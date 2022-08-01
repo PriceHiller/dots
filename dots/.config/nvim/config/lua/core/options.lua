@@ -80,7 +80,7 @@ M.setup = function()
     opt.completeopt = "menuone,noselect"
 
     -- Set max text width
-    opt.textwidth = 80
+    opt.textwidth = 120
 
     -- Make statusline global
     opt.laststatus = 3
