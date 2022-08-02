@@ -260,10 +260,13 @@ return packer.startup({
         use({
             "neovim/nvim-lspconfig",
             requires = {
+                "hrsh7th/cmp-nvim-lsp",
                 "folke/lua-dev.nvim",
                 "Decodetalkers/csharpls-extended-lsp.nvim",
                 "williamboman/mason-lspconfig.nvim",
+                "nanotee/sqls.nvim",
                 "williamboman/mason.nvim",
+                "simrat39/rust-tools.nvim",
             },
             config = function()
                 require("mason").setup({})
@@ -301,18 +304,12 @@ return packer.startup({
             end,
         })
 
-        -- Sql support
-        use({
-            "nanotee/sqls.nvim",
-        })
-
         -- Display LSP Progress
         use({
             "j-hui/fidget.nvim",
             config = function()
                 require("plugins.configs.fidget-spinner")
             end,
-            -- after = "nvim-lspconfig"
         })
 
         -- Display Lsp Signature
@@ -339,11 +336,6 @@ return packer.startup({
             config = function()
                 require("plugins.configs.null_ls")
             end,
-        })
-
-        -- Better LSP Handling for Rust
-        use({
-            "simrat39/rust-tools.nvim",
         })
 
         -- Autopairs
