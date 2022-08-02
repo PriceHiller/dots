@@ -576,29 +576,6 @@ return packer.startup({
             keys = "/",
         })
 
-        -- Lsp Diags on scrollbar
-        use({
-            "petertriho/nvim-scrollbar",
-            requires = {
-                "kevinhwang91/nvim-hlslens",
-                "folke/tokyonight.nvim",
-            },
-            after = "nvim-hlslens",
-            config = function()
-                require("plugins.configs.diag-scrollbar")
-            end,
-        })
-
-        -- Discord Rich Presence
-        use({
-            "andweeb/presence.nvim",
-            config = function()
-                require("presence"):setup({
-                    neovim_image_text = "How do I exit?",
-                })
-            end,
-        })
-
         -- Note Taking
         use({
             "nvim-neorg/neorg",
