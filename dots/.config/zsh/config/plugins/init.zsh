@@ -9,6 +9,7 @@ init() {
 	source "${wkdir}/zsh-completions/zsh-completions.plugin.zsh"
 	source "${wkdir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 	source "${wkdir}/zsh-vi-mode/zsh-vi-mode.zsh"
+	eval "$(lua "${wkdir}/z.lua/z.lua" --init zsh enhanced once)"
 
 	configure
 }
