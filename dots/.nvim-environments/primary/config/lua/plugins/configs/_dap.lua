@@ -1,41 +1,44 @@
-local dap = require('dap')
-local async = require('plenary.async')
+local loaded, dap = pcall(require, "dap")
+if not loaded then
+    return
+end
+local async = require("plenary.async")
 
 --- Gets a path for a given program in the environment
 ---@param program @The string of a program in the PATH
 ---@return @The full path to the program if found, or nil if not
 local function get_program_path(program)
-    local home = os.getenv('HOME')
-    local program_path = home .. '/.local/share/nvim/mason/packages/' .. program .. '/' .. program
+    local home = os.getenv("HOME")
+    local program_path = home .. "/.local/share/nvim/mason/packages/" .. program .. "/" .. program
     return program_path
 end
 
-local lldb_path = get_program_path('lldb-vscode')
+local lldb_path = get_program_path("lldb-vscode")
 -- Adapaters
 dap.adapters.lldb = {
-    type = 'executable',
+    type = "executable",
     command = lldb_path,
-    name = 'lldb',
+    name = "lldb",
 }
 
 dap.adapters.coreclr = {
-    type = 'executable',
-    command = get_program_path('netcoredbg'),
-    args = { '--interpreter=vscode' },
+    type = "executable",
+    command = get_program_path("netcoredbg"),
+    args = { "--interpreter=vscode" },
 }
 
 -- configurations
 dap.configurations.cpp = {
     {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
+        name = "Launch",
+        type = "lldb",
+        request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
-        cwd = '${workspaceFolder}',
+        cwd = "${workspaceFolder}",
         stopOnEntry = false,
-        targetArchitecture = 'arm64',
+        targetArchitecture = "arm64",
         args = {},
 
         -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
@@ -57,11 +60,11 @@ dap.configurations.rust = dap.configurations.cpp
 
 dap.configurations.cs = {
     {
-        type = 'coreclr',
-        name = 'launch - netcoredbg',
-        request = 'launch',
+        type = "coreclr",
+        name = "launch - netcoredbg",
+        request = "launch",
         program = function()
-            return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+            return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
         end,
     },
 }

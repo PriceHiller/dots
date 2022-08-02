@@ -1,6 +1,42 @@
-local mason_lspconfig = require("mason-lspconfig")
-local lspconfig = require("lspconfig")
-local async = require("plenary.async")
+local loaded, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not loaded then
+    return
+end
+
+local lspconfig_loaded, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_loaded then
+    return
+end
+
+local plenary_loaded, async = pcall(require, "plenary.async")
+if not plenary_loaded then
+    return
+end
+
+local cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_nvim_lsp_loaded then
+    return
+end
+
+local rust_tools_loaded, rust_tools = pcall(require, "rust_tools")
+if not rust_tools_loaded then
+    return
+end
+
+local lua_dev_loaded, lua_dev = pcall(require, "lua-dev")
+if not lua_dev_loaded then
+    return
+end
+
+local sqls_loaded, sqls = pcall(require, "sqls")
+if not sqls_loaded then
+    return
+end
+
+local chsarpls_extended_loaded, csharpls_extended = pcall(require, "csharpls_extended")
+if not csharpls_extended_loaded then
+    return
+end
 
 -- NOTE: Keep this near top
 mason_lspconfig.setup({
@@ -18,7 +54,7 @@ local function on_attach(client, bufnr)
     end)
 end
 
-local lsp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lsp_capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local opts = {
     capabilities = lsp_capabilities,
     on_attach = on_attach,
@@ -51,7 +87,7 @@ local rustopts = {
         },
     },
 }
-require("rust-tools").setup(rustopts)
+rust_tools.setup(rustopts)
 
 -- NOTE: ANSIBLE LSP
 -- I use ansible a lot, define exceptions for servers that can use
@@ -79,7 +115,7 @@ lspconfig.ansiblels.setup({
 })
 
 -- NOTE: LUA LSP
-local luadev = require("lua-dev").setup({
+local luadev = lua_dev.setup({
     lspconfig = opts,
 })
 
@@ -88,7 +124,7 @@ lspconfig.sumneko_lua.setup(luadev)
 -- NOTE: SQL LSP
 lspconfig.sqls.setup({
     on_attach = function(client, bufnr)
-        require("sqls").on_attach(client, bufnr)
+        sqls.on_attach(client, bufnr)
         on_attach(client, bufnr)
     end,
 })
@@ -157,7 +193,7 @@ lspconfig.yamlls.setup({
 
 lspconfig.csharp_ls.setup({
     handlers = {
-        ["textDocument/definition"] = require("csharpls_extended").handler,
+        ["textDocument/definition"] = csharpls_extended.handler,
     },
     capabilities = lsp_capabilities,
     on_attach = on_attach,
