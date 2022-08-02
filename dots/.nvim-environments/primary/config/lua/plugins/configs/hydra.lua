@@ -3,6 +3,11 @@ if not loaded then
     return
 end
 
+local loaded, gitsigns = pcall(require, "gitsigns")
+if not loaded then
+    return
+end
+
 -- Side Scroll
 hydra({
     name = "Side scroll",
@@ -21,9 +26,6 @@ hydra({
         { "L", "zL", { desc = "half screen ←/→" } },
     },
 })
-
--- Git Integration
-local gitsigns = require("gitsigns")
 
 local hint = [[
  _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
