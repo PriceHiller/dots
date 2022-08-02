@@ -11,9 +11,8 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 ### FZF ###
 function zvm_after_init() {
-  [[ -r "${XDG_CONFIG_HOME}/fzf/fzf.zsh" ]]  && source "${XDG_CONFIG_HOME}fzf/fzf.zsh"
+  [[ -r "${XDG_CONFIG_HOME}/fzf/fzf.zsh" ]]  && source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
 }
-[[ -r "${XDG_CONFIG_HOME}/fzf/fzf.zsh" ]]  && source "${XDG_CONFIG_HOME}fzf/fzf.zsh"
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color=always'
 export FZF_DEFAULT_OPTS="--height=80% --layout=reverse --info=inline --border --margin=1 --ansi"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
