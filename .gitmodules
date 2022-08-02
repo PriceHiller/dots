@@ -1,0 +1,18 @@
+[submodule "dots/.config/zsh/config/plugins/zsh-vi-mode"]
+	path = dots/.config/zsh/config/plugins/zsh-vi-mode
+	url = https://github.com/jeffreytse/zsh-vi-mode.git
+[submodule "dots/.config/zsh/config/plugins/zsh-syntax-highlighting"]
+	path = dots/.config/zsh/config/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "dots/.config/zsh/config/plugins/zsh-completions"]
+	path = dots/.config/zsh/config/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "dots/.config/zsh/config/plugins/zsh-autosuggestions"]
+	path = dots/.config/zsh/config/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "dots/.config/zsh/config/plugins/fzf-tab"]
+	path = dots/.config/zsh/config/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab.git
+[submodule "dots/.config/zsh/config/plugins/z.lua"]
+	path = dots/.config/zsh/config/plugins/z.lua
+	url = https://github.com/skywind3000/z.lua.git
