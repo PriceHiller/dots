@@ -1,7 +1,4 @@
-local loaded, telescope = pcall(require, "telescope")
-if not loaded then
-    return
-end
+local telescope = require("telescope")
 local actions = require("telescope.actions")
 
 telescope.setup({

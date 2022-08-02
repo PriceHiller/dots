@@ -1,6 +1,3 @@
-local loaded, colorizer = pcall(require, "colorizer")
-if not loaded then
-    return
-end
+local colorizer = require('colorizer')
 colorizer.setup({})
-vim.cmd("ColorizerAttachToBuffer")
+vim.cmd('ColorizerAttachToBuffer')

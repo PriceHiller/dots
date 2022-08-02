@@ -1,7 +1,4 @@
-local loaded, neotree = pcall(require, "neo-tree")
-if not loaded then
-    return
-end
+local neotree = require('neo-tree')
 
 vim.g.neo_tree_remove_legacy_commands = 1
 neotree.setup({
@@ -10,8 +7,8 @@ neotree.setup({
     },
     window = {
         mappings = {
-            ["/"] = "noop",
-            ["/"] = {},
+            ['/'] = 'noop',
+            ['/'] = {},
         },
     },
 })
