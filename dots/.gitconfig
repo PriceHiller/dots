@@ -8,7 +8,6 @@
 
 [core]
     pager = delta
-    excludesfile = ~/.git-global/gitignore
 
 [interactive]
     diffFilter = delta --color-only --features=interactive
