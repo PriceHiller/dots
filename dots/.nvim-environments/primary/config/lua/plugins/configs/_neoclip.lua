@@ -1,5 +1,5 @@
-local neoclip = pcall(require, "neoclip")
-if not neoclip then
+local loaded, neoclip = pcall(require, "neoclip")
+if not loaded then
     return
 end
 neoclip.setup({
