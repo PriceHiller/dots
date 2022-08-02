@@ -1,7 +1,0 @@
-require('core.disabled').setup()
-require('core.options').setup()
-require('core.mappings').setup()
-require('core.globals').setup()
-require('core.autocmds').setup()
-require('core.lsp').setup()
--- require('core.winbar').setup()
