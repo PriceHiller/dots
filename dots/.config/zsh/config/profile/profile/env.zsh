@@ -8,12 +8,10 @@ export ZSH_HIGHLIGHT_MAXLENGTH=10000
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-### Direnv ###
-eval "$(direnv hook zsh)"
 
 ### FZF ###
 function zvm_after_init() {
-  [[ -r "${HOME}/.config/fzf/fzf.zsh" ]]  && source "${HOME}/.config/fzf/fzf.zsh"
+  [[ -r "${XDG_DATA_CONFIG}/fzf/fzf.zsh" ]]  && source "${XDG_DATA_CONFIG}fzf/fzf.zsh"
 }
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color=always'
 export FZF_DEFAULT_OPTS="--height=80% --layout=reverse --info=inline --border --margin=1 --ansi"
@@ -88,6 +86,9 @@ export PATH="${PATH}:${CARGO_HOME}/bin"
 
 ## Dotnet ###
 export PATH="${PATH}:${XDG_DATA_HOME}/dotnet"
+
+### Direnv ###
+eval "$(direnv hook zsh)"
 
 ### Terminal Specific ###
 # If using the kitty terminal we want to set our TERM var to be xterm as kitty will send
