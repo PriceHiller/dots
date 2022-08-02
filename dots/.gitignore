@@ -1,1 +1,3 @@
-.config/nvim/
+.config/nvim
+packer_compiled.lua
+.nvim-environments/*/*/share
