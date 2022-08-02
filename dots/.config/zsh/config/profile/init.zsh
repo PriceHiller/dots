@@ -6,6 +6,11 @@ configure() {
 
 init() {
 
+	# Enables bash completion compatability
+	autoload -U +X bashcompinit && bashcompinit
+	autoload -U +X compinit && compinit
+
+
 	local wkdir="${BASE_ZSH_CONFIG_DIR}/config/profile"
 	source "${wkdir}/profile/options.zsh"
 	source "${wkdir}/profile/env.zsh"
