@@ -4,7 +4,6 @@
 
 [init]
     defaultBranch = Development
-    templateDir = ~/.git-global/template
 
 [core]
     pager = delta
