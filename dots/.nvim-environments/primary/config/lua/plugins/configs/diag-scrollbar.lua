@@ -1,5 +1,13 @@
-local colors = require('tokyonight.colors').setup()
-require('scrollbar').setup({
+local loaded, colors = pcall(require, "kanagawa.colors")
+if not loaded then
+    return
+end
+local loaded, scrollbar = pcall(require, "scrollbar")
+if not loaded then
+    return
+end
+
+scrollbar.setup({
     handle = {
         color = colors.bg_highlight,
     },
