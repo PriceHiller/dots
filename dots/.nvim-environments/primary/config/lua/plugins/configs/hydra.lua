@@ -1,29 +1,26 @@
-local loaded, hydra = pcall(require, "hydra")
-if not loaded then
-    return
-end
+local hydra = require('hydra')
 
 -- Side Scroll
 hydra({
-    name = "Side scroll",
+    name = 'Side scroll',
     config = {
         {
-            position = "bottom-right",
-            border = "rounded",
+            position = 'bottom-right',
+            border = 'rounded',
         },
     },
-    mode = "n",
-    body = "z",
+    mode = 'n',
+    body = 'z',
     heads = {
-        { "h", "5zh" },
-        { "l", "5zl", { desc = "←/→" } },
-        { "H", "zH" },
-        { "L", "zL", { desc = "half screen ←/→" } },
+        { 'h', '5zh' },
+        { 'l', '5zl', { desc = '←/→' } },
+        { 'H', 'zH' },
+        { 'L', 'zL', { desc = 'half screen ←/→' } },
     },
 })
 
 -- Git Integration
-local gitsigns = require("gitsigns")
+local gitsigns = require('gitsigns')
 
 local hint = [[
  _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
@@ -36,11 +33,11 @@ local hint = [[
 hydra({
     hint = hint,
     config = {
-        color = "pink",
+        color = 'pink',
         invoke_on_body = true,
         hint = {
-            position = "bottom-right",
-            border = "rounded",
+            position = 'bottom-right',
+            border = 'rounded',
         },
         on_enter = function()
             vim.bo.modifiable = false
@@ -53,68 +50,68 @@ hydra({
             gitsigns.toggle_deleted(false)
         end,
     },
-    mode = { "n", "x" },
-    body = "<leader>G",
+    mode = { 'n', 'x' },
+    body = '<leader>G',
     heads = {
         {
-            "J",
+            'J',
             function()
                 if vim.wo.diff then
-                    return "]c"
+                    return ']c'
                 end
                 vim.schedule(function()
                     gitsigns.next_hunk()
                 end)
-                return "<Ignore>"
+                return '<Ignore>'
             end,
             { expr = true },
         },
         {
-            "K",
+            'K',
             function()
                 if vim.wo.diff then
-                    return "[c"
+                    return '[c'
                 end
                 vim.schedule(function()
                     gitsigns.prev_hunk()
                 end)
-                return "<Ignore>"
+                return '<Ignore>'
             end,
             { expr = true },
         },
-        { "s", ":Gitsigns stage_hunk<CR>", { silent = true } },
-        { "u", gitsigns.undo_stage_hunk },
-        { "S", gitsigns.stage_buffer },
-        { "p", gitsigns.preview_hunk },
-        { "d", gitsigns.toggle_deleted, { nowait = true } },
-        { "b", gitsigns.blame_line },
+        { 's', ':Gitsigns stage_hunk<CR>', { silent = true } },
+        { 'u', gitsigns.undo_stage_hunk },
+        { 'S', gitsigns.stage_buffer },
+        { 'p', gitsigns.preview_hunk },
+        { 'd', gitsigns.toggle_deleted, { nowait = true } },
+        { 'b', gitsigns.blame_line },
         {
-            "B",
+            'B',
             function()
                 gitsigns.blame_line({ full = true })
             end,
         },
-        { "/", gitsigns.show, { exit = true } }, -- show the base of the file
-        { "<Enter>", "<cmd>Neogit<CR>", { exit = true } },
-        { "q", nil, { exit = true, nowait = true } },
+        { '/', gitsigns.show, { exit = true } }, -- show the base of the file
+        { '<Enter>', '<cmd>Neogit<CR>', { exit = true } },
+        { 'q', nil, { exit = true, nowait = true } },
     },
 })
 
 -- Hydra to repeat expanding windows
 hydra({
-    name = "Window Sizing",
-    mode = "n",
-    body = "<C-w>",
+    name = 'Window Sizing',
+    mode = 'n',
+    body = '<C-w>',
     config = {
         {
-            position = "bottom-right",
-            border = "rounded",
+            position = 'bottom-right',
+            border = 'rounded',
         },
     },
     heads = {
-        { "<", "2<C-w><" },
-        { ">", "2<C-w>>", { desc = "←/→" } },
-        { "+", "2<C-w>+" },
-        { "-", "2<C-w>-", { desc = "↑/↓" } },
+        { '<', '2<C-w><' },
+        { '>', '2<C-w>>', { desc = '←/→' } },
+        { '+', '2<C-w>+' },
+        { '-', '2<C-w>-', { desc = '↑/↓' } },
     },
 })
