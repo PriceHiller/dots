@@ -21,6 +21,8 @@ return {
         -- Pixel sizes: [128]
         "Noto Color Emoji",
 
+        "Unifont",
+
         -- <built-in>, BuiltIn
         "Last Resort High-Efficiency",
     }),
