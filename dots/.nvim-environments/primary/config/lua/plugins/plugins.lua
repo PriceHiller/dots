@@ -742,6 +742,10 @@ return packer.startup({
                 "anuvyklack/keymap-layer.nvim",
                 "lewis6991/gitsigns.nvim",
             },
+            after = {
+                "anuvyklack/keymap-layer.nvim",
+                "lewis6991/gitsigns.nvim",
+            },
             config = function()
                 require("plugins.configs.hydra")
             end,
