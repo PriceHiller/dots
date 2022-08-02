@@ -14,6 +14,7 @@ return {
         "Noto Sans Symbols2",
         "PowerlineExtraSymbols",
         { family = "FiraCode NF", weight = "DemiBold", scale = 1.2 },
+        "FiraCode NF",
         "MesloLGS NF",
 
         -- <built-in>, BuiltIn
