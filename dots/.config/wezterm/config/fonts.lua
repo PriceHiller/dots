@@ -22,6 +22,7 @@ return {
         -- Pixel sizes: [128]
         "Noto Color Emoji",
 
+        "Noto Sans Adlam",
         "Unifont",
 
         -- <built-in>, BuiltIn
