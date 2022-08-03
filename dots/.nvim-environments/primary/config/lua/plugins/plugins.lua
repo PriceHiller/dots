@@ -756,11 +756,6 @@ return packer.startup({
         end
     end,
     config = {
-        display = {
-            open_fn = function()
-                return require("packer.util").float({ border = "double" })
-            end,
-        },
         compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
     },
 })
