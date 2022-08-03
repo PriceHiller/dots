@@ -87,6 +87,9 @@ export PATH="${PATH}:${CARGO_HOME}/bin"
 ## Dotnet ###
 export PATH="${PATH}:${XDG_DATA_HOME}/dotnet"
 
+### Go ###
+export PATH="${PATH}:/usr/local/go/bin"
+
 ### Direnv ###
 eval "$(direnv hook zsh)"
 
