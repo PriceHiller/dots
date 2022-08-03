@@ -28,8 +28,8 @@ telescope.setup({
         },
         mappings = {
             i = {
-                ["<C-s>"] = actions.cycle_history_next,
-                ["<C-a>"] = actions.cycle_history_prev,
+                ["<C-d>"] = actions.cycle_history_next,
+                ["<C-s>"] = actions.cycle_history_prev,
             },
         },
         prompt_prefix = "   ",
