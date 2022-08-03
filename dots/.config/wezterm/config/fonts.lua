@@ -3,6 +3,7 @@ local lib = require("wlib")
 
 return {
     -- use_cap_height_to_scale_fallback_fonts = true,
+    unicode_version = 14,
     font = wezterm.font_with_fallback({
         {
             family = "JetBrains Mono",
