@@ -12,4 +12,5 @@ return {
     },
     colors = colors.theme,
     force_reverse_video_cursor = true,
+    default_cursor_style = "SteadyBar",
 }
