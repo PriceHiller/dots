@@ -16,6 +16,7 @@ init() {
 	source "${wkdir}/profile/env.zsh"
 	source "${wkdir}/profile/functions.zsh"
 	source "${wkdir}/profile/aliases.zsh"
+	source "${wkdir}/profile/keybinds.zsh"
 
 	configure
 }
