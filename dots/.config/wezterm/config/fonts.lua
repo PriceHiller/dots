@@ -34,5 +34,5 @@ return {
         "fonts",
     },
     font_locator = "ConfigDirsOnly",
-    font_size = 14,
+    font_size = 11,
 }
