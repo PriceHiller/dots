@@ -1,0 +1,3 @@
+include conf/*.conf
+
+xwayland enable

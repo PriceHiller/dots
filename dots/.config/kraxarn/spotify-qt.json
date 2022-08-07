@@ -1,0 +1,55 @@
+{
+    "Account": {
+        "access_token": "",
+        "client_id": "",
+        "client_secret": "",
+        "last_refresh": 1659838296,
+        "refresh_token": ""
+    },
+    "General": {
+        "check_for_updates": true,
+        "close_to_tray": false,
+        "custom_playlist_order": [],
+        "fallback_icons": false,
+        "fixed_width_time": true,
+        "hidden_song_headers": [],
+        "last_device": "",
+        "last_playlist": "",
+        "last_version": "v3.9",
+        "last_volume": 20,
+        "media_controller": false,
+        "notify_track_change": false,
+        "playlist_order": 0,
+        "refresh_interval": 3,
+        "relative_added": true,
+        "show_changelog": true,
+        "song_header_sort_by": -1,
+        "style": "",
+        "style_palette": 0,
+        "track_list_resize_mode": 0,
+        "track_numbers": 1,
+        "tray_album_art": false,
+        "tray_icon": true,
+        "tray_light_icon": false
+    },
+    "Qt": {
+        "album_size": 0,
+        "custom_font_name": "",
+        "custom_font_size": 0,
+        "mirror_title_bar": false,
+        "system_title_bar": false
+    },
+    "Spotify": {
+        "always_start": true,
+        "backend": "",
+        "bitrate": 320,
+        "device_type": 0,
+        "disable_discovery": false,
+        "global_config": false,
+        "keyring_password": false,
+        "max_queue": 500,
+        "path": "",
+        "start_client": false,
+        "username": ""
+    }
+}
