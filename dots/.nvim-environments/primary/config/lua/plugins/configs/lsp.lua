@@ -172,6 +172,7 @@ for _, server in ipairs({
     "dockerls",
     "eslint",
     "html",
+    "cssls",
     "jdtls",
     "kotlin_language_server",
     "terraformls",
