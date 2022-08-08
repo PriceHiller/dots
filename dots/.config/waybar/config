@@ -9,13 +9,12 @@
         "battery",
         "disk",
         "pulseaudio",
-        "custom/cap-left"
+        "custom/media",
     ],
     "modules-center": [
         "sway/workspaces"
     ],
     "modules-right": [
-        "custom/cap-right",
         "custom/weather",
         "network",
         "clock",
@@ -25,7 +24,7 @@
     "custom/weather": {
         "tooltip": false,
         "min-length": 5,
-        "exec": "curl 'https://wttr.in/Melbourne?m&format='%t''",
+        "exec": "curl 'https://wttr.in/?format='%t''",
         "interval": 3600
     },
     "battery": {
@@ -54,7 +53,7 @@
         ]
     },
     "clock": {
-        "format": " {:%a %b %d %H:%M}",
+        "format": " {:%a %b %d %I:%M %p}",
         "tooltip": false,
         "min-length": 18
     },
@@ -110,9 +109,10 @@
     "temperature": {
         "tooltip": false,
         "min-length": 6,
+        "thermal-zone": 1,
         "critical-threshold": 90,
-        "format": "{icon} {temperatureC}°C",
-        "format-critical": "{icon} {temperatureC}°C",
+        "format": "{icon} {temperatureF}°F",
+        "format-critical": "{icon} {temperatureF}°F",
         "format-icons": {
             "default": [
                 "",
@@ -143,14 +143,20 @@
     },
     "sway/workspaces": {
         "tooltip": false,
-        "disable-scroll": true
+        "disable-scroll": true,
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": []
+        }
     },
-    "custom/cap-left": {
-        "tooltip": false,
-        "format": ""
+    "custom/media": {
+        "interval": 1,
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/get-media.bash",
+        "escape": true
     },
-    "custom/cap-right": {
-        "tooltip": false,
-        "format": ""
-    }
 }
