@@ -76,6 +76,15 @@
   border-radius: 0px;
 }
 
+#workspaces button.persistent {
+  transition: none;
+  margin: 0px;
+  color: @sakuraPink;
+  background: transparent;
+  border-bottom: 2px solid @sakuraPink;
+  border-radius: 0px;
+}
+
 #workspaces button.focused {
   color: @springGreen;
   border-bottom: 2px solid @springGreen;
@@ -87,8 +96,8 @@
   box-shadow: inherit;
   text-shadow: inherit;
   border-top: 0px;
-  border-bottom: 2px solid @peachRed;
-  color: @sakuraPink;
+  border-bottom: 2px solid @lightBlue;
+  color: @lightBlue;
   border-right: 0px;
   border-left: 0px;
   border-radius: 0px;
