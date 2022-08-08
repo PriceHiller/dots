@@ -158,5 +158,5 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/get-media.bash",
         "escape": true
-    },
+    }
 }
