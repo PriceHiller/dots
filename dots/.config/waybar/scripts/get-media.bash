@@ -8,10 +8,10 @@ main() {
 	local player_ctl_info="$(playerctl metadata --format '{{ artist }} | {{ title }} | {{ album }}')"
 
 	if [[ "${class}" == "playing" ]]; then
-		text="▶ ${player_ctl_info}"
+		text=" ${player_ctl_info}"
 
 	elif [[ "${class}" == "paused" ]]; then
-		text="⏸︎ ${player_ctl_info}"
+		text=" ${player_ctl_info}"
 	fi
 
 	printf '{"class": "%s", "text": "%s"}\n' "${class}" "${text}"
