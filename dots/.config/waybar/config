@@ -18,7 +18,7 @@
             "custom/weather",
             "network",
             "clock",
-            "custom/offswitch"
+            "custom/lock"
         ],
         "custom/weather": {
             "tooltip": false,
@@ -56,11 +56,11 @@
             "tooltip": false,
             "min-length": 18
         },
-        "custom/offswitch": {
+        "custom/lock": {
             "tooltip": false,
-            "format": "",
+            "format": "",
             "interval": "once",
-            "on-click": "systemctl poweroff"
+            "on-click": "swaylock"
         },
         "network": {
             "interval": 10,
@@ -156,14 +156,6 @@
         "sway/workspaces": {
             "tooltip": false,
             "disable-scroll": true,
-            "persistent_workspaces": {
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [],
-                "5": [],
-                "6": []
-            }
         }
     }
 ]
