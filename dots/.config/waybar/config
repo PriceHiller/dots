@@ -1,79 +1,156 @@
 {
-	"layer": "top",
-	"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
-	"modules-center": ["river/tags"],
-	"modules-right": ["custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
-
-	"pulseaudio": {
-		"tooltip": false,
-		"scroll-step": 5,
-		"format": "{icon} {volume}%",
-		"format-muted": "{icon} {volume}%",
-		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"format-icons": {
-			"default": ["", "", ""]
-		}
-	},
-
-    "river/tags": {
-		"num-tags": 6
+    "layer": "top",
+    "position": "top",
+    "modules-left": [
+        "idle_inhibitor",
+        "cpu",
+        "temperature",
+        "memory",
+        "battery",
+        "disk",
+        "pulseaudio",
+        "custom/cap-left"
+    ],
+    "modules-center": [
+        "sway/workspaces"
+    ],
+    "modules-right": [
+        "custom/cap-right",
+        "custom/weather",
+        "network",
+        "clock",
+        "custom/offswitch"
+    ],
+    "sway/window": {},
+    "custom/weather": {
+        "tooltip": false,
+        "min-length": 5,
+        "exec": "curl 'https://wttr.in/Melbourne?m&format='%t''",
+        "interval": 3600
     },
-	"network": {
-		"tooltip": false,
-		"format-wifi": "  {essid}",
-		"format-ethernet": ""
-	},
-	"backlight": {
-		"tooltip": false,
-		"format": " {}%",
-		"interval":1,
-        "on-scroll-up": "light -A 5",
-		"on-scroll-down": "light -U 5"
-	},
     "battery": {
+        "min-length": 5,
         "states": {
-            "good": 95,
+            "full": 90,
             "warning": 30,
-            "critical": 20
+            "critical": 15
         },
-        "format": "{icon}  {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "tooltip": false,
+        "full-at": 95,
+        "format-plugged": "{icon} {capacity}%",
+        "format-charging": "{icon} {capacity}%",
+        "format": "{icon} {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
-	"tray":{
-		"icon-size":18,
-		"spacing": 10
-	},
     "clock": {
-        "format": "{: %I:%M %p   %d/%m/%Y}"
+        "format": " {:%a %b %d %H:%M}",
+        "tooltip": false,
+        "min-length": 18
+    },
+    "custom/offswitch": {
+        "tooltip": false,
+        "format": "",
+        "interval": "once",
+        "on-click": "systemctl poweroff"
+    },
+    "network": {
+        "interval": 10,
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ipaddr}",
+        "format-linked": " {ifname}",
+        "format-disconnected": " Disconnected",
+        "tooltip": false,
+        "max-length": 20,
+        "min-length": 14
+    },
+    "pulseaudio": {
+        "tooltip": false,
+        "min-length": 5,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "MUTE",
+        "format-icons": {
+            "headphone": "",
+            "headset": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        }
+    },
+    "idle_inhibitor": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
     },
     "cpu": {
-        "interval": 15,
-        "format": " {}%",
-        "max-length": 10
+        "interval": 4,
+        "min-length": 6,
+        "format": " {usage}%",
+        "tooltip": false,
+        "states": {
+            "critical": 90
+        }
+    },
+    "temperature": {
+        "tooltip": false,
+        "min-length": 6,
+        "critical-threshold": 90,
+        "format": "{icon} {temperatureC}°C",
+        "format-critical": "{icon} {temperatureC}°C",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                "",
+                "",
+                ""
+            ]
+        }
     },
     "memory": {
-        "interval": 30,
-        "format": " {}%",
-        "max-length": 10
-    },
-    "custom/media": {
-        "interval": 30,
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 20,
-        "format-icons": {
-            "default": " "
+        "tooltip": false,
+        "format": " {percentage}%",
+        "states": {
+            "critical": 90
         },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null",
-        "on-click": "playerctl play-pause"
+        "min-length": 5
     },
-    "custom/launcher":{
-        "format": " ",
-        "on-click": "wofi --show drun",
-        "on-click-right": "killall wofi"
+    "disk": {
+        "tooltip": false,
+        "path": "/",
+        "interval": 60,
+        "min-length": 5,
+        "format": " {percentage_used}%",
+        "states": {
+            "critical": 90
+        }
     },
+    "sway/workspaces": {
+        "tooltip": false,
+        "disable-scroll": true
+    },
+    "custom/cap-left": {
+        "tooltip": false,
+        "format": ""
+    },
+    "custom/cap-right": {
+        "tooltip": false,
+        "format": ""
+    }
 }
