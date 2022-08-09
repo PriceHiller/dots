@@ -53,7 +53,8 @@
         },
         "clock": {
             "format": " {:%a %b %d %I:%M %p}",
-            "tooltip": false,
+            "tooltip": true,
+            "tooltip-format": "<big>{:%Y %B \t week: %V }</big>\n<tt>{calendar}</tt>",
             "min-length": 18
         },
         "custom/lock": {
@@ -123,17 +124,17 @@
             }
         },
         "memory": {
-            "tooltip": false,
             "format": " {percentage}%",
+            "tooltip-format": "{used:0.1f}GB/{total:0.1f}GB ",
             "states": {
                 "critical": 90
             },
             "min-length": 5
         },
         "disk": {
-            "tooltip": false,
             "path": "/",
             "interval": 60,
+            "tooltip-format": "{used} used out of {total} ({percentage_used}%)",
             "min-length": 5,
             "format": " {percentage_used}%",
             "states": {
