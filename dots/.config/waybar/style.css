@@ -57,12 +57,14 @@
   border-top: 2px solid @oniViolet;
   border-left: 2px solid @oniViolet;
   border-right: 2px solid @oniViolet;
+  color: @fujiWhite;
 }
 
 #custom-sway-mode {
   background: @sumiInk0;
   border-bottom: 2px solid @oniViolet;
   border-left: 2px solid @oniViolet;
+  color: @fujiWhite;
 }
 
 #workspaces {
@@ -114,6 +116,7 @@
   background: @sumiInk0;
   border-top: 2px solid @oniViolet;
   border-left: 2px solid @oniViolet;
+  color: @fujiWhite;
 }
 
 #network,
@@ -123,6 +126,7 @@
   background: @sumiInk0;
   border-top: 2px solid @oniViolet;
   border-right: 2px solid @oniViolet;
+  color: @fujiWhite;
 }
 
 #cpu,
@@ -136,6 +140,7 @@
   padding-right: 10px;
   border-top: 2px solid @oniViolet;
   border-left: 2px solid @oniViolet;
+  color: @fujiWhite;
 }
 
 #disk.critical {
@@ -212,4 +217,11 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+#language {
+  border-bottom: 2px solid @oniViolet;
+  border-right: 2px solid @oniViolet;
+  background: @sumiInk0;
+  color: @fujiWhite;
 }

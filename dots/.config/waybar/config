@@ -158,6 +158,9 @@
         "modules-center": [
             "sway/workspaces"
         ],
+        "modules-right": [
+            "sway/language"
+        ],
         "sway/workspaces": {
             "tooltip": false,
             "disable-scroll": true,
@@ -176,8 +179,11 @@
         },
         "custom/sway-mode": {
             "exec": "swaymsg -t get_binding_state | jq '.name' -r",
-            "format": " {}",
+            "format": " {}",
             "interval": 1
+        },
+        "sway/language": {
+            "format": " {long}"
         }
     }
 ]
