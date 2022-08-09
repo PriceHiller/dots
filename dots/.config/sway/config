@@ -2,4 +2,3 @@ include conf/*.conf
 
 xwayland enable
 exec_always ~/.config/sway/scripts/launch-waybar.bash
-exec_always dunst
