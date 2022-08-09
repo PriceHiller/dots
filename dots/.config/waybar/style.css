@@ -59,6 +59,12 @@
   border-right: 2px solid @oniViolet;
 }
 
+#custom-sway-mode {
+  background: @sumiInk0;
+  border-bottom: 2px solid @oniViolet;
+  border-left: 2px solid @oniViolet;
+}
+
 #workspaces {
   background: @sumiInk0;
   transition: none;

@@ -152,6 +152,9 @@
     {
         "layer": "bottom",
         "position": "bottom",
+        "modules-left": [
+            "custom/sway-mode"
+        ],
         "modules-center": [
             "sway/workspaces"
         ],
@@ -170,6 +173,11 @@
                 "8": [],
                 "9": []
             }
+        },
+        "custom/sway-mode": {
+            "exec": "swaymsg -t get_binding_state | jq '.name' -r",
+            "format": " {}",
+            "interval": 1
         }
     }
 ]
