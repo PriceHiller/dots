@@ -1,3 +1,13 @@
-image=~/.local/share/wallpapers/TokyoNight.jpg
-scaling=fill
-indicator-caps-lock
+screenshots
+clock
+indicator
+indicator-radius=100
+indicator-thickness=12
+effect-blur=12x8
+effect-vignette=0.5:0.5
+ring-color=#957FB8
+key-hl-color=#FF5D62
+line-color=00000000
+inside-color=#16161D
+separator-color=00000000
+fade-in=0.2
