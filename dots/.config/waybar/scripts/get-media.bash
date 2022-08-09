@@ -5,7 +5,8 @@ main() {
 	local text=""
 	class="$(playerctl metadata --format '{{lc(status)}}')"
 
-	local player_ctl_info="$(playerctl metadata --format '{{ artist }} | {{ title }} | {{ album }}')"
+	local player_ctl_info
+	player_ctl_info="$(playerctl metadata --format '{{ artist }} | {{ title }} | {{ album }}')"
 
 	if [[ "${class}" == "playing" ]]; then
 		text=" ${player_ctl_info}"
