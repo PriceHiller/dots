@@ -66,10 +66,11 @@
         "network": {
             "interval": 10,
             "format-wifi": " {essid}",
-            "format-ethernet": " {ipaddr}",
+            "format-ethernet": " {ipaddr}",
             "format-linked": " {ifname}",
             "format-disconnected": " Disconnected",
-            "tooltip": false,
+            "tooltip": true,
+            "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}/{cidr}\nNM: {netmask}",
             "max-length": 20,
             "min-length": 14
         },
