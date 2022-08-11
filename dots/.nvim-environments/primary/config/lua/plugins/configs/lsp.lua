@@ -24,20 +24,7 @@ local opts = {
     on_attach = on_attach,
 }
 
--- INFO: RUST LSP
--- In the scenario we're using rust it makes more sense to use rust-tools
--- see: https://github.com/williamboman/nvim-lsp-installer/wiki/Rust
---
--- NOTE: Requires rust_analyzer
---
--- Dap installation, required vscode and the following extension to be installed:
--- https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb
---
--- locate it with `find ~/ -name `
-local extension_path = os.getenv("HOME") .. "/.vscode/extensions/vadimcn.vscode-lldb-1.6.10/"
-local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-
+local rust_tools = require("rust-tools")
 local rustopts = {
     server = opts,
     dap = {
@@ -96,9 +83,58 @@ local rustopts = {
         hover_actions = {
             auto_focus = true,
         },
+
+        server = {
+            on_attach = function(client, bufnr)
+                vim.keymap.set("n", "<leader>fr", rust_tools.runnables.runnables, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fd", rust_tools.debuggables.debuggables, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fp", rust_tools.parent_module.parent_module, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fJ", rust_tools.join_lines.join_lines, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fH", rust_tools.hover_range.hover_range, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fm", rust_tools.expand_macro.expand_macro, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fc", rust_tools.open_cargo_toml.open_cargo_toml, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fk", ":RustMoveItemUp<CR>", {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fj", ":RustMoveItemDown<CR>", {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fh", rust_tools.hover_actions.hover_actions, {
+                    buffer = bufnr,
+                })
+
+                vim.keymap.set("n", "<leader>fa", rust_tools.code_action_group.code_action_group, {
+                    buffer = bufnr,
+                })
+                on_attach(client, bufnr)
+            end,
+        },
     },
 }
-require("rust-tools").setup(rustopts)
+rust_tools.setup(rustopts)
 
 -- NOTE: ANSIBLE LSP
 -- I use ansible a lot, define exceptions for servers that can use
