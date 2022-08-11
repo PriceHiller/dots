@@ -13,7 +13,7 @@ configure() {
 	zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 	# Tab Completion for Kill
-	zstyle ':completion:*:*:*:*:processes' command "ps -ef -o pid,user,comm"
+	zstyle ':completion:*:processes' command "ps -ef"
 	zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
 		'[[ $group == "[process ID]" ]] && ps -w $word'
 	zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down,3,wrap
