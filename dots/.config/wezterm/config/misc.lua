@@ -4,6 +4,6 @@ return {
     exit_behavior = "Close",
     scrollback_lines = 20000,
     native_macos_fullscreen_mode = true,
-    -- term = "wezterm",
+    term = "wezterm",
     warn_about_missing_glyphs = true,
 }
