@@ -190,10 +190,13 @@ return packer.startup({
 
         -- Highlight given color codes
         use({
-            "norcalli/nvim-colorizer.lua",
+            "brenoprata10/nvim-highlight-colors",
             event = "BufEnter",
             config = function()
-                require("plugins.configs.nvim-colorizer")
+                require("nvim-highlight-colors").setup({
+                    enable_tailwind = true,
+                    render = "background",
+                })
             end,
         })
 
