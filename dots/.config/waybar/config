@@ -87,6 +87,7 @@
                     "墳"
                 ],
             },
+            "on-click": "pw-volume mute toggle; pkill -RTMIN+8 waybar",
             "exec": "pw-volume status"
         },
         "idle_inhibitor": {
