@@ -9,7 +9,7 @@
             "memory",
             "battery",
             "disk",
-            "pulseaudio"
+            "custom/pipewire"
         ],
         "modules-center": [
             "custom/media"
@@ -74,21 +74,20 @@
             "max-length": 20,
             "min-length": 14
         },
-        "pulseaudio": {
-            "tooltip": false,
-            "min-length": 5,
-            "format": "{icon} {volume}%",
-            "format-bluetooth": "{icon} {volume}%",
-            "format-muted": "MUTE",
+        "custom/pipewire": {
+            "format": "{icon} {percentage}%",
+            "return-type": "json",
+            "signal": 8,
+            "interval": "once",
             "format-icons": {
-                "headphone": "",
-                "headset": "",
+                "mute": "婢",
                 "default": [
-                    "",
-                    "",
-                    ""
-                ]
-            }
+                    "奄",
+                    "奔",
+                    "墳"
+                ],
+            },
+            "exec": "pw-volume status"
         },
         "idle_inhibitor": {
             "tooltip": false,
@@ -147,35 +146,31 @@
             "return-type": "json",
             "exec": "~/.config/waybar/scripts/get-media.bash",
             "escape": true
+        },
+        "wlr/workspaces": {
+            "format": "{name}",
+            "on-click": "activate",
+            "format-icons": {
+                "1": "",
+                "2": "",
+                "3": "",
+                "4": "",
+                "5": "",
+                "urgent": "",
+                "active": "",
+                "default": ""
+            }
         }
     },
     {
         "layer": "bottom",
         "position": "bottom",
-        "modules-left": [
-            "custom/sway-mode"
-        ],
         "modules-center": [
-            "sway/workspaces"
+            "wlr/workspaces"
         ],
-        "modules-right": [
-            "sway/language"
-        ],
-        "sway/workspaces": {
-            "tooltip": false,
-            "disable-scroll": true,
-            "all-outputs": true,
-            "persistent_workspaces": {
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [],
-                "5": [],
-                "6": [],
-                "7": [],
-                "8": [],
-                "9": []
-            }
+        "wlr/workspaces": {
+            "format": "{name}",
+            "on-click": "activate"
         },
         "custom/sway-mode": {
             "exec": "swaymsg -t get_binding_state | jq '.name' -r",

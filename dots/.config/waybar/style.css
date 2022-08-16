@@ -84,7 +84,7 @@
   border-radius: 0px;
 }
 
-#workspaces button.persistent {
+#workspaces button.visible {
   transition: none;
   margin: 0px;
   color: @sakuraPink;
@@ -131,7 +131,7 @@
 
 #cpu,
 #memory,
-#pulseaudio,
+#custom-pipewire,
 #disk,
 #temperature,
 #battery {
