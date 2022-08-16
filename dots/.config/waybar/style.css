@@ -93,6 +93,12 @@
   border-radius: 0px;
 }
 
+#workspaces button.active {
+  color: @springGreen;
+  border-bottom: 2px solid @springGreen;
+  border-radius: 0px;
+}
+
 #workspaces button.focused {
   color: @springGreen;
   border-bottom: 2px solid @springGreen;
