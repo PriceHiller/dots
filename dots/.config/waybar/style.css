@@ -84,22 +84,7 @@
   border-radius: 0px;
 }
 
-#workspaces button.visible {
-  transition: none;
-  margin: 0px;
-  color: @sakuraPink;
-  background: transparent;
-  border-bottom: 2px solid @sakuraPink;
-  border-radius: 0px;
-}
-
 #workspaces button.active {
-  color: @springGreen;
-  border-bottom: 2px solid @springGreen;
-  border-radius: 0px;
-}
-
-#workspaces button.focused {
   color: @springGreen;
   border-bottom: 2px solid @springGreen;
   border-radius: 0px;
