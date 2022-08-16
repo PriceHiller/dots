@@ -149,18 +149,7 @@
             "escape": true
         },
         "wlr/workspaces": {
-            "format": "{name}",
             "on-click": "activate",
-            "format-icons": {
-                "1": "",
-                "2": "",
-                "3": "",
-                "4": "",
-                "5": "",
-                "urgent": "",
-                "active": "",
-                "default": ""
-            }
         }
     },
     {
