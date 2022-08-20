@@ -266,6 +266,7 @@ for _, server in ipairs({
     "tsserver",
     "jsonls",
     "pyright",
+    "rnix",
 }) do
     lspconfig[server].setup(opts)
 end
