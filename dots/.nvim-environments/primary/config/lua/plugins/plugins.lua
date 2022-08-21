@@ -604,17 +604,17 @@ return packer.startup({
                 -- Underline matching words to word undor cursor
                 require("mini.cursorword").setup({})
                 -- Surround operators
-                require("mini.surround").setup({
-                    mappings = {
-                        add = "gs",
-                        delete = "ds",
-                        find = "",
-                        find_left = "",
-                        highlight = "",
-                        replace = "cs",
-                        update_n_lines = "",
-                    },
-                })
+                -- require("mini.surround").setup({
+                --     mappings = {
+                --         add = "gs",
+                --         delete = "ds",
+                --         find = "",
+                --         find_left = "",
+                --         highlight = "",
+                --         replace = "cs",
+                --         update_n_lines = "",
+                --     },
+                -- })
             end,
         })
 
@@ -725,6 +725,14 @@ return packer.startup({
                 -- you can configure Hop the way you like here; see :h hop-config
                 require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
             end,
+        })
+
+        -- Surround actions
+        use({
+            'https://github.com/kylechui/nvim-surround.git',
+            config = function()
+                require("nvim-surround").setup({})
+            end
         })
 
         -- Leave at end!!!
