@@ -490,7 +490,7 @@ return packer.startup({
 
         -- Highlight certain comments, TODO, BUG, etc.
         use({
-            "folke/todo-comments.nvim",
+            "B4mbus/todo-comments.nvim",
             event = "BufEnter",
             config = function()
                 require("todo-comments").setup({})
