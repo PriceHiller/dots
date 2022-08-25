@@ -67,8 +67,8 @@ return {
         { key = "t", mods = "LEADER", action = { SendString = "fd --color=always | fzf\x0D" } },
 
         -- NOTE: Copy & Paste
-        { key = "v", mods = "LEADER", action = wezterm.action.PasteFrom("Clipboard") },
-        { key = "c", mods = "LEADER", action = wezterm.action.CopyTo("Clipboard") },
+        { key = "v", mods = "SUPER", action = wezterm.action.PasteFrom("PrimarySelection") },
+        { key = "c", mods = "SUPER", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
     },
     key_tables = {},
 }
