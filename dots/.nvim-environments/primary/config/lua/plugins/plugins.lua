@@ -730,10 +730,18 @@ return packer.startup({
 
         -- Surround actions
         use({
-            'https://github.com/kylechui/nvim-surround.git',
+            "kylechui/nvim-surround",
             config = function()
                 require("nvim-surround").setup({})
-            end
+            end,
+        })
+
+        -- Better list continuation
+        use({
+            "gaoDean/autolist.nvim",
+            config = function()
+                require("autolist").setup({})
+            end,
         })
 
         -- Leave at end!!!
