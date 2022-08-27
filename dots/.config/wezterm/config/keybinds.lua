@@ -5,8 +5,8 @@ return {
     leader = { key = "a", mods = "CTRL", timeout_milliseconds = 100000 },
     keys = {
         { key = "r", mods = "SUPER", action = "ReloadConfiguration" },
-        { key = "z", mods = "SUPER", action = wezterm.action({ ActivateTabRelative = -1 }) },
-        { key = "x", mods = "SUPER", action = wezterm.action({ ActivateTabRelative = 1 }) },
+        { key = "z", mods = "ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
+        { key = "x", mods = "ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
         { key = "t", mods = "SUPER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
         { key = "w", mods = "ALT", action = wezterm.action({ CloseCurrentPane = { confirm = false } }) },
         { key = "w", mods = "SUPER", action = wezterm.action({ CloseCurrentTab = { confirm = false } }) },
