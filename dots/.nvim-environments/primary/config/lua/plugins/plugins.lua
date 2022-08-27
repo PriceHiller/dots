@@ -730,21 +730,10 @@ return packer.startup({
 
         -- Surround actions
         use({
-            "https://github.com/kylechui/nvim-surround.git",
+            'https://github.com/kylechui/nvim-surround.git',
             config = function()
                 require("nvim-surround").setup({})
-            end,
-        })
-
-        -- Note taking, tasks
-        use({
-            "https://github.com/phaazon/mind.nvim",
-            config = function()
-                require("mind").setup({
-                    edit = { data_extension = ".norg" },
-                    data_header = "* %s",
-                })
-            end,
+            end
         })
 
         -- Leave at end!!!
