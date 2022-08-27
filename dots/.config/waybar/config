@@ -110,10 +110,10 @@
         "temperature": {
             "tooltip": false,
             "min-length": 6,
-            "thermal-zone": 1,
+            "thermal-zone": 0,
             "critical-threshold": 90,
-            "format": "{icon} {temperatureF}°F",
-            "format-critical": "{icon} {temperatureF}°F",
+            "format": "{icon} {temperatureC}°C",
+            "format-critical": "{icon} {temperatureC}°C",
             "format-icons": {
                 "default": [
                     "",
