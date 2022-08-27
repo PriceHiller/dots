@@ -82,6 +82,7 @@ return packer.startup({
                         NeogitDiffDeleteHighlight = { fg = colors.git.removed, bg = colors.diff.delete },
                         NeogitDiffAddHighlight = { fg = colors.git.added, bg = colors.diff.add },
                         NeogitCommitViewHeader = { fg = colors.git.changed, bg = colors.diff.text },
+                        WinSeparator = { fg = "#54546D", bg = "NONE" },
                     },
                 })
             end,
