@@ -63,13 +63,13 @@ return packer.startup({
             config = function()
                 local colors = require("kanagawa.colors").setup({})
                 vim.opt.fillchars:append({
-                    horiz = "━",
-                    horizup = "┻",
-                    horizdown = "┳",
-                    vert = "┃",
-                    vertleft = "┨",
-                    vertright = "┣",
-                    verthoriz = "╋",
+                    horiz = "─",
+                    horizup = "┴",
+                    horizdown = "┬",
+                    vert = "│",
+                    vertleft = "┤",
+                    vertright = "├",
+                    verthoriz = "┼",
                 })
                 require("kanagawa").setup({
                     transparent = true,
