@@ -10,8 +10,8 @@ return {
         { key = "t", mods = "SUPER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
         { key = "w", mods = "ALT", action = wezterm.action({ CloseCurrentPane = { confirm = false } }) },
         { key = "w", mods = "SUPER", action = wezterm.action({ CloseCurrentTab = { confirm = false } }) },
-        { key = "c", mods = "SUPER", action = wezterm.action({ CopyTo = "Clipboard" }) },
-        { key = "v", mods = "SUPER", action = wezterm.action({ PasteFrom = "Clipboard" }) },
+        { key = "Copy", action = wezterm.action({ CopyTo = "Clipboard" }) },
+        { key = "Paste", action = wezterm.action({ PasteFrom = "Clipboard" }) },
         -- NOTE: Pane Splitting
         {
             key = "RightArrow",
@@ -67,8 +67,8 @@ return {
         { key = "t", mods = "LEADER", action = { SendString = "fd --color=always | fzf\x0D" } },
 
         -- NOTE: Copy & Paste
-        { key = "v", mods = "SUPER", action = wezterm.action.PasteFrom("PrimarySelection") },
-        { key = "c", mods = "SUPER", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
+        { key = "v", mods = "LEADER", action = wezterm.action.PasteFrom("Clipboard") },
+        { key = "c", mods = "LEADER", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
     },
     key_tables = {},
 }
