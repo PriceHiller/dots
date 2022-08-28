@@ -46,3 +46,5 @@
     unstage = reset HEAD --
 [push]
     autoSetupRemote = true
+[merge]
+    conflictstyle = diff3
