@@ -17,6 +17,8 @@ init() {
 	source "${wkdir}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 	source "${wkdir}/zsh-completions/zsh-completions.plugin.zsh"
 	source "${wkdir}/zsh-vi-mode/zsh-vi-mode.zsh"
+	source "${wkdir}/nix-zsh-completions/nix.plugin.zsh"
+	FPATH="${FPATH}:${wkdir}/nix-zsh-completions"
 	eval "$(lua "${wkdir}/z.lua/z.lua" --init zsh enhanced once)"
 
 	configure
