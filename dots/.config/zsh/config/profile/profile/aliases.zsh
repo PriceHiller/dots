@@ -24,6 +24,7 @@ if command -v git >/dev/null 2>&1; then
 	alias gd="git diff"
 	alias gr="git remote"
 	alias gl="git log"
+	alias glo="git log --oneline"
 	alias gw="git worktree"
 	alias gwa="git worktree add"
 	alias gwr="git worktree remove"
