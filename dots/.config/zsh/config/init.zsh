@@ -22,3 +22,5 @@ init() {
 }
 
 init
+unset -f init
+unset -f configure
