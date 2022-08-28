@@ -267,6 +267,7 @@ for _, server in ipairs({
     "jsonls",
     "pyright",
     "rnix",
+    "marksman",
 }) do
     lspconfig[server].setup(opts)
 end
