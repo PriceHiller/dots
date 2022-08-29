@@ -114,11 +114,6 @@ M.setup = function()
 
     -- Set command bar height to hide when not in use
     opt.cmdheight = 0
-
-    -- WARN: Disable swap files.
-    -- WARN: This is potentially VERY dangerous.
-    -- WARN: For my use case, this is intended
-    opt.swapfile = false
 end
 
 return M
