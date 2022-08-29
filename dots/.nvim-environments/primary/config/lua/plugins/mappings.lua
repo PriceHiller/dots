@@ -143,8 +143,8 @@ vim.keymap.set("n", "<leader>pc", packer_compile, {
     desc = "PackerCompile",
 })
 
--- Undotree mappings
-vim.keymap.set("n", "<leader>ut", ":UndotreeToggle<CR>")
+-- Mundo mappings
+vim.keymap.set("n", "<leader>ut", ":MundoToggle<CR>")
 
 -- Hop Mappings
 local hop = require("hop")
