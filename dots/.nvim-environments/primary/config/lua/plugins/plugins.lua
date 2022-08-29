@@ -699,13 +699,9 @@ return packer.startup({
             end,
         })
 
-        -- Undotree, similar to git branch history
+        -- Mundo, browse and apply undo history
         use({
-            "mbbill/undotree",
-            cmd = "UndotreeToggle",
-            setup = function()
-                vim.g.undotree_WindowLayout = 3
-            end,
+            "simnalamburt/vim-mundo",
         })
 
         -- Allows repeating actions and more
