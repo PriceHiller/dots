@@ -216,6 +216,7 @@ lspconfig.yamlls.setup({
                 ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
                     "/azure-pipeline*.y*l",
                     "/*.azure",
+                    "Azure-Pipelines/**/*.y*l",
                 },
                 ["https://raw.githubusercontent.com/docker/cli/master/cli/compose/schema/data/config_schema_v3.10.json"] = "/docker-compose.y*l",
                 ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml",
