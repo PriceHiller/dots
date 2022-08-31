@@ -65,6 +65,8 @@ M.setup = function()
     opt.foldmethod = "expr"
     opt.fillchars = { fold = " " }
     opt.foldlevel = 20
+    vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.wo.foldmethod = "expr"
 
     -- Concealment for nicer rendering
     opt.conceallevel = 2
