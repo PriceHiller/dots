@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 main() {
-	if pidof waybar >/dev/null 2>&1; then
-		killall -9 waybar
-	fi
+	kill -9 "$(pidof waybar)" >/dev/null
 	waybar &
 }
 main
