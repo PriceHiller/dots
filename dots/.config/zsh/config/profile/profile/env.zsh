@@ -15,9 +15,9 @@ export FZF_DEFAULT_OPTS="--height=80% --layout=reverse --info=inline --border --
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
 ### Python ###
-export PYENV_ROOT="${HOME}/.local/share/pyenv"
-export PATH="${PATH}:${PYENV_ROOT}/bin"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="${HOME}/.local/share/pyenv"
+# export PATH="${PATH}:${PYENV_ROOT}/bin"
+# eval "$(pyenv init -)"
 
 ### MAC ##
 if [[ "$OSTYPE" = "darwin"* ]]; then
@@ -74,19 +74,6 @@ else
 	export EDITOR=vi
 	export VISUAL=less
 fi
-
-### Rust ###
-export CARGO_HOME="${HOME}/.local/share/cargo"
-source "${CARGO_HOME}/env"
-export RUSTUP_HOME="${HOME}/.local/share/rustup"
-export PATH="${PATH}:${CARGO_HOME}/bin"
-
-## Dotnet ###
-export PATH="${PATH}:${XDG_DATA_HOME}/dotnet"
-
-### Go ###
-export GOPATH="${HOME}/.local/share/go"
-export PATH="${PATH}:/usr/local/go/bin:${GOPATH}/bin"
 
 ### Direnv ###
 eval "$(direnv hook zsh)"
