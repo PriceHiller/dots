@@ -54,6 +54,11 @@ if command -v bat >/dev/null 2>&1; then
 	alias cat="bat"
 fi
 
+### Wezterm ###
+if command -v wezterm >/dev/null 2>&1; then
+	alias img="wezterm imgcat"
+fi
+
 ### Misc ###
 alias e="${EDITOR}"
 alias Get-Public-IPV4="dig @resolver4.opendns.com myip.opendns.com +short -4"
