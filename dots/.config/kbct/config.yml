@@ -1,0 +1,9 @@
+- keyboards:
+    - Asus Keyboard
+    - Glorious GMMK Pro ANSI
+  layers:
+    - modifiers:
+        - leftmeta
+      keymap:
+        c: copy
+        v: paste
