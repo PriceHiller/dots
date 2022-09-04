@@ -78,9 +78,6 @@ vim.keymap.set("n", "<leader>dl", ':lua require("dap").run_last()<CR>')
 vim.keymap.set("n", "<leader>/", ":CommentToggle<CR>")
 vim.keymap.set("v", "<leader>/", ":'<,'>CommentToggle<CR>")
 
--- Code Outline
-vim.keymap.set("n", "<leader>co", ":SymbolsOutline<CR>")
-
 -- Bufferline mappings
 vim.keymap.set("n", "<A-a>", ":BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "<A-s>", ":BufferLineCycleNext<CR>")
@@ -155,6 +152,7 @@ vim.keymap.set("", "f", function()
     })
 end)
 
+-- Hop Bindings
 vim.keymap.set("", ";l", "<cmd>HopLineStart<CR>")
 vim.keymap.set("", ";s", "<cmd>HopPattern<CR>")
 vim.keymap.set("", ";;", "<cmd>HopWord<CR>")
