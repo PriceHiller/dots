@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 
-export BASE_ZSH_CONFIG_DIR="$(dirname -- "$( readlink -f -- "${0}" )")"
-source  "${BASE_ZSH_CONFIG_DIR}/config/init.zsh"
+export BASE_ZSH_CONFIG_DIR="$(dirname -- "$(readlink -f -- "${0}")")"
+source "${BASE_ZSH_CONFIG_DIR}/config/init.zsh"
