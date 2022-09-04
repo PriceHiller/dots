@@ -271,6 +271,7 @@ return packer.startup({
                 "nanotee/sqls.nvim",
                 "williamboman/mason.nvim",
                 "simrat39/rust-tools.nvim",
+                "Hoffs/omnisharp-extended-lsp.nvim",
             },
             config = function()
                 require("mason").setup({})

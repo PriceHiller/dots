@@ -239,10 +239,28 @@ lspconfig.yamlls.setup({
     on_attach = on_attach,
 })
 
-lspconfig.csharp_ls.setup({
-    handlers = {
-        ["textDocument/definition"] = require("csharpls_extended").handler,
+-- lspconfig.csharp_ls.setup({
+--     handlers = {
+--         ["textDocument/definition"] = require("csharpls_extended").handler,
+--     },
+--     capabilities = lsp_capabilities,
+--     on_attach = on_attach,
+-- })
+
+lspconfig.omnisharp.setup({
+    cmd = {
+        os.getenv("HOME") .. ".local/share/nvim/mason/bin/omnisharp",
+        "--languageserver",
+        "--hostPID",
+        tostring(vim.fn.getpid()),
     },
+
+    handlers = {
+        ["textDocument/definition"] = require("omnisharp_extended").handler,
+    },
+    enable_import_completion = true,
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
     capabilities = lsp_capabilities,
     on_attach = on_attach,
 })
