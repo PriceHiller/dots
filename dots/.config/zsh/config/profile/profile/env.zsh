@@ -83,6 +83,8 @@ export PATH="${PATH}:${CARGO_HOME}/bin"
 
 ## Dotnet ###
 export PATH="${PATH}:${XDG_DATA_HOME}/dotnet"
+export DOTNET_ROOT="${XDG_DATA_HOME}/dotnet"
+export PATH="${PATH}:${HOME}/.dotnet/tools"
 
 ### Go ###
 export GOPATH="${HOME}/.local/share/go"
