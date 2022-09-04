@@ -401,18 +401,6 @@ return packer.startup({
             end,
         })
 
-        -- Show code outline
-        use({
-            "simrat39/symbols-outline.nvim",
-            cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
-            config = function()
-                -- TODO: Clean this up and use the `nvim.api.nvim_set_hl` api
-                vim.cmd(
-                    [[hi FocusedSymbol term=italic,bold cterm=italic ctermbg=yellow ctermfg=darkblue gui=bold,italic guibg=none guifg=#59D0FF]]
-                )
-            end,
-        })
-
         -- DAP, debugger
         use({
             "mfussenegger/nvim-dap",
@@ -739,6 +727,17 @@ return packer.startup({
             "gaoDean/autolist.nvim",
             config = function()
                 require("autolist").setup({})
+            end,
+        })
+
+        -- Tint inactive windows
+        use({
+            "levouh/tint.nvim",
+            config = function()
+                require("tint").setup({
+                    amt = -20,
+                    saturation = 0.9,
+                })
             end,
         })
 
