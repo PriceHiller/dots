@@ -736,7 +736,7 @@ return packer.startup({
             config = function()
                 require("tint").setup({
                     amt = -20,
-                    saturation = 0.9,
+                    saturation = 0.8,
                 })
             end,
         })
