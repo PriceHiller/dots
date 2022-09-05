@@ -35,52 +35,7 @@ local kind_icons = {
 -- Load Snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local border = {
-    { "╭", "CmpBorder" },
-    { "─", "CmpBorder" },
-    { "╮", "CmpBorder" },
-    { "│", "CmpBorder" },
-    { "╯", "CmpBorder" },
-    { "─", "CmpBorder" },
-    { "╰", "CmpBorder" },
-    { "│", "CmpBorder" },
-}
-
 cmp.setup({
-    -- formatting = {
-    --     fields = {
-    --         cmp.ItemField.Kind,
-    --         cmp.ItemField.Abbr,
-    --         cmp.ItemField.Menu,
-    --     },
-    --     format = function(entry, vim_item)
-    --         -- Get the full snippet (and only keep first line)
-    --         local word = entry:get_insert_text()
-    --         if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-    --             word = vim.lsp.util.parse_snippet(word)
-    --         end
-    --         word = str.oneline(word)
-    --
-    --         -- concatenates the string
-    --         local max = 50
-    --         if string.len(word) >= max then
-    --             local before = string.sub(word, 1, math.floor((max - 3) / 2))
-    --             word = before .. "..."
-    --         end
-    --
-    --         if
-    --             entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-    --             and string.sub(vim_item.abbr, -1, -1) == "~"
-    --         then
-    --             word = word .. "~"
-    --         end
-    --         vim_item.abbr = word
-    --         -- Kind icons
-    --         vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-    --
-    --         return vim_item
-    --     end,
-    -- },
     formatting = {
 
         fields = {
@@ -169,13 +124,12 @@ cmp.setup({
     },
     window = {
         documentation = {
-            border = border,
+            side_padding = 0,
         },
         completion = {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
             col_offset = -3,
             side_padding = 0,
-            -- border = border,
         },
     },
     experimental = {
