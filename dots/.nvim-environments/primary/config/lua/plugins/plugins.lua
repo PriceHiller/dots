@@ -738,6 +738,8 @@ return packer.startup({
             requires = {
                 "anuvyklack/keymap-layer.nvim",
                 "lewis6991/gitsigns.nvim",
+
+                "jbyuki/venn.nvim",
             },
             config = function()
                 require("plugins.configs.hydra")
