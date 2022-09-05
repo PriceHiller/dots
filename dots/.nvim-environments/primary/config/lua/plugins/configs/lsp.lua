@@ -249,7 +249,7 @@ lspconfig.yamlls.setup({
 
 lspconfig.omnisharp.setup({
     cmd = {
-        os.getenv("HOME") .. "/.local/share/nvim/mason/bin/omnisharp",
+        vim.fn.stdpath("data") .. "/mason/bin/omnisharp",
         "--languageserver",
         "--hostPID",
         tostring(vim.fn.getpid()),
