@@ -96,9 +96,9 @@ return packer.startup({
                         CmpItemKindEnum = { fg = "#DCD7BA", bg = "#76946A" },
                         CmpItemKindKeyword = { fg = "#DCD7BA", bg = "#76946A" },
 
-                        CmpItemKindConstant = { fg = "#DCD7BA", bg = "#E6C384" },
-                        CmpItemKindConstructor = { fg = "#DCD7BA", bg = "#E6C384" },
-                        CmpItemKindReference = { fg = "#DCD7BA", bg = "#E6C384" },
+                        CmpItemKindConstant = { fg = "#DCD7BA", bg = "#C0A36E" },
+                        CmpItemKindConstructor = { fg = "#DCD7BA", bg = "#C0A36E" },
+                        CmpItemKindReference = { fg = "#DCD7BA", bg = "#C0A36E" },
 
                         CmpItemKindFunction = { fg = "#DCD7BA", bg = "#957FB8" },
                         CmpItemKindStruct = { fg = "#DCD7BA", bg = "#957FB8" },
