@@ -741,6 +741,15 @@ return packer.startup({
             end,
         })
 
+        -- Highlight argument definitions and usages
+        use({
+            "m-demare/hlargs.nvim",
+            requires = { "nvim-treesitter/nvim-treesitter" },
+            config = function()
+                require("hlargs").setup({})
+            end,
+        })
+
         -- Leave at end!!!
         -- Install and deploy packer plugins
         -- automatically
