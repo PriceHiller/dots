@@ -221,12 +221,6 @@ cmp.setup.filetype("gitcommit", {
     }),
 })
 
-cmp.setup.filetype("NeogitCommitMesssage", {
-    sources = cmp.config.sources({
-        { name = "conventionalcommits", priority = 20 },
-    }),
-})
-
 cmp.setup.filetype("toml", {
     sources = cmp.config.sources({
         { name = "crates" },
@@ -238,7 +232,6 @@ cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
         { name = "fuzzy_buffer" },
-        { name = "cmdline_history" },
     }),
 })
 
@@ -246,7 +239,6 @@ cmp.setup.cmdline("?", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
         { name = "fuzzy_buffer" },
-        { name = "cmdline_history" },
     }),
 })
 
