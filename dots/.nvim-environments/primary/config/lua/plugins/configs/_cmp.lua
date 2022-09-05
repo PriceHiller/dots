@@ -148,8 +148,21 @@ cmp.setup({
                 vim_item.menu = strings[1] .. " " .. strings[2]
                 return kind
             else
+                local word = entry:get_insert_text()
+                if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+                    word = vim.lsp.util.parse_snippet(word)
+                end
+                word = str.oneline(word)
+
+                -- concatenates the string
+                local max = 50
+                if string.len(word) >= max then
+                    local before = string.sub(word, 1, math.floor((max - 3) / 2))
+                    word = before .. "..."
+                end
                 vim_item.kind = " " .. selection.symbol
                 vim_item.menu = selection.symbol .. selection.name
+                vim_item.abbr = word
                 return vim_item
             end
         end,
