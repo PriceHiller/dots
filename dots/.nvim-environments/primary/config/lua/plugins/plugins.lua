@@ -776,6 +776,7 @@ return packer.startup({
             "levouh/tint.nvim",
             config = function()
                 require("tint").setup({
+                    highlight_ignore_patterns = { "WinSeparator" },
                     amt = -30,
                     saturation = 0.8,
                 })
