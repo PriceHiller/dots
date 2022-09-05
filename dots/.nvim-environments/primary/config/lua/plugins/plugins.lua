@@ -735,7 +735,7 @@ return packer.startup({
             "levouh/tint.nvim",
             config = function()
                 require("tint").setup({
-                    amt = -20,
+                    amt = -30,
                     saturation = 0.8,
                 })
             end,
