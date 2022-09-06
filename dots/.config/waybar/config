@@ -6,6 +6,7 @@
             "idle_inhibitor",
             "cpu",
             "temperature",
+            "custom/asusmode",
             "memory",
             "battery",
             "disk",
@@ -85,7 +86,7 @@
                     "奄",
                     "奔",
                     "墳"
-                ],
+                ]
             },
             "on-click": "pw-volume mute toggle; pkill -RTMIN+8 waybar",
             "exec": "pw-volume status"
@@ -124,6 +125,11 @@
                 ]
             }
         },
+        "custom/asusmode": {
+            "interval": 1,
+            "format": " {}",
+            "exec": "asusctl profile -p | awk '{print $NF}'"
+        },
         "memory": {
             "format": " {percentage}%",
             "tooltip-format": "{used:0.1f}GB/{total:0.1f}GB ",
@@ -149,7 +155,7 @@
             "escape": true
         },
         "wlr/workspaces": {
-            "on-click": "activate",
+            "on-click": "activate"
         }
     },
     {
