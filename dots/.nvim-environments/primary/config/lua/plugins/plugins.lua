@@ -543,7 +543,7 @@ return packer.startup({
             run = "cd app && npm install",
             setup = function()
                 vim.g.mkdp_filetypes = { "markdown" }
-                vim.g.mkdp_browser = "firefox"
+                vim.g.mkdp_browser = "firefox-developer-edition"
             end,
             ft = { "markdown" },
         })
