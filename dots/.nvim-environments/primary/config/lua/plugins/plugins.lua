@@ -792,6 +792,14 @@ return packer.startup({
             end,
         })
 
+        -- Vim Latex Support
+        use({
+            "lervag/vimtex",
+            config = function()
+                vim.g.vimtext_view_method = "zathura"
+            end,
+        })
+
         -- Leave at end!!!
         -- Install and deploy packer plugins
         -- automatically
