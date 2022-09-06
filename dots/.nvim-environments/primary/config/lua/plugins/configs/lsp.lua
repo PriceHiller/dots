@@ -287,6 +287,7 @@ for _, server in ipairs({
     "pyright",
     "rnix",
     "marksman",
+    "texlab",
 }) do
     lspconfig[server].setup(opts)
 end
