@@ -44,4 +44,3 @@ default-timeout=5000
 on-touch=none
 on-button-left=dismiss-all
 format=<b><span size="larger" fgcolor="#7E9CD8">%s</span></b>\n<span fgcolor="#DCA561">%b</span>\n<span size="small" fgcolor="#54546D">%a</span>
-on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
