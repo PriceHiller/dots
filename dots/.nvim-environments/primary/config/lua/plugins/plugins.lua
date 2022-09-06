@@ -341,11 +341,6 @@ return packer.startup({
             end,
         })
 
-        -- Code Action Menu, prettier ui for LSP code actions
-        require("packer").use({
-            "weilbith/nvim-code-action-menu",
-        })
-
         -- Lsp From Null LS
         use({
             "jose-elias-alvarez/null-ls.nvim",
