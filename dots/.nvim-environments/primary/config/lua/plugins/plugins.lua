@@ -285,19 +285,6 @@ return packer.startup({
             end,
         })
 
-        -- Workspaces
-        use({
-            "natecraddock/workspaces.nvim",
-            config = function()
-                local workspaces = require("workspaces")
-                workspaces.setup({
-                    hooks = {
-                        open = "Neotree",
-                    },
-                })
-            end,
-        })
-
         -- Lspconfig
         use({
             "neovim/nvim-lspconfig",
@@ -323,20 +310,6 @@ return packer.startup({
             config = function()
                 require("inc_rename").setup({})
             end,
-        })
-
-        -- Show lsp diags at bottom
-        use({
-            "folke/trouble.nvim",
-            config = function()
-                require("trouble").setup()
-            end,
-            cmd = {
-                "Trouble",
-                "TroubleClose",
-                "TroubleToggle",
-                "TroubleRefresh",
-            },
         })
 
         -- Better LSP Virtual Text Lines
@@ -496,7 +469,7 @@ return packer.startup({
             end,
         })
 
-        -- Stabalize closing buffers
+        -- Stabilize closing buffers
         use({
             "luukvbaal/stabilize.nvim",
             config = function()
@@ -631,20 +604,7 @@ return packer.startup({
         use({
             "echasnovski/mini.nvim",
             config = function()
-                -- Underline matching words to word undor cursor
                 require("mini.cursorword").setup({})
-                -- Surround operators
-                -- require("mini.surround").setup({
-                --     mappings = {
-                --         add = "gs",
-                --         delete = "ds",
-                --         find = "",
-                --         find_left = "",
-                --         highlight = "",
-                --         replace = "cs",
-                --         update_n_lines = "",
-                --     },
-                -- })
             end,
         })
 
@@ -667,15 +627,6 @@ return packer.startup({
                     snippet_engine = "luasnip",
                 })
             end,
-        })
-
-        -- Center code, make it visually prettier
-        use({
-            "folke/zen-mode.nvim",
-            config = function()
-                require("zen-mode").setup({})
-            end,
-            cmd = "ZenMode",
         })
 
         -- Multiple cursor/multiple visual selection support
@@ -727,11 +678,6 @@ return packer.startup({
             end,
         })
 
-        -- Mundo, browse and apply undo history
-        use({
-            "simnalamburt/vim-mundo",
-        })
-
         -- Allows repeating actions and more
         use({
             "anuvyklack/hydra.nvim",
@@ -766,6 +712,7 @@ return packer.startup({
         -- Better list continuation
         use({
             "gaoDean/autolist.nvim",
+            ft = "markdown",
             config = function()
                 require("autolist").setup({})
             end,
@@ -795,6 +742,7 @@ return packer.startup({
         -- Vim Latex Support
         use({
             "lervag/vimtex",
+            ft = "tex",
             config = function()
                 vim.g.vimtext_view_method = "zathura"
                 vim.g.vimtex_view_general_viewer = "zathura"
