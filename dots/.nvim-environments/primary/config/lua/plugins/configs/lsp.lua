@@ -140,7 +140,8 @@ rust_tools.setup(rustopts)
 -- I use ansible a lot, define exceptions for servers that can use
 -- server:setup & vim.cmd at the bottom here
 lspconfig.ansiblels.setup({
-    opts,
+    capabilities = lsp_capabilities,
+    on_attach = on_attach,
     settings = {
         ansible = {
             ansible = {
