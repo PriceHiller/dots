@@ -3,7 +3,6 @@
         "layer": "top",
         "position": "top",
         "modules-left": [
-            "idle_inhibitor",
             "cpu",
             "temperature",
             "custom/asusmode",
