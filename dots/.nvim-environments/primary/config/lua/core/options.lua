@@ -72,6 +72,9 @@ M.setup = function()
     opt.conceallevel = 2
     opt.concealcursor = "ic"
 
+    -- Cursor line highlight
+    opt.cursorline = true
+
     -- Lazy Redraw to Speed Up Macros
     opt.lazyredraw = true
 
