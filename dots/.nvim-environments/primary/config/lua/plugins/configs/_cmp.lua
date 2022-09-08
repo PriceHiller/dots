@@ -10,66 +10,29 @@ require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
     formatting = {
 
-        fields = {
-            cmp.ItemField.Kind,
-            cmp.ItemField.Abbr,
-            cmp.ItemField.Menu,
-        },
+        fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
         format = function(entry, vim_item)
             local selections = {
-                fuzzy_buffer = {
-                    symbol = "﬘ ",
-                    name = "Buffer",
-                },
-                luasnip = {
-                    symbol = " ",
-                    name = "Snippet",
-                },
-                path = {
-                    symbol = " ",
-                    name = "Path",
-                },
-                calc = {
-                    symbol = " ",
-                    name = "Calculator",
-                },
-                neorg = {
-                    symbol = " ",
-                    name = "Neorg",
-                },
-                emoji = {
-                    symbol = "ﲃ ",
-                    name = "Emoji",
-                },
-                zsh = {
-                    symbol = " ",
-                    name = "Zsh",
-                },
-                crates = {
-                    symbol = " ",
-                    name = "Crates",
-                },
-                cmdline_history = {
-                    symbol = " ",
-                    name = "Cmd History",
-                },
-                rg = {
-                    symbol = " ",
-                    name = "Ripgrep",
-                },
-                npm = {
-                    symbol = " ",
-                    name = "Npm,",
-                },
-                conventionalcommits = {
-                    symbol = " ",
-                    name = "Commit",
-                },
+                fuzzy_buffer = { symbol = "﬘ ", name = "Buffer" },
+                luasnip = { symbol = " ", name = "Snippet" },
+                path = { symbol = " ", name = "Path" },
+                calc = { symbol = " ", name = "Calculator" },
+                neorg = { symbol = " ", name = "Neorg" },
+                emoji = { symbol = "ﲃ ", name = "Emoji" },
+                zsh = { symbol = " ", name = "Zsh" },
+                crates = { symbol = " ", name = "Crates" },
+                cmdline_history = { symbol = " ", name = "Cmd History" },
+                rg = { symbol = " ", name = "Ripgrep" },
+                npm = { symbol = " ", name = "Npm," },
+                conventionalcommits = { symbol = " ", name = "Commit" },
             }
 
             local selection = selections[entry.source.name]
             if not selection then
-                local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+                local kind = require("lspkind").cmp_format({
+                    mode = "symbol_text",
+                    maxwidth = 50,
+                })(entry, vim_item)
                 local strings = vim.split(kind.kind, "%s", { trimempty = true })
                 kind.kind = " " .. strings[1] .. " "
                 vim_item.menu = strings[1] .. " " .. strings[2]
@@ -95,19 +58,14 @@ cmp.setup({
         end,
     },
     window = {
-        documentation = {
-            side_padding = 0,
-        },
+        documentation = { side_padding = 0 },
         completion = {
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
             col_offset = -3,
             side_padding = 0,
         },
     },
-    experimental = {
-        ghost_text = true,
-        native_menu = false,
-    },
+    experimental = { ghost_text = true, native_menu = false },
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
@@ -189,30 +147,20 @@ cmp.setup({
 
 -- Git Commit Completions
 cmp.setup.filetype("gitcommit", {
-    sources = cmp.config.sources({
-        { name = "conventionalcommits", priority = 20 },
-    }),
+    sources = cmp.config.sources({ { name = "conventionalcommits", priority = 20 } }),
 })
 
-cmp.setup.filetype("toml", {
-    sources = cmp.config.sources({
-        { name = "crates" },
-    }),
-})
+cmp.setup.filetype("toml", { sources = cmp.config.sources({ { name = "crates" } }) })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = "fuzzy_buffer" },
-    }),
+    sources = cmp.config.sources({ { name = "fuzzy_buffer" } }),
 })
 
 cmp.setup.cmdline("?", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = "fuzzy_buffer" },
-    }),
+    sources = cmp.config.sources({ { name = "fuzzy_buffer" } }),
 })
 
 cmp.setup.cmdline("@", {
