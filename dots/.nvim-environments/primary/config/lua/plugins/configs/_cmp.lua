@@ -13,18 +13,17 @@ cmp.setup({
         fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
         format = function(entry, vim_item)
             local selections = {
-                fuzzy_buffer = { symbol = "﬘ ", name = "Buffer" },
-                luasnip = { symbol = " ", name = "Snippet" },
-                path = { symbol = " ", name = "Path" },
-                calc = { symbol = " ", name = "Calculator" },
-                neorg = { symbol = " ", name = "Neorg" },
-                emoji = { symbol = "ﲃ ", name = "Emoji" },
-                zsh = { symbol = " ", name = "Zsh" },
-                crates = { symbol = " ", name = "Crates" },
-                cmdline_history = { symbol = " ", name = "Cmd History" },
-                rg = { symbol = " ", name = "Ripgrep" },
-                npm = { symbol = " ", name = "Npm," },
-                conventionalcommits = { symbol = " ", name = "Commit" },
+                fuzzy_buffer = { symbol = "﬘ ", name = "Buffer", hl_group = "Buffer" },
+                path = { symbol = " ", name = "Path", hl_group = "Path" },
+                calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
+                neorg = { symbol = " ", name = "Neorg", hl_group = "Neorg" },
+                emoji = { symbol = "ﲃ ", name = "Emoji", hl_group = "Emoji" },
+                zsh = { symbol = " ", name = "Zsh", hl_group = "Zsh" },
+                crates = { symbol = " ", name = "Crates", hl_group = "Crates" },
+                cmdline_history = { symbol = " ", name = "Cmd History", hl_group = "CmdHistory" },
+                rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
+                npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
+                conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
             }
 
             local selection = selections[entry.source.name]
@@ -52,6 +51,7 @@ cmp.setup({
                 end
                 vim_item.kind = " " .. selection.symbol
                 vim_item.menu = selection.symbol .. selection.name
+                vim_item.kind_hl_group = "CmpCustomSelection" .. selection.hl_group
                 vim_item.abbr = word
                 return vim_item
             end
