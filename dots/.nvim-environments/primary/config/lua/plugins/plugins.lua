@@ -133,6 +133,11 @@ return packer.startup({
                         CmpCustomSelectionNpm = { fg = colors.fujiWhite, bg = colors.peachRed },
                         CmpCustomSelectionCommit = { fg = colors.fujiWhite, bg = colors.peachRed },
 
+                        TelescopeBorder = { bg = "NONE" },
+                        TelescopePromptBorder = { bg = "NONE" },
+                        TelescopeResultsBorder = { bg = "NONE" },
+                        TelescopePreviewBorder = { bg = "NONE" },
+
                         WinSeparator = { fg = colors.sumiInk4, bg = "NONE" },
                     },
                 })
