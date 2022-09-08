@@ -132,6 +132,7 @@ return packer.startup({
                         CmpCustomSelectionRipgrep = { fg = colors.fujiWhite, bg = colors.dragonBlue },
                         CmpCustomSelectionNpm = { fg = colors.fujiWhite, bg = colors.peachRed },
                         CmpCustomSelectionCommit = { fg = colors.fujiWhite, bg = colors.peachRed },
+                        CmpCustomSelectionSpell = { fg = colors.fujiWhite, bg = colors.waveRed },
 
                         TelescopeBorder = { bg = "NONE" },
                         TelescopePromptBorder = { bg = "NONE" },
@@ -406,6 +407,7 @@ return packer.startup({
                 "David-Kunz/cmp-npm",
                 "lukas-reineke/cmp-rg",
                 "onsails/lspkind.nvim",
+                "f3fora/cmp-spell",
             },
             config = function()
                 require("plugins.configs._cmp")

@@ -24,6 +24,7 @@ cmp.setup({
                 rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
                 npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
                 conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
+                spell = { symbol = " ", name = "Spell", hl_group = "Spell" },
             }
 
             local selection = selections[entry.source.name]
@@ -128,7 +129,7 @@ cmp.setup({
         { name = "neorg" },
         { name = "calc" },
         { name = "npm", keyword_length = 2 },
-        { name = "dictionary", keyword_length = 2 },
+        { name = "spell", keyword_length = 2 },
     }),
     sorting = {
         comparators = {
