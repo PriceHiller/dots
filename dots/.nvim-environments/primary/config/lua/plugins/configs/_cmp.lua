@@ -159,17 +159,18 @@ cmp.setup({
         { name = "nvim_lsp", priority = 10 },
         { name = "luasnip", priority = 9 }, -- For luasnip users.
         { name = "fuzzy_buffer", priority = 8 },
-        { name = "rg", priority = 7 },
+        {
+            name = "rg",
+            priority = 7,
+            keyword_length = 3,
+        },
         { name = "path", priority = 6 },
         { name = "zsh", priority = 5 },
         { name = "emoji", keyword_length = 2 },
         { name = "neorg" },
         { name = "calc" },
         { name = "npm", keyword_length = 2 },
-        {
-            name = "dictionary",
-            keyword_length = 2,
-        },
+        { name = "dictionary", keyword_length = 2 },
     }),
     sorting = {
         comparators = {
