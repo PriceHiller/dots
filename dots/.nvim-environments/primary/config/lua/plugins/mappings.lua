@@ -157,4 +157,4 @@ vim.keymap.set("", ";a", "<cmd>HopAnywhere<CR>")
 vim.keymap.set("", ";v", "<cmd>HopVertical<CR>")
 
 -- Term/Open bindings
-vim.keymap.set("n", "<leader>ot", "<cmd>ToggleTerm<CR>")
+vim.keymap.set("n", "<leader><leader>", "<cmd>ToggleTerm<CR>")
