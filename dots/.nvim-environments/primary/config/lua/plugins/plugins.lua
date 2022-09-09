@@ -764,6 +764,30 @@ return packer.startup({
             end,
         })
 
+        use({
+            "akinsho/toggleterm.nvim",
+            config = function()
+                require("toggleterm").setup({
+                    start_in_insert = false,
+                    direction = "vertical",
+                    autochdir = true,
+                    size = function(term)
+                        if term.direction == "vertical" then
+                            return vim.o.columns * 0.5
+                        else
+                            return 30
+                        end
+                    end,
+                    winbar = {
+                        enable = true,
+                        name_formatter = function(term) --  term: Terminal
+                            return term.name
+                        end,
+                    },
+                })
+            end,
+        })
+
         -- Leave at end!!!
         -- Install and deploy packer plugins
         -- automatically

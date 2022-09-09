@@ -50,6 +50,9 @@ M.setup = function()
 
     -- Sudo Write
     vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %")
+
+    -- Terminal mappings
+    vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]])
 end
 
 return M
