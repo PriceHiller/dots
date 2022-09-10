@@ -13,6 +13,7 @@ g.indent_blankline_filetype_exclude = {
     "lspinfo",
     "mason.nvim",
     "mason",
+    "man",
 }
 
 g.indent_blankline_buftype_exclude = { "terminal" }
