@@ -37,10 +37,21 @@
 
 font=Fira Code 10
 background-color=#16161DF0
-text-color=#DCD7BA
-border-color=#957FB8
+border-color=#FF9E3B
 border-radius=10
+text-color=#DCA561
+progress-color=over #7E9CD8
 default-timeout=5000
+width=450
 on-touch=none
 on-button-left=dismiss-all
-format=<b><span size="larger" fgcolor="#7E9CD8">%s</span></b>\n<span fgcolor="#DCA561">%b</span>\n<span size="small" fgcolor="#54546D">%a</span>
+format=<b><span size="larger" fgcolor="#7E9CD8">%s</span></b>\n%b\n<span size="small" fgcolor="#54546D">%a</span>
+
+[urgency=critical]
+text-color=#FF5D62
+border-color=#FF5D62
+default-timeout=500000000
+
+[app-name=Spotify]
+text-color=#98BB6C
+border-color=#98BB6C
