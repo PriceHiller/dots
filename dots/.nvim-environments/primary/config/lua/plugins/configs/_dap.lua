@@ -9,7 +9,7 @@ local function get_program_path(program)
     return program_path
 end
 
-local lldb_path = get_program_path("lldb-vscode")
+local lldb_path = get_program_path("codelldb")
 -- Adapaters
 dap.adapters.lldb = {
     type = "executable",
