@@ -16,9 +16,6 @@ vim.keymap.set("n", "<leader>fh", ":RustHoverActions<CR>", {
 vim.keymap.set("n", "<leader>fH", ":RustHoverRange<CR>", {
     buffer = true,
 })
-vim.keymap.set("n", "<leader>fi", ":RustToggleInlayHints<CR>", {
-    buffer = true,
-})
 vim.keymap.set("n", "<leader>fm", ":RustExpandMacro<CR>", {
     buffer = true,
 })
