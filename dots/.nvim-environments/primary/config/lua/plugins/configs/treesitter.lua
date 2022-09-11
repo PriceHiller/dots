@@ -1,13 +1,13 @@
-local nvim_treesitter = require("nvim-treesitter.configs")
+local nvim_treesitter = require('nvim-treesitter.configs')
 
 nvim_treesitter.setup({
     ensure_installed = {
-        "norg",
+        'norg',
     },
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,
-        disable = { "yaml" },
+        disable = { 'yaml' },
     },
     matchup = {
         enable = true,
@@ -16,9 +16,6 @@ nvim_treesitter.setup({
         enable = true,
     },
     yati = {
-        enable = true,
-    },
-    markid = {
         enable = true,
     },
 })
