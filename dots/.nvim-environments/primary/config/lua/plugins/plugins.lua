@@ -186,6 +186,9 @@ return packer.startup({
         use({
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
+            requires = {
+                "David-Kunz/markid",
+            },
             config = function()
                 require("plugins.configs.treesitter")
             end,
@@ -746,13 +749,13 @@ return packer.startup({
         })
 
         -- Highlight argument definitions and usages
-        use({
-            "m-demare/hlargs.nvim",
-            requires = { "nvim-treesitter/nvim-treesitter" },
-            config = function()
-                require("hlargs").setup({})
-            end,
-        })
+        -- use({
+        --     "m-demare/hlargs.nvim",
+        --     requires = { "nvim-treesitter/nvim-treesitter" },
+        --     config = function()
+        --         require("hlargs").setup({})
+        --     end,
+        -- })
 
         -- Vim Latex Support
         use({
