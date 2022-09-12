@@ -28,6 +28,7 @@
         },
         "battery": {
             "min-length": 5,
+            "design-capacity": true,
             "states": {
                 "full": 90,
                 "warning": 30,
