@@ -769,15 +769,8 @@ return packer.startup({
             config = function()
                 require("toggleterm").setup({
                     start_in_insert = false,
-                    direction = "vertical",
+                    direction = "float",
                     autochdir = true,
-                    size = function(term)
-                        if term.direction == "vertical" then
-                            return vim.o.columns * 0.5
-                        else
-                            return 30
-                        end
-                    end,
                     winbar = {
                         enable = true,
                         name_formatter = function(term) --  term: Terminal
