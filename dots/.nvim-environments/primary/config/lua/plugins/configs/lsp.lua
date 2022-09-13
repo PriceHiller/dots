@@ -271,6 +271,8 @@ lspconfig.jsonls.setup({
         schemas = require("schemastore").json.schemas(),
         validate = { enable = true },
     },
+    capabilities = lsp_capabilities,
+    on_attach = on_attach,
 })
 
 -- NOTE: GENERIC LSP SERVERS
