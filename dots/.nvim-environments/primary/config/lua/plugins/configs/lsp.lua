@@ -266,12 +266,18 @@ lspconfig.omnisharp.setup({
     on_attach = on_attach,
 })
 
-lspconfig.bashls.setup({})
+lspconfig.jsonls.setup({
+    settings = {
+        schemas = require("schemastore").json.schemas(),
+        validate = { enable = true },
+    },
+})
 
 -- NOTE: GENERIC LSP SERVERS
 for _, server in ipairs({
     "clangd",
     "cmake",
+    "bashls",
     "dockerls",
     "eslint",
     "html",
@@ -284,7 +290,6 @@ for _, server in ipairs({
     "vimls",
     "vuels",
     "tsserver",
-    "jsonls",
     "pyright",
     "rnix",
     "marksman",
