@@ -316,6 +316,7 @@ return packer.startup({
                 "williamboman/mason.nvim",
                 "simrat39/rust-tools.nvim",
                 "Hoffs/omnisharp-extended-lsp.nvim",
+                "b0o/schemastore.nvim",
             },
             config = function()
                 require("mason").setup({})
