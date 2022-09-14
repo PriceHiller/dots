@@ -789,6 +789,16 @@ return packer.startup({
             end,
         })
 
+        -- Take a screenshot of code selected
+        use({
+            "segeljakt/vim-silicon",
+            config = function()
+                vim.g.silicon = {
+                    background = "#7E9CD8"
+            }
+	    end
+        })
+
         -- Leave at end!!!
         -- Install and deploy packer plugins
         -- automatically
