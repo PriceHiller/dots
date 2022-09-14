@@ -794,9 +794,9 @@ return packer.startup({
             "segeljakt/vim-silicon",
             config = function()
                 vim.g.silicon = {
-                    background = "#7E9CD8"
-            }
-	    end
+                    theme = "Coldark-Dark"
+                }
+            end,
         })
 
         -- Leave at end!!!
