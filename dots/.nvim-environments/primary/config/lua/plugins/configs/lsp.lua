@@ -156,7 +156,7 @@ lspconfig.ansiblels.setup({
                 interpreterPath = "python3",
             },
             completion = {
-                provideRedirectModules = false,
+                provideRedirectModules = true,
             },
         },
     },
