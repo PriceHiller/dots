@@ -275,6 +275,10 @@ lspconfig.jsonls.setup({
     on_attach = on_attach,
 })
 
+lspconfig.powershell_es.setup({
+    bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
+})
+
 -- NOTE: GENERIC LSP SERVERS
 for _, server in ipairs({
     "clangd",
