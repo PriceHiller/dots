@@ -277,6 +277,8 @@ lspconfig.jsonls.setup({
 
 lspconfig.powershell_es.setup({
     bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
+    capabilities = lsp_capabilities,
+    on_attach = on_attach,
 })
 
 -- NOTE: GENERIC LSP SERVERS
