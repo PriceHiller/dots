@@ -7,11 +7,13 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS
+setopt AUTO_PARAM_SLASH
 
 setopt EXTENDED_GLOB
 setopt NULL_GLOB
 
 setopt AUTO_CD
+setopt AUTO_PUSHD
 setopt CHASE_DOTS
 
 setopt HASH_CMDS
