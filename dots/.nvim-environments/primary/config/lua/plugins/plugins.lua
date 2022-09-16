@@ -803,7 +803,7 @@ return packer.startup({
         use({
             "gen740/SmoothCursor.nvim",
             requires = {
-                "rebelot/kanagawa",
+                "rebelot/kanagawa.nvim",
             },
             config = function()
                 local kcolors = require("kanagawa.colors").setup({})
