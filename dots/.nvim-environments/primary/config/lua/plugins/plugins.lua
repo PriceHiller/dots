@@ -794,8 +794,36 @@ return packer.startup({
             "segeljakt/vim-silicon",
             config = function()
                 vim.g.silicon = {
-                    theme = "Coldark-Dark"
+                    theme = "Coldark-Dark",
                 }
+            end,
+        })
+
+        -- Nice sidebar cursor goodies
+        use({
+            "gen740/SmoothCursor.nvim",
+            requires = {
+                "rebelot/kanagawa",
+            },
+            config = function()
+                local kcolors = require("kanagawa.colors").setup({})
+                vim.api.nvim_set_hl(0, "SmoothCursorCursor", { fg = kcolors.roninYellow })
+                vim.api.nvim_set_hl(0, "SmoothCursorTrail", { fg = kcolors.autumnYellow })
+                require("smoothcursor").setup({
+                    fancy = {
+                        enable = true,
+                        head = { cursor = "⯈", texthl = "SmoothCursorCursor", linehl = nil },
+                        body = {
+                            { cursor = "", texthl = "SmoothCursorTrail" },
+                            { cursor = "", texthl = "SmoothCursorTrail" },
+                            { cursor = "●", texthl = "SmoothCursorTrail" },
+                            { cursor = "●", texthl = "SmoothCursorTrail" },
+                            { cursor = "•", texthl = "SmoothCursorTrail" },
+                            { cursor = ".", texthl = "SmoothCursorTrail" },
+                            { cursor = ".", texthl = "SmoothCursorTrail" },
+                        },
+                    },
+                })
             end,
         })
 
