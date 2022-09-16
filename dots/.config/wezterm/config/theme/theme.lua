@@ -1,7 +1,6 @@
 local colors = require("config.theme.colors")
 
 return {
-    enable_scroll_bar = true,
     window_decorations = "RESIZE",
     window_background_opacity = 0.90,
     text_background_opacity = 1.0,
