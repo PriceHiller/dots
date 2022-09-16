@@ -140,6 +140,9 @@ return packer.startup({
                         TelescopePreviewBorder = { bg = "NONE" },
 
                         WinSeparator = { fg = colors.sumiInk4, bg = "NONE" },
+
+                        MiniCursorword = { bg = colors.sumiInk3 },
+                        MiniCursorwordCurrent = { bg = colors.sumiInk3 },
                     },
                 })
             end,
