@@ -143,6 +143,14 @@ return packer.startup({
 
                         MiniCursorword = { bg = colors.sumiInk3 },
                         MiniCursorwordCurrent = { bg = colors.sumiInk3 },
+
+                        rainbowcol1 = { fg = colors.oniViolet },
+                        rainbowcol2 = { fg = colors.crystalBlue },
+                        rainbowcol3 = { fg = colors.lightBlue },
+                        rainbowcol4 = { fg = colors.sakuraPink },
+                        rainbowcol5 = { fg = colors.springGreen },
+                        rainbowcol6 = { fg = colors.springViolet2 },
+                        rainbowcol7 = { fg = colors.carpYellow },
                     },
                 })
             end,
@@ -189,6 +197,9 @@ return packer.startup({
         use({
             "nvim-treesitter/nvim-treesitter",
             run = ":TSUpdate",
+            requires = {
+                "p00f/nvim-ts-rainbow",
+            },
             config = function()
                 require("plugins.configs.treesitter")
             end,
