@@ -4,7 +4,14 @@ if not loaded then
     return
 end
 
+local wk = require("which-key")
+
 -- Telescope mappings
+wk.register({
+    t = {
+        name = "Telescope",
+    },
+}, { prefix = "<leader>" })
 vim.keymap.set("n", "<Leader>tw", ":Telescope live_grep<CR>", { silent = true, desc = "Telescope: Grep for Word" })
 vim.keymap.set("n", "<Leader>tgs", ":Telescope git_status<CR>", { silent = true, desc = "Telescope: Git Status" })
 vim.keymap.set("n", "<Leader>tgc", ":Telescope git_commits<CR>", { silent = true, desc = "Telescope: Git Commits" })
@@ -34,6 +41,12 @@ vim.keymap.set("n", "<leader>tk", ":Telescope keymaps<CR>", { silent = true, des
 vim.keymap.set("n", "<leader>tc", ":Telescope commands<CR>", { silent = true, desc = "Telescope: Commands" })
 
 -- Lsp Mappings
+
+wk.register({
+    l = {
+        name = "LSP",
+    },
+}, { prefix = "<leader>" })
 vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { silent = true, desc = "LSP: Declaration" })
 vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { silent = true, desc = "LSP: Definition" })
 vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { silent = true, desc = "LSP: Hover" })
@@ -88,6 +101,11 @@ end, {
 vim.keymap.set("n", "<leader>nf", ":Neoformat<CR>", { silent = true, desc = "Neoformat" })
 
 -- DAP Mappings
+wk.register({
+    d = {
+        name = "DAP",
+    },
+}, { prefix = "<leader>" })
 local dap = require("dap")
 vim.keymap.set("n", "<leader>dc", dap.continue, { silent = true, desc = "DAP: Continue" })
 vim.keymap.set("n", "<leader>de", dap.terminate, { silent = true, desc = "DAP: Terminate" })
@@ -130,6 +148,13 @@ vim.keymap.set("n", "<leader>nd", require("notify").dismiss, { silent = true, de
 vim.keymap.set("n", "<leader>ww", ":WhichKey<CR>", { silent = true, desc = "Show Keybinds" })
 
 -- Neogen Mappings
+wk.register({
+    n = {
+        g = {
+            name = "Neogen",
+        },
+    },
+}, { prefix = "<leader>" })
 vim.keymap.set("n", "<leader>ngf", ":Neogen func<CR>", { silent = true, desc = "Neogen: Function Annotation" })
 vim.keymap.set("n", "<leader>ngc", ":Neogen class<CR>", { silent = true, desc = "Neogen: Class Annotation" })
 vim.keymap.set("n", "<leader>ngt", ":Neogen type<CR>", { silent = true, desc = "Neogen: Type Annotation" })
@@ -142,6 +167,11 @@ vim.keymap.set("n", "<leader>nt", ":Neotree show toggle focus<cr>", { silent = t
 vim.keymap.set("n", "<leader>pt", "<Plug>PlenaryTestFile", { silent = true, desc = "Plenary: Test File" })
 
 -- Neogit Mappings
+wk.register({
+    g = {
+        name = "Git",
+    },
+}, { prefix = "<leader>" })
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { silent = true, desc = "Neogit: Open" })
 
 -- Gitsigns Mappings
