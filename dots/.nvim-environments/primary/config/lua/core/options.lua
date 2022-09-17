@@ -117,8 +117,8 @@ M.setup = function()
     opt.modeline = true
     opt.modelines = 5
 
-    -- Set command bar height to hide when not in use
-    opt.cmdheight = 0
+    -- Set command bar height
+    opt.cmdheight = 1
 end
 
 return M
