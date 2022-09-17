@@ -1,4 +1,14 @@
 local hydra = require("hydra")
+local wk = require("which-key")
+wk.register(
+    { h = {
+        name = "Hydra",
+        o = { "Options" },
+        g = { "Git Signs" },
+        d = { "Diagram" },
+    } },
+    { prefix = "<leader>" }
+)
 
 -- Side Scroll
 hydra({
