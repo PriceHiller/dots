@@ -5,22 +5,26 @@ M.setup = function()
     vim.g.mapleader = " "
 
     -- Get rid of highlight after search
-    vim.keymap.set("n", "<esc>", ":noh<CR>")
+    vim.keymap.set("n", "<esc>", function()
+        vim.api.nvim_command("noh")
+    end, { silent = true, desc = "Remove Highlighted Searches" })
 
     -- Spell Checking
-    vim.keymap.set("n", "<leader>st", ":set spell!<CR>")
+    vim.keymap.set("n", "<leader>st", function()
+        vim.opt.spell = not vim.opt.spell:get()
+    end, { silent = true, desc = "Toggle Spell" })
 
     -- Better split movement
-    vim.keymap.set("n", "<C-l>", "<C-w>l")
-    vim.keymap.set("n", "<C-h>", "<C-w>h")
-    vim.keymap.set("n", "<C-k>", "<C-w>k")
-    vim.keymap.set("n", "<C-j>", "<C-w>j")
+    vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
+    vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
+    vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
+    vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
 
     -- Better split closing
-    vim.keymap.set("n", "<C-x>", "<C-w>c")
+    vim.keymap.set("n", "<C-x>", "<C-w>c", { silent = true })
 
     -- Set current focused file as cwd
-    vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>")
+    vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
 
     -- Toggle showing diagnostics
     local diagnostics_active = true
@@ -31,7 +35,7 @@ M.setup = function()
         else
             vim.diagnostic.disable()
         end
-    end, { desc = "Toggle Diagnostics" })
+    end, { silent = true, desc = "Toggle Diagnostics" })
 
     -- Toggle showing command bar
     vim.keymap.set("n", "<leader>cl", function()
@@ -41,18 +45,18 @@ M.setup = function()
         else
             vim.opt.cmdheight = 1
         end
-    end, { desc = "Toggle Cmdline" })
+    end, { silent = true, desc = "Toggle Cmdline" })
 
     -- Toggle relativenumber
     vim.keymap.set("n", "<leader>sn", function()
         vim.opt.relativenumber = not vim.opt.relativenumber:get()
-    end, { desc = "Toggle Relativenumber" })
+    end, { silent = true, desc = "Toggle Relativenumber" })
 
     -- Sudo Write
-    vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %")
+    vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
 
     -- Terminal mappings
-    vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]])
+    vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { silent = true })
 end
 
 return M
