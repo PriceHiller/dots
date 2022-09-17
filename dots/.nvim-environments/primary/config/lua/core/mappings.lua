@@ -38,7 +38,7 @@ M.setup = function()
     end, { silent = true, desc = "Toggle Diagnostics" })
 
     -- Toggle showing command bar
-    vim.keymap.set("n", "<leader>cl", function()
+    vim.keymap.set("n", "<leader>sc", function()
         local current_cmdheight = vim.opt.cmdheight:get()
         if current_cmdheight > 0 then
             vim.opt.cmdheight = 0
