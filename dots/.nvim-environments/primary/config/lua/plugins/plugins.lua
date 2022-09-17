@@ -822,19 +822,23 @@ return packer.startup({
             config = function()
                 local kcolors = require("kanagawa.colors").setup({})
                 vim.api.nvim_set_hl(0, "SmoothCursorCursor", { fg = kcolors.roninYellow })
-                vim.api.nvim_set_hl(0, "SmoothCursorTrail", { fg = kcolors.autumnYellow })
+                vim.api.nvim_set_hl(0, "SmoothCursorTrailBig1", { fg = kcolors.autumnYellow })
+                vim.api.nvim_set_hl(0, "SmoothCursorTrailBig2", { fg = kcolors.crystalBlue })
+                vim.api.nvim_set_hl(0, "SmoothCursorTrailMedium", { fg = kcolors.oniViolet })
+                vim.api.nvim_set_hl(0, "SmoothCursorTrailSmall", { fg = kcolors.springBlue })
+                vim.api.nvim_set_hl(0, "SmoothCursorTrailXSmall", { fg = kcolors.waveAqua2 })
                 require("smoothcursor").setup({
                     fancy = {
                         enable = true,
                         head = { cursor = "⯈", texthl = "SmoothCursorCursor", linehl = nil },
                         body = {
-                            { cursor = "", texthl = "SmoothCursorTrail" },
-                            { cursor = "", texthl = "SmoothCursorTrail" },
-                            { cursor = "●", texthl = "SmoothCursorTrail" },
-                            { cursor = "●", texthl = "SmoothCursorTrail" },
-                            { cursor = "•", texthl = "SmoothCursorTrail" },
-                            { cursor = ".", texthl = "SmoothCursorTrail" },
-                            { cursor = ".", texthl = "SmoothCursorTrail" },
+                            { cursor = "", texthl = "SmoothCursorTrailBig1" },
+                            { cursor = "", texthl = "SmoothCursorTrailBig2" },
+                            { cursor = "●", texthl = "SmoothCursorTrailMedium" },
+                            { cursor = "●", texthl = "SmoothCursorTrailMedium" },
+                            { cursor = "•", texthl = "SmoothCursorTrailSmall" },
+                            { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
+                            { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
                         },
                     },
                 })
