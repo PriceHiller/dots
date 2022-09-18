@@ -304,6 +304,10 @@ return packer.startup({
             end,
         })
 
+        use({
+            "stevearc/dressing.nvim",
+        })
+
         -- File Tree
         use({
             "nvim-neo-tree/neo-tree.nvim",
@@ -850,6 +854,13 @@ return packer.startup({
             "uga-rosa/ccc.nvim",
             config = function()
                 require("plugins.configs.ccc")
+            end,
+        })
+
+        use({
+            "stevearc/overseer.nvim",
+            config = function()
+                require("overseer").setup()
             end,
         })
 
