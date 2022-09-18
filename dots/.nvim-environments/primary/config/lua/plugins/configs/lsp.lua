@@ -281,6 +281,25 @@ lspconfig.powershell_es.setup({
     on_attach = on_attach,
 })
 
+local path = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+local words = {}
+
+for word in io.open(path, "r"):lines() do
+    table.insert(words, word)
+end
+
+lspconfig.ltex.setup({
+    settings = {
+        ltex = {
+            dictionary = {
+                ["en-US"] = words,
+            },
+        },
+    },
+    capabilities = lsp_capabilities,
+    on_attach = on_attach,
+})
+
 -- NOTE: GENERIC LSP SERVERS
 for _, server in ipairs({
     "clangd",
