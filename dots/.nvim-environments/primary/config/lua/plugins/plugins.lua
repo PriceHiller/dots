@@ -845,6 +845,14 @@ return packer.startup({
             end,
         })
 
+        -- Color Picker
+        use({
+            "uga-rosa/ccc.nvim",
+            config = function()
+                require("plugins.configs.ccc")
+            end,
+        })
+
         -- Leave at end!!!
         -- Install and deploy packer plugins
         -- automatically
