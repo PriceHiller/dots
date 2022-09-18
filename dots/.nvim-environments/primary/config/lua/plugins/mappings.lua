@@ -232,3 +232,12 @@ vim.keymap.set("", ";v", "<cmd>HopVertical<CR>", { silent = true, desc = "Hop Ve
 
 -- Term/Open bindings
 vim.keymap.set("n", "<leader><leader>", "<cmd>ToggleTerm<CR>", { silent = true, desc = "Toggle Terminal" })
+
+-- Overseer mappings
+wk.register({
+    o = {
+        name = "Overseer",
+    },
+}, { prefix = "<leader>" })
+vim.keymap.set("n", "<leader>or", vim.cmd.OverseerRun, { silent = true, desc = "Overseer: Run" })
+vim.keymap.set("n", "<leader>ot", vim.cmd.OverseerToggle, { silent = true, desc = "Overseer: Toggle" })
