@@ -7,6 +7,8 @@
 #		wf-recorder
 #	- notification daemon: https://archlinux.org/packages/?name=notification-daemon
 #	- wl-clipboard: https://github.com/bugaevc/wl-clipboard
+#
+#	Some of this is hacky because I can't get wf-recorder to nicely output GIFs by itself :(
 
 mk-gif() {
 	local program_name="Screen Capture"
@@ -19,7 +21,8 @@ mk-gif() {
 			rm -rf "${pid_file}"
 			exit 1
 		fi
-		inotifywait -e delete_self /tmp/mk-gif-pid && notify-send "Saved ${program_name}" "Successfully Saved Screen Capture to Clipboard" -a "${program_name}"
+		inotifywait -e delete_self "${pid_file}" &&
+			notify-send "Saved ${program_name}" "Successfully Saved Screen Capture to Clipboard" -a "${program_name}"
 	else
 		local input_tmpfile
 		notify-send "Starting ${program_name}" "Recording GIF of Selected Region" -a "${program_name}"
