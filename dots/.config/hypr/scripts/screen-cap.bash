@@ -23,13 +23,16 @@ mk-gif() {
 	else
 		local input_tmpfile
 		notify-send "Starting ${program_name}" "Recording GIF of Selected Region" -a "${program_name}"
-		input_tmpfile="/tmp/$(mktemp wf-recorder.XXXXXXXXXXX).mp4"
-		wf-recorder -g "$(slurp)" -f "${input_tmpfile}" &
-		printf "%s" $! >"${pid_file}"
-		wait
-		gifski "${input_tmpfile}" --output "${input_tmpfile}.gif"
-		wl-copy --type image/gif <"${input_tmpfile}.gif"
-		rm -f "${pid_file}"
+		(
+			cd "/tmp"
+			input_tmpfile="/tmp/$(mktemp wf-recorder.XXXXXXXXXXX).mp4"
+			wf-recorder -g "$(slurp)" -f "${input_tmpfile}" &
+			printf "%s" $! >"${pid_file}"
+			wait
+			gifski "${input_tmpfile}" --output "${input_tmpfile}.gif"
+			wl-copy --type image/gif <"${input_tmpfile}.gif"
+			rm -f "${pid_file}"
+		)
 	fi
 }
 
