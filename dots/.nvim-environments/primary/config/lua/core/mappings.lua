@@ -6,7 +6,7 @@ M.setup = function()
 
     -- Get rid of highlight after search
     vim.keymap.set("n", "<esc>", function()
-        vim.api.nvim_command("noh")
+        vim.cmd.noh()
     end, { silent = true, desc = "Remove Highlighted Searches" })
 
     -- Spell Checking
