@@ -13,7 +13,7 @@ M.colors = {
     },
     kanagawa = {
         foreground = "#dcd7ba",
-        background = "#1f1f28",
+        background = "#0f111d",
 
         cursor_bg = "#c8c093",
         cursor_fg = "#c8c093",
