@@ -252,14 +252,6 @@ return packer.startup({
             end,
         })
 
-        -- Better treesitter indentations
-        -- NOTE: Remove this once treesitter gets up to par
-        -- NOTE: this is just a placeholder until it is.
-        use({
-            "yioneko/nvim-yati",
-            requires = "nvim-treesitter/nvim-treesitter",
-        })
-
         -- Highlight given color codes
         use({
             "brenoprata10/nvim-highlight-colors",
