@@ -10,6 +10,8 @@ return {
             family = "JetBrains Mono",
             weight = "DemiBold",
         },
+        "PowerLineExtraSymbols",
+        "Noto Color Emoji",
         "Symbols Nerd Font Mono",
         "Unifont",
         "Last Resort High-Efficiency",
