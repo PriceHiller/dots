@@ -837,6 +837,7 @@ return packer.startup({
                             { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
                         },
                     },
+                    disabled_filetypes = { "NeogitNotification" },
                 })
             end,
         })
