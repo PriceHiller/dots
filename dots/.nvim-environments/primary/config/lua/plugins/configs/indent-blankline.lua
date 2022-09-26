@@ -14,6 +14,7 @@ g.indent_blankline_filetype_exclude = {
     "mason.nvim",
     "mason",
     "man",
+    "OverseerForm",
 }
 
 g.indent_blankline_buftype_exclude = { "terminal" }
