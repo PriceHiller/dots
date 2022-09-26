@@ -29,6 +29,9 @@ function M.Table.merge(...)
     local ret = {}
     for _, tbl in ipairs({ ... }) do
         for k, v in pairs(tbl) do
+            if ret[k] ~= nil and type(ret[k]) == "table" and type(v) == "table" then
+                v = M.Table.merge(ret[k], v)
+            end
             ret[k] = v
         end
     end
