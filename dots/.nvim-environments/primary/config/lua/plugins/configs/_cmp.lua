@@ -117,11 +117,12 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp", priority = 10 },
         { name = "luasnip", priority = 9 }, -- For luasnip users.
-        { name = "fuzzy_buffer", priority = 8 },
+        { name = "fuzzy_buffer", priority = 8, keyword_length = 3, max_item_count = 10 },
         {
             name = "rg",
             priority = 7,
             keyword_length = 3,
+            max_item_count = 10,
         },
         { name = "path", priority = 6 },
         { name = "zsh", priority = 5 },
