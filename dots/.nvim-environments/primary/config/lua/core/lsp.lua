@@ -3,10 +3,6 @@ local M = {}
 M.setup = function()
     local function lspSymbol(name, icon, linehlbg)
         local hl = "DiagnosticSign" .. name
-        -- local linehl = 'DiagnosticSignLineHl' .. name
-        -- vim.api.nvim_set_hl(0, linehl, {
-        --     bg = linehlbg,
-        -- })
         vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl, linehl = linehl })
     end
 
