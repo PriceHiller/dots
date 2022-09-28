@@ -7,6 +7,21 @@ return {
     line_height = 0.9,
     font = wezterm.font_with_fallback({
         {
+            family = "Fira Code",
+            weight = "DemiBold",
+            harfbuzz_features = {
+                "zero",
+                "cv01",
+                "cv02",
+                "cv30",
+                "ss05",
+                "ss03",
+                "ss04",
+                "cv26",
+                "ss10",
+            },
+        },
+        {
             family = "JetBrains Mono",
             weight = "DemiBold",
         },
