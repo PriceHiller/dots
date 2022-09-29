@@ -274,23 +274,17 @@ return packer.startup({
             end,
         })
 
-        -- Telescope Extensions
-        use({
-            "nvim-telescope/telescope-fzf-native.nvim",
-            run = "make",
-        })
-
-        use({
-            "nvim-telescope/telescope-media-files.nvim",
-            "nvim-telescope/telescope-file-browser.nvim",
-            "artart222/telescope_find_directories",
-            "nvim-telescope/telescope-ui-select.nvim",
-            { "nvim-telescope/telescope-smart-history.nvim", requires = "tami5/sqlite.lua" },
-        })
-
         -- Telescope
         use({
             "nvim-telescope/telescope.nvim",
+            requires = {
+                "nvim-telescope/telescope-media-files.nvim",
+                "nvim-telescope/telescope-file-browser.nvim",
+                "artart222/telescope_find_directories",
+                "nvim-telescope/telescope-ui-select.nvim",
+                { "nvim-telescope/telescope-smart-history.nvim", requires = "tami5/sqlite.lua" },
+                { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+            },
             config = function()
                 require("plugins.configs.telescope-nvim")
             end,
@@ -312,6 +306,7 @@ return packer.startup({
             config = function()
                 require("plugins.configs.neotree")
             end,
+            cmd = "Neotree",
         })
 
         -- Lspconfig
@@ -409,7 +404,6 @@ return packer.startup({
                 "hrsh7th/cmp-path",
                 "hrsh7th/cmp-cmdline",
                 "hrsh7th/cmp-emoji",
-                "hrsh7th/vim-vsnip",
                 "hrsh7th/cmp-nvim-lsp-document-symbol",
                 "hrsh7th/cmp-calc",
                 "davidsierradz/cmp-conventionalcommits",
@@ -592,6 +586,7 @@ return packer.startup({
                     },
                 })
             end,
+            cmd = { "Neogit" },
             requires = {
                 "sindrets/diffview.nvim",
             },
@@ -620,6 +615,7 @@ return packer.startup({
                 "nvim-neorg/neorg-telescope",
             },
             after = "nvim-treesitter",
+            ft = "norg",
         })
 
         -- Log Syntax Highlighting
@@ -747,7 +743,12 @@ return packer.startup({
         -- Better list continuation
         use({
             "gaoDean/autolist.nvim",
-            ft = "markdown",
+            ft = {
+                "markdown",
+                "text",
+                "text",
+                "plaintex",
+            },
             config = function()
                 require("autolist").setup({})
             end,
@@ -799,6 +800,14 @@ return packer.startup({
                     },
                 })
             end,
+            cmd = {
+                "ToggleTerm",
+                "ToggleTermSetName",
+                "ToggleTermToggleAll",
+                "ToggleTermSendCurrentLine",
+                "ToggleTermSendVisualLines",
+                "ToggleTermSendVisualSelection",
+            },
         })
 
         -- Take a screenshot of code selected
@@ -809,6 +818,10 @@ return packer.startup({
                     theme = "Coldark-Dark",
                 }
             end,
+            cmd = {
+                "Silicon",
+                "SiliconHighlight",
+            },
         })
 
         -- Nice sidebar cursor goodies
@@ -850,6 +863,13 @@ return packer.startup({
             config = function()
                 require("plugins.configs.ccc")
             end,
+            cmd = {
+                "CccPick",
+                "CccConvert",
+                "CccHighlighterEnable",
+                "CccHighlighterToggle",
+                "CccHighlighterDisable",
+            },
         })
 
         use({
