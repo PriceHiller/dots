@@ -136,12 +136,7 @@ vim.keymap.set("n", "<A-s>", ":BufferLineCycleNext<CR>", { silent = true, desc =
 vim.keymap.set("n", "<A-x>", require("utils.funcs").close_buffer, { silent = true, desc = "Close Buffer" })
 
 -- Vim Notify Mappings
-vim.keymap.set(
-    "n",
-    "<leader>nv",
-    require("telescope").extensions.notify.notify,
-    { silent = true, desc = "Notifications: Search" }
-)
+vim.keymap.set("n", "<leader>nv", ":Telescope notify<CR>", { silent = true, desc = "Notifications: Search" })
 vim.keymap.set("n", "<leader>nd", require("notify").dismiss, { silent = true, desc = "Notifications: Dismiss" })
 
 -- Whichkey Mappings
