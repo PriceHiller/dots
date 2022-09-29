@@ -106,7 +106,7 @@ return packer.startup({
                         CmpItemKindModule = { fg = colors.fujiWhite, bg = colors.oniViolet },
                         CmpItemKindOperator = { fg = colors.fujiWhite, bg = colors.oniViolet },
 
-                        CmpItemKindVariable = { fg = colors.fujiWhite, bg = colors.sumiInk4 },
+                        CmpItemKindVariable = { fg = colors.fujiWhite, bg = colors.roninYellow },
                         CmpItemKindFile = { fg = colors.fujiWhite, bg = colors.autumnYellow },
 
                         CmpItemKindUnit = { fg = colors.fujiWhite, bg = colors.autumnYellow },
@@ -126,7 +126,7 @@ return packer.startup({
                         CmpCustomSelectionCalculator = { fg = colors.fujiWhite, bg = colors.waveBlue2 },
                         CmpCustomSelectionNeorg = { fg = colors.fujiWhite, bg = colors.waveAqua1 },
                         CmpCustomSelectionEmoji = { fg = colors.fujiWhite, bg = colors.dragonBlue },
-                        CmpCustomSelectionZsh = { fg = colors.fujiWhite, bg = colors.waveBlue2 },
+                        CmpCustomSelectionZsh = { fg = colors.fujiWhite, bg = colors.springGreen },
                         CmpCustomSelectionCrates = { fg = colors.fujiWhite, bg = colors.roninYellow },
                         CmpCustomSelectionCmdHistory = { fg = colors.fujiWhite, bg = colors.waveBlue2 },
                         CmpCustomSelectionRipgrep = { fg = colors.fujiWhite, bg = colors.dragonBlue },
