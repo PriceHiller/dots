@@ -1,180 +1,180 @@
 [
-    {
-        "layer": "top",
-        "position": "top",
-        "modules-left": [
-            "cpu",
-            "temperature",
-            "custom/asusmode",
-            "memory",
-            "battery",
-            "disk",
-            "custom/pipewire"
-        ],
-        "modules-center": [
-            "custom/media"
-        ],
-        "modules-right": [
-            "custom/weather",
-            "network",
-            "clock",
-            "custom/lock"
-        ],
-        "custom/weather": {
-            "tooltip": false,
-            "min-length": 5,
-            "exec": "curl 'https://wttr.in/?format='%t''",
-            "interval": 3600
-        },
-        "battery": {
-            "min-length": 5,
-            "design-capacity": true,
-            "states": {
-                "full": 90,
-                "warning": 30,
-                "critical": 15
-            },
-            "tooltip": false,
-            "full-at": 95,
-            "format-plugged": "{icon} {capacity}%",
-            "format-charging": "{icon} {capacity}%",
-            "format": "{icon} {capacity}%",
-            "format-icons": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ]
-        },
-        "clock": {
-            "format": " {:%a %b %d %I:%M %p}",
-            "tooltip": true,
-            "tooltip-format": "<big>{:%Y %B \t week: %V }</big>\n<tt>{calendar}</tt>",
-            "min-length": 18
-        },
-        "custom/lock": {
-            "tooltip": false,
-            "format": "",
-            "interval": "once",
-            "on-click": "swaylock"
-        },
-        "network": {
-            "interval": 10,
-            "format-wifi": " {essid}",
-            "format-ethernet": " {ipaddr}",
-            "format-linked": " {ifname}",
-            "format-disconnected": " Disconnected",
-            "tooltip": true,
-            "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}/{cidr}\nNM: {netmask}",
-            "max-length": 20,
-            "min-length": 14
-        },
-        "custom/pipewire": {
-            "format": "{icon} {percentage}%",
-            "return-type": "json",
-            "signal": 8,
-            "interval": "once",
-            "format-icons": {
-                "mute": "婢",
-                "default": [
-                    "奄",
-                    "奔",
-                    "墳"
-                ]
-            },
-            "on-click": "pw-volume mute toggle; pkill -RTMIN+8 waybar",
-            "exec": "pw-volume status"
-        },
-        "idle_inhibitor": {
-            "tooltip": false,
-            "format": "{icon}",
-            "format-icons": {
-                "activated": "",
-                "deactivated": ""
-            }
-        },
-        "cpu": {
-            "interval": 4,
-            "min-length": 6,
-            "format": " {usage}%",
-            "tooltip": false,
-            "states": {
-                "critical": 90
-            }
-        },
-        "temperature": {
-            "tooltip": false,
-            "min-length": 6,
-            "thermal-zone": 0,
-            "critical-threshold": 90,
-            "format": "{icon} {temperatureC}°C",
-            "format-critical": "{icon} {temperatureC}°C",
-            "format-icons": {
-                "default": [
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
-                ]
-            }
-        },
-        "custom/asusmode": {
-            "interval": 1,
-            "format": " {}",
-            "exec": "asusctl profile -p | awk '{print $NF}'"
-        },
-        "memory": {
-            "format": " {percentage}%",
-            "tooltip-format": "{used:0.1f}GB/{total:0.1f}GB ",
-            "states": {
-                "critical": 90
-            },
-            "min-length": 5
-        },
-        "disk": {
-            "path": "/",
-            "interval": 60,
-            "tooltip-format": "{used} used out of {total} ({percentage_used}%)",
-            "min-length": 5,
-            "format": " {percentage_used}%",
-            "states": {
-                "critical": 90
-            }
-        },
-        "custom/media": {
-            "interval": 1,
-            "return-type": "json",
-            "exec": "~/.config/waybar/scripts/get-media.bash",
-            "escape": true
-        },
-        "wlr/workspaces": {
-            "on-click": "activate"
-        }
+  {
+    "layer": "top",
+    "position": "top",
+    "modules-left": [
+      "cpu",
+      "temperature",
+      "custom/asusmode",
+      "memory",
+      "battery",
+      "disk",
+      "custom/pipewire"
+    ],
+    "modules-center": [
+      "custom/media"
+    ],
+    "modules-right": [
+      "custom/weather",
+      "network",
+      "clock",
+      "custom/lock"
+    ],
+    "custom/weather": {
+      "tooltip": false,
+      "min-length": 5,
+      "exec": "curl 'https://wttr.in/?format='%t''",
+      "interval": 3600
     },
-    {
-        "layer": "bottom",
-        "position": "bottom",
-        "modules-center": [
-            "wlr/workspaces"
-        ],
-        "wlr/workspaces": {
-            "format": "{name}",
-            "on-click": "activate"
-        },
-        "custom/sway-mode": {
-            "exec": "swaymsg -t get_binding_state | jq '.name' -r",
-            "format": " {}",
-            "interval": 1
-        },
-        "sway/language": {
-            "format": " {long}"
-        }
+    "battery": {
+      "min-length": 5,
+      "design-capacity": true,
+      "states": {
+        "full": 90,
+        "warning": 30,
+        "critical": 15
+      },
+      "tooltip": false,
+      "full-at": 95,
+      "format-plugged": "{icon} {capacity}%",
+      "format-charging": "{icon} {capacity}%",
+      "format": "{icon} {capacity}%",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "clock": {
+      "format": " {:%a %b %d %I:%M %p}",
+      "tooltip": true,
+      "tooltip-format": "<big>{:%Y %B \t week: %V }</big>\n<tt>{calendar}</tt>",
+      "min-length": 18
+    },
+    "custom/lock": {
+      "tooltip": false,
+      "format": "",
+      "interval": "once",
+      "on-click": "swaylock"
+    },
+    "network": {
+      "interval": 10,
+      "format-wifi": " {essid}",
+      "format-ethernet": " {ipaddr}",
+      "format-linked": " {ifname}",
+      "format-disconnected": " Disconnected",
+      "tooltip": true,
+      "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}/{cidr}\nNM: {netmask}",
+      "max-length": 20,
+      "min-length": 14
+    },
+    "custom/pipewire": {
+      "format": "{icon} {percentage}%",
+      "return-type": "json",
+      "signal": 8,
+      "interval": "once",
+      "format-icons": {
+        "mute": "婢",
+        "default": [
+          "奄",
+          "奔",
+          "墳"
+        ]
+      },
+      "on-click": "pw-volume mute toggle; pkill -RTMIN+8 waybar",
+      "exec": "pw-volume status"
+    },
+    "idle_inhibitor": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
+    "cpu": {
+      "interval": 4,
+      "min-length": 6,
+      "format": " {usage}%",
+      "tooltip": false,
+      "states": {
+        "critical": 90
+      }
+    },
+    "temperature": {
+      "tooltip": false,
+      "min-length": 6,
+      "thermal-zone": 0,
+      "critical-threshold": 90,
+      "format": "{icon} {temperatureC}°C",
+      "format-critical": "{icon} {temperatureC}°C",
+      "format-icons": {
+        "default": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "custom/asusmode": {
+      "interval": 1,
+      "format": " {}",
+      "exec": "asusctl profile -p | awk '{print $NF}'"
+    },
+    "memory": {
+      "format": " {percentage}%",
+      "tooltip-format": "{used:0.1f}GB/{total:0.1f}GB ",
+      "states": {
+        "critical": 90
+      },
+      "min-length": 5
+    },
+    "disk": {
+      "path": "/",
+      "interval": 60,
+      "tooltip-format": "{used} used out of {total} ({percentage_used}%)",
+      "min-length": 5,
+      "format": " {percentage_used}%",
+      "states": {
+        "critical": 90
+      }
+    },
+    "custom/media": {
+      "interval": 1,
+      "return-type": "json",
+      "exec": "~/.config/waybar/scripts/get-media.bash",
+      "escape": true
+    },
+    "wlr/workspaces": {
+      "on-click": "activate"
     }
+  },
+  {
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-center": [
+      "wlr/workspaces"
+    ],
+    "wlr/workspaces": {
+      "format": "{name}",
+      "on-click": "activate"
+    },
+    "custom/sway-mode": {
+      "exec": "swaymsg -t get_binding_state | jq '.name' -r",
+      "format": " {}",
+      "interval": 1
+    },
+    "sway/language": {
+      "format": " {long}"
+    }
+  }
 ]
