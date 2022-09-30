@@ -43,6 +43,7 @@ return packer.startup({
             config = function()
                 require("plugins.configs.nvim-notify")
             end,
+            before = "neovim/nvim-lspconfig",
         })
 
         -- Color schemes
