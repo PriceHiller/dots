@@ -46,6 +46,7 @@ return packer.startup({
                     views = {
                         cmdline_popup = {
                             border = {
+                                style = "none",
                                 padding = { 1, 3 },
                             },
                             filter_options = {},
