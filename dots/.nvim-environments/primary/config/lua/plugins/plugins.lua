@@ -37,13 +37,31 @@ return packer.startup({
             "nvim-lua/plenary.nvim",
         })
 
-        -- Nvim Notify
+        -- Much nicer ui, integrates cmdheight = 0 wella
         use({
-            "rcarriga/nvim-notify",
+            "folke/noice.nvim",
+            event = "VimEnter",
             config = function()
                 require("plugins.configs.nvim-notify")
+                require("noice").setup({
+                    cmdline = {
+                        view = "cmdline",
+                    },
+                    routes = {
+                        filter = {
+                            event = "cmdline",
+                            find = "^%s*[/?]",
+                        },
+                        view = "cmdline",
+                    },
+                })
             end,
-            before = "neovim/nvim-lspconfig",
+            requires = {
+                -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+                "MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+                "hrsh7th/nvim-cmp",
+            },
         })
 
         -- Color schemes
@@ -204,17 +222,24 @@ return packer.startup({
             config = function()
                 require("plugins.configs.treesitter")
             end,
+            before = "folke/noice.nvim",
         })
 
         use({
             "nvim-treesitter/nvim-treesitter-textobjects",
-            after = "nvim-treesitter",
+            after = { "nvim-treesitter" },
             config = function()
                 require("nvim-treesitter.configs").setup({
                     textobjects = {
                         select = {
                             enable = true,
                             lookahead = true,
+                            disable = function(lang, bufnr)
+                                local mode = vim.fn.mode()
+                                if mode == "c" then
+                                    return true
+                                end
+                            end,
                             keymaps = {
                                 ["af"] = "@function.outer",
                                 ["if"] = "@function.inner",
@@ -226,6 +251,12 @@ return packer.startup({
                         },
                         move = {
                             enable = true,
+                            disable = function(lang, bufnr)
+                                local mode = vim.fn.mode()
+                                if mode == "c" then
+                                    return true
+                                end
+                            end,
                             set_jumps = true,
                             goto_next_start = {
                                 ["]fs"] = "@function.outer",
