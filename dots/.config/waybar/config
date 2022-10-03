@@ -139,7 +139,7 @@
       "min-length": 5
     },
     "disk": {
-      "path": "/",
+      "path": "/home",
       "interval": 60,
       "tooltip-format": "{used} used out of {total} ({percentage_used}%)",
       "min-length": 5,
