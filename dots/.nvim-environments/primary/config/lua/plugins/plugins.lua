@@ -42,19 +42,21 @@ return packer.startup({
             "folke/noice.nvim",
             event = "VimEnter",
             config = function()
-                require("plugins.configs.nvim-notify")
                 require("noice").setup({
-                    cmdline = {
-                        view = "cmdline",
-                    },
-                    routes = {
-                        filter = {
-                            event = "cmdline",
-                            find = "^%s*[/?]",
+                    views = {
+                        cmdline_popup = {
+                            border = {
+                                padding = { 1, 3 },
+                            },
+                            filter_options = {},
+                            win_options = {
+                                winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+                            },
                         },
-                        view = "cmdline",
                     },
                 })
+                -- NOTE: Might be redundant, to check later
+                require("plugins.configs.nvim-notify")
             end,
             requires = {
                 -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
