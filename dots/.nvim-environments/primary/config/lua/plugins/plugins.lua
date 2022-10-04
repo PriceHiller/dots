@@ -43,16 +43,16 @@ return packer.startup({
             event = "VimEnter",
             config = function()
                 require("noice").setup({
-                    views = {
-                        cmdline_popup = {
-                            border = {
-                                style = "none",
-                                padding = { 1, 3 },
+                    cmdline = {
+                        view = "cmdline",
+                    },
+                    routes = {
+                        {
+                            filter = {
+                                event = "cmdline",
+                                find = "^%s*[/?]",
                             },
-                            filter_options = {},
-                            win_options = {
-                                winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-                            },
+                            view = "cmdline",
                         },
                     },
                 })
