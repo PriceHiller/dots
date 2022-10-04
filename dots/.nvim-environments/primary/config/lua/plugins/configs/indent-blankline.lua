@@ -1,7 +1,7 @@
 local g = vim.g
 
--- g.indent_blankline_char = '▏'
--- g.indent_blankline_context_char = '▏'
+g.indent_blankline_char = "▏"
+g.indent_blankline_context_char = "▏"
 
 -- Disable indent-blankline on these pages.
 g.indent_blankline_filetype_exclude = {
