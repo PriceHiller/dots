@@ -911,6 +911,7 @@ return packer.startup({
             },
         })
 
+        -- Task runner & job management
         use({
             "stevearc/overseer.nvim",
             config = function()
