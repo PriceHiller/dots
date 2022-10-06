@@ -528,14 +528,6 @@ return packer.startup({
             end,
         })
 
-        -- Stabilize closing buffers
-        use({
-            "luukvbaal/stabilize.nvim",
-            config = function()
-                require("plugins.configs._stabilize")
-            end,
-        })
-
         -- Git signs
         use({
             "lewis6991/gitsigns.nvim",
