@@ -118,7 +118,7 @@ M.setup = function()
     opt.modelines = 5
 
     -- Set command bar height
-    opt.cmdheight = 1
+    opt.cmdheight = 0
 end
 
 return M
