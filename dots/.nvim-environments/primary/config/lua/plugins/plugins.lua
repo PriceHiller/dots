@@ -37,12 +37,34 @@ return packer.startup({
             "nvim-lua/plenary.nvim",
         })
 
-        -- Better looking notifications
+        -- Much nicer ui, integrates cmdheight = 0 wella
         use({
-            "rcarriga/nvim-notify",
+            "folke/noice.nvim",
+            event = "VimEnter",
             config = function()
+                require("noice").setup({
+                    cmdline = {
+                        view = "cmdline",
+                    },
+                    routes = {
+                        {
+                            filter = {
+                                event = "cmdline",
+                                find = "^%s*[/?]",
+                            },
+                            view = "cmdline",
+                        },
+                    },
+                })
+                -- NOTE: Might be redundant, to check later
                 require("plugins.configs.nvim-notify")
             end,
+            requires = {
+                -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+                "MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+                "hrsh7th/nvim-cmp",
+            },
         })
 
         -- Color schemes
