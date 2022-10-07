@@ -42,20 +42,7 @@ return packer.startup({
             "folke/noice.nvim",
             event = "VimEnter",
             config = function()
-                require("noice").setup({
-                    cmdline = {
-                        view = "cmdline",
-                    },
-                    routes = {
-                        {
-                            filter = {
-                                event = "cmdline",
-                                find = "^%s*[/?]",
-                            },
-                            view = "cmdline",
-                        },
-                    },
-                })
+                require("plugins.configs.noice")
                 -- NOTE: Might be redundant, to check later
                 require("plugins.configs.nvim-notify")
             end,
@@ -203,7 +190,6 @@ return packer.startup({
             "nvim-lualine/lualine.nvim",
             after = {
                 "nvim-bufferline.lua",
-                "tokyonight.nvim",
             },
             config = function()
                 require("plugins.configs.statusline")
