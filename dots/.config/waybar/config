@@ -31,8 +31,8 @@
       "design-capacity": true,
       "states": {
         "full": 90,
-        "warning": 30,
-        "critical": 15
+        "warning": 20,
+        "critical": 10
       },
       "tooltip": false,
       "full-at": 95,
