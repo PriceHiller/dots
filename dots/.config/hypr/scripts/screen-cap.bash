@@ -2,9 +2,7 @@
 
 # Dependencies:
 #	- wf-recorder: https://github.com/ammen99/wf-recorder
-#	- Gifski: https://github.com/ImageOptim/gifski
-#		- I do a conversion from mp4 to gif because there is various issues with recording straight to gif format with
-#		wf-recorder
+#	- ffmpeg: https://ffmpeg.org/download.html
 #	- notification daemon: https://archlinux.org/packages/?name=notification-daemon
 #	- wl-clipboard: https://github.com/bugaevc/wl-clipboard
 #
@@ -28,11 +26,11 @@ mk-gif() {
 		notify-send "Starting ${program_name}" "Recording GIF of Selected Region" -a "${program_name}"
 		(
 			cd "/tmp"
-			input_tmpfile="/tmp/$(mktemp wf-recorder.XXXXXXXXXXX).mp4"
-			wf-recorder -g "$(slurp)" -f "${input_tmpfile}" &
+			input_tmpfile="/tmp/$(mktemp wf-recorder.XXXXXXXXXXX)"
+			wf-recorder -g "$(slurp)" -f "${input_tmpfile}.mp4" -- &
 			printf "%s" $! >"${pid_file}"
 			wait
-			gifski "${input_tmpfile}" --output "${input_tmpfile}.gif"
+			ffmpeg -i "${input_tmpfile}.mp4" -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "${input_tmpfile}.gif"
 			wl-copy --type image/gif <"${input_tmpfile}.gif"
 			rm -f "${pid_file}"
 		)
