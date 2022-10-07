@@ -78,6 +78,8 @@ lualine.setup({
             },
             {
                 show_macro_recording,
+                "macro-recording",
+                fmt = show_macro_recording,
             },
         },
         lualine_c = {
@@ -134,4 +136,27 @@ lualine.setup({
         'quickfix',
         'toggleterm',
     },
+})
+
+vim.api.nvim_create_autocmd("RecordingEnter", {
+    callback = function()
+        lualine.refresh({
+            place = { "statusline" },
+        })
+    end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+    callback = function()
+        local timer = vim.loop.new_timer()
+        timer:start(
+            50,
+            0,
+            vim.schedule_wrap(function()
+                lualine.refresh({
+                    place = { "statusline" },
+                })
+            end)
+        )
+    end,
 })
