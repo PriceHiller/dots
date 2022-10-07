@@ -42,18 +42,13 @@ lualine.setup({
     options = {
         icons_enabled = true,
         theme = "auto",
-        -- component_separators = { left = '', right = '' },
-        -- section_separators = { left = '', right = '' },
-        -- component_separators = { left = '', right = '' },
-        -- section_separators = { left = '', right = '' },
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = {},
         always_divide_middle = true,
-        globalstatus = true, -- requires neovim 0.7 or highter
+        globalstatus = true,
     },
     sections = {
-        -- Left
         lualine_a = {
             {
                 "mode",
@@ -67,13 +62,11 @@ lualine.setup({
             },
             {
                 "diff",
-                symbols = { added = "+", modified = "~", removed = "-" },
-                -- symbols = { added = ' ', modified = ' ', removed = ' ' },
+                symbols = { added = " ", modified = " ", removed = " " },
             },
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
-                -- symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
                 symbols = { error = " ", warn = " ", info = " ", hint = " " },
             },
             {
