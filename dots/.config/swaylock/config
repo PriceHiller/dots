@@ -3,7 +3,7 @@ clock
 indicator
 indicator-radius=150
 indicator-thickness=8
-effect-blur=12x8
+effect-blur=30x26
 effect-vignette=0.5:0.5
 ring-color=#54546D
 key-hl-color=#FF5D62
