@@ -58,6 +58,12 @@ cmp.setup({
             end
         end,
     },
+    view = {
+        entries = {
+            name = "custom",
+            selection_order = "near_cursor",
+        },
+    },
     window = {
         documentation = { side_padding = 0 },
         completion = {
