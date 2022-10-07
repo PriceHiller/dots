@@ -10,12 +10,5 @@ require("noice").setup({
             },
             view = "cmdline",
         },
-        {
-            view = "confirm",
-            filter = {
-                event = "msg_show",
-                kind = "confirm",
-            },
-        },
     },
 })
