@@ -119,6 +119,9 @@ M.setup = function()
 
     -- Set command bar height
     opt.cmdheight = 1
+
+    -- Set splitkeep
+    vim.opt.splitkeep = "screen"
 end
 
 return M
