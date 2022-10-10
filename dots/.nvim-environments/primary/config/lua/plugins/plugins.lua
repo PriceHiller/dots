@@ -438,6 +438,7 @@ return packer.startup({
                 "lukas-reineke/cmp-rg",
                 "onsails/lspkind.nvim",
                 "f3fora/cmp-spell",
+                "amarakon/nvim-cmp-buffer-lines"
             },
             config = function()
                 require("plugins.configs._cmp")
