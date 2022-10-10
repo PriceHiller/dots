@@ -7,7 +7,7 @@ return {
     line_height = 0.9,
     font = wezterm.font_with_fallback({
         {
-            family = "Fira Code",
+            family = "FiraCode NF",
             weight = "DemiBold",
             harfbuzz_features = {
                 "zero",
@@ -32,7 +32,6 @@ return {
         "Noto Sans Symbols2",
         "PowerlineExtraSymbols",
         { family = "FiraCode NF", weight = "DemiBold", scale = 1.2 },
-        "FiraCode NF",
         "MesloLGS NF",
 
         -- <built-in>, BuiltIn
