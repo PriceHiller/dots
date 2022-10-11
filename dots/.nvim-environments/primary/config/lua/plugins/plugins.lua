@@ -348,6 +348,7 @@ return packer.startup({
                 "Hoffs/omnisharp-extended-lsp.nvim",
                 "b0o/schemastore.nvim",
             },
+            after = "noice.nvim",
             config = function()
                 require("mason").setup({})
                 require("plugins.configs.lsp")
@@ -438,7 +439,7 @@ return packer.startup({
                 "lukas-reineke/cmp-rg",
                 "onsails/lspkind.nvim",
                 "f3fora/cmp-spell",
-                "amarakon/nvim-cmp-buffer-lines"
+                "amarakon/nvim-cmp-buffer-lines",
             },
             config = function()
                 require("plugins.configs._cmp")
