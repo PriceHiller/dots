@@ -218,6 +218,7 @@ lspconfig.yamlls.setup({
                     "/azure-pipeline*.y*l",
                     "/*.azure",
                     "Azure-Pipelines/**/*.y*l",
+                    "Pipelines/*.y*l",
                 },
                 ["https://raw.githubusercontent.com/docker/cli/master/cli/compose/schema/data/config_schema_v3.10.json"] = "/docker-compose.y*l",
                 ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml",
@@ -240,31 +241,31 @@ lspconfig.yamlls.setup({
     on_attach = on_attach,
 })
 
--- lspconfig.csharp_ls.setup({
---     handlers = {
---         ["textDocument/definition"] = require("csharpls_extended").handler,
---     },
---     capabilities = lsp_capabilities,
---     on_attach = on_attach,
--- })
-
-lspconfig.omnisharp.setup({
-    cmd = {
-        vim.fn.stdpath("data") .. "/mason/bin/omnisharp",
-        "--languageserver",
-        "--hostPID",
-        tostring(vim.fn.getpid()),
-    },
-
+lspconfig.csharp_ls.setup({
     handlers = {
-        ["textDocument/definition"] = require("omnisharp_extended").handler,
+        ["textDocument/definition"] = require("csharpls_extended").handler,
     },
-    enable_import_completion = true,
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
     capabilities = lsp_capabilities,
     on_attach = on_attach,
 })
+
+-- lspconfig.omnisharp.setup({
+--     cmd = {
+--         vim.fn.stdpath("data") .. "/mason/bin/omnisharp",
+--         "--languageserver",
+--         "--hostPID",
+--         tostring(vim.fn.getpid()),
+--     },
+--
+--     handlers = {
+--         ["textDocument/definition"] = require("omnisharp_extended").handler,
+--     },
+--     enable_import_completion = true,
+--     enable_roslyn_analyzers = true,
+--     organize_imports_on_format = true,
+--     capabilities = lsp_capabilities,
+--     on_attach = on_attach,
+-- })
 
 lspconfig.jsonls.setup({
     settings = {
