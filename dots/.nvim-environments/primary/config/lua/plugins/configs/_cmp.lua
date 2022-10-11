@@ -124,7 +124,7 @@ cmp.setup({
         { name = "nvim_lsp", priority = 11 },
         { name = "luasnip", priority = 10 }, -- For luasnip users.
         { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
-        { name = "buffer-lines", priority = 8 },
+        { name = "buffer-lines", priority = 8, max_item_count = 10 },
         {
             name = "rg",
             priority = 7,
