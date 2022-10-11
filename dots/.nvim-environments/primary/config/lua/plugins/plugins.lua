@@ -40,7 +40,6 @@ return packer.startup({
         -- Much nicer ui, integrates cmdheight = 0 wella
         use({
             "folke/noice.nvim",
-            event = "VimEnter",
             config = function()
                 require("plugins.configs.noice")
                 -- NOTE: Might be redundant, to check later
@@ -102,12 +101,12 @@ return packer.startup({
                         CmpItemKindEvent = { fg = colors.fujiWhite, bg = colors.sakuraPink },
 
                         CmpItemKindText = { fg = colors.fujiWhite, bg = colors.dragonBlue },
-                        CmpItemKindEnum = { fg = colors.fujiWhite, bg = colors.autumnGreen },
-                        CmpItemKindKeyword = { fg = colors.fujiWhite, bg = colors.autumnGreen },
+                        CmpItemKindEnum = { fg = colors.fujiWhite, bg = colors.crystalBlue },
+                        CmpItemKindKeyword = { fg = colors.fujiWhite, bg = colors.springBlue },
 
-                        CmpItemKindConstant = { fg = colors.fujiWhite, bg = colors.boatYellow2 },
-                        CmpItemKindConstructor = { fg = colors.fujiWhite, bg = colors.boatYellow2 },
-                        CmpItemKindReference = { fg = colors.fujiWhite, bg = colors.boatYellow2 },
+                        CmpItemKindConstant = { fg = colors.fujiWhite, bg = colors.crystalBlue },
+                        CmpItemKindConstructor = { fg = colors.fujiWhite, bg = colors.crystalBlue },
+                        CmpItemKindReference = { fg = colors.fujiWhite, bg = colors.crystalBlue },
 
                         CmpItemKindFunction = { fg = colors.fujiWhite, bg = colors.oniViolet },
                         CmpItemKindStruct = { fg = colors.fujiWhite, bg = colors.oniViolet },
@@ -122,11 +121,11 @@ return packer.startup({
                         CmpItemKindSnippet = { fg = colors.fujiWhite, bg = colors.autumnYellow },
                         CmpItemKindFolder = { fg = colors.fujiWhite, bg = colors.autumnYellow },
 
-                        CmpItemKindMethod = { fg = colors.fujiWhite, bg = colors.dragonBlue },
-                        CmpItemKindValue = { fg = colors.fujiWhite, bg = colors.dragonBlue },
-                        CmpItemKindEnumMember = { fg = colors.fujiWhite, bg = colors.dragonBlue },
+                        CmpItemKindMethod = { fg = colors.fujiWhite, bg = colors.autumnGreen },
+                        CmpItemKindValue = { fg = colors.fujiWhite, bg = colors.autumnGreen },
+                        CmpItemKindEnumMember = { fg = colors.fujiWhite, bg = colors.autumnGreen },
 
-                        CmpItemKindInterface = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
+                        CmpItemKindInterface = { fg = colors.fujiWhite, bg = colors.waveRed },
                         CmpItemKindColor = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
                         CmpItemKindTypeParameter = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
 
