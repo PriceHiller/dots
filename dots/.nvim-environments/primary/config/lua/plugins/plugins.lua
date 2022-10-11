@@ -163,6 +163,8 @@ return packer.startup({
                         rainbowcol5 = { fg = colors.springGreen },
                         rainbowcol6 = { fg = colors.springViolet2 },
                         rainbowcol7 = { fg = colors.carpYellow },
+
+                        packerSuccess = { fg = colors.autumnGreen, bg = "NONE" },
                     },
                 })
             end,
