@@ -144,11 +144,11 @@ return packer.startup({
                         CmpCustomSelectionSpell = { fg = colors.fujiWhite, bg = colors.waveRed },
 
                         TelescopeNormal = { bg = colors.sumiInk1 },
-                        TelescopeBorder = { bg = colors.sumiInk1 },
-                        TelescopePromptBorder = { bg = colors.sumiInk0 },
+                        TelescopeBorder = { bg = colors.sumiInk1, fg = colors.sumiInk1 },
+                        TelescopePromptBorder = { bg = colors.sumiInk0, fg = colors.sumiInk0 },
                         TelescopePromptTitle = { fg = colors.sumiInk0, bg = colors.oniViolet },
                         TelescopePreviewTitle = { fg = colors.sumiInk0, bg = colors.sakuraPink },
-                        TelescopePreviewBorder = { bg = colors.sumiInk2 },
+                        TelescopePreviewBorder = { bg = colors.sumiInk2, fg = colors.sumiInk2 },
                         TelescopePreviewNormal = { bg = colors.sumiInk2 },
                         TelescopeResultsTitle = { fg = "NONE", bg = "NONE" },
 
