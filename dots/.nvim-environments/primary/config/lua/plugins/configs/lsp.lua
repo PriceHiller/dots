@@ -9,13 +9,9 @@ mason_lspconfig.setup({
 
 local function on_attach(client, bufnr)
     -- Set autocommands conditional on server_capabilities
-    async.run(function()
-        vim.notify
-            .async("Attached server " .. client.name, "info", {
-                title = "Lsp Attach",
-            }).events
-            .close()
-    end)
+    vim.notify("Attached server " .. client.name, "info", {
+        title = "LSP",
+    })
 end
 
 local lsp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
