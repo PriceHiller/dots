@@ -14,7 +14,7 @@ local function on_attach(client, bufnr)
     })
 end
 
-local lsp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local opts = {
     capabilities = lsp_capabilities,
     on_attach = on_attach,
@@ -159,11 +159,17 @@ lspconfig.ansiblels.setup({
 })
 
 -- NOTE: LUA LSP
-local luadev = require("lua-dev").setup({
-    lspconfig = opts,
-})
+local luadev = require("neodev").setup({})
 
-lspconfig.sumneko_lua.setup(luadev)
+lspconfig.sumneko_lua.setup({
+    settings = {
+        Lua = {
+            completion = {
+                callSnippet = "Replace",
+            },
+        },
+    },
+})
 
 -- NOTE: SQL LSP
 lspconfig.sqls.setup({
