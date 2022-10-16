@@ -605,7 +605,7 @@ return packer.startup({
                     },
                 })
             end,
-            cmd = { "Neogit" },
+            event = "BufWinEnter",
             requires = {
                 "sindrets/diffview.nvim",
             },
