@@ -39,10 +39,12 @@
   min-height: 0;
   padding: 3px;
   border-radius: 20px;
-  padding-left: 20px;
   margin-left: 5px;
   margin-right: 5px;
-  padding-right: 20px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 #waybar {
@@ -80,6 +82,8 @@
   border-top: 2px solid @oniViolet;
   border-left: 2px solid @oniViolet;
   border-right: 2px solid @oniViolet;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 #workspaces button {
@@ -134,8 +138,6 @@
 #temperature,
 #battery {
   background: @sumiInk0;
-  padding-left: 10px;
-  padding-right: 10px;
   border-top: 2px solid @oniViolet;
   border-left: 2px solid @oniViolet;
   color: @fujiWhite;
