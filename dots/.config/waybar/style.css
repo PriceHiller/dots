@@ -93,6 +93,10 @@
   background: transparent;
   border-bottom: 2px solid @oniViolet;
   border-radius: 0px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 #workspaces button.active {
