@@ -46,5 +46,10 @@
     unstage = reset HEAD --
 [push]
     autoSetupRemote = true
+    default = current
 [merge]
     conflictstyle = diff3
+[branch]
+    autosetupmerge = always
+[remote]
+    pushDefault = origin
