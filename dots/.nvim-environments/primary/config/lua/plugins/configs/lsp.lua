@@ -21,14 +21,12 @@ local opts = {
 }
 
 local rust_tools = require("rust-tools")
+local codelldb_path = vim.fn.stdpath("data") .. "/mason/bin/codelldb"
+local liblldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
 local rustopts = {
     server = opts,
     dap = {
-        adapter = {
-            type = "executable",
-            command = "lldb-vscode",
-            name = "rt_lldb",
-        },
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
     },
     tools = {
         -- how to execute terminal commands
