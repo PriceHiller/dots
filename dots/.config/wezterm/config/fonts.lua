@@ -11,7 +11,6 @@ return {
             weight = "DemiBold",
             harfbuzz_features = {
                 "zero",
-                "cv01",
                 "cv02",
                 "cv30",
                 "ss05",
