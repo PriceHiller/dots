@@ -1,4 +1,9 @@
 require("noice").setup({
+    cmdline = {
+        format = {
+            cmdline = { "^:", icon = "" },
+        },
+    },
     views = {
         cmdline_popup = {
             position = {
