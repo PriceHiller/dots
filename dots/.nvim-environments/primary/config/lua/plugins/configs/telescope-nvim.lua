@@ -18,7 +18,6 @@ telescope.setup({
             "--with-filename",
             "--line-number",
             "--column",
-            "--no-ignore-exclude",
             "--hidden",
             "--smart-case",
         },
