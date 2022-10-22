@@ -613,6 +613,9 @@ return packer.startup({
             "kevinhwang91/nvim-hlslens",
             module = "hlslens",
             keys = "/",
+            config = function()
+                require("hlslens").setup()
+            end,
         })
 
         -- Note Taking
