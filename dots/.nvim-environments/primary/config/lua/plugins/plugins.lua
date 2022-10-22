@@ -372,14 +372,6 @@ return packer.startup({
             end,
         })
 
-        -- Display LSP Progress
-        use({
-            "j-hui/fidget.nvim",
-            config = function()
-                require("plugins.configs.fidget-spinner")
-            end,
-        })
-
         -- Display Lsp Signature
         use({
             "ray-x/lsp_signature.nvim",
