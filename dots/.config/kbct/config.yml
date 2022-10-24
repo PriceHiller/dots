@@ -1,6 +1,7 @@
 - keyboards:
     - Asus Keyboard
     - Glorious GMMK Pro ANSI
+    - Glorious GMMK Pro ANSI Keyboard
   layers:
     - modifiers:
         - leftmeta
