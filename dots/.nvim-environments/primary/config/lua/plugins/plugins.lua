@@ -80,21 +80,21 @@ return packer.startup({
         })
 
         -- Tab Line at top of editor
+
         use({
-            "akinsho/nvim-bufferline.lua",
-            after = "nvim-web-devicons",
-            requires = { "nvim-web-devicons" },
+            "romgrk/barbar.nvim",
+            requires = { "kyazdani42/nvim-web-devicons" },
             config = function()
-                require("plugins.configs.bufferline")
+                require("bufferline").setup({
+                    animation = true,
+                    auto_hide = true,
+                })
             end,
         })
 
         -- Statusline.
         use({
             "nvim-lualine/lualine.nvim",
-            after = {
-                "nvim-bufferline.lua",
-            },
             config = function()
                 require("plugins.configs.statusline")
             end,
