@@ -5,14 +5,18 @@ M.winbar = function()
     local ignore_fts = {
         'neo-tree',
         'dashboard',
+        'alpha',
     }
 
     for _, ft in ipairs(ignore_fts) do
         if ft == vim.bo.filetype then
-            return win_number
+            return win_number .. ' ' .. ft
         end
     end
-    return win_number .. ' %f'
+
+    local relative_path = vim.fn.fnamemodify(vim.fn.expand('%:h'), ':p:~:.')
+    local filename = vim.fn.expand('%:t')
+    return win_number ..  '  ' .. relative_path .. filename
 end
 
 M.setup = function()
