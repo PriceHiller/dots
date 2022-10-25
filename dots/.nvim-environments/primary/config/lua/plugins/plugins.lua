@@ -744,17 +744,8 @@ return packer.startup({
         -- Nice sidebar cursor goodies
         use({
             "gen740/SmoothCursor.nvim",
-            requires = {
-                "rebelot/kanagawa.nvim",
-            },
+            after = "kanagawa.nvim",
             config = function()
-                local kcolors = require("kanagawa.colors").setup({})
-                vim.api.nvim_set_hl(0, "SmoothCursorCursor", { fg = kcolors.roninYellow })
-                vim.api.nvim_set_hl(0, "SmoothCursorTrailBig1", { fg = kcolors.autumnYellow })
-                vim.api.nvim_set_hl(0, "SmoothCursorTrailBig2", { fg = kcolors.crystalBlue })
-                vim.api.nvim_set_hl(0, "SmoothCursorTrailMedium", { fg = kcolors.oniViolet })
-                vim.api.nvim_set_hl(0, "SmoothCursorTrailSmall", { fg = kcolors.springBlue })
-                vim.api.nvim_set_hl(0, "SmoothCursorTrailXSmall", { fg = kcolors.waveAqua2 })
                 require("smoothcursor").setup({
                     fancy = {
                         enable = true,
