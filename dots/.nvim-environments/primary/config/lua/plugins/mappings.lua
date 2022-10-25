@@ -167,7 +167,7 @@ wk.register({
         name = "Git",
     },
 }, { prefix = "<leader>" })
-vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { silent = true, desc = "Neogit: Open" })
+vim.keymap.set("n", "<leader>gg", require('neogit').open, { silent = true, desc = "Neogit: Open" })
 
 -- Gitsigns Mappings
 vim.keymap.set("n", "]g", "<cmd>Gitsigns next_hunk<CR><CR>", { silent = true, desc = "Gitsigns: Next Hunk" })
