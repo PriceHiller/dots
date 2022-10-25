@@ -130,10 +130,10 @@ vim.keymap.set("n", "<leader>dl", dap.run_last, { silent = true, desc = "DAP: Ru
 vim.keymap.set("n", "<leader>/", ":CommentToggle<CR>", { silent = true, desc = "Toggle Comment" })
 vim.keymap.set("v", "<leader>/", ":'<,'>CommentToggle<CR>", { silent = true, desc = "Toggle Selection Comment" })
 
--- Bufferline mappings
-vim.keymap.set("n", "<A-a>", ":BufferLineCyclePrev<CR>", { silent = true, desc = "Go to Previous Buffer" })
-vim.keymap.set("n", "<A-s>", ":BufferLineCycleNext<CR>", { silent = true, desc = "Go to Next Buffer" })
-vim.keymap.set("n", "<A-x>", require("utils.funcs").close_buffer, { silent = true, desc = "Close Buffer" })
+-- Buffer mappings
+vim.keymap.set("n", "<A-a>", ":BufferPrevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
+vim.keymap.set("n", "<A-s>", ":BufferNext<CR>", { silent = true, desc = "Go to Next Buffer" })
+vim.keymap.set("n", "<A-x>", ":BufferClose<CR>", { silent = true, desc = "Close Buffer" })
 
 -- Vim Notify Mappings
 vim.keymap.set("n", "<leader>nv", ":Telescope notify<CR>", { silent = true, desc = "Notifications: Search" })
