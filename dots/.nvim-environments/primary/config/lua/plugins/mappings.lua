@@ -131,9 +131,11 @@ vim.keymap.set("n", "<leader>/", ":CommentToggle<CR>", { silent = true, desc = "
 vim.keymap.set("v", "<leader>/", ":'<,'>CommentToggle<CR>", { silent = true, desc = "Toggle Selection Comment" })
 
 -- Buffer mappings
-vim.keymap.set("n", "<A-a>", ":BufferPrevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
-vim.keymap.set("n", "<A-s>", ":BufferNext<CR>", { silent = true, desc = "Go to Next Buffer" })
-vim.keymap.set("n", "<A-x>", ":BufferClose<CR>", { silent = true, desc = "Close Buffer" })
+vim.keymap.set("n", "<A-a>", ":bprevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
+vim.keymap.set("n", "<A-s>", ":bnext<CR>", { silent = true, desc = "Go to Next Buffer" })
+vim.keymap.set("n", "<A-x>", function()
+    require("bufdelete").bufdelete(0)
+end, { silent = true, desc = "Close Buffer" })
 
 -- Vim Notify Mappings
 vim.keymap.set("n", "<leader>nv", ":Telescope notify<CR>", { silent = true, desc = "Notifications: Search" })
@@ -167,7 +169,7 @@ wk.register({
         name = "Git",
     },
 }, { prefix = "<leader>" })
-vim.keymap.set("n", "<leader>gg", require('neogit').open, { silent = true, desc = "Neogit: Open" })
+vim.keymap.set("n", "<leader>gg", require("neogit").open, { silent = true, desc = "Neogit: Open" })
 
 -- Gitsigns Mappings
 vim.keymap.set("n", "]g", "<cmd>Gitsigns next_hunk<CR><CR>", { silent = true, desc = "Gitsigns: Next Hunk" })

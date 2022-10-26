@@ -79,19 +79,6 @@ return packer.startup({
             event = "BufEnter",
         })
 
-        -- Tab Line at top of editor
-
-        use({
-            "romgrk/barbar.nvim",
-            requires = { "kyazdani42/nvim-web-devicons" },
-            config = function()
-                require("bufferline").setup({
-                    animation = true,
-                    auto_hide = true,
-                })
-            end,
-        })
-
         -- Statusline.
         use({
             "nvim-lualine/lualine.nvim",
@@ -786,6 +773,11 @@ return packer.startup({
             config = function()
                 require("overseer").setup()
             end,
+        })
+
+        -- Better buffer deletion
+        use({
+            'famiu/bufdelete.nvim'
         })
 
         -- Leave at end!!!
