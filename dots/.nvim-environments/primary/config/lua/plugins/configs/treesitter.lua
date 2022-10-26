@@ -19,3 +19,6 @@ nvim_treesitter.setup({
         max_file_lines = nil,
     },
 })
+
+require('treesitter-context').setup({})
+vim.cmd.TSContextEnable()

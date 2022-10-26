@@ -102,6 +102,7 @@ return packer.startup({
             run = ":TSUpdate",
             requires = {
                 "p00f/nvim-ts-rainbow",
+                "nvim-treesitter/nvim-treesitter-context"
             },
             config = function()
                 require("plugins.configs.treesitter")
