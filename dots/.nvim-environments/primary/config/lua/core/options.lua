@@ -122,6 +122,9 @@ M.setup = function()
 
   -- Set splitkeep
   vim.opt.splitkeep = "screen"
+
+  -- Hide the tabline
+  vim.opt.showtabline = 0
 end
 
 return M
