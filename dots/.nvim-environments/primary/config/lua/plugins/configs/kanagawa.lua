@@ -100,9 +100,26 @@ require("kanagawa").setup({
 
         NeoTreeNormal = { bg = colors.sumiInk1b },
         NeoTreeNormalNC = { bg = colors.sumiInk1b },
+
+        NoiceCmdlineIconCmdline = { fg = colors.oniViolet },
+        NoiceCmdlinePopupBorderCmdline = { fg = colors.oniViolet },
+
+        NoiceCmdlineIconFilter = { fg = colors.springGreen },
+        NoiceCmdlinePopupBorderFilter = { fg = colors.springGreen },
+
+        NoiceCmdLineIconLua = { fg = colors.crystalBlue },
+        NoiceCmdlinePopupBorderLua = { fg = colors.crystalBlue },
+
+        NoiceCmdlineIconHelp = { fg = colors.surimiOrange },
+        NoiceCmdlinePopupBorderHelp = { fg = colors.surimiOrange },
+
+        NoiceCmdLineIconSearch = { fg = colors.roninYellow },
+        NoiceCmdlinePopupBorderSearch = { fg = colors.roninYellow },
+
+        NoiceCmdlineIconIncRename = { fg = colors.peachRed },
+        NoiceCmdlinePopupdBorderIncRename = { fg = colors.peachRed }
     },
 })
-
 
 -- NOTE: Colors for SmoothCursor
 vim.api.nvim_set_hl(0, "SmoothCursorCursor", { fg = colors.roninYellow })
