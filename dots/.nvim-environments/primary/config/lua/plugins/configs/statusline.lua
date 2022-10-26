@@ -48,6 +48,48 @@ lualine.setup({
         always_divide_middle = true,
         globalstatus = true,
     },
+    winbar = {
+        lualine_a = {
+            {
+                "filename",
+                path = 1,
+            },
+        },
+        lualine_b = {
+            {
+                "macro-recording",
+                fmt = show_macro_recording,
+            },
+        },
+        lualine_c = {},
+        lualine_x = {
+            "encoding",
+            "fileformat",
+            "filetype",
+        },
+        lualine_y = {
+            {
+                "location",
+                fmt = customLocation,
+            },
+        },
+        lualine_z = {
+            {
+                "progress",
+                fmt = customProgress,
+            },
+        },
+    },
+    inactive_winbar = {
+        lualine_a = { { "filename", path = 1 } },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {
+            "filetype",
+        },
+        lualine_y = {},
+        lualine_z = {},
+    },
     sections = {
         lualine_a = {
             {
@@ -88,37 +130,17 @@ lualine.setup({
         },
 
         -- Right
-        lualine_x = {
-            "encoding",
-            "fileformat",
-            "filetype",
-        },
+        lualine_x = {},
         lualine_y = {
             {
-                "location",
-                fmt = customLocation,
+                "buffers",
             },
         },
         lualine_z = {
-            {
-                "progress",
-                fmt = customProgress,
-            },
+            { "tabs" },
         },
     },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = {
-            {
-                "location",
-                fmt = customLocation,
-            },
-        },
-        lualine_y = {},
-        lualine_z = {},
-    },
+    inactive_sections = {},
     tabline = {},
     extensions = {
         "aerial",
@@ -130,10 +152,11 @@ lualine.setup({
     },
 })
 
+local macro_refresh_places = { "statusline", "winbar" }
 vim.api.nvim_create_autocmd("RecordingEnter", {
     callback = function()
         lualine.refresh({
-            place = { "statusline" },
+            place = macro_refresh_places,
         })
     end,
 })
@@ -142,11 +165,11 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
     callback = function()
         local timer = vim.loop.new_timer()
         timer:start(
-            50,
+            30,
             0,
             vim.schedule_wrap(function()
                 lualine.refresh({
-                    place = { "statusline" },
+                    place = macro_refresh_places,
                 })
             end)
         )
