@@ -134,6 +134,7 @@ lualine.setup({
         lualine_y = {
             {
                 "buffers",
+                mode = 2,
             },
         },
         lualine_z = {
