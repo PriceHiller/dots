@@ -263,19 +263,6 @@ return packer.startup({
             end,
         })
 
-        -- Display Lsp Signature
-        use({
-            "ray-x/lsp_signature.nvim",
-            config = function()
-                require("lsp_signature").setup({
-                    hint_prefix = "",
-                    hint_enable = true,
-                    floating_window = false,
-                    toggle_key = "<M-x>",
-                })
-            end,
-        })
-
         -- Lsp From Null LS
         use({
             "jose-elias-alvarez/null-ls.nvim",
