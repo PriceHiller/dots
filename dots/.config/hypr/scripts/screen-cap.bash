@@ -29,11 +29,11 @@ mk-gif() {
 			tmp_dir="$(mktemp -d)"
 			cd "${tmp_dir}"
 			input_tmpfile="${tmp_dir}/$(mktemp wf-recorder.XXXXXXXXXXX)"
-			wf-recorder -g "$(slurp)" -f "${input_tmpfile}.mp4" -- &
+			wf-recorder -g "$(slurp)" -f "${input_tmpfile}.mp4" --framerate 10 -- &
 			printf "%s" $! >"${pid_file}"
 			wait
 			ffmpeg -i "${input_tmpfile}.mp4" -filter_complex "[0:v] palettegen" palette.png
-			ffmpeg -i "${input_tmpfile}.mp4" -i palette.png -filter_complex "[0:v][1:v] paletteuse" -framerate 10 "${input_tmpfile}.gif"
+			ffmpeg -i "${input_tmpfile}.mp4" -i palette.png -filter_complex "[0:v][1:v] paletteuse" "${input_tmpfile}.gif"
 			wl-copy --type image/gif <"${input_tmpfile}.gif"
 			rm -f "${pid_file}"
 		)
