@@ -25,12 +25,15 @@ mk-gif() {
 		local input_tmpfile
 		notify-send "Starting ${program_name}" "Recording GIF of Selected Region" -a "${program_name}"
 		(
-			cd "/tmp"
-			input_tmpfile="/tmp/$(mktemp wf-recorder.XXXXXXXXXXX)"
+			local tmp_dir
+			tmp_dir="$(mktemp -d)"
+			cd "${tmp_dir}"
+			input_tmpfile="${tmp_dir}/$(mktemp wf-recorder.XXXXXXXXXXX)"
 			wf-recorder -g "$(slurp)" -f "${input_tmpfile}.mp4" -- &
 			printf "%s" $! >"${pid_file}"
 			wait
-			ffmpeg -i "${input_tmpfile}.mp4" -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "${input_tmpfile}.gif"
+			ffmpeg -i "${input_tmpfile}.mp4" -filter_complex "[0:v] palettegen" palette.png
+			ffmpeg -i "${input_tmpfile}.mp4" -i palette.png -filter_complex "[0:v][1:v] paletteuse" -framerate 10 "${input_tmpfile}.gif"
 			wl-copy --type image/gif <"${input_tmpfile}.gif"
 			rm -f "${pid_file}"
 		)
