@@ -102,7 +102,7 @@ return packer.startup({
             run = ":TSUpdate",
             requires = {
                 "p00f/nvim-ts-rainbow",
-                "nvim-treesitter/nvim-treesitter-context"
+                "nvim-treesitter/nvim-treesitter-context",
             },
             config = function()
                 require("plugins.configs.treesitter")
@@ -704,16 +704,11 @@ return packer.startup({
 
         -- Take a screenshot of code selected
         use({
-            "segeljakt/vim-silicon",
+            "treatybreaker/fix-wl-copy-date-formatting",
+            requires = { "nvim-lua/plenary.nvim" },
             config = function()
-                vim.g.silicon = {
-                    theme = "Coldark-Dark",
-                }
+                require("silicon").setup({})
             end,
-            cmd = {
-                "Silicon",
-                "SiliconHighlight",
-            },
         })
 
         -- Nice sidebar cursor goodies
@@ -765,7 +760,7 @@ return packer.startup({
 
         -- Better buffer deletion
         use({
-            'famiu/bufdelete.nvim'
+            "famiu/bufdelete.nvim",
         })
 
         -- Leave at end!!!
