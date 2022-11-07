@@ -8,7 +8,7 @@ return {
     font = wezterm.font_with_fallback({
         {
             family = "FiraCode NF",
-            weight = "DemiBold",
+            weight = "Medium",
             harfbuzz_features = {
                 "zero",
                 "cv02",
@@ -22,7 +22,7 @@ return {
         },
         {
             family = "JetBrains Mono",
-            weight = "DemiBold",
+            weight = "Medium",
         },
         -- NOTE: Attempt to resolve missing symbols etc.
         -- <built-in>, BuiltIn
