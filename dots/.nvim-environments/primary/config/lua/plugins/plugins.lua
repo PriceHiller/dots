@@ -704,7 +704,7 @@ return packer.startup({
 
         -- Take a screenshot of code selected
         use({
-            "treatybreaker/fix-wl-copy-date-formatting",
+            "NarutoXY/silicon.lua",
             requires = { "nvim-lua/plenary.nvim" },
             config = function()
                 require("silicon").setup({})
