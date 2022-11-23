@@ -125,6 +125,10 @@ M.setup = function()
 
   -- Hide the tabline
   vim.opt.showtabline = 0
+
+  -- Improved diff
+  opt.diffopt:append("linematch:75")
+  opt.fillchars:append("diff:/")
 end
 
 return M
