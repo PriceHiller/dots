@@ -16,7 +16,6 @@ M.setup = function()
 
   -- Set truecolor support
   opt.termguicolors = true
-  vim.cmd("highlight Normal guibg=none")
 
   -- Enable system clipboard
   opt.clipboard = "unnamedplus"
