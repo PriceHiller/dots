@@ -29,20 +29,18 @@ local header = {
 }
 
 -- Subheader, plugin count
-local get_plugins = function()
-    local num_plugins_loaded = #vim.fn.globpath(vim.fn.stdpath('data') .. '/site/pack/packer/start', '*', 0, 1)
-    local num_plugins_total = #vim.tbl_keys(packer_plugins)
-    if num_plugins_total <= 1 then
-        return num_plugins_loaded .. ' / ' .. num_plugins_total .. ' plugin  loaded'
+local get_plugin_info = function()
+    if require("lazy.status").has_updates() then
+        return "Plugin updates available, check :Lazy"
     else
-        return num_plugins_loaded .. ' / ' .. num_plugins_total .. ' plugins  loaded'
+        return "All plugins up to date"
     end
 end
 
-local plugin_count = {
+local plugin_info = {
     type = 'text',
     val = {
-        get_plugins(),
+        get_plugin_info()
     },
     opts = {
         hl = 'Comment',
@@ -87,7 +85,7 @@ local buttons = {
         button('f', '  Find File', ':Telescope find_files<CR>'),
         button('r', '  Recent', ':Telescope oldfiles<CR>'),
         button('s', '  Settings', ':e ~/.config/nvim/<CR>'),
-        button('u', '  Update Plugins', ':PackerSync<CR>'),
+        button('u', '  Update Plugins', ':Lazy sync<CR>'),
         button('q', '  Quit', ':qa<CR>'),
     },
     opts = {
@@ -113,7 +111,7 @@ local opts = {
         padding(),
         header,
         padding(),
-        plugin_count,
+        plugin_info,
         padding(),
         buttons,
         padding(),
