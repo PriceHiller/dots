@@ -29,6 +29,7 @@ if command -v git >/dev/null 2>&1; then
 	alias gwa="git worktree add"
 	alias gwr="git worktree remove"
 	alias git-remote="git config --get remote.origin.url"
+	alias git-head-default="git rev-parse --abbrev-ref origin/HEAD | cut -d '/' -f2"
 	alias gbc="git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'"
 fi
 
