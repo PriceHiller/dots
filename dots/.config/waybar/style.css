@@ -69,6 +69,14 @@
   color: @fujiWhite;
 }
 
+#custom-audio-device {
+  background: @sumiInk0;
+  border-top: 2px solid @oniViolet;
+  border-left: 2px solid @oniViolet;
+  color: @fujiWhite;
+}
+
+
 #custom-sway-mode {
   background: @sumiInk0;
   border-bottom: 2px solid @oniViolet;
