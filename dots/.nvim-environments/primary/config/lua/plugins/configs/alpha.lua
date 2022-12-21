@@ -106,7 +106,7 @@ local padding = function(pad_amount)
 end
 local opts = {
     layout = {
-        padding(12),
+        padding(4),
         header,
         padding(4),
         plugin_info,
