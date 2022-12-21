@@ -130,7 +130,12 @@ lualine.setup({
         },
 
         -- Right
-        lualine_x = {},
+        lualine_x = {
+            {
+                require("lazy.status").updates,
+                cond = require("lazy.status").has_updates,
+            },
+        },
         lualine_y = {
             {
                 "buffers",

@@ -183,34 +183,6 @@ vim.keymap.set(
     { silent = true, desc = "Gitsigns: Unstage Hunk" }
 )
 
--- Packer Mappings
-local packer = require("packer")
-local packer_sync = function()
-    vim.notify("Syncing packer.", "info", {
-        title = "Packer",
-    })
-    local snap_shot_time = tostring(os.date("!%Y-%m-%dT%TZ"))
-    packer.snapshot(snap_shot_time)
-    packer.sync()
-end
-
-local packer_compile = function()
-    vim.notify("Compiling packer.", "info", {
-        title = "Packer",
-    })
-    packer.compile()
-end
-
-vim.keymap.set("n", "<leader>ps", packer_sync, {
-    silent = true,
-    desc = "Packer: Sync",
-})
-
-vim.keymap.set("n", "<leader>pc", packer_compile, {
-    silent = true,
-    desc = "Packer: Compile",
-})
-
 -- Hop Mappings
 local hop = require("hop")
 
