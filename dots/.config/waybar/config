@@ -9,6 +9,7 @@
       "memory",
       "battery",
       "disk",
+      "custom/audio-device",
       "custom/pipewire"
     ],
     "modules-center": [
@@ -74,6 +75,13 @@
       "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}/{cidr}\nNM: {netmask}",
       "max-length": 20,
       "min-length": 14
+    },
+    "custom/audio-device": {
+      "tooltip": false,
+      "min-length": 20,
+      "interval": 1,
+      "format": " {}",
+      "exec": "wpctl status | grep -m 1 '*' | cut -d '.' -f2 | cut -d '[' -f1 | xargs"
     },
     "custom/pipewire": {
       "format": "{icon} {percentage}%",
