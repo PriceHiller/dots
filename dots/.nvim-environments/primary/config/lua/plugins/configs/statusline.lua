@@ -132,6 +132,14 @@ lualine.setup({
         -- Right
         lualine_x = {
             {
+                function()
+                    local lazy_stats = require("lazy").stats()
+                    local plugin_count = lazy_stats.count
+                    local loaded_plugins = lazy_stats.loaded
+                    return "" .. loaded_plugins .. "/" .. plugin_count .. " "
+                end,
+            },
+            {
                 require("lazy.status").updates,
                 cond = require("lazy.status").has_updates,
             },
