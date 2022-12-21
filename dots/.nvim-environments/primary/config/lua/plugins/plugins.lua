@@ -750,40 +750,6 @@ lazy.setup({
     {
         "famiu/bufdelete.nvim",
     },
-
-    -- Leave at end!!!
-    -- Install and deploy packer plugins
-    -- automatically
-    --     if PACKER_STRAP then
-    --         vim.notify("Syncing packer from bootstrap")
-    --
-    --         function _G.NotifyRestartNeeded()
-    --             local notify_available, _ = require("notify")
-    --             local message = "Neovim Restart Required to Finish Installation!"
-    --             if notify_available then
-    --                 vim.notify(message, vim.lsp.log_levels.WARN, {
-    --                     title = "Packer Strap",
-    --                     keep = function()
-    --                         return true
-    --                     end,
-    --                 },
-    --             else
-    --                 vim.notify(message)
-    --             end
-    --         end
-    --
-    --         vim.api.nvim_exec(
-    --             [[
-    --             autocmd User PackerCompileDone lua NotifyRestartNeeded()
-    --             ]],
-    --             false
-    --         )
-    --         require("packer").sync()
-    --     end
-    -- end,
-    -- config = {
-    --     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
-    -- },
 }, {
     checker = {
         enabled = true,
