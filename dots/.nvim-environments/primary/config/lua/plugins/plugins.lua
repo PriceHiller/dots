@@ -187,6 +187,7 @@ lazy.setup({
             "nvim-telescope/telescope-file-browser.nvim",
             "artart222/telescope_find_directories",
             "nvim-telescope/telescope-ui-select.nvim",
+            "debugloop/telescope-undo.nvim",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
