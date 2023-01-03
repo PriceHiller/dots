@@ -20,9 +20,6 @@ M.setup = function()
     vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
     vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
 
-    -- Better split closing
-    vim.keymap.set("n", "<C-x>", "<C-w>c", { silent = true })
-
     -- Set current focused file as cwd
     vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
 
@@ -57,6 +54,11 @@ M.setup = function()
 
     -- Terminal mappings
     vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { silent = true })
+
+    -- Alternative bindings for increment & decrement
+    vim.keymap.set("n", "=", "<C-a>", { silent = true, remap = true })
+    vim.keymap.set("n", "+", "<C-a>", { silent = true, remap = true })
+    vim.keymap.set("n", "-", "<C-x>", { silent = true, remap = true })
 end
 
 return M
