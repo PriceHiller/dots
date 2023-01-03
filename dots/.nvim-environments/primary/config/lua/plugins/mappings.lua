@@ -39,6 +39,7 @@ vim.keymap.set("n", "<leader>tl", ":Telescope resume<CR>", { silent = true, desc
 vim.keymap.set("n", "<leader>tT", ":TodoTelescope<CR>", { silent = true, desc = "Telescope: Todo Items" })
 vim.keymap.set("n", "<leader>tk", ":Telescope keymaps<CR>", { silent = true, desc = "Telescope: Keymaps" })
 vim.keymap.set("n", "<leader>tc", ":Telescope commands<CR>", { silent = true, desc = "Telescope: Commands" })
+vim.keymap.set("n", "<leader>tu", ":Telescope undo<CR>", { silent = true, desc = "Telescope: Undo History" })
 
 -- Lsp Mappings
 
