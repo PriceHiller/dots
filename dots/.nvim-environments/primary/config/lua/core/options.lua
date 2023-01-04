@@ -33,6 +33,7 @@ M.setup = function()
   opt.breakindent = true
   opt.expandtab = true
   opt.smarttab = true
+  opt.shiftround = true
 
   -- Search settings
   opt.hlsearch = true
@@ -128,6 +129,7 @@ M.setup = function()
   -- Improved diff
   opt.diffopt:append("linematch:75")
   opt.fillchars:append("diff:/")
+
 end
 
 return M
