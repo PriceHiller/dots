@@ -17,9 +17,6 @@ vim.opt.runtimepath:prepend(lazypath)
 local lazy = require("lazy")
 
 lazy.setup({
-    -- Packer Itself
-    { "wbthomason/packer.nvim" },
-
     -- Commonly used library
     {
         "nvim-lua/plenary.nvim",
