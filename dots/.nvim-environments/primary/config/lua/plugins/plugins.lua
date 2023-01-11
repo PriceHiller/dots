@@ -23,20 +23,23 @@ lazy.setup({
     },
 
     -- Much nicer ui, integrates cmdheight = 0 wella
-    {
-        "folke/noice.nvim",
-        config = function()
-            -- NOTE: Might be redundant, to check later
-            require("plugins.configs.nvim-notify")
-            require("plugins.configs.noice")
-        end,
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-            "hrsh7th/nvim-cmp",
-        },
-    },
+    -- NOTE: Temporarily disabling this until nightly is fixed
+    -- {
+    --     "folke/noice.nvim",
+    --     config = function()
+    --         -- NOTE: Might be redundant, to check later
+    --         require("plugins.configs.nvim-notify")
+    --         require("plugins.configs.noice")
+    --     end,
+    --     dependencies = {
+    --         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    --         "MunifTanjim/nui.nvim",
+    --         "rcarriga/nvim-notify",
+    --         "hrsh7th/nvim-cmp",
+    --     },
+    -- },
+    --
+    { "rcarriga/nvim-notify" },
 
     -- Color schemes
     { "folke/tokyonight.nvim" },
@@ -92,7 +95,7 @@ lazy.setup({
         config = function()
             require("plugins.configs.treesitter")
         end,
-        before = "folke/noice.nvim",
+        -- before = "folke/noice.nvim",
     },
 
     {
@@ -226,7 +229,7 @@ lazy.setup({
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
         },
-        after = "noice.nvim",
+        -- after = "noice.nvim",
         event = "BufEnter",
         config = function()
             require("mason").setup({})
