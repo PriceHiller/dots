@@ -20,12 +20,14 @@ lazy.setup({
     -- Commonly used library
     {
         "nvim-lua/plenary.nvim",
+        event = "VeryLazy",
     },
 
     -- Much nicer ui, integrates cmdheight = 0 wella
     -- NOTE: Temporarily disabling this until nightly is fixed
     -- {
     --     "folke/noice.nvim",
+    --     event = "VeryLazy",
     --     config = function()
     --         -- NOTE: Might be redundant, to check later
     --         require("plugins.configs.nvim-notify")
@@ -45,6 +47,7 @@ lazy.setup({
     { "folke/tokyonight.nvim" },
     {
         "EdenEast/nightfox.nvim",
+        event = "VeryLazy",
         config = function()
             require("nightfox").setup({
                 options = {
@@ -56,6 +59,7 @@ lazy.setup({
     },
     {
         "rebelot/kanagawa.nvim",
+        event = "VeryLazy",
         config = function()
             require("plugins.configs.kanagawa")
         end,
@@ -64,12 +68,13 @@ lazy.setup({
     -- Icons for folders, files, etc.
     {
         "kyazdani42/nvim-web-devicons",
-        event = "BufEnter",
+        event = "VeryLazy",
     },
 
     -- Statusline.
     {
         "nvim-lualine/lualine.nvim",
+        event = "VeryLazy",
         config = function()
             require("plugins.configs.statusline")
         end,
@@ -78,7 +83,7 @@ lazy.setup({
     -- Indentation Guides
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "BufEnter",
+        event = "VeryLazy",
         config = function()
             require("plugins.configs.indent-blankline")
         end,
@@ -87,6 +92,7 @@ lazy.setup({
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
+        event = "VeryLazy",
         build = ":TSUpdate",
         dependencies = {
             "p00f/nvim-ts-rainbow",
@@ -100,6 +106,7 @@ lazy.setup({
 
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        event = "VeryLazy",
         after = { "nvim-treesitter" },
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -160,7 +167,7 @@ lazy.setup({
     -- Highlight given color codes
     {
         "brenoprata10/nvim-highlight-colors",
-        event = "BufEnter",
+        event = "VeryLazy",
         config = function()
             require("nvim-highlight-colors").setup({
                 enable_tailwind = true,
@@ -182,6 +189,7 @@ lazy.setup({
     -- Telescope
     {
         "nvim-telescope/telescope.nvim",
+        event = "VeryLazy",
         dependencies = {
             "nvim-telescope/telescope-media-files.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
@@ -198,11 +206,13 @@ lazy.setup({
 
     {
         "stevearc/dressing.nvim",
+        event = "VeryLazy",
     },
 
     -- File Tree
     {
         "nvim-neo-tree/neo-tree.nvim",
+        event = "VeryLazy",
         branch = "v2.x",
         dependencies = {
             "kyazdani42/nvim-web-devicons",
@@ -218,6 +228,7 @@ lazy.setup({
     -- Lspconfig
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "folke/neodev.nvim",
@@ -230,7 +241,6 @@ lazy.setup({
             "b0o/schemastore.nvim",
         },
         -- after = "noice.nvim",
-        event = "BufEnter",
         config = function()
             require("mason").setup({})
             require("plugins.configs.lsp")
@@ -240,6 +250,7 @@ lazy.setup({
     -- Incremental rename, easier to view renames
     {
         "smjonas/inc-rename.nvim",
+        event = "VeryLazy",
         config = function()
             require("inc_rename").setup({})
         end,
@@ -248,6 +259,7 @@ lazy.setup({
     -- Better LSP Virtual Text Lines
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        event = "VeryLazy",
         config = function()
             require("lsp_lines").setup()
         end,
@@ -256,6 +268,7 @@ lazy.setup({
     -- Lsp From Null LS
     {
         "jose-elias-alvarez/null-ls.nvim",
+        event = "VeryLazy",
         config = function()
             require("plugins.configs.null_ls")
         end,
@@ -264,6 +277,7 @@ lazy.setup({
     -- Autopairs
     {
         "windwp/nvim-autopairs",
+        event = "VeryLazy",
         config = function()
             require("nvim-autopairs").setup()
         end,
@@ -272,6 +286,7 @@ lazy.setup({
     -- Snippets
     {
         "rafamadriz/friendly-snippets",
+        event = "VeryLazy",
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
@@ -280,12 +295,12 @@ lazy.setup({
             "saadparwaiz1/cmp_luasnip",
         },
         after = "LuaSnip",
-        event = "BufEnter",
     },
 
     -- Code completion
     {
         "hrsh7th/nvim-cmp",
+        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
@@ -308,12 +323,13 @@ lazy.setup({
 
     {
         "tzachar/cmp-fuzzy-buffer",
+        event = "VeryLazy",
         dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
     },
     { "tzachar/cmp-fuzzy-path", dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
     {
         "saecki/crates.nvim",
-        event = { "BufRead Cargo.toml" },
+        event = "VeryLazy",
         dependencies = { { "nvim-lua/plenary.nvim" } },
         config = function()
             require("crates").setup()
@@ -323,6 +339,7 @@ lazy.setup({
     -- DAP, debugger
     {
         "mfussenegger/nvim-dap",
+        event = "VeryLazy",
         config = function()
             require("dap.ext.vscode").load_launchjs()
             require("plugins.configs._dap")
@@ -333,6 +350,7 @@ lazy.setup({
     -- Python debugger, dapinstall does not play nice with debugpy
     {
         "mfussenegger/nvim-dap-python",
+        event = "VeryLazy",
         after = "nvim-dap",
         config = function()
             require("plugins.configs.python-dap")
@@ -342,6 +360,7 @@ lazy.setup({
     -- Virtual Text for DAP
     {
         "theHamsta/nvim-dap-virtual-text",
+        event = "VeryLazy",
         after = "nvim-dap",
         config = function()
             require("nvim-dap-virtual-text").setup({})
@@ -351,6 +370,7 @@ lazy.setup({
     -- Fancy ui for dap
     {
         "rcarriga/nvim-dap-ui",
+        event = "VeryLazy",
         after = "nvim-dap",
         config = function()
             require("plugins.configs.dap-ui")
@@ -360,6 +380,7 @@ lazy.setup({
     -- Code formatting
     {
         "sbdchd/neoformat",
+        event = "VeryLazy",
         cmd = "Neoformat",
         config = function()
             require("plugins.configs.neoformat")
@@ -368,6 +389,7 @@ lazy.setup({
 
     {
         "anuvyklack/pretty-fold.nvim",
+        event = "VeryLazy",
         dependencies = "anuvyklack/nvim-keymap-amend",
         config = function()
             require("pretty-fold").setup({
@@ -379,6 +401,7 @@ lazy.setup({
     -- Git signs
     {
         "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
         config = function()
             require("gitsigns").setup({
                 current_line_blame = true,
@@ -392,7 +415,7 @@ lazy.setup({
     -- Highlight certain comments, TODO, BUG, etc.
     {
         "folke/todo-comments.nvim",
-        event = "BufEnter",
+        event = "VeryLazy",
         config = function()
             require("todo-comments").setup({})
         end,
@@ -401,6 +424,7 @@ lazy.setup({
     -- Show possible key bindings during typing
     {
         "folke/which-key.nvim",
+        event = "VeryLazy",
         config = function()
             require("which-key").setup({})
         end,
@@ -409,6 +433,7 @@ lazy.setup({
     -- Create full path if not existing on write
     {
         "jghauser/mkdir.nvim",
+        event = "VeryLazy",
         config = function()
             require("mkdir")
         end,
@@ -417,6 +442,7 @@ lazy.setup({
     -- Text commenting
     {
         "terrortylor/nvim-comment",
+        event = "VeryLazy",
         cmd = "CommentToggle",
         config = function()
             require("nvim_comment").setup()
@@ -426,11 +452,13 @@ lazy.setup({
     -- Move selections with alt+movement key
     {
         "matze/vim-move",
+        event = "VeryLazy",
     },
 
     -- Register support in telescope with persistent save
     {
         "AckslD/nvim-neoclip.lua",
+        event = "VeryLazy",
         dependencies = {
             { "tami5/sqlite.lua", module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
@@ -445,6 +473,7 @@ lazy.setup({
     -- Markdown Previewer
     {
         "iamcco/markdown-preview.nvim",
+        event = "VeryLazy",
         build = "cd app && npm install",
         init = function()
             vim.g.mkdp_filetypes = { "markdown" }
@@ -456,6 +485,7 @@ lazy.setup({
     -- Better Git integration
     {
         "TimUntersberger/neogit",
+        event = "VeryLazy",
         config = function()
             require("neogit").setup({
                 disable_commit_confirmation = true,
@@ -464,7 +494,7 @@ lazy.setup({
                 },
             })
         end,
-        event = "BufWinEnter",
+        event = "VeryLazy",
         dependencies = {
             "sindrets/diffview.nvim",
         },
@@ -473,11 +503,13 @@ lazy.setup({
     -- Ansible Syntax Highlighting
     {
         "pearofducks/ansible-vim",
+        event = "VeryLazy",
     },
 
     -- Better search display
     {
         "kevinhwang91/nvim-hlslens",
+        event = "VeryLazy",
         module = "hlslens",
         keys = "/",
         config = function()
@@ -502,12 +534,14 @@ lazy.setup({
     -- Log Syntax Highlighting
     {
         "MTDL9/vim-log-highlighting",
+        event = "VeryLazy",
     },
 
     -- Lots of small modules pulled into
     -- one git repository
     {
         "echasnovski/mini.nvim",
+        event = "VeryLazy",
         config = function()
             require("mini.cursorword").setup({})
         end,
@@ -516,6 +550,7 @@ lazy.setup({
     -- Smoother Scrolling
     {
         "karb94/neoscroll.nvim",
+        event = "VeryLazy",
         config = function()
             require("neoscroll").setup({
                 easing_function = "circular",
@@ -526,6 +561,7 @@ lazy.setup({
     -- Generate function/class/etc annotations
     {
         "danymat/neogen",
+        event = "VeryLazy",
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = function()
             require("neogen").setup({
@@ -544,16 +580,19 @@ lazy.setup({
     -- Multiple cursor/multiple visual selection support
     {
         "mg979/vim-visual-multi",
+        event = "VeryLazy",
     },
 
     -- Editorconfig support
     {
         "gpanders/editorconfig.nvim",
+        event = "VeryLazy",
     },
 
     -- Maintain last cursor position in files
     {
         "ethanholz/nvim-lastplace",
+        event = "VeryLazy",
         config = function()
             require("nvim-lastplace").setup({
                 lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
@@ -569,6 +608,7 @@ lazy.setup({
     -- More codeactions
     {
         "ThePrimeagen/refactoring.nvim",
+        event = "VeryLazy",
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-treesitter/nvim-treesitter" },
@@ -578,6 +618,7 @@ lazy.setup({
     -- Http Request Support
     {
         "NTBBloodbath/rest.nvim",
+        event = "VeryLazy",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
@@ -593,6 +634,7 @@ lazy.setup({
     -- Allows repeating actions and more
     {
         "anuvyklack/hydra.nvim",
+        event = "VeryLazy",
         dependencies = {
             "anuvyklack/keymap-layer.nvim",
             "lewis6991/gitsigns.nvim",
@@ -607,6 +649,7 @@ lazy.setup({
     -- Faster motions
     {
         "phaazon/hop.nvim",
+        event = "VeryLazy",
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
             require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
@@ -616,6 +659,7 @@ lazy.setup({
     -- Surround actions
     {
         "kylechui/nvim-surround",
+        event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({})
         end,
@@ -624,6 +668,7 @@ lazy.setup({
     -- Better list continuation
     {
         "gaoDean/autolist.nvim",
+        event = "VeryLazy",
         ft = {
             "markdown",
             "text",
@@ -638,6 +683,7 @@ lazy.setup({
     -- Tint inactive windows
     {
         "levouh/tint.nvim",
+        event = "VeryLazy",
         config = function()
             require("tint").setup({
                 highlight_ignore_patterns = { "WinSeparator" },
@@ -650,6 +696,7 @@ lazy.setup({
     -- Highlight argument definitions and usages
     {
         "m-demare/hlargs.nvim",
+        event = "VeryLazy",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()
             require("hlargs").setup({})
@@ -659,6 +706,7 @@ lazy.setup({
     -- Vim Latex Support
     {
         "lervag/vimtex",
+        event = "VeryLazy",
         ft = "tex",
         config = function()
             vim.g.vimtext_view_method = "zathura"
@@ -668,6 +716,7 @@ lazy.setup({
 
     {
         "akinsho/toggleterm.nvim",
+        event = "VeryLazy",
         config = function()
             require("toggleterm").setup({
                 start_in_insert = false,
@@ -694,6 +743,7 @@ lazy.setup({
     -- Take a screenshot of code selected
     {
         "NarutoXY/silicon.lua",
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("silicon").setup({})
@@ -703,6 +753,7 @@ lazy.setup({
     -- Nice sidebar cursor goodies
     {
         "gen740/SmoothCursor.nvim",
+        event = "VeryLazy",
         after = "kanagawa.nvim",
         config = function()
             require("smoothcursor").setup({
@@ -727,6 +778,7 @@ lazy.setup({
     -- Color Picker
     {
         "uga-rosa/ccc.nvim",
+        event = "VeryLazy",
         config = function()
             require("plugins.configs.ccc")
         end,
@@ -742,6 +794,7 @@ lazy.setup({
     -- Task runner & job management
     {
         "stevearc/overseer.nvim",
+        event = "VeryLazy",
         config = function()
             require("overseer").setup()
         end,
@@ -750,11 +803,12 @@ lazy.setup({
     -- Better buffer deletion
     {
         "famiu/bufdelete.nvim",
+        event = "VeryLazy",
     },
 }, {
     checker = {
         enabled = true,
-        concurrency = 20
+        concurrency = 20,
     },
-    lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json'
+    lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 })
