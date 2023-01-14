@@ -26,7 +26,6 @@ lazy.setup({
     -- Much nicer ui, integrates cmdheight = 0 wella
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
         config = function()
             -- NOTE: Might be redundant, to check later
             require("plugins.configs.nvim-notify")
