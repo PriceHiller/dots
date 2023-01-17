@@ -77,7 +77,7 @@ vim.keymap.set("n", "<leader>lc", vim.lsp.buf.code_action, { silent = true, desc
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, { silent = true, desc = "LSP: References" })
 vim.keymap.set("n", "<leader>lR", ":LspRestart<CR>", { silent = true, desc = "LSP: Restart" })
 vim.keymap.set("n", "<leader>ls", function()
-    vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
+    vim.diagnostic.open_float(nil, { focus = true, scope = "cursor" })
 end, { silent = true, desc = "LSP: Diagnostic Open Float" })
 vim.keymap.set("n", "<leader>lf", function()
     vim.lsp.buf.format({ async = true })
