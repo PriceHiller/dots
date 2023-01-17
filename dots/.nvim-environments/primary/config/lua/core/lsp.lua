@@ -37,9 +37,14 @@ M.setup = function()
         float = {
             focusable = true,
             style = "minimal",
-            border = "rounded",
+            border = {
+                " ",
+                " ",
+                " ",
+                " ",
+            },
             source = "always",
-            header = "",
+            header = "Diagnostic",
             prefix = "",
         },
     })
