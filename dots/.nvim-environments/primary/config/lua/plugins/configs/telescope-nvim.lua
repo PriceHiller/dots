@@ -80,6 +80,14 @@ telescope.setup({
         },
         undo = {
             side_by_side = true,
+            use_delta = true,
+            mappings = {
+                i = {
+                    ["<C-cr>"] = require("telescope-undo.actions").yank_additions,
+                    ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+                    ["<cr>"] = require("telescope-undo.actions").restore,
+                },
+            },
             layout_strategy = "vertical",
             layout_config = {
                 preview_height = 0.8,
