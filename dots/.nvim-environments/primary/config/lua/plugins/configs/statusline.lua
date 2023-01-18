@@ -60,6 +60,29 @@ lualine.setup({
                 "macro-recording",
                 fmt = show_macro_recording,
             },
+            {
+                function()
+                    local msg = "No Active Lsp"
+                    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+                    local clients = vim.lsp.get_active_clients()
+                    if next(clients) == nil then
+                        return msg
+                    else
+                        msg = ""
+                        for _, client in ipairs(clients) do
+                            local filetypes = client.config.filetypes
+                            if msg == "" then
+                                msg = client.name
+                            else
+                                msg = msg .. ", " .. client.name
+                            end
+                        end
+                    end
+                    return msg
+                end,
+                icon = " LSP:",
+                color = { fg = "#957fb8" },
+            },
         },
         lualine_c = {},
         lualine_x = {
