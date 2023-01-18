@@ -38,6 +38,32 @@ local function show_macro_recording()
     end
 end
 
+local show_lsp_name = {
+    function()
+        local msg = "No Active Lsp"
+        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+        local clients = vim.lsp.get_active_clients()
+        if next(clients) == nil then
+            return msg
+        else
+            msg = ""
+            for _, client in ipairs(clients) do
+                local filetypes = client.config.filetypes
+                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                    if msg == "" then
+                        msg = client.name
+                    else
+                        msg = msg .. ", " .. client.name
+                    end
+                end
+            end
+        end
+        return msg
+    end,
+    icon = " LSP:",
+    color = { fg = "#957fb8" },
+}
+
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -60,29 +86,7 @@ lualine.setup({
                 "macro-recording",
                 fmt = show_macro_recording,
             },
-            {
-                function()
-                    local msg = "No Active Lsp"
-                    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
-                        return msg
-                    else
-                        msg = ""
-                        for _, client in ipairs(clients) do
-                            local filetypes = client.config.filetypes
-                            if msg == "" then
-                                msg = client.name
-                            else
-                                msg = msg .. ", " .. client.name
-                            end
-                        end
-                    end
-                    return msg
-                end,
-                icon = " LSP:",
-                color = { fg = "#957fb8" },
-            },
+            show_lsp_name,
         },
         lualine_c = {},
         lualine_x = {
@@ -105,7 +109,7 @@ lualine.setup({
     },
     inactive_winbar = {
         lualine_a = { { "filename", path = 1 } },
-        lualine_b = {},
+        lualine_b = { show_lsp_name },
         lualine_c = {},
         lualine_x = {
             "filetype",
