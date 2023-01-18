@@ -1,6 +1,4 @@
 local alpha = require("alpha")
-local startify = require("alpha.themes.startify")
-local dashboard = require("alpha.themes.dashboard")
 
 -- Set header
 local header = {
@@ -27,27 +25,40 @@ local header = {
 
 local plugins_loaded = {
     type = "text",
-    val = {
-        (function()
-            local lazy_stats = require("lazy").stats()
-            local plugin_count = lazy_stats.count
-            local loaded_plugins = lazy_stats.loaded
-            return "" .. loaded_plugins .. "/" .. plugin_count .. " plugins  loaded!"
-        end)(),
-    },
+    val = function()
+        local lazy_stats = require("lazy").stats()
+        local plugin_count = lazy_stats.count
+        local loaded_plugins = lazy_stats.loaded
+        return "" .. loaded_plugins .. "/" .. plugin_count .. " plugins  loaded!"
+    end,
+
     opts = { hl = "@conditional", position = "center" },
 }
+
+vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@string" })
 local plugin_info = {
     type = "text",
-    val = {
-        (function()
-            if require("lazy.status").has_updates() then
-                return "Plugin updates available, check :Lazy"
-            else
-                return "All plugins up to date"
-            end
-        end)(),
+    val = function()
+        if require("lazy.status").has_updates() then
+            vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@exception" })
+            return "Plugin updates available!"
+        else
+            vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@string" })
+            return "All plugins up to date"
+        end
+    end,
+
+    opts = {
+        hl = "AlphaPluginUpdate",
+        position = "center",
     },
+}
+
+local datetime = {
+    type = "text",
+    val = function()
+        return vim.fn.strftime("%c")
+    end,
     opts = { hl = "@decorator", position = "center" },
 }
 
@@ -87,7 +98,7 @@ local buttons = {
         button("e", "  New File", ":ene <BAR> startinsert <CR>"),
         button("f", "  Find File", ":Telescope find_files<CR>"),
         button("r", "  Recent", ":Telescope oldfiles<CR>"),
-        button("s", "  Settings", ":e ~/.config/nvim/<CR>"),
+        button("s", "  Settings", "<cmd>e ~/.config/nvim/<CR>"),
         button("u", "  Update Plugins", ":Lazy sync<CR>"),
         button("q", "  Quit", ":qa<CR>"),
     },
@@ -109,6 +120,8 @@ local opts = {
         padding(4),
         header,
         padding(4),
+        datetime,
+        padding(1),
         plugin_info,
         padding(1),
         plugins_loaded,
@@ -124,7 +137,25 @@ alpha.setup(opts)
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "alpha",
+    desc = "Alpha Main Handler",
     callback = function()
         vim.opt_local.cursorline = false
+
+        local alpha_timer = vim.loop.new_timer()
+        alpha_timer:start(
+            50,
+            1000,
+            vim.schedule_wrap(function()
+                vim.cmd("AlphaRedraw")
+            end)
+        )
+
+        vim.api.nvim_create_autocmd("BufUnload", {
+            buffer = 0,
+            desc = "Shut down alpha timer",
+            callback = function(input)
+                alpha_timer:close()
+            end,
+        })
     end,
 })
