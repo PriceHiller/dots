@@ -17,6 +17,8 @@ vim.opt.runtimepath:prepend(lazypath)
 local lazy = require("lazy")
 
 lazy.setup({
+    -- Lazy itself
+    { "folke/lazy.nvim" },
     -- Commonly used library
     {
         "nvim-lua/plenary.nvim",
