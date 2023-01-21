@@ -130,9 +130,6 @@ M.setup = function()
   opt.diffopt:append("linematch:75")
   opt.fillchars:append("diff:/")
 
-  -- Keywords (splitting for words)
-  opt.iskeyword:remove("_")
-
 end
 
 return M
