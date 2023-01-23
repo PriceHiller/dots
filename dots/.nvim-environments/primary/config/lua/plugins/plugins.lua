@@ -615,8 +615,7 @@ lazy.setup({
 
     -- Http Request Support
     {
-        "NTBBloodbath/rest.nvim",
-        event = "VeryLazy",
+        "rest-nvim/rest.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
