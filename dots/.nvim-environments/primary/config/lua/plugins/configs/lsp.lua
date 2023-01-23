@@ -211,6 +211,11 @@ lspconfig.pylsp.setup({
 
 lspconfig.yamlls.setup({
     settings = {
+        redhat = {
+            telemetry = {
+                enabled = false
+            }
+        },
         yaml = {
             schemas = {
                 ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
@@ -234,6 +239,10 @@ lspconfig.yamlls.setup({
                     "host_vars/*.y*l",
                     "group_vars/*.y*l",
                 },
+                kubernetes = {
+                    "*.k8s",
+                    "*.k8s.*"
+                }
             },
         },
     },

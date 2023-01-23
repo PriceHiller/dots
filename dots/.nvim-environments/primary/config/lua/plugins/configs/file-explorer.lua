@@ -7,6 +7,7 @@ nvim_tree.setup({
         disable = {
             -- Ansible support reasons
             'ansible.yaml',
+            'yaml.ansible'
         },
     },
     matchup = {
