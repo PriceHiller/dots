@@ -8,6 +8,9 @@ export ZSH_HIGHLIGHT_MAXLENGTH=10000
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+### SSH ###
+eval "$(ssh-agent -s)" >/dev/null 2>&1
+
 
 ### FZF ###
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color=always'
