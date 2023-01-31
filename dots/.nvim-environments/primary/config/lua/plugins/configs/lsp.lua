@@ -226,7 +226,7 @@ lspconfig.yamlls.setup({
                     "Pipelines/*.y*l",
                 },
                 ["https://raw.githubusercontent.com/docker/cli/master/cli/compose/schema/data/config_schema_v3.10.json"] = "/docker-compose.y*l",
-                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml",
+                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "**/.gitlab-ci.yml",
                 ["https://json.schemastore.org/travis.json"] = "/.travis.y*l",
                 ["https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-inventory.json"] = {
                     "/inventories/*/*.y*l",
