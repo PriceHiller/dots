@@ -119,7 +119,8 @@ require("kanagawa").setup({
         NoiceCmdlineIconIncRename = { fg = colors.peachRed },
         NoiceCmdlinePopupdBorderIncRename = { fg = colors.peachRed },
 
-        Folded = { bg = colors.winterBlue }
+        Folded = { bg = colors.waveBlue1 },
+        UfoFoldedBg = { bg = colors.springViolet1 }
     },
 })
 

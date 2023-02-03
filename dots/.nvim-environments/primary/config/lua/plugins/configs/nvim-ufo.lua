@@ -32,7 +32,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
         end
         curWidth = curWidth + chunkWidth
     end
-    table.insert(newVirtText, {suffix, "CursorLineNR"})
+    table.insert(newVirtText, {suffix, "@conditional"})
     return newVirtText
 end
 
