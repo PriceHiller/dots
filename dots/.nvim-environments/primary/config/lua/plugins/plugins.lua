@@ -386,13 +386,11 @@ lazy.setup({
     },
 
     {
-        "anuvyklack/pretty-fold.nvim",
-        event = "VeryLazy",
-        dependencies = "anuvyklack/nvim-keymap-amend",
+        "kevinhwang91/nvim-ufo",
+        dependencies = { "kevinhwang91/promise-async" },
+        after = "nvim-treesitter",
         config = function()
-            require("pretty-fold").setup({
-                fill_char = " ",
-            })
+            require("plugins.configs.nvim-ufo")
         end,
     },
 
