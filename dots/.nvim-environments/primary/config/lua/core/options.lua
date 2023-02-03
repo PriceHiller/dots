@@ -63,7 +63,7 @@ M.setup = function()
   -- Better folding
   opt.foldexpr = "nvim_treesitter#foldexpr()"
   opt.foldmethod = "expr"
-  opt.fillchars = { fold = " " }
+  opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
   opt.foldlevel = 20
   vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
   vim.wo.foldmethod = "expr"
