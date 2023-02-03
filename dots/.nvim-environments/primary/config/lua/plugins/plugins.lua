@@ -386,9 +386,22 @@ lazy.setup({
     },
 
     {
+        "luukvbaal/statuscol.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("statuscol").setup({
+                foldfunc = "builtin",
+                setopt = true,
+            })
+        end,
+    },
+
+    {
         "kevinhwang91/nvim-ufo",
-        dependencies = { "kevinhwang91/promise-async" },
-        after = "nvim-treesitter",
+        dependencies = {
+            "kevinhwang91/promise-async",
+        },
+        after = { "nvim-treesitter", "statuscol.nvim" },
         config = function()
             require("plugins.configs.nvim-ufo")
         end,
