@@ -327,7 +327,6 @@ for _, server in ipairs({
     "vimls",
     "vuels",
     "tsserver",
-    "pyright",
     "rnix",
     "marksman",
     "texlab",
