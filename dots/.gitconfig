@@ -58,3 +58,6 @@
 ; Per environemnt specific setup shit
 [includeIf "gitdir:~/Git/SSFCU/"]
     path = ~/.dot_files/git-configs/.gitconfig-ssfcu
+
+[credential]
+    helper = store
