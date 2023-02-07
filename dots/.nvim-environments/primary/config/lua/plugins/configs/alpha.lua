@@ -146,7 +146,7 @@ vim.api.nvim_create_autocmd("FileType", {
             50,
             1000,
             vim.schedule_wrap(function()
-                vim.cmd("AlphaRedraw")
+                pcall(vim.cmd, "AlphaRedraw")
             end)
         )
 
@@ -154,7 +154,6 @@ vim.api.nvim_create_autocmd("FileType", {
             buffer = 0,
             desc = "Shut down alpha timer",
             callback = function(input)
-                alpha_timer:close()
             end,
         })
     end,
