@@ -57,9 +57,9 @@ lazy.setup({
     },
     {
         "rebelot/kanagawa.nvim",
-        event = "VeryLazy",
         config = function()
             require("plugins.configs.kanagawa")
+            vim.cmd.colorscheme("kanagawa")
         end,
     },
 
