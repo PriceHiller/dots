@@ -30,7 +30,7 @@ local header = {
         "                               ",
         "                               ",
     },
-    opts = { position = "center", hl = "Delimiter" },
+    opts = { position = "center", hl = "@boolean" },
 }
 
 local plugins_loaded = {
