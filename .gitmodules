@@ -19,6 +19,3 @@
 [submodule "dots/.config/zsh/config/plugins/nix-zsh-completions"]
 	path = dots/.config/zsh/config/plugins/nix-zsh-completions
 	url = https://github.com/spwhitt/nix-zsh-completions
-[submodule "dots/.config/zsh/config/plugins/forgit"]
-	path = dots/.config/zsh/config/plugins/forgit
-	url = https://github.com/wfxr/forgit.git

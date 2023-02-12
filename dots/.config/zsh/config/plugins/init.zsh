@@ -7,7 +7,6 @@ init() {
 	source "${wkdir}/zsh-completions/zsh-completions.plugin.zsh"
 	source "${wkdir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 	source "${wkdir}/nix-zsh-completions/nix.plugin.zsh"
-	source "${wkdir}/forgit/forgit.plugin.zsh"
 	FPATH="${FPATH}:${wkdir}/nix-zsh-completions"
 	eval "$(lua "${wkdir}/z.lua/z.lua" --init zsh enhanced once)"
 
