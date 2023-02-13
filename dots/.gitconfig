@@ -1,13 +1,14 @@
 [user]
     name = Price Hiller
     email = price@orion-technologies.io
+    signingkey = /home/sam/.ssh/keys/id_ed25519
 
 [init]
     defaultBranch = Development
 
 [core]
     pager = delta
-	ignorecase = false
+    ignorecase = false
 
 [interactive]
     diffFilter = delta --color-only --features=interactive
@@ -61,3 +62,6 @@
 
 [credential]
     helper = store
+
+[gpg]
+    format = ssh
