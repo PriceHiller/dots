@@ -104,6 +104,9 @@ lualine.setup({
         lualine_b = {
             {
                 "macro-recording",
+                color = {
+                    fg = "#FF9E3B"
+                },
                 fmt = show_macro_recording,
             },
             show_lsp_name,
@@ -160,6 +163,9 @@ lualine.setup({
             },
             {
                 "macro-recording",
+                color = {
+                    fg = "#FF9E3B"
+                },
                 fmt = show_macro_recording,
             },
         },
