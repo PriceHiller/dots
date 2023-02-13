@@ -128,7 +128,7 @@ M.setup = function()
 
   -- Improved diff
   opt.diffopt:append("linematch:75")
-  opt.fillchars:append("diff:/")
+  opt.fillchars:append("diff:╱")
 
 end
 
