@@ -11,7 +11,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ### SSH ###
 export SSH_AUTH_SOCK="${HOME}/.ssh/ssh-agent.sock"
 ssh-add -l >/dev/null 2>&1
-[ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+[ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null 2>&1
 
 
 ### FZF ###
