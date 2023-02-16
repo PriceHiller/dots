@@ -306,6 +306,7 @@ lspconfig.ltex.setup({
             },
         },
     },
+    filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
     capabilities = lsp_capabilities,
     on_attach = on_attach,
 })
