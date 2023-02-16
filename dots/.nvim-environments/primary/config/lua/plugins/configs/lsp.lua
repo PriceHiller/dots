@@ -213,8 +213,8 @@ lspconfig.yamlls.setup({
     settings = {
         redhat = {
             telemetry = {
-                enabled = false
-            }
+                enabled = false,
+            },
         },
         yaml = {
             schemas = {
@@ -241,8 +241,8 @@ lspconfig.yamlls.setup({
                 },
                 kubernetes = {
                     "*.k8s",
-                    "*.k8s.*"
-                }
+                    "*.k8s.*",
+                },
             },
         },
     },
