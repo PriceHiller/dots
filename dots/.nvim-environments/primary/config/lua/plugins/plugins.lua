@@ -813,6 +813,31 @@ lazy.setup({
         "famiu/bufdelete.nvim",
         event = "VeryLazy",
     },
+
+    -- Improved Visuals for Documentation
+    {
+        "atusy/tsnode-marker.nvim",
+        lazy = true,
+        filetype = "markdown",
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("tsnode-marker-markdown", {}),
+                pattern = "markdown",
+                callback = function(ctx)
+                    require("tsnode-marker").set_automark(ctx.buf, {
+                        target = { "code_fence_content" }, -- list of target node types
+                        hl_group = "CursorLine", -- highlight group
+                    })
+                end,
+            })
+        end,
+    },
+    {
+        "lukas-reineke/headlines.nvim",
+        config = function()
+            require("headlines").setup()
+        end,
+    },
 }, {
     checker = {
         enabled = true,
