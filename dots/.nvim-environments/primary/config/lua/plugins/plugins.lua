@@ -529,6 +529,7 @@ lazy.setup({
     -- Note Taking
     {
         "nvim-neorg/neorg",
+        build = ":Neorg sync-parsers",
         config = function()
             require("plugins.configs._neorg")
         end,
