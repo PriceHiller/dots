@@ -834,6 +834,7 @@ lazy.setup({
     },
     {
         "lukas-reineke/headlines.nvim",
+        lazy = true,
         config = function()
             require("headlines").setup()
         end,
