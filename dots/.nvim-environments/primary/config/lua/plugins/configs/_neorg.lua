@@ -35,16 +35,5 @@ neorg.setup({
         },
         ['core.integrations.telescope'] = {},
         ['core.norg.qol.toc'] = {},
-        ['core.gtd.base'] = {
-            config = {
-                workspace = 'default',
-            },
-        },
-        ['core.gtd.ui'] = {
-            config = {},
-        },
-        ['core.gtd.helpers'] = {
-            config = {},
-        },
     },
 })
