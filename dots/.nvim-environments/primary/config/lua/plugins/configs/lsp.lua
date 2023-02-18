@@ -20,8 +20,9 @@ local opts = {
     on_attach = on_attach,
 }
 
+local lsp_server_bin_dir = vim.fn.stdpath("data") .. "/mason/bin/"
 local rust_tools = require("rust-tools")
-local codelldb_path = vim.fn.stdpath("data") .. "/mason/bin/codelldb"
+local codelldb_path = lsp_server_bin_dir .. "codelldb"
 local liblldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
 local rustopts = {
     server = opts,
@@ -335,3 +336,22 @@ for _, server in ipairs({
 }) do
     lspconfig[server].setup(opts)
 end
+
+-- Custom Servers outside of lspconfig
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "nginx",
+    desc = "Nginx Language Server Handler",
+    callback = function()
+        local client_id = vim.lsp.start({
+            name = "Nginx-ls",
+            cmd = { lsp_server_bin_dir .. "nginx-language-server" },
+            root_dir = vim.fn.getcwd(),
+            capabilities = vim.lsp.protocol.make_client_capabilities(),
+            on_attach = on_attach
+        })
+
+        if client_id then
+            vim.lsp.buf_attach_client(0, client_id)
+        end
+    end,
+})
