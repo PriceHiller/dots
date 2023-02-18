@@ -298,18 +298,18 @@ for word in io.open(path, "r"):lines() do
     table.insert(words, word)
 end
 
-lspconfig.ltex.setup({
-    settings = {
-        ltex = {
-            dictionary = {
-                ["en-US"] = words,
-            },
-        },
-    },
-    filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
-    capabilities = lsp_capabilities,
-    on_attach = on_attach,
-})
+-- lspconfig.ltex.setup({
+--     settings = {
+--         ltex = {
+--             dictionary = {
+--                 ["en-US"] = words,
+--             },
+--         },
+--     },
+--     filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
+--     capabilities = lsp_capabilities,
+--     on_attach = on_attach,
+-- })
 
 -- NOTE: GENERIC LSP SERVERS
 for _, server in ipairs({
