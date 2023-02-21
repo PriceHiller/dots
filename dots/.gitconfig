@@ -65,3 +65,5 @@
 
 [gpg]
     format = ssh
+[pager]
+	diff = nvim +DiffviewOpen
