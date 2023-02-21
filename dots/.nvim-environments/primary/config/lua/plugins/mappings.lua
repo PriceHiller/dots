@@ -184,6 +184,10 @@ vim.keymap.set(
     { silent = true, desc = "Gitsigns: Unstage Hunk" }
 )
 
+-- Diffview Mappings
+vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { silent = true, desc = "Diff View: Open" })
+vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory<CR>", { silent = true, desc = "Diff View: File History" })
+
 -- Hop Mappings
 local hop = require("hop")
 
