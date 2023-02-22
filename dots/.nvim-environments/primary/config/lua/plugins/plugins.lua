@@ -751,11 +751,23 @@ lazy.setup({
 
     -- Take a screenshot of code selected
     {
-        "NarutoXY/silicon.lua",
-        event = "VeryLazy",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        "krivahtoo/silicon.nvim",
+        build = "./install.sh build",
         config = function()
-            require("silicon").setup({})
+            require("silicon").setup({
+                font = "Hack=20",
+                theme = "Monokai Extended",
+                background = "#87F",
+                pad_vert = 60,
+                pad_horiz = 40,
+                line_number = true,
+                watermark = {
+                    text = "Test",
+                },
+                window_title = function()
+                    return vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
+                end,
+            })
         end,
     },
 
@@ -818,7 +830,7 @@ lazy.setup({
     -- Improved Visuals for Documentation
     {
         "lukas-reineke/headlines.nvim",
-        after = { "nvim-treesitter"},
+        after = { "nvim-treesitter" },
         event = "VeryLazy",
         config = function()
             require("headlines").setup()

@@ -216,6 +216,4 @@ wk.register({
 vim.keymap.set("n", "<leader>or", vim.cmd.OverseerRun, { silent = true, desc = "Overseer: Run" })
 vim.keymap.set("n", "<leader>ot", vim.cmd.OverseerToggle, { silent = true, desc = "Overseer: Toggle" })
 
-vim.keymap.set("v", "<leader>sc", function()
-    require("silicon").visualise_api({ to_clip = true })
-end, { silent = true, desc = "Silicon: Copy" })
+vim.keymap.set("v", "<leader>sc", "<cmd>Silicon<CR>", { silent = true, desc = "Silicon: Copy" })
