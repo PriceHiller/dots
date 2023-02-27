@@ -761,9 +761,6 @@ lazy.setup({
                 pad_vert = 60,
                 pad_horiz = 40,
                 line_number = true,
-                watermark = {
-                    text = "Test",
-                },
                 window_title = function()
                     return vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
                 end,
