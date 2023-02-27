@@ -762,7 +762,7 @@ lazy.setup({
                 line_number = true,
                 window_title = function()
                     local devicons = require("nvim-web-devicons")
-                    local icon = devicons.get_icon_by_filetype('lua')
+                    local icon = devicons.get_icon_by_filetype(vim.bo.filetype)
                     return icon .. ' ' .. vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
                 end,
             })
