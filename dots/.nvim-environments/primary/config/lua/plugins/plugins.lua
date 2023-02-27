@@ -753,16 +753,22 @@ lazy.setup({
     {
         "krivahtoo/silicon.nvim",
         build = "./install.sh build",
+        event = "VeryLazy",
+        dependencies = {
+            "kyazdani42/nvim-web-devicons"
+        },
         config = function()
             require("silicon").setup({
-                font = "Hack=20",
+                font = "FiraCode Nerd Font=20",
                 theme = "Monokai Extended",
                 background = "#87F",
                 pad_vert = 60,
                 pad_horiz = 40,
                 line_number = true,
                 window_title = function()
-                    return vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
+                    local devicons = require("nvim-web-devicons")
+                    local icon = devicons.get_icon_by_filetype('lua')
+                    return icon .. ' ' .. vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
                 end,
             })
         end,
