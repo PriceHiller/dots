@@ -594,12 +594,6 @@ lazy.setup({
         event = "VeryLazy",
     },
 
-    -- Editorconfig support
-    {
-        "gpanders/editorconfig.nvim",
-        event = "VeryLazy",
-    },
-
     -- Maintain last cursor position in files
     {
         "ethanholz/nvim-lastplace",
