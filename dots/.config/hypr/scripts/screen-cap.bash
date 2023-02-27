@@ -7,7 +7,7 @@
 #
 #	Some of this is hacky because I can't get wf-recorder to nicely output GIFs by itself :(
 
-mk-gif() {
+mk-mp4() {
 	local program_name="Screen Capture"
 	local pid_file="/tmp/mk-gif-pid"
 
@@ -37,4 +37,4 @@ mk-gif() {
 	fi
 }
 
-mk-gif
+mk-mp4
