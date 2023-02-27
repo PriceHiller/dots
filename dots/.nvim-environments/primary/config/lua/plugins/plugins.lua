@@ -212,6 +212,7 @@ lazy.setup({
         "nvim-neo-tree/neo-tree.nvim",
         event = "VeryLazy",
         branch = "v2.x",
+        commit = "4077fc611aa084ac3a171f69c2d7af23b2180a3e",
         dependencies = {
             "kyazdani42/nvim-web-devicons",
             "nvim-lua/plenary.nvim",
