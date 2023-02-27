@@ -2,7 +2,6 @@
 
 # Dependencies:
 #	- wf-recorder: https://github.com/ammen99/wf-recorder
-#	- ffmpeg: https://ffmpeg.org/download.html
 #	- notification daemon: https://archlinux.org/packages/?name=notification-daemon
 #	- wl-clipboard: https://github.com/bugaevc/wl-clipboard
 #
@@ -29,12 +28,10 @@ mk-gif() {
 			tmp_dir="$(mktemp -d)"
 			cd "${tmp_dir}"
 			input_tmpfile="${tmp_dir}/$(mktemp wf-recorder.XXXXXXXXXXX)"
-			wf-recorder -g "$(slurp)" -f "${input_tmpfile}.mp4" --framerate 10 -- &
+			wf-recorder -g "$(slurp)" -f "${input_tmpfile}.mp4" -c h264_vaapi -d /dev/dri/renderD128 --framerate 24 -- &
 			printf "%s" $! >"${pid_file}"
 			wait
-			ffmpeg -i "${input_tmpfile}.mp4" -filter_complex "[0:v] palettegen" palette.png
-			ffmpeg -i "${input_tmpfile}.mp4" -i palette.png -filter_complex "[0:v][1:v] paletteuse" "${input_tmpfile}.gif"
-			wl-copy --type image/gif <"${input_tmpfile}.gif"
+			wl-copy --type video/mp4 <"${input_tmpfile}.mp4"
 			rm -f "${pid_file}"
 		)
 	fi
