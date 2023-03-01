@@ -7,4 +7,5 @@ return {
         bottom = 0,
     },
     enable_scroll_bar = false,
+    underline_position = "250%",
 }
