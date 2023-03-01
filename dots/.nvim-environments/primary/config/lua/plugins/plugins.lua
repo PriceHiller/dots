@@ -388,11 +388,18 @@ lazy.setup({
 
     {
         "luukvbaal/statuscol.nvim",
-        event = "VeryLazy",
+        event = "BufReadPost",
         config = function()
+            local builtin = require("statuscol.builtin")
             require("statuscol").setup({
                 foldfunc = "builtin",
                 setopt = true,
+                relculright = false,
+                segments = {
+                    { text = { "%s" }, click = "v:lua.ScSa" },
+                    { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+                    { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+                },
             })
         end,
     },
