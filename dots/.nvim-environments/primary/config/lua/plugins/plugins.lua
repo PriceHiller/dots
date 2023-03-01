@@ -757,7 +757,7 @@ lazy.setup({
         build = "./install.sh build",
         event = "VeryLazy",
         dependencies = {
-            "kyazdani42/nvim-web-devicons"
+            "kyazdani42/nvim-web-devicons",
         },
         config = function()
             require("silicon").setup({
@@ -770,7 +770,7 @@ lazy.setup({
                 window_title = function()
                     local devicons = require("nvim-web-devicons")
                     local icon = devicons.get_icon_by_filetype(vim.bo.filetype)
-                    return icon .. ' ' .. vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
+                    return icon .. " " .. vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
                 end,
             })
         end,
