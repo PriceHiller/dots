@@ -347,7 +347,7 @@ vim.api.nvim_create_autocmd("FileType", {
             name = "Nginx-ls",
             cmd = { lsp_server_bin_dir .. "nginx-language-server" },
             root_dir = vim.fn.getcwd(),
-            capabilities = vim.lsp.protocol.make_client_capabilities(),
+            capabilities = lsp_capabilities,
             on_attach = on_attach
         })
 
