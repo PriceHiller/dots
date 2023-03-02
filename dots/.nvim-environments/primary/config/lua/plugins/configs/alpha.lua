@@ -164,6 +164,7 @@ vim.api.nvim_create_autocmd("FileType", {
             buffer = 0,
             desc = "Shut down alpha timer",
             callback = function(input)
+                alpha_timer:close()
             end,
         })
     end,
