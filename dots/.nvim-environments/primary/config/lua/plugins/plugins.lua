@@ -387,7 +387,7 @@ lazy.setup({
 
     {
         "luukvbaal/statuscol.nvim",
-        event = "BufReadPost",
+        event = "VeryLazy",
         config = function()
             local builtin = require("statuscol.builtin")
             require("statuscol").setup({
