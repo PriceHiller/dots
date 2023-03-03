@@ -121,6 +121,13 @@ require("kanagawa").setup({
 
         Folded = { bg = colors.waveBlue1 },
         UfoFoldedBg = { bg = "NONE" },
+
+        TSRainbowRed = { fg = colors.peachRed },
+        TSRainbowYellow = { fg = colors.carpYellow },
+        TSRainbowBlue = { fg = colors.crystalBlue },
+        TSRainbowGreen = { fg = colors.springGreen },
+        TSRainbowViolet = { fg = colors.oniViolet },
+        TSRainbowCyan = { fg = colors.lightBlue }
     },
 })
 

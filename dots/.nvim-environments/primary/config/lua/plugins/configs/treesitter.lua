@@ -15,8 +15,16 @@ nvim_treesitter.setup({
     },
     rainbow = {
         enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
+        query = "rainbow-parens",
+        strategy = {
+            on_attach = function()
+                if vim.fn.line('$') < 1000 then
+                    require("ts-rainbow.strategy.local")
+                elseif vim.fn.line('$') < 10000 then
+                    require("ts-rainbow.strategy.global")
+                end
+            end
+        },
     },
 })
 
