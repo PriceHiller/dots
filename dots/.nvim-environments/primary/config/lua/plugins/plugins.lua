@@ -103,6 +103,13 @@ lazy.setup({
     },
 
     {
+            require("various-textobjs").setup({
+                useDefaultKeymaps = true
+            })
+        end,
+    },
+
+    {
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = "VeryLazy",
         after = { "nvim-treesitter" },
