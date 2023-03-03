@@ -4,7 +4,7 @@ M.setup = function()
     vim.filetype.add({
         pattern = {
             [".*%.dockerfile"] = "dockerfile",
-            [".*%.dockerignore"] = "gitignore"
+            [".*%.dockerignore"] = "gitignore",
         },
     })
 end
