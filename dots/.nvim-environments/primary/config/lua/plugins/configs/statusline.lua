@@ -105,7 +105,7 @@ lualine.setup({
             {
                 "macro-recording",
                 color = {
-                    fg = "#FF9E3B"
+                    fg = "#FF9E3B",
                 },
                 fmt = show_macro_recording,
             },
@@ -164,7 +164,7 @@ lualine.setup({
             {
                 "macro-recording",
                 color = {
-                    fg = "#FF9E3B"
+                    fg = "#FF9E3B",
                 },
                 fmt = show_macro_recording,
             },
@@ -201,8 +201,8 @@ lualine.setup({
                 fmt = datetime_section,
                 color = "LuaLineDateTime",
                 separator = {
-                    right = '%#lualine_transitional_lualine_b_normal_to_lualine_c_normal#'
-                }
+                    right = "%#lualine_transitional_lualine_b_normal_to_lualine_c_normal#",
+                },
             },
         },
         lualine_y = {

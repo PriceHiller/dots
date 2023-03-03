@@ -1,10 +1,10 @@
-vim.keymap.set('n', '<leader>fr', '<Plug>RestNvim', {
+vim.keymap.set("n", "<leader>fr", "<Plug>RestNvim", {
     buffer = true,
 })
-vim.keymap.set('n', '<leader>fp', '<Plug>RestNvimPreview', {
+vim.keymap.set("n", "<leader>fp", "<Plug>RestNvimPreview", {
     buffer = true,
 })
-vim.keymap.set('n', '<leader>fl', '<Plug>RestNvimLast', {
+vim.keymap.set("n", "<leader>fl", "<Plug>RestNvimLast", {
     buffer = true,
 })
 

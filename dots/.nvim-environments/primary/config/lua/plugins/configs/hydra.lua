@@ -1,14 +1,13 @@
 local hydra = require("hydra")
 local wk = require("which-key")
-wk.register(
-    { h = {
+wk.register({
+    h = {
         name = "Hydra",
         o = { "Options" },
         g = { "Git Signs" },
         d = { "Diagram" },
-    } },
-    { prefix = "<leader>" }
-)
+    },
+}, { prefix = "<leader>" })
 
 -- Side Scroll
 hydra({
@@ -135,7 +134,7 @@ hydra({
  ^ ^ _K_ ^ ^   _f_: surround it with box
  _H_ ^ ^ _L_
  ^ ^ _J_ ^ ^                      _<Esc>_
-]]   ,
+]],
     config = {
         color = "pink",
         invoke_on_body = true,
@@ -174,7 +173,7 @@ hydra({
   _r_ %{rnu} relative number
   ^
        ^^^^                _<Esc>_
-]]   ,
+]],
     config = {
         color = "amaranth",
         invoke_on_body = true,

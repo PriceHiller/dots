@@ -1,4 +1,4 @@
-local nvim_tree = require('nvim-tree.configs')
+local nvim_tree = require("nvim-tree.configs")
 
 nvim_tree.setup({
     highlight = {
@@ -6,8 +6,8 @@ nvim_tree.setup({
         additional_vim_regex_highlighting = true,
         disable = {
             -- Ansible support reasons
-            'ansible.yaml',
-            'yaml.ansible'
+            "ansible.yaml",
+            "yaml.ansible",
         },
     },
     matchup = {

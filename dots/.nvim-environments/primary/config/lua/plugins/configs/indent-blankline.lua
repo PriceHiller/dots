@@ -16,7 +16,7 @@ g.indent_blankline_filetype_exclude = {
     "man",
     "OverseerForm",
     "noice",
-    "lazy"
+    "lazy",
 }
 
 g.indent_blankline_buftype_exclude = { "terminal" }

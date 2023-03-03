@@ -20,5 +20,5 @@ nvim_treesitter.setup({
     },
 })
 
-require('treesitter-context').setup({})
+require("treesitter-context").setup({})
 vim.cmd.TSContextEnable()

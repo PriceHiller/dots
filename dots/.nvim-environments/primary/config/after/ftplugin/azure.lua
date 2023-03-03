@@ -1,1 +1,1 @@
-vim.opt_local.filetype = 'yaml'
+vim.opt_local.filetype = "yaml"
