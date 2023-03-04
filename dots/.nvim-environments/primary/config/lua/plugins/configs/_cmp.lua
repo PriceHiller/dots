@@ -30,9 +30,9 @@ cmp.setup({
             local selection = selections[entry.source.name]
             if not selection then
                 local kind = require("lspkind").cmp_format({
-                    mode = "symbol_text",
-                    maxwidth = 50,
-                })(entry, vim_item)
+                        mode = "symbol_text",
+                        maxwidth = 50,
+                    })(entry, vim_item)
                 local strings = vim.split(kind.kind, "%s", { trimempty = true })
                 kind.kind = " " .. strings[1] .. " "
                 vim_item.menu = strings[1] .. " " .. strings[2]
@@ -65,9 +65,12 @@ cmp.setup({
         },
     },
     window = {
-        documentation = { side_padding = 0 },
+        documentation = {
+            side_padding = 0,
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+        },
         completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
             col_offset = -3,
             side_padding = 0,
         },
@@ -80,7 +83,7 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs( -4), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
@@ -97,8 +100,8 @@ cmp.setup({
             end
         end, { "i", "s" }),
         ["<C-S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            if luasnip.jumpable( -1) then
+                luasnip.jump( -1)
             else
                 fallback()
             end
@@ -113,16 +116,16 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            elseif luasnip.jumpable( -1) then
+                luasnip.jump( -1)
             else
                 fallback()
             end
         end, { "i", "s" }),
     },
     sources = cmp.config.sources({
-        { name = "nvim_lsp", priority = 11 },
-        { name = "luasnip", priority = 10 }, -- For luasnip users.
+        { name = "nvim_lsp",     priority = 11 },
+        { name = "luasnip",      priority = 10 }, -- For luasnip users.
         { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
         {
             name = "rg",
@@ -130,12 +133,12 @@ cmp.setup({
             keyword_length = 3,
             max_item_count = 10,
         },
-        { name = "path", priority = 6 },
-        { name = "zsh", priority = 5 },
+        { name = "path",  priority = 6 },
+        { name = "zsh",   priority = 5 },
         { name = "emoji", keyword_length = 2 },
         { name = "neorg" },
         { name = "calc" },
-        { name = "npm", keyword_length = 2 },
+        { name = "npm",   keyword_length = 2 },
         { name = "spell", keyword_length = 2 },
     }),
     sorting = {
@@ -156,7 +159,7 @@ cmp.setup({
 -- Git Commit Completions
 cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
-        { name = "conventionalcommits", priority = 20 },
+        { name = "conventionalcommits",          priority = 20 },
         { { name = "emoji", keyword_length = 2 } },
     }),
 })

@@ -60,6 +60,7 @@ lazy.setup({
         config = function()
             require("plugins.configs.kanagawa")
             vim.cmd.colorscheme("kanagawa")
+            vim.schedule(vim.cmd.KanagawaCompile)
         end,
     },
 
@@ -195,7 +196,7 @@ lazy.setup({
             "nvim-telescope/telescope-ui-select.nvim",
             "debugloop/telescope-undo.nvim",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            { "nvim-telescope/telescope-fzf-native.nvim",    build = "make" },
         },
         config = function()
             require("plugins.configs.telescope-nvim")
@@ -324,7 +325,7 @@ lazy.setup({
         event = "VeryLazy",
         dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
     },
-    { "tzachar/cmp-fuzzy-path", dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
+    { "tzachar/cmp-fuzzy-path",  dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
     {
         "saecki/crates.nvim",
         event = "VeryLazy",
@@ -395,8 +396,8 @@ lazy.setup({
                 setopt = true,
                 relculright = false,
                 segments = {
-                    { text = { "%s" }, click = "v:lua.ScSa" },
-                    { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+                    { text = { "%s" },                       click = "v:lua.ScSa" },
+                    { text = { builtin.lnumfunc },           click = "v:lua.ScLa" },
                     { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
                 },
             })
@@ -476,7 +477,7 @@ lazy.setup({
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
         dependencies = {
-            { "tami5/sqlite.lua", module = "sqlite" },
+            { "tami5/sqlite.lua",             module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
         },
         config = function()
@@ -791,8 +792,8 @@ lazy.setup({
                         { cursor = "●", texthl = "SmoothCursorTrailMedium" },
                         { cursor = "●", texthl = "SmoothCursorTrailMedium" },
                         { cursor = "•", texthl = "SmoothCursorTrailSmall" },
-                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
-                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
+                        { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
+                        { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
                     },
                 },
                 disabled_filetypes = { "NeogitNotification" },
