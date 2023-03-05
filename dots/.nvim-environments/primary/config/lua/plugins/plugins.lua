@@ -57,10 +57,16 @@ lazy.setup({
     },
     {
         "rebelot/kanagawa.nvim",
+        build = "KanagawaCompile",
         config = function()
             require("plugins.configs.kanagawa")
             vim.cmd.colorscheme("kanagawa")
-            vim.schedule(vim.cmd.KanagawaCompile)
+            vim.api.nvim_create_autocmd("BufWritePost", {
+                pattern = "lua/plugins/configs/kanagawa.lua",
+                callback = function()
+                    vim.schedule(vim.cmd.KanagawaCompile)
+                end,
+            })
         end,
     },
 
