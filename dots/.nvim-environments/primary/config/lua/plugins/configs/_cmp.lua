@@ -67,7 +67,6 @@ cmp.setup({
     window = {
         documentation = {
             side_padding = 0,
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
         },
         completion = {
             winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
