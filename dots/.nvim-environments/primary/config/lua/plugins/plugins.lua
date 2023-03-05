@@ -599,6 +599,9 @@ lazy.setup({
     {
         "mg979/vim-visual-multi",
         event = "VeryLazy",
+        config = function()
+            vim.cmd.VMTheme("codedark")
+        end
     },
 
     -- Maintain last cursor position in files
