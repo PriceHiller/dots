@@ -233,7 +233,6 @@ lazy.setup({
     -- Lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "folke/neodev.nvim",
