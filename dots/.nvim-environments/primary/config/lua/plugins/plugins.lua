@@ -57,7 +57,10 @@ lazy.setup({
     },
     {
         "rebelot/kanagawa.nvim",
-        build = "KanagawaCompile",
+        build = function()
+            require("plugins.configs.kanagawa")
+            vim.cmd.KanagawaCompile()
+        end,
         config = function()
             require("plugins.configs.kanagawa")
             vim.cmd.colorscheme("kanagawa")
