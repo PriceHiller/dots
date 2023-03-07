@@ -69,7 +69,7 @@ local datetime = {
     val = function()
         return vim.fn.strftime("%c")
     end,
-    opts = { hl = "@decorator", position = "center" },
+    opts = { hl = "@field", position = "center" },
 }
 
 -- Menu
