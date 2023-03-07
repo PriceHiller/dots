@@ -8,7 +8,7 @@
 #
 #	Some of this is hacky because I can't get wf-recorder to nicely output GIFs by itself :(
 
-mk-mp4() {
+mk-video() {
 	local program_name="Screen Capture"
 	local pid_file="/tmp/mk-gif-pid"
 	local output_type="${1:-MP4}"
@@ -38,7 +38,7 @@ mk-mp4() {
 				pwd
 				gifski_tmpoutput="${tmp_dir}/$(mktemp gifski.XXXXXXXXXXX).gif"
 				gifski "${input_tmpfile}" --output "${gifski_tmpoutput}"
-				wl-copy --type image/gif <"${gifski_tmpoutput}"
+				wl-copy --type image/png <"${gifski_tmpoutput}"
 			else
 				wl-copy --type video/mp4 <"${input_tmpfile}"
 			fi
@@ -47,4 +47,4 @@ mk-mp4() {
 	fi
 }
 
-mk-mp4 "${@}"
+mk-video "${@}"
