@@ -122,7 +122,8 @@ require("kanagawa").setup({
             SmoothCursorTrailBig2 = { fg = colors.crystalBlue },
             SmoothCursorTrailMedium = { fg = colors.oniViolet },
             SmoothCursorTrailSmall = { fg = colors.springBlue },
-            SmoothCursorTrailXSmall = { fg = colors.waveAqua2 }
+            SmoothCursorTrailXSmall = { fg = colors.waveAqua2 },
+            TreesitterContext = { bg = colors.sumiInk0 }
         }
 
         return overrides
