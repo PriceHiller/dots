@@ -1,15 +1,15 @@
 local M = {}
 
 M.setup = function()
-    local function lspSymbol(name, icon, linehlbg)
+    local function lspSymbol(name, icon)
         local hl = "DiagnosticSign" .. name
-        vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl, linehl = linehl })
+        vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
     end
 
-    lspSymbol("Error", "", "#2d202a")
-    lspSymbol("Warn", "", "#2e2a2d")
-    lspSymbol("Info", "", "#192b38")
-    lspSymbol("Hint", "", "#1a2b32")
+    lspSymbol("Error", "")
+    lspSymbol("Warn", "")
+    lspSymbol("Info", "")
+    lspSymbol("Hint", "")
 
     local border = {
         { "╭", "FloatBorder" },
