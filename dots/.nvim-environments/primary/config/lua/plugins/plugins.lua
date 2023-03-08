@@ -778,6 +778,7 @@ lazy.setup({
                 pad_vert = 60,
                 pad_horiz = 40,
                 line_number = true,
+                gobble = true,
                 window_title = function()
                     local devicons = require("nvim-web-devicons")
                     local icon = devicons.get_icon_by_filetype(vim.bo.filetype)
