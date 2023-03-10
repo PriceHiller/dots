@@ -3,7 +3,16 @@ local neorg = require("neorg")
 neorg.setup({
     load = {
         ["core.defaults"] = {},
-        ["core.norg.concealer"] = {},
+        ["core.norg.concealer"] = {
+            config = {
+                dim_code_blocks = {
+                    enabled = true,
+                    content_only = true,
+                    adaptive = true,
+                },
+                icon_preset = "diamond",
+            },
+        },
         ["core.norg.esupports.metagen"] = {
             config = {
                 type = "auto",
