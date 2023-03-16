@@ -33,52 +33,39 @@ local rustopts = {
         -- how to execute terminal commands
         -- options right now: termopen / quickfix
         executor = require("rust-tools/executors").termopen,
-
         -- callback to execute once rust-analyzer is done initializing the workspace
         -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
         on_initialized = nil,
-
         -- These apply to the default RustSetInlayHints command
         inlay_hints = {
             -- automatically set inlay hints (type hints)
             -- default: true
             auto = true,
-
             -- Only show inlay hints for the current line
             only_current_line = false,
-
             -- whether to show parameter hints with the inlay hints or not
             -- default: true
             show_parameter_hints = true,
-
             -- prefix for parameter hints
             -- default: "<-"
             parameter_hints_prefix = "<- ",
-
             -- prefix for all the other hints (type, chaining)
             -- default: "=>"
             other_hints_prefix = "=> ",
-
             -- whether to align to the lenght of the longest line in the file
             max_len_align = false,
-
             -- padding from the left if max_len_align is true
             max_len_align_padding = 1,
-
             -- whether to align to the extreme right or not
             right_align = false,
-
             -- padding from the right if right_align is true
             right_align_padding = 7,
-
             -- The color of the hints
             highlight = "Comment",
         },
-
         hover_actions = {
             auto_focus = true,
         },
-
         server = {
             on_attach = function(client, bufnr)
                 vim.keymap.set("n", "<leader>fr", rust_tools.runnables.runnables, {
@@ -218,33 +205,21 @@ lspconfig.yamlls.setup({
             },
         },
         yaml = {
-            schemas = {
-                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-                ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
-                    "/azure-pipeline*.y*l",
-                    "/*.azure*",
-                    "Azure-Pipelines/**/*.y*l",
-                    "Pipelines/*.y*l",
+            schemas = require("schemastore").yaml.schemas({
+                replace = {
+                    ["Azure Pipelines"] = {
+                        description = "Azure Pipelines override",
+                        fileMatch = {
+                            "/azure-pipeline*.y*l",
+                            "/*.azure*",
+                            "Azure-Pipelines/**/*.y*l",
+                            "Pipelines/*.y*l",
+                        },
+                        name = "Azure Pipelines",
+                        url = "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"
+                    },
                 },
-                ["https://raw.githubusercontent.com/docker/cli/master/cli/compose/schema/data/config_schema_v3.10.json"] = "/docker-compose.y*l",
-                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "**/.gitlab-ci.yml",
-                ["https://json.schemastore.org/travis.json"] = "/.travis.y*l",
-                ["https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-inventory.json"] = {
-                    "/inventories/*/*.y*l",
-                    "/inventory/*.y*l",
-                },
-                ["https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-vars.json"] = {
-                    "playbooks/vars/*.y*l",
-                    "vars/*.y*l",
-                    "defaults/*.y*l",
-                    "host_vars/*.y*l",
-                    "group_vars/*.y*l",
-                },
-                kubernetes = {
-                    "*.k8s",
-                    "*.k8s.*",
-                },
-            },
+            }),
         },
     },
     capabilities = lsp_capabilities,
