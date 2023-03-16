@@ -27,6 +27,10 @@ cmp.setup({
                 spell = { symbol = " ", name = "Spell", hl_group = "Spell" },
             }
 
+            local extra_kind_icons = {
+                TypeParameter = ""
+            }
+
             local selection = selections[entry.source.name]
             if not selection then
                 local kind = require("lspkind").cmp_format({
@@ -34,8 +38,12 @@ cmp.setup({
                         maxwidth = 50,
                     })(entry, vim_item)
                 local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                if not strings[2] then
+                    strings[2] = strings[1]
+                    strings[1] = extra_kind_icons[strings[1]] or ""
+                end
                 kind.kind = " " .. strings[1] .. " "
-                vim_item.menu = strings[1] .. " " .. strings[2]
+                vim_item.menu = (strings[1] or "") .. " " .. (strings[2] or "")
                 return kind
             else
                 local word = entry:get_insert_text()
