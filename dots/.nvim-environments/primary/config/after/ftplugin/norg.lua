@@ -1,7 +1,7 @@
 vim.keymap.set("n", "<leader>fge", ":Neorg gtd edit<CR>", {
     buffer = true,
 })
-vim.keymap.set("n", "<ledaer>fgv", ":Neorg gtd views<CR>", {
+vim.keymap.set("n", "<leader>fgv", ":Neorg gtd views<CR>", {
     buffer = true,
 })
 
