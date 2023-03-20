@@ -163,6 +163,7 @@ lspconfig.sqls.setup({
         require("sqls").on_attach(client, bufnr)
         on_attach(client, bufnr)
     end,
+    capabilities = capabilities
 })
 
 -- NOTE: PYTHON LSP
