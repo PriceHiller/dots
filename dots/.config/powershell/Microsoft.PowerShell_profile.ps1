@@ -1,3 +1,4 @@
+$env:POWERSHELL_TELEMETRY_OPTOUT = $true
 if (-Not (Get-Module -ListAvailable -Name PSFzf))
 {
     Install-Module -Name PSFzf
