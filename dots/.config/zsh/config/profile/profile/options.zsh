@@ -17,5 +17,6 @@ setopt AUTO_PUSHD
 setopt CHASE_DOTS
 
 setopt HASH_CMDS
+setopt COMBININGCHARS
 
 unsetopt BEEP
