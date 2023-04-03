@@ -8,7 +8,6 @@ null_ls.setup({
         null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.code_actions.shellcheck,
         null_ls.builtins.diagnostics.hadolint,
-        null_ls.builtins.diagnostics.ansiblelint,
         null_ls.builtins.code_actions.refactoring,
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.stylua,
