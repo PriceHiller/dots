@@ -157,15 +157,6 @@ lspconfig.lua_ls.setup({
     },
 })
 
--- NOTE: SQL LSP
-lspconfig.sqls.setup({
-    on_attach = function(client, bufnr)
-        require("sqls").on_attach(client, bufnr)
-        on_attach(client, bufnr)
-    end,
-    capabilities = capabilities
-})
-
 -- NOTE: PYTHON LSP
 lspconfig.pylsp.setup({
     filetypes = { "python" },
