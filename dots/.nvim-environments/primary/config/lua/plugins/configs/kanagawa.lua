@@ -124,7 +124,8 @@ require("kanagawa").setup({
             SmoothCursorTrailSmall = { fg = colors.springBlue },
             SmoothCursorTrailXSmall = { fg = colors.waveAqua2 },
             TreesitterContext = { bg = colors.sumiInk0 },
-            FloatTitle = { bg = "NONE" }
+            FloatTitle = { bg = "NONE" },
+            DiffviewFilePanelTitle = { fg = colors.crystalBlue }
         }
 
         return overrides
