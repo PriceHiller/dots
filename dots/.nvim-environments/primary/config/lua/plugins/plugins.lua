@@ -241,7 +241,6 @@ lazy.setup({
             "folke/neodev.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "nanotee/sqls.nvim",
             "williamboman/mason.nvim",
             "simrat39/rust-tools.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
