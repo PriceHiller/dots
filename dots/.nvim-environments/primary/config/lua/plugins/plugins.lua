@@ -846,11 +846,8 @@ lazy.setup({
     -- Improved Visuals for Documentation
     {
         "lukas-reineke/headlines.nvim",
-        after = { "nvim-treesitter" },
-        event = "VeryLazy",
-        config = function()
-            require("headlines").setup()
-        end,
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true
     },
 }, {
     checker = {
