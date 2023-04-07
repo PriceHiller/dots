@@ -36,9 +36,11 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     return newVirtText
 end
 
+local ft_options = { norg = "" }
 require("ufo").setup({
     provider_selector = function(bufnr, filetype, buftype)
-        return { "treesitter", "indent" }
+        return ft_options[filetype] or { "treesitter", "indent" }
     end,
     fold_virt_text_handler = handler,
+    disabled = { "norg" },
 })
