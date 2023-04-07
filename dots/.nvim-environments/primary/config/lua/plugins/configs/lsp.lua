@@ -197,21 +197,7 @@ lspconfig.yamlls.setup({
             },
         },
         yaml = {
-            schemas = require("schemastore").yaml.schemas({
-                replace = {
-                    ["Azure Pipelines"] = {
-                        description = "Azure Pipelines override",
-                        fileMatch = {
-                            "/azure-pipeline*.y*l",
-                            "/*.azure*",
-                            "Azure-Pipelines/**/*.y*l",
-                            "Pipelines/*.y*l",
-                        },
-                        name = "Azure Pipelines",
-                        url = "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"
-                    },
-                },
-            }),
+            schemas = require("schemastore").yaml.schemas({}),
         },
     },
     capabilities = lsp_capabilities,
@@ -255,6 +241,36 @@ lspconfig.jsonls.setup({
 
 lspconfig.powershell_es.setup({
     bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
+    capabilities = lsp_capabilities,
+    on_attach = on_attach,
+})
+
+lspconfig.azure_pipelines_ls.setup({
+    cmd = { lsp_server_bin_dir .. "azure-pipelines-language-server", "--stdio" },
+    settings = {
+        redhat = {
+            telemetry = {
+                enabled = false,
+            },
+        },
+        yaml = {
+            schemas = require("schemastore").yaml.schemas({
+                replace = {
+                    ["Azure Pipelines"] = {
+                        description = "Azure Pipelines override",
+                        fileMatch = {
+                            "/azure-pipeline*.y*l",
+                            "/*.azure*",
+                            "Azure-Pipelines/**/*.y*l",
+                            "Pipelines/*.y*l",
+                        },
+                        name = "Azure Pipelines",
+                        url = "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json",
+                    },
+                },
+            }),
+        },
+    },
     capabilities = lsp_capabilities,
     on_attach = on_attach,
 })
