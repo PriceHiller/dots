@@ -1,9 +1,7 @@
 local nvim_treesitter = require("nvim-treesitter.configs")
 
 nvim_treesitter.setup({
-    ensure_installed = {
-        "norg",
-    },
+    ensure_installed = { "norg" },
     highlight = {
         enable = true,
         disable = function(_, buf)
@@ -14,23 +12,20 @@ nvim_treesitter.setup({
             end
         end,
     },
-    matchup = {
-        enable = true,
-    },
-    autotag = {
-        enable = true,
-    },
+    matchup = { enable = true },
+    autotag = { enable = true },
+    indent = { enable = true },
     rainbow = {
         enable = true,
         query = "rainbow-parens",
         strategy = {
             on_attach = function()
-                if vim.fn.line('$') < 1000 then
+                if vim.fn.line("$") < 1000 then
                     require("ts-rainbow.strategy.local")
-                elseif vim.fn.line('$') < 10000 then
+                elseif vim.fn.line("$") < 10000 then
                     require("ts-rainbow.strategy.global")
                 end
-            end
+            end,
         },
     },
 })
