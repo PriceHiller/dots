@@ -17,10 +17,10 @@ require("kanagawa").setup({
         theme = {
             all = {
                 ui = {
-                    bg_gutter = 'NONE'
-                }
-            }
-        }
+                    bg_gutter = "NONE",
+                },
+            },
+        },
     },
     overrides = function(palette)
         local colors = palette.palette
@@ -127,7 +127,7 @@ require("kanagawa").setup({
             FloatTitle = { bg = "NONE" },
             DiffviewFilePanelTitle = { fg = colors.crystalBlue },
             Headline = { bg = colors.sumiInk2 },
-            HeadlineReversed = { bg = colors.sumiInk1 }
+            HeadlineReversed = { bg = colors.sumiInk1 },
         }
 
         return overrides
