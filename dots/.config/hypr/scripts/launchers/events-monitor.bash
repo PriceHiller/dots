@@ -16,7 +16,7 @@ monitor-ssid() {
 	local previous_ssid=""
 	local ssid
 	while :; do
-		ssid="$(iwctl station wlan0 show | grep 'Connected network' | awk '{$1=$2=""; print $0}')"
+		ssid="$(iwctl station wlan0 show | grep 'Connected network' | awk '{print $3}')"
 		ssid="$(printf "%s" "${ssid}" | xargs)"
 		if [[ "${ssid}" != "${previous_ssid}" ]]; then
 			if [[ -z "${ssid// /}" ]]; then
