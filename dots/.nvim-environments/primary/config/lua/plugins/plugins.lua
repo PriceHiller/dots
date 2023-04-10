@@ -849,6 +849,14 @@ lazy.setup({
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = true,
     },
+    {
+        "skosulor/nibbler",
+        config = function()
+            require("nibbler").setup({
+                display_enabled = true, -- Set to false to disable real-time display (default: true)
+            })
+        end,
+    },
 }, {
     checker = {
         enabled = true,
