@@ -707,7 +707,24 @@ lazy.setup({
         event = "VeryLazy",
         config = function()
             require("tint").setup({
-                highlight_ignore_patterns = { "WinSeparator" },
+                highlight_ignore_patterns = {
+                    "WinSeparator",
+                },
+                window_ignore_function = function(winid)
+                    local bufid = vim.api.nvim_win_get_buf(winid)
+
+                    local ignoredFiletypes = { "DiffviewFiles", "DiffviewFileHistory", "neo-tree" }
+                    local ignoredBuftypes = { "terminal" }
+
+                    local isDiff = vim.api.nvim_win_get_option(winid, "diff")
+                    local isFloating = vim.api.nvim_win_get_config(winid).relative ~= ""
+                    local isIgnoredBuftype =
+                        vim.tbl_contains(ignoredBuftypes, vim.api.nvim_buf_get_option(bufid, "buftype"))
+                    local isIgnoredFiletype =
+                        vim.tbl_contains(ignoredFiletypes, vim.api.nvim_buf_get_option(bufid, "filetype"))
+
+                    return isDiff or isFloating or isIgnoredBuftype or isIgnoredFiletype
+                end,
                 tint = -30,
                 saturation = 0.8,
             })
