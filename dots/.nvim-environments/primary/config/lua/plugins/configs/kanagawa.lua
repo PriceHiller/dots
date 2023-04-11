@@ -25,11 +25,11 @@ require("kanagawa").setup({
     overrides = function(palette)
         local colors = palette.palette
         local overrides = {
-            NeogitHunkHeader = { bg = colors.winterBlue },
+            NeogitHunkHeader = { fg = colors.oniViolet, bg = colors.sumiInk1 },
             NeogitHunkHeaderHighlight = { fg = colors.winterYellow, bg = colors.oldWhite },
-            NeogitDiffContextHighlight = { bg = colors.winterBlue },
-            NeogitDiffDeleteHighlight = { fg = colors.winterRed, bg = colors.autumnRed },
-            NeogitDiffAddHighlight = { fg = colors.winterGreen, bg = colors.autumnGreen },
+            NeogitDiffContextHighlight = { bg = colors.sumiInk4 },
+            NeogitDiffDelete = { bg = colors.winterRed, fg = colors.autumnRed },
+            NeogitDiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
             NeogitCommitViewHeader = { fg = colors.winterYellow, bg = colors.autumnYellow },
             menuSel = { bg = colors.sumiInk0, fg = "NONE" },
             Pmenu = { fg = colors.fujiWhite, bg = colors.sumiInk2 },
