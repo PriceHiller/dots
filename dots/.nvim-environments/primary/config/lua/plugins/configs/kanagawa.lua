@@ -27,7 +27,7 @@ require("kanagawa").setup({
         local overrides = {
             NeogitHunkHeader = { fg = colors.oniViolet, bg = colors.sumiInk1 },
             NeogitHunkHeaderHighlight = { fg = colors.winterYellow, bg = colors.oldWhite },
-            NeogitDiffContextHighlight = { bg = colors.sumiInk4 },
+            NeogitDiffContextHighlight = { link = "CursorLine" },
             NeogitDiffDelete = { bg = colors.winterRed, fg = colors.autumnRed },
             NeogitDiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
             NeogitCommitViewHeader = { fg = colors.winterYellow, bg = colors.autumnYellow },
