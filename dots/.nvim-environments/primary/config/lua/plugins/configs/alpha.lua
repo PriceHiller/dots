@@ -33,6 +33,15 @@ local header = {
     opts = { position = "center", hl = "@boolean" },
 }
 
+local vim_version = {
+    type = "text",
+    val = function ()
+        local version = vim.version()
+        return ('─────── v%s.%s.%s ───────'):format(version.major, version.minor, version.patch)
+    end,
+    opts = { position = "center", hl = "@boolean"}
+}
+
 local plugins_loaded = {
     type = "text",
     val = function()
@@ -129,6 +138,7 @@ local opts = {
     layout = {
         padding(4),
         header,
+        vim_version,
         padding(4),
         datetime,
         padding(1),
