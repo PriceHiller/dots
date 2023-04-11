@@ -78,3 +78,5 @@
 	autoUpdate = true
 [am]
 	threeWay = true
+[gpg "ssh"]
+	allowedSignersFile = /home/sam/.config/git/allowed_signers
