@@ -56,8 +56,8 @@ M.setup = function()
     vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { silent = true })
 
     -- Alternative bindings for increment & decrement
-    vim.keymap.set("n", "+", "<C-a>", { silent = true, remap = true })
-    vim.keymap.set("n", "-", "<C-x>", { silent = true, remap = true })
+    vim.keymap.set("n", "+", "<C-a>", { silent = true, remap = true, desc = "Increment" })
+    vim.keymap.set("n", "-", "<C-x>", { silent = true, remap = true, desc = "Decrement" })
 
     -- Tabclose binding
     vim.keymap.set("n", "<C-w>t", "<cmd>tabclose<CR>", { silent = true, desc = "Close Tab" })
