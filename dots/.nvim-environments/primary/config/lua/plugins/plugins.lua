@@ -811,6 +811,7 @@ lazy.setup({
         after = "kanagawa.nvim",
         config = function()
             require("smoothcursor").setup({
+                priority = 8,
                 fancy = {
                     enable = true,
                     head = { cursor = "⯈", texthl = "SmoothCursorCursor", linehl = nil },
