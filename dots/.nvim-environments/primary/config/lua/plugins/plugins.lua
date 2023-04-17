@@ -252,6 +252,29 @@ lazy.setup({
         end,
     },
 
+    -- Show code actions
+    {
+        "kosayoda/nvim-lightbulb",
+        after = "nvim-lspconfig",
+        dependencies = {
+            "antoinemadec/FixCursorHold.nvim",
+        },
+        config = function()
+            local text_icon = ""
+            local nvim_lightbulb = require("nvim-lightbulb")
+            nvim_lightbulb.setup({
+                sign = {
+                    priority = 9
+                },
+            })
+            vim.fn.sign_define( "LightBulbSign", { text = text_icon, numhl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", priority = 9 })
+            vim.api.nvim_create_autocmd("CursorHold,CursorHoldI", {
+                callback = nvim_lightbulb.update_lightbulb
+            })
+
+        end,
+    },
+
     -- Incremental rename, easier to view renames
     {
         "smjonas/inc-rename.nvim",
