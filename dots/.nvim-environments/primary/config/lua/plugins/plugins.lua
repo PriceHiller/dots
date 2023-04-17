@@ -246,7 +246,6 @@ lazy.setup({
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
         },
-        -- after = "noice.nvim",
         config = function()
             require("mason").setup({})
             require("plugins.configs.lsp")
