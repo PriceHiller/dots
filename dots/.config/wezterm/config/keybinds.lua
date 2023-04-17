@@ -56,7 +56,7 @@ return {
         },
         { key = "=", mods = "CTRL", action = "IncreaseFontSize" },
         { key = "-", mods = "CTRL", action = "DecreaseFontSize" },
-        { key = "0", mods = "CTRL", action = "ResetFontAndWindowSize" },
+        { key = "0", mods = "CTRL", action = "ResetFontSize" },
 
         -- NOTE: Leader dependent binds
         { key = "h", mods = "LEADER", action = wezterm.action({ EmitEvent = "trigger-nvim-with-scrollback" }) },
