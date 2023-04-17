@@ -42,19 +42,6 @@ lazy.setup({
     },
 
     -- Color schemes
-    { "folke/tokyonight.nvim" },
-    {
-        "EdenEast/nightfox.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("nightfox").setup({
-                options = {
-                    transparent = true,
-                    dim_inactive = true,
-                },
-            })
-        end,
-    },
     {
         "rebelot/kanagawa.nvim",
         build = function()
@@ -236,6 +223,7 @@ lazy.setup({
     -- Lspconfig
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "folke/neodev.nvim",
@@ -438,7 +426,7 @@ lazy.setup({
         dependencies = {
             "kevinhwang91/promise-async",
         },
-        after = { "nvim-treesitter", "statuscol.nvim" },
+        event = "VeryLazy",
         config = function()
             require("plugins.configs.nvim-ufo")
         end,
@@ -886,7 +874,7 @@ lazy.setup({
     -- Improved Visuals for Documentation
     {
         "lukas-reineke/headlines.nvim",
-        dependencies = "nvim-treesitter/nvim-treesitter",
+        event = "VeryLazy",
         config = true,
     },
     {
