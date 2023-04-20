@@ -1,26 +1,2 @@
-fzf/
-autostart/
-nvim
-fish/
-pavucontrol.ini
-dconf
-gtk-3.0
-pulse
-rog
-procps
-ncspot
-mimeapps.list
-spotify
-Mullvad\ VPN
-configstore
-qBittorrent
-chromium
-systemd
-libreoffice
-teams
-cef_user_data
-Microsoft
-discord/
-BetterDiscord/
-BetterDiscord\ Installer/
-vlc/
+*/
+!nvim
