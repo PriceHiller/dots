@@ -9,12 +9,10 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
     formatting = {
-
         fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
         format = function(entry, vim_item)
             local selections = {
                 fuzzy_buffer = { symbol = "﬘ ", name = "Buffer", hl_group = "Buffer" },
-                path = { symbol = " ", name = "Path", hl_group = "Path" },
                 calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
                 neorg = { symbol = " ", name = "Neorg", hl_group = "Neorg" },
                 emoji = { symbol = "ﲃ ", name = "Emoji", hl_group = "Emoji" },
@@ -140,7 +138,6 @@ cmp.setup({
             keyword_length = 3,
             max_item_count = 10,
         },
-        { name = "path", priority = 6 },
         { name = "zsh", priority = 5 },
         { name = "emoji", keyword_length = 2 },
         { name = "neorg" },
@@ -196,7 +193,6 @@ cmp.setup.cmdline("@", {
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = "path" },
         { name = "cmdline" },
         { name = "cmdline_history" },
     }),
