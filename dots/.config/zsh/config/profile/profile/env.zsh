@@ -72,7 +72,6 @@ if command -v nvim >/dev/null 2>&1; then
 	export EDITOR=nvim
 	export VISUAL=nvim
 	export MANPAGER="nvim +Man!"
-	export NVIM_ENVS_DIR="${HOME}/.nvim-environments"
 elif command -v vim >/dev/null 2>&1; then
 	export EDITOR=vim
 	export VISUAL=vim
