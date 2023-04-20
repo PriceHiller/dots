@@ -1,2 +1,16 @@
 */
-!nvim
+!./nvim
+!./zathura
+!./chrome-flags.conf
+!./chromium-flags.conf
+!./bat
+!./hypr
+!./mako
+!./mpv
+!./waybar
+!./silicon
+!./powershell
+!./wezterm
+!./wofi
+!./kitty
+!./emacs
