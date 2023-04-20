@@ -1,4 +1,5 @@
 */
+*
 !./nvim
 !./zathura
 !./chrome-flags.conf
