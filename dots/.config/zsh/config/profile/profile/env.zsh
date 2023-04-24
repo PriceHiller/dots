@@ -106,7 +106,6 @@ eval "$(direnv hook zsh)"
 if [[ "$TERM" = *"xterm-kitty"* ]]; then
 	alias ssh="TERM=xterm-256color ssh"
 	alias icat="kitty +kitten icat"
-	__kitty_complete
 fi
 
 if [[ "${TERM}" = "wezterm" ]]; then
