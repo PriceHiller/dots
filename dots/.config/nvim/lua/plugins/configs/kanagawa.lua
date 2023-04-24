@@ -30,7 +30,7 @@ require("kanagawa").setup({
             NeogitDiffContextHighlight = { link = "CursorLine" },
             NeogitDiffDelete = { bg = colors.winterRed, fg = colors.autumnRed },
             NeogitDiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
-            NeogitCommitViewHeader = { fg = colors.winterYellow, bg = colors.autumnYellow },
+            NeogitCommitViewHeader = { fg = colors.autumnGreen, bg = colors.sumiInk0 },
             menuSel = { bg = colors.sumiInk0, fg = "NONE" },
             Pmenu = { fg = colors.fujiWhite, bg = colors.sumiInk2 },
             CmpItemAbbrDeprecated = { fg = colors.fujiGray, bg = "NONE" },
