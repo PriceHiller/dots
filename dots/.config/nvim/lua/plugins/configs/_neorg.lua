@@ -3,7 +3,7 @@ local neorg = require("neorg")
 neorg.setup({
     load = {
         ["core.defaults"] = {},
-        ["core.norg.concealer"] = {
+        ["core.concealer"] = {
             config = {
                 dim_code_blocks = {
                     enabled = true,
@@ -13,7 +13,7 @@ neorg.setup({
                 icon_preset = "diamond",
             },
         },
-        ["core.norg.esupports.metagen"] = {
+        ["core.esupports.metagen"] = {
             config = {
                 type = "auto",
             },
@@ -21,7 +21,7 @@ neorg.setup({
         ["core.integrations.nvim-cmp"] = {
             config = {},
         },
-        ["core.norg.completion"] = {
+        ["core.completion"] = {
             config = {
                 engine = "nvim-cmp",
             },
@@ -32,7 +32,7 @@ neorg.setup({
                 -- norg_leader = "-"
             },
         },
-        ["core.norg.dirman"] = {
+        ["core.dirman"] = {
             config = {
                 workspaces = {
                     default = "~/.notes", -- Format: <name_of_workspace> = <path_to_workspace_root>
@@ -43,6 +43,6 @@ neorg.setup({
             },
         },
         ["core.integrations.telescope"] = {},
-        ["core.norg.qol.toc"] = {},
+        ["core.qol.toc"] = {},
     },
 })
