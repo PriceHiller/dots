@@ -129,6 +129,9 @@ M.setup = function()
     -- Improved diff
     opt.diffopt:append("linematch:75")
     opt.fillchars:append("diff:╱")
+
+    -- Limit default menu height for completions
+    opt.pumheight = 30
 end
 
 return M
