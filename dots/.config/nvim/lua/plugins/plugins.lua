@@ -875,8 +875,11 @@ lazy.setup({
         event = "VeryLazy",
         config = true,
     },
+
+    -- Convert numbers between binary, decimal, & hex
     {
         "skosulor/nibbler",
+        event = "VeryLazy",
         config = function()
             require("nibbler").setup({
                 display_enabled = true, -- Set to false to disable real-time display (default: true)
