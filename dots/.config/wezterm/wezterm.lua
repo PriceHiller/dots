@@ -10,6 +10,7 @@ local tabbar = require("config.tabbar")
 local rendering = require("config.rendering")
 local keybinds = require("config.keybinds")
 local misc = require("config.misc")
+local gpu = require("config.gpu")
 
 -- NOTE: Pull in the OS specific config, this is passed last to the mergeable
 -- NOTE: as the last item to be merged (last item passed) overrides all others
@@ -23,5 +24,8 @@ if not found then
     os_config = {}
 end
 
-local config = wlib.Table.merge(events, fonts, theme, tabbar, misc, rendering, keybinds, os_config)
+
+local config = wlib.Table.merge(gpu, events, fonts, theme, tabbar, misc, rendering, keybinds, os_config)
+
+
 return config
