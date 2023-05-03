@@ -5,12 +5,11 @@ local wezterm = require("wezterm")
 
 local found_valid_gpu = false
 for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
-    if gpu.backend == "Vulkan" then
-        wezterm.log_info("Found Usable Vulkan GPU\n  Device Name -> " .. gpu.name .."\n  Device Type -> " .. gpu.device_type)
+    if gpu.backend == "Vulkan" and not found_valid_gpu then
+        wezterm.log_info("Found Usable Vulkan GPU -- Device Name -> " .. gpu.name .."; Device Type -> " .. gpu.device_type)
         config.webgpu_preferred_adapter = gpu
         config.front_end = "WebGpu"
         found_valid_gpu = true
-        break
     end
 end
 
