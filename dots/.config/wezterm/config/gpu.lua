@@ -2,10 +2,8 @@
 -- we are unable to locate a card that supports Vulkan we fall back to OpenGL
 local config = {}
 local wezterm = require("wezterm")
-local wlib = require("wlib")
 
 local found_valid_gpu = false
-wezterm.log_info(wlib.Table.dump(wezterm.gui.enumerate_gpus()))
 for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
     if gpu.backend == "Vulkan" then
         wezterm.log_info("Found Usable Vulkan GPU\n  Device Name -> " .. gpu.name .."\n  Device Type -> " .. gpu.device_type)
