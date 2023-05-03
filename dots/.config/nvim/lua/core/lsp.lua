@@ -11,7 +11,6 @@ M.setup = function()
     lspSymbol("Info", "󰋼", 10)
     lspSymbol("Hint", "", 10)
 
-
     local border = {
         { "╭", "FloatBorder" },
         { "─", "FloatBorder" },

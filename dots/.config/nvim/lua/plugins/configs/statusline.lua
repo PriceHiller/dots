@@ -209,7 +209,7 @@ lualine.setup({
             {
                 "buffers",
                 mode = 2,
-                show_filename_only = false
+                show_filename_only = false,
             },
         },
         lualine_z = {
