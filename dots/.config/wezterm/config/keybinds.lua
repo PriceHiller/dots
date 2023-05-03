@@ -69,6 +69,9 @@ return {
         -- NOTE: Copy & Paste
         { key = "v", mods = "LEADER", action = wezterm.action.PasteFrom("Clipboard") },
         { key = "c", mods = "LEADER", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
+
+        -- NOTE: Debugging
+        { key = "D", mods = "CTRL|SHIFT", action = wezterm.action.ShowDebugOverlay }
     },
     key_tables = {},
 }
