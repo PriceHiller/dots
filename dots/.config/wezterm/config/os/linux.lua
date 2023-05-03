@@ -1,1 +1,3 @@
-return {}
+return {
+    font_locator = nil
+}
