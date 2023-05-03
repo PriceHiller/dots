@@ -35,11 +35,15 @@ local header = {
 
 local vim_version = {
     type = "text",
-    val = function ()
+    val = function()
         local version = vim.version()
-        return ('─────── v%s.%s.%s ───────'):format(version.major, version.minor, version.patch)
+        return ("─────── v%s.%s.%s ───────"):format(
+            version.major,
+            version.minor,
+            version.patch
+        )
     end,
-    opts = { position = "center", hl = "@boolean"}
+    opts = { position = "center", hl = "@boolean" },
 }
 
 local plugins_loaded = {

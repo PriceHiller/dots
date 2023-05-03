@@ -252,14 +252,16 @@ lazy.setup({
             local nvim_lightbulb = require("nvim-lightbulb")
             nvim_lightbulb.setup({
                 sign = {
-                    priority = 9
+                    priority = 9,
                 },
             })
-            vim.fn.sign_define( "LightBulbSign", { text = text_icon, numhl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", priority = 9 })
+            vim.fn.sign_define(
+                "LightBulbSign",
+                { text = text_icon, numhl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", priority = 9 }
+            )
             vim.api.nvim_create_autocmd("CursorHold,CursorHoldI", {
-                callback = nvim_lightbulb.update_lightbulb
+                callback = nvim_lightbulb.update_lightbulb,
             })
-
         end,
     },
 
