@@ -8,7 +8,7 @@ wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
     f:write(scrollback)
     f:flush()
     f:close()
-    window:perform_action(wezterm.action({ SpawnCommandInNewTab = { args = { "nvim", name } } }), pane)
+    window:perform_action(wezterm.action({ SpawnCommandInNewTab = { args = { "nvim", name, "+$", "-R" , "+set filetype=termhistory"} } }), pane)
 
     wezterm.sleep_ms(1000)
     os.remove(name)
