@@ -65,24 +65,6 @@ local show_lsp_name = {
     color = { fg = "#957fb8" },
 }
 
-local LuaLineDateTimeHls = function()
-    return {
-        normal = {
-            fg = "#957FB8",
-            bg = util.get_color("lualine_c_normal", "bg#"),
-        },
-        hour_changed = {
-            fg = "#FFA066",
-            bg = util.get_color("lualine_c_normal", "bg#"),
-        },
-    }
-end
-
-vim.api.nvim_set_hl(0, "LuaLineDateTime", LuaLineDateTimeHls().normal)
-
-local datetime_section = function()
-    return os.date("%I:%M %p")
-end
 
 lualine.setup({
     options = {
@@ -195,15 +177,7 @@ lualine.setup({
             {
                 require("lazy.status").updates,
                 cond = require("lazy.status").has_updates,
-            },
-            {
-                "datetime",
-                fmt = datetime_section,
-                color = "LuaLineDateTime",
-                separator = {
-                    right = "%#lualine_transitional_lualine_b_normal_to_lualine_c_normal#",
-                },
-            },
+            }
         },
         lualine_y = {
             {
@@ -252,21 +226,3 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
         timer:close()
     end,
 })
-
-local last_date_hour = tonumber(os.date("%H"))
-local date_timer = vim.loop.new_timer()
-date_timer:start(
-    100,
-    1000,
-    vim.schedule_wrap(function()
-        vim.api.nvim_set_hl(0, "LuaLineDateTime", LuaLineDateTimeHls().normal)
-        local curr_date_hour = tonumber(os.date("%H"))
-        if curr_date_hour ~= last_date_hour then
-            vim.api.nvim_set_hl(0, "LuaLineDateTime", LuaLineDateTimeHls().hour_changed)
-        end
-        last_date_hour = curr_date_hour
-        lualine.refresh({
-            place = { "datetime" },
-        })
-    end)
-)
