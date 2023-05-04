@@ -159,7 +159,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         bg = color_names.kanagawa.sumiInk0
         fg = color_names.kanagawa.oniViolet
     elseif hover then
-        bg = color_names.kanagawa.sumiInk2
         fg = color_names.kanagawa.peachRed
     end
 
