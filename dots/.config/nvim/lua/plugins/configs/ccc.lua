@@ -85,3 +85,4 @@ ccc.setup({
         RgbHslCmykInput,
     },
 })
+vim.cmd.CccHighlighterEnable()
