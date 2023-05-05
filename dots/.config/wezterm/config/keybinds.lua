@@ -71,7 +71,10 @@ return {
         { key = "c", mods = "LEADER", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
 
         -- NOTE: Debugging
-        { key = "D", mods = "CTRL|SHIFT", action = wezterm.action.ShowDebugOverlay }
+        { key = "D", mods = "CTRL|SHIFT", action = wezterm.action.ShowDebugOverlay },
+
+        -- NOTE: Show Commands
+        { key = "C", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette }
     },
     key_tables = {},
 }
