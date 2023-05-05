@@ -5,7 +5,6 @@ local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
 vim.opt.runtimepath:append(treesitter_dir)
 
 nvim_treesitter.setup({
-    auto_install = true,
     parser_install_dir = treesitter_dir,
     ensure_installed = {
         "norg",
