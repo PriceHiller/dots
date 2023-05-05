@@ -17,6 +17,10 @@ nvim_treesitter.setup({
         "yaml",
         "json",
         "html",
+        "markdown",
+        "markdown_inline",
+        "regex",
+        "bash",
     },
     highlight = {
         enable = true,
