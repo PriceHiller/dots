@@ -41,7 +41,7 @@ nvim_treesitter.setup({
             latex = "rainbow-blocks",
             tsx = "rainbow-tags",
             vue = "rainbow-tags",
-            javascript = "rainbow-parens-react"
+            javascript = "rainbow-parens-react",
         },
         strategy = {
             on_attach = function()
