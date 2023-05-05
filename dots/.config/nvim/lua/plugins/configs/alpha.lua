@@ -171,6 +171,7 @@ vim.api.nvim_create_autocmd("FileType", {
             1000,
             vim.schedule_wrap(function()
                 pcall(vim.cmd, "AlphaRedraw")
+                vim.opt_local.statuscolumn = " "
             end)
         )
 
