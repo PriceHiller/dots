@@ -102,7 +102,6 @@ lazy.setup({
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = "VeryLazy",
-        after = { "nvim-treesitter" },
         config = function()
             require("nvim-treesitter.configs").setup({
                 textobjects = {
@@ -243,7 +242,6 @@ lazy.setup({
     -- Show code actions
     {
         "kosayoda/nvim-lightbulb",
-        after = "nvim-lspconfig",
         dependencies = {
             "antoinemadec/FixCursorHold.nvim",
         },
@@ -312,7 +310,6 @@ lazy.setup({
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
         },
-        after = "LuaSnip",
     },
 
     -- Code completion
@@ -360,14 +357,12 @@ lazy.setup({
             require("dap.ext.vscode").load_launchjs()
             require("plugins.configs._dap")
         end,
-        after = "nvim-notify",
     },
 
     -- Python debugger, dapinstall does not play nice with debugpy
     {
         "mfussenegger/nvim-dap-python",
         event = "VeryLazy",
-        after = "nvim-dap",
         config = function()
             require("plugins.configs.python-dap")
         end,
@@ -377,7 +372,6 @@ lazy.setup({
     {
         "theHamsta/nvim-dap-virtual-text",
         event = "VeryLazy",
-        after = "nvim-dap",
         config = function()
             require("nvim-dap-virtual-text").setup({})
         end,
@@ -387,7 +381,6 @@ lazy.setup({
     {
         "rcarriga/nvim-dap-ui",
         event = "VeryLazy",
-        after = "nvim-dap",
         config = function()
             require("plugins.configs.dap-ui")
         end,
@@ -562,7 +555,6 @@ lazy.setup({
             "nvim-lua/plenary.nvim",
             "nvim-neorg/neorg-telescope",
         },
-        after = "nvim-treesitter",
         ft = "norg",
     },
 
@@ -818,7 +810,6 @@ lazy.setup({
     {
         "gen740/SmoothCursor.nvim",
         event = "VeryLazy",
-        after = "kanagawa.nvim",
         config = function()
             require("smoothcursor").setup({
                 priority = 8,
