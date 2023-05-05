@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-local lib = require("wlib")
 
 return {
     -- use_cap_height_to_scale_fallback_fonts = true,
@@ -7,7 +6,21 @@ return {
     line_height = 0.9,
     font = wezterm.font_with_fallback({
         {
-            family = "FiraCode NF",
+            family = "FiraCodeNerdFont",
+            weight = "Medium",
+            harfbuzz_features = {
+                "zero",
+                "cv02",
+                "cv30",
+                "ss05",
+                "ss03",
+                "ss04",
+                "cv26",
+                "ss10",
+            },
+        },
+        {
+            family = "FiraCodeNerdFontMono",
             weight = "Medium",
             harfbuzz_features = {
                 "zero",
@@ -48,6 +61,5 @@ return {
     font_dirs = {
         "fonts",
     },
-    font_locator = "ConfigDirsOnly",
     font_size = 11,
 }
