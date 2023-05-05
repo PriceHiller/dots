@@ -65,7 +65,6 @@ local show_lsp_name = {
     color = { fg = "#957fb8" },
 }
 
-
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -177,7 +176,7 @@ lualine.setup({
             {
                 require("lazy.status").updates,
                 cond = require("lazy.status").has_updates,
-            }
+            },
         },
         lualine_y = {
             {
@@ -213,16 +212,8 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
 
 vim.api.nvim_create_autocmd("RecordingLeave", {
     callback = function()
-        local timer = vim.loop.new_timer()
-        timer:start(
-            30,
-            0,
-            vim.schedule_wrap(function()
-                lualine.refresh({
-                    place = macro_refresh_places,
-                })
-            end)
-        )
-        timer:close()
+        lualine.refresh({
+            place = macro_refresh_places,
+        })
     end,
 })
