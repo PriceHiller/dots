@@ -87,7 +87,6 @@ lazy.setup({
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "VeryLazy",
         build = ":TSUpdate",
         dependencies = {
             { url = "https://gitlab.com/HiPhish/nvim-ts-rainbow2.git" },
