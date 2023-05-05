@@ -1,7 +1,24 @@
 local nvim_treesitter = require("nvim-treesitter.configs")
 
+local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
+
+vim.opt.runtimepath:append(treesitter_dir)
+
 nvim_treesitter.setup({
-    ensure_installed = { "norg" },
+    auto_install = true,
+    parser_install_dir = treesitter_dir,
+    ensure_installed = {
+        "norg",
+        "lua",
+        "vim",
+        "toml",
+        "rust",
+        "python",
+        "c_sharp",
+        "yaml",
+        "json",
+        "html",
+    },
     highlight = {
         enable = true,
         disable = function(_, buf)
@@ -13,11 +30,20 @@ nvim_treesitter.setup({
         end,
     },
     matchup = { enable = true },
-    autotag = { enable = true },
+    autotag = {
+        enable = true,
+    },
     indent = { enable = true },
     rainbow = {
         enable = true,
-        query = "rainbow-parens",
+        query = {
+            "rainbow-parens",
+            html = "rainbow-tags",
+            latex = "rainbow-blocks",
+            tsx = "rainbow-tags",
+            vue = "rainbow-tags",
+            javascript = "rainbow-parens-react"
+        },
         strategy = {
             on_attach = function()
                 if vim.fn.line("$") < 1000 then
