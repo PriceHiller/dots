@@ -201,7 +201,9 @@ wezterm.on("update-status", function(window, pane)
         end
     end
 
-    local date = wezterm.strftime("%a, %b %-d, %I:%M %p")
+    cwd = " " .. cwd
+
+    local date = " " .. wezterm.strftime("%a, %b %-d, %I:%M %p")
 
     -- An entry for each battery (typically 0 or 1 battery)
     local battery = ""
@@ -232,10 +234,10 @@ wezterm.on("update-status", function(window, pane)
 
     -- Color palette for the backgrounds of each cell
     local fade_colors = {
-        { bg = color_names.kanagawa.sumiInk1, fg = color_names.kanagawa.springGreen },
-        { bg = color_names.kanagawa.sumiInk2, fg = color_names.kanagawa.crystalBlue },
-        { bg = color_names.kanagawa.sumiInk3, fg = color_names.kanagawa.surimiOrange },
-        { bg = color_names.kanagawa.sumiInk4, fg = color_names.kanagawa.fujiWhite },
+        { bg = color_names.kanagawa.roninYellow, fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.springGreen, fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.crystalBlue, fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.oniViolet, fg = color_names.kanagawa.sumiInk0 },
     }
 
     -- The elements to be formatted
