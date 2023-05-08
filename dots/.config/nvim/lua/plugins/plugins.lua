@@ -177,7 +177,7 @@ lazy.setup({
             "nvim-telescope/telescope-ui-select.nvim",
             "debugloop/telescope-undo.nvim",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            { "nvim-telescope/telescope-fzf-native.nvim",    build = "make" },
         },
         config = function()
             require("plugins.configs.telescope-nvim")
@@ -392,8 +392,8 @@ lazy.setup({
                 setopt = true,
                 relculright = false,
                 segments = {
-                    { text = { "%s" }, click = "v:lua.ScSa" },
-                    { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+                    { text = { "%s" },                       click = "v:lua.ScSa" },
+                    { text = { builtin.lnumfunc },           click = "v:lua.ScLa" },
                     { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
                 },
             })
@@ -473,7 +473,7 @@ lazy.setup({
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
         dependencies = {
-            { "tami5/sqlite.lua", module = "sqlite" },
+            { "tami5/sqlite.lua",             module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
         },
         config = function()
@@ -531,6 +531,15 @@ lazy.setup({
     },
 
     -- Note Taking
+    {
+        "mickael-menu/zk-nvim",
+        config = function ()
+            require("zk").setup({
+                picker = "telescope"
+            })
+        end,
+        event = "VeryLazy",
+    },
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
@@ -808,8 +817,8 @@ lazy.setup({
                         { cursor = "●", texthl = "SmoothCursorTrailMedium" },
                         { cursor = "●", texthl = "SmoothCursorTrailMedium" },
                         { cursor = "•", texthl = "SmoothCursorTrailSmall" },
-                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
-                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
+                        { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
+                        { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
                     },
                 },
                 disabled_filetypes = { "NeogitNotification" },
