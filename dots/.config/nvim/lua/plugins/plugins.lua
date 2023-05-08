@@ -540,18 +540,6 @@ lazy.setup({
         end,
         event = "VeryLazy",
     },
-    {
-        "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        config = function()
-            require("plugins.configs._neorg")
-        end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-neorg/neorg-telescope",
-        },
-        ft = "norg",
-    },
 
     -- Log Syntax Highlighting
     {
