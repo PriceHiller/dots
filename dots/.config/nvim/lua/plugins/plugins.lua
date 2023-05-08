@@ -19,10 +19,11 @@ local lazy = require("lazy")
 lazy.setup({
     -- Lazy itself
     { "folke/lazy.nvim" },
+
     -- Commonly used library
     {
         "nvim-lua/plenary.nvim",
-        event = "VeryLazy",
+        lazy = true,
     },
 
     -- Much nicer ui, integrates cmdheight = 0 wella
@@ -63,7 +64,7 @@ lazy.setup({
     -- Icons for folders, files, etc.
     {
         "kyazdani42/nvim-web-devicons",
-        event = "VeryLazy",
+        lazy = true,
     },
 
     -- Statusline.
@@ -169,7 +170,9 @@ lazy.setup({
     -- Telescope
     {
         "nvim-telescope/telescope.nvim",
-        event = "VeryLazy",
+        cmd = {
+            "Telescope",
+        },
         dependencies = {
             "nvim-telescope/telescope-media-files.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
@@ -177,7 +180,7 @@ lazy.setup({
             "nvim-telescope/telescope-ui-select.nvim",
             "debugloop/telescope-undo.nvim",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
-            { "nvim-telescope/telescope-fzf-native.nvim",    build = "make" },
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         config = function()
             require("plugins.configs.telescope-nvim")
@@ -192,7 +195,6 @@ lazy.setup({
     -- File Tree
     {
         "nvim-neo-tree/neo-tree.nvim",
-        event = "VeryLazy",
         branch = "v2.x",
         dependencies = {
             "kyazdani42/nvim-web-devicons",
@@ -208,7 +210,7 @@ lazy.setup({
     -- Lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        event = "BufReadPre",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "folke/neodev.nvim",
@@ -287,13 +289,11 @@ lazy.setup({
 
     -- Snippets
     {
-        "rafamadriz/friendly-snippets",
+        "L3MON4D3/LuaSnip",
+        build = "make install_jsregexp",
         event = "VeryLazy",
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end,
         dependencies = {
-            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
             "saadparwaiz1/cmp_luasnip",
         },
     },
@@ -315,6 +315,7 @@ lazy.setup({
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
             "f3fora/cmp-spell",
+            "L3MON4D3/LuaSnip",
         },
         config = function()
             require("plugins.configs._cmp")
@@ -328,8 +329,8 @@ lazy.setup({
     },
     {
         "saecki/crates.nvim",
-        event = "VeryLazy",
         dependencies = { { "nvim-lua/plenary.nvim" } },
+        ft = "toml",
         config = function()
             require("crates").setup()
         end,
@@ -375,7 +376,6 @@ lazy.setup({
     -- Code formatting
     {
         "sbdchd/neoformat",
-        event = "VeryLazy",
         cmd = "Neoformat",
         config = function()
             require("plugins.configs.neoformat")
@@ -392,8 +392,8 @@ lazy.setup({
                 setopt = true,
                 relculright = false,
                 segments = {
-                    { text = { "%s" },                       click = "v:lua.ScSa" },
-                    { text = { builtin.lnumfunc },           click = "v:lua.ScLa" },
+                    { text = { "%s" }, click = "v:lua.ScSa" },
+                    { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
                     { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
                 },
             })
@@ -473,7 +473,7 @@ lazy.setup({
         "AckslD/nvim-neoclip.lua",
         event = "VeryLazy",
         dependencies = {
-            { "tami5/sqlite.lua",             module = "sqlite" },
+            { "tami5/sqlite.lua" },
             { "nvim-telescope/telescope.nvim" },
         },
         config = function()
@@ -486,7 +486,6 @@ lazy.setup({
     -- Markdown Previewer
     {
         "iamcco/markdown-preview.nvim",
-        event = "VeryLazy",
         build = "cd app && npm install",
         init = function()
             vim.g.mkdp_filetypes = { "markdown" }
@@ -507,7 +506,6 @@ lazy.setup({
                 },
             })
         end,
-        event = "VeryLazy",
         dependencies = {
             "sindrets/diffview.nvim",
         },
@@ -523,23 +521,12 @@ lazy.setup({
     {
         "kevinhwang91/nvim-hlslens",
         event = "VeryLazy",
-        module = "hlslens",
-        keys = "/",
         config = function()
             require("hlslens").setup()
         end,
     },
 
     -- Note Taking
-    {
-        "mickael-menu/zk-nvim",
-        config = function ()
-            require("zk").setup({
-                picker = "telescope"
-            })
-        end,
-        event = "VeryLazy",
-    },
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
@@ -583,7 +570,9 @@ lazy.setup({
     -- Generate function/class/etc annotations
     {
         "danymat/neogen",
-        event = "VeryLazy",
+        cmd = {
+            "Neogen",
+        },
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = function()
             require("neogen").setup({
@@ -611,7 +600,6 @@ lazy.setup({
     -- Maintain last cursor position in files
     {
         "ethanholz/nvim-lastplace",
-        event = "VeryLazy",
         config = function()
             require("nvim-lastplace").setup({
                 lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
@@ -620,9 +608,6 @@ lazy.setup({
             })
         end,
     },
-
-    -- Diagnose startup time
-    { "dstein64/vim-startuptime" },
 
     -- More codeactions
     {
@@ -640,6 +625,7 @@ lazy.setup({
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+        ft = "http",
         config = function()
             local rest_nvim = require("rest-nvim")
             rest_nvim.setup({
@@ -686,12 +672,12 @@ lazy.setup({
     -- Better list continuation
     {
         "gaoDean/autolist.nvim",
-        event = "VeryLazy",
         ft = {
             "markdown",
-            "text",
+            "tex",
             "text",
             "plaintex",
+            "norg",
         },
         config = function()
             require("autolist").setup({})
@@ -741,7 +727,6 @@ lazy.setup({
     -- Vim Latex Support
     {
         "lervag/vimtex",
-        event = "VeryLazy",
         ft = "tex",
         config = function()
             vim.g.vimtext_view_method = "zathura"
@@ -751,7 +736,6 @@ lazy.setup({
 
     {
         "akinsho/toggleterm.nvim",
-        event = "VeryLazy",
         config = function()
             require("toggleterm").setup({
                 start_in_insert = false,
@@ -779,9 +763,11 @@ lazy.setup({
     {
         "krivahtoo/silicon.nvim",
         build = "./install.sh build",
-        event = "VeryLazy",
         dependencies = {
             "kyazdani42/nvim-web-devicons",
+        },
+        cmd = {
+            "Silicon",
         },
         config = function()
             require("silicon").setup({
@@ -817,8 +803,8 @@ lazy.setup({
                         { cursor = "●", texthl = "SmoothCursorTrailMedium" },
                         { cursor = "●", texthl = "SmoothCursorTrailMedium" },
                         { cursor = "•", texthl = "SmoothCursorTrailSmall" },
-                        { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
-                        { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
+                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
+                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
                     },
                 },
                 disabled_filetypes = { "NeogitNotification" },
@@ -829,7 +815,6 @@ lazy.setup({
     -- Color Picker
     {
         "uga-rosa/ccc.nvim",
-        event = "VeryLazy",
         config = function()
             require("plugins.configs.ccc")
         end,
@@ -860,14 +845,24 @@ lazy.setup({
     -- Improved Visuals for Documentation
     {
         "lukas-reineke/headlines.nvim",
-        event = "VeryLazy",
         config = true,
+        ft = {
+            "markdown",
+            "norg",
+        },
     },
 
     -- Convert numbers between binary, decimal, & hex
     {
         "skosulor/nibbler",
-        event = "VeryLazy",
+        cmd = {
+            "NibblerToBin",
+            "NibblerToHex",
+            "NibblerToDec",
+            "NibblerToCArray",
+            "NibblerHexStringToCArray",
+            "NibblerToggle",
+        },
         config = function()
             require("nibbler").setup({
                 display_enabled = true, -- Set to false to disable real-time display (default: true)
