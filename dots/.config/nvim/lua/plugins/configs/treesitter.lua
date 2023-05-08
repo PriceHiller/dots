@@ -6,22 +6,7 @@ vim.opt.runtimepath:append(treesitter_dir)
 
 nvim_treesitter.setup({
     parser_install_dir = treesitter_dir,
-    ensure_installed = {
-        "norg",
-        "lua",
-        "vim",
-        "toml",
-        "rust",
-        "python",
-        "c_sharp",
-        "yaml",
-        "json",
-        "html",
-        "markdown",
-        "markdown_inline",
-        "regex",
-        "bash",
-    },
+    ensure_installed = "all",
     highlight = {
         enable = true,
         disable = function(_, buf)
