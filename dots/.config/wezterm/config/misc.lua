@@ -5,4 +5,5 @@ return {
     scrollback_lines = 20000,
     native_macos_fullscreen_mode = true,
     warn_about_missing_glyphs = true,
+    term = "wezterm",
 }
