@@ -42,6 +42,8 @@ local color_names = {
     },
 }
 
+M.color_names = color_names
+
 local colors = {
     tokyonight_night = {
         foreground = "#c0caf5",
