@@ -74,7 +74,7 @@ return {
         { key = "d", mods = "LEADER", action = wezterm.action.ShowDebugOverlay },
 
         -- NOTE: Show Commands
-        { key = "a", mods = "LEADER", action = wezterm.action.ActivateCommandPalette }
+        { key = "a", mods = "LEADER", action = wezterm.action.ActivateCommandPalette },
     },
     key_tables = {},
 }
