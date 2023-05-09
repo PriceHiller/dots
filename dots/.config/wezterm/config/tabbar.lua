@@ -1,7 +1,6 @@
 local wezterm = require("wezterm")
 local color_names = require("config.theme.colors").color_names
 
-
 local edges = {
     solid = {
         left = "",
@@ -155,11 +154,10 @@ wezterm.on("update-status", function(window, pane)
     window:set_right_status(wezterm.format(elements))
 end)
 
-
 return {
     enable_tab_bar = true,
     tab_bar_at_bottom = true,
     tab_max_width = 48,
     use_fancy_tab_bar = false,
-    hide_tab_bar_if_only_one_tab = false
+    hide_tab_bar_if_only_one_tab = false,
 }

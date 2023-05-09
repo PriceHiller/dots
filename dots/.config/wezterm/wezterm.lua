@@ -24,8 +24,6 @@ if not found then
     os_config = {}
 end
 
-
 local config = wlib.Table.merge(gpu, events, fonts, theme, tabbar, misc, rendering, keybinds, os_config)
-
 
 return config

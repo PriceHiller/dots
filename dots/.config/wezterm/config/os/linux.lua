@@ -1,3 +1,3 @@
 return {
-    font_locator = nil
+    font_locator = nil,
 }
