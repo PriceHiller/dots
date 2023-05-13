@@ -239,6 +239,7 @@ lazy.setup({
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
             "f3fora/cmp-spell",
+            "FelipeLema/cmp-async-path",
             -- Snippets
             {
                 "L3MON4D3/LuaSnip",
