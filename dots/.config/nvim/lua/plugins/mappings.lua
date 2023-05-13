@@ -42,7 +42,6 @@ vim.keymap.set("n", "<leader>tc", ":Telescope commands<CR>", { silent = true, de
 vim.keymap.set("n", "<leader>tu", ":Telescope undo<CR>", { silent = true, desc = "Telescope: Undo History" })
 
 -- Lsp Mappings
-
 wk.register({
     l = {
         name = "LSP",
@@ -74,7 +73,7 @@ vim.keymap.set("n", "<leader>ll", function()
 end, { silent = true, desc = "LSP: List Workspaces" })
 vim.keymap.set("n", "<leader>ln", ":IncRename ", { silent = true, desc = "LSP: Rename" })
 vim.keymap.set("n", "<leader>lc", vim.lsp.buf.code_action, { silent = true, desc = "LSP: Code Action" })
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, { silent = true, desc = "LSP: References" })
+vim.keymap.set("n", "<leader>lr", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, desc = "LSP: References" })
 vim.keymap.set("n", "<leader>lR", ":LspRestart<CR>", { silent = true, desc = "LSP: Restart" })
 vim.keymap.set("n", "<leader>ls", function()
     vim.diagnostic.open_float(nil, { focus = true, scope = "cursor" })
@@ -163,6 +162,11 @@ vim.keymap.set("n", "<leader>nt", ":Neotree show toggle focus<cr>", { silent = t
 
 -- Plenary Mappings
 vim.keymap.set("n", "<leader>pt", "<Plug>PlenaryTestFile", { silent = true, desc = "Plenary: Test File" })
+wk.register({
+    p = {
+        name = "Plenary",
+    },
+}, { prefix = "<leader>" })
 
 -- Neogit Mappings
 wk.register({
@@ -217,3 +221,17 @@ vim.keymap.set("n", "<leader>or", vim.cmd.OverseerRun, { silent = true, desc = "
 vim.keymap.set("n", "<leader>ot", vim.cmd.OverseerToggle, { silent = true, desc = "Overseer: Toggle" })
 
 vim.keymap.set("v", "<leader>sc", ":'<,'>Silicon<CR>", { silent = true, desc = "Silicon: Copy" })
+
+-- Trouble mappings
+-- NOTE: there is a references mapping placed in the LSP bindings region
+wk.register({
+    x = {
+        name = "Trouble",
+    },
+}, { prefix = "<leader>" })
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true,  desc = "Trouble: Toggle" })
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true,  desc = "Trouble: Workspace Diagnostics" })
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true,  desc = "Trouble: Document Diagnostics" })
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true,  desc = "Trouble: Loclist"})
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, desc = "Trouble: Quickfix" })
+vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { silent = true, desc = "Trouble: Todo Items" })
