@@ -110,6 +110,8 @@ require("kanagawa").setup({
             NoiceCmdlinePopupBorderSearch = { fg = colors.roninYellow },
             NoiceCmdlineIconIncRename = { fg = colors.peachRed },
             NoiceCmdlinePopupdBorderIncRename = { fg = colors.peachRed },
+            NoiceMini = { bg = colors.sumiInk3 },
+            NoiceLspProgressClient = { fg = colors.oniViolet, bold = true },
             Folded = { bg = colors.waveBlue1 },
             UfoFoldedBg = { bg = colors.waveBlue1 },
             TSRainbowRed = { fg = colors.peachRed },
