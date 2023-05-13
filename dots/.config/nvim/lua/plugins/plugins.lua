@@ -890,6 +890,19 @@ lazy.setup({
             })
         end,
     },
+
+    -- Better listing for diags, refs, quickfix, locs, etc.
+    {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+        cmd = {
+            "Trouble",
+            "TroubleClose",
+            "TroubleToggle",
+            "TroubleRefresh",
+        },
+        opts = {},
+    },
 }, {
     checker = {
         enabled = true,
