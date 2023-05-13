@@ -93,68 +93,10 @@ lazy.setup({
             { url = "https://gitlab.com/HiPhish/nvim-ts-rainbow2.git" },
             "nvim-treesitter/nvim-treesitter-context",
             "windwp/nvim-ts-autotag",
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
             require("plugins.configs.treesitter")
-        end,
-    },
-
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        event = "VeryLazy",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        disable = function(lang, bufnr)
-                            local mode = vim.fn.mode()
-                            if mode == "c" then
-                                return true
-                            end
-                        end,
-                        keymaps = {
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            ["ic"] = "@class.inner",
-                            ["ib"] = "@block.inner",
-                            ["ab"] = "@block.outer",
-                        },
-                    },
-                    move = {
-                        enable = true,
-                        disable = function(lang, bufnr)
-                            local mode = vim.fn.mode()
-                            if mode == "c" then
-                                return true
-                            end
-                        end,
-                        set_jumps = true,
-                        goto_next_start = {
-                            ["]fs"] = "@function.outer",
-                            ["]cs"] = "@class.outer",
-                            ["]bs"] = "@block.outer",
-                        },
-                        goto_next_end = {
-                            ["]fe"] = "@function.outer",
-                            ["]ce"] = "@class.outer",
-                            ["]be"] = "@block.outer",
-                        },
-                        goto_previous_start = {
-                            ["[fs"] = "@function.outer",
-                            ["[cs"] = "@class.outer",
-                            ["[bs"] = "@block.outer",
-                        },
-                        goto_previous_end = {
-                            ["[fe"] = "@function.outer",
-                            ["[ce"] = "@class.outer",
-                            ["[bs"] = "@block.outer",
-                        },
-                    },
-                },
-            })
         end,
     },
 
@@ -180,7 +122,7 @@ lazy.setup({
             "nvim-telescope/telescope-ui-select.nvim",
             "debugloop/telescope-undo.nvim",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            { "nvim-telescope/telescope-fzf-native.nvim",    build = "make" },
         },
         config = function()
             require("plugins.configs.telescope-nvim")
@@ -212,7 +154,6 @@ lazy.setup({
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
             "folke/neodev.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -255,18 +196,14 @@ lazy.setup({
     {
         "smjonas/inc-rename.nvim",
         event = "VeryLazy",
-        config = function()
-            require("inc_rename").setup({})
-        end,
+        opts = {},
     },
 
     -- Better LSP Virtual Text Lines
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         event = "VeryLazy",
-        config = function()
-            require("lsp_lines").setup()
-        end,
+        opts = {},
     },
 
     -- Lsp From Null LS
@@ -282,20 +219,7 @@ lazy.setup({
     {
         "windwp/nvim-autopairs",
         event = "VeryLazy",
-        config = function()
-            require("nvim-autopairs").setup()
-        end,
-    },
-
-    -- Snippets
-    {
-        "L3MON4D3/LuaSnip",
-        build = "make install_jsregexp",
-        event = "VeryLazy",
-        dependencies = {
-            "rafamadriz/friendly-snippets",
-            "saadparwaiz1/cmp_luasnip",
-        },
+        opts = {},
     },
 
     -- Code completion
@@ -315,7 +239,16 @@ lazy.setup({
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
             "f3fora/cmp-spell",
-            "L3MON4D3/LuaSnip",
+            -- Snippets
+            {
+                "L3MON4D3/LuaSnip",
+                build = "make install_jsregexp",
+                event = "VeryLazy",
+                dependencies = {
+                    "rafamadriz/friendly-snippets",
+                    "saadparwaiz1/cmp_luasnip",
+                },
+            },
         },
         config = function()
             require("plugins.configs._cmp")
@@ -331,9 +264,7 @@ lazy.setup({
         "saecki/crates.nvim",
         dependencies = { { "nvim-lua/plenary.nvim" } },
         ft = "toml",
-        config = function()
-            require("crates").setup()
-        end,
+        opts = {},
     },
 
     -- DAP, debugger
@@ -359,9 +290,7 @@ lazy.setup({
     {
         "theHamsta/nvim-dap-virtual-text",
         event = "VeryLazy",
-        config = function()
-            require("nvim-dap-virtual-text").setup({})
-        end,
+        opts = {},
     },
 
     -- Fancy ui for dap
@@ -392,8 +321,8 @@ lazy.setup({
                 setopt = true,
                 relculright = false,
                 segments = {
-                    { text = { "%s" }, click = "v:lua.ScSa" },
-                    { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+                    { text = { "%s" },                       click = "v:lua.ScSa" },
+                    { text = { builtin.lnumfunc },           click = "v:lua.ScLa" },
                     { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
                 },
             })
@@ -415,41 +344,33 @@ lazy.setup({
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
-        config = function()
-            require("gitsigns").setup({
-                current_line_blame = true,
-                current_line_blame_opts = {
-                    delay = 0,
-                },
-            })
-        end,
+        opts = {
+            current_line_blame = true,
+            current_line_blame_opts = {
+                delay = 0,
+            },
+        },
     },
 
     -- Highlight certain comments, TODO, BUG, etc.
     {
         "folke/todo-comments.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("todo-comments").setup({})
-        end,
+        cmd = {
+            "TodoTrouble",
+        },
+        opts = {},
     },
 
     -- Show possible key bindings during typing
     {
         "folke/which-key.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("which-key").setup({})
-        end,
+        lazy = true,
+        opts = {},
     },
 
     -- Create full path if not existing on write
     {
         "jghauser/mkdir.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("mkdir")
-        end,
     },
 
     -- Text commenting
@@ -476,11 +397,9 @@ lazy.setup({
             { "tami5/sqlite.lua" },
             { "nvim-telescope/telescope.nvim" },
         },
-        config = function()
-            require("neoclip").setup({
-                enable_persistent_history = true,
-            })
-        end,
+        opts = {
+            enable_persistent_history = true,
+        },
     },
 
     -- Markdown Previewer
@@ -497,33 +416,23 @@ lazy.setup({
     -- Better Git integration
     {
         "TimUntersberger/neogit",
-        event = "VeryLazy",
-        config = function()
-            require("neogit").setup({
-                disable_commit_confirmation = true,
-                integrations = {
-                    diffview = true,
-                },
-            })
-        end,
+        lazy = true,
+        opts = {
+            disable_commit_confirmation = true,
+            integrations = {
+                diffview = true,
+            },
+        },
         dependencies = {
             "sindrets/diffview.nvim",
         },
-    },
-
-    -- Ansible Syntax Highlighting
-    {
-        "pearofducks/ansible-vim",
-        event = "VeryLazy",
     },
 
     -- Better search display
     {
         "kevinhwang91/nvim-hlslens",
         event = "VeryLazy",
-        config = function()
-            require("hlslens").setup()
-        end,
+        opts = {},
     },
 
     -- Note Taking
@@ -544,6 +453,7 @@ lazy.setup({
     {
         "MTDL9/vim-log-highlighting",
         event = "VeryLazy",
+        ft = "log",
     },
 
     -- Lots of small modules pulled into
@@ -560,11 +470,9 @@ lazy.setup({
     {
         "karb94/neoscroll.nvim",
         event = "VeryLazy",
-        config = function()
-            require("neoscroll").setup({
-                easing_function = "circular",
-            })
-        end,
+        opts = {
+            easing_function = "circular",
+        },
     },
 
     -- Generate function/class/etc annotations
@@ -574,18 +482,16 @@ lazy.setup({
             "Neogen",
         },
         dependencies = "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require("neogen").setup({
-                snippet_engine = "luasnip",
-                languages = {
-                    cs = {
-                        template = {
-                            annotation_convention = "xmldoc",
-                        },
+        opts = {
+            snippet_engine = "luasnip",
+            languages = {
+                cs = {
+                    template = {
+                        annotation_convention = "xmldoc",
                     },
                 },
-            })
-        end,
+            },
+        },
     },
 
     -- Multiple cursor/multiple visual selection support
@@ -600,13 +506,11 @@ lazy.setup({
     -- Maintain last cursor position in files
     {
         "ethanholz/nvim-lastplace",
-        config = function()
-            require("nvim-lastplace").setup({
-                lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-                lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit", "fugitive" },
-                lastplace_open_folds = true,
-            })
-        end,
+        opts = {
+            lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+            lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit", "fugitive" },
+            lastplace_open_folds = true,
+        },
     },
 
     -- More codeactions
@@ -626,13 +530,9 @@ lazy.setup({
             "nvim-lua/plenary.nvim",
         },
         ft = "http",
-        config = function()
-            local rest_nvim = require("rest-nvim")
-            rest_nvim.setup({
-                -- This is a dev plugin, makes life easier
-                skip_ssl_verification = true,
-            })
-        end,
+        opts = {
+            skip_ssl_verification = true,
+        },
     },
 
     -- Allows repeating actions and more
@@ -653,20 +553,23 @@ lazy.setup({
     -- Faster motions
     {
         "phaazon/hop.nvim",
-        event = "VeryLazy",
-        config = function()
-            -- you can configure Hop the way you like here; see :h hop-config
-            require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-        end,
+        cmd = {
+            "HopLineStart",
+            "HopPattern",
+            "HopWord",
+            "HopAnywhere",
+            "HopVertical",
+        },
+        opts = {
+            keys = "etovxqpdygfblzhckisuran",
+        },
     },
 
     -- Surround actions
     {
         "kylechui/nvim-surround",
         event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end,
+        opts = {},
     },
 
     -- Better list continuation
@@ -679,39 +582,35 @@ lazy.setup({
             "plaintex",
             "norg",
         },
-        config = function()
-            require("autolist").setup({})
-        end,
+        opts = {},
     },
 
     -- Tint inactive windows
     {
         "levouh/tint.nvim",
         event = "VeryLazy",
-        config = function()
-            require("tint").setup({
-                highlight_ignore_patterns = {
-                    "WinSeparator",
-                },
-                window_ignore_function = function(winid)
-                    local bufid = vim.api.nvim_win_get_buf(winid)
+        opts = {
+            highlight_ignore_patterns = {
+                "WinSeparator",
+            },
+            window_ignore_function = function(winid)
+                local bufid = vim.api.nvim_win_get_buf(winid)
 
-                    local ignoredFiletypes = { "DiffviewFiles", "DiffviewFileHistory", "neo-tree" }
-                    local ignoredBuftypes = { "terminal" }
+                local ignoredFiletypes = { "DiffviewFiles", "DiffviewFileHistory", "neo-tree" }
+                local ignoredBuftypes = { "terminal" }
 
-                    local isDiff = vim.api.nvim_win_get_option(winid, "diff")
-                    local isFloating = vim.api.nvim_win_get_config(winid).relative ~= ""
-                    local isIgnoredBuftype =
-                        vim.tbl_contains(ignoredBuftypes, vim.api.nvim_buf_get_option(bufid, "buftype"))
-                    local isIgnoredFiletype =
-                        vim.tbl_contains(ignoredFiletypes, vim.api.nvim_buf_get_option(bufid, "filetype"))
+                local isDiff = vim.api.nvim_win_get_option(winid, "diff")
+                local isFloating = vim.api.nvim_win_get_config(winid).relative ~= ""
+                local isIgnoredBuftype =
+                    vim.tbl_contains(ignoredBuftypes, vim.api.nvim_buf_get_option(bufid, "buftype"))
+                local isIgnoredFiletype =
+                    vim.tbl_contains(ignoredFiletypes, vim.api.nvim_buf_get_option(bufid, "filetype"))
 
-                    return isDiff or isFloating or isIgnoredBuftype or isIgnoredFiletype
-                end,
-                tint = -30,
-                saturation = 0.8,
-            })
-        end,
+                return isDiff or isFloating or isIgnoredBuftype or isIgnoredFiletype
+            end,
+            tint = -30,
+            saturation = 0.8,
+        },
     },
 
     -- Highlight argument definitions and usages
@@ -719,9 +618,7 @@ lazy.setup({
         "m-demare/hlargs.nvim",
         event = "VeryLazy",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require("hlargs").setup({})
-        end,
+        opts = {},
     },
 
     -- Vim Latex Support
@@ -736,19 +633,17 @@ lazy.setup({
 
     {
         "akinsho/toggleterm.nvim",
-        config = function()
-            require("toggleterm").setup({
-                start_in_insert = false,
-                direction = "float",
-                autochdir = true,
-                winbar = {
-                    enable = true,
-                    name_formatter = function(term) --  term: Terminal
-                        return term.name
-                    end,
-                },
-            })
-        end,
+        opts = {
+            start_in_insert = false,
+            direction = "float",
+            autochdir = true,
+            winbar = {
+                enable = true,
+                name_formatter = function(term) --  term: Terminal
+                    return term.name
+                end,
+            },
+        },
         cmd = {
             "ToggleTerm",
             "ToggleTermSetName",
@@ -769,47 +664,43 @@ lazy.setup({
         cmd = {
             "Silicon",
         },
-        config = function()
-            require("silicon").setup({
-                font = "FiraCode Nerd Font=20",
-                theme = "Monokai Extended",
-                background = "#87F",
-                pad_vert = 60,
-                pad_horiz = 40,
-                line_number = true,
-                gobble = true,
-                window_title = function()
-                    local devicons = require("nvim-web-devicons")
-                    local icon = devicons.get_icon_by_filetype(vim.bo.filetype)
-                    return icon .. " " .. vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
-                end,
-            })
-        end,
+        opts = {
+            font = "FiraCode Nerd Font=20",
+            theme = "Monokai Extended",
+            background = "#87F",
+            pad_vert = 60,
+            pad_horiz = 40,
+            line_number = true,
+            gobble = true,
+            window_title = function()
+                local devicons = require("nvim-web-devicons")
+                local icon = devicons.get_icon_by_filetype(vim.bo.filetype)
+                return icon .. " " .. vim.fn.fnamemodify(vim.fn.bufname(vim.fn.bufnr()), ":~:.")
+            end,
+        },
     },
 
     -- Nice sidebar cursor goodies
     {
         "gen740/SmoothCursor.nvim",
         event = "VeryLazy",
-        config = function()
-            require("smoothcursor").setup({
-                priority = 8,
-                fancy = {
-                    enable = true,
-                    head = { cursor = "⯈", texthl = "SmoothCursorCursor", linehl = nil },
-                    body = {
-                        { cursor = "", texthl = "SmoothCursorTrailBig1" },
-                        { cursor = "", texthl = "SmoothCursorTrailBig2" },
-                        { cursor = "●", texthl = "SmoothCursorTrailMedium" },
-                        { cursor = "●", texthl = "SmoothCursorTrailMedium" },
-                        { cursor = "•", texthl = "SmoothCursorTrailSmall" },
-                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
-                        { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
-                    },
+        opts = {
+            priority = 8,
+            fancy = {
+                enable = true,
+                head = { cursor = "⯈", texthl = "SmoothCursorCursor", linehl = nil },
+                body = {
+                    { cursor = "", texthl = "SmoothCursorTrailBig1" },
+                    { cursor = "", texthl = "SmoothCursorTrailBig2" },
+                    { cursor = "●", texthl = "SmoothCursorTrailMedium" },
+                    { cursor = "●", texthl = "SmoothCursorTrailMedium" },
+                    { cursor = "•", texthl = "SmoothCursorTrailSmall" },
+                    { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
+                    { cursor = ".",   texthl = "SmoothCursorTrailXSmall" },
                 },
-                disabled_filetypes = { "NeogitNotification" },
-            })
-        end,
+            },
+            disabled_filetypes = { "NeogitNotification" },
+        },
     },
 
     -- Color Picker
@@ -831,21 +722,19 @@ lazy.setup({
     {
         "stevearc/overseer.nvim",
         event = "VeryLazy",
-        config = function()
-            require("overseer").setup()
-        end,
+        opts = {},
     },
 
     -- Better buffer deletion
     {
         "famiu/bufdelete.nvim",
-        event = "VeryLazy",
+        lazy = true,
     },
 
     -- Improved Visuals for Documentation
     {
         "lukas-reineke/headlines.nvim",
-        config = true,
+        opts = {},
         ft = {
             "markdown",
             "norg",
@@ -863,11 +752,9 @@ lazy.setup({
             "NibblerHexStringToCArray",
             "NibblerToggle",
         },
-        config = function()
-            require("nibbler").setup({
-                display_enabled = true, -- Set to false to disable real-time display (default: true)
-            })
-        end,
+        opts = {
+            display_enabled = true,
+        },
     },
 
     -- Preview Norm commands, global, macros
