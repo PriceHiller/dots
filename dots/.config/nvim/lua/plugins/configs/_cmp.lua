@@ -129,8 +129,8 @@ cmp.setup({
         end, { "i", "s" }),
     },
     sources = cmp.config.sources({
-        { name = "nvim_lsp", priority = 11 },
-        { name = "luasnip", priority = 10 }, -- For luasnip users.
+        { name = "nvim_lsp",     priority = 11 },
+        { name = "luasnip",      priority = 10 }, -- For luasnip users.
         { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
         {
             name = "rg",
@@ -138,11 +138,12 @@ cmp.setup({
             keyword_length = 3,
             max_item_count = 10,
         },
-        { name = "zsh", priority = 5 },
+        { name = "async_path", priority = 6 },
+        { name = "zsh",   priority = 5 },
         { name = "emoji", keyword_length = 2 },
         { name = "neorg" },
         { name = "calc" },
-        { name = "npm", keyword_length = 2 },
+        { name = "npm",   keyword_length = 2 },
         { name = "spell", keyword_length = 2 },
     }),
     sorting = {
@@ -164,7 +165,7 @@ cmp.setup({
 cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
         { name = "conventionalcommits", priority = 20 },
-        { name = "emoji", keyword_length = 2 },
+        { name = "emoji",               keyword_length = 2 },
     }),
 })
 
