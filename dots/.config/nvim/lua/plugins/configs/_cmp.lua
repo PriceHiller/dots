@@ -12,17 +12,17 @@ cmp.setup({
         fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
         format = function(entry, vim_item)
             local selections = {
-                fuzzy_buffer = { symbol = "﬘ ", name = "Buffer", hl_group = "Buffer" },
+                fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
                 calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
-                neorg = { symbol = " ", name = "Neorg", hl_group = "Neorg" },
-                emoji = { symbol = "ﲃ ", name = "Emoji", hl_group = "Emoji" },
+                neorg = { symbol = "󱍤 ", name = "Neorg", hl_group = "Neorg" },
+                emoji = { symbol = "󰞅 ", name = "Emoji", hl_group = "Emoji" },
                 zsh = { symbol = " ", name = "Zsh", hl_group = "Zsh" },
                 crates = { symbol = " ", name = "Crates", hl_group = "Crates" },
                 cmdline_history = { symbol = " ", name = "Cmd History", hl_group = "CmdHistory" },
                 rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
                 npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
-                conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
-                spell = { symbol = " ", name = "Spell", hl_group = "Spell" },
+                conventionalcommits = { symbol = "󰊢 ", name = "Commit", hl_group = "Commit" },
+                spell = { symbol = "󰏪 ", name = "Spell", hl_group = "Spell" },
             }
 
             local extra_kind_icons = {

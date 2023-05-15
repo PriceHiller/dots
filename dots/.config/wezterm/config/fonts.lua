@@ -39,12 +39,11 @@ return {
         },
         -- NOTE: Attempt to resolve missing symbols etc.
         -- <built-in>, BuiltIn
-        { family = "Symbols Nerd Font Mono", scale = 0.8 },
-        { family = "Symbols Nerd Font", scale = 0.8 },
+        { family = "Symbols Nerd Font Mono" },
+        { family = "Symbols Nerd Font" },
         "Noto Sans Symbols",
         "Noto Sans Symbols2",
         "PowerlineExtraSymbols",
-        { family = "FiraCode NF", weight = "DemiBold", scale = 1.2 },
         "MesloLGS NF",
 
         -- <built-in>, BuiltIn
