@@ -1,0 +1,4 @@
+# vim: set ft=gitignore
+
+# Ignore project specific configs for neovim
+.nvim.lua

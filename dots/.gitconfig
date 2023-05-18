@@ -9,6 +9,7 @@
 [core]
 	pager = delta
 	ignorecase = false
+	excludesfile = ~/.config/git/ignore
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive
@@ -59,7 +60,7 @@
 
 ; Per environemnt specific setup shit
 [includeIf "gitdir:~/Git/SSFCU/"]
-	path = ~/.dot_files/git-configs/.gitconfig-ssfcu
+	path = ~/.config/git/configs/gitconfig-ssfcu
 
 [credential]
 	helper = store
@@ -79,4 +80,4 @@
 [am]
 	threeWay = true
 [gpg "ssh"]
-	allowedSignersFile = /home/sam/.config/git/allowed_signers
+	allowedSignersFile = ~/.config/git/allowed_signers
