@@ -1,9 +1,8 @@
-; vim: ft=gitconfig:
-
+# vim: ft=gitconfig:
 
 [user]
-    name = Price Hiller
-    email = Philler@ssfcu.org
+	name = Price Hiller
+	email = Philler@ssfcu.org
 
 [credential]
 	helper = store
