@@ -132,6 +132,9 @@ M.setup = function()
 
     -- Limit default menu height for completions
     opt.pumheight = 30
+
+    -- Allow per project configuration via exrc
+    opt.exrc = true
 end
 
 return M
