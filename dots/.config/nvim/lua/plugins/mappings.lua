@@ -229,9 +229,19 @@ wk.register({
         name = "Trouble",
     },
 }, { prefix = "<leader>" })
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true,  desc = "Trouble: Toggle" })
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true,  desc = "Trouble: Workspace Diagnostics" })
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true,  desc = "Trouble: Document Diagnostics" })
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true,  desc = "Trouble: Loclist"})
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, desc = "Trouble: Toggle" })
+vim.keymap.set(
+    "n",
+    "<leader>xw",
+    "<cmd>TroubleToggle workspace_diagnostics<cr>",
+    { silent = true, desc = "Trouble: Workspace Diagnostics" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>xd",
+    "<cmd>TroubleToggle document_diagnostics<cr>",
+    { silent = true, desc = "Trouble: Document Diagnostics" }
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, desc = "Trouble: Loclist" })
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, desc = "Trouble: Quickfix" })
 vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { silent = true, desc = "Trouble: Todo Items" })
