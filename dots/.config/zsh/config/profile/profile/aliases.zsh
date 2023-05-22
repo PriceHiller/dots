@@ -48,6 +48,10 @@ if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
 		alias c="wl-copy"
 		alias p="wl-paste"
 	fi
+
+	if ! command -v open >/dev/null 2>&1 && command -v xdg-open >/dev/null 2>&1; then
+		alias open="xdg-open"
+	fi
 fi
 
 ### Bat ###
