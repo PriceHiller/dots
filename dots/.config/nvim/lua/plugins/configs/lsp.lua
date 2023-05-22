@@ -254,23 +254,15 @@ lspconfig.azure_pipelines_ls.setup({
             },
         },
         yaml = {
-            schemas = require("schemastore").yaml.schemas({
-                replace = {
-                    ["Azure Pipelines"] = {
-                        description = "Azure Pipelines override",
-                        fileMatch = {
-                            "/azure-pipeline*.y*l",
-                            "/*.azure*",
-                            "Azure-Pipelines/**/*.y*l",
-                            "Pipelines/*.y*l",
-                        },
-                        name = "Azure Pipelines",
-                        url = "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json",
-                    },
+            schemas = {
+                ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+                    "*.yml",
+                    "*.yaml",
                 },
-            }),
+            },
         },
     },
+    filetypes = "azure-pipelines",
     capabilities = lsp_capabilities,
     on_attach = on_attach,
 })
