@@ -145,7 +145,7 @@ lspconfig.ansiblels.setup({
 })
 
 -- NOTE: LUA LSP
-local luadev = require("neodev").setup({})
+require("neodev").setup({})
 
 lspconfig.lua_ls.setup({
     settings = {
