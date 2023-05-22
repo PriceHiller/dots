@@ -38,3 +38,6 @@ set recolor                     "true"
 set recolor-keephue             "true"
 
 set database                    "plain"
+
+set synctex true
+set synctex-editor-command "code -g %{input}:%{line}"
