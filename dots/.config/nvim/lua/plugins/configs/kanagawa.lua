@@ -131,6 +131,7 @@ require("kanagawa").setup({
             DiffviewFilePanelTitle = { fg = colors.crystalBlue },
             Headline = { bg = colors.sumiInk2 },
             HeadlineReversed = { bg = colors.sumiInk1 },
+            LspInlayHint = { fg = colors.lotusViolet1, bg = colors.sumiInk5, italic = true },
         }
 
         return overrides
