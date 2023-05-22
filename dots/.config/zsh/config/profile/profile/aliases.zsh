@@ -42,8 +42,8 @@ if [[ "$OSTYPE" = "darwin"* ]]; then
 	alias sed="gsed"
 fi
 
-### Arch Linux ###
-if [[ "$(uname -r)" == *"arch"* ]]; then
+### Linux ###
+if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
 	if command -v wl-copy >/dev/null 2>&1; then
 		alias c="wl-copy"
 		alias p="wl-paste"
