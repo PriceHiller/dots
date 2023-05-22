@@ -10,6 +10,16 @@ nvim_treesitter.setup({
     highlight = {
         enable = true,
         disable = function(_, buf)
+            local disabled_filetypes = {
+                "tex",
+            }
+
+            for _, ft in ipairs(disabled_filetypes) do
+                if vim.bo.filetype == ft then
+                    return true
+                end
+            end
+
             local max_filesize = 100 * 1024 -- 100 KB
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             if ok and stats and stats.size > max_filesize then
