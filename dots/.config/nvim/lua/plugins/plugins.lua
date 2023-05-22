@@ -174,8 +174,8 @@ lazy.setup({
         config = function()
             require("lsp-inlayhints").setup({
                 inlay_hints = {
-                    highlight = "LspInlayHint"
-                }
+                    highlight = "LspInlayHint",
+                },
             })
             vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
             vim.api.nvim_create_autocmd("LspAttach", {

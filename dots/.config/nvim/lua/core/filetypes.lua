@@ -3,7 +3,7 @@ local M = {}
 M.setup = function()
     vim.filetype.add({
         filename = {
-            ['.dockerignore'] = "dockerignore"
+            [".dockerignore"] = "dockerignore",
         },
         pattern = {
             [".*%.dockerfile"] = "dockerfile",
