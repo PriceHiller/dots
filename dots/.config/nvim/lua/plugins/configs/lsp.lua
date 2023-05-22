@@ -275,6 +275,23 @@ lspconfig.azure_pipelines_ls.setup({
     on_attach = on_attach,
 })
 
+lspconfig.texlab.setup({
+    settings = {
+        texlab = {
+            build = {
+                onSave = true,
+                executable = "tectonic",
+                forwardSearchAfter = true,
+                args = { "-X", "compile", "%f", "--synctex" },
+            },
+            forwardSearch = {
+                executable = "zathura",
+                args = { "--synctex-forward", "%l:1:%f", "%p" },
+            },
+        },
+    },
+})
+
 local path = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 local words = {}
 
@@ -315,7 +332,6 @@ for _, server in ipairs({
     "tsserver",
     "rnix",
     "marksman",
-    "texlab",
 }) do
     lspconfig[server].setup(opts)
 end
