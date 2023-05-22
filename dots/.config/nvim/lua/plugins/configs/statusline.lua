@@ -41,25 +41,30 @@ end
 
 local show_lsp_name = {
     function()
-        local msg = "No Active Lsp"
-        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+        local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
         local clients = vim.lsp.get_active_clients()
         if next(clients) == nil then
-            return msg
+            return "No Active Lsp"
         else
-            msg = ""
+            local msg = nil
             for _, client in ipairs(clients) do
                 local filetypes = client.config.filetypes
+                -- Prep filetypes for indexing, some language servers only register with a single filetype so we need to
+                -- convert them into a blob so vim.fn.index doesn't throw a fit
+                if type(filetypes) == "string" then
+                    filetypes = { filetypes }
+                end
+
                 if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                    if msg == "" then
+                    if not msg then
                         msg = client.name
                     else
                         msg = msg .. ", " .. client.name
                     end
                 end
             end
+            return msg
         end
-        return msg
     end,
     icon = " LSP:",
     color = { fg = "#957fb8" },
