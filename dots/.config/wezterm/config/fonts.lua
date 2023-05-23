@@ -1,8 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
-    -- use_cap_height_to_scale_fallback_fonts = true,
-    unicode_version = 14,
+    use_cap_height_to_scale_fallback_fonts = true,
     line_height = 0.9,
     font = wezterm.font_with_fallback({
         {
