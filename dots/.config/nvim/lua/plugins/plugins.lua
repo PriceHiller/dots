@@ -63,7 +63,7 @@ lazy.setup({
 
     -- Icons for folders, files, etc.
     {
-        "kyazdani42/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons",
         lazy = true,
     },
 
@@ -103,7 +103,7 @@ lazy.setup({
     -- Dashboard when no file is given to nvim
     {
         "goolord/alpha-nvim",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("plugins.configs.alpha")
         end,
@@ -139,7 +139,7 @@ lazy.setup({
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
         dependencies = {
-            "kyazdani42/nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
         },
@@ -682,7 +682,7 @@ lazy.setup({
         "krivahtoo/silicon.nvim",
         build = "./install.sh build",
         dependencies = {
-            "kyazdani42/nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
         },
         cmd = {
             "Silicon",
