@@ -35,201 +35,157 @@
 /* peachRed       #FF5D62; */
 /* surimiOrange   #FFA066; */
 
+/* Global Styling */
 * {
-  min-height: 0;
-  padding: 3px;
-  border-radius: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding-right: 4px;
-  padding-left: 4px;
-  padding-top: 1px;
-  padding-bottom: 1px;
+  border: none;
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+  border-radius: 0px;
+  margin-top: 0.1rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 
+/* Bar Styling */
 #waybar {
   background: transparent;
-  font-family: JetBrainsMono;
-  font-size: medium;
-  color: #dcd7ba;
 }
 
-#custom-media {
-  background: #16161d;
-  border-top: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  border-right: 2px solid #957fb8;
+#cpu,
+#temperature,
+#custom-asusmode,
+#memory,
+#battery,
+#disk,
+#custom-audio-device,
+#custom-pipewire,
+#workspaces,
+#custom-media,
+#custom-weather,
+#custom-launcher,
+#network,
+#clock,
+#custom-lock {
+  background-color: #16161d;
   color: #dcd7ba;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
 }
 
-#custom-asusmode {
-  background: #16161d;
-  border-top: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  color: #dcd7ba;
+/* Launcher */
+#custom-launcher {
+  padding-right: 0.3rem;
+  padding-left: 0.1rem;
+  color: #957fb8;
+  margin-right: 0.25rem;
 }
 
-#custom-audio-device {
-  background: #16161d;
-  border-top: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  color: #dcd7ba;
+/* System Status */
+#cpu,
+#temperature,
+#memory,
+#disk {
+  color: #7e9cd8;
 }
 
-#custom-sway-mode {
-  background: #16161d;
-  border-bottom: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  color: #dcd7ba;
+#cpu {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-left: 1rem;
+  padding-right: 0.2rem;
+  margin-right: 0rem;
 }
 
+#memory {
+  border-radius: 0px;
+  padding-left: 0.1rem;
+  padding-right: 0.35rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+
+#temperature {
+  border-radius: 0px;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+
+#disk {
+  color: #ff5d62;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 0.35rem;
+  padding-right: 1rem;
+  margin-left: 0rem;
+}
+
+/* Worksapces */
 #workspaces {
-  background: #16161d;
-  transition: none;
-  border-top: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  border-right: 2px solid #957fb8;
-  padding-right: 20px;
-  padding-left: 20px;
+  border-radius: 14px;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+#workspaces * {
+  font-size: 0px;
 }
 
 #workspaces button {
-  transition: none;
-  margin: 0px;
-  color: #957fb8;
-  background: transparent;
-  border-bottom: 2px solid #957fb8;
-  border-radius: 0px;
-  padding-right: 25px;
-  padding-left: 25px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 0px;
+  margin: 5px 5px;
+  min-height: 0.75rem;
+  min-width: 0.75rem;
+  border-radius: 100%;
+  background-color: #54546d;
 }
 
 #workspaces button.active {
-  color: #98bb6c;
-  border-bottom: 2px solid #98bb6c;
-  border-radius: 0px;
+  background: radial-gradient(
+    circle,
+    #d27e99 0%,
+    #e46876 10%,
+    #7fb4ca 20%,
+    #a3d4d5 30%,
+    #ff9e3b 40%,
+    #e6c384 50%,
+    #98bb6c 60%,
+    #938aa9 70%,
+    #9cabca 80%,
+    #ffa066 90%,
+    #957fb8 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient_roll 30s ease-in-out infinite;
 }
 
 #workspaces button:hover {
   transition: none;
   box-shadow: inherit;
   text-shadow: inherit;
-  border-top: 0px;
-  border-bottom: 2px solid #a3d4d5;
-  color: #a3d4d5;
-  border-right: 0px;
-  border-left: 0px;
-  border-radius: 0px;
+  background-color: #ff5d62;
 }
 
-#idle_inhibitor {
-  margin-left: 0px;
-  background: #16161d;
-  border-top: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  color: #dcd7ba;
+/* Asus Fan Mode */
+#custom-asusmode {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
 }
 
-#network,
-#custom-weather,
-#clock,
-#custom-lock {
-  background: #16161d;
-  border-top: 2px solid #957fb8;
-  border-right: 2px solid #957fb8;
-  color: #dcd7ba;
-}
-
-#cpu,
-#memory,
-#custom-pipewire,
-#disk,
-#temperature,
-#battery {
-  background: #16161d;
-  border-top: 2px solid #957fb8;
-  border-left: 2px solid #957fb8;
-  color: #dcd7ba;
-}
-
-#disk.critical {
-  color: #e82424;
-}
-
-#temperature.critical {
-  color: #e82424;
-}
-
-#cpu.critical {
-  color: #e82424;
-}
-
-#memory.critical {
-  color: #e82424;
-}
-
-@keyframes blink1 {
-  to {
-    color: #98bb6c;
+/*=============*/
+/* Animations */
+/*===========*/
+@keyframes gradient_roll {
+  0% {
+    background-position: 0% 200%;
   }
-}
 
-#battery.plugged {
-  background-color: #16161d;
-  animation-name: blink1;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink2 {
-  to {
-    background-color: #e6c384;
+  50% {
+    background-position: 200% 0%;
   }
-}
 
-#battery.charging {
-  animation-name: blink2;
-  animation-duration: 8s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink3 {
-  to {
-    background-color: #ff9e3b;
+  100% {
+    background-position: 400% 200%;
   }
-}
-
-#battery.warning:not(.charging) {
-  animation-name: blink3;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink4 {
-  to {
-    background-color: #e82424;
-  }
-}
-
-#battery.critical:not(.charging) {
-  animation-name: blink4;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-#language {
-  border-bottom: 2px solid #957fb8;
-  border-right: 2px solid #957fb8;
-  background: #16161d;
-  color: #dcd7ba;
 }
