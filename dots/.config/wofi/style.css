@@ -35,53 +35,97 @@
 /*  --peachRed:       #FF5D62  */
 /*  --surimiOrange:   #FFA066  */
 
+* {
+  transition: 0.2s;
+}
+
 window {
-  margin: 5px;
-  border: 2px solid #54546d;
-  color: #dcd7ba;
-  background-color: #16161d;
-  border-radius: 20px;
+  font-family: "FiraCode Nerd Font Mono";
+  font-size: 12px;
+  border-radius: 12px;
+  border: 2px solid #ff5d62;
+  background-color: #16161D;
+  margin: 0px;
 }
 
 #input {
-  margin: 5px;
-  color: #dcd7ba;
-  border: 2px solid #54546d;
-  background-color: #1f1f28;
-  border-radius: 15px;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  padding: 4px;
+  margin: 20px;
+  padding-left: 20px;
+  border: none;
+  font-weight: bold;
+  background: linear-gradient(90deg, #957FB8 0%, #D27E99 100%);
+  color: #DCD7BA;
+  outline: none;
+  border-radius: 16px;
+}
+
+#input image {
+  color: #DCD7BA;
+  border: none;
+}
+
+#input:focus {
+  border: none;
+  outline: none;
 }
 
 #inner-box {
-  background-color: #1f1f28;
-  border-radius: 15px;
-  margin: 10px;
+  margin: 20px;
+  margin-top: 0px;
+  border: none;
+  color: #957FB8;
+  border-radius: 16px;
+}
+
+#inner-box * {
+  transition: none;
 }
 
 #outer-box {
-  margin: 10px;
-  border-radius: 15px;
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  border-radius: 16px;
 }
 
 #scroll {
-  border: 2px solid #54546d;
-  background-color: #1f1f28;
-  margin: 10px;
-  border-radius: 15px;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 16px;
+  margin-bottom: 5px;
+}
+
+#text:selected {
+  color: #DCD7BA;
+  font-weight: bold;
+}
+
+#img {
+  margin-right: 20px;
+  background: transparent;
 }
 
 #text {
-  color: #dcd7ba;
-  margin: 5px;
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background: transparent;
+}
+
+#entry {
+  margin: 0px;
+  border: none;
+  border-radius: 16px;
+  background-color: transparent;
+  min-height: 32px;
+  font-weight: bold;
 }
 
 #entry:selected {
-  background-color: #223249;
-  border-radius: 15px;
   outline: none;
-  margin: 2px;
+  margin: 0px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #957FB8 0%, #D27E99 100%);
 }
