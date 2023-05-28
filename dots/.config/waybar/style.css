@@ -1,39 +1,39 @@
-@define-color fujiWhite      #DCD7BA;
-@define-color oldWhite       #C8C093;
-@define-color sumiInk0       #16161D;
-@define-color sumiInk1       #1F1F28;
-@define-color sumiInk2       #2A2A37;
-@define-color sumiInk3       #363646;
-@define-color sumiInk4       #54546D;
-@define-color waveBlue1      #223249;
-@define-color waveBlue2      #2D4F67;
-@define-color winterGreen    #2B3328;
-@define-color winterYellow   #49443C;
-@define-color winterRed      #43242B;
-@define-color winterBlue     #252535;
-@define-color autumnGreen    #76946A;
-@define-color autumnRed      #C34043;
-@define-color autumnYellow   #DCA561;
-@define-color samuraiRed     #E82424;
-@define-color roninYellow    #FF9E3B;
-@define-color waveAqua1      #6A9589;
-@define-color dragonBlue     #658594;
-@define-color fujiGray       #727169;
-@define-color springViolet1  #938AA9;
-@define-color oniViolet      #957FB8;
-@define-color crystalBlue    #7E9CD8;
-@define-color springViolet2  #9CABCA;
-@define-color springBlue     #7FB4CA;
-@define-color lightBlue      #A3D4D5;
-@define-color waveAqua2      #7AA89F;
-@define-color springGreen    #98BB6C;
-@define-color boatYellow1    #938056;
-@define-color boatYellow2    #C0A36E;
-@define-color carpYellow     #E6C384;
-@define-color sakuraPink     #D27E99;
-@define-color waveRed        #E46876;
-@define-color peachRed       #FF5D62;
-@define-color surimiOrange   #FFA066;
+/* fujiWhite      #DCD7BA; */
+/* oldWhite       #C8C093; */
+/* sumiInk0       #16161D; */
+/* sumiInk1       #1F1F28; */
+/* sumiInk2       #2A2A37; */
+/* sumiInk3       #363646; */
+/* sumiInk4       #54546D; */
+/* waveBlue1      #223249; */
+/* waveBlue2      #2D4F67; */
+/* winterGreen    #2B3328; */
+/* winterYellow   #49443C; */
+/* winterRed      #43242B; */
+/* winterBlue     #252535; */
+/* autumnGreen    #76946A; */
+/* autumnRed      #C34043; */
+/* autumnYellow   #DCA561; */
+/* samuraiRed     #E82424; */
+/* roninYellow    #FF9E3B; */
+/* waveAqua1      #6A9589; */
+/* dragonBlue     #658594; */
+/* fujiGray       #727169; */
+/* springViolet1  #938AA9; */
+/* oniViolet      #957FB8; */
+/* crystalBlue    #7E9CD8; */
+/* springViolet2  #9CABCA; */
+/* springBlue     #7FB4CA; */
+/* lightBlue      #A3D4D5; */
+/* waveAqua2      #7AA89F; */
+/* springGreen    #98BB6C; */
+/* boatYellow1    #938056; */
+/* boatYellow2    #C0A36E; */
+/* carpYellow     #E6C384; */
+/* sakuraPink     #D27E99; */
+/* waveRed        #E46876; */
+/* peachRed       #FF5D62; */
+/* surimiOrange   #FFA066; */
 
 * {
   min-height: 0;
@@ -51,45 +51,44 @@
   background: transparent;
   font-family: JetBrainsMono;
   font-size: medium;
-  color: @fujiWhite;
+  color: #dcd7ba;
 }
 
 #custom-media {
-  background: @sumiInk0;
-  border-top: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  border-right: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-top: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  border-right: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
 #custom-asusmode {
-  background: @sumiInk0;
-  border-top: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-top: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
 #custom-audio-device {
-  background: @sumiInk0;
-  border-top: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-top: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
-
 #custom-sway-mode {
-  background: @sumiInk0;
-  border-bottom: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-bottom: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
 #workspaces {
-  background: @sumiInk0;
+  background: #16161d;
   transition: none;
-  border-top: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  border-right: 2px solid @oniViolet;
+  border-top: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  border-right: 2px solid #957fb8;
   padding-right: 20px;
   padding-left: 20px;
 }
@@ -97,9 +96,9 @@
 #workspaces button {
   transition: none;
   margin: 0px;
-  color: @oniViolet;
+  color: #957fb8;
   background: transparent;
-  border-bottom: 2px solid @oniViolet;
+  border-bottom: 2px solid #957fb8;
   border-radius: 0px;
   padding-right: 25px;
   padding-left: 25px;
@@ -108,8 +107,8 @@
 }
 
 #workspaces button.active {
-  color: @springGreen;
-  border-bottom: 2px solid @springGreen;
+  color: #98bb6c;
+  border-bottom: 2px solid #98bb6c;
   border-radius: 0px;
 }
 
@@ -118,8 +117,8 @@
   box-shadow: inherit;
   text-shadow: inherit;
   border-top: 0px;
-  border-bottom: 2px solid @lightBlue;
-  color: @lightBlue;
+  border-bottom: 2px solid #a3d4d5;
+  color: #a3d4d5;
   border-right: 0px;
   border-left: 0px;
   border-radius: 0px;
@@ -127,20 +126,20 @@
 
 #idle_inhibitor {
   margin-left: 0px;
-  background: @sumiInk0;
-  border-top: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-top: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
 #network,
 #custom-weather,
 #clock,
 #custom-lock {
-  background: @sumiInk0;
-  border-top: 2px solid @oniViolet;
-  border-right: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-top: 2px solid #957fb8;
+  border-right: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
 #cpu,
@@ -149,36 +148,36 @@
 #disk,
 #temperature,
 #battery {
-  background: @sumiInk0;
-  border-top: 2px solid @oniViolet;
-  border-left: 2px solid @oniViolet;
-  color: @fujiWhite;
+  background: #16161d;
+  border-top: 2px solid #957fb8;
+  border-left: 2px solid #957fb8;
+  color: #dcd7ba;
 }
 
 #disk.critical {
-  color: @samuraiRed;
+  color: #e82424;
 }
 
 #temperature.critical {
-  color: @samuraiRed;
+  color: #e82424;
 }
 
 #cpu.critical {
-  color: @samuraiRed;
+  color: #e82424;
 }
 
 #memory.critical {
-  color: @samuraiRed;
+  color: #e82424;
 }
 
 @keyframes blink1 {
   to {
-    color: @springGreen;
+    color: #98bb6c;
   }
 }
 
 #battery.plugged {
-  background-color: @sumiInk0;
+  background-color: #16161d;
   animation-name: blink1;
   animation-duration: 2s;
   animation-timing-function: linear;
@@ -188,12 +187,11 @@
 
 @keyframes blink2 {
   to {
-    background-color: @carpYellow;
+    background-color: #e6c384;
   }
 }
 
 #battery.charging {
-  /* background-color: @sumiInk0; */
   animation-name: blink2;
   animation-duration: 8s;
   animation-timing-function: ease-in-out;
@@ -203,12 +201,11 @@
 
 @keyframes blink3 {
   to {
-    background-color: @roninYellow;
+    background-color: #ff9e3b;
   }
 }
 
 #battery.warning:not(.charging) {
-  /*  background-color: @sumiInk0; */
   animation-name: blink3;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
@@ -218,12 +215,11 @@
 
 @keyframes blink4 {
   to {
-    background-color: @samuraiRed;
+    background-color: #e82424;
   }
 }
 
 #battery.critical:not(.charging) {
-  /* background-color: @sumiInk0; */
   animation-name: blink4;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
@@ -232,8 +228,8 @@
 }
 
 #language {
-  border-bottom: 2px solid @oniViolet;
-  border-right: 2px solid @oniViolet;
-  background: @sumiInk0;
-  color: @fujiWhite;
+  border-bottom: 2px solid #957fb8;
+  border-right: 2px solid #957fb8;
+  background: #16161d;
+  color: #dcd7ba;
 }
