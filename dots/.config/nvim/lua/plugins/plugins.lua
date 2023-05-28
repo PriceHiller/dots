@@ -804,7 +804,7 @@ lazy.setup({
     -- Better listing for diags, refs, quickfix, locs, etc.
     {
         "folke/trouble.nvim",
-        requires = "nvim-tree/nvim-web-devicons",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         cmd = {
             "Trouble",
             "TroubleClose",
