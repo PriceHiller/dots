@@ -44,7 +44,7 @@ window {
   font-size: 12px;
   border-radius: 12px;
   border: 2px solid #ff5d62;
-  background-color: #16161D;
+  background-color: #16161d;
   margin: 0px;
 }
 
@@ -54,14 +54,14 @@ window {
   padding-left: 20px;
   border: none;
   font-weight: bold;
-  background: linear-gradient(90deg, #957FB8 0%, #D27E99 100%);
-  color: #DCD7BA;
+  background: linear-gradient(90deg, #957fb8 0%, #d27e99 100%);
+  color: #dcd7ba;
   outline: none;
   border-radius: 16px;
 }
 
 #input image {
-  color: #DCD7BA;
+  color: #dcd7ba;
   border: none;
 }
 
@@ -74,7 +74,7 @@ window {
   margin: 20px;
   margin-top: 0px;
   border: none;
-  color: #957FB8;
+  color: #957fb8;
   border-radius: 16px;
 }
 
@@ -97,7 +97,7 @@ window {
 }
 
 #text:selected {
-  color: #DCD7BA;
+  color: #dcd7ba;
   font-weight: bold;
 }
 
@@ -127,5 +127,19 @@ window {
   margin: 0px;
   border: none;
   border-radius: 16px;
-  background: linear-gradient(90deg, #957FB8 0%, #D27E99 100%);
+  background: linear-gradient(-90deg, #957fb8, #7E9CD8, #FFA066, #FF5D62);
+  background-size: 300% 300%;
+  animation: gradient 9s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
