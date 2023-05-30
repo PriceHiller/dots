@@ -83,7 +83,10 @@
     rgba(149, 127, 184, 0.9)
   );
   background-size: 400% 400%;
-  animation: gradient_scroll 10s ease infinite;
+  /*
+  * NOTE: As much as I'd love to have this animation on, gtk enjoys being a massive pile of shit and causes the CPU to
+  * turn into a space heater. */
+  /* animation: gradient_scroll 10s ease infinite; */
 }
 
 /* Launcher */

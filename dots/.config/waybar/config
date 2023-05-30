@@ -23,12 +23,11 @@
             "custom/lock"
         ],
         "custom/launcher": {
-            "format": "{}",
+            "format": "󰫢",
             "tooltip": false,
             "min-length": 5,
-            "interval": 1,
             "on-click": "wofi",
-            "exec": "printf '󰫢'"
+            "interval": "once"
         },
         "battery": {
             "min-length": 5,
@@ -196,7 +195,6 @@
             "return-type": "json",
             "on-click": "playerctl play-pause",
             "exec": "~/.config/waybar/scripts/get-media.bash",
-            "escape": true
         }
     }
 ]

@@ -21,7 +21,7 @@ get-album-info () {
 		fi
 
 		printf '{"class": "%s", "text": "%s"}\n' "${class}" "${text}"
-		sleep .08
+		sleep .5
 	done
 }
 
