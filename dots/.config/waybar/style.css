@@ -58,18 +58,32 @@
 #battery,
 #disk,
 #custom-audio-device,
-#custom-pipewire,
 #workspaces,
 #custom-media,
 #custom-weather,
 #custom-launcher,
 #network,
 #clock,
+#wireplumber,
+#image,
 #custom-lock {
   background-color: #16161d;
   color: #dcd7ba;
   padding: 0.4rem 0.8rem;
   border-radius: 20px;
+}
+
+/* Media */
+#custom-media {
+  margin: 0;
+  background: linear-gradient(
+    -45deg,
+    rgba(126, 156, 216, 0.9),
+    rgba(210, 126, 153, 0.9),
+    rgba(149, 127, 184, 0.9)
+  );
+  background-size: 400% 400%;
+  animation: gradient_scroll 10s ease infinite;
 }
 
 /* Launcher */
@@ -84,48 +98,88 @@
 #cpu,
 #temperature,
 #memory,
-#disk {
+#disk,
+#battery {
   color: #7e9cd8;
+  margin-left: 0rem;
+  margin-right: 0rem;
 }
 
 #cpu {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  padding-left: 1rem;
-  padding-right: 0.2rem;
-  margin-right: 0rem;
+  padding-right: 0em;
 }
 
 #memory {
   border-radius: 0px;
   padding-left: 0.1rem;
   padding-right: 0.35rem;
-  margin-left: 0rem;
-  margin-right: 0rem;
 }
 
 #temperature {
   border-radius: 0px;
   padding-left: 0.35rem;
   padding-right: 0.35rem;
-  margin-left: 0rem;
-  margin-right: 0rem;
 }
 
 #disk {
-  color: #ff5d62;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  color: #dca561;
+  border-radius: 0px;
   padding-left: 0.35rem;
   padding-right: 1rem;
+}
+
+#battery {
   margin-left: 0rem;
+  padding-left: 0rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color: #98bb6c;
+}
+
+#battery.warning {
+  color: #e6c384;
+}
+
+#battery.near-critical {
+  color: #c34043;
+}
+
+#battery.critical {
+  color: #e82424;
+  animation: blink_text 1.5s linear infinite;
+}
+
+/* Audio Device & Wireplumber Audio Return */
+#custom-audio-device,
+#wireplumber {
+  margin-right: 0rem;
+}
+
+#custom-audio-device {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-right: 0.35rem;
+  color: #ff9e3b;
+}
+
+#wireplumber {
+  border-top-left-radius: 0;
+  padding-left: 0.35rem;
+  border-bottom-left-radius: 0;
+  margin-left: 0rem;
+  color: #d27e99;
 }
 
 /* Worksapces */
 #workspaces {
-  border-radius: 14px;
   margin-left: 0.25rem;
   margin-right: 0.25rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 #workspaces * {
@@ -133,12 +187,15 @@
 }
 
 #workspaces button {
-  padding: 0px;
-  margin: 5px 5px;
-  min-height: 0.75rem;
-  min-width: 0.75rem;
-  border-radius: 100%;
+  border-radius: 50%;
+  min-height: 0.0em;
+  min-width: 0.0em;
+  padding-left: 0.0rem;
+  padding-right: 0.0rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   background-color: #54546d;
+  color: transparent;
 }
 
 #workspaces button.active {
@@ -169,8 +226,26 @@
 
 /* Asus Fan Mode */
 #custom-asusmode {
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
+  color: #ffa066;
+}
+
+/* Network */
+#network {
+  color: #a3d4d5;
+}
+
+#network.disconnected {
+  color: #e6c384;
+}
+
+/* Clock */
+#clock {
+  color: #ff5d62;
+}
+
+/* Lock */
+#custom-lock {
+  color: #957fb8;
 }
 
 /*=============*/
@@ -187,5 +262,23 @@
 
   100% {
     background-position: 400% 200%;
+  }
+}
+
+@keyframes blink_text {
+  50% {
+    color: transparent;
+  }
+}
+
+@keyframes gradient_scroll {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

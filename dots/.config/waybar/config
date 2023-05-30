@@ -11,7 +11,7 @@
             "disk",
             "battery",
             "custom/audio-device",
-            "custom/pipewire"
+            "wireplumber"
         ],
         "modules-center": [
             "custom/media"
@@ -34,8 +34,8 @@
             "min-length": 5,
             "design-capacity": true,
             "states": {
-                "full": 90,
-                "warning": 20,
+                "warning": 30,
+                "near-critical": 15,
                 "critical": 10
             },
             "tooltip": false,
@@ -57,20 +57,36 @@
             ]
         },
         "wlr/workspaces": {
-            "format": "{icon}",
-            "format-icons": {
-                "active": "",
-                "default": ""
-            },
+            "format": "",
             "on-scroll-up": "hyprctl dispatch workspace e-1",
             "on-scroll-down": "hyprctl dispatch workspace e+1",
             "on-click": "activate"
         },
         "clock": {
             "format": " {:%a %b %d %I:%M %p}",
-            "tooltip": true,
-            "tooltip-format": "<big>{:%Y %B \t week: %V }</big>\n<tt>{calendar}</tt>",
-            "min-length": 18
+            "format-alt": " {:%H:%M %p}",
+            "tooltip-format": "<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "year",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "on-click-right": "mode",
+                "format": {
+                    "months": "<span color='#FFA066'><b>{}</b></span>",
+                    "days": "<span color='#DCD7BA'><b>{}</b></span>",
+                    "weeks": "<span color='#A3D4D5'><b>W{}</b></span>",
+                    "weekdays": "<span color='#E6C384'><b>{}</b></span>",
+                    "today": "<span color='#FF5D62'><b><u>{}</u></b></span>"
+                }
+            },
+            "actions": {
+                "on-click-right": "mode",
+                "on-click-forward": "tz_up",
+                "on-click-backward": "tz_down",
+                "on-scroll-up": "shift_up",
+                "on-scroll-down": "shift_down"
+            }
         },
         "custom/lock": {
             "tooltip": false,
@@ -79,15 +95,25 @@
             "on-click": "swaylock"
         },
         "network": {
-            "interval": 10,
-            "format-wifi": " {essid}",
-            "format-ethernet": " {ipaddr}",
-            "format-linked": " {ifname}",
-            "format-disconnected": " Disconnected",
+            "on-click-right": "iwctl station wlan0 disconnect",
+            "interval": 1,
+            "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
+            "format-disconnected": "{icon} Disconnected",
+            "format-linked": " {ifname} | ↕ {bandwidthTotalBytes}",
+            "format-wifi": "{icon} {essid} | ↕ {bandwidthTotalBytes}",
+            "format-ethernet": "{icon} {ipaddr}/{cidr} | ↕ {bandwidthTotalBytes}",
+            "tooltip-format": "{ifname}: {ipaddr}/{cidr} 󰌹 {gwaddr}",
+            "format-icons": {
+                "ethernet": "󰈀",
+                "disconnected": "",
+                "wifi": [
+                    "󰖪",
+                    ""
+                ]
+            },
             "tooltip": true,
-            "tooltip-format": "IP: {ipaddr}/{cidr}\nGW: {gwaddr}/{cidr}\nNM: {netmask}",
-            "max-length": 20,
-            "min-length": 14
+            "max-length": 60,
+            "min-length": 30
         },
         "custom/audio-device": {
             "tooltip": false,
@@ -96,21 +122,16 @@
             "format": " {}",
             "exec": "wpctl status | grep -m 1 '*' | cut -d '.' -f2 | cut -d '[' -f1 | xargs"
         },
-        "custom/pipewire": {
-            "format": "{icon} {percentage}%",
-            "return-type": "json",
-            "signal": 8,
-            "interval": "once",
-            "format-icons": {
-                "mute": "婢",
-                "default": [
-                    "奄",
-                    "奔",
-                    "墳"
-                ]
-            },
-            "on-click": "pw-volume mute toggle; pkill -RTMIN+8 waybar",
-            "exec": "pw-volume status"
+        "wireplumber": {
+            "format": "{icon}{volume}%",
+            "format-muted": "󰖁  0%",
+            "on-right-click": "helvum",
+            "on-click": "pw-volume mute toggle",
+            "format-icons": [
+                "󰕿 ",
+                "󰖀 ",
+                "󰕾 "
+            ]
         },
         "idle_inhibitor": {
             "tooltip": false,
@@ -149,6 +170,8 @@
         "custom/asusmode": {
             "interval": 1,
             "format": " {}",
+            "on-click": "asusctl profile -n",
+            "on-click-right": "rog-control-center",
             "exec": "asusctl profile -p | awk '{print $NF}'"
         },
         "memory": {
@@ -164,14 +187,14 @@
             "interval": 60,
             "tooltip-format": "{used} used out of {total} ({percentage_used}%)",
             "min-length": 5,
-            "format": "🖴 {percentage_used}%",
+            "format": "󰋊 {percentage_used}%",
             "states": {
                 "critical": 90
             }
         },
         "custom/media": {
-            "interval": 1,
             "return-type": "json",
+            "on-click": "playerctl play-pause",
             "exec": "~/.config/waybar/scripts/get-media.bash",
             "escape": true
         }
