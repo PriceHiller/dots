@@ -17,6 +17,7 @@
             "custom/media"
         ],
         "modules-right": [
+            "custom/pacman-update",
             "custom/asusmode",
             "network",
             "clock",
@@ -195,6 +196,14 @@
             "return-type": "json",
             "on-click": "playerctl play-pause",
             "exec": "~/.config/waybar/scripts/get-media.bash"
+        },
+        "custom/pacman-update": {
+            "return-type": "json",
+            "exec": "~/.config/waybar/scripts/get-pacman-package-updates.bash",
+            "exec-if": "((\"$(checkupdates | wc -l)\" > 0))",
+            "format": "󰇚 {}",
+            "tooltip": true,
+            "interval": 10
         }
     }
 ]

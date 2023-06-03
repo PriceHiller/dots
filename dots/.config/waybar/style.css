@@ -66,6 +66,7 @@
 #clock,
 #wireplumber,
 #image,
+#custom-pacman-update,
 #custom-lock {
   background-color: #16161d;
   color: #dcd7ba;
@@ -219,6 +220,11 @@
   box-shadow: inherit;
   text-shadow: inherit;
   background-color: #ff5d62;
+}
+
+/* Pacman Updates */
+#custom-pacman-update {
+  color: #7E9CD8;
 }
 
 /* Asus Fan Mode */
