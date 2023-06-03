@@ -194,7 +194,7 @@
         "custom/media": {
             "return-type": "json",
             "on-click": "playerctl play-pause",
-            "exec": "~/.config/waybar/scripts/get-media.bash",
+            "exec": "~/.config/waybar/scripts/get-media.bash"
         }
     }
 ]
