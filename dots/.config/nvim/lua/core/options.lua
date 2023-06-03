@@ -70,7 +70,7 @@ M.setup = function()
 
     -- Concealment for nicer rendering
     opt.conceallevel = 2
-    opt.concealcursor = "ic"
+    opt.concealcursor = ""
 
     -- Cursor line highlight
     opt.cursorline = true
