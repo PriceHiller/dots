@@ -199,20 +199,16 @@
 #workspaces button.active {
   background: radial-gradient(
     circle,
-    #d27e99 0%,
-    #e46876 10%,
-    #7fb4ca 20%,
-    #a3d4d5 30%,
-    #ff9e3b 40%,
-    #e6c384 50%,
-    #98bb6c 60%,
-    #938aa9 70%,
-    #9cabca 80%,
-    #ffa066 90%,
+    #e46876 0%,
+    #a3d4d5 25%,
+    #ff9e3b 30%,
+    #ff5d62 60%,
     #957fb8 100%
   );
   background-size: 400% 400%;
-  animation: gradient_roll 30s ease-in-out infinite;
+  /* PERF: Animations in gtk css cause incredible CPU loads, wtf?!
+  * Disabling this shit for now, not worth the CPU cost. */
+  /* animation: gradient_roll 30s ease-in-out infinite; */
 }
 
 #workspaces button:hover {
