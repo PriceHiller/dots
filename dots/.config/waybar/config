@@ -128,7 +128,8 @@
         "wireplumber": {
             "format": "{icon}{volume}%",
             "format-muted": "󰖁  0%",
-            "on-right-click": "helvum",
+            "on-click-middle": "helvum",
+            "on-click-right": "pavucontrol",
             "on-click": "pw-volume mute toggle",
             "format-icons": [
                 "󰕿 ",
