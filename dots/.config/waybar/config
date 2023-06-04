@@ -11,7 +11,8 @@
             "disk",
             "battery",
             "custom/audio-device",
-            "wireplumber"
+            "wireplumber",
+            "wlr/taskbar"
         ],
         "modules-center": [
             "custom/media"
@@ -204,6 +205,20 @@
             "format": "󰇚 {}",
             "tooltip": true,
             "interval": 10
+        },
+        "wlr/taskbar": {
+            "format": "{icon}",
+            "icon-size": 12,
+            "icon-theme": "Numix-Circle",
+            "tooltip-format": "{title}",
+            "on-click": "activate",
+            "on-click-middle": "close",
+            "ignore-list": [
+                "Alacritty"
+            ],
+            "app_ids-mapping": {
+                "firefoxdeveloperedition": "firefox-developer-edition"
+            }
         }
     }
 ]
