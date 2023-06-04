@@ -259,9 +259,13 @@
   color: #e6c384;
 }
 
+#network.disabled {
+  color: #FF5D62;
+}
+
 /* Clock */
 #clock {
-  color: #ff5d62;
+  color: #FF9E3B;
 }
 
 /* Lock */
