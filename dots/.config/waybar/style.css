@@ -189,11 +189,12 @@
 
 #taskbar button.active {
   border-bottom: 0.2em solid #ff9e3b;
+  background-color: rgba(255, 158, 59, 0.3);
 }
 
 #taskbar button:hover {
   border-bottom: 0.2em solid #ff5d62;
-  background: transparent;
+  background: rgba(255, 93, 98, 0.3);
 }
 
 /* Worksapces */
