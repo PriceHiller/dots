@@ -77,11 +77,17 @@
 /* Media */
 #custom-media {
   margin: 0;
-  background-size: 400% 400%;
-  /*
-  * NOTE: As much as I'd love to have this animation on, gtk enjoys being a massive pile of shit and causes the CPU to
-  * turn into a space heater. */
-  /* animation: gradient_scroll 10s ease infinite; */
+}
+
+#custom-media.playing {
+  background: linear-gradient(
+    -45deg,
+    rgba(126, 156, 216, 0.75),
+    rgba(156, 171, 202, 0.75),
+    rgba(210, 126, 153, 0.75),
+    rgba(255, 93, 98, 0.75),
+    rgba(149, 127, 184, 0.75)
+  );
 }
 
 /* Launcher */
