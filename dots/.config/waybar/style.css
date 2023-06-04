@@ -67,6 +67,8 @@
 #wireplumber,
 #image,
 #custom-pacman-update,
+#taskbar,
+#tray,
 #custom-lock {
   background-color: #16161d;
   color: #dcd7ba;
@@ -94,8 +96,8 @@
 #custom-launcher {
   padding-right: 0.3rem;
   padding-left: 0.1rem;
+  margin-right: 0rem;
   color: #957fb8;
-  margin-right: 0.25rem;
 }
 
 /* System Status */
@@ -176,10 +178,26 @@
   color: #d27e99;
 }
 
+/* Taskbar, showing icons of open applications */
+#taskbar button {
+  margin-top: 0.1em;
+  min-height: 0.25em;
+  padding-left: 0em;
+  padding-right: 0em;
+  background-color: transparent;
+}
+
+#taskbar button.active {
+  border-bottom: 0.2em solid #ff9e3b;
+}
+
+#taskbar button:hover {
+  border-bottom: 0.2em solid #ff5d62;
+  background: transparent;
+}
+
 /* Worksapces */
 #workspaces {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
   margin-top: 0rem;
   margin-bottom: 0rem;
   padding-top: 1em;
@@ -192,10 +210,10 @@
 
 #workspaces button {
   border-radius: 50%;
-  min-height: 0.0em;
-  min-width: 0.0em;
-  padding-left: 0.0rem;
-  padding-right: 0.0rem;
+  min-height: 0em;
+  min-width: 0em;
+  padding-left: 0rem;
+  padding-right: 0rem;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
   background-color: #54546d;
@@ -218,12 +236,12 @@
 }
 
 #workspaces button:hover {
-  background: #98BB6C;
+  background: #98bb6c;
 }
 
 /* Pacman Updates */
 #custom-pacman-update {
-  color: #7E9CD8;
+  color: #7e9cd8;
 }
 
 /* Asus Fan Mode */
