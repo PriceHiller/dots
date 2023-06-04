@@ -12,8 +12,12 @@ end
 local lldb_path = get_program_path("codelldb")
 -- Adapaters
 dap.adapters.lldb = {
-    type = "executable",
-    command = lldb_path,
+    type = "server",
+    port = "${port}",
+    executable = {
+        command = lldb_path,
+        args = { "--port", "${port}" },
+    },
     name = "lldb",
 }
 
@@ -40,7 +44,6 @@ dap.configurations.cpp = {
         end,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
-        targetArchitecture = "arm64",
         args = {},
 
         -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
@@ -58,6 +61,7 @@ dap.configurations.cpp = {
 }
 
 dap.configurations.c = dap.configurations.cpp
+dap.configurations.asm = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 vim.g.dotnet_build_project = function()
