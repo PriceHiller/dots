@@ -97,13 +97,14 @@
             "on-click": "swaylock"
         },
         "network": {
-            "on-click-right": "iwctl station wlan0 disconnect",
+            "on-click-right": "~/.config/waybar/scripts/set-rfkill.bash",
             "interval": 1,
             "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
             "format-disconnected": "{icon} Disconnected",
             "format-linked": " {ifname} | ↕ {bandwidthTotalBytes}",
             "format-wifi": "{icon} {essid} | ↕ {bandwidthTotalBytes}",
             "format-ethernet": "{icon} {ipaddr}/{cidr} | ↕ {bandwidthTotalBytes}",
+            "format-disabled": "󰀝 Wireless Networking Disabled",
             "tooltip-format": "{ifname}: {ipaddr}/{cidr} 󰌹 {gwaddr}",
             "format-icons": {
                 "ethernet": "󰈀",
