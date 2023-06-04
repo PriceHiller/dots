@@ -19,6 +19,7 @@
         ],
         "modules-right": [
             "custom/pacman-update",
+            "tray",
             "custom/asusmode",
             "network",
             "clock",
@@ -219,6 +220,9 @@
             "app_ids-mapping": {
                 "firefoxdeveloperedition": "firefox-developer-edition"
             }
+        },
+        "tray": {
+            "icon-size": 12
         }
     }
 ]
