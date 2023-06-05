@@ -323,7 +323,7 @@ for _, server in ipairs({
     "tsserver",
     "rnix",
     "marksman",
-    "asm_lsp"
+    "asm_lsp",
 }) do
     lspconfig[server].setup(opts)
 end
