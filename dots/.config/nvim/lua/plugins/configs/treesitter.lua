@@ -7,6 +7,15 @@ vim.opt.runtimepath:append(treesitter_dir)
 nvim_treesitter.setup({
     parser_install_dir = treesitter_dir,
     ensure_installed = "all",
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "<CR>",
+            scope_incremental = "<S-CR>",
+            node_incremental = "<CR>",
+            node_decremental = "<BS>",
+        },
+    },
     highlight = {
         enable = true,
         disable = function(_, buf)
