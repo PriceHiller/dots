@@ -152,7 +152,7 @@ lazy.setup({
     -- Lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = "BufRead",
+        event = "VimEnter",
         dependencies = {
             "folke/neodev.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
