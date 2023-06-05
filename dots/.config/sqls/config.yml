@@ -1,4 +1,0 @@
-connections:
-  - alias: zero2prod
-    driver: postgresql
-    dataSourceName: postgres://postgres:password@127.0.0.1:5432/newsletter
