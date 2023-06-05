@@ -261,7 +261,7 @@ lspconfig.azure_pipelines_ls.setup({
             },
         },
     },
-    filetypes = "azure-pipelines",
+    filetypes = { "azure-pipelines" },
     capabilities = lsp_capabilities,
     on_attach = on_attach,
 })
