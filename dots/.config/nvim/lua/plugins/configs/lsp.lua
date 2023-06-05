@@ -319,7 +319,6 @@ for _, server in ipairs({
     "tflint",
     "tsserver",
     "vimls",
-    "vuels",
     "tsserver",
     "rnix",
     "marksman",
