@@ -18,6 +18,7 @@ nvim_treesitter.setup({
     },
     highlight = {
         enable = true,
+        additional_vim_regex_highlighting = false,
         disable = function(_, buf)
             local disabled_filetypes = {
                 "tex",
