@@ -755,16 +755,6 @@ lazy.setup({
         lazy = true,
     },
 
-    -- Improved Visuals for Documentation
-    {
-        "lukas-reineke/headlines.nvim",
-        opts = {},
-        ft = {
-            "markdown",
-            "norg",
-        },
-    },
-
     -- Convert numbers between binary, decimal, & hex
     {
         "skosulor/nibbler",

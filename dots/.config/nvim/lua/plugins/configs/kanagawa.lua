@@ -132,6 +132,12 @@ require("kanagawa").setup({
             Headline = { bg = colors.sumiInk2 },
             HeadlineReversed = { bg = colors.sumiInk1 },
             LspInlayHint = { link = "Comment", italic = true },
+            ['@text.title.1.marker.markdown'] = { fg = colors.surimiOrange },
+            ['@text.title.2.marker.markdown'] = { fg = colors.surimiOrange },
+            ['@text.title.3.marker.markdown'] = { fg = colors.surimiOrange },
+            ['@text.title.4.marker.markdown'] = { fg = colors.surimiOrange },
+            ['@text.title.5.marker.markdown'] = { fg = colors.surimiOrange },
+            ['@text.title.6.marker.markdown'] = { fg = colors.surimiOrange }
         }
 
         return overrides
