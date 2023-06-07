@@ -32,7 +32,8 @@ vim.keymap.set(
     ":Telescope neoclip default<CR>",
     { silent = true, desc = "Telescope: Neoclip Buffer" }
 )
-vim.keymap.set("n", "<leader>tr", ":Telescope registers<CR>", { silent = true, desc = "Telescope: Registers" })
+vim.keymap.set("n", "<leader>tr", ":Telescope resume<CR>", { silent = true, desc = "Telescope: Resume" })
+vim.keymap.set("n", "<leader>tR", ":Telescope registers<CR>", { silent = true, desc = "Telescope: Registers" })
 vim.keymap.set("n", "<leader>tt", ":Telescope file_browser<CR>", { silent = true, desc = "Telescope: File Tree" })
 vim.keymap.set("n", "<leader>ts", ":Telescope spell_suggest<CR>", { silent = true, desc = "Telescope: Spell Suggest" })
 vim.keymap.set("n", "<leader>tl", ":Telescope resume<CR>", { silent = true, desc = "Telescope: Previous State" })
