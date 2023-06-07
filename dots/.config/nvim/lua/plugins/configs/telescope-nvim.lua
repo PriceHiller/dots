@@ -6,6 +6,7 @@ telescope.setup({
         find_files = {
             find_command = {
                 "fd",
+                "--no-ignore"
             },
             hidden = true,
         },
@@ -19,6 +20,7 @@ telescope.setup({
             "--line-number",
             "--column",
             "--hidden",
+            "--no-ignore",
             "--smart-case",
         },
         history = {
