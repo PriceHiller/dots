@@ -157,6 +157,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
     local title = " " .. wezterm.truncate_right(tab_title(tab), max_width - 2) .. " "
 
+    if title:match("^%s+$") then
+        title = " N/A "
+    end
+
     if tab.is_active then
         bg = color_names.kanagawa.sumiInk0
         fg = color_names.kanagawa.oniViolet
