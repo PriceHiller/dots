@@ -15,6 +15,7 @@ M.setup = function()
 
     vim.treesitter.language.register("yaml", "azure-pipelines")
     vim.treesitter.language.register("gitignore", "dockerignore")
+    vim.treesitter.language.register("html", "xml")
 end
 
 return M
