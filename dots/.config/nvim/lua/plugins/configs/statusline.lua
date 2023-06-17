@@ -63,7 +63,7 @@ local show_lsp_name = {
                     end
                 end
             end
-            return msg
+            return msg or "No Active Lsp"
         end
     end,
     icon = " LSP:",
