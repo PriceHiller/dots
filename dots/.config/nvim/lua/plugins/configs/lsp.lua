@@ -1,6 +1,5 @@
 local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
-local async = require("plenary.async")
 
 -- NOTE: Keep this near top
 mason_lspconfig.setup({
@@ -12,6 +11,11 @@ local function on_attach(client, bufnr)
     vim.notify("Attached server " .. client.name, "info", {
         title = "LSP",
     })
+
+    -- Enable inlay hints if the language server provides them
+    if client.server_capabilities.inlayHintProvider then
+        vim.lsp.buf.inlay_hint(bufnr, true)
+    end
 end
 
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
