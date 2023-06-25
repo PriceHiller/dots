@@ -168,6 +168,12 @@ lazy.setup({
         end,
     },
 
+    {
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
+    },
+
     -- Show code actions
     {
         "kosayoda/nvim-lightbulb",
