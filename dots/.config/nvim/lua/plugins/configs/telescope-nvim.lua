@@ -6,7 +6,7 @@ telescope.setup({
         find_files = {
             find_command = {
                 "fd",
-                "--no-ignore"
+                "--no-ignore",
             },
             hidden = true,
         },

@@ -9,7 +9,7 @@ M.setup = function()
             [".*%.dockerfile"] = "dockerfile",
             [".*/Azure%-Pipelines/.*%.yml"] = "azure-pipelines",
             [".*/Azure%-Pipelines/.*%.yaml"] = "azure-pipelines",
-            [".*/waybar/config"] = "jsonc"
+            [".*/waybar/config"] = "jsonc",
         },
     })
 
