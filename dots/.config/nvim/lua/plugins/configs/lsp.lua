@@ -4,6 +4,9 @@ local lspconfig = require("lspconfig")
 -- NOTE: Keep this near top
 mason_lspconfig.setup({
     automatic_installation = true,
+    ensure_installed = {
+        "tsserver",
+    },
 })
 
 local function on_attach(client, bufnr)
@@ -14,7 +17,7 @@ local function on_attach(client, bufnr)
 
     -- Enable inlay hints if the language server provides them
     if client.server_capabilities.inlayHintProvider then
-        vim.lsp.buf.inlay_hint(bufnr, true)
+        vim.lsp.inlay_hint(bufnr, true)
     end
 end
 
@@ -44,7 +47,7 @@ local rustopts = {
         inlay_hints = {
             -- automatically set inlay hints (type hints)
             -- default: true
-            auto = false,
+            auto = true,
             -- Only show inlay hints for the current line
             only_current_line = false,
             -- whether to show parameter hints with the inlay hints or not
@@ -287,25 +290,20 @@ lspconfig.texlab.setup({
     },
 })
 
-local path = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
-local words = {}
-
-for word in io.open(path, "r"):lines() do
-    table.insert(words, word)
-end
-
--- lspconfig.ltex.setup({
---     settings = {
---         ltex = {
---             dictionary = {
---                 ["en-US"] = words,
---             },
---         },
---     },
---     filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
---     capabilities = lsp_capabilities,
---     on_attach = on_attach,
--- })
+-- Custom config from typescript tools
+require("typescript-tools").setup({
+    on_attach = on_attach,
+    settings = {
+        tsserver_file_preferences = {
+            includeInlayParameterNameHints = "all",
+            includeInlayEnumMemberValueHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayVariableTypeHints = true,
+        },
+    },
+})
 
 -- NOTE: GENERIC LSP SERVERS
 for _, server in ipairs({
