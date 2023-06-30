@@ -152,7 +152,6 @@ lazy.setup({
     -- Lspconfig
     {
         "neovim/nvim-lspconfig",
-        event = "VimEnter",
         dependencies = {
             "folke/neodev.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
@@ -161,17 +160,16 @@ lazy.setup({
             "simrat39/rust-tools.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
+
+            {
+                "pmizio/typescript-tools.nvim",
+                dependencies = { "nvim-lua/plenary.nvim" },
+            },
         },
         config = function()
             require("mason").setup({})
             require("plugins.configs.lsp")
         end,
-    },
-
-    {
-        "pmizio/typescript-tools.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        opts = {},
     },
 
     -- Show code actions
@@ -575,7 +573,7 @@ lazy.setup({
             "tex",
             "plaintex",
         },
-        opts = {}
+        opts = {},
     },
 
     -- Tint inactive windows
