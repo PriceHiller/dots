@@ -248,16 +248,82 @@ vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = 
 vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { silent = true, desc = "Trouble: Todo Items" })
 
 -- Autolist mappings
-vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("i", "<CR>", "<CR><cmd>AutolistNewBullet<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("n", "<S-CR>", "<cmd>AutolistToggleCheckbox<cr><CR>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("n", "<C-r>", "<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
+local autolist_group = vim.api.nvim_create_augroup("Autolist", {})
+-- NOTE: Why is this wrapped in an autocmd you ask? Because we want to bind these for buffer local *only*. We do not
+-- want to pollute the global keymaps with autolist as autolist only supports certain filetypes.
+vim.api.nvim_create_autocmd("filetype", {
+    group = autolist_group,
+    pattern = {
+        "markdown",
+        "text",
+        "tex",
+        "plaintex",
+        "norg"
+    },
+    callback = function()
+        if pcall(require, "autolist") then
+            vim.keymap.set(
+                "i",
+                "<tab>",
+                "<cmd>AutolistTab<cr>",
+                { silent = true, desc = "Autolist: Tab", buffer = true }
+            )
+            vim.keymap.set(
+                "i",
+                "<s-tab>",
+                "<cmd>AutolistShiftTab<cr>",
+                { silent = true, desc = "Autolist: Shift Tab", buffer = true }
+            )
+            vim.keymap.set(
+                "i",
+                "<CR>",
+                "<CR><cmd>AutolistNewBullet<cr>",
+                { silent = true, desc = "Autolist: New Bullet", buffer = true }
+            )
+            vim.keymap.set(
+                "n",
+                "o",
+                "o<cmd>AutolistNewBullet<cr>",
+                { silent = true, desc = "Autolist: New Bullet", buffer = true }
+            )
+            vim.keymap.set(
+                "n",
+                "O",
+                "O<cmd>AutolistNewBulletBefore<cr>",
+                { silent = true, desc = "Autolist: New Bullet Before", buffer = true }
+            )
+            vim.keymap.set(
+                "n",
+                "<C-CR>",
+                "<cmd>AutolistToggleCheckbox<cr>",
+                { silent = true, desc = "Autolist: Toggle Checkbox", buffer = true }
+            )
 
--- functions to recalculate list on edit
-vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
-vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
+            -- functions to recalculate list on edit
+            vim.keymap.set(
+                "n",
+                ">>",
+                ">><cmd>AutolistRecalculate<cr>",
+                { silent = true, desc = "Autolist: Indent", buffer = true }
+            )
+            vim.keymap.set(
+                "n",
+                "<<",
+                "<<<cmd>AutolistRecalculate<cr>",
+                { silent = true, desc = "Autolist: Dedent", buffer = true }
+            )
+            vim.keymap.set(
+                "n",
+                "dd",
+                "dd<cmd>AutolistRecalculate<cr>",
+                { silent = true, desc = "Autolist: Delete", buffer = true }
+            )
+            vim.keymap.set(
+                "v",
+                "d",
+                "d<cmd>AutolistRecalculate<cr>",
+                { silent = true, desc = "Autolist: Delete", buffer = true }
+            )
+        end
+    end,
+})
