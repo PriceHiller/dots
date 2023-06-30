@@ -246,3 +246,18 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, desc = "Trouble: Loclist" })
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, desc = "Trouble: Quickfix" })
 vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { silent = true, desc = "Trouble: Todo Items" })
+
+-- Autolist mappings
+vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("i", "<CR>", "<CR><cmd>AutolistNewBullet<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("n", "<S-CR>", "<cmd>AutolistToggleCheckbox<cr><CR>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("n", "<C-r>", "<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
+
+-- functions to recalculate list on edit
+vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
+vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>", { silent = true, desc = "Trouble: Todo Items" })
