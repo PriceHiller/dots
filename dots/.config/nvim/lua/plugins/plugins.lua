@@ -779,4 +779,7 @@ lazy.setup({
         concurrency = 20,
     },
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
+    dev = {
+        path = "~/Git/Neovim",
+    },
 })
