@@ -573,7 +573,7 @@ lazy.setup({
             "text",
             "tex",
             "plaintex",
-            "norg"
+            "norg",
         },
         opts = {},
     },

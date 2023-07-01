@@ -258,7 +258,7 @@ vim.api.nvim_create_autocmd("filetype", {
         "text",
         "tex",
         "plaintex",
-        "norg"
+        "norg",
     },
     callback = function()
         if pcall(require, "autolist") then
