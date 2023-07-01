@@ -94,6 +94,7 @@ lazy.setup({
             "nvim-treesitter/nvim-treesitter-context",
             "windwp/nvim-ts-autotag",
             "nvim-treesitter/nvim-treesitter-textobjects",
+            { "pfeiferj/nvim-hurl", opts = { color = false } },
         },
         config = function()
             require("plugins.configs.treesitter")
