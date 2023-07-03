@@ -421,7 +421,7 @@ lazy.setup({
 
     -- Better Git integration
     {
-        "TimUntersberger/neogit",
+        "NeogitOrg/neogit",
         lazy = true,
         opts = {
             disable_commit_confirmation = true,
