@@ -41,9 +41,13 @@
                 "critical": 10
             },
             "tooltip": false,
+            "interval": 3,
             "full-at": 95,
-            "format-plugged": "{icon} {capacity}%",
-            "format-charging": "{icon} {capacity}%",
+            "format-plugged": "󰚥{icon} {capacity}%",
+            "format-charging": "󱐋{icon} {capacity}%",
+            "format-near-critical": "󱈸{icon} {capacity}%",
+            "format-warning": "{icon} {capacity}%",
+            "format-critical": "󱈸{icon} {capacity}%",
             "format": "{icon} {capacity}%",
             "format-icons": [
                 "",
