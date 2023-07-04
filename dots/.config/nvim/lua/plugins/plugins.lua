@@ -781,7 +781,9 @@ lazy.setup({
         dependencies = { "ldelossa/litee.nvim" },
         config = function()
             require('litee.lib').setup()
-            require('litee.gh').setup()
+            require('litee.gh').setup({
+                refresh_interval = 60000
+            })
         end
     },
 }, {
