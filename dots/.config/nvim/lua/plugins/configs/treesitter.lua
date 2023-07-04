@@ -113,6 +113,12 @@ nvim_treesitter.setup({
             },
         },
     },
+    playground = {
+        enable = true
+    },
+    query_linter = {
+        enable = true
+    }
 })
 
 require("treesitter-context").setup({})
