@@ -92,9 +92,10 @@ lazy.setup({
         dependencies = {
             { url = "https://gitlab.com/HiPhish/nvim-ts-rainbow2.git" },
             "nvim-treesitter/nvim-treesitter-context",
+            "nvim-treesitter/playground",
             "windwp/nvim-ts-autotag",
             "nvim-treesitter/nvim-treesitter-textobjects",
-            { "pfeiferj/nvim-hurl", opts = {} },
+            { "pfeiferj/nvim-hurl", opts = {}, dev = true },
         },
         config = function()
             require("plugins.configs.treesitter")
