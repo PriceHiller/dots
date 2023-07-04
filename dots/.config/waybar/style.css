@@ -150,17 +150,20 @@
   color: #98bb6c;
 }
 
-#battery.warning {
+#battery.discharging.warning {
   color: #e6c384;
 }
 
-#battery.near-critical {
+#battery.discharging.near-critical {
   color: #c34043;
 }
 
-#battery.critical {
+#battery.discharging.critical {
   color: #e82424;
-  animation: blink_text 1.5s linear infinite;
+}
+
+#battery.charging {
+  color: #A3D4D5;
 }
 
 /* Audio Device & Wireplumber Audio Return */
