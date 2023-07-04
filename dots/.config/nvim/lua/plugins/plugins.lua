@@ -774,6 +774,16 @@ lazy.setup({
         },
         opts = {},
     },
+
+    -- Github CLI integration
+    {
+        "ldelossa/gh.nvim",
+        dependencies = { "ldelossa/litee.nvim" },
+        config = function()
+            require('litee.lib').setup()
+            require('litee.gh').setup()
+        end
+    },
 }, {
     checker = {
         enabled = true,
