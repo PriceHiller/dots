@@ -1,0 +1,3 @@
+#compdef gh
+
+source <(gh completion -s zsh)
