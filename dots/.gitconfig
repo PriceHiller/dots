@@ -44,8 +44,7 @@
 	syntax-theme = Solarized (dark)
 
 [pull]
-	rebase = false
-	ff = only
+	rebase = true
 [alias]
 	unstage = reset HEAD --
 [push]
