@@ -437,7 +437,7 @@ lazy.setup({
 
     {
         "tpope/vim-fugitive",
-        event = "VeryLazy"
+        event = "VeryLazy",
     },
 
     -- Better search display
@@ -785,11 +785,11 @@ lazy.setup({
         "ldelossa/gh.nvim",
         dependencies = { "ldelossa/litee.nvim" },
         config = function()
-            require('litee.lib').setup()
-            require('litee.gh').setup({
-                refresh_interval = 60000
+            require("litee.lib").setup()
+            require("litee.gh").setup({
+                refresh_interval = 60000,
             })
-        end
+        end,
     },
 }, {
     checker = {
