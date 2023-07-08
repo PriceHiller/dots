@@ -186,6 +186,7 @@ lazy.setup({
             nvim_lightbulb.setup({
                 sign = {
                     priority = 9,
+                    text = text_icon
                 },
             })
             vim.fn.sign_define(
