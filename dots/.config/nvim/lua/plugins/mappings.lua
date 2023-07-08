@@ -49,10 +49,17 @@ wk.register({
     },
 }, { prefix = "<leader>" })
 vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { silent = true, desc = "LSP: Declaration" })
-vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { silent = true, desc = "LSP: Definition" })
+vim.keymap.set("n", "<leader>ld", function()
+    vim.lsp.buf.definition({ reuse_win = true })
+end, { silent = true, desc = "LSP: Definition" })
 vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { silent = true, desc = "LSP: Hover" })
 vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, { silent = true, desc = "LSP: Sig Help" })
-vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { silent = true, desc = "LSP: Implementation" })
+vim.keymap.set(
+    "n",
+    "<leader>li",
+    "<cmd>TroubleToggle lsp_implementations<cr>",
+    { silent = true, desc = "LSP: Implementation" }
+)
 vim.keymap.set(
     "n",
     "<leader>la",
