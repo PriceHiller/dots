@@ -121,7 +121,7 @@ M.setup = function()
     opt.cmdheight = 1
 
     -- Set splitkeep
-    vim.opt.splitkeep = "screen"
+    vim.opt.splitkeep = "cursor"
 
     -- Hide the tabline
     vim.opt.showtabline = 0
