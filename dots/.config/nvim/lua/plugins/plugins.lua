@@ -804,4 +804,7 @@ lazy.setup({
     dev = {
         path = "~/Git/Neovim",
     },
+    checker = {
+        notify = false,
+    },
 })
