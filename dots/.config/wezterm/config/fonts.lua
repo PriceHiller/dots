@@ -36,28 +36,9 @@ return {
             family = "JetBrains Mono",
             weight = "Medium",
         },
-        -- NOTE: Attempt to resolve missing symbols etc.
-        -- <built-in>, BuiltIn
-        { family = "Symbols Nerd Font Mono" },
-        { family = "Symbols Nerd Font" },
-        "Noto Sans Symbols",
-        "Noto Sans Symbols2",
-        "PowerlineExtraSymbols",
-        "MesloLGS NF",
-
-        -- <built-in>, BuiltIn
-        -- Assumed to have Emoji Presentation
-        -- Pixel sizes: [128]
-        "Noto Color Emoji",
-
-        "Noto Sans Adlam Unjoined",
-        "Unifont",
-
-        -- <built-in>, BuiltIn
-        "Last Resort High-Efficiency",
+        {
+        family = "Noto Fonts Emoji",
+        }
     }),
-    font_dirs = {
-        "fonts",
-    },
     font_size = 11,
 }
