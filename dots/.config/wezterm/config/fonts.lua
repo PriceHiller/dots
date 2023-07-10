@@ -37,6 +37,9 @@ return {
             weight = "Medium",
         },
         {
+            family = "MesloLGS Nerd Font",
+        },
+        {
             family = "Noto Fonts Emoji",
         },
     }),
