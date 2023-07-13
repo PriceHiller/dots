@@ -14,7 +14,6 @@ setopt NULL_GLOB
 
 setopt AUTO_CD
 setopt AUTO_PUSHD
-setopt CHASE_DOTS
 
 setopt HASH_CMDS
 setopt COMBININGCHARS
