@@ -138,6 +138,13 @@ require("kanagawa").setup({
             ["@text.title.4.marker.markdown"] = { fg = colors.surimiOrange },
             ["@text.title.5.marker.markdown"] = { fg = colors.surimiOrange },
             ["@text.title.6.marker.markdown"] = { fg = colors.surimiOrange },
+            RainbowDelimiterRed = { fg = colors.peachRed },
+            RainbowDelimiterYellow = { fg = colors.autumnYellow },
+            RainbowDelimiterBlue = { fg = colors.crystalBlue },
+            RainbowDelimiterOrange = { fg = colors.surimiOrange },
+            RainbowDelimiterGreen = { fg = colors.springGreen },
+            RainbowDelimiterViolet = { fg = colors.oniViolet },
+            RainbowDelimiterCyan = { fg = colors.lightBlue }
         }
 
         return overrides
