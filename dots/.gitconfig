@@ -57,10 +57,6 @@
 [remote]
 	pushDefault = origin
 
-; Per environemnt specific setup shit
-[includeIf "hasconfig:remote.*.url:**ssfcu.org**"]
-	path = ~/.config/git/configs/gitconfig-ssfcu
-
 [credential]
 	helper = store
 
