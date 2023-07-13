@@ -84,5 +84,8 @@ ccc.setup({
     inputs = {
         RgbHslCmykInput,
     },
+    highlighter = {
+        auto_enable = true,
+        lsp = true
+    }
 })
-vim.cmd.CccHighlighterEnable()

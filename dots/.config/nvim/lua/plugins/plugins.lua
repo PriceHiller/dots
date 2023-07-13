@@ -756,13 +756,6 @@ lazy.setup({
         config = function()
             require("plugins.configs.ccc")
         end,
-        cmd = {
-            "CccPick",
-            "CccConvert",
-            "CccHighlighterEnable",
-            "CccHighlighterToggle",
-            "CccHighlighterDisable",
-        },
     },
 
     -- Task runner & job management
