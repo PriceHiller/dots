@@ -90,7 +90,6 @@ lazy.setup({
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         dependencies = {
-            { url = "https://gitlab.com/HiPhish/nvim-ts-rainbow2.git" },
             "nvim-treesitter/nvim-treesitter-context",
             "nvim-treesitter/playground",
             "windwp/nvim-ts-autotag",
@@ -99,6 +98,44 @@ lazy.setup({
         },
         config = function()
             require("plugins.configs.treesitter")
+        end,
+    },
+
+    -- Rainbow braces/brackets/etc
+    {
+        url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+        config = function()
+            local rainbow_delimiters = require("rainbow-delimiters")
+            vim.g.rainbow_delimiters = {
+                strategy = {
+                    on_attach = function()
+                        if vim.fn.line("$") > 10000 then
+                            return nil
+                        elseif vim.fn.line("$") > 1000 then
+                            return rainbow_delimiters.strategy["global"]
+                        end
+                        return rainbow_delimiters.strategy["local"]
+                    end,
+                },
+                query = {
+                    [""] = "rainbow-delimiters",
+                    lua = "rainbow-blocks",
+                    latex = "rainbow-blocks",
+                    html = "rainbow-blocks",
+                    javascript = "rainbow-delimiters-react",
+                    tsx = "rainbow-parens",
+                    verilog = "rainbow-blocks",
+                },
+                highlight = {
+                    "RainbowDelimiterRed",
+                    "RainbowDelimiterYellow",
+                    "RainbowDelimiterBlue",
+                    "RainbowDelimiterOrange",
+                    "RainbowDelimiterGreen",
+                    "RainbowDelimiterViolet",
+                    "RainbowDelimiterCyan",
+                },
+            }
         end,
     },
 

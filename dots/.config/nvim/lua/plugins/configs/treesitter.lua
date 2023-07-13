@@ -42,26 +42,6 @@ nvim_treesitter.setup({
         enable = true,
     },
     indent = { enable = true },
-    rainbow = {
-        enable = true,
-        query = {
-            "rainbow-parens",
-            html = "rainbow-tags",
-            latex = "rainbow-blocks",
-            tsx = "rainbow-tags",
-            vue = "rainbow-tags",
-            javascript = "rainbow-parens-react",
-        },
-        strategy = {
-            on_attach = function()
-                if vim.fn.line("$") < 1000 then
-                    require("ts-rainbow.strategy.local")
-                elseif vim.fn.line("$") < 10000 then
-                    require("ts-rainbow.strategy.global")
-                end
-            end,
-        },
-    },
     textobjects = {
         select = {
             enable = true,
