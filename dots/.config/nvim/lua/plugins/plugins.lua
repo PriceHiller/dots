@@ -842,12 +842,10 @@ lazy.setup({
     checker = {
         enabled = true,
         concurrency = 20,
+        notify = false,
     },
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
     dev = {
         path = "~/Git/Neovim",
-    },
-    checker = {
-        notify = false,
     },
 })
