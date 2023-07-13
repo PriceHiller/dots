@@ -463,16 +463,22 @@ lazy.setup({
         "NeogitOrg/neogit",
         lazy = true,
         opts = {
+            disable_insert_on_commit = "auto",
             disable_commit_confirmation = true,
+            use_telescope = true,
             integrations = {
                 diffview = true,
             },
         },
         dependencies = {
-            "sindrets/diffview.nvim",
-            opts = {
-                enhanced_diff_hl = true,
+            {
+                "sindrets/diffview.nvim",
+                opts = {
+                    enhanced_diff_hl = true,
+                },
             },
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
         },
     },
 
