@@ -58,7 +58,7 @@ M.setup = function()
     opt.signcolumn = "yes"
 
     -- Enable persistent undo
-    opt.undodir = vim.fn.stdpath("cache") .. "/undo"
+    opt.undodir = vim.fn.stdpath("state") .. "/undo"
     opt.undofile = true
 
     -- Better folding
