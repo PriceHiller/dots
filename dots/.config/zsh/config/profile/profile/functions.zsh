@@ -160,3 +160,9 @@ TCPDump-Capture() {
 	tcpdump -qns 0 -X -r "${1}"
 }
 
+Unzip () {
+	for item in "${*[@]}"; do
+		unzip -d "${item%.zip}" "${item}" || return
+		printf "\n"
+	done
+}
