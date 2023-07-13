@@ -461,6 +461,7 @@ lazy.setup({
     -- Better Git integration
     {
         "NeogitOrg/neogit",
+        dev = true,
         lazy = true,
         opts = {
             disable_insert_on_commit = "auto",

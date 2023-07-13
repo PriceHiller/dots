@@ -19,6 +19,7 @@ g.indent_blankline_filetype_exclude = {
     "lazy",
     "NeogitStatus",
     "NeogitHelpPopup",
+    "NeogitPopup",
     "NeogitLogView",
 }
 
