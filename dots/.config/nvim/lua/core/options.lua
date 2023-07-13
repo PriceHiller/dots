@@ -10,6 +10,7 @@ M.setup = function()
 
     -- Scroll Offset
     opt.scrolloff = 3
+    opt.sidescrolloff = 5
 
     -- Disable showmode
     opt.showmode = false
