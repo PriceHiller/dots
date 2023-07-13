@@ -144,7 +144,7 @@ require("kanagawa").setup({
             RainbowDelimiterOrange = { fg = colors.surimiOrange },
             RainbowDelimiterGreen = { fg = colors.springGreen },
             RainbowDelimiterViolet = { fg = colors.oniViolet },
-            RainbowDelimiterCyan = { fg = colors.lightBlue }
+            RainbowDelimiterCyan = { fg = colors.lightBlue },
         }
 
         return overrides
