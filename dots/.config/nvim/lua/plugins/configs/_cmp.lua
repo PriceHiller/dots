@@ -21,8 +21,9 @@ cmp.setup({
                 cmdline_history = { symbol = " ", name = "Cmd History", hl_group = "CmdHistory" },
                 rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
                 npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
-                conventionalcommits = { symbol = "󰊢 ", name = "Commit", hl_group = "Commit" },
+                conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
                 spell = { symbol = "󰏪 ", name = "Spell", hl_group = "Spell" },
+                git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
             }
 
             local extra_kind_icons = {
@@ -140,6 +141,7 @@ cmp.setup({
         },
         { name = "async_path", priority = 6 },
         { name = "zsh", priority = 5 },
+        { name = "git", priority = 4 },
         { name = "emoji", keyword_length = 2 },
         { name = "neorg" },
         { name = "calc" },
@@ -164,7 +166,8 @@ cmp.setup({
 -- Git Commit Completions
 cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
-        { name = "conventionalcommits", priority = 2 },
+        { name = "conventionalcommits", priority = 3 },
+        { name = " git", priority = 2 },
         { name = "emoji", keyword_length = 2, priority = 1 },
     }),
 })

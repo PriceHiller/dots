@@ -86,6 +86,7 @@ require("kanagawa").setup({
             CmpItemKindInterface = { fg = colors.fujiWhite, bg = colors.waveRed },
             CmpItemKindColor = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
             CmpItemKindTypeParameter = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
+            CmpCustomSelectionGit = { fg = colors.fujiWhite, bg = colors.roninYellow },
             CmpCustomSelectionBuffer = { fg = colors.fujiWhite, bg = colors.dragonBlue },
             CmpCustomSelectionPath = { fg = colors.fujiWhite, bg = colors.autumnYellow },
             CmpCustomSelectionCalculator = { fg = colors.fujiWhite, bg = colors.waveBlue2 },
