@@ -468,14 +468,9 @@ lazy.setup({
         "NeogitOrg/neogit",
         dev = true,
         lazy = true,
-        opts = {
-            disable_insert_on_commit = "auto",
-            disable_commit_confirmation = true,
-            use_telescope = true,
-            integrations = {
-                diffview = true,
-            },
-        },
+        config = function()
+            require("plugins.configs.neogit")
+        end,
         dependencies = {
             {
                 "sindrets/diffview.nvim",
