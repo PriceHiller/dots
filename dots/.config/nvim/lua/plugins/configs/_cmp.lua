@@ -150,10 +150,10 @@ cmp.setup({
     }),
     sorting = {
         comparators = {
-            compare.exact,
             compare.score,
             compare.offset,
             compare.recently_used,
+            compare.exact,
             require("cmp_fuzzy_buffer.compare"),
             compare.kind,
             compare.sort_text,
