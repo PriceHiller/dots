@@ -164,8 +164,8 @@ cmp.setup({
 -- Git Commit Completions
 cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
-        { name = "conventionalcommits", priority = 20 },
-        { name = "emoji", keyword_length = 2 },
+        { name = "conventionalcommits", priority = 2 },
+        { name = "emoji", keyword_length = 2, priority = 1 },
     }),
 })
 
