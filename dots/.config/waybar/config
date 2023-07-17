@@ -50,16 +50,15 @@
             "format-critical": "󱈸{icon} {capacity}%",
             "format": "{icon} {capacity}%",
             "format-icons": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
+                "󰁻",
+                "󰁺",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰁹"
             ]
         },
         "wlr/workspaces": {
@@ -126,7 +125,7 @@
             "tooltip": false,
             "min-length": 20,
             "interval": 1,
-            "format": " {}",
+            "format": "󰓃 {}",
             "exec": "wpctl status | grep -m 1 '*' | cut -d '.' -f2 | cut -d '[' -f1 | xargs"
         },
         "wireplumber": {
@@ -177,7 +176,7 @@
         },
         "custom/asusmode": {
             "interval": 1,
-            "format": " {}",
+            "format": "󰈐 {}",
             "on-click": "asusctl profile -n",
             "on-click-right": "rog-control-center",
             "exec": "asusctl profile -p | awk '{print $NF}'"
