@@ -7,7 +7,7 @@ end
 -- Thanks to rockyzhang24 (github.com/rockyzhang24)
 
 local function simplifiedMode(str)
-    return "  " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
+    return "󰀘  " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
 end
 
 -- For location, show total lines
