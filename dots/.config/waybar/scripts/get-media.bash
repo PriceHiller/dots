@@ -10,10 +10,10 @@ get-album-info () {
 			player_ctl_info="$(playerctl metadata --format '{{ artist }} | {{ title }} | {{ album }}')"
 
 			if [[ "${class}" == "playing" ]]; then
-				text=" ${player_ctl_info}"
+				text="󰎆 ${player_ctl_info}"
 
 			elif [[ "${class}" == "paused" ]]; then
-				text=" ${player_ctl_info}"
+				text="󰏦 ${player_ctl_info}"
 			fi
 		else
 			class="paused"
