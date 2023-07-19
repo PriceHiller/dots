@@ -5,21 +5,7 @@ return {
     line_height = 1.0,
     font = wezterm.font_with_fallback({
         {
-            family = "FiraCodeNerdFont",
-            weight = "Medium",
-            harfbuzz_features = {
-                "zero",
-                "cv02",
-                "cv30",
-                "ss05",
-                "ss03",
-                "ss04",
-                "cv26",
-                "ss10",
-            },
-        },
-        {
-            family = "FiraCodeNerdFontMono",
+            family = "FiraCode Nerd Font",
             weight = "Medium",
             harfbuzz_features = {
                 "zero",
