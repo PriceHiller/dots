@@ -28,6 +28,7 @@ return {
         {
             family = "Noto Fonts Emoji",
         },
+        { family = "Nerd Font Symbols" },
     }),
     font_size = 11,
 }
