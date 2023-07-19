@@ -177,7 +177,6 @@ lazy.setup({
     -- File Tree
     {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
             "nvim-lua/plenary.nvim",
