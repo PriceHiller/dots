@@ -53,7 +53,6 @@
 
 #cpu,
 #temperature,
-#custom-asusmode,
 #memory,
 #battery,
 #disk,
@@ -77,10 +76,6 @@
 }
 
 /* Media */
-#custom-media {
-  margin: 0;
-}
-
 #custom-media.playing {
   background: linear-gradient(
     -45deg,
@@ -254,10 +249,6 @@
   color: #7e9cd8;
 }
 
-/* Asus Fan Mode */
-#custom-asusmode {
-  color: #ffa066;
-}
 
 /* Network */
 #network {
