@@ -20,7 +20,6 @@
         "modules-right": [
             "custom/pacman-update",
             "tray",
-            "custom/asusmode",
             "network",
             "clock",
             "custom/lock"
@@ -173,13 +172,6 @@
                     ""
                 ]
             }
-        },
-        "custom/asusmode": {
-            "interval": 1,
-            "format": "󰈐 {}",
-            "on-click": "asusctl profile -n",
-            "on-click-right": "rog-control-center",
-            "exec": "asusctl profile -p | awk '{print $NF}'"
         },
         "memory": {
             "format": " {percentage}%",
