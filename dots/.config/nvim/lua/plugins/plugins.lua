@@ -808,13 +808,24 @@ lazy.setup({
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("trouble").setup({
+                auto_close = true,
+                position = "right",
+            })
+            vim.api.nvim_create_autocmd("BufLeave", {
+                pattern = "*Trouble*",
+                callback = function()
+                    vim.api.nvim_win_close(0, true)
+                end,
+            })
+        end,
         cmd = {
             "Trouble",
             "TroubleClose",
             "TroubleToggle",
             "TroubleRefresh",
         },
-        opts = {},
     },
 
     -- Github CLI integration
