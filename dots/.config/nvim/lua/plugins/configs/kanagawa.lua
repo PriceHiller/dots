@@ -24,6 +24,12 @@ require("kanagawa").setup({
     },
     overrides = function(palette)
         local colors = palette.palette
+        vim.api.nvim_set_hl(0, "NvimNotifyError", { fg = colors.samuraiRed })
+        vim.api.nvim_set_hl(0, "NvimNotifyWarn", { fg = colors.roninYellow })
+        vim.api.nvim_set_hl(0, "NvimNotifyInfo", { fg = colors.springGreen })
+        vim.api.nvim_set_hl(0, "NvimNotifyDebug", { fg = colors.crystalBlue })
+        vim.api.nvim_set_hl(0, "NvimNotifyTrace", { fg = colors.oniViolet })
+
         local overrides = {
             DiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
             DiffDelete = { bg = colors.winterREd, fg = colors.autumnRed },
@@ -170,6 +176,21 @@ require("kanagawa").setup({
             RainbowDelimiterGreen = { fg = colors.springGreen },
             RainbowDelimiterViolet = { fg = colors.oniViolet },
             RainbowDelimiterCyan = { fg = colors.lightBlue },
+            NotifyERRORBorder = { link = "NvimNotifyError" },
+            NotifyERRORIcon = { link = "NvimNotifyError" },
+            NotifyERRORTitle = { link = "NvimNotifyError" },
+            NotifyWARNBorder = { link = "NvimNotifyWarn" },
+            NotifyWARNIcon = { link = "NvimNotifyWarn" },
+            NotifyWARNTitle = { link = "NvimNotifyWarn" },
+            NotifyINFOBorder = { link = "NvimNotifyInfo" },
+            NotifyINFOIcon = { link = "NvimNotifyInfo" },
+            NotifyINFOTitle = { link = "NvimNotifyInfo" },
+            NotifyDEBUGBorder = { link = "NvimNotifyDebug" },
+            NotifyDEBUGIcon = { link = "NvimNotifyDebug" },
+            NotifyDEBUGTitle = { link = "NvimNotifyDebug" },
+            NotifyTRACEBorder = { link = "NvimNotifyTrace" },
+            NotifyTRACEIcon = { link = "NvimNotifyTrace" },
+            NotifyTRACETitle = { link = "NvimNotifyTrace" },
         }
 
         return overrides
