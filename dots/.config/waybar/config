@@ -159,7 +159,7 @@
         "temperature": {
             "tooltip": false,
             "min-length": 6,
-            "thermal-zone": 8,
+            "thermal-zone": 12,
             "critical-threshold": 90,
             "format": "{icon} {temperatureC}°C",
             "format-critical": "{icon} {temperatureC}°C",
