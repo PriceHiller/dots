@@ -30,7 +30,7 @@ mk-video() {
 			tmp_dir="$(mktemp -d)"
 			cd "${tmp_dir}"
 			input_tmpfile="${tmp_dir}/$(mktemp wf-recorder.XXXXXXXXXXX).mp4"
-			wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -d /dev/dri/renderD128 -- &
+			wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -d /dev/dri/card0 -- &
 			printf "%s" $! >"${pid_file}"
 			wait
 			if [[ "${output_type}" == "gif" ]]; then
