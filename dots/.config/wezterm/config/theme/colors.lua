@@ -215,24 +215,28 @@ wezterm.on("update-status", function(window, pane)
     local battery = ""
     for _, b in ipairs(wezterm.battery_info()) do
         local charge_percent = b.state_of_charge * 100
-        local battery_icon = ""
+        local battery_icon = "󰁹"
 
         if charge_percent < 100 then
-            battery_icon = ""
+            battery_icon = "󰁹"
+        elseif charge_percent < 90 then
+            battery_icon = "󰂂"
+        elseif charge_percent < 80 then
+            battery_icon = "󰂁"
         elseif charge_percent < 70 then
-            battery_icon = ""
+            battery_icon = "󰂀"
         elseif charge_percent < 60 then
-            battery_icon = ""
+            battery_icon = "󰁿"
         elseif charge_percent < 50 then
-            battery_icon = ""
+            battery_icon = "󰁾"
         elseif charge_percent < 40 then
-            battery_icon = ""
+            battery_icon = "󰁽"
         elseif charge_percent < 30 then
-            battery_icon = ""
+            battery_icon = "󰁼"
         elseif charge_percent < 20 then
-            battery_icon = ""
+            battery_icon = "󰁻"
         elseif charge_percent < 10 then
-            battery_icon = ""
+            battery_icon = "󰁺"
         end
 
         battery = battery_icon .. " " .. string.format("%.0f%%", charge_percent)
