@@ -251,8 +251,14 @@
 }
 
 /* Tray */
+#tray {
+  -gtk-icon-shadow: 0 0 2px #957FB8;
+}
+
 #tray menu {
   border-radius: 0px;
+  -gtk-icon-shadow: none;
+
 }
 
 /* Network */
