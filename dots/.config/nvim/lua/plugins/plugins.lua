@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 -- Packer strap, install packer automatically and configure plugins
 -- See the end of this file for how the variable `packer_strap` gets used
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
