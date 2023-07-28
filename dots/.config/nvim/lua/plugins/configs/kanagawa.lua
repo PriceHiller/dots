@@ -40,6 +40,7 @@ require("kanagawa").setup({
             NeogitHunkHeader = { fg = colors.crystalBlue, bg = colors.sumiInk2 },
             NeogitHunkHeaderHighlight = { fg = colors.roninYellow, bg = colors.sumiInk1 },
             NeogitBranch = { fg = colors.autumnYellow, bold = true },
+            NeogitUnmergedInto = { fg = colors.roninYellow, bold = true },
             NeogitRemote = { fg = colors.carpYellow, bold = true },
             NeogitDiffContext = { bg = colors.sumiInk3 },
             NeogitDiffContextHighlight = { bg = colors.sumiInk4 },
