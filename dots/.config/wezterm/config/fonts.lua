@@ -26,6 +26,9 @@ return {
             family = "MesloLGS Nerd Font",
         },
         {
+            family = "Twemoji",
+        },
+        {
             family = "Noto Fonts Emoji",
         },
         { family = "Nerd Font Symbols" },
