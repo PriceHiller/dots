@@ -73,22 +73,18 @@ nvim_treesitter.setup({
             set_jumps = true,
             goto_next_start = {
                 ["]fs"] = "@function.outer",
-                ["]cs"] = "@class.outer",
                 ["]bs"] = "@block.outer",
             },
             goto_next_end = {
                 ["]fe"] = "@function.outer",
-                ["]ce"] = "@class.outer",
                 ["]be"] = "@block.outer",
             },
             goto_previous_start = {
                 ["[fs"] = "@function.outer",
-                ["[cs"] = "@class.outer",
                 ["[bs"] = "@block.outer",
             },
             goto_previous_end = {
                 ["[fe"] = "@function.outer",
-                ["[ce"] = "@class.outer",
                 ["[bs"] = "@block.outer",
             },
         },
