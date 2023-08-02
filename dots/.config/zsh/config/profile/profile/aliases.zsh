@@ -26,7 +26,7 @@ if command -v git >/dev/null 2>&1; then
 	alias gst="git stash"
 	alias gstc="git stash clear"
 	alias gsw="git switch"
-	alias gd="git diff"
+	alias gd="nvim -c 'DiffviewOpen' -R"
 	alias gr="git remote"
 	alias gl="git log"
 	alias glo="git log --oneline"
