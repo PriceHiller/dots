@@ -840,6 +840,11 @@ lazy.setup({
             })
         end,
     },
+
+    -- Nftables Syntax support
+    {
+        "nfnty/vim-nftables",
+    },
 }, {
     checker = {
         enabled = true,
