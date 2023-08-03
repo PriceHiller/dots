@@ -2,6 +2,7 @@ local neogit = require("neogit")
 neogit.setup({
     disable_insert_on_commit = "auto",
     disable_commit_confirmation = true,
+    disable_builtin_notifications = true,
     integrations = {
         diffview = true,
         telescope = true,
