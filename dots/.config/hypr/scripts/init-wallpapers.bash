@@ -23,7 +23,7 @@ set-wallpapers() {
 		done
 		if "${set_mon_wallpaper}"; then
 			log "Set default wallpaper for monitor: '${monitor}'"
-			swww img -t none "${XDG_DATA_HOME}/wallpapers/Nebula.jpg" -o "${monitor}" &
+			swww img -t none "${XDG_DATA_HOME}/wallpapers/Nebula.jpg" -o "${monitor}"
 		fi
 	done < <(hyprctl monitors -j | jq -r '.[].name')
 
@@ -32,7 +32,7 @@ set-wallpapers() {
 }
 
 main() {
-	swww init
+	swww kill; swww init && log "Initialized swww daemon"
 	set-wallpapers
 }
 
