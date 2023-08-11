@@ -102,6 +102,11 @@ vim.keymap.set("n", "<leader>lt", function()
 end, {
     desc = "LSP: Toggle Diagnostic Style",
 })
+vim.keymap.set("n", "<leader>lT", function()
+    vim.lsp.inlay_hint(0, nil)
+end, {
+    desc = "LSP: Toggle Inlay Hints",
+})
 
 -- Formatter
 vim.keymap.set("n", "<leader>nf", ":Neoformat<CR>", { silent = true, desc = "Neoformat" })
