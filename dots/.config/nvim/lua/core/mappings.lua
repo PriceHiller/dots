@@ -23,16 +23,13 @@ M.setup = function()
     -- Set current focused file as cwd
     vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
 
-    -- Toggle showing diagnostics
-    local diagnostics_active = true
     vim.keymap.set("n", "<leader>lh", function()
-        diagnostics_active = not diagnostics_active
-        if diagnostics_active then
+        if vim.diagnostic.is_disabled() then
             vim.diagnostic.enable()
         else
             vim.diagnostic.disable()
         end
-    end, { silent = true, desc = "Toggle Diagnostics" })
+    end, { silent = true, desc = "LSP: Toggle Diagnostics" })
 
     -- Toggle showing command bar
     vim.keymap.set("n", "<leader>sc", function()
@@ -61,6 +58,10 @@ M.setup = function()
 
     -- Tabclose binding
     vim.keymap.set("n", "<C-w>t", "<cmd>tabclose<CR>", { silent = true, desc = "Close Tab" })
+
+    -- Buffer bindings
+    vim.keymap.set("n", "<A-a>", ":bprevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
+    vim.keymap.set("n", "<A-s>", ":bnext<CR>", { silent = true, desc = "Go to Next Buffer" })
 end
 
 return M
