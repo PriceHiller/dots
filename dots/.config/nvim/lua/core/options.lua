@@ -52,6 +52,7 @@ M.setup = function()
     opt.ruler = true
 
     -- Set timeouts
+    opt.timeout = true
     opt.ttimeoutlen = 20
     opt.timeoutlen = 1000
     opt.updatetime = 250
@@ -65,7 +66,10 @@ M.setup = function()
     opt.foldexpr = "nvim_treesitter#foldexpr()"
     opt.foldmethod = "expr"
     opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
-    opt.foldlevel = 20
+    vim.o.foldcolumn = "1"
+    vim.o.foldlevel = 99
+    vim.o.foldlevelstart = 99
+    vim.o.foldenable = true
     vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
     vim.wo.foldmethod = "expr"
 
@@ -102,13 +106,13 @@ M.setup = function()
 
     -- Set fillchars
     vim.opt.fillchars:append({
-        horiz = "━",
-        horizup = "┻",
-        horizdown = "┳",
-        vert = "┃",
-        vertleft = "┨",
-        vertright = "┣",
-        verthoriz = "╋",
+        horiz = "─",
+        horizup = "┴",
+        horizdown = "┬",
+        vert = "│",
+        vertleft = "┤",
+        vertright = "├",
+        verthoriz = "┼",
     })
 
     -- Remove end of boundry '~'
