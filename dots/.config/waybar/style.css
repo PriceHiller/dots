@@ -84,7 +84,11 @@ tooltip {
   border-radius: 20px;
 }
 
-/* Media */
+#custom-media {
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+
 #custom-media.playing {
   background: linear-gradient(
     -45deg,
@@ -105,7 +109,7 @@ tooltip {
 /* Launcher */
 #custom-launcher {
   padding-right: 0.3rem;
-  padding-left: 0.1rem;
+  padding-left: 0rem;
   margin-right: 0rem;
   color: #957fb8;
 }
@@ -167,7 +171,7 @@ tooltip {
 }
 
 #battery.charging {
-  color: #A3D4D5;
+  color: #a3d4d5;
 }
 
 /* Audio Device & Wireplumber Audio Return */
@@ -224,12 +228,12 @@ tooltip {
 
 #workspaces button {
   border-radius: 50%;
-  min-height: 0em;
-  min-width: 0em;
+  min-height: 1rem;
+  min-width: 1rem;
   padding-left: 0rem;
   padding-right: 0rem;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
   background-color: #54546d;
   color: transparent;
 }
@@ -260,13 +264,12 @@ tooltip {
 
 /* Tray */
 #tray {
-  -gtk-icon-shadow: 0 0 2px #957FB8;
+  -gtk-icon-shadow: 0 0 2px #957fb8;
 }
 
 #tray menu {
   border-radius: 0px;
   -gtk-icon-shadow: none;
-
 }
 
 /* Network */
@@ -279,16 +282,19 @@ tooltip {
 }
 
 #network.disabled {
-  color: #FF5D62;
+  color: #ff5d62;
 }
 
 /* Clock */
 #clock {
-  color: #FF9E3B;
+  color: #ff9e3b;
 }
 
 /* Lock */
 #custom-lock {
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
+  margin-right: 0rem;
   color: #957fb8;
 }
 
