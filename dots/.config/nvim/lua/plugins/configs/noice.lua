@@ -27,8 +27,8 @@ return {
                 },
             },
             popupmenu = {
-                backend = "cmp"
-            }
+                backend = "cmp",
+            },
         },
         dependencies = {
             -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -41,7 +41,7 @@ return {
                         function()
                             require("notify").dismiss({
                                 pending = true,
-                                silent = true
+                                silent = true,
                             })
                         end,
                         desc = "Notifications: Dismiss",

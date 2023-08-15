@@ -28,9 +28,8 @@ return {
         dependencies = {
             {
                 keys = {
-                    { "<leader>gd", "<cmd>DiffviewOpen<CR>",  desc = "Diff View: Open" },
-                    {"<leader>gh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff View: File History" }
-
+                    { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View: Open" },
+                    { "<leader>gh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff View: File History" },
                 },
                 "sindrets/diffview.nvim",
                 cmd = {
@@ -40,7 +39,7 @@ return {
                     "DiffviewRefresh",
                     "DiffviewClose",
                     "DiffviewOpen",
-                    "DiffviewLog"
+                    "DiffviewLog",
                 },
                 opts = {
                     enhanced_diff_hl = true,

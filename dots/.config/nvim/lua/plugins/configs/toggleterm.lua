@@ -2,7 +2,7 @@ return {
     {
         "akinsho/toggleterm.nvim",
         keys = {
-            {"<leader><leader>", "<cmd>ToggleTerm<CR>", desc = "ToggleTerm: Toggle" },
+            { "<leader><leader>", "<cmd>ToggleTerm<CR>", desc = "ToggleTerm: Toggle" },
         },
         opts = {
             start_in_insert = false,

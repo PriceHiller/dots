@@ -5,4 +5,3 @@ vim.opt_local.textwidth = 0
 vim.keymap.set("n", "<leader>fr", "<cmd>MarkdownPreview<CR>", {
     buffer = true,
 })
-
