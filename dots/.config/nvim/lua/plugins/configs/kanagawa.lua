@@ -100,6 +100,7 @@ return {
                         CmpItemKindInterface = { fg = colors.fujiWhite, bg = colors.waveRed },
                         CmpItemKindColor = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
                         CmpItemKindTypeParameter = { fg = colors.fujiWhite, bg = colors.waveAqua2 },
+                        CmpCustomSelectionColor = { bg = colors.sumiInk5 },
                         CmpCustomSelectionGit = { fg = colors.fujiWhite, bg = colors.roninYellow },
                         CmpCustomSelectionBuffer = { fg = colors.fujiWhite, bg = colors.dragonBlue },
                         CmpCustomSelectionPath = { fg = colors.fujiWhite, bg = colors.autumnYellow },
