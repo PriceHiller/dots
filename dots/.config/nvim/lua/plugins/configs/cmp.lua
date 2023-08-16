@@ -52,9 +52,25 @@ return {
             -- Load Snippets
             require("luasnip.loaders.from_vscode").lazy_load()
 
+            local colors_bg_color = vim.api.nvim_get_hl(0, { name = "CmpCustomSelectionColor" }).bg
+            local cached_colors = {}
+            local function handle_color_hl(color_entry)
+                local cached_hl_grp = cached_colors[color_entry]
+                if cached_hl_grp ~= nil then
+                    return cached_hl_grp
+                else
+                    local hl_grp = string.format("CmpCustomColor%s", color_entry:sub(2))
+                    vim.api.nvim_set_hl(0, hl_grp, { fg = color_entry, bg = colors_bg_color or "#FF0000" })
+                    cached_colors[color_entry] = hl_grp
+                    return hl_grp
+                end
+            end
+
             cmp.setup({
                 formatting = {
                     fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
+                    ---@param entry cmp.Entry
+                    ---@param vim_item vim.CompletedItem
                     format = function(entry, vim_item)
                         local selections = {
                             fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
@@ -81,13 +97,18 @@ return {
                                 mode = "symbol_text",
                                 maxwidth = 50,
                             })(entry, vim_item)
+                            if string.match(kind.kind, ".* Color$") then
+                                kind.kind_hl_group =
+                                    handle_color_hl(entry.cache.entries.get_completion_item.documentation)
+                            end
+
                             local strings = vim.split(kind.kind, "%s", { trimempty = true })
                             if not strings[2] then
                                 strings[2] = strings[1]
                                 strings[1] = extra_kind_icons[strings[1]] or ""
                             end
                             kind.kind = " " .. strings[1] .. " "
-                            vim_item.menu = (strings[1] or "") .. " " .. (strings[2] or "")
+
                             return kind
                         else
                             local word = entry:get_insert_text()
