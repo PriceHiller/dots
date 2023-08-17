@@ -2,6 +2,6 @@
 
 main() {
 	kill -9 "$(pidof waybar)" >/dev/null
-	waybar &
+	GTK_THEME="THIS THEME DOESN'T EXIST" waybar &
 }
 main
