@@ -1,8 +1,7 @@
 return {
     {
-        "NeogitOrg/neogit",
+        "neogitorg/neogit",
         cmd = { "Neogit" },
-        dev = true,
         keys = {
             { "<leader>g", desc = "> Git" },
             { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit: Open" },
