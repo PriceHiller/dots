@@ -4,7 +4,7 @@ return {
         dependencies = {
             "kevinhwang91/promise-async",
         },
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufRead", "BufNewFile" },
         opts = function()
             vim.keymap.set("n", "zR", require("ufo").openAllFolds)
             vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
