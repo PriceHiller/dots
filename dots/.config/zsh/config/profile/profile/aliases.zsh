@@ -28,7 +28,7 @@ if command -v git >/dev/null 2>&1; then
 	alias gsw="git switch"
 	alias gd="nvim -c 'DiffviewOpen' -R"
 	alias gr="git remote"
-	alias gl="git log"
+	alias gl="nvim -c 'call feedkeys(\":Neogit log\<CR>l\")'"
 	alias glo="git log --oneline"
 	alias gw="git worktree"
 	alias gwa="git worktree add"
