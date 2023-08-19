@@ -8,9 +8,16 @@ return {
             "tex",
             "plaintex",
             "norg",
+            "yaml"
         },
         config = function()
-            require("autolist").setup({})
+            require("autolist").setup({
+                lists = {
+                    yaml = {
+                        "[-]"
+                    }
+                }
+            })
             local autolist_group = vim.api.nvim_create_augroup("Autolist", {})
             vim.api.nvim_create_autocmd("filetype", {
                 group = autolist_group,
@@ -20,6 +27,7 @@ return {
                     "tex",
                     "plaintex",
                     "norg",
+                    "yaml",
                 },
                 callback = function()
                     if pcall(require, "autolist") then
