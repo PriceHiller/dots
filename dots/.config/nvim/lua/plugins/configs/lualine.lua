@@ -159,6 +159,19 @@ return {
                             "mode",
                             fmt = simplifiedMode,
                         },
+                        {
+                            color = {
+                                fg = "#C34043",
+                                gui = "bold,italic"
+                            },
+                            function()
+                                local user = os.getenv("USER")
+                                if user == "root" then
+                                    return user
+                                end
+                                return ""
+                            end,
+                        },
                     },
                     lualine_b = {
                         {
