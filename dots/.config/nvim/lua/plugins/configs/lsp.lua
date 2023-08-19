@@ -325,7 +325,6 @@ return {
                         library.enabled = true
                         library.plugins = true
                     end
-
                 end,
             })
 

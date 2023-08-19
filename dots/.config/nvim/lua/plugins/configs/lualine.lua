@@ -162,7 +162,7 @@ return {
                         {
                             color = {
                                 fg = "#C34043",
-                                gui = "bold,italic"
+                                gui = "bold,italic",
                             },
                             function()
                                 local user = os.getenv("USER")

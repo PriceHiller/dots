@@ -25,9 +25,9 @@ return {
                 mappings = {
                     status = {
                         ["l"] = false,
-                        ["L"] = "LogPopup"
-                    }
-                }
+                        ["L"] = "LogPopup",
+                    },
+                },
             }
         end,
         dependencies = {
