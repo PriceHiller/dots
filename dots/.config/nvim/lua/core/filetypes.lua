@@ -10,6 +10,7 @@ M.setup = function()
             [".*/Azure%-Pipelines/.*%.yml"] = "azure-pipelines",
             [".*/Azure%-Pipelines/.*%.yaml"] = "azure-pipelines",
             [".*/waybar/config"] = "jsonc",
+            [".*/etc/systemd/.*"] = "systemd"
         },
     })
 
