@@ -4,5 +4,5 @@ vim.opt_local.expandtab = true
 
 vim.keymap.set("n", "<leader>fr", ":luafile %<CR>", {
     buffer = true,
-    silent = true
+    silent = true,
 })

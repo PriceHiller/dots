@@ -7,6 +7,6 @@ return {
             "HighlightColorsOff",
             "HighlightColorsToggle",
         },
-        config = true
+        config = true,
     },
 }

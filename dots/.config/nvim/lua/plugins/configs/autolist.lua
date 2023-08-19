@@ -8,15 +8,15 @@ return {
             "tex",
             "plaintex",
             "norg",
-            "yaml"
+            "yaml",
         },
         config = function()
             require("autolist").setup({
                 lists = {
                     yaml = {
-                        "[-]"
-                    }
-                }
+                        "[-]",
+                    },
+                },
             })
             local autolist_group = vim.api.nvim_create_augroup("Autolist", {})
             vim.api.nvim_create_autocmd("filetype", {
