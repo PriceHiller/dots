@@ -40,7 +40,7 @@ return {
 
                     local overrides = {
                         DiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
-                        DiffDelete = { bg = colors.winterREd, fg = colors.autumnRed },
+                        DiffDelete = { bg = colors.winterRed, fg = colors.autumnRed },
                         NeogitPopupSectionTitle = { fg = colors.crystalBlue },
                         NeogitPopupConfigEnabled = { fg = colors.springBlue, italic = true },
                         NeogitPopupActionkey = { fg = colors.surimiOrange },
