@@ -22,6 +22,12 @@ return {
                     diffview = true,
                     telescope = true,
                 },
+                mappings = {
+                    status = {
+                        ["l"] = false,
+                        ["L"] = "LogPopup"
+                    }
+                }
             }
         end,
         dependencies = {
