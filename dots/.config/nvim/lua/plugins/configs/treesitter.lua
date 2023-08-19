@@ -98,7 +98,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufReadPre", "BufNewFile", "WinLeave" },
         dependencies = {
             "nvim-treesitter/playground",
             {
