@@ -20,6 +20,7 @@ configure() {
 init() {
 	local wkdir="${BASE_ZSH_CONFIG_DIR}/config/themes"
 	configure
+	typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 	source "${wkdir}/powerlevel10k/powerlevel10k.zsh-theme"
 }
 
