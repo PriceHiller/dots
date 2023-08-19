@@ -314,10 +314,18 @@ return {
             -- NOTE: LUA LSP
             require("neodev").setup({
                 override = function(root_dir, library)
+                    local cur_file = vim.api.nvim_buf_get_name(0)
+
                     if root_dir:find("/tmp", 1, true) == 1 then
                         library.enabled = true
                         library.plugins = true
                     end
+
+                    if cur_file:find("%.nvim%.lua") ~= nil then
+                        library.enabled = true
+                        library.plugins = true
+                    end
+
                 end,
             })
 
