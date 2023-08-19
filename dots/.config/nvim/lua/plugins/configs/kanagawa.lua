@@ -30,6 +30,7 @@ return {
                     },
                 },
                 overrides = function(palette)
+                    ---@type PaletteColors
                     local colors = palette.palette
                     vim.api.nvim_set_hl(0, "NvimNotifyError", { fg = colors.samuraiRed })
                     vim.api.nvim_set_hl(0, "NvimNotifyWarn", { fg = colors.roninYellow })
