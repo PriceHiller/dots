@@ -12,7 +12,15 @@ return {
             "TodoLocList",
         },
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = true,
+        opts = {
+            keywords = {
+                SECURITY = {
+                    icon = "󰒃",
+                    color = "warning",
+                    alt = { "SEC", "SECURITY" },
+                },
+            },
+        },
     },
     {
         "folke/trouble.nvim",
