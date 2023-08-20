@@ -30,5 +30,23 @@ monitor-ssid() {
 	done
 }
 
+monitor-laptop-lid() {
+	local laptop_lid_state
+	while :; do
+		laptop_lid_state="$(</proc/acpi/button/lid/LID0/state)"
+		laptop_lid_state="${laptop_lid_state##* }"
+		laptop_lid_state="${laptop_lid_state^^}"
+		case "${laptop_lid_state}" in
+		"CLOSED")
+			if hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1") | .name' >/dev/null; then
+				hyprctl keyword monitor "eDP-1, disable" >/dev/null && printf "Disabled laptop screen as the laptop was shut\n"
+			fi
+			;;
+		esac
+		sleep 1
+	done
+}
+
 monitor-ssid &
+monitor-laptop-lid &
 wait
