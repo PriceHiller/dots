@@ -62,6 +62,16 @@ M.setup = function()
     -- Buffer bindings
     vim.keymap.set("n", "<A-a>", ":bprevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
     vim.keymap.set("n", "<A-s>", ":bnext<CR>", { silent = true, desc = "Go to Next Buffer" })
+
+    -- Binding to insert literal tab
+    vim.keymap.set("i", "<S-Tab>", function()
+        if vim.opt_local.expandtab:get() then
+            vim.api.nvim_feedkeys("\t", "m", false)
+        else
+            local spaces = string.rep(" ", vim.opt_local.shiftwidth:get() or 4)
+            vim.api.nvim_feedkeys(spaces, "m", false)
+        end
+    end, { silent = true, desc = "Insert Literal Tab" })
 end
 
 return M
