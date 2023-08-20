@@ -9,17 +9,20 @@ return {
             "plaintex",
             "norg",
             "yaml",
-            "yaml.ansible"
+            "yaml.ansible",
         },
         config = function()
             require("autolist").setup({
+                colon = {
+                    indent_raw = false,
+                },
                 lists = {
                     yaml = {
                         "[-]",
                     },
                     ["yaml.ansible"] = {
-                        "[-]"
-                    }
+                        "[-]",
+                    },
                 },
             })
             local autolist_group = vim.api.nvim_create_augroup("Autolist", {})
@@ -32,7 +35,7 @@ return {
                     "plaintex",
                     "norg",
                     "yaml",
-                    "yaml.ansible"
+                    "yaml.ansible",
                 },
                 callback = function()
                     if pcall(require, "autolist") then
