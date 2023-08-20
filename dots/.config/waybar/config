@@ -112,8 +112,8 @@
                 "ethernet": "󰈀",
                 "disconnected": "",
                 "wifi": [
-                    "󰖪",
-                    ""
+                    "",
+                    "󰖪"
                 ]
             },
             "tooltip": true,
