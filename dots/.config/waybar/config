@@ -111,10 +111,7 @@
             "format-icons": {
                 "ethernet": "󰈀",
                 "disconnected": "",
-                "wifi": [
-                    "",
-                    "󰖪"
-                ]
+                "wifi": ""
             },
             "tooltip": true,
             "max-length": 60,
