@@ -19,7 +19,7 @@ return {
                 transparent = true,
                 dim_inactive = true,
                 globalStatus = true,
-                theme = "dragon",
+                theme = "wave",
                 colors = {
                     theme = {
                         all = {
