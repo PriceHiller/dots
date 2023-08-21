@@ -8,6 +8,56 @@ export ZSH_HIGHLIGHT_MAXLENGTH=10000
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+source ~/.config/zsh/lib/colors.zsh
+
+read -r -d '' TIMEFMT <<-__EOS__
+${kanagawa[crystalBlue]}╭────────────────────────────────────────────────────────────────────────────────────╮
+│                                       ${kanagawa[roninYellow]}Job${reset_color}${kanagawa[crystalBlue]}                                          │
+├────────────────────────────────────────────────────────────────────────────────────╯${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   %J
+${kanagawa[crystalBlue]}├────────────────────────────────────────────────────────────────────────────────────╮
+│                                      ${kanagawa[roninYellow]}Stats${reset_color}${kanagawa[crystalBlue]}                                         │
+├────────────────────────────────────────────────────────────────────────────────────╯${reset_color}
+${kanagawa[crystalBlue]}│${reset_color} ${kanagawa[springGreen]}${UNDERLINE}${BOLD}Basic Stats${reset_color}
+${kanagawa[crystalBlue]}│${reset_color} ${kanagawa[oniViolet2]}real:${reset_color}                           %E
+${kanagawa[crystalBlue]}│${reset_color} ${kanagawa[oniViolet2]}user:${reset_color}                           %U
+${kanagawa[crystalBlue]}│${reset_color} ${kanagawa[oniViolet2]}sys:${reset_color}                            %S
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color} ${kanagawa[springGreen]}${UNDERLINE}${BOLD}Detailed Stats${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}CPU${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}CPU Percentage:${reset_color}               %P
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}Signals${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Signals Received:${reset_color}             %k
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}Memory${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Max Memory Used:${reset_color}              %M KB
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Total Space Used:${reset_color}             %K KB
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Average Shared Space Used:${reset_color}    %X KB
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Average Unshared Space Used:${reset_color}  %D KB
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}Page Faults${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Major Page Faults:${reset_color}            %F
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Minor Page Faults:${reset_color}            %R
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}I/O Operations${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Input Operations:${reset_color}             %I
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Output Operations:${reset_color}            %O
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}Context Switches${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Voluntary Context Switches:${reset_color}   %w
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Involuntary Context Switches:${reset_color} %c
+${kanagawa[crystalBlue]}│${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[carpYellow]}${UNDERLINE}Socket Messages${reset_color}
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Socket Messages Sent:${reset_color}         %s
+${kanagawa[crystalBlue]}│${reset_color}   ${kanagawa[oniViolet2]}Socket Messages Received:${reset_color}     %r
+${kanagawa[crystalBlue]}╰${reset_color}
+__EOS__
+
+export TIMEFMT
+export REPORTTIME=600
+
 ### SSH ###
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.sock"
 ssh-add -l >/dev/null 2>&1
