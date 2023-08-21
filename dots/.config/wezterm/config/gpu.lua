@@ -2,11 +2,12 @@
 -- we are unable to locate a card that supports Vulkan we fall back to OpenGL
 local config = {}
 local wezterm = require("wezterm")
+local log = require("lib.log")
 
 local found_valid_gpu = false
 for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
     if gpu.backend == "Vulkan" and not found_valid_gpu then
-        wezterm.log_info(
+        log.info(
             "Found Usable Vulkan GPU -- Device Name -> " .. gpu.name .. "; Device Type -> " .. gpu.device_type
         )
         config.webgpu_preferred_adapter = gpu
@@ -17,7 +18,7 @@ for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
 end
 
 if not found_valid_gpu then
-    wezterm.log_warn("Unable to locate a Vulkan-supported GPU, falling back to OpenGL")
+    log.warn("Unable to locate a Vulkan-supported GPU, falling back to OpenGL")
     config.front_end = "OpenGL"
 end
 
