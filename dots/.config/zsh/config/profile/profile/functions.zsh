@@ -166,3 +166,9 @@ Unzip () {
 		printf "\n"
 	done
 }
+
+File-Strip-Blank() {
+	for file in "${*[@]}"; do
+		mv "${file}" "${file//[[:blank:]]/-}"
+	done
+}
