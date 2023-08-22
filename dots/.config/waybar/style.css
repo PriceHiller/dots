@@ -65,6 +65,7 @@
 #clock,
 #wireplumber,
 #image,
+#submap,
 tooltip,
 tooltip label,
 #custom-pacman-update,
@@ -83,6 +84,10 @@ tooltip {
   background-color: #16161d;
   color: #dcd7ba;
   border-radius: 20px;
+}
+
+#submap {
+  background-color: #FF5D62
 }
 
 #custom-media {
