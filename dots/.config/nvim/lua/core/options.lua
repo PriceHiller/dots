@@ -74,7 +74,7 @@ M.setup = function()
     vim.wo.foldmethod = "expr"
 
     -- Concealment for nicer rendering
-    opt.conceallevel = 1
+    opt.conceallevel = 2
     opt.concealcursor = ""
 
     -- Cursor line highlight
