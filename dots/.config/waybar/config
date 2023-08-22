@@ -4,6 +4,7 @@
         "position": "top",
         "modules-left": [
             "custom/launcher",
+            "hyprland/submap",
             "wlr/workspaces",
             "cpu",
             "memory",
@@ -31,6 +32,10 @@
             "min-length": 5,
             "on-click": "wofi",
             "interval": "once"
+        },
+        "hyprland/submap": {
+            "format": "󰥻 {}",
+            "tooltip": false
         },
         "battery": {
             "min-length": 5,
