@@ -13,7 +13,6 @@ local M = {}
 local function system_log(message, log_level)
     local log_unit = "wezterm"
     if os_detected == "linux" then
-        print(string.format("systemd-cat -t %s -p %s echo '%s'", log_unit, log_level:lower(), message))
         local handle = io.popen(string.format("systemd-cat -t %s -p %s echo '%s'", log_unit, log_level:lower(), message))
         ---@diagnostic disable-next-line: need-check-nil
         local output = handle:read("*a")
