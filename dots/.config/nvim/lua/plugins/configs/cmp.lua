@@ -99,7 +99,7 @@ return {
                             })(entry, vim_item)
                             if string.match(kind.kind, ".* Color$") then
                                 kind.kind_hl_group =
-                                    handle_color_hl(entry.cache.entries.get_completion_item.documentation)
+                                    handle_color_hl(entry.cache.entries.get_completion_item.label)
                             end
 
                             local strings = vim.split(kind.kind, "%s", { trimempty = true })
