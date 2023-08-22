@@ -20,6 +20,7 @@
         "modules-right": [
             "custom/pacman-update",
             "tray",
+            "backlight",
             "network",
             "clock",
             "custom/lock"
@@ -97,6 +98,10 @@
             "format": "",
             "interval": "once",
             "on-click": "swaylock"
+        },
+        "backlight": {
+            "format": "󰃠 {percent}%",
+            "scroll-step": 5.0
         },
         "network": {
             "on-click-right": "~/.config/waybar/scripts/set-rfkill.bash",

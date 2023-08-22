@@ -70,6 +70,7 @@ tooltip label,
 #custom-pacman-update,
 #taskbar,
 #tray,
+#backlight,
 #tray menu,
 #custom-lock {
   background-color: #16161d;
@@ -249,7 +250,7 @@ tooltip {
   );
   background-size: 400% 400%;
   /* PERF: Animations in gtk css cause incredible CPU loads, wtf?!
-  * Disabling this shit for now, not worth the CPU cost. */
+  *  Disabling this shit for now, not worth the CPU cost. */
   /* animation: gradient_roll 30s ease-in-out infinite; */
 }
 
@@ -270,6 +271,11 @@ tooltip {
 #tray menu {
   border-radius: 0px;
   -gtk-icon-shadow: none;
+}
+
+/* Backlight */
+#backlight {
+  color: #DCA561;
 }
 
 /* Network */
