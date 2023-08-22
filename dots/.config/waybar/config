@@ -198,7 +198,8 @@
             "exec": "~/.config/waybar/scripts/get-pacman-package-updates.bash",
             "format": "󰇚 {}",
             "tooltip": true,
-            "interval": 3600
+            "interval": 3600,
+            "signal": 8
         },
         "wlr/taskbar": {
             "format": "{icon}",
