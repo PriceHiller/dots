@@ -98,8 +98,27 @@ return {
                                 maxwidth = 50,
                             })(entry, vim_item)
                             if string.match(kind.kind, ".* Color$") then
-                                kind.kind_hl_group =
-                                    handle_color_hl(entry.cache.entries.get_completion_item.label)
+                                ---@type string
+                                local hl = nil
+                                local cmp_item = entry.cache.entries.get_completion_item
+                                if cmp_item.documentation ~= nil then
+                                    hl = cmp_item.documentation
+                                elseif cmp_item.label ~= nil then
+                                    hl = cmp_item.label
+                                end
+
+                                local s, _, red, green, blue = string.find(hl, "rgba%((%d+), (%d+), (%d+), .*%)")
+                                if s ~= nil then
+                                    hl = string.format("#%x%x%x", red, green, blue)
+                                end
+
+                                s, _, red, green, blue = string.find(hl, "rgb%((%d+), (%d+), (%d+))")
+                                if s ~= nil then
+                                    hl = string.format("#%x%x%x", red, green, blue)
+                                end
+
+
+                                kind.kind_hl_group = handle_color_hl(hl)
                             end
 
                             local strings = vim.split(kind.kind, "%s", { trimempty = true })
