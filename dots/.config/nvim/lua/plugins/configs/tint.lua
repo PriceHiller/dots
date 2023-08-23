@@ -21,8 +21,8 @@ return {
 
                 return isDiff or isFloating or isIgnoredBuftype or isIgnoredFiletype
             end,
-            tint = -30,
-            saturation = 0.8,
+            tint = -10,
+            saturation = 0.85,
         },
     },
 }
