@@ -117,7 +117,6 @@ return {
                                     hl = string.format("#%x%x%x", red, green, blue)
                                 end
 
-
                                 kind.kind_hl_group = handle_color_hl(hl)
                             end
 
