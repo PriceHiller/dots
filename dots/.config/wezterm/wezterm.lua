@@ -27,6 +27,6 @@ end
 
 local config = wlib.Table.merge(gpu, events, fonts, theme, tabbar, misc, rendering, keybinds, os_config)
 
-log.debug("Final Wezterm Config:\n" .. require("lib.inspect").inspect(config, { newline = " ", indent = "" }))
+log.debug("Final Wezterm Config: " .. require("lib.inspect").inspect(config, { newline = " ", indent = "" }))
 
 return config
