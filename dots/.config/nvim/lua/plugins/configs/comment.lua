@@ -1,13 +1,34 @@
 return {
     {
-        "terrortylor/nvim-comment",
-        cmd = "CommentToggle",
-        config = function()
-            require("nvim_comment").setup({})
-        end,
+        "numToStr/Comment.nvim",
+        config = true,
         keys = {
-            { "<leader>/", "<cmd>CommentToggle<CR>", desc = "Toggle Comment" },
-            { "<leader>/", ":'<,'>CommentToggle<CR>", desc = "Toggle Selection Comment", mode = { "v" } },
+            { "gc", desc = "> Comment: Line" },
+            { "gb", desc = "> Comment: Block " },
+            { "gbc", desc = "Comment: Toggle block comment" },
+            { "gcc", desc = "Comment: Toggle line comment" },
+            { "gcO", desc = "Comment: Add comment on line above" },
+            { "gco", desc = "Comment: Add comment on line below" },
+            { "gcA", desc = "Comment: Add comment at end of line" },
+            {
+                "<leader>/",
+                function()
+                    local api = require("Comment.api")
+                    api.toggle.linewise.current()
+                end,
+                desc = "Comment: Toggle Linewise",
+            },
+            {
+                "<leader>/",
+                function()
+                    local api = require("Comment.api")
+                    local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+                    vim.api.nvim_feedkeys(esc, "nx", false)
+                    api.toggle.linewise(vim.fn.visualmode())
+                end,
+                desc = "Comment: Toggle Blockwise",
+                mode = { "x" },
+            },
         },
     },
 }
