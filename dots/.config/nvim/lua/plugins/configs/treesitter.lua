@@ -105,6 +105,7 @@ return {
                 "pfeiferj/nvim-hurl",
                 config = true,
             },
+            "JoosepAlviste/nvim-ts-context-commentstring"
         },
         config = function()
             local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
@@ -158,6 +159,9 @@ return {
                 query_linter = {
                     enable = true,
                 },
+                context_commentstring = {
+                    enable = true
+                }
             })
         end,
     },
