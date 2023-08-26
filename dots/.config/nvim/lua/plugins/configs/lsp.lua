@@ -163,6 +163,7 @@ return {
                 },
             })
 
+            local lsp_augroup = vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
             local function on_attach(client, bufnr)
                 -- Set autocommands conditional on server_capabilities
                 vim.notify("Attached server " .. client.name, "info", {
@@ -172,7 +173,20 @@ return {
                 local capabilities = client.server_capabilities
                 -- Enable inlay hints if the language server provides them
                 if capabilities.inlayHintProvider then
-                    vim.lsp.inlay_hint(bufnr, true)
+                    vim.api.nvim_create_autocmd("InsertEnter", {
+                        buffer = bufnr,
+                        callback = function()
+                            vim.lsp.inlay_hint(bufnr, true)
+                        end,
+                        group = lsp_augroup,
+                    })
+                    vim.api.nvim_create_autocmd("InsertLeave", {
+                        buffer = bufnr,
+                        callback = function()
+                            vim.lsp.inlay_hint(bufnr, false)
+                        end,
+                        group = lsp_augroup,
+                    })
                 end
 
                 if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
