@@ -67,7 +67,6 @@ return {
                         "--with-filename",
                         "--line-number",
                         "--column",
-                        "--hidden",
                         "--smart-case",
                     },
                     history = {
