@@ -125,13 +125,6 @@ return {
                 end,
                 desc = "LSP: Diagnostic Open Float",
             },
-            {
-                "<leader>lf",
-                function()
-                    vim.lsp.buf.format({ async = true })
-                end,
-                desc = "LSP: Format",
-            },
             { "[l", vim.diagnostic.goto_prev, desc = "LSP: Diagnostic Previous" },
             { "]l", vim.diagnostic.goto_next, desc = "LSP: Diagnostic Next" },
             {
