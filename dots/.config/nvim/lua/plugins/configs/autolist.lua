@@ -12,6 +12,13 @@ return {
             "yaml.ansible",
         },
         config = function()
+            local list_patterns = {
+                unordered = "[-+*]", -- - + *
+                digit = "%d+[.)]",   -- 1. 2. 3.
+                ascii = "%a[.)]",    -- a) b) c)
+                roman = "%u*[.)]",   -- I. II. III.
+            }
+
             require("autolist").setup({
                 colon = {
                     indent_raw = false,
@@ -23,6 +30,13 @@ return {
                     ["yaml.ansible"] = {
                         "[-]",
                     },
+                    markdown = {
+                        list_patterns.unordered,
+                        list_patterns.digit,
+                        list_patterns.ascii,
+                        list_patterns.roman,
+                        ">"
+                    }
                 },
             })
             local autolist_group = vim.api.nvim_create_augroup("Autolist", {})
