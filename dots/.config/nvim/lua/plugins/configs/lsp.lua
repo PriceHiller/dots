@@ -4,7 +4,14 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         opts = function()
             local null_ls = require("null-ls")
+            local function on_attach(client, bufnr)
+                local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+                if ft == "markdown" then
+                    vim.api.nvim_set_option_value("formatexpr", nil, { buf = bufnr })
+                end
+            end
             return {
+                on_attach = on_attach,
                 sources = {
                     null_ls.builtins.diagnostics.hadolint,
                     null_ls.builtins.code_actions.refactoring,
