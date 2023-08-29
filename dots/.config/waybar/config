@@ -138,7 +138,7 @@
             "format": "{icon}{volume}%",
             "format-muted": "󰖁  0%",
             "on-click-middle": "helvum",
-            "on-click-right": "pavucontrol",
+            "on-click-right": "pavucontrol-qt",
             "on-click": "pw-volume mute toggle",
             "format-icons": [
                 "󰕿 ",
