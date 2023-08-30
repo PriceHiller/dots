@@ -11,7 +11,8 @@ return {
             "HighlightColorsToggle",
         },
         config = true,
-    },{
+    },
+    {
         "uga-rosa/ccc.nvim",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
@@ -24,7 +25,7 @@ return {
                 },
                 highlighter = {
                     auto_enable = true,
-                    lsp = true
+                    lsp = true,
                 },
             })
         end,

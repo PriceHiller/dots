@@ -14,9 +14,9 @@ return {
         config = function()
             local list_patterns = {
                 unordered = "[-+*]", -- - + *
-                digit = "%d+[.)]",   -- 1. 2. 3.
-                ascii = "%a[.)]",    -- a) b) c)
-                roman = "%u*[.)]",   -- I. II. III.
+                digit = "%d+[.)]", -- 1. 2. 3.
+                ascii = "%a[.)]", -- a) b) c)
+                roman = "%u*[.)]", -- I. II. III.
             }
 
             require("autolist").setup({
@@ -35,8 +35,8 @@ return {
                         list_patterns.digit,
                         list_patterns.ascii,
                         list_patterns.roman,
-                        ">"
-                    }
+                        ">",
+                    },
                 },
             })
             local autolist_group = vim.api.nvim_create_augroup("Autolist", {})

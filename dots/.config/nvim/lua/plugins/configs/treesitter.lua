@@ -39,7 +39,23 @@ return {
         "windwp/nvim-ts-autotag",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
-        config = true,
+        opts = {
+            filetypes = {
+                "astro",
+                "glimmer",
+                "handlebars",
+                "html",
+                "javascript",
+                "jsx",
+                "php",
+                "rescript",
+                "svelte",
+                "tsx",
+                "typescript",
+                "vue",
+                "xml",
+            },
+        },
         ft = {
             "astro",
             "glimmer",
@@ -47,7 +63,6 @@ return {
             "html",
             "javascript",
             "jsx",
-            "markdown",
             "php",
             "rescript",
             "svelte",
@@ -105,7 +120,7 @@ return {
                 "pfeiferj/nvim-hurl",
                 config = true,
             },
-            "JoosepAlviste/nvim-ts-context-commentstring"
+            "JoosepAlviste/nvim-ts-context-commentstring",
         },
         config = function()
             local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
@@ -160,8 +175,8 @@ return {
                     enable = true,
                 },
                 context_commentstring = {
-                    enable = true
-                }
+                    enable = true,
+                },
             })
         end,
     },
