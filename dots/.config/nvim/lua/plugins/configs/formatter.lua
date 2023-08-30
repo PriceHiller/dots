@@ -24,7 +24,7 @@ return {
                 filetype = {
                     markdown = filetypes.markdown.prettierd,
                     css = filetypes.css.prettierd,
-                    lua = filetypes.lua.stylua
+                    lua = filetypes.lua.stylua,
                 },
             }
         end,
