@@ -19,7 +19,8 @@ local M = {}
 local function system_log(message, opts)
     local log_unit = "wezterm"
     if os_detected == "linux" then
-        local handle = io.popen(string.format("systemd-cat -t %s -p %s echo '%s'", log_unit, opts.level:lower(), message))
+        local handle =
+            io.popen(string.format("systemd-cat -t %s -p %s echo '%s'", log_unit, opts.level:lower(), message))
         if not opts.ignore_result or opts.ignore_result == nil then
             ---@diagnostic disable-next-line: need-check-nil
             local output = handle:read("*a")
@@ -38,7 +39,6 @@ local function system_log(message, opts)
         end
     end
 end
-
 
 ---Format message with log options
 ---@param message string
