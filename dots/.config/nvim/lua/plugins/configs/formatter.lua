@@ -23,7 +23,8 @@ return {
                 log_level = vim.log.levels.WARN,
                 filetype = {
                     markdown = filetypes.markdown.prettierd,
-                    css = filetypes.css.prettierd
+                    css = filetypes.css.prettierd,
+                    lua = filetypes.lua.stylua
                 },
             }
         end,
