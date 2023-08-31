@@ -57,7 +57,7 @@ return {
                     ["core.concealer"] = {
                         config = {
                             folds = false,
-                            icon_preset = "diamond",
+                            icon_preset = "varied",
                             icons = {
                                 code_block = {
                                     conceal = true,
