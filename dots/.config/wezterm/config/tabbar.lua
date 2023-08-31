@@ -70,7 +70,9 @@ wezterm.on("update-right-status", function(window, pane)
     if type(cwd_uri) == "userdata" then
         -- Running on a newer version of wezterm and we have
         -- a URL object here, making this simple!
+        ---@diagnostic disable-next-line: undefined-field
         cwd = cwd_uri.file_path
+        ---@diagnostic disable-next-line: undefined-field
         hostname = cwd_uri.host or wezterm.hostname()
     else
         -- an older version of wezterm, 20230712-072601-f4abf8fd or earlier,
