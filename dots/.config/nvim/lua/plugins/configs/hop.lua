@@ -10,11 +10,6 @@ return {
                 desc = "Hop: Character",
                 mode = { "" },
             },
-            { ";l", "<cmd>HopLineStart<CR>", desc = "Hop: Line Start" },
-            { ";s", "<cmd>HopPattern<CR>", desc = "Hop: Pattern" },
-            { ";;", "<cmd>HopWord<CR>", desc = "Hop: Word" },
-            { ";a", "<cmd>HopAnywhere<CR>", desc = "Hop: Anywhere" },
-            { ";v", "<cmd>HopVertical<CR>", desc = "Hop Vertical" },
         },
         cmd = {
             "HopLineStart",

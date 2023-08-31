@@ -3,6 +3,7 @@ local M = {}
 M.setup = function()
     -- set mapleader to space
     vim.g.mapleader = " "
+    vim.g.maplocalleader = ";"
 
     -- Get rid of highlight after search
     vim.keymap.set("n", "<esc>", function()
