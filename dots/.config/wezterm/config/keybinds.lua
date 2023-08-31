@@ -1,16 +1,68 @@
 local wezterm = require("wezterm")
 
+local adjust_pane_size_amount = 5
+
 return {
     disable_default_key_bindings = true,
     leader = { key = "a", mods = "CTRL", timeout_milliseconds = 100000 },
+    key_tables = {
+        -- NOTE: Pane Resizing Submap
+        resize_pane = {
+            { key = "LeftArrow",  action = wezterm.action.AdjustPaneSize({ "Left", adjust_pane_size_amount }) },
+            { key = "h",          action = wezterm.action.AdjustPaneSize({ "Left", adjust_pane_size_amount }) },
+            { key = "RightArrow", action = wezterm.action.AdjustPaneSize({ "Right", adjust_pane_size_amount }) },
+            { key = "l",          action = wezterm.action.AdjustPaneSize({ "Right", adjust_pane_size_amount }) },
+            { key = "UpArrow",    action = wezterm.action.AdjustPaneSize({ "Up", adjust_pane_size_amount }) },
+            { key = "k",          action = wezterm.action.AdjustPaneSize({ "Up", adjust_pane_size_amount }) },
+            { key = "DownArrow",  action = wezterm.action.AdjustPaneSize({ "Down", adjust_pane_size_amount }) },
+            { key = "j",          action = wezterm.action.AdjustPaneSize({ "Down", adjust_pane_size_amount }) },
+
+            -- Cancel the mode by pressing escape
+            { key = "Escape",     action = "PopKeyTable" },
+        },
+    },
     keys = {
-        { key = "r", mods = "SUPER", action = "ReloadConfiguration" },
-        { key = "z", mods = "SUPER", action = wezterm.action({ ActivateTabRelative = -1 }) },
-        { key = "x", mods = "SUPER", action = wezterm.action({ ActivateTabRelative = 1 }) },
-        { key = "t", mods = "SUPER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
-        { key = "w", mods = "ALT", action = wezterm.action({ CloseCurrentPane = { confirm = false } }) },
-        { key = "w", mods = "SUPER", action = wezterm.action({ CloseCurrentTab = { confirm = false } }) },
-        { key = "Copy", action = wezterm.action({ CopyTo = "Clipboard" }) },
+        {
+            key = "r",
+            mods = "SUPER",
+            action = "ReloadConfiguration"
+        },
+        {
+            key = "z",
+            mods = "SUPER",
+            action = wezterm.action({
+                ActivateTabRelative = -1,
+            }),
+        },
+        {
+            key = "x",
+            mods = "SUPER",
+            action = wezterm.action({
+                ActivateTabRelative = 1,
+            }),
+        },
+        {
+            key = "t",
+            mods = "SUPER",
+            action = wezterm.action({
+                SpawnTab = "CurrentPaneDomain",
+            }),
+        },
+        {
+            key = "w",
+            mods = "ALT",
+            action = wezterm.action({
+                CloseCurrentPane = { confirm = false },
+            }),
+        },
+        {
+            key = "w",
+            mods = "SUPER",
+            action = wezterm.action({
+                CloseCurrentTab = { confirm = false },
+            }),
+        },
+        { key = "Copy",  action = wezterm.action({ CopyTo = "Clipboard" }) },
         { key = "Paste", action = wezterm.action({ PasteFrom = "Clipboard" }) },
         -- NOTE: Pane Splitting
         {
@@ -54,9 +106,9 @@ return {
             mods = "CTRL",
             action = wezterm.action({ ActivatePaneDirection = "Down" }),
         },
-        { key = "=", mods = "CTRL", action = "IncreaseFontSize" },
-        { key = "-", mods = "CTRL", action = "DecreaseFontSize" },
-        { key = "0", mods = "CTRL", action = "ResetFontSize" },
+        { key = "=", mods = "CTRL",   action = "IncreaseFontSize" },
+        { key = "-", mods = "CTRL",   action = "DecreaseFontSize" },
+        { key = "0", mods = "CTRL",   action = "ResetFontSize" },
 
         -- NOTE: Leader dependent binds
         { key = "h", mods = "LEADER", action = wezterm.action({ EmitEvent = "trigger-nvim-with-scrollback" }) },
@@ -75,6 +127,15 @@ return {
 
         -- NOTE: Show Commands
         { key = "a", mods = "LEADER", action = wezterm.action.ActivateCommandPalette },
+        -- NOTE: Pane Resizing Submap Call
+        {
+            key = "r",
+            mods = "LEADER",
+            action = wezterm.action.ActivateKeyTable({
+                name = "resize_pane",
+                one_shot = false,
+            }),
+        },
+
     },
-    key_tables = {},
 }
