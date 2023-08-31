@@ -17,11 +17,6 @@ return {
             "onsails/lspkind.nvim",
             "f3fora/cmp-spell",
             "FelipeLema/cmp-async-path",
-            {
-                "petertriho/cmp-git",
-                dependencies = { "nvim-lua/plenary.nvim" },
-                opts = { filetypes = { "*" } },
-            },
             -- Snippets
             {
                 "L3MON4D3/LuaSnip",
@@ -66,6 +61,31 @@ return {
                 end
             end
 
+
+            ---@param sources table?
+            local standard_sources = function(sources)
+                sources = sources or {}
+                local default_sources = {
+                    { name = "nvim_lsp",     priority = 11 },
+                    { name = "luasnip",      priority = 10 }, -- For luasnip users.
+                    { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
+                    {
+                        name = "rg",
+                        priority = 7,
+                        keyword_length = 3,
+                        max_item_count = 10,
+                    },
+                    { name = "async_path", priority = 6 },
+                    { name = "zsh",        priority = 5 },
+                    { name = "emoji",      keyword_length = 2 },
+                    { name = "neorg" },
+                    { name = "calc" },
+                    { name = "npm",        keyword_length = 2 },
+                    { name = "spell",      keyword_length = 2 },
+                }
+
+                return vim.tbl_deep_extend("force", default_sources, sources)
+            end
             cmp.setup({
                 formatting = {
                     fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
@@ -213,25 +233,7 @@ return {
                         end
                     end, { "i", "s" }),
                 },
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp", priority = 11 },
-                    { name = "luasnip", priority = 10 }, -- For luasnip users.
-                    { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
-                    {
-                        name = "rg",
-                        priority = 7,
-                        keyword_length = 3,
-                        max_item_count = 10,
-                    },
-                    { name = "async_path", priority = 6 },
-                    { name = "zsh", priority = 5 },
-                    { name = "git", priority = 4 },
-                    { name = "emoji", keyword_length = 2 },
-                    { name = "neorg" },
-                    { name = "calc" },
-                    { name = "npm", keyword_length = 2 },
-                    { name = "spell", keyword_length = 2 },
-                }),
+                sources = cmp.config.sources(standard_sources()),
                 sorting = {
                     comparators = {
                         compare.score,
@@ -249,14 +251,12 @@ return {
 
             -- Git Commit Completions
             cmp.setup.filetype("gitcommit", {
-                sources = cmp.config.sources({
-                    { name = "conventionalcommits", priority = 3 },
-                    { name = " git", priority = 2 },
-                    { name = "emoji", keyword_length = 2, priority = 1 },
+                sources = standard_sources({
+                    { name = "conventionalcommits", priority = 99 },
                 }),
             })
 
-            cmp.setup.filetype("toml", { sources = cmp.config.sources({ { name = "crates" } }) })
+            cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
 
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
@@ -273,7 +273,7 @@ return {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { name = "fuzzy_buffer" },
-                    { name = "cmdline_history" },
+                    { name = "cmdline_history", max_item_count = 3 },
                 }),
             })
 
@@ -287,7 +287,7 @@ return {
                             ignore_cmds = { "!" },
                         },
                     },
-                    { name = "cmdline_history" },
+                    { name = "cmdline_history", max_item_count = 3 },
                     { name = "fuzzy_buffer" },
                 }),
             })
