@@ -2,7 +2,7 @@ return {
     {
         "lukas-reineke/headlines.nvim",
         dependencies = "nvim-treesitter/nvim-treesitter",
-        config = true, -- or `opts = {}`
-        filetypes = { "markdown", "norg", "rmd", "org" },
+        config = true,
+        ft = { "markdown", "norg", "rmd", "org" },
     },
 }
