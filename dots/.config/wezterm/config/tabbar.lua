@@ -67,23 +67,31 @@ wezterm.on("update-status", function(window, pane)
     local cwd_uri = pane:get_current_working_dir()
     local hostname = ""
     local cwd = ""
-    if cwd_uri then
+    if type(cwd_uri) == 'userdata' then
+        -- Running on a newer version of wezterm and we have
+        -- a URL object here, making this simple!
+        cwd = cwd_uri.file_path
+        hostname = cwd_uri.host or wezterm.hostname()
+    else
+        -- an older version of wezterm, 20230712-072601-f4abf8fd or earlier,
+        -- which doesn't have the Url object
         cwd_uri = cwd_uri:sub(8)
-        local slash = cwd_uri:find("/")
+        local slash = cwd_uri:find '/'
         if slash then
             hostname = cwd_uri:sub(1, slash - 1)
-            -- Remove the domain name portion of the hostname
-            local dot = hostname:find("[.]")
-            if dot then
-                hostname = hostname:sub(1, dot - 1)
-            end
-            hostname = "@" .. hostname
-            -- and extract the cwd from the uri
-            cwd = cwd_uri:sub(slash)
+            -- and extract the cwd from the uri, decoding %-encoding
+            cwd = cwd_uri:sub(slash):gsub('%%(%x%x)', function(hex)
+                return string.char(tonumber(hex, 16))
+            end)
         end
     end
 
     cwd = " " .. cwd
+    if hostname ~= nil then
+        hostname = "@" .. hostname
+    else
+        hostname = "No Hostname"
+    end
 
     local date = " " .. wezterm.strftime("%a, %b %-d, %I:%M %p")
 
@@ -123,7 +131,7 @@ wezterm.on("update-status", function(window, pane)
         { bg = color_names.kanagawa.roninYellow, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.springGreen, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.crystalBlue, fg = color_names.kanagawa.sumiInk0 },
-        { bg = color_names.kanagawa.oniViolet, fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.oniViolet,   fg = color_names.kanagawa.sumiInk0 },
     }
 
     -- The elements to be formatted
