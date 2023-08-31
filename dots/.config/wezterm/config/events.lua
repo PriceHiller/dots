@@ -5,6 +5,10 @@ wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
     local scrollback = pane:get_lines_as_text(scrollback_lines)
     local name = os.tmpname()
     local f = io.open(name, "w+")
+    if f == nil then
+        window:toast_notification("Wezterm", "Unable to get scrollback!", nil, 4000)
+        return
+    end
     f:write(scrollback)
     f:flush()
     f:close()
