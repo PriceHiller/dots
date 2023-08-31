@@ -57,7 +57,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     }
 end)
 
-wezterm.on("update-status", function(window, pane)
+wezterm.on("update-right-status", function(window, pane)
     log.debug("received event", { prefix = "update-status", ignore_result = true })
     -- Each element holds the text for a cell in a "powerline" style << fade
 
@@ -67,7 +67,7 @@ wezterm.on("update-status", function(window, pane)
     local cwd_uri = pane:get_current_working_dir()
     local hostname = ""
     local cwd = ""
-    if type(cwd_uri) == 'userdata' then
+    if type(cwd_uri) == "userdata" then
         -- Running on a newer version of wezterm and we have
         -- a URL object here, making this simple!
         cwd = cwd_uri.file_path
@@ -76,21 +76,19 @@ wezterm.on("update-status", function(window, pane)
         -- an older version of wezterm, 20230712-072601-f4abf8fd or earlier,
         -- which doesn't have the Url object
         cwd_uri = cwd_uri:sub(8)
-        local slash = cwd_uri:find '/'
+        local slash = cwd_uri:find("/")
         if slash then
             hostname = cwd_uri:sub(1, slash - 1)
             -- and extract the cwd from the uri, decoding %-encoding
-            cwd = cwd_uri:sub(slash):gsub('%%(%x%x)', function(hex)
+            cwd = cwd_uri:sub(slash):gsub("%%(%x%x)", function(hex)
                 return string.char(tonumber(hex, 16))
             end)
         end
     end
 
     cwd = " " .. cwd
-    if hostname ~= nil then
+    if hostname ~= nil or hostname ~= "" then
         hostname = "@" .. hostname
-    else
-        hostname = "No Hostname"
     end
 
     local date = " " .. wezterm.strftime("%a, %b %-d, %I:%M %p")
@@ -126,14 +124,25 @@ wezterm.on("update-status", function(window, pane)
         battery = battery_icon .. " " .. string.format("%.0f%%", charge_percent)
     end
 
+    local leader_text = "󰀘 LEADER"
+    local leader = ""
+    if window:leader_is_active() then
+        leader = leader_text
+    end
+
+    local key_table = window:active_key_table()
+    if key_table then
+        leader = string.format("%s > %s", leader_text, key_table)
+    end
+
     -- Color palette for the backgrounds of each cell
     local fade_colors = {
         { bg = color_names.kanagawa.roninYellow, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.springGreen, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.crystalBlue, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.oniViolet,   fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.waveRed,     fg = color_names.kanagawa.sumiInk0 },
     }
-
     -- The elements to be formatted
     local elements = {}
     -- Ensure the items have a "cap" on them
@@ -148,7 +157,9 @@ wezterm.on("update-status", function(window, pane)
         local cell_no = num_cells + 1
         table.insert(elements, { Foreground = { Color = fade_colors[cell_no].fg } })
         table.insert(elements, { Background = { Color = fade_colors[cell_no].bg } })
-        table.insert(elements, { Text = " " .. text .. " " })
+        if text ~= nil and text ~= "" then
+            table.insert(elements, { Text = " " .. text .. " " })
+        end
         if not is_last then
             table.insert(elements, { Foreground = { Color = fade_colors[cell_no + 1].bg } })
             table.insert(elements, { Text = edges.solid.right })
@@ -157,6 +168,7 @@ wezterm.on("update-status", function(window, pane)
     end
 
     local cells = {
+        leader,
         cwd,
         battery,
         date,
