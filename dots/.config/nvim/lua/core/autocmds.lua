@@ -13,7 +13,7 @@ M.setup = function()
     -- NOTE: Remove trailing whitespace on save
     vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
-        command = "%s/\\s\\+$//e",
+        command = "StripTrailSpace",
     })
 
 
