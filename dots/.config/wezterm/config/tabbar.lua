@@ -13,6 +13,10 @@ local edges = {
     },
 }
 
+-- This function returns the suggested title for a tab.
+-- It prefers the title that was set via `tab:set_title()`
+-- or `wezterm cli set-tab-title`, but falls back to the
+-- title of the active pane in that tab.
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     log.debug("received event", { prefix = "format-tab-title", ignore_result = true })
@@ -35,6 +39,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local edge_fg = color_names.kanagawa.oniViolet
 
     local title = " " .. wezterm.truncate_right(tab_title(tab), max_width - 2) .. " "
+
+    if title:match("^%s+$") then
+        title = " N/A "
+    end
 
     if tab.is_active then
         bg = color_names.kanagawa.sumiInk0
