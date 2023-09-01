@@ -16,7 +16,6 @@ M.setup = function()
         command = "StripTrailSpace",
     })
 
-
     -- NOTE: Disables status column elements in Terminal buffer
     vim.api.nvim_create_autocmd("TermOpen", {
         group = augroup,
@@ -26,7 +25,7 @@ M.setup = function()
             vim.api.nvim_set_option_value("number", false, { scope = "local" })
             vim.api.nvim_set_option_value("relativenumber", false, { scope = "local" })
             vim.cmd.startinsert()
-        end
+        end,
     })
 end
 
