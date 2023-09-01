@@ -155,12 +155,16 @@ wezterm.on("update-right-status", function(window, pane)
 
     local key_table = window:active_key_table()
     if key_table then
-        leader = string.format("%s > %s", leader_text, key_table)
+        leader = leader_text
+        key_table = "󰌌 " .. key_table:gsub("_", " "):gsub("(%l)(%w*)", function (a,b)
+            return string.upper(a)..b
+        end)
     end
 
     -- Color palette for the backgrounds of each cell
     local fade_colors = {
         { bg = color_names.kanagawa.roninYellow, fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.carpYellow, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.springGreen, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.crystalBlue, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.oniViolet,   fg = color_names.kanagawa.sumiInk0 },
@@ -192,6 +196,7 @@ wezterm.on("update-right-status", function(window, pane)
 
     local cells = {
         leader,
+        key_table,
         cwd,
         battery,
         date,
