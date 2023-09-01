@@ -72,6 +72,7 @@ wezterm.on("update-right-status", function(window, pane)
         -- a URL object here, making this simple!
         ---@diagnostic disable-next-line: undefined-field
         cwd = cwd_uri.file_path
+        cwd = cwd:gsub(wezterm.home_dir, "~")
         ---@diagnostic disable-next-line: undefined-field
         hostname = cwd_uri.host or wezterm.hostname()
     end
