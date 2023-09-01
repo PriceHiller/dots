@@ -71,6 +71,8 @@ local colors = {
         scrollbar_thumb = color_names.kanagawa.sumiInk0,
         split = color_names.kanagawa.sumiInk0,
 
+        compose_cursor = color_names.kanagawa.roninYellow,
+
         ansi = {
             color_names.kanagawa.sumiInk0,
             color_names.kanagawa.autumnRed,
