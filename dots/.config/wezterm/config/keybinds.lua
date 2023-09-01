@@ -20,6 +20,15 @@ return {
             -- Cancel the mode by pressing escape
             { key = "Escape",     action = "PopKeyTable" },
         },
+
+        -- NOTE: Pane Rotate Position Submap
+        rotate_panes = {
+            { key = "h",          action = wezterm.action.RotatePanes("CounterClockwise") },
+            { key = "LeftArrow",  action = wezterm.action.RotatePanes("CounterClockwise") },
+            { key = "l",          action = wezterm.action.RotatePanes("Clockwise") },
+            { key = "RightArrow", action = wezterm.action.RotatePanes("Clockwise") },
+            { key = "Escape",     action = "PopKeyTable" },
+        }
     },
     keys = {
         {
@@ -136,6 +145,15 @@ return {
                 one_shot = false,
             }),
         },
+        -- NOTE: Pane Rotate Submap Call
+        {
+            key = "z",
+            mods = "LEADER",
+            action = wezterm.action.ActivateKeyTable({
+                name = "rotate_panes",
+                one_shot = false,
+            }),
+        }
 
     },
 }
