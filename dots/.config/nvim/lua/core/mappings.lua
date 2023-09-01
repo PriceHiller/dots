@@ -73,6 +73,10 @@ M.setup = function()
             vim.api.nvim_feedkeys(spaces, "m", false)
         end
     end, { silent = true, desc = "Insert Literal Tab" })
+
+    -- Binding to keep S-Space in terminals from not sending <Space>
+    vim.keymap.set("t", "<S-Space>", "<Space>",
+        { silent = true, desc = "Terminal: Hack S-Space to Space" })
 end
 
 return M
