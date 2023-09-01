@@ -13,6 +13,16 @@ local edges = {
     },
 }
 
+---@class Url See https://wezfurlong.org/wezterm/config/lua/wezterm.url/Url.html
+---@field scheme "file" | "https" The URL scheme such as "file", or "https"
+---@field file_path string Decodes the path field and interprets it as a file path
+---@field username string The username portion of the URL, or an empty string if none is specified
+---@field password string The password portion of the URL, or nil if none is specified
+---@field host string The hostname portion of the URL, with IDNA decoded to UTF-8
+---@field path string The path portion of the URL, complete with percent encoding
+---@field fragment string The fragment portion of the URL
+---@field query string The query portion of the URL
+
 -- This function returns the suggested title for a tab.
 -- It prefers the title that was set via `tab:set_title()`
 -- or `wezterm cli set-tab-title`, but falls back to the
@@ -29,7 +39,14 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         end
         -- Otherwise, use the title from the active pane
         -- in that tab
-        return tab_info.active_pane.title
+        local active_pane = tab_info.active_pane
+        ---@type Url
+        local pane_cwd
+        pane_cwd = tab_info.active_pane.current_working_dir
+        if type(pane_cwd) == "userdata" then
+            pane_cwd = pane_cwd.file_path:gsub(wezterm.home_dir, "~")
+        end
+        return string.format("%s %s", active_pane.title, pane_cwd or "")
     end
 
     local bg = color_names.kanagawa.sumiInk0
@@ -38,11 +55,17 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local edge_bg = color_names.kanagawa.sumiInk0
     local edge_fg = color_names.kanagawa.oniViolet
 
-    local title = " " .. wezterm.truncate_right(tab_title(tab), max_width - 2) .. " "
+    local title = tab_title(tab)
+    if #title > max_width then
+        title = " " .. wezterm.truncate_right(title, max_width - 6) .. "..."
+    else
+        title = " " .. title .. " "
+    end
 
     if title:match("^%s+$") then
-        title = " N/A "
+        title = "N/A"
     end
+
 
     if tab.is_active then
         bg = color_names.kanagawa.sumiInk0
@@ -72,6 +95,7 @@ wezterm.on("update-right-status", function(window, pane)
     -- Figure out the cwd and host of the current pane.
     -- This will pick up the hostname for the remote host if your
     -- shell is using OSC 7 on the remote host.
+    ---@type Url
     local cwd_uri = pane:get_current_working_dir()
     local hostname = ""
     local cwd = ""
