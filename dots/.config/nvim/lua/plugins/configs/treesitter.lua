@@ -121,6 +121,7 @@ return {
                 config = true,
             },
             "JoosepAlviste/nvim-ts-context-commentstring",
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
             local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
@@ -177,6 +178,59 @@ return {
                 context_commentstring = {
                     enable = true,
                 },
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        disable = function(lang, bufnr)
+                            local mode = vim.fn.mode()
+                            if mode == "c" then
+                                return true
+                            end
+                        end,
+                        keymaps = {
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner",
+                            ["ib"] = "@block.inner",
+                            ["ab"] = "@block.outer",
+                            ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                        },
+                    },
+                    move = {
+                        enable = true,
+                        disable = function(lang, bufnr)
+                            local mode = vim.fn.mode()
+                            if mode == "c" then
+                                return true
+                            end
+                        end,
+                        set_jumps = true,
+                        goto_next_start = {
+                            ["]fs"] = "@function.outer",
+                            ["]cs"] = "@class.outer",
+                            ["]bs"] = "@block.outer",
+                        },
+                        goto_next_end = {
+                            ["]fe"] = "@function.outer",
+                            ["]ce"] = "@class.outer",
+                            ["]be"] = "@block.outer",
+                        },
+                        goto_previous_start = {
+                            ["[fs"] = "@function.outer",
+                            ["[cs"] = "@class.outer",
+                            ["[bs"] = "@block.outer",
+                        },
+                        goto_previous_end = {
+                            ["[fe"] = "@function.outer",
+                            ["[ce"] = "@class.outer",
+                            ["[bs"] = "@block.outer",
+                        },
+                    },
+                    include_surrounding_whitespace = true,
+                },
+
             })
         end,
     },
