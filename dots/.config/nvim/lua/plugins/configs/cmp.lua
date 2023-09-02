@@ -2,7 +2,7 @@
 return {
     {
         "hrsh7th/nvim-cmp",
-        event = { "BufRead", "BufNewFile", "InsertEnter", "ModeChanged", "WinNew" },
+        event = { "InsertEnter", "ModeChanged" },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-cmdline",
