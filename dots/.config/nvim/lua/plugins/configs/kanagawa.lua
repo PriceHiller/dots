@@ -39,6 +39,7 @@ return {
                     vim.api.nvim_set_hl(0, "NvimNotifyTrace", { fg = colors.oniViolet })
 
                     local overrides = {
+                        Visual = { bg = "#1d3554" },
                         DiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
                         DiffDelete = { bg = colors.winterRed, fg = colors.autumnRed },
                         NeogitPopupSectionTitle = { fg = colors.crystalBlue },
