@@ -122,6 +122,7 @@ return {
             },
             "JoosepAlviste/nvim-ts-context-commentstring",
             "nvim-treesitter/nvim-treesitter-textobjects",
+            "RRethy/nvim-treesitter-endwise"
         },
         config = function()
             local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
@@ -177,6 +178,9 @@ return {
                 },
                 context_commentstring = {
                     enable = true,
+                },
+                endwise = {
+                    enable = true
                 },
                 textobjects = {
                     select = {
