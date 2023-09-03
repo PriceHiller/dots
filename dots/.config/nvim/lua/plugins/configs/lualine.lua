@@ -4,17 +4,6 @@ return {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         opts = function()
-            local present, lualine = pcall(require, "lualine")
-            if not present then
-                return
-            end
-
-            -- Thanks to rockyzhang24 (github.com/rockyzhang24)
-
-            local function simplifiedMode(str)
-                return "󰀘  " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
-            end
-
             -- For location, show total lines
             local function customLocation(str)
                 return string.gsub(str, "%w+", "%1" .. "/%%L", 1)
@@ -156,8 +145,9 @@ return {
                 sections = {
                     lualine_a = {
                         {
-                            "mode",
-                            fmt = simplifiedMode,
+                            function()
+                                return ""
+                            end
                         },
                         {
                             color = {
