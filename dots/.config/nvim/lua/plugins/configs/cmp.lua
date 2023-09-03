@@ -174,21 +174,24 @@ return {
                                         convertNumHex(blue))
                                 end
 
-                                local s, _, red, green, blue = string.find(hl, "rgb.*%((%d+), (%d+), (%d+).*%)")
-                                if s ~= nil then
-                                    hl = rgbToHex(red, green, blue)
-                                end
+                                if type(hl) == string then
+                                    local s, _, red, green, blue = string.find(hl, "rgb.*%((%d+), (%d+), (%d+).*%)")
+                                    if s ~= nil then
+                                        hl = rgbToHex(red, green, blue)
+                                    end
 
-                                local start, _, hue, saturation, lightness = hl:find(
-                                    "hsl.*%((%d+), (%d+)%%, (%d+)%%.*%)")
-                                if start ~= nil then
-                                    red, green, blue = hslToRgb(tonumber(hue), tonumber(saturation), tonumber(lightness))
-                                    hl = rgbToHex(red, green, blue)
-                                end
+                                    local start, _, hue, saturation, lightness = hl:find(
+                                        "hsl.*%((%d+), (%d+)%%, (%d+)%%.*%)")
+                                    if start ~= nil then
+                                        red, green, blue = hslToRgb(tonumber(hue), tonumber(saturation),
+                                            tonumber(lightness))
+                                        hl = rgbToHex(red, green, blue)
+                                    end
 
-                                if hl:match("^#?%x%x%x%x%x%x$") ~= nil then
-                                    kind.kind_hl_group = handle_color_hl(hl)
-                                    kind.kind = " Color"
+                                    if hl:match("^#?%x%x%x%x%x%x$") ~= nil then
+                                        kind.kind_hl_group = handle_color_hl(hl)
+                                        kind.kind = " Color"
+                                    end
                                 end
                             end
 
