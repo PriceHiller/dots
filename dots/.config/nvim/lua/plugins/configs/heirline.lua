@@ -685,7 +685,7 @@ return {
                             return vim.v.hlsearch ~= 0
                         end,
                         {
-                            provider = seps.full.left,
+                            provider = " " .. seps.full.left,
                             hl = {
                                 fg = colors.surimiOrange,
                                 bg = utils.get_highlight("StatusLine").bg,
@@ -739,7 +739,7 @@ return {
                             "RecordingLeave",
                         },
                         {
-                            provider = seps.full.left,
+                            provider = " " .. seps.full.left,
                             hl = {
                                 fg = colors.surimiOrange,
                                 bg = utils.get_highlight("StatusLine").bg,
