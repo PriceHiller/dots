@@ -4,7 +4,6 @@ return {
         event = "ColorScheme",
         dependencies = {
             "lewis6991/gitsigns.nvim",
-            "mfussenegger/nvim-dap",
         },
         opts = function()
             local colors = require("kanagawa.colors").setup().palette
