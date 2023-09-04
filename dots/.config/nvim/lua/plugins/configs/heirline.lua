@@ -270,7 +270,7 @@ return {
             -- we redefine the filename component, as we probably only want the tail and not the relative path
             local StatusLineFileName = {
                 init = function(self)
-                    self.lfilename = vim.fn.fnamemodify(self.filename, ":.:~")
+                    self.lfilename = vim.fn.fnamemodify(self.filename, ":~:.")
                     if self.lfilename == "" then
                         self.lfilename = "[No Name]"
                     end
