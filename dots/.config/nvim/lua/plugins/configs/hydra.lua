@@ -10,6 +10,7 @@ return {
         keys = {
             { "<leader>h", desc = "> Hydra" },
         },
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local hydra = require("hydra")
             local wk = require("which-key")
