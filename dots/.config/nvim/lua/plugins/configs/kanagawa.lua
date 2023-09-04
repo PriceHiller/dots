@@ -39,6 +39,8 @@ return {
                     vim.api.nvim_set_hl(0, "NvimNotifyTrace", { fg = colors.oniViolet })
 
                     local overrides = {
+                        StatusLine = { fg = colors.fujiWhite, bg = colors.sumiInk0 },
+                        WinBar = { fg = colors.fujiWhite, bg = nil },
                         Visual = { bg = "#1d3554" },
                         DiffAdd = { bg = colors.winterGreen, fg = colors.autumnGreen },
                         DiffDelete = { bg = colors.winterRed, fg = colors.autumnRed },
@@ -125,7 +127,6 @@ return {
                         TelescopePreviewNormal = { bg = colors.sumiInk4 },
                         TelescopePreviewBorder = { link = "TelescopePreviewNormal" },
                         TelescopeResultsTitle = { fg = "NONE", bg = "NONE" },
-                        WinSeparator = { fg = colors.sumiInk4, bg = "NONE" },
                         MiniCursorword = { bg = colors.waveBlue2 },
                         MiniCursorwordCurrent = { bg = colors.waveBlue2 },
                         rainbowcol1 = { fg = colors.oniViolet },
@@ -136,8 +137,6 @@ return {
                         rainbowcol6 = { fg = colors.springViolet2 },
                         rainbowcol7 = { fg = colors.carpYellow },
                         packerSuccess = { fg = colors.autumnGreen, bg = "NONE" },
-                        WinBar = { fg = colors.fujiWhite, bg = colors.sumiInk1 },
-                        WinBarNC = { fg = colors.fujiWhite, bg = colors.sumiInk1 },
                         NeoTreeNormal = { bg = colors.sumiInk1 },
                         NeoTreeNormalNC = { bg = colors.sumiInk1 },
                         NoiceCmdlineIconCmdline = { fg = colors.oniViolet },
@@ -207,7 +206,13 @@ return {
                     return overrides
                 end,
             })
+
             vim.cmd.colorscheme("kanagawa")
+            local colors = require("kanagawa.colors").setup().palette
+            vim.api.nvim_set_hl(0, "StatusLine", { bg = colors.sumiInk0 })
+            vim.api.nvim_set_hl(0, "WinBar", { bg =  nil })
+            vim.api.nvim_set_hl(0, "StatusLineNC", { bg = nil })
+            vim.api.nvim_set_hl(0, "WinBarNC", { bg =  nil })
         end,
     },
 }
