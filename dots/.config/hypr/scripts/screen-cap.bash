@@ -45,7 +45,7 @@ mk-video() {
 				pwd
 				gifski_tmpoutput="${tmp_dir}/$(mktemp gifski.XXXXXXXXXXX).gif"
 				gifski "${input_tmpfile}" --output "${gifski_tmpoutput}"
-				wl-copy --type image/png <"${gifski_tmpoutput}"
+				wl-copy --type image/gif <"${gifski_tmpoutput}"
 			else
 				wl-copy --type video/mp4 <"${input_tmpfile}"
 			fi
