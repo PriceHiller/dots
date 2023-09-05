@@ -438,7 +438,7 @@ return {
                     local sep = ""
 
                     if #vim.api.nvim_list_tabpages() ~= self.tabnr then
-                        sep = "।"
+                        sep = "|"
                     end
                     return prefix .. "%" .. self.tabnr .. "T " .. self.tabpage .. " %T" .. sep
                 end,
