@@ -10,6 +10,10 @@ return {
                 window = {
                     open = "alternate"
                 },
+                one_per = {
+                    wezterm = false,
+                    kitty = false
+                },
                 callbacks = {
                     should_block = function(argv)
                         -- Note that argv contains all the parts of the CLI command, including
