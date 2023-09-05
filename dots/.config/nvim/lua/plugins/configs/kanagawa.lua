@@ -39,6 +39,7 @@ return {
                     vim.api.nvim_set_hl(0, "NvimNotifyTrace", { fg = colors.oniViolet })
 
                     local overrides = {
+                        WinSeparator = { fg = colors.fujiGray },
                         StatusLine = { fg = colors.fujiWhite, bg = colors.sumiInk0 },
                         WinBar = { fg = colors.fujiWhite, bg = nil },
                         Visual = { bg = "#1d3554" },
