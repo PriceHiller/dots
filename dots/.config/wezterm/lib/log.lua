@@ -20,7 +20,7 @@ local function system_log(message, opts)
     local log_unit = "wezterm"
     if os_detected == "linux" then
         local handle =
-            io.popen(string.format("systemd-cat -t %s -p %s echo '%s'", log_unit, opts.level:lower(), message))
+            io.popen(string.format("systemd-cat -t %s -p %s echo '%s' 2>&1", log_unit, opts.level:lower(), message))
         if not opts.ignore_result or opts.ignore_result == nil then
             ---@diagnostic disable-next-line: need-check-nil
             local output = handle:read("*a")
@@ -33,7 +33,7 @@ local function system_log(message, opts)
             local success = handle:close()
             if success == nil or not success then
                 wezterm.log_warn(
-                    string.format("'systemd-cat' did not indicate a successful run!\nHandle Output:\n%s", output)
+                    string.format("'systemd-cat' did not indicate a successful run!\nHandle Output: %s", output)
                 )
             end
         end
