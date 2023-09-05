@@ -11,39 +11,39 @@ return {
                 ":Telescope diagnostics bufnr=0<CR>",
                 desc = "LSP: Telescope Diagnostics",
             },
-            { "<leader>t", desc = "> Telescope" },
-            { "<leader>tg", desc = "> Telescope: Git" },
-            { "<leader>tw", ":Telescope live_grep<CR>", desc = "Telescope: Grep for Word" },
-            { "<leader>tgs", ":Telescope git_status<CR>", desc = "Telescope: Git Status" },
-            { "<leader>tgc", ":Telescope git_commits<CR>", desc = "Telescope: Git Commits" },
-            { "<leader>tgb", ":Telescope git_branches<CR>", desc = "Telescope: Git Branches" },
-            { "<leader>tf", ":Telescope find_files<CR>", desc = "Telescope: Find Files" },
-            { "<leader>td", ":Telescope find_directories<CR>", desc = "Telescope: Find Directories" },
-            { "<leader>tb", ":Telescope buffers<CR>", desc = "Telescope: Buffers" },
-            { "<leader>th", ":Telescope help_tags<CR>", desc = "Telescope: Help Tags" },
-            { "<leader>to", ":Telescope oldfiles<CR>", desc = "Telescope: Recent Files" },
-            { "<leader>tn", ":Telescope neoclip default<CR>", desc = "Telescope: Neoclip Buffer" },
-            { "<leader>tr", ":Telescope resume<CR>", desc = "Telescope: Resume" },
-            { "<leader>tR", ":Telescope registers<CR>", desc = "Telescope: Registers" },
-            { "<leader>tt", ":Telescope file_browser<CR>", desc = "Telescope: File Tree" },
-            { "<leader>ts", ":Telescope spell_suggest<CR>", desc = "Telescope: Spell Suggest" },
-            { "<leader>tl", ":Telescope resume<CR>", desc = "Telescope: Previous State" },
-            { "<leader>tT", ":TodoTelescope<CR>", desc = "Telescope: Todo Items" },
-            { "<leader>tk", ":Telescope keymaps<CR>", desc = "Telescope: Keymaps" },
-            { "<leader>tc", ":Telescope commands<CR>", desc = "Telescope: Commands" },
-            { "<leader>tu", ":Telescope undo<CR>", desc = "Telescope: Undo History" },
-            { "<leader>lq", ":Telescope diagnostics bufnr=0<CR>", desc = "LSP: Telescope Diagnostics" },
-            { "<leader>nv", ":Telescope notify<CR>", desc = "Notifications: Search" },
+            { "<leader>t",   desc = "> Telescope" },
+            { "<leader>tg",  desc = "> Telescope: Git" },
+            { "<leader>tw",  ":Telescope live_grep<CR>",           desc = "Telescope: Grep for Word" },
+            { "<leader>tgs", ":Telescope git_status<CR>",          desc = "Telescope: Git Status" },
+            { "<leader>tgc", ":Telescope git_commits<CR>",         desc = "Telescope: Git Commits" },
+            { "<leader>tgb", ":Telescope git_branches<CR>",        desc = "Telescope: Git Branches" },
+            { "<leader>tf",  ":Telescope find_files<CR>",          desc = "Telescope: Find Files" },
+            { "<leader>td",  ":Telescope find_directories<CR>",    desc = "Telescope: Find Directories" },
+            { "<leader>tb",  ":Telescope buffers<CR>",             desc = "Telescope: Buffers" },
+            { "<leader>th",  ":Telescope help_tags<CR>",           desc = "Telescope: Help Tags" },
+            { "<leader>to",  ":Telescope oldfiles<CR>",            desc = "Telescope: Recent Files" },
+            { "<leader>tn",  ":Telescope neoclip default<CR>",     desc = "Telescope: Neoclip Buffer" },
+            { "<leader>tr",  ":Telescope resume<CR>",              desc = "Telescope: Resume" },
+            { "<leader>tR",  ":Telescope registers<CR>",           desc = "Telescope: Registers" },
+            { "<leader>tt",  ":Telescope file_browser<CR>",        desc = "Telescope: File Tree" },
+            { "<leader>ts",  ":Telescope spell_suggest<CR>",       desc = "Telescope: Spell Suggest" },
+            { "<leader>tl",  ":Telescope resume<CR>",              desc = "Telescope: Previous State" },
+            { "<leader>tT",  ":TodoTelescope<CR>",                 desc = "Telescope: Todo Items" },
+            { "<leader>tk",  ":Telescope keymaps<CR>",             desc = "Telescope: Keymaps" },
+            { "<leader>tc",  ":Telescope commands<CR>",            desc = "Telescope: Commands" },
+            { "<leader>tu",  ":Telescope undo<CR>",                desc = "Telescope: Undo History" },
+            { "<leader>tm",  ":Telescope man_pages<CR>",           desc = "Telescope: Man Pages" },
+            { "<leader>lq",  ":Telescope diagnostics bufnr=0<CR>", desc = "LSP: Telescope Diagnostics" },
+            { "<leader>nv",  ":Telescope notify<CR>",              desc = "Notifications: Search" },
         },
         dependencies = {
-            "nvim-telescope/telescope-media-files.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
             "artart222/telescope_find_directories",
             "nvim-telescope/telescope-ui-select.nvim",
             "debugloop/telescope-undo.nvim",
             "rcarriga/nvim-notify",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            { "nvim-telescope/telescope-fzf-native.nvim",    build = "make" },
         },
         config = function()
             local telescope = require("telescope")
@@ -119,10 +119,6 @@ return {
                     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
                 },
                 extensions = {
-                    media_files = {
-                        filetypes = { "png", "webp", "jpg", "jpeg" },
-                        find_cmd = "rg",
-                    },
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown(),
                     },
@@ -144,7 +140,6 @@ return {
                 },
             })
 
-            telescope.load_extension("media_files")
             telescope.load_extension("find_directories")
             telescope.load_extension("file_browser")
             telescope.load_extension("notify")
@@ -184,7 +179,7 @@ return {
                                         "Wikipedia",
                                         ("https://en.wikipedia.org/w/index.php\\?search\\=" .. search:gsub(" ", "+")),
                                     },
-                                    { "Github", ("https://github.com/search\\?q\\=" .. search:gsub(" ", "+")) },
+                                    { "Github",        ("https://github.com/search\\?q\\=" .. search:gsub(" ", "+")) },
                                 },
                                 entry_maker = function(entry)
                                     return { value = entry, display = entry[1], ordinal = entry[1] }
