@@ -25,6 +25,7 @@ return {
                 mappings = {
                     status = {
                         ["l"] = false,
+                        ["f"] = false,
                         ["L"] = "LogPopup",
                     },
                 },
