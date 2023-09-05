@@ -46,7 +46,7 @@ monitor-laptop-lid() {
 		sleep 1
 	done
 }
-
+kill -9 "$(pgrep -f "${BASH_SOURCE[0]}" | grep -v "${$}")"
 monitor-ssid &
 monitor-laptop-lid &
 wait
