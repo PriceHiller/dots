@@ -1,13 +1,12 @@
 return {
     {
-        "ldelossa/gh.nvim",
-        cmd = { "GH" },
-        dependencies = { "ldelossa/litee.nvim" },
-        config = function()
-            require("litee.lib").setup()
-            require("litee.gh").setup({
-                refresh_interval = 60000,
-            })
-        end,
-    },
+        'pwntester/octo.nvim',
+        cmd = "Octo",
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = true
+    }
 }
