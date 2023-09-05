@@ -1,24 +1,5 @@
 return {
     {
-        "3rd/image.nvim",
-        build = function()
-            ---@param out SystemCompleted
-            vim.system({ "luarocks", "--lua-version", "5.1", "--local", "install", "magick" }, {}, function(out)
-                if out.code ~= 0 then
-                    error("Failed to install `magick` luarock for image.nvim!", vim.log.levels.ERROR)
-                end
-            end)
-        end,
-        ft = { "markdown", "norg" },
-        config = function()
-            package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-            package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-            require("image").setup({
-                window_overlap_clear_enabled = true,
-            })
-        end,
-    },
-    {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers", -- This is the important bit!
         cmd = { "Neorg" },
