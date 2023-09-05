@@ -49,10 +49,20 @@ set-wallpapers() {
 }
 
 main() {
-	if swww init >/dev/null 2>&1; then
-		log "Initialized swww daemon"
-	fi
-	set-wallpapers
+	until systemctl --user is-active swww --quiet; do
+		sleep .1
+	done
+	log "swww daemon running, setting wallpapers"
+	while :; do
+		while IFS= read -r line
+		do
+			if grep "color: 000000" <<< "${line}"; then
+				set-wallpapers
+			fi
+			sleep .1
+		done < <(swww query)
+		sleep .1
+	done
 }
 
 main
