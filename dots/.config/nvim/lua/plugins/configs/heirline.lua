@@ -140,16 +140,30 @@ return {
                 init = function(self)
                     local filename = self.filename
                     local extension = vim.fn.fnamemodify(filename, ":e")
+                    local buftype = vim.api.nvim_get_option_value("buftype", {
+                        buf = self.bufnr
+                    })
                     self.icon, self.icon_color =
                         require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
 
-                    local overrides = {
-                        ["rs"] = "",
+                    local ft_overrides = {
+                        ["rs"] = { icon = "", icon_color = self.icon_color },
                     }
 
-                    local override = overrides[extension]
-                    if override ~= nil then
-                        self.icon = override
+                    local buftype_overrides = {
+                        ["terminal"] = { icon = " ", icon_color = colors.roninYellow }
+                    }
+
+                    local ft_override = ft_overrides[extension]
+                    if ft_override ~= nil then
+                        self.icon = ft_override.icon
+                        self.icon_color = ft_override.icon_color
+                    end
+
+                    local buftype_override = buftype_overrides[buftype]
+                    if buftype_override ~= nil then
+                        self.icon = buftype_override.icon
+                        self.icon_color = buftype_override.icon_color
                     end
                 end,
                 provider = function(self)
@@ -163,14 +177,15 @@ return {
             local FileName = {
                 provider = function(self)
                     local filename = ""
-                    if self.filename:match("^term://.*") then
-                        local term_name = ""
+                    local buftype = vim.api.nvim_get_option_value("buftype", {
+                        buf = self.bufnr
+                    })
+                    if buftype == "terminal" then
                         local subs = 0
-                        term_name, subs = self.filename:gsub(".*;", "")
+                        filename, subs = self.filename:gsub(".*;", "")
                         if subs == 0 then
-                            term_name = self.filename:gsub(".*:", "")
+                            filename = self.filename:gsub(".*:", "")
                         end
-                        filename = term_name .. "  "
                     else
                         ---@diagnostic disable-next-line: cast-local-type
                         filename = vim.fn.fnamemodify(self.filename, ":~:.")
@@ -320,13 +335,7 @@ return {
                         return not vim.api.nvim_buf_get_option(self.bufnr, "modifiable")
                             or vim.api.nvim_buf_get_option(self.bufnr, "readonly")
                     end,
-                    provider = function(self)
-                        if vim.api.nvim_buf_get_option(self.bufnr, "buftype") == "terminal" then
-                            return "  "
-                        else
-                            return " "
-                        end
-                    end,
+                    provider = " ",
                     hl = { fg = colors.roninYellow },
                 },
             }
