@@ -30,7 +30,14 @@ mk-video() {
 			tmp_dir="$(mktemp -d)"
 			cd "${tmp_dir}"
 			input_tmpfile="${tmp_dir}/$(mktemp wf-recorder.XXXXXXXXXXX).mp4"
-			wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -d /dev/dri/card0 -- &
+			local card
+			card="$(find /dev/dri -maxdepth 1 -name "card*" -print -quit)"
+			if [[ -n "${card}" ]]; then
+				wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -d "${card}" -- &
+			else
+				notify-send "Card Detection" "Did not detect a card to use, encoding will be slower!" -a "${program_name}" -u critical
+				wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -- &
+			fi
 			printf "%s" $! >"${pid_file}"
 			wait
 			if [[ "${output_type}" == "gif" ]]; then
