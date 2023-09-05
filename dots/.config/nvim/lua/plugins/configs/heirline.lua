@@ -505,8 +505,10 @@ return {
                     FileNameBlock,
                     margin(1),
                     {
-                        condition = conditions.lsp_attached,
                         {
+                            condition = function()
+                                return conditions.lsp_attached() or conditions.has_diagnostics()
+                            end,
                             {
                                 provider = seps.full.left,
                                 hl = { fg = colors.oniViolet, bg = utils.get_highlight("WinBarNC").bg },
@@ -520,31 +522,41 @@ return {
                             },
                             {
                                 provider = seps.full.right,
-                                hl = { fg = colors.oniViolet, bg = colors.oniViolet2 },
+                                hl = function()
+                                    local bg = colors.oniViolet2
+                                    if conditions.has_diagnostics() and not conditions.lsp_attached() then
+                                        bg = colors.sumiInk2
+                                    end
+
+                                    return { fg = colors.oniViolet, bg = bg}
+                                end
                             },
                         },
                         {
-                            update = { "LspAttach", "LspDetach" },
+                            condition = conditions.lsp_attached,
+                            {
+                                update = { "LspAttach", "LspDetach" },
 
-                            provider = function()
-                                local names = {}
-                                for _, server in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-                                    table.insert(names, server.name)
-                                end
-                                return " " .. table.concat(names, ", ")
-                            end,
-                            hl = { fg = colors.sumiInk0, bg = colors.oniViolet2 },
-                        },
-                        {
-                            provider = seps.full.right,
-                            hl = function()
-                                local bg = utils.get_highlight("WinBar").bg
-                                if conditions.has_diagnostics() then
-                                    bg = colors.sumiInk2
-                                end
-                                return { fg = colors.oniViolet2, bg = bg }
-                            end,
-                        },
+                                provider = function()
+                                    local names = {}
+                                    for _, server in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+                                        table.insert(names, server.name)
+                                    end
+                                    return " " .. table.concat(names, ", ")
+                                end,
+                                hl = { fg = colors.sumiInk0, bg = colors.oniViolet2 },
+                            },
+                            {
+                                provider = seps.full.right,
+                                hl = function()
+                                    local bg = utils.get_highlight("WinBar").bg
+                                    if conditions.has_diagnostics() then
+                                        bg = colors.sumiInk2
+                                    end
+                                    return { fg = colors.oniViolet2, bg = bg }
+                                end,
+                            },
+                       }
                     },
                     {
                         condition = conditions.has_diagnostics,
