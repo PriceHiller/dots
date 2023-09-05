@@ -162,17 +162,21 @@ return {
 
             local FileName = {
                 provider = function(self)
-                    -- first, trim the pattern relative to the current directory. For other
-                    -- options, see :h filename-modifers
-                    local filename = vim.fn.fnamemodify(self.filename, ":.")
-                    if filename == "" then
-                        return "[No Name]"
+                    local filename = ""
+                    if self.filename:match("^term://.*") then
+                        local term_name = ""
+                        local subs = 0
+                        term_name, subs = self.filename:gsub(".*;", "")
+                        if subs == 0 then
+                            term_name = self.filename:gsub(".*:", "")
+                        end
+                        filename = term_name .. "  "
+                    else
+                        ---@diagnostic disable-next-line: cast-local-type
+                        filename = vim.fn.fnamemodify(self.filename, ":~:.")
                     end
-                    -- now, if the filename would occupy more than 1/4th of the available
-                    -- space, we trim the file path to its initials
-                    -- See Flexible Components section below for dynamic truncation
-                    if not conditions.width_percent_below(#filename, 0.25) then
-                        filename = vim.fn.pathshorten(filename)
+                    if filename == "" then
+                        filename = "[No Name]"
                     end
                     return filename
                 end,
@@ -269,7 +273,11 @@ return {
             -- we redefine the filename component, as we probably only want the tail and not the relative path
             local StatusLineFileName = {
                 init = function(self)
-                    self.lfilename = vim.fn.fnamemodify(self.filename, ":~:.")
+                    if self.filename:match("^term://.*") then
+                        self.lfilename = self.filename:gsub(".*:", "")
+                    else
+                        self.lfilename = vim.fn.fnamemodify(self.filename, ":~:.")
+                    end
                     if self.lfilename == "" then
                         self.lfilename = "[No Name]"
                     end
@@ -422,7 +430,7 @@ return {
                 StatusLineBufferBlock,
                 { provider = "", hl = { fg = colors.katanaGray } }, -- left truncation, optional (defaults to "<")
                 { provider = "", hl = { fg = colors.katanaGray } } -- right trunctation, also optional (defaults to ...... yep, ">")
-                -- by the way, open a lot of buffers and try clicking them ;)
+            -- by the way, open a lot of buffers and try clicking them ;)
             )
 
             local Tabpage = {
@@ -528,7 +536,7 @@ return {
                                         bg = colors.sumiInk2
                                     end
 
-                                    return { fg = colors.oniViolet, bg = bg}
+                                    return { fg = colors.oniViolet, bg = bg }
                                 end
                             },
                         },
@@ -556,7 +564,7 @@ return {
                                     return { fg = colors.oniViolet2, bg = bg }
                                 end,
                             },
-                       }
+                        }
                     },
                     {
                         condition = conditions.has_diagnostics,
