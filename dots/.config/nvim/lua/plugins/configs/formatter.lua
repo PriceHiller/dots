@@ -25,6 +25,12 @@ return {
                     markdown = filetypes.markdown.prettierd,
                     css = filetypes.css.prettierd,
                     lua = filetypes.lua.stylua,
+                    asm = function()
+                        return {
+                            exe = "asmfmt",
+                            stdin = true
+                        }
+                    end
                 },
             }
         end,
