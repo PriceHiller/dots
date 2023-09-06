@@ -381,13 +381,13 @@ return {
                 {
                     provider = " 󰅙 ",
                     hl = function(self)
-                        local bg
-                        if self.is_active then
-                            bg = buffer_hl.active.bg
-                        else
+                        local fg = colors.peachRed
+                        local bg = buffer_hl.active.bg
+                        if not self.is_active then
+                            fg = colors.autumnRed
                             bg = buffer_hl.inactive.bg
                         end
-                        return { fg = colors.waveRed, bg = bg }
+                        return { fg = fg, bg = bg }
                     end,
                     on_click = {
                         callback = function(_, minwid)
