@@ -28,6 +28,17 @@ M.setup = function()
         end,
     })
 
+    -- NOTE: Removes No Name buffers, thanks
+    -- https://www.reddit.com/r/neovim/comments/16b0n3a/comment/jzcbhxo/?utm_source=share&utm_medium=web2x&context=3
+    vim.api.nvim_create_autocmd("BufHidden", {
+        group = augroup,
+        desc = "Delete [No Name] buffers",
+        callback = function(event)
+            if event.file == "" and vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
+                vim.schedule(function() pcall(vim.api.nvim_buf_delete, event.buf, {}) end)
+            end
+        end,
+    })
     -- NOTE: Launches a different program for a given filetype instead of opening it in Neovim
     local intercept_file_open = true
     vim.api.nvim_create_user_command("InterceptToggle", function()
