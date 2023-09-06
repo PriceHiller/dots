@@ -168,18 +168,18 @@ return {
                                 results = {
                                     {
                                         "Stack Overflow",
-                                        ("www.stackoverflow.com/search\\?q\\=" .. search:gsub(" ", "+")),
+                                        ("https://www.stackoverflow.com/search?q=" .. search:gsub(" ", "+")),
                                     },
-                                    { "Google Search", ("www.google.com/search\\?q\\=" .. search:gsub(" ", "+")) },
+                                    { "Google Search", ("www.google.com/search?q=" .. search:gsub(" ", "+")) },
                                     {
                                         "Youtube",
-                                        ("https://www.youtube.com/results\\?search_query\\=" .. search:gsub(" ", "+")),
+                                        ("https://www.youtube.com/results?search_query=" .. search:gsub(" ", "+")),
                                     },
                                     {
                                         "Wikipedia",
-                                        ("https://en.wikipedia.org/w/index.php\\?search\\=" .. search:gsub(" ", "+")),
+                                        ("https://en.wikipedia.org/w/index.php?search=" .. search:gsub(" ", "+")),
                                     },
-                                    { "Github",        ("https://github.com/search\\?q\\=" .. search:gsub(" ", "+")) },
+                                    { "Github",        ("https://github.com/search?q=" .. search:gsub(" ", "+")) },
                                 },
                                 entry_maker = function(entry)
                                     return { value = entry, display = entry[1], ordinal = entry[1] }
@@ -190,11 +190,14 @@ return {
                                 actions.select_default:replace(function()
                                     actions.close(prompt_bufnr)
                                     local selection = action_state.get_selected_entry()
-                                    vim.cmd(
-                                        ("silent execute '!firefox-developer-edition %s &'"):format(
-                                            selection["value"][2]
-                                        )
-                                    )
+                                    ---@param obj vim.SystemCompleted
+                                    vim.system({ "xdg-open", selection["value"][2] }, { text = true }, function(obj)
+                                        if obj.code ~= 0 then
+                                            vim.notify(string.format(
+                                            "Failed to open selection, exit code: %s!\n---Stdout---\n%s\n---Stderr---\n%s",
+                                                obj.code, obj.stdout, obj.stderr))
+                                        end
+                                    end)
                                 end)
                                 return true
                             end,
