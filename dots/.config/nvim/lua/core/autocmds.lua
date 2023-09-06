@@ -80,10 +80,9 @@ M.setup = function()
             ---@param buf integer The buffer handle for the opening buffer
             ---@param fpath string The file path given to the program
             ---@param fname string The file name used in notifications
-            ---@param prog string The program to execute against the file path
-            local function open_in_prog(buf, fpath, fname, prog)
+            local function open_mime(buf, fpath, fname)
                 vim.notify(
-                    string.format("Opening `%s` in `%s`", fname, prog),
+                    string.format("Opening `%s` in external program", fname),
                     vim.log.levels.INFO,
                     {
                         title = "Open File in External Program",
@@ -97,20 +96,20 @@ M.setup = function()
                         end
                     }
                 )
-                vim.system({ prog, fpath }, { detach = true })
+                vim.system({ "xdg-open", fpath }, { detach = true })
                 vim.api.nvim_buf_delete(buf, { force = true })
             end
 
             local extension_callbacks = {
                 ["pdf"] = function(buf, fpath, fname)
-                    open_in_prog(buf, fpath, fname, "zathura")
+                    open_mime(buf, fpath, fname)
                 end,
                 ["png"] = function(buf, fpath, fname)
-                    open_in_prog(buf, fpath, fname, "feh")
+                    open_mime(buf, fpath, fname)
                 end,
                 ["jpg"] = "png",
                 ["mp4"] = function(buf, fpath, fname)
-                    open_in_prog(buf, fpath, fname, "mpv")
+                    open_mime(buf, fpath, fname)
                 end,
                 ["gif"] = "mp4"
             }
