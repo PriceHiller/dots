@@ -12,7 +12,8 @@ vim.keymap.set("n", "<leader>fr", function()
     vim.fn.mkdir(target_dir, "p")
 
     local cmd = {
-        "as",
+        "nasm",
+        "-felf64",
         curr_file,
         "-o",
         object_path,
