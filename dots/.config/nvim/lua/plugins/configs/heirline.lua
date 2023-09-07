@@ -6,6 +6,7 @@ return {
             "lewis6991/gitsigns.nvim",
         },
         opts = function()
+            local core_utils = require("utils.funcs")
             local colors = require("kanagawa.colors").setup().palette
 
             local seps = {
@@ -143,24 +144,38 @@ return {
                     local buftype = vim.api.nvim_get_option_value("buftype", {
                         buf = self.bufnr
                     })
+
+                    local filetype = vim.api.nvim_get_option_value("filetype", {
+                        buf = self.bufnr
+                    })
                     self.icon, self.icon_color =
                         require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
 
                     local ft_overrides = {
-                        ["rs"] = { icon = "", icon_color = self.icon_color },
+                        ["rust"] = { icon = "", icon_color = self.icon_color },
+                        ["sshconfig"] = { icon = "󱂺", icon_color = colors.carpYellow },
+                        ["sshdconfig"] = "sshconfig"
                     }
 
                     local buftype_overrides = {
                         ["terminal"] = { icon = " ", icon_color = colors.roninYellow }
                     }
 
-                    local ft_override = ft_overrides[extension]
+                    local function get_override(name, overrides)
+                        local override = overrides[name]
+                        if type(override) == "string" then
+                            override = get_override(override, overrides)
+                        end
+                        return override
+                    end
+
+                    local ft_override = get_override(filetype, ft_overrides)
                     if ft_override ~= nil then
                         self.icon = ft_override.icon
                         self.icon_color = ft_override.icon_color
                     end
 
-                    local buftype_override = buftype_overrides[buftype]
+                    local buftype_override = get_override(buftype, buftype_overrides)
                     if buftype_override ~= nil then
                         self.icon = buftype_override.icon
                         self.icon_color = buftype_override.icon_color
@@ -632,20 +647,55 @@ return {
                     {
                         provider = seps.full.left,
                         hl = function()
-                            return { fg = colors.sumiInk5, bg = utils.get_highlight("WinBar").bg }
+                            return { fg = colors.crystalBlue, bg = utils.get_highlight("WinBar").bg }
+                        end,
+                    },
+                    {
+                        provider = function ()
+                            local ft = vim.bo.filetype or "[No Filetype]"
+                            return ft .. " "
+                        end,
+                        hl = {
+                            fg = colors.sumiInk0,
+                            bg = colors.crystalBlue,
+                        },
+                    },
+                    {
+                        provider = seps.full.left,
+                        hl = function()
+                            return { fg = colors.sumiInk4, bg = colors.crystalBlue }
+                        end,
+                    },
+                    {
+                        FileIcon,
+                        hl = { bg = colors.sumiInk4 }
+                    },
+                    {
+                        provider = seps.full.right,
+                        hl = function()
+                            return { fg = colors.sumiInk4, bg = utils.get_highlight("WinBar").bg }
+                        end,
+                    },
+                },
+                margin(1),
+                {
+                    {
+                        provider = seps.full.left,
+                        hl = function()
+                            return { fg = colors.sumiInk4, bg = utils.get_highlight("WinBar").bg }
                         end,
                     },
                     {
                         provider = "%p%% ",
                         hl = {
                             fg = colors.fujiWhite,
-                            bg = colors.sumiInk5,
+                            bg = colors.sumiInk4,
                         },
                     },
                     {
                         provider = seps.full.left,
                         hl = function()
-                            return { fg = colors.carpYellow, bg = colors.sumiInk5 }
+                            return { fg = colors.carpYellow, bg = colors.sumiInk4 }
                         end,
                     },
                     {
@@ -667,20 +717,20 @@ return {
                     {
                         provider = seps.full.left,
                         hl = function()
-                            return { fg = colors.sumiInk5, bg = utils.get_highlight("WinBar").bg }
+                            return { fg = colors.sumiInk4, bg = utils.get_highlight("WinBar").bg }
                         end,
                     },
                     {
-                        provider = "%3l:%c ",
+                        provider = "%l:%c ",
                         hl = {
                             fg = colors.fujiWhite,
-                            bg = colors.sumiInk5,
+                            bg = colors.sumiInk4,
                         },
                     },
                     {
                         provider = seps.full.left,
                         hl = function()
-                            return { fg = colors.crystalBlue, bg = colors.sumiInk5 }
+                            return { fg = colors.crystalBlue, bg = colors.sumiInk4 }
                         end,
                     },
                     {

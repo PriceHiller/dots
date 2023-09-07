@@ -40,4 +40,16 @@ U.get_color = function(group, attr)
     return fn.synIDattr(fn.synIDtrans(fn.hlID(group)), attr)
 end
 
+-- https://stackoverflow.com/a/22548737
+---Title cases a given string
+---@param str string
+U.title_case = function(str)
+    local function inner(first, rest)
+        return first:upper() .. rest:lower()
+    end
+
+    return string.gsub(str, "(%a)([%w_']*)", inner)
+end
+
+
 return U
