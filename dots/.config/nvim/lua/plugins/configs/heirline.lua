@@ -154,7 +154,8 @@ return {
                     local ft_overrides = {
                         ["rust"] = { icon = "", icon_color = self.icon_color },
                         ["sshconfig"] = { icon = "󰴳", icon_color = colors.carpYellow },
-                        ["sshdconfig"] = "sshconfig"
+                        ["sshdconfig"] = "sshconfig",
+                        ["help"] = { icon = "󰋗", icon_color = colors.springGreen }
                     }
 
                     local buftype_overrides = {
