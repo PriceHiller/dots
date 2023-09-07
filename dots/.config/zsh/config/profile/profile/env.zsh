@@ -60,8 +60,8 @@ export REPORTTIME=600
 
 ### SSH ###
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.sock"
-ssh-add -l >/dev/null 2>&1
-[ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null 2>&1
+ssh-add -l >/dev/null
+[ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" -t 24h >/dev/null
 
 
 ### FZF ###
