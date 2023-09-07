@@ -153,7 +153,7 @@ return {
 
                     local ft_overrides = {
                         ["rust"] = { icon = "", icon_color = self.icon_color },
-                        ["sshconfig"] = { icon = "󱂺", icon_color = colors.carpYellow },
+                        ["sshconfig"] = { icon = "󰴳", icon_color = colors.carpYellow },
                         ["sshdconfig"] = "sshconfig"
                     }
 
