@@ -645,6 +645,10 @@ return {
                     provider = "%=",
                 },
                 {
+                    init = function(self)
+                        self.filename = vim.api.nvim_buf_get_name(0)
+                    end,
+
                     {
                         provider = seps.full.left,
                         hl = function()
@@ -652,7 +656,7 @@ return {
                         end,
                     },
                     {
-                        provider = function ()
+                        provider = function()
                             local ft = vim.bo.filetype or "[No Filetype]"
                             return ft .. " "
                         end,
