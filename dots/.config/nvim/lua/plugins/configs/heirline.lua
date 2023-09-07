@@ -657,7 +657,10 @@ return {
                     },
                     {
                         provider = function()
-                            local ft = vim.bo.filetype or "[No Filetype]"
+                            local ft = vim.bo.filetype
+                            if ft == nil or ft == "" then
+                                ft = "[No Filetype]"
+                            end
                             return ft .. " "
                         end,
                         hl = {
