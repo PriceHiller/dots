@@ -56,12 +56,6 @@ M.setup = function()
         vim.opt.spell = not vim.opt.spell:get()
     end, { silent = true, desc = "Toggle Spell" })
 
-    -- Better split movement
-    vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
-    vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
-    vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
-    vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
-
     -- Set current focused file as cwd
     vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
 
