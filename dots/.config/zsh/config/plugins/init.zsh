@@ -1,4 +1,6 @@
-configure() {}
+configure() {
+	prompt_nix_shell_setup
+}
 
 init() {
 	local wkdir="${BASE_ZSH_CONFIG_DIR}/config/plugins"
@@ -7,6 +9,7 @@ init() {
 	source "${wkdir}/zsh-completions/zsh-completions.plugin.zsh"
 	source "${wkdir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 	source "${wkdir}/nix-zsh-completions/nix.plugin.zsh"
+	source "${wkdir}/zsh-nix-shell/nix-shell.plugin.zsh"
 
 	# export PATH="${PATH}:${wkdir}/forgit/bin"
 	# source "${wkdir}/forgit/forgit.plugin.zsh"
