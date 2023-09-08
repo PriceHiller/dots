@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 ### Exa ###
-if command -v exa >/dev/null 2>&1; then
-	alias ls="exa --icons --group --group-directories-first --octal-permissions --classify"
+if command -v eza >/dev/null 2>&1; then
+	alias ls="eza --icons --group --group-directories-first --octal-permissions --classify"
 	alias l="ls -alh"
 	alias ll="l"
 	alias tree="ls --tree"
