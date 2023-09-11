@@ -68,6 +68,7 @@ return {
             "b0o/schemastore.nvim",
             {
                 "pmizio/typescript-tools.nvim",
+                build = "npm i -g @styled/typescript-styled-plugin typescript",
                 dependencies = { "nvim-lua/plenary.nvim" },
             },
             {
@@ -459,6 +460,17 @@ return {
             require("typescript-tools").setup({
                 on_attach = on_attach,
                 settings = {
+                    tsserver_path = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
+                    expose_as_code_action = {
+                        "fix_all",
+                        "add_missing_imports",
+                        "remove_unused",
+                        "remove_unused_imports",
+                        "organize_imports"
+                    },
+                    tsserver_plugins = {
+                        "@styled/typescript-styled-plugin"
+                    },
                     tsserver_file_preferences = {
                         includeInlayParameterNameHints = "all",
                         includeInlayEnumMemberValueHints = true,
