@@ -1,12 +1,13 @@
+;; -*- lexical-binding: t -*-
 ;; Install elpaca
 (defvar elpaca-installer-version 0.5)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-			      :ref nil
-			      :files (:defaults (:exclude "extensions"))
-			      :build (:not elpaca--activate-package)))
+                              :ref nil
+                              :files (:defaults (:exclude "extensions"))
+                              :build (:not elpaca--activate-package)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
        (order (cdr elpaca-order))
@@ -16,18 +17,18 @@
     (make-directory repo t)
     (when (< emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
-	(if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-		 ((zerop (call-process "git" nil buffer t "clone"
-				       (plist-get order :repo) repo)))
-		 ((zerop (call-process "git" nil buffer t "checkout"
-				       (or (plist-get order :ref) "--"))))
-		 (emacs (concat invocation-directory invocation-name))
-		 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-				       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-		 ((require 'elpaca))
-		 ((elpaca-generate-autoloads "elpaca" repo)))
-	    (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-	  (error "%s" (with-current-buffer buffer (buffer-string))))
+        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                 ((zerop (call-process "git" nil buffer t "clone"
+                                       (plist-get order :repo) repo)))
+                 ((zerop (call-process "git" nil buffer t "checkout"
+                                       (or (plist-get order :ref) "--"))))
+                 (emacs (concat invocation-directory invocation-name))
+                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                 ((require 'elpaca))
+                 ((elpaca-generate-autoloads "elpaca" repo)))
+            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+          (error "%s" (with-current-buffer buffer (buffer-string))))
       ((error) (warn "%s" err) (delete-directory repo 'recursive))))
   (unless (require 'elpaca-autoloads nil t)
     (require 'elpaca)
@@ -47,7 +48,6 @@
 ;; General for keybindings
 (use-package general
   :demand t)
-
 (elpaca-wait)
 
 (general-create-definer key-leader
@@ -58,7 +58,8 @@
 
 (key-leader
   :states 'normal
-  "/" '(comment-line :which-key "Comment: Toggle Current Line"))
+  "/" '(comment-line :which-key "Comment: Toggle Current Line")
+  )
 
 (key-leader
   :states 'visual
@@ -79,13 +80,24 @@
   :keymaps 'emacs-lisp-mode-map
   "f r" '(eval-region :which-key "File: Evaluate Region"))
 
+(key-leader
+  :states 'normal
+  "b b" #'ibuffer)
+
+(general-def
+ "<escape>" #'keyboard-escape-quit)
 
 ;; Which key to hint key bindings
 (use-package which-key
-  :after evil
+  :defer nil
+  :general
+  (key-leader
+    :states 'normal
+    "w w" #'which-key-show-top-level)
+  :custom
+  (which-key-idle-delay 0.1)
+  (which-key-max-description-length 50)
   :init
-  (setq which-key-idle-delay 0.1)
-  :config
   (which-key-mode))
 
 (custom-set-variables
@@ -105,32 +117,64 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-one t)
   (doom-themes-visual-bell-config)
-  (doom-themes-treemacs-config)
   (doom-themes-org-config))
 
 (use-package nerd-icons)
+
+(use-package nerd-icons-ibuffer
+  :ensure t
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+
+(use-package nerd-icons-dired
+  :after nerd-icons
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+
 (use-package treemacs
   :defer t
-  :after nerd-icons
+  :general
+  (key-leader
+    :states 'normal
+    "t" '(nil :which-key "Treemacs"))
+  (key-leader
+    :states 'normal
+    "t t" '(treemacs :which-key "Treemacs: Toggle")
+    "t p" '(nil :which-key "Treemacs Project"))
+  (key-leader
+    :states 'normal
+    "t p n" '(nil :which-key "Treemacs Project: New"))
+  :custom
+  (treemacs-silent-refresh t)
+  (treemacs-silent-filewatch t)
+  (treemacs-filewatch-mode t)
+  (treemacs-show-hidden-files nil)
+  (treemacs-follow-after-init t)
+  (treemacs-expand-after-init t)
+  (treemacs-file-event-delay 100)
+  (treemacs-follow-mode t)
+  :hook (treemacs-mode . (lambda () (display-line-numbers-mode -1))))
+
+(use-package treemacs-nerd-icons
+  :after nerd-icons treemacs
   :config
-  (use-package treemacs-nerd-icons)
-  (use-package treemacs-evil)
-  (treemacs-load-theme "nerd-icons")
-  (setq treemacs-silent-refresh t
-	treemacs-silent-filewatch t
-	tree-file-event-delay 100))
+  (treemacs-load-theme "nerd-icons"))
+
+(use-package treemacs-evil
+  :after treemacs)
 
 ;; Download Evil
 (use-package goto-chg)
 (use-package evil
   :after goto-chg
-  :init
-  (setq evl-kbd-macro-suppress-motion-error t
-        evil-want-C-u-scroll t
-        evil-want-integration t
-        evil-want-keybinding 'nil
-        which-key-allow-evil-operators t
-        evil-undo-system 'undo-redo)
+  :custom
+  (evl-kbd-macro-suppress-motion-error t)
+  (evil-want-C-u-scroll t)
+  (evil-want-integration t)
+  (evil-want-keybinding 'nil)
+  (which-key-allow-evil-operators t)
+  (evil-undo-system 'undo-redo)
+  (evil-want-fine-undo t)
+  (evil-show-paren-range 1000)
   :config
   (evil-mode 1))
 
@@ -184,22 +228,48 @@
 
 (use-package orderless
   :after hotfuzz
-  :custom
-  (completion-ignore-case t)
-  (completion-styles '(hotfuzz orderless))
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  (orderless-matching-styles
+  :config
+  (defun +orderless--consult-suffix ()
+    "Regexp which matches the end of string with Consult tofu support."
+    (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
+        (format "[%c-%c]*$"
+                consult--tofu-char
+                (+ consult--tofu-char consult--tofu-range -1))
+      "$"))
+
+  ;; Recognizes the following patterns:
+  ;; * .ext (file extension)
+  ;; * regexp$ (regexp matching at end)
+  (defun +orderless-consult-dispatch (word _index _total)
+    (cond
+     ;; Ensure that $ works with Consult commands, which add disambiguation suffixes
+     ((string-suffix-p "$" word)
+      `(orderless-regexp . ,(concat (substring word 0 -1) (+orderless--consult-suffix))))
+     ;; File extensions
+     ((and (or minibuffer-completing-file-name
+               (derived-mode-p 'eshell-mode))
+           (string-match-p "\\`\\.." word))
+      `(orderless-regexp . ,(concat "\\." (substring word 1) (+orderless--consult-suffix))))))
+
+  (orderless-define-completion-style +orderless-with-initialism
+    (orderless-matching-styles '(orderless-initialism orderless-literal orderless-regexp)))
+  (setq
+   completion-ignore-case t
+   completion-styles '(hotfuzz orderless basic)
+   completion-category-defaults nil
+   completion-category-overrides '((file (styles partial-completion))
+                                   (command (styles +orderless-with-initialism))
+                                   (variable (styles +orderless-with-initialism))
+                                   (symbol (styles +orderless-with-initialism)))
+   orderless-component-separator #'orderless-escapable-split-on-space
+   orderless-style-dispatchers (list #'+orderless-consult-dispatch
+                                     #'orderless-affix-dispatch)
+   orderless-matching-styles
    '(orderless-literal
      orderless-prefixes
      orderless-initialism)))
 
 (use-package corfu
-  :elpaca
-  (:host github
-         :repo "minad/corfu"
-         :depth 1
-         :files ("extensions/*"))
   :after tempel tempel-collection
   :custom
   (completion-cycle-threshold nil)
@@ -224,14 +294,6 @@
             "M-d" #'corfu-show-documentation
             "M-d" #'corfu-show-location)
   :init
-  (defun corfu-enable-always-in-minibuffer ()
-    "Enable Corfu in the minibuffer if Vertico/Mct are not active."
-    (unless (or (bound-and-true-p mct--active)
-                (bound-and-true-p vertico--input)
-                (eq (current-local-map) read-passwd-map))
-      (setq-local corfu-popupinfo-delay 0.1)
-      (corfu-mode 1)))
-  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
   (global-corfu-mode)
   (corfu-popupinfo-mode))
 
@@ -244,7 +306,9 @@
 
 ;; Add extensions
 (use-package cape
-  :elpaca (:host github :repo "minad/cape")
+  :elpaca (:host github
+		 :repo "minad/cape"
+		 :depth 1)
   :init
   ;; Add to the global default value of `completion-at-point-functions' which is
   ;; used by `completion-at-point'.  The order of the functions matters, the
@@ -306,11 +370,6 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
-(use-package nerd-icons-dired
-  :after nerd-icons
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-
 (use-package nerd-icons-completion
   :after marginalia
   :config
@@ -319,44 +378,38 @@
 
 ;; Enable vertico
 (use-package vertico
-  :elpaca (:host github
-                 :depth 1
-                 :repo "minad/vertico"
-                 :files ("extensions/*"))
   :general
   (:keymaps '(normal insert visual motion)
             "M-." #'vertico-repeat) ; Perfectly return to the state of the last Vertico minibuffer usage
   (:keymaps 'vertico-map
-            "<C-RET>" #'vertico-insert
+            "C-<return>" #'vertico-insert
             "<escape>" #'minibuffer-keyboard-quit
-            "<M-s>" #'vertico-next-group
-            "<M-a>" #'vertico-previous-group
+            "M-s" #'vertico-next-group
+            "M-a" #'vertico-previous-group
             "TAB" #'vertico-next
             [tab] #'vertico-next
             "S-TAB" #'vertico-previous
             [backtab] #'vertico-previous
             "<backspace>" #'vertico-directory-delete-char
             "C-<backspace>" #'vertico-directory-delete-word
-            "RET" #'vertico-directory-enter
+            "<return>" #'vertico-directory-enter
             "M-j" #'vertico-quick-insert)
   :hook (minibuffer-setup . vertico-repeat-save) ; Make sure vertico state is saved for `vertico-repeat'
   :custom
-  (vertico-count 50)
+  (vertico-count 15)
   (vertico-resize t)
   (vertico-cycle nil)
   (enable-recursive-minibuffers t)
-  (vertico-grid-separator "       ")
   (vertico-grid-lookahead 50)
   (vertico-buffer-display-action '(display-buffer-reuse-window))
   (vertico-multiform-categories
    '((file reverse)
-     (consult-grep buffer)
+     (consult-ripgrep buffer)
      (consult-location)
      (imenu buffer)
      (library reverse indexed)
      (org-roam-node reverse indexed)
-     (t reverse)
-     ))
+     (t reverse)))
   (vertico-multiform-commands
    '(("flyspell-correct-*" grid reverse)
      (org-refile grid reverse indexed)
@@ -381,8 +434,6 @@
 
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
-
-
   (vertico-mode)
   (vertico-mouse-mode))
 
@@ -396,9 +447,39 @@
             "M-A"  #'marginalia-cycle)
   :custom
   (marginalia-max-relative-age 0)
-  (marginalia-align #'right)
+  (marginalia-align #'center)
   :init
   (marginalia-mode))
+
+;; (use-package embark
+;;   :after marginalia
+;;   :custom
+;;   (prefix-help-command #'embark-prefix-help-command)
+;;   :init)
+
+
+(use-package consult
+  :init
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format
+        xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref
+        completion-in-region-function (lambda (&rest args)
+                                        (apply (if vertico-mode
+                                                   #'consult-completion-in-region
+                                                 #'completion--in-region)
+                                               args))
+        consult-narrow-key "<")
+  :general
+  (key-leader
+    :states 'normal
+    "c" '(nil :which-key "Consult"))
+  (key-leader
+    :states 'normal
+    "c r" '(consult-recent-file :which-key "Consult: Recent  Files")))
+
+
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -422,7 +503,7 @@
   :after tree-sitter
   :init
   (setq treesit-language-source-alist
-	'((emacs-lisp "https://github.com/Wilfred/tree-sitter-elisp")))
+        '((emacs-lisp "https://github.com/Wilfred/tree-sitter-elisp")))
   :config
   (setq treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
@@ -435,9 +516,24 @@
   (global-ts-fold-indicators-mode)
   (ts-fold-line-comment-mode))
 
+;; Undo Tree
+(use-package vundo
+  :defer t
+  :hook (vundo-mode . (lambda () (setq-local cursor-type nil)))
+  :custom
+  (vundo-glyph-alist vundo-unicode-symbols))
+
+;; Persistent Undo
+(use-package undo-fu-session
+  :config
+  (undo-fu-session-global-mode))
+
+;; Set background colors for color codes
+(use-package rainbow-mode
+  :config
+  (rainbow-mode t))
+
 ;; Opacity
-(set-frame-parameter nil 'alpha-background 25)
-(add-to-list 'default-frame-alist '(alpha-background . 25))
 (menu-bar-mode -1) ; Disable menubar
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)  ; Disable toolbar
@@ -446,4 +542,14 @@
 (setq visible-bell t) ; Enable visible bell
 (blink-cursor-mode 0) ; Disable blinking  cursor
 (setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
+(column-number-mode t)
+(global-display-line-numbers-mode t)
+(setq-default indent-tabs-mode nil)
+(global-hl-line-mode t)
+(setq use-dialog-box nil)
+(global-auto-revert-mode t)
+(recentf-mode t)
+(fset 'yes-or-no-p 'y-or-n-p)
+(save-place-mode 1)
+(setq custom-file (locate-user-emacs-file "custom-vars.el"))
+(load custom-file 'noerror 'nomessage)
