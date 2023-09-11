@@ -440,6 +440,8 @@ return {
             })
 
             lspconfig.texlab.setup({
+                capabilities = lsp_capabilities,
+                on_attach = on_attach,
                 settings = {
                     texlab = {
                         build = {
@@ -481,6 +483,25 @@ return {
                     },
                 },
             })
+
+            lspconfig.gopls.setup({
+                capabilities = lsp_capabilities,
+                on_attach = on_attach,
+                settings = {
+                    gopls = {
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            compositeLiteralTypes = true,
+                            constantValues = true,
+                            functionTypeParameters = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
+                        }
+                    }
+                }
+            }
+            )
 
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
