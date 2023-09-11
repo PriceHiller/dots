@@ -76,6 +76,7 @@ return {
                         NeogitNotificationError = { fg = colors.samuraiRed, bold = true },
                         menuSel = { bg = colors.sumiInk0, fg = "NONE" },
                         Pmenu = { fg = colors.fujiWhite, bg = colors.sumiInk2 },
+                        CmpGhostText = { fg = colors.boatYellow1, italic = true },
                         CmpItemAbbrDeprecated = { fg = colors.fujiGray, bg = "NONE" },
                         CmpItemAbbrMatch = { fg = colors.crystalBlue, bg = "NONE" },
                         CmpItemAbbrMatchFuzzy = { fg = colors.crystalBlue, bg = "NONE" },

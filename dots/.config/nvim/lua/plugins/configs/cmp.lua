@@ -240,7 +240,7 @@ return {
                         side_padding = 0,
                     },
                 },
-                experimental = { ghost_text = { hl_group = "Comment" }, native_menu = false },
+                experimental = { ghost_text = { hl_group = "CmpGhostText" }, native_menu = false },
                 snippet = {
                     -- REQUIRED - you must specify a snippet engine
                     expand = function(args)
