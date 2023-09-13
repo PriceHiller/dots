@@ -51,5 +51,4 @@ U.title_case = function(str)
     return string.gsub(str, "(%a)([%w_']*)", inner)
 end
 
-
 return U

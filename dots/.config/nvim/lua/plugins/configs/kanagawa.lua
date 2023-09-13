@@ -212,9 +212,9 @@ return {
             vim.cmd.colorscheme("kanagawa")
             local colors = require("kanagawa.colors").setup().palette
             vim.api.nvim_set_hl(0, "StatusLine", { bg = colors.sumiInk0 })
-            vim.api.nvim_set_hl(0, "WinBar", { bg =  nil })
+            vim.api.nvim_set_hl(0, "WinBar", { bg = nil })
             vim.api.nvim_set_hl(0, "StatusLineNC", { bg = nil })
-            vim.api.nvim_set_hl(0, "WinBarNC", { bg =  nil })
+            vim.api.nvim_set_hl(0, "WinBarNC", { bg = nil })
         end,
     },
 }

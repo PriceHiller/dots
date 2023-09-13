@@ -28,9 +28,9 @@ return {
                     asm = function()
                         return {
                             exe = "asmfmt",
-                            stdin = true
+                            stdin = true,
                         }
-                    end
+                    end,
                 },
             }
         end,

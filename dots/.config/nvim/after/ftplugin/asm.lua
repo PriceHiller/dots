@@ -23,7 +23,7 @@ vim.keymap.set("n", "<leader>fr", function()
         "-o",
         executable_path,
         "&& \n",
-        executable_path
+        executable_path,
     }
     require("toggleterm").exec(table.concat(cmd, " "))
 end, {

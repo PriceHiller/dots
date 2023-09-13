@@ -17,18 +17,13 @@ M.setup = function()
         if not strip_trail_space then
             intercept_state = "`Disabled`"
         end
-        vim.notify("Strip Trail Space set to " .. intercept_state, vim.log.levels.INFO,
-            {
-                title = "Strip Trail Space",
-                ---@param win integer The window handle
-                on_open = function(win)
-                    vim.api.nvim_buf_set_option(
-                        vim.api.nvim_win_get_buf(win),
-                        "filetype",
-                        "markdown"
-                    )
-                end
-            })
+        vim.notify("Strip Trail Space set to " .. intercept_state, vim.log.levels.INFO, {
+            title = "Strip Trail Space",
+            ---@param win integer The window handle
+            on_open = function(win)
+                vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
+            end,
+        })
     end, { desc = "Toggles intercepting BufWritePre to strip trail space" })
 
     -- NOTE: Remove trailing whitespace on save
@@ -38,7 +33,7 @@ M.setup = function()
             if strip_trail_space then
                 vim.cmd.StripTrailSpace()
             end
-        end
+        end,
     })
 
     -- NOTE: Disables status column elements in Terminal buffer
@@ -60,7 +55,9 @@ M.setup = function()
         desc = "Delete [No Name] buffers",
         callback = function(event)
             if event.file == "" and vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
-                vim.schedule(function() pcall(vim.api.nvim_buf_delete, event.buf, {}) end)
+                vim.schedule(function()
+                    pcall(vim.api.nvim_buf_delete, event.buf, {})
+                end)
             end
         end,
     })
@@ -72,18 +69,13 @@ M.setup = function()
         if not intercept_file_open then
             intercept_state = "`Disabled`"
         end
-        vim.notify("Intercept file open set to " .. intercept_state, vim.log.levels.INFO,
-            {
-                title = "Intercept File Open",
-                ---@param win integer The window handle
-                on_open = function(win)
-                    vim.api.nvim_buf_set_option(
-                        vim.api.nvim_win_get_buf(win),
-                        "filetype",
-                        "markdown"
-                    )
-                end
-            })
+        vim.notify("Intercept file open set to " .. intercept_state, vim.log.levels.INFO, {
+            title = "Intercept File Open",
+            ---@param win integer The window handle
+            on_open = function(win)
+                vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
+            end,
+        })
     end, { desc = "Toggles intercepting BufNew to open files in custom programs" })
 
     -- NOTE: Add "BufReadPre" to the autocmd events to also intercept files given on the command line, e.g.
@@ -106,21 +98,13 @@ M.setup = function()
             ---@param fpath string The file path given to the program
             ---@param fname string The file name used in notifications
             local function open_mime(buf, fpath, fname)
-                vim.notify(
-                    string.format("Opening `%s` in external program", fname),
-                    vim.log.levels.INFO,
-                    {
-                        title = "Open File in External Program",
-                        ---@param win integer The window handle
-                        on_open = function(win)
-                            vim.api.nvim_buf_set_option(
-                                vim.api.nvim_win_get_buf(win),
-                                "filetype",
-                                "markdown"
-                            )
-                        end
-                    }
-                )
+                vim.notify(string.format("Opening `%s` in external program", fname), vim.log.levels.INFO, {
+                    title = "Open File in External Program",
+                    ---@param win integer The window handle
+                    on_open = function(win)
+                        vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
+                    end,
+                })
                 vim.system({ "xdg-open", fpath }, { detach = true })
                 vim.api.nvim_buf_delete(buf, { force = true })
             end
@@ -136,7 +120,7 @@ M.setup = function()
                 ["mp4"] = function(buf, fpath, fname)
                     open_mime(buf, fpath, fname)
                 end,
-                ["gif"] = "mp4"
+                ["gif"] = "mp4",
             }
 
             ---Get the extension callback for a given extension. Will do a recursive lookup if an extension callback is actually
@@ -157,7 +141,7 @@ M.setup = function()
                     callback(bufnr, path, filename)
                 end
             end
-        end
+        end,
     })
 end
 

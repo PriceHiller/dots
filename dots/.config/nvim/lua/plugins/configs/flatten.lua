@@ -8,11 +8,11 @@ return {
 
             return {
                 window = {
-                    open = "alternate"
+                    open = "alternate",
                 },
                 one_per = {
                     wezterm = false,
-                    kitty = false
+                    kitty = false,
                 },
                 callbacks = {
                     should_block = function(argv)
@@ -49,7 +49,7 @@ return {
                                 once = true,
                                 callback = vim.schedule_wrap(function()
                                     vim.api.nvim_buf_delete(bufnr, {})
-                                end)
+                                end),
                             })
                         end
                     end,
@@ -61,9 +61,9 @@ return {
                                 saved_terminal = nil
                             end
                         end)
-                    end
-                }
+                    end,
+                },
             }
-        end
-    }
+        end,
+    },
 }
