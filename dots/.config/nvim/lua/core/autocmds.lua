@@ -10,10 +10,35 @@ M.setup = function()
         end,
     })
 
+    local strip_trail_space = true
+    vim.api.nvim_create_user_command("ToggleStripTrailSpace", function()
+        strip_trail_space = not strip_trail_space
+        local intercept_state = "`Enabled`"
+        if not strip_trail_space then
+            intercept_state = "`Disabled`"
+        end
+        vim.notify("Strip Trail Space set to " .. intercept_state, vim.log.levels.INFO,
+            {
+                title = "Strip Trail Space",
+                ---@param win integer The window handle
+                on_open = function(win)
+                    vim.api.nvim_buf_set_option(
+                        vim.api.nvim_win_get_buf(win),
+                        "filetype",
+                        "markdown"
+                    )
+                end
+            })
+    end, { desc = "Toggles intercepting BufWritePre to strip trail space" })
+
     -- NOTE: Remove trailing whitespace on save
     vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
-        command = "StripTrailSpace",
+        callback = function()
+            if strip_trail_space then
+                vim.cmd.StripTrailSpace()
+            end
+        end
     })
 
     -- NOTE: Disables status column elements in Terminal buffer
