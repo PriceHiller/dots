@@ -1,9 +1,9 @@
 return {
     {
-        'tzachar/highlight-undo.nvim',
+        "tzachar/highlight-undo.nvim",
         keys = {
-            {"u"},
-            {"<C-r>"}
+            { "u" },
+            { "<C-r>" },
         },
         opts = {},
     },

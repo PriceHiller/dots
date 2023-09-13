@@ -462,16 +462,17 @@ return {
             require("typescript-tools").setup({
                 on_attach = on_attach,
                 settings = {
-                    tsserver_path = vim.fn.stdpath("data") .. "/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
+                    tsserver_path = vim.fn.stdpath("data")
+                        .. "/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
                     expose_as_code_action = {
                         "fix_all",
                         "add_missing_imports",
                         "remove_unused",
                         "remove_unused_imports",
-                        "organize_imports"
+                        "organize_imports",
                     },
                     tsserver_plugins = {
-                        "@styled/typescript-styled-plugin"
+                        "@styled/typescript-styled-plugin",
                     },
                     tsserver_file_preferences = {
                         includeInlayParameterNameHints = "all",
@@ -497,11 +498,10 @@ return {
                             functionTypeParameters = true,
                             parameterNames = true,
                             rangeVariableTypes = true,
-                        }
-                    }
-                }
-            }
-            )
+                        },
+                    },
+                },
+            })
 
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({

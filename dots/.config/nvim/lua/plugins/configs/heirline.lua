@@ -142,11 +142,11 @@ return {
                     local filename = self.filename
                     local extension = vim.fn.fnamemodify(filename, ":e")
                     local buftype = vim.api.nvim_get_option_value("buftype", {
-                        buf = self.bufnr
+                        buf = self.bufnr,
                     })
 
                     local filetype = vim.api.nvim_get_option_value("filetype", {
-                        buf = self.bufnr
+                        buf = self.bufnr,
                     })
                     self.icon, self.icon_color =
                         require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
@@ -155,11 +155,11 @@ return {
                         ["rust"] = { icon = "", icon_color = self.icon_color },
                         ["sshconfig"] = { icon = "󰴳", icon_color = colors.carpYellow },
                         ["sshdconfig"] = "sshconfig",
-                        ["help"] = { icon = "󰋗", icon_color = colors.springGreen }
+                        ["help"] = { icon = "󰋗", icon_color = colors.springGreen },
                     }
 
                     local buftype_overrides = {
-                        ["terminal"] = { icon = " ", icon_color = colors.roninYellow }
+                        ["terminal"] = { icon = " ", icon_color = colors.roninYellow },
                     }
 
                     local function get_override(name, overrides)
@@ -194,7 +194,7 @@ return {
                 provider = function(self)
                     local filename = ""
                     local buftype = vim.api.nvim_get_option_value("buftype", {
-                        buf = self.bufnr
+                        buf = self.bufnr,
                     })
                     if buftype == "terminal" then
                         local subs = 0
@@ -455,7 +455,7 @@ return {
                 StatusLineBufferBlock,
                 { provider = "", hl = { fg = colors.katanaGray } }, -- left truncation, optional (defaults to "<")
                 { provider = "", hl = { fg = colors.katanaGray } } -- right trunctation, also optional (defaults to ...... yep, ">")
-            -- by the way, open a lot of buffers and try clicking them ;)
+                -- by the way, open a lot of buffers and try clicking them ;)
             )
 
             local Tabpage = {
@@ -562,7 +562,7 @@ return {
                                     end
 
                                     return { fg = colors.oniViolet, bg = bg }
-                                end
+                                end,
                             },
                         },
                         {
@@ -589,7 +589,7 @@ return {
                                     return { fg = colors.oniViolet2, bg = bg }
                                 end,
                             },
-                        }
+                        },
                     },
                     {
                         condition = conditions.has_diagnostics,
@@ -676,7 +676,7 @@ return {
                     },
                     {
                         FileIcon,
-                        hl = { bg = colors.sumiInk4 }
+                        hl = { bg = colors.sumiInk4 },
                     },
                     {
                         provider = seps.full.right,

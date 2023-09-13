@@ -22,7 +22,7 @@ return {
                         vim.cmd.ToggleTerm()
                     end
                 end,
-                desc = "ToggleTerm: Toggle"
+                desc = "ToggleTerm: Toggle",
             },
         },
         opts = {

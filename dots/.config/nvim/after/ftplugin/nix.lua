@@ -10,12 +10,12 @@ vim.keymap.set("n", "<leader>fr", function()
         "nix-instantiate",
         "--eval",
         "--strict",
-        vim.api.nvim_buf_get_name(0)
+        vim.api.nvim_buf_get_name(0),
     }
     require("toggleterm").exec(table.concat(cmd, " "))
 end, {
     buffer = true,
-    desc = "Nix: Run with default output"
+    desc = "Nix: Run with default output",
 })
 
 vim.keymap.set("n", "<leader>fj", function()
@@ -26,10 +26,10 @@ vim.keymap.set("n", "<leader>fj", function()
         "--json",
         vim.api.nvim_buf_get_name(0),
         "|",
-        "jq"
+        "jq",
     }
     require("toggleterm").exec(table.concat(cmd, " "))
 end, {
     buffer = true,
-    desc = "Nix: Run with json output"
+    desc = "Nix: Run with json output",
 })

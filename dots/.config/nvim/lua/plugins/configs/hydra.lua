@@ -9,7 +9,7 @@ return {
         },
         keys = {
             { "<leader>h", desc = "> Hydra" },
-            { "<C-w>" }
+            { "<C-w>" },
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
