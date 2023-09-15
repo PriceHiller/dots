@@ -10,10 +10,8 @@ return {
                 uppercase = false,
                 style = "overlay",
             },
-            search = {
-                char = {
-                    enabled = false
-                }
+            char = {
+                enabled = false
             }
         },
         keys = {
