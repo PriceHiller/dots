@@ -40,13 +40,22 @@ return {
                     },
                     ["core.concealer"] = {
                         config = {
-                            folds = false,
-                            icon_preset = "varied",
+                            folds = true,
                             icons = {
                                 code_block = {
                                     conceal = true,
                                     content_only = true,
                                 },
+                                heading = {
+                                    icons = {
+                                        "󰀘",
+                                        "",
+                                        "󰺕",
+                                        "",
+                                        "󰬪",
+                                        "󱆭",
+                                    }
+                                }
                             },
                         },
                     },
