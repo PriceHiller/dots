@@ -56,6 +56,7 @@
 (general-create-definer key-local-leader
   :prefix ";")
 
+
 (key-leader
   :states 'normal
   "/" '(comment-line :which-key "Comment: Toggle Current Line")
@@ -86,6 +87,13 @@
 
 (general-def
  "<escape>" #'keyboard-escape-quit)
+
+
+;; Ensure emacs paths load the same as our shell
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 ;; Which key to hint key bindings
 (use-package which-key
@@ -174,9 +182,9 @@
   (which-key-allow-evil-operators t)
   (evil-undo-system 'undo-redo)
   (evil-want-fine-undo t)
-  (evil-show-paren-range 1000)
   :config
   (evil-mode 1))
+
 
 (use-package evil-surround
   :config
@@ -465,12 +473,8 @@
         register-preview-function #'consult-register-format
         xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref
-        completion-in-region-function (lambda (&rest args)
-                                        (apply (if vertico-mode
-                                                   #'consult-completion-in-region
-                                                 #'completion--in-region)
-                                               args))
-        consult-narrow-key "<")
+        consult-narrow-key "<"
+        completion-in-region-function #'consult-completion-in-region)
   :general
   (key-leader
     :states 'normal
@@ -478,7 +482,6 @@
   (key-leader
     :states 'normal
     "c r" '(consult-recent-file :which-key "Consult: Recent  Files")))
-
 
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
@@ -533,11 +536,56 @@
   :config
   (rainbow-mode t))
 
+;; Setup Language Servers
+
+(general-create-definer key-lsp-leader
+  :prefix "SPC l")
+
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "SPC l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         ;; (XXX-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+
+;; optionally if you want to use debugger
+(use-package dap-mode
+  :config
+  (require 'dap-cpptools)
+  (require 'dap-gdb-lldb)
+  (dap-register-debug-template "Rust::GDB Run Configuration"
+                               (list :type "gdb"
+                                     :request "launch"
+                                     :name "GDB::Run"
+                                     :gdbpath "rust-gdb"
+                                     :target nil
+                                     :cwd nil))
+  (dap-ui-mode)
+  (dap-tooltip-mode)
+  (dap-ui-controls-mode)
+  (dap-mode))
+
+  
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+;; Rust integration
+(use-package rustic
+  :general
+  (key-lsp-leader
+    :states 'normal))
+    ;; "f r" ((rustic-cargo-run) :which-key "Cargo: Run")))
+
 ;; Opacity
 (menu-bar-mode -1) ; Disable menubar
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)  ; Disable toolbar
-(tooltip-mode -1) ; Disable tooltips
+(tooltip-mode) ; Enable tooltips
 (set-fringe-mode 10)  ; Breathing room
 (setq visible-bell t) ; Enable visible bell
 (blink-cursor-mode 0) ; Disable blinking  cursor
