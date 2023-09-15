@@ -40,13 +40,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         -- Otherwise, use the title from the active pane
         -- in that tab
         local active_pane = tab_info.active_pane
-        ---@type Url
-        local pane_cwd
-        pane_cwd = tab_info.active_pane.current_working_dir
-        if type(pane_cwd) == "userdata" then
-            pane_cwd = pane_cwd.file_path:gsub(wezterm.home_dir, "~")
-        end
-        return string.format("%s %s", active_pane.title, pane_cwd or "")
+        return active_pane.title
     end
 
     local bg = color_names.kanagawa.sumiInk0
