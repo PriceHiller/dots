@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-### Exa ###
+### Eza ###
 if command -v eza >/dev/null 2>&1; then
+	alias exa='eza' # This helps some preview commands work from separate repos
 	alias ls="eza --icons --group --group-directories-first --octal-permissions --classify"
 	alias l="ls -alh"
 	alias ll="l"
