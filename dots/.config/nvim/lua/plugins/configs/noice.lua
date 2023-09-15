@@ -29,6 +29,17 @@ return {
             popupmenu = {
                 backend = "cmp",
             },
+            routes = {
+                {
+                    filter = { event = "msg_show", find = "Hop .*:" },
+                    opts = { skip = true }
+                },
+                {
+                    view = "split",
+                    filter = { event = "msg_show", min_height = 20 },
+                },
+
+            }
         },
         dependencies = {
             -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
