@@ -79,9 +79,6 @@ M.setup = function()
         vim.opt.relativenumber = not vim.opt.relativenumber:get()
     end, { silent = true, desc = "Toggle Relativenumber" })
 
-    -- Sudo Write
-    vim.keymap.set("c", "w!!", "w !sudo tee > /dev/null %", { silent = true, desc = "Write as Sudo" })
-
     -- Terminal mappings
     vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { silent = true })
 
