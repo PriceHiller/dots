@@ -30,8 +30,8 @@ configure() {
 		fzf-preview 'echo ${(P)word}'
 
 	# Tab Completion for previewing files or directories
-	zstyle ':fzf-tab:complete:(mv|cat|bat|cp|rm|chmod|du|viu|nvim|ls|cd|exa):*' fzf-preview \
-		'[[ -f ${realpath} ]] && bat -P --color=always --theme="Solarized (dark)" --style=header,grid,numbers,snip ${realpath} || exa -al --no-filesize --no-time --no-user --no-permissions ${realpath}'
+	zstyle ':fzf-tab:complete:(mv|cat|bat|cp|rm|chmod|du|viu|nvim|ls|cd|eza):*' fzf-preview \
+		'[[ -f ${realpath} ]] && bat -P --color=always --theme="Solarized (dark)" --style=header,grid,numbers,snip ${realpath} || eza -al --no-filesize --no-time --no-user --no-permissions ${realpath}'
 
 	### Generic Oh My Zsh Styles ###
 
