@@ -3,7 +3,10 @@ return {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers", -- This is the important bit!
         cmd = { "Neorg" },
-        ft = { "norg" },
+        event = { "FileType" },
+        dependencies = {
+            { "nvim-treesitter/nvim-treesitter" },
+        },
         keys = {
             { "<leader>o", desc = "> Neorg" },
             { "<leader>oj", ":Neorg journal custom<CR>", desc = "Neorg: Journal" },
