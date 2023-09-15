@@ -51,9 +51,11 @@
 (elpaca-wait)
 
 (general-create-definer key-leader
+  :states 'normal
   :prefix "SPC")
 
 (general-create-definer key-local-leader
+  :states 'normal
   :prefix ";")
 
 
@@ -103,7 +105,7 @@
     :states 'normal
     "w w" #'which-key-show-top-level)
   :custom
-  (which-key-idle-delay 0.1)
+  (which-key-idle-delay 1)
   (which-key-max-description-length 50)
   :init
   (which-key-mode))
@@ -127,6 +129,29 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
+(use-package doom-modeline
+  :custom    
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 5)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-major-mode-color-icon t)
+  (doom-modeline-buffer-file-name-style 'truncate-upto-project)
+  (doom-modeline-buffer-state-icon t)
+  (doom-modeline-buffer-modification-icon t)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-enable-word-count nil)
+  (doom-modeline-buffer-encoding t)
+  (doom-modeline-indent-info nil)
+  (doom-modeline-checker-simple-format t)
+  (doom-modeline-vcs-max-length 12)
+  (doom-modeline-env-version t)
+  (doom-modeline-irc-stylize 'identity)
+  (doom-modeline-github-timer nil)
+  (doom-modeline-gnus-timer nil)
+  :config
+  (doom-modeline-mode))
+
 (use-package nerd-icons)
 
 (use-package nerd-icons-ibuffer
@@ -135,8 +160,8 @@
 
 (use-package nerd-icons-dired
   :after nerd-icons
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (use-package treemacs
   :defer t
@@ -182,9 +207,30 @@
   (which-key-allow-evil-operators t)
   (evil-undo-system 'undo-redo)
   (evil-want-fine-undo t)
+  (evil-emacs-state-modes nil)
+  (evil-insert-state-modes nil)
+  (evil-motion-state-modes nil)
   :config
   (evil-mode 1))
 
+(use-package evil-matchit
+  :config
+  (global-evil-matchit-mode))
+
+(use-package targets
+  :elpaca (:host github
+                 :depth 1
+                 :repo "noctuid/targets.el"
+  :custom
+  (targets-user-text-objects '((pipe "|" nil separator)
+                               (paren "(" ")" pair :more-keys "b")
+                               (bracket "[" "]" pair :more-keys "r")
+                               (curly "{" "}" pair :more-keys "c")))
+  :config
+  (targets-setup t
+                 :inside-key nil
+                 :around-key nil
+                 :remote-key nil)))
 
 (use-package evil-surround
   :config
@@ -195,6 +241,13 @@
   :config
   (evil-collection-init))
 
+;; Allow to jump to characters, etc.
+(use-package avy
+  :general
+  (:keymaps 'normal
+            "f" 'avy-goto-char))
+
+;; Improved PDF Experience
 (use-package pdf-tools
   :config
   (pdf-tools-install)
@@ -304,13 +357,6 @@
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode))
-
-(use-package corfu-candidate-overlay
-  :after corfu
-  :config
-  ;; enable corfu-candidate-overlay mode globally
-  ;; this relies on having corfu-auto set to nil
-  (corfu-candidate-overlay-mode +1))
 
 ;; Add extensions
 (use-package cape
@@ -459,12 +505,17 @@
   :init
   (marginalia-mode))
 
-;; (use-package embark
-;;   :after marginalia
-;;   :custom
-;;   (prefix-help-command #'embark-prefix-help-command)
-;;   :init)
+(use-package embark
+  :after marginalia
+  :general
+  ("C-." 'embark-act)
+  :custom
+  (prefix-help-command #'embark-prefix-help-command)
+  :init)
 
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package consult
   :init
@@ -478,9 +529,9 @@
   :general
   (key-leader
     :states 'normal
-    "c" '(nil :which-key "Consult"))
-  (key-leader
-    :states 'normal
+    "c" '(nil :which-key "Consult")
+    "c b" '(consult-buffer :which-key "Consult: Buffers")
+    "c f" '(consult-fd :which-key "Consult: Find File")
     "c r" '(consult-recent-file :which-key "Consult: Recent  Files")))
 
 
@@ -538,21 +589,50 @@
 
 ;; Setup Language Servers
 
-(general-create-definer key-lsp-leader
-  :prefix "SPC l")
-
 (use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "SPC l")
+  :general
+  (key-leader
+    :states 'visual
+    "l f r" '(lsp-format-buffer :which-key "LSP Format: Region"))
+  (key-leader
+    :states 'normal
+    "k" '(lsp-ui-doc-glance :which-key "LSP: Glance Symbol")
+    "K" '(lsp-describe-thing-at-point :which-key "LSP: Full Doc")
+    "l" '(nil :which-key "LSP")
+    "l f" '(nil :which-key "LSP Format")
+    "l f f" '(lsp-format-buffer :which-key "LSP Format: Buffer")
+    "l i" '(lsp-treemacs-implementations :which-key "LSP: Implementation")
+    "l r" '(lsp-treemacs-references :which-key "LSP: Refrences")
+    "l n" '(lsp-rename :which-key "LSP: Rename")
+    "l R" '(lsp-restart :which-key "LSP: Restart")
+    "l d" '(lsp-find-definition :which-key "LSP: Definition")
+    "l D" '(lsp-find-declaration :which-key "LSP: Declaration")
+    "l c" '(lsp-execute-code-action :which-key "LSP: Code Actions")
+    "l t" '(nil :which-key "LSP Treemacs")
+    "l t e" '(lsp-treemacs-errors-list :which-key "LSP Treemacs: Errors List")
+    "l t s" '(lsp-treemacs-symbols :which-key "LSP Treemacs: Symbols")
+    "l t q" '(lsp-treemacs-quick-fix :which-key "LSP Treemacs: Quickfix")
+    "l t h" '(lsp-treemacs-call-heirarchy :which-key "LSP Treemacs: Call Hierarchy"))
+  :custom
+  (lsp-keymap-prefix "M-l")
+  (lsp-auto-execute-action 'nil)
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          ;; (XXX-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  :commands lsp
+  :config
+  (with-eval-after-load 'lsp-mode
+    (lsp-treemacs-sync-mode)
+    (setq lsp-modeline-diagnostics-scope :workspace)))
 
 ;; optionally
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :custom
+  (lsp-ui-doc-delay 0.1)
+  :commands
+  lsp-ui-mode
+  lsp-ui-doc-enable)
 
 ;; optionally if you want to use debugger
 (use-package dap-mode
@@ -569,19 +649,52 @@
   (dap-ui-mode)
   (dap-tooltip-mode)
   (dap-ui-controls-mode)
+  (dap-auto-configure-mode)
   (dap-mode))
-
-  
-;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; Rust integration
 (use-package rustic
   :general
-  (key-lsp-leader
-    :states 'normal))
-    ;; "f r" ((rustic-cargo-run) :which-key "Cargo: Run")))
+  (key-leader
+    :states 'normal
+    "f r" '(rustic-cargo-run :which-key "Cargo: Run"))
+  :config
+  (rustic-mode))
 
-;; Opacity
+
+;;; Org Mode Appearance ------------------------------------
+(use-package org-bullets
+  :hook (org-mode-hook . (lambda ()
+			   (org-bullets-mode 1)
+			   (org-toggle-pretty-entities))))
+
+;; Load org-faces to make sure we can set appropriate faces
+(require 'org-faces)
+
+;; Hide emphasis markers on formatted text
+(setq org-hide-emphasis-markers t)
+
+;; Resize Org headings
+(dolist (face '((org-level-1 . 1.45)
+                (org-level-2 . 1.35)
+                (org-level-3 . 1.3)
+                (org-level-4 . 1.25)
+                (org-level-5 . 1.2)
+                (org-level-6 . 1.15)
+                (org-level-7 . 1.1)
+                (org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil :font "FiraCode Nerd Font" :weight 'medium :height (cdr face)))
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+
+;; Misc settings
 (menu-bar-mode -1) ; Disable menubar
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)  ; Disable toolbar
