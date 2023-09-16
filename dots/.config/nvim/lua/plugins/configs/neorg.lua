@@ -3,7 +3,7 @@ return {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers", -- This is the important bit!
         cmd = { "Neorg" },
-        event = { "FileType" },
+        event = { "WinEnter" },
         dependencies = {
             { "nvim-treesitter/nvim-treesitter" },
         },
