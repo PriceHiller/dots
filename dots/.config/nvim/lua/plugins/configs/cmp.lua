@@ -46,6 +46,9 @@ return {
 
             -- Load Snippets
             require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip.loaders.from_lua").load({
+                paths = vim.fn.stdpath("config") .. "/lua/plugins/snippets"
+            })
 
             local colors_bg_color = vim.api.nvim_get_hl(0, { name = "CmpCustomSelectionColor" }).bg
             local cached_colors = {}
@@ -107,8 +110,8 @@ return {
             local standard_sources = function(sources)
                 sources = sources or {}
                 local default_sources = {
-                    { name = "nvim_lsp", priority = 11 },
-                    { name = "luasnip", priority = 10 }, -- For luasnip users.
+                    { name = "nvim_lsp",     priority = 11 },
+                    { name = "luasnip",      priority = 10 }, -- For luasnip users.
                     { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
                     {
                         name = "rg",
@@ -117,12 +120,12 @@ return {
                         max_item_count = 10,
                     },
                     { name = "async_path", priority = 6 },
-                    { name = "zsh", priority = 5 },
-                    { name = "emoji", keyword_length = 2 },
+                    { name = "zsh",        priority = 5 },
+                    { name = "emoji",      keyword_length = 2 },
                     { name = "neorg" },
                     { name = "calc" },
-                    { name = "npm", keyword_length = 2 },
-                    { name = "spell", keyword_length = 2 },
+                    { name = "npm",        keyword_length = 2 },
+                    { name = "spell",      keyword_length = 2 },
                 }
 
                 return vim.tbl_deep_extend("force", default_sources, sources)
