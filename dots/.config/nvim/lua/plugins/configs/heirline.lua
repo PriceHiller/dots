@@ -256,7 +256,8 @@ return {
                 end,
             }, {
                 provider = seps.full.right .. " ",
-                hl = function()
+                hl = function(self)
+                    local bg = self.bg_color_right
                     if conditions.is_active() then
                         return { fg = colors.sumiInk4, bg = colors.carpYellow }
                     else
@@ -275,11 +276,12 @@ return {
                 FileFlags,
             }, { provider = "%<" }, {
                 provider = seps.full.right,
-                hl = function()
+                hl = function(self)
+                    local bg = self.bg_color_right
                     if conditions.is_active() then
-                        return { fg = colors.carpYellow, bg = utils.get_highlight("StatusLine").bg }
+                        return { fg = colors.carpYellow, bg = bg }
                     else
-                        return { fg = colors.sumiInk3, bg = utils.get_highlight("StatusLineNC").bg }
+                        return { fg = colors.sumiInk3, bg = bg }
                     end
                 end,
             })
@@ -535,7 +537,12 @@ return {
                             return { fg = colors.sumiInk4, bg = utils.get_highlight("WinBar").bg }
                         end,
                     },
-                    FileNameBlock,
+                    {
+                        FileNameBlock,
+                        static = {
+                            bg_color_right = nil
+                        }
+                    },
                     margin(1),
                     {
                         {
@@ -882,15 +889,14 @@ return {
                     {
                         {
                             provider = seps.full.left,
-                            hl = function()
-                                if conditions.is_active() then
-                                    return { fg = colors.sumiInk4, bg = utils.get_highlight("StatusLine").bg }
-                                else
-                                    return { fg = colors.sumiInk0, bg = utils.get_highlight("StatusLineNC").bg }
-                                end
-                            end,
+                            hl = { fg = colors.sumiInk4, bg = utils.get_highlight("StatusLine").bg }
                         },
-                        FileNameBlock,
+                        {
+                            FileNameBlock,
+                            static = {
+                                bg_color_right = utils.get_highlight("StatusLine").bg
+                            }
+                        }
                     },
                     margin(1),
                     {
