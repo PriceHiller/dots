@@ -453,9 +453,9 @@ return {
             -- and here we go
             local BufferLine = utils.make_buflist(
                 StatusLineBufferBlock,
-                { provider = "", hl = { fg = colors.katanaGray } }, -- left truncation, optional (defaults to "<")
-                { provider = "", hl = { fg = colors.katanaGray } } -- right trunctation, also optional (defaults to ...... yep, ">")
-                -- by the way, open a lot of buffers and try clicking them ;)
+                -- left truncation, optional (defaults to "<")
+                { provider = "", hl = { fg = colors.katanaGray, bg = utils.get_highlight("StatusLine").bg } },
+                { provider = "", hl = { fg = colors.katanaGray, bg = utils.get_highlight("StatusLine").bg } }
             )
 
             local Tabpage = {
