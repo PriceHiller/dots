@@ -48,8 +48,9 @@ return {
                 "rcarriga/nvim-notify",
                 keys = {
                     {
-                        "<leader>nd",
+                        "<esc>",
                         function()
+                            vim.cmd.noh()
                             require("notify").dismiss({
                                 pending = true,
                                 silent = true,
