@@ -14,15 +14,6 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local hydra = require("hydra")
-            local wk = require("which-key")
-            wk.register({
-                h = {
-                    name = "Hydra",
-                    o = { "Options" },
-                    g = { "Git Signs" },
-                    d = { "Diagram" },
-                },
-            }, { prefix = "<leader>" })
 
             -- Side Scroll
             hydra({
@@ -30,7 +21,7 @@ return {
                 config = {
                     {
                         position = "bottom-right",
-                        border = "rounded",
+                        border = "solid",
                     },
                 },
                 mode = "n",
@@ -55,13 +46,14 @@ return {
 ]]
 
             hydra({
+                name = "Git",
                 hint = hint,
                 config = {
                     color = "pink",
                     invoke_on_body = true,
                     hint = {
                         position = "bottom-right",
-                        border = "rounded",
+                        border = "solid",
                     },
                     on_enter = function()
                         vim.bo.modifiable = false
@@ -107,7 +99,7 @@ return {
                     { "u", gitsigns.undo_stage_hunk },
                     { "S", gitsigns.stage_buffer },
                     { "p", gitsigns.preview_hunk },
-                    { "d", gitsigns.toggle_deleted, { nowait = true } },
+                    { "d", gitsigns.toggle_deleted,    { nowait = true } },
                     { "b", gitsigns.blame_line },
                     {
                         "B",
@@ -115,9 +107,9 @@ return {
                             gitsigns.blame_line({ full = true })
                         end,
                     },
-                    { "/", gitsigns.show, { exit = true } }, -- show the base of the file
+                    { "/",       gitsigns.show,     { exit = true } }, -- show the base of the file
                     { "<Enter>", "<cmd>Neogit<CR>", { exit = true } },
-                    { "q", nil, { exit = true, nowait = true } },
+                    { "q",       nil,               { exit = true, nowait = true } },
                 },
             })
 
@@ -129,7 +121,7 @@ return {
                 config = {
                     {
                         position = "bottom-right",
-                        border = "rounded",
+                        border = "solid",
                     },
                 },
                 heads = {
@@ -138,6 +130,45 @@ return {
                     { "+", "2<C-w>+" },
                     { "-", "2<C-w>-", { desc = "↑/↓" } },
                 },
+            })
+
+            -- Hydra for DAP
+            hydra({
+                name = "Debug",
+                mode = "n",
+                body = "<leader>hd",
+                hint = [[
+^^Debug
+^
+_c_: Continue/Start       _r_: Run Last                 _e_: End/Stop
+_b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional Breakpoint
+
+^^                _s_: Toggle DAP UI               _R_: Run to cursor
+
+^^                _<F5>_: Step Over                _<F6>_: Step Into
+^^                _<F7>_: Step Out                 _<F8>_: Step Back
+                ]],
+                heads = {
+                    { "c",    ":DapContinue<CR>" },
+                    { "r",    ":DapRunLast<CR>" },
+                    { "e",    ":DapTerminate<CR>" },
+                    { "b",    ":DapToggleBreakpoint<CR>" },
+                    { "B",    function() require("dap").set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end },
+                    { "l",    function() require("dap").set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end },
+                    { "s",    require("dapui").toggle },
+                    { "R",    require("dap").run_to_cursor },
+                    { "<F5>", ":DapStepOver<CR>" },
+                    { "<F6>", ":DapStepInto<CR>" },
+                    { "<F7>", ":DapStepOut<CR>" },
+                    { "<F8>", require("dap").step_back }
+                },
+                config = {
+                    color = "pink",
+                    invoke_on_body = true,
+                    hint = {
+                        border = "solid"
+                    }
+                }
             })
 
             -- Hydra for diagrams
@@ -154,7 +185,7 @@ return {
                     color = "pink",
                     invoke_on_body = true,
                     hint = {
-                        border = "rounded",
+                        border = "solid",
                     },
                     on_enter = function()
                         vim.o.virtualedit = "all"
@@ -163,14 +194,14 @@ return {
                     end,
                 },
                 mode = "n",
-                body = "<leader>hd",
+                body = "<leader>hD",
                 heads = {
-                    { "H", "<C-v>h:VBox<CR>" },
-                    { "J", "<C-v>j:VBox<CR>" },
-                    { "K", "<C-v>k:VBox<CR>" },
-                    { "L", "<C-v>l:VBox<CR>" },
-                    { "f", ":VBox<CR>", { mode = "v" } },
-                    { "<Esc>", nil, { exit = true } },
+                    { "H",     "<C-v>h:VBox<CR>" },
+                    { "J",     "<C-v>j:VBox<CR>" },
+                    { "K",     "<C-v>k:VBox<CR>" },
+                    { "L",     "<C-v>l:VBox<CR>" },
+                    { "f",     ":VBox<CR>",      { mode = "v" } },
+                    { "<Esc>", nil,              { exit = true } },
                 },
             })
 
@@ -193,7 +224,7 @@ return {
                     color = "amaranth",
                     invoke_on_body = true,
                     hint = {
-                        border = "rounded",
+                        border = "solid",
                         position = "middle",
                     },
                 },
