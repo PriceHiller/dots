@@ -6,7 +6,7 @@ return {
             {
                 "<leader>dt",
                 function()
-                    require("dapui").toggle()
+                    require("dapui").toggle({ reset = true })
                 end,
                 desc = "DAP: Toggle UI",
             },
