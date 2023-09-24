@@ -328,6 +328,7 @@ return {
             })
 
             cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
+            cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 99 } }) })
 
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
