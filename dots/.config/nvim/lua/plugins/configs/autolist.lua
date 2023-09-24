@@ -30,6 +30,11 @@ return {
                     ["yaml.ansible"] = {
                         "[-]",
                     },
+                    org = {
+                        "-",
+                        list_patterns.digit,
+                        list_patterns.ascii
+                    },
                     markdown = {
                         list_patterns.unordered,
                         list_patterns.digit,
