@@ -38,7 +38,7 @@ return {
                 return newVirtText
             end
 
-            local ft_options = { norg = "", octo = "" }
+            local ft_options = { norg = "", octo = "", NeogitStatus = "" }
             return {
                 provider_selector = function(_, filetype, _)
                     return ft_options[filetype] or { "treesitter", "indent" }
