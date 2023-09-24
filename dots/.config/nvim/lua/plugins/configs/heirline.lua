@@ -156,6 +156,7 @@ return {
                         ["sshconfig"] = { icon = "󰴳", icon_color = colors.carpYellow },
                         ["sshdconfig"] = "sshconfig",
                         ["help"] = { icon = "󰋗", icon_color = colors.springGreen },
+                        ["octo"] = { icon = "", icon_color = colors.fujiWhite }
                     }
 
                     local buftype_overrides = {
