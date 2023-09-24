@@ -1,14 +1,18 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.notify("Installing Lazy plugin manager, please wait...")
-    vim.fn.system({
+    local status = vim.system({
         "git",
         "clone",
         "--filter=blob:none",
         "--single-branch",
         "https://github.com/folke/lazy.nvim.git",
         lazypath,
-    })
+    }):wait()
+
+    if status.code >  0 then
+        error("Failed to install lazy.nvim!\n====STDOUT====\n" .. status.stdout .. "\n====STDERR====\n" ..status.stderr)
+    end
 end
 vim.opt.runtimepath:prepend(lazypath)
 
@@ -21,7 +25,6 @@ lazy.setup("plugins.configs", {
     },
     colorscheme = function()
         vim.cmd.colorscheme("kanagawa")
-        vim.notify("WTF!")
     end,
     checker = {
         enabled = true,
