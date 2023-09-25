@@ -129,7 +129,7 @@ return {
                     { name = "spell",      keyword_length = 2 },
                 }
 
-                return vim.tbl_deep_extend("force", default_sources, sources)
+                return cmp.config.sources(vim.tbl_deep_extend("force", default_sources, sources))
             end
             cmp.setup({
                 formatting = {
@@ -305,7 +305,7 @@ return {
                         end
                     end, { "i", "s" }),
                 },
-                sources = cmp.config.sources(standard_sources()),
+                sources = standard_sources(),
                 sorting = {
                     comparators = {
                         compare.score,
