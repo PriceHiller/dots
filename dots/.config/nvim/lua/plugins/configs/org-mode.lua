@@ -22,7 +22,7 @@ return {
         },
         ft = { "org" },
         keys = {
-            { "<leader>o", desc = "> Org"}
+            { "<leader>o",  desc = "> Org" },
         },
         config = function()
             -- Load treesitter grammar for org
