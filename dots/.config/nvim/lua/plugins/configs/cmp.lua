@@ -129,7 +129,8 @@ return {
                     { name = "spell",      keyword_length = 2 },
                 }
 
-                return cmp.config.sources(vim.tbl_deep_extend("force", default_sources, sources))
+                vim.tbl_map(function(source) table.insert(default_sources, 1, source) end, sources)
+                return cmp.config.sources(default_sources)
             end
             cmp.setup({
                 formatting = {
