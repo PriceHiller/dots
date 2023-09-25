@@ -33,6 +33,9 @@ return {
                 org_agenda_files = "~/orgfiles/**/*",
                 org_default_notes_file = "~/orgfiles/refile.org",
             })
+            if vim.bo.filetype == "org" then
+                vim.cmd.edit()
+            end
         end,
     }
 }
