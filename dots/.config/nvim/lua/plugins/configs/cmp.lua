@@ -7,6 +7,7 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-emoji",
+            "petertriho/cmp-git",
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "hrsh7th/cmp-calc",
             "davidsierradz/cmp-conventionalcommits",
@@ -323,7 +324,14 @@ return {
             -- Git Commit Completions
             cmp.setup.filetype("gitcommit", {
                 sources = standard_sources({
-                    { name = "conventionalcommits", priority = 99 },
+                    { name = "conventionalcommits" },
+                    { name = "git" }
+                }),
+            })
+
+            cmp.setup.filetype("octo", {
+                sources = standard_sources({
+                    { name = "git" }
                 }),
             })
 
