@@ -30,8 +30,9 @@ return {
 
             -- Setup orgmode
             require("orgmode").setup({
-                org_agenda_files = "~/orgfiles/**/*",
-                org_default_notes_file = "~/orgfiles/refile.org",
+                org_agenda_files = "~/Notes/**/*",
+                org_default_notes_file = "~/Notes/refile.org",
+                org_startup_folded = "inherit"
             })
             if vim.bo.filetype == "org" then
                 vim.cmd.edit()
