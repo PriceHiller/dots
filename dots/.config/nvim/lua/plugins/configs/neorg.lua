@@ -3,7 +3,7 @@ return {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers", -- This is the important bit!
         cmd = { "Neorg" },
-        event = { "WinEnter" },
+        ft = { "norg" },
         dependencies = {
             { "nvim-treesitter/nvim-treesitter" },
         },
@@ -75,6 +75,9 @@ return {
                     ["core.ui.calendar"] = {},
                 },
             })
+            if vim.bo.filetype == "norg" then
+                vim.cmd.edit()
+            end
         end,
     },
 }
