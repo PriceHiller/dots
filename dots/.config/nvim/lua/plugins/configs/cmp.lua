@@ -325,14 +325,14 @@ return {
             -- Git Commit Completions
             cmp.setup.filetype("gitcommit", {
                 sources = standard_sources({
-                    { name = "conventionalcommits" },
-                    { name = "git" }
+                    { name = "conventionalcommits", priotity = 99 },
+                    { name = "git", priority = 98 }
                 }),
             })
 
             cmp.setup.filetype("octo", {
                 sources = standard_sources({
-                    { name = "git" }
+                    { name = "git", priority = 98 }
                 }),
             })
 
