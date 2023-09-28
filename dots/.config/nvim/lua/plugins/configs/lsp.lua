@@ -359,24 +359,6 @@ return {
                 on_attach = on_attach,
             })
 
-            -- lspconfig.omnisharp.setup({
-            --     cmd = {
-            --         vim.fn.stdpath("data") .. "/mason/bin/omnisharp",
-            --         "--languageserver",
-            --         "--hostPID",
-            --         tostring(vim.fn.getpid()),
-            --     },
-            --
-            --     handlers = {
-            --         ["textDocument/definition"] = require("omnisharp_extended").handler,
-            --     },
-            --     enable_import_completion = true,
-            --     enable_roslyn_analyzers = true,
-            --     organize_imports_on_format = true,
-            --     capabilities = lsp_capabilities,
-            --     on_attach = on_attach,
-            -- })
-
             lspconfig.jsonls.setup({
                 settings = {
                     schemas = require("schemastore").json.schemas(),
@@ -384,6 +366,16 @@ return {
                 },
                 capabilities = lsp_capabilities,
                 on_attach = on_attach,
+            })
+
+            lspconfig.docker_compose_language_service.setup({
+                settings = {
+                    telemetry = {
+                        enableTelemetry = false
+                    }
+                },
+                capabilities = lsp_capabilities,
+                on_attach = on_attach
             })
 
             lspconfig.powershell_es.setup({
