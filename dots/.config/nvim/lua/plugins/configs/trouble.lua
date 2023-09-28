@@ -46,17 +46,12 @@ return {
                 end
             })
             require("trouble").setup({
+                auto_open = true,
                 auto_close = true,
                 position = "right",
                 action_keys = {
                     cancel = "q"
                 }
-            })
-            vim.api.nvim_create_autocmd("BufLeave", {
-                pattern = "*Trouble*",
-                callback = function()
-                    vim.api.nvim_win_close(0, true)
-                end,
             })
         end,
         cmd = {
