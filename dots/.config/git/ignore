@@ -2,3 +2,7 @@
 
 # Ignore project specific configs for neovim
 .nvim.lua
+
+# Ignore all files and folders ending with `.ignore`
+.ignore/
+*.ignore
