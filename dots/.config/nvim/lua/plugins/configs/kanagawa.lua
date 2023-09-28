@@ -185,7 +185,7 @@ return {
                         RainbowDelimiterYellow = { fg = colors.autumnYellow },
                         RainbowDelimiterBlue = { fg = colors.crystalBlue },
                         RainbowDelimiterOrange = { fg = colors.surimiOrange },
-                        RainbowDelimiterGreen = { fg = colors.springGreen },
+                        RainbowDelimiterGreen = { fg = colors.waveAqua1 },
                         RainbowDelimiterViolet = { fg = colors.oniViolet },
                         RainbowDelimiterCyan = { fg = colors.lightBlue },
                         NotifyERRORBorder = { link = "NvimNotifyError" },
