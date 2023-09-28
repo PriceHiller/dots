@@ -151,13 +151,20 @@ return {
                             conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
                             spell = { symbol = "󰏪 ", name = "Spell", hl_group = "Spell" },
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
+                            docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker"}
                         }
 
                         local extra_kind_icons = {
                             TypeParameter = "",
                         }
 
-                        local selection = selections[entry.source.name]
+                        local selection
+                        if entry.source.name == "nvim_lsp" then
+                            -- vim.notify(vim.inspect(entry.source.source))
+                            selection = selections[entry.source.source.client.name]
+                        else
+                            selection = selections[entry.source.name]
+                        end
                         if not selection then
                             local kind = require("lspkind").cmp_format({
                                 mode = "symbol_text",
@@ -326,7 +333,7 @@ return {
             cmp.setup.filetype("gitcommit", {
                 sources = standard_sources({
                     { name = "conventionalcommits", priotity = 99 },
-                    { name = "git", priority = 98 }
+                    { name = "git",                 priority = 98 }
                 }),
             })
 
