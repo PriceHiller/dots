@@ -77,6 +77,7 @@ return {
                         i = {
                             ["<C-d>"] = actions.cycle_history_next,
                             ["<C-s>"] = actions.cycle_history_prev,
+                            ["<C-q>"] = actions.smart_send_to_qflist,
                         },
                     },
                     prompt_prefix = "   ",
