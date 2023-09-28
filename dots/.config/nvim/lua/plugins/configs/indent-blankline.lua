@@ -5,41 +5,59 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
-        opts = function()
-            local g = vim.g
-
-            g.indent_blankline_char = "▏"
-            g.indent_blankline_context_char = "▏"
-
-            -- Disable indent-blankline on these pages.
-            g.indent_blankline_filetype_exclude = {
-                "help",
-                "terminal",
-                "alpha",
-                "packer",
-                "lsp-installer",
-                "lspinfo",
-                "mason.nvim",
-                "mason",
-                "man",
-                "OverseerForm",
-                "noice",
-                "lazy",
-                "NeogitStatus",
-                "NeogitHelpPopup",
-                "NeogitPopup",
-                "NeogitLogView",
-                "norg"
-            }
-
-            g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-            g.indent_blankline_show_trailing_blankline_indent = false
-            g.indent_blankline_show_first_indent_level = true
-
-            return {
-                show_current_context = true,
-                show_current_context_start = true,
-            }
+        config = function()
+            require("ibl").setup()
+            require("ibl").setup({
+                exclude = {
+                    buftypes = {
+                        "terminal",
+                        "nofile"
+                    },
+                    filetypes = {
+                        "help",
+                        "terminal",
+                        "alpha",
+                        "packer",
+                        "lsp-installer",
+                        "lspinfo",
+                        "mason.nvim",
+                        "mason",
+                        "man",
+                        "OverseerForm",
+                        "noice",
+                        "lazy",
+                        "NeogitStatus",
+                        "NeogitHelpPopup",
+                        "NeogitPopup",
+                        "NeogitLogView",
+                        "norg"
+                    }
+                },
+                indent = {
+                    char = "▏",
+                    smart_indent_cap = true
+                },
+                scope = {
+                    enabled = true,
+                    include = {
+                        node_type = {
+                            lua = {
+                                "return_statement",
+                                "table_constructor"
+                            }
+                        }
+                    },
+                    highlight = {
+                        "RainbowDelimiterRed",
+                        "RainbowDelimiterYellow",
+                        "RainbowDelimiterBlue",
+                        "RainbowDelimiterOrange",
+                        "RainbowDelimiterGreen",
+                        "RainbowDelimiterViolet",
+                        "RainbowDelimiterCyan",
+                    }
+                }
+            })
         end,
     },
 }
