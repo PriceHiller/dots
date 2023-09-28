@@ -40,9 +40,17 @@ return {
         },
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
+            vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+                callback = function ()
+                    vim.cmd("Trouble quickfix")
+                end
+            })
             require("trouble").setup({
                 auto_close = true,
                 position = "right",
+                action_keys = {
+                    cancel = "q"
+                }
             })
             vim.api.nvim_create_autocmd("BufLeave", {
                 pattern = "*Trouble*",
