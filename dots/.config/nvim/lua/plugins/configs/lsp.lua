@@ -331,35 +331,9 @@ return {
             })
 
             -- NOTE: PYTHON LSP
-            lspconfig.pylsp.setup({
-                filetypes = { "python" },
-                settings = {
-                    formatCommand = { "black" },
-                    pylsp = {
-                        plugins = {
-                            jedi_completion = {
-                                include_params = true,
-                                fuzzy = true,
-                                eager = true,
-                            },
-                            jedi_signature_help = { enabled = true },
-                            pyflakes = { enabled = true },
-                            pycodestyle = {
-                                enabled = true,
-                                ignore = { "E501", "E231", "W503", "E731" },
-                                maxLineLength = 120,
-                            },
-                            mypy = { enabled = true },
-                            yapf = { enabled = true },
-                            rope_completion = {
-                                enabled = true,
-                                eager = true,
-                            },
-                        },
-                    },
-                },
+            lspconfig.pyright.setup({
                 capabilities = lsp_capabilities,
-                on_attach = on_attach,
+                on_attach = on_attach
             })
 
             lspconfig.yamlls.setup({
