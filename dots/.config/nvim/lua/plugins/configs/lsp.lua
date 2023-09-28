@@ -332,6 +332,12 @@ return {
 
             -- NOTE: PYTHON LSP
             lspconfig.pyright.setup({
+                python = {
+                    analysis = {
+                        diagnosticMode = "workspace",
+                        typeCheckingMode = "strict"
+                    }
+                },
                 capabilities = lsp_capabilities,
                 on_attach = on_attach
             })
