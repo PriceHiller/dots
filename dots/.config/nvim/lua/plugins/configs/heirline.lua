@@ -156,7 +156,7 @@ return {
                         ["sshconfig"] = { icon = "󰴳", icon_color = colors.carpYellow },
                         ["sshdconfig"] = "sshconfig",
                         ["help"] = { icon = "󰋗", icon_color = colors.springGreen },
-                        ["octo"] = { icon = "", icon_color = colors.fujiWhite }
+                        ["octo"] = { icon = "", icon_color = colors.fujiWhite },
                     }
 
                     local buftype_overrides = {
@@ -541,8 +541,8 @@ return {
                     {
                         FileNameBlock,
                         static = {
-                            bg_color_right = nil
-                        }
+                            bg_color_right = nil,
+                        },
                     },
                     margin(1),
                     {
@@ -776,7 +776,7 @@ return {
                     VimMode,
                     {
                         condition = function()
-                            return vim.v.hlsearch ~= 0
+                            return #vim.fn.searchcount() ~= 0
                         end,
                         {
                             provider = " " .. seps.full.left,
@@ -809,7 +809,15 @@ return {
                             end,
                             provider = function(self)
                                 local search = self.search
-                                return string.format(" %d/%d", search.current, math.min(search.total, search.maxcount))
+                                if search == nil then
+                                    return " ?/?"
+                                else
+                                    return string.format(
+                                        " %d/%d",
+                                        search.current,
+                                        math.min(search.total, search.maxcount)
+                                    )
+                                end
                             end,
                             hl = {
                                 fg = colors.fujiWhite,
@@ -890,14 +898,14 @@ return {
                     {
                         {
                             provider = seps.full.left,
-                            hl = { fg = colors.sumiInk4, bg = utils.get_highlight("StatusLine").bg }
+                            hl = { fg = colors.sumiInk4, bg = utils.get_highlight("StatusLine").bg },
                         },
                         {
                             FileNameBlock,
                             static = {
-                                bg_color_right = utils.get_highlight("StatusLine").bg
-                            }
-                        }
+                                bg_color_right = utils.get_highlight("StatusLine").bg,
+                            },
+                        },
                     },
                     margin(1),
                     {
