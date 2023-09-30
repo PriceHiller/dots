@@ -46,7 +46,7 @@ return {
                 end
             })
             require("trouble").setup({
-                auto_open = true,
+                auto_open = false,
                 auto_close = true,
                 position = "right",
                 action_keys = {
