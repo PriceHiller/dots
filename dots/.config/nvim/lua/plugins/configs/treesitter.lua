@@ -147,6 +147,7 @@ return {
                     disable = function(_, buf)
                         local disabled_filetypes = {
                             "tex",
+                            "log"
                         }
 
                         for _, ft in ipairs(disabled_filetypes) do
