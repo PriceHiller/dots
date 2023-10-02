@@ -21,7 +21,6 @@
 !fontconfig
 !stylua.toml
 !Trolltech.conf
-!dconf
 !systemd
 !mimeapps.list
 !emacs
