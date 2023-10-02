@@ -33,5 +33,5 @@ return {
         },
         { family = "Nerd Font Symbols" },
     }),
-    font_size = 12,
+    font_size = 13,
 }
