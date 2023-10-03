@@ -48,7 +48,7 @@ return {
                 "rcarriga/nvim-notify",
                 keys = {
                     {
-                        "<esc>",
+                        "<leader>nd",
                         function()
                             vim.cmd.noh()
                             require("notify").dismiss({
