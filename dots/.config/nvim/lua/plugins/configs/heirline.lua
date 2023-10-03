@@ -776,7 +776,7 @@ return {
                     VimMode,
                     {
                         condition = function()
-                            return #vim.fn.searchcount() ~= 0
+                            return vim.v.hlsearch > 0
                         end,
                         {
                             provider = " " .. seps.full.left,
