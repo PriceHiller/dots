@@ -23,9 +23,6 @@ lazy.setup("plugins.configs", {
         version = false,
         lazy = false,
     },
-    colorscheme = function()
-        vim.cmd.colorscheme("kanagawa")
-    end,
     checker = {
         enabled = true,
         concurrency = 20,
