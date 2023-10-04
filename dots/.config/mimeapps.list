@@ -23,6 +23,7 @@ application/pdf=org.pwmt.zathura.desktop
 image/gif=mpv.desktop
 image/png=feh.desktop
 image=feh.desktop
+image/vnd.djvu=org.pwmt.zathura.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefoxdeveloperedition.desktop;
