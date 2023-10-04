@@ -113,6 +113,7 @@ M.setup = function()
                 ["pdf"] = function(buf, fpath, fname)
                     open_mime(buf, fpath, fname)
                 end,
+                ["djvu"] = "pdf",
                 ["png"] = function(buf, fpath, fname)
                     open_mime(buf, fpath, fname)
                 end,
