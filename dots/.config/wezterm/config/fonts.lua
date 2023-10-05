@@ -6,7 +6,6 @@ return {
     font = wezterm.font_with_fallback({
         {
             family = "FiraCode Nerd Font",
-            weight = "Medium",
             harfbuzz_features = {
                 "zero",
                 "cv02",
@@ -20,7 +19,6 @@ return {
         },
         {
             family = "JetBrains Mono",
-            weight = "Medium",
         },
         {
             family = "MesloLGS Nerd Font",
