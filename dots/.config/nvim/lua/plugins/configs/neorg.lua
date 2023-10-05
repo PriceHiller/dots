@@ -8,9 +8,9 @@ return {
             { "nvim-treesitter/nvim-treesitter" },
         },
         keys = {
-            { "<leader>N", desc = "> Neorg" },
-            { "<leader>Nj", ":Neorg journal custom<CR>", desc = "Neorg: Journal" },
-            { "<leader>Nt", ":Neorg toc<CR>", desc = "Neorg: Table of Contents" },
+            { "<leader>o",  desc = "> Neorg" },
+            { "<leader>oj", ":Neorg journal custom<CR>", desc = "Neorg: Journal" },
+            { "<leader>ot", ":Neorg toc<CR>",            desc = "Neorg: Table of Contents" },
         },
         config = function()
             require("neorg").setup({
