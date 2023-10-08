@@ -38,11 +38,21 @@ return {
             { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble: Quickfix" },
             { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Trouble: Todo Items" },
         },
+        event = { "QuickFixCmdPre" },
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             vim.api.nvim_create_autocmd("QuickFixCmdPost", {
                 callback = function ()
-                    vim.cmd("Trouble quickfix")
+                    vim.cmd.TroubleRefresh()
+                    vim.cmd.Trouble("quickfix")
+                end
+            })
+            -- HACK: Unfortuantely Neovim & Vim don't expose some C level functions to know when content in the
+            -- quickfix has been updated 😢. A serious issue with this is that it just tries to refresh after 200ms,
+            -- which may or may not work depending on how long the quickfix filtering took :/
+            vim.api.nvim_create_autocmd({"CmdlineLeave", "CmdwinLeave"}, {
+                callback = function ()
+                    vim.defer_fn(vim.cmd.TroubleRefresh, 200)
                 end
             })
             require("trouble").setup({
