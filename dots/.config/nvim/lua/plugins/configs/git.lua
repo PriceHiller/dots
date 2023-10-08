@@ -14,10 +14,16 @@ return {
                 end,
             })
 
+            ---@type NeogitConfig
             return {
                 disable_insert_on_commit = "auto",
                 disable_commit_confirmation = true,
                 disable_builtin_notifications = true,
+                auto_refresh = true,
+                filewatcher = {
+                    enabled = true,
+                    interval = 1000
+                },
                 integrations = {
                     diffview = true,
                     telescope = true,
