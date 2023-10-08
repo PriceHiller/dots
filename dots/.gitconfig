@@ -10,6 +10,7 @@
 	pager = delta
 	ignorecase = false
 	excludesfile = ~/.config/git/ignore
+	quotePath = false
 
 [interactive]
 	diffFilter = delta --color-only --features=interactive
