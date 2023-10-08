@@ -48,3 +48,6 @@ lazy.setup("plugins.configs", {
         },
     },
 })
+
+require("plugins.autocmds")
+require("plugins.postload")
