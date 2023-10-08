@@ -33,7 +33,7 @@ return {
             { "<leader>tc", ":Telescope commands<CR>", desc = "Telescope: Commands" },
             { "<leader>tu", ":Telescope undo<CR>", desc = "Telescope: Undo History" },
             { "<leader>tm", ":Telescope man_pages<CR>", desc = "Telescope: Man Pages" },
-            { "<leader>lq", ":Telescope diagnostics bufnr=0<CR>", desc = "LSP: Telescope Diagnostics" },
+            { "<leader>tq", ":Telescope quickfixhistry", desc = "LSP: Telescope Quickfix History" },
             { "<leader>nv", ":Telescope notify<CR>", desc = "Notifications: Search" },
         },
         dependencies = {
