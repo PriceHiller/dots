@@ -108,6 +108,10 @@ M.setup = function()
 
     vim.keymap.set("n", "<C-j>", indent_traverse(1, true), { silent = true, desc = "Move: To next equal indent" })
     vim.keymap.set("n", "<C-k>", indent_traverse(-1, true), { silent = true, desc = "Move: To previous equal indent" })
+
+    -- Binding to go to older and newer quickfix list
+    vim.keymap.set("n", "]q", "<cmd>cnewer<CR>", { silent = true, desc = "Quickfix: Newer" })
+    vim.keymap.set("n", "]q", "<cmd>colder<CR>", { silent = true, desc = "Quickfix: Older" })
 end
 
 return M
