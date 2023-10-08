@@ -1022,6 +1022,20 @@ return {
                 },
                 opts = {
                     disable_winbar_cb = function(args)
+                        if args.event == "FileType" then
+                            local ft = args.match
+                            local matches = vim.tbl_filter(
+                                function(excluded_ft)
+                                    return ft:lower():find(excluded_ft) ~= nil
+                                end,
+                                {
+                                    ".*neogit.*"
+                                }
+                            )
+                            if #matches > 0 then
+                                return false
+                            end
+                        end
                         return conditions.buffer_matches({
                             buftype = { "nofile", "prompt", "quickfix", "terminal" },
                             filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
