@@ -434,8 +434,6 @@ return {
             require("typescript-tools").setup({
                 on_attach = on_attach,
                 settings = {
-                    tsserver_path = vim.fn.stdpath("data")
-                        .. "/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
                     expose_as_code_action = {
                         "fix_all",
                         "add_missing_imports",
