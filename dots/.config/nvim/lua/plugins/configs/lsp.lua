@@ -491,6 +491,7 @@ return {
                 "rnix",
                 "marksman",
                 "asm_lsp",
+                "denols"
             }) do
                 lspconfig[server].setup(opts)
             end
