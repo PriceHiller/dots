@@ -42,7 +42,7 @@ return {
                 "LightBulbSign",
                 { text = text_icon, numhl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", priority = 9 }
             )
-            vim.api.nvim_create_autocmd("CursorHold,CursorHoldI", {
+            vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
                 callback = nvim_lightbulb.update_lightbulb,
             })
             return {
