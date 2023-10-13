@@ -35,9 +35,6 @@ return {
     {
         "kosayoda/nvim-lightbulb",
         event = "LspAttach",
-        dependencies = {
-            "antoinemadec/FixCursorHold.nvim",
-        },
         opts = function()
             local text_icon = ""
             local nvim_lightbulb = require("nvim-lightbulb")
