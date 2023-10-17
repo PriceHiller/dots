@@ -96,7 +96,7 @@ M.setup = function()
     -- Binding to insert literal tab
     vim.keymap.set("i", "<S-Tab>", function()
         if vim.opt_local.expandtab:get() then
-            vim.api.nvim_feedkeys("\t", "m", false)
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-V><TAB>", true, false, true), "m", true)
         else
             local spaces = string.rep(" ", vim.opt_local.shiftwidth:get() or 4)
             vim.api.nvim_feedkeys(spaces, "m", false)
