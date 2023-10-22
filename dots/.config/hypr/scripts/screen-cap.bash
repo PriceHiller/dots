@@ -11,7 +11,7 @@
 mk-video() {
 	local program_name="Screen Capture"
 	local pid_file="/tmp/mk-gif-pid"
-	local output_type="${1:-MP4}"
+	local output_type="${1:-mp4}"
 
 	if [[ -f "${pid_file}" ]]; then
 		notify-send "Saving ${program_name}" "This May Take a Minute" -a "${program_name}"
@@ -30,21 +30,13 @@ mk-video() {
 			tmp_dir="$(mktemp -d)"
 			cd "${tmp_dir}"
 			input_tmpfile="${tmp_dir}/$(mktemp wf-recorder.XXXXXXXXXXX).mp4"
-			local card
-			card="$(find /dev/dri -maxdepth 1 -name "card*" -print -quit)"
-			if [[ -n "${card}" ]]; then
-				wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -d "${card}" -- &
-			else
-				notify-send "Card Detection" "Did not detect a card to use, encoding will be slower!" -a "${program_name}" -u critical
-				wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -c h264_vaapi -- &
-			fi
+			wf-recorder -g "$(slurp)" -f "${input_tmpfile}" -- &
 			printf "%s" $! >"${pid_file}"
 			wait
 			if [[ "${output_type}" == "gif" ]]; then
 				local gifski_tmpoutput
-				pwd
 				gifski_tmpoutput="${tmp_dir}/$(mktemp gifski.XXXXXXXXXXX).gif"
-				gifski "${input_tmpfile}" --output "${gifski_tmpoutput}"
+				gifski --output "${gifski_tmpoutput}" "${input_tmpfile}"
 				wl-copy --type image/gif <"${gifski_tmpoutput}"
 			else
 				wl-copy --type video/mp4 <"${input_tmpfile}"
