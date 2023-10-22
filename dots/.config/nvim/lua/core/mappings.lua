@@ -94,7 +94,7 @@ M.setup = function()
     vim.keymap.set("n", "<A-s>", ":bnext<CR>", { silent = true, desc = "Go to Next Buffer" })
 
     -- Binding to insert literal tab
-    vim.keymap.set("i", "<S-Tab>", function()
+    vim.keymap.set("i", "<C-Tab>", function()
         if vim.opt_local.expandtab:get() then
             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-V><TAB>", true, false, true), "m", true)
         else
