@@ -1,6 +1,9 @@
 return {
     {
         "chrisgrieser/nvim-various-textobjs",
-        opts = { useDefaultKeymaps = true }
+        opts = {
+            useDefaultKeymaps = true,
+            disabledKeymaps = { "r", "R" }
+        }
     },
 }
