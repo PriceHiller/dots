@@ -73,6 +73,8 @@ return {
                     },
                     ["core.ui"] = {},
                     ["core.ui.calendar"] = {},
+                    ["core.itero"] = {},
+                    ["core.promo"] = {}
                 },
             })
             if vim.bo.filetype == "norg" then
