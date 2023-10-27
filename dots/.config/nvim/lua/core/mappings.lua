@@ -112,6 +112,9 @@ M.setup = function()
     -- Binding to go to older and newer quickfix list
     vim.keymap.set("n", "]q", "<cmd>cnewer<CR>", { silent = true, desc = "Quickfix: Newer" })
     vim.keymap.set("n", "]q", "<cmd>colder<CR>", { silent = true, desc = "Quickfix: Older" })
+
+    -- Binding to allow shift tab dedent
+    vim.keymap.set("i", "<S-Tab>", "<C-d>", { silent = true, desc = "Insert: Dedent" })
 end
 
 return M
