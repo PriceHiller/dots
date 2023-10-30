@@ -71,10 +71,6 @@ M.setup = function()
         end
         vim.notify("Intercept file open set to " .. intercept_state, vim.log.levels.INFO, {
             title = "Intercept File Open",
-            ---@param win integer The window handle
-            on_open = function(win)
-                vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
-            end,
         })
     end, { desc = "Toggles intercepting BufNew to open files in custom programs" })
 
@@ -100,10 +96,6 @@ M.setup = function()
             local function open_mime(buf, fpath, fname)
                 vim.notify(string.format("Opening `%s` in external program", fname), vim.log.levels.INFO, {
                     title = "Open File in External Program",
-                    ---@param win integer The window handle
-                    on_open = function(win)
-                        vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
-                    end,
                 })
                 vim.system({ "xdg-open", fpath }, { detach = true })
                 vim.api.nvim_buf_delete(buf, { force = true })
