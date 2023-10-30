@@ -169,7 +169,7 @@ return {
                 },
                 indent = {
                     enable = true,
-                    disable = { "lua" },
+                    disable = { "lua", "org" },
                 },
                 playground = {
                     enable = true,
