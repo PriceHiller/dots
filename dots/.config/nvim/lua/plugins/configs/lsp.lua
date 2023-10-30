@@ -472,6 +472,7 @@ return {
 
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
+                "nixd",
                 "clangd",
                 "cmake",
                 "bashls",
