@@ -156,7 +156,7 @@ return {
                         NoiceCmdlinePopupdBorderIncRename = { fg = colors.peachRed },
                         NoiceMini = { bg = colors.sumiInk4 },
                         NoiceLspProgressClient = { fg = colors.oniViolet, bold = true },
-                        Folded = { bg = colors.waveBlue1 },
+                        Folded = { bg = "NONE" },
                         UfoFoldedBg = { bg = colors.waveBlue1 },
                         TSRainbowRed = { fg = colors.peachRed },
                         TSRainbowYellow = { fg = colors.carpYellow },
