@@ -123,7 +123,6 @@ return {
                     { name = "async_path", priority = 6 },
                     { name = "zsh",        priority = 5 },
                     { name = "emoji",      keyword_length = 2 },
-                    { name = "neorg" },
                     { name = "calc" },
                     { name = "npm",        keyword_length = 2 },
                     { name = "spell",      keyword_length = 2 },
@@ -141,7 +140,7 @@ return {
                         local selections = {
                             fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
                             calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
-                            neorg = { symbol = "󱍤 ", name = "Neorg", hl_group = "Neorg" },
+                            orgmode = { symbol = " ", name = "Org", hl_group = "Orgmode" },
                             emoji = { symbol = "󰞅 ", name = "Emoji", hl_group = "Emoji" },
                             zsh = { symbol = " ", name = "Zsh", hl_group = "Zsh" },
                             crates = { symbol = " ", name = "Crates", hl_group = "Crates" },
