@@ -31,6 +31,17 @@ return {
                 org_startup_folded = "inherit",
                 calendar_week_start_day = 0,
                 org_agenda_start_on_weekday = 0,
+                org_capture_templates = {
+                    t = {
+                        description = "Todo",
+                        template = "* TODO %?\n %u",
+                    },
+                    j = {
+                        description = "Journal",
+                        template = "\n** %U           :journal:\n\n%?",
+                        target = "~/Notes/journal/%<%Y-%m-%d>.org"
+                    },
+                },
                 emacs_config = {
                     config_path = "$HOME/.config/emacs/init.el"
                 }
