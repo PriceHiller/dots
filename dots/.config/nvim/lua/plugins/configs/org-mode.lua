@@ -27,7 +27,7 @@ return {
             -- Setup orgmode
             require("orgmode").setup({
                 org_agenda_files = "~/Notes/**/*",
-                org_default_notes_file = "~/Notes/refile.org",
+                org_default_notes_file = "~/Notes/notes.org",
                 org_startup_folded = "inherit",
                 calendar_week_start_day = 0,
                 org_agenda_start_on_weekday = 0,
