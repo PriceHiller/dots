@@ -204,6 +204,9 @@ return {
                         NotifyTRACEBorder = { link = "NvimNotifyTrace" },
                         NotifyTRACEIcon = { link = "NvimNotifyTrace" },
                         NotifyTRACETitle = { link = "NvimNotifyTrace" },
+                        org_table_sep = { fg = colors.springBlue, bg = colors.winterBlue },
+                        org_table_header = { fg = colors.crystalBlue, bg = colors.winterBlue },
+                        org_table = { bg = colors.winterBlue }
                     }
 
                     return overrides
