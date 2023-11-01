@@ -111,7 +111,7 @@ return {
                         CmpCustomSelectionBuffer = { fg = colors.fujiWhite, bg = colors.dragonBlue },
                         CmpCustomSelectionPath = { fg = colors.fujiWhite, bg = colors.autumnYellow },
                         CmpCustomSelectionCalculator = { fg = colors.fujiWhite, bg = colors.waveBlue2 },
-                        CmpCustomSelectionNeorg = { fg = colors.fujiWhite, bg = colors.waveAqua1 },
+                        CmpCustomSelectionOrgmode = { fg = colors.fujiWhite, bg = colors.waveAqua1 },
                         CmpCustomSelectionEmoji = { fg = colors.fujiWhite, bg = colors.carpYellow },
                         CmpCustomSelectionZsh = { fg = colors.fujiWhite, bg = colors.springGreen },
                         CmpCustomSelectionCrates = { fg = colors.fujiWhite, bg = colors.roninYellow },
