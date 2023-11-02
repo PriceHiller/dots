@@ -28,13 +28,6 @@ return {
                     diffview = true,
                     telescope = true,
                 },
-                mappings = {
-                    status = {
-                        ["l"] = false,
-                        ["f"] = false,
-                        ["L"] = "LogPopup",
-                    },
-                },
             }
         end,
         dependencies = {
