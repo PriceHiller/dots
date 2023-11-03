@@ -131,7 +131,8 @@ return {
 
             require("nvim-treesitter.configs").setup({
                 parser_install_dir = treesitter_dir,
-                ensure_installed = "all",
+                auto_install = true,
+                ignore_install = { "comment" },
                 incremental_selection = {
                     enable = true,
                     keymaps = {
