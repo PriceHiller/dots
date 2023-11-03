@@ -137,7 +137,10 @@ return {
                     ---@param entry cmp.Entry
                     ---@param vim_item vim.CompletedItem
                     format = function(entry, vim_item)
+
+                        -- vim.notify(vim.inspect(entry))
                         local selections = {
+                            ["vim-dadbod-completion"] = { symbol = "󰆼 ", name = "DB", hl_group = "DadbodCompletion" },
                             fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
                             calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
                             orgmode = { symbol = " ", name = "Org", hl_group = "Orgmode" },
@@ -342,6 +345,9 @@ return {
                 }),
             })
 
+            cmp.setup.filetype("sql", { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+            cmp.setup.filetype("mysql", { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+            cmp.setup.filetype("plsql", { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
             cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
             cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 99 } }) })
 
