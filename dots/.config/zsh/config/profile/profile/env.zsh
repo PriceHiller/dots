@@ -173,3 +173,6 @@ export POWERSHELL_TELEMETRY_OPTOUT=true
 ### NPM ###
 export NPM_CONFIG_PREFIX="${HOME}/.npm-global"
 export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"
+
+### BOB, Neovim Version Manager ###
+export PATH="${PATH}:${XDG_DATA_HOME}/bob/nvim-bin"
