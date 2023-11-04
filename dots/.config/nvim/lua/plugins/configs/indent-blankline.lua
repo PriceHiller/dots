@@ -30,7 +30,8 @@ return {
                         "NeogitHelpPopup",
                         "NeogitPopup",
                         "NeogitLogView",
-                        "norg"
+                        "norg",
+                        "org"
                     }
                 },
                 indent = {
