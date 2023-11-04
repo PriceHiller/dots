@@ -33,10 +33,6 @@ return {
                 ft = "toml",
                 config = true,
             },
-            {
-                "tzachar/cmp-fuzzy-buffer",
-                dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
-            },
         },
         config = function()
             local cmp = require("cmp")
@@ -113,7 +109,6 @@ return {
                 local default_sources = {
                     { name = "nvim_lsp",     priority = 11 },
                     { name = "luasnip",      priority = 10 }, -- For luasnip users.
-                    { name = "fuzzy_buffer", priority = 9, keyword_length = 3, max_item_count = 10 },
                     {
                         name = "rg",
                         priority = 7,
@@ -141,7 +136,6 @@ return {
                         -- vim.notify(vim.inspect(entry))
                         local selections = {
                             ["vim-dadbod-completion"] = { symbol = "󰆼 ", name = "DB", hl_group = "DadbodCompletion" },
-                            fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
                             calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
                             orgmode = { symbol = " ", name = "Org", hl_group = "Orgmode" },
                             emoji = { symbol = "󰞅 ", name = "Emoji", hl_group = "Emoji" },
@@ -322,7 +316,6 @@ return {
                         compare.offset,
                         compare.recently_used,
                         compare.exact,
-                        require("cmp_fuzzy_buffer.compare"),
                         compare.kind,
                         compare.sort_text,
                         compare.length,
@@ -354,18 +347,18 @@ return {
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({ { name = "fuzzy_buffer" } }),
+                sources = cmp.config.sources({ { name = "rg" } }),
             })
 
             cmp.setup.cmdline("?", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({ { name = "fuzzy_buffer" } }),
+                sources = cmp.config.sources({ { name = "rg" } }),
             })
 
             cmp.setup.cmdline("@", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
-                    { name = "fuzzy_buffer" },
+                    { name = "rg" },
                     { name = "cmdline_history", max_item_count = 3 },
                 }),
             })
@@ -381,7 +374,7 @@ return {
                         },
                     },
                     { name = "cmdline_history", max_item_count = 3 },
-                    { name = "fuzzy_buffer" },
+                    { name = "rg" },
                 }),
             })
         end,
