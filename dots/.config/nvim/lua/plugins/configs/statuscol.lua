@@ -1,26 +1,5 @@
 return {
     {
-        "gen740/SmoothCursor.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        opts = {
-            priority = 8,
-            fancy = {
-                enable = true,
-                head = { cursor = "⯈", texthl = "SmoothCursorCursor", linehl = nil },
-                body = {
-                    { cursor = "", texthl = "SmoothCursorTrailBig1" },
-                    { cursor = "", texthl = "SmoothCursorTrailBig2" },
-                    { cursor = "󰝥", texthl = "SmoothCursorTrailMedium" },
-                    { cursor = "󰝥", texthl = "SmoothCursorTrailMedium" },
-                    { cursor = "•", texthl = "SmoothCursorTrailSmall" },
-                    { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
-                    { cursor = ".", texthl = "SmoothCursorTrailXSmall" },
-                },
-            },
-            disabled_filetypes = { "NeogitNotification" },
-        },
-    },
-    {
         "luukvbaal/statuscol.nvim",
         opts = function()
             local builtin = require("statuscol.builtin")
