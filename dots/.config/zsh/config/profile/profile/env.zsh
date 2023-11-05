@@ -117,6 +117,9 @@ if [[ -r "${usr/libexec/java_home}" ]]; then
 	export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
+### BOB, Neovim Version Manager ###
+export PATH="${PATH}:${XDG_DATA_HOME}/bob/nvim-bin"
+
 ### Editor ###
 if command -v nvim >/dev/null 2>&1; then
 	export EDITOR=nvim
@@ -174,5 +177,3 @@ export POWERSHELL_TELEMETRY_OPTOUT=true
 export NPM_CONFIG_PREFIX="${HOME}/.npm-global"
 export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"
 
-### BOB, Neovim Version Manager ###
-export PATH="${PATH}:${XDG_DATA_HOME}/bob/nvim-bin"
