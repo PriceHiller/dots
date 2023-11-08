@@ -68,6 +68,7 @@ return {
                         "--line-number",
                         "--column",
                         "--smart-case",
+                        "--hidden"
                     },
                     history = {
                         path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
