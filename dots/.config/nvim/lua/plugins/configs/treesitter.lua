@@ -127,10 +127,6 @@ return {
             "RRethy/nvim-treesitter-endwise",
         },
         config = function()
-            local treesitter_dir = vim.fn.stdpath("data") .. "/treesitter"
-
-            vim.opt.runtimepath:append(treesitter_dir)
-
             require("nvim-treesitter.configs").setup({
                 parser_install_dir = treesitter_dir,
                 auto_install = true,
