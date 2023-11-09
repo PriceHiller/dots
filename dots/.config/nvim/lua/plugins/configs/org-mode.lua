@@ -8,6 +8,7 @@ return {
                 opts = {
                     concealcursor = true,
                     symbols = {
+                        list = "",
                         headlines = {
                             "󰀘",
                             "",
