@@ -54,9 +54,13 @@ return {
                     find_files = {
                         find_command = {
                             "fd",
-                            "--no-ignore",
+                            "--hidden",
+                            "--type",
+                            "f",
+                            "--strip-cwd-prefix",
+                            "--exclude",
+                            ".git/"
                         },
-                        hidden = true,
                     },
                 },
                 defaults = {
