@@ -34,6 +34,21 @@ return {
                     filter = { event = "msg_show", find = "Hop .*:" },
                     opts = { skip = true }
                 },
+                -- Ignore `written` message
+                {
+                    filter = { event = "msg_show", find = '^".*" %d*L, %d*B written$' },
+                    opts = { skip = true }
+                },
+                -- Ignore `undo` message
+                {
+                    filter = { event = "msg_show", find = "^%d+ .*; before #%d+  %d+.*ago$" },
+                    opts = { skip = true }
+                },
+                -- Ignore `redo` message
+                {
+                    filter = { event = "msg_show", find = "^%d+ .*; after #%d+  %d+.*ago$" },
+                    opts = { skip = true }
+                },
                 {
                     view = "split",
                     filter = { event = "msg_show", min_height = 20 },
