@@ -170,7 +170,7 @@ return {
                         DiffviewFilePanelTitle = { fg = colors.crystalBlue },
                         Headline = { bg = colors.sumiInk2 },
                         HeadlineReversed = { bg = colors.sumiInk1 },
-                        LspInlayHint = { fg = colors.fujiGray, bg = colors.sumiInk3 },
+                        LspInlayHint = { fg = colors.springViolet2, bg = colors.winterBlue },
                         ["@text.title.1.marker.markdown"] = { fg = colors.surimiOrange },
                         ["@text.title.2.marker.markdown"] = { fg = colors.surimiOrange },
                         ["@text.title.3.marker.markdown"] = { fg = colors.surimiOrange },
