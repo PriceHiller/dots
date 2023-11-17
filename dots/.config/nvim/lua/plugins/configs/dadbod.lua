@@ -19,6 +19,7 @@ return {
             "DBUIAddConnection",
             "DBUIFindBuffer",
         },
+        ft = { "sql" },
         keys = {
             { "<leader>aa", "<cmd>DBUIToggle<CR>", desc = "Dadbod: Toggle UI" },
             { "<leader>ac", "<cmd>DBUIAddConnection<CR>", desc = "Dadbod: Add Connection" },
