@@ -139,9 +139,6 @@ M.setup = function()
 
     -- Allow per project configuration via exrc
     opt.exrc = true
-
-    -- Disable termsync, this fucks with Wezterm big time
-    opt.termsync = false
 end
 
 return M
