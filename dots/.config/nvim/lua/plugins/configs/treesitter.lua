@@ -3,11 +3,11 @@ return {
     {
         "danymat/neogen",
         keys = {
-            { "<leader>ng", desc = "> Neogen" },
-            { "<leader>ngf", "<cmd>Neogen func<CR>", desc = "Neogen: Function Annotation" },
+            { "<leader>ng",  desc = "> Neogen" },
+            { "<leader>ngf", "<cmd>Neogen func<CR>",  desc = "Neogen: Function Annotation" },
             { "<leader>ngc", "<cmd>Neogen class<CR>", desc = "Neogen: Class Annotation" },
-            { "<leader>ngt", "<cmd>Neogen type<CR>", desc = "Neogen: Type Annotation" },
-            { "<leader>ngb", "<cmd>Neogen file<CR>", desc = "Neogen: File Annotation" },
+            { "<leader>ngt", "<cmd>Neogen type<CR>",  desc = "Neogen: Type Annotation" },
+            { "<leader>ngb", "<cmd>Neogen file<CR>",  desc = "Neogen: File Annotation" },
         },
         cmd = {
             "Neogen",
@@ -122,13 +122,11 @@ return {
                 "pfeiferj/nvim-hurl",
                 config = true,
             },
-            "JoosepAlviste/nvim-ts-context-commentstring",
             "nvim-treesitter/nvim-treesitter-textobjects",
             "RRethy/nvim-treesitter-endwise",
         },
         config = function()
             require("nvim-treesitter.configs").setup({
-                parser_install_dir = treesitter_dir,
                 auto_install = true,
                 ignore_install = { "comment" },
                 incremental_selection = {
@@ -174,9 +172,6 @@ return {
                     enable = true,
                 },
                 query_linter = {
-                    enable = true,
-                },
-                context_commentstring = {
                     enable = true,
                 },
                 endwise = {
