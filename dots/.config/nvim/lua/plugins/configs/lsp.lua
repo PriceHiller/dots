@@ -1,3 +1,45 @@
+local lsp_augroup = vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
+local function on_attach(client, bufnr)
+    -- Set autocommands conditional on server_capabilities
+    vim.notify("Attached server " .. client.name, "info", {
+        title = "LSP",
+    })
+
+    local capabilities = client.server_capabilities
+    -- Enable inlay hints if the language server provides them
+    if capabilities.inlayHintProvider then
+        vim.api.nvim_create_autocmd("InsertEnter", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.inlay_hint.enable(bufnr, true)
+            end,
+            group = lsp_augroup,
+        })
+        vim.api.nvim_create_autocmd("InsertLeave", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.inlay_hint.enable(bufnr, false)
+            end,
+            group = lsp_augroup,
+        })
+    end
+
+    if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
+        require("hlargs").disable_buf(bufnr)
+    end
+end
+
+local lsp_capabilities =
+    require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local server_opts = {
+    capabilities = lsp_capabilities,
+    on_attach = on_attach,
+}
+
+local lsp_server_bin_dir = vim.fn.stdpath("data") .. "/mason/bin/"
+local codelldb_path = lsp_server_bin_dir .. "codelldb"
+local liblldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
+
 return {
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -42,7 +84,7 @@ return {
                 "LightBulbSign",
                 { text = text_icon, numhl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", priority = 9 }
             )
-            vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                 callback = nvim_lightbulb.update_lightbulb,
             })
             return {
@@ -52,6 +94,27 @@ return {
                 },
             }
         end,
+    },
+    {
+        'mrcjkb/rustaceanvim',
+        ft = { 'rust' },
+        config = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    on_attach = on_attach,
+                },
+                tools = {
+                    executor = require("rustaceanvim.executors").termopen,
+                    on_initialized = function()
+                        vim.g.rustaceanvim.dap = { adaptper = require('rustaceanvim.dap').get_codelldb_adapter(codelldb_path,
+                            liblldb_path) }
+                    end,
+                    hover_actions = {
+                        replace_builtin_hover = false,
+                    },
+                },
+            }
+        end
     },
     {
         "neovim/nvim-lspconfig",
@@ -75,7 +138,7 @@ return {
             },
         },
         keys = {
-            { "<leader>l", desc = "> LSP" },
+            { "<leader>l",  desc = "> LSP" },
             {
                 "<leader>lh",
                 function()
@@ -87,11 +150,11 @@ return {
                 end,
                 desc = "LSP: Toggle Diagnostics",
             },
-            { "<leader>lD", vim.lsp.buf.declaration, desc = "LSP: Declaration" },
-            { "<leader>k", vim.lsp.buf.hover, desc = "LSP: Hover" },
-            { "<leader>K", vim.lsp.buf.signature_help, desc = "LSP: Sig Help" },
-            { "<leader>lc", vim.lsp.buf.code_action, desc = "LSP: Code Action" },
-            { "<leader>lR", ":LspRestart<CR>", desc = "LSP: Restart" },
+            { "<leader>lD", vim.lsp.buf.declaration,    desc = "LSP: Declaration" },
+            { "<leader>k",  vim.lsp.buf.hover,          desc = "LSP: Hover" },
+            { "<leader>K",  vim.lsp.buf.signature_help, desc = "LSP: Sig Help" },
+            { "<leader>lc", vim.lsp.buf.code_action,    desc = "LSP: Code Action" },
+            { "<leader>lR", ":LspRestart<CR>",          desc = "LSP: Restart" },
             {
                 "<leader>ls",
                 function()
@@ -116,7 +179,7 @@ return {
             {
                 "<leader>lT",
                 function()
-                    vim.lsp.inlay_hint(0, nil)
+                    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
                 end,
                 desc = "LSP: Toggle Inlay Hints",
             },
@@ -137,142 +200,6 @@ return {
                     "tsserver",
                 },
             })
-
-            local lsp_augroup = vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
-            local function on_attach(client, bufnr)
-                -- Set autocommands conditional on server_capabilities
-                vim.notify("Attached server " .. client.name, "info", {
-                    title = "LSP",
-                })
-
-                local capabilities = client.server_capabilities
-                -- Enable inlay hints if the language server provides them
-                if capabilities.inlayHintProvider then
-                    vim.api.nvim_create_autocmd("InsertEnter", {
-                        buffer = bufnr,
-                        callback = function()
-                            vim.lsp.inlay_hint.enable(bufnr, true)
-                        end,
-                        group = lsp_augroup,
-                    })
-                    vim.api.nvim_create_autocmd("InsertLeave", {
-                        buffer = bufnr,
-                        callback = function()
-                            vim.lsp.inlay_hint.enable(bufnr, false)
-                        end,
-                        group = lsp_augroup,
-                    })
-                end
-
-                if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
-                    require("hlargs").disable_buf(bufnr)
-                end
-            end
-
-            local lsp_capabilities =
-                require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-            local opts = {
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
-            }
-
-            local lsp_server_bin_dir = vim.fn.stdpath("data") .. "/mason/bin/"
-            local rust_tools = require("rust-tools")
-            local codelldb_path = lsp_server_bin_dir .. "codelldb"
-            local liblldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
-            local rustopts = {
-                server = opts,
-                dap = {
-                    adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-                },
-                tools = {
-                    -- how to execute terminal commands
-                    -- options right now: termopen / quickfix
-                    executor = require("rust-tools/executors").termopen,
-                    -- callback to execute once rust-analyzer is done initializing the workspace
-                    -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
-                    on_initialized = nil,
-                    -- These apply to the default RustSetInlayHints command
-                    inlay_hints = {
-                        -- automatically set inlay hints (type hints)
-                        -- default: true
-                        auto = false,
-                        -- Only show inlay hints for the current line
-                        only_current_line = false,
-                        -- whether to show parameter hints with the inlay hints or not
-                        -- default: true
-                        show_parameter_hints = true,
-                        -- prefix for parameter hints
-                        -- default: "<-"
-                        parameter_hints_prefix = "<- ",
-                        -- prefix for all the other hints (type, chaining)
-                        -- default: "=>"
-                        other_hints_prefix = "=> ",
-                        -- whether to align to the lenght of the longest line in the file
-                        max_len_align = false,
-                        -- padding from the left if max_len_align is true
-                        max_len_align_padding = 1,
-                        -- whether to align to the extreme right or not
-                        right_align = false,
-                        -- padding from the right if right_align is true
-                        right_align_padding = 7,
-                        -- The color of the hints
-                        highlight = "Comment",
-                    },
-                    hover_actions = {
-                        auto_focus = true,
-                    },
-                    server = {
-                        on_attach = function(client, bufnr)
-                            vim.keymap.set("n", "<leader>fr", rust_tools.runnables.runnables, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fd", rust_tools.debuggables.debuggables, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fp", rust_tools.parent_module.parent_module, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fJ", rust_tools.join_lines.join_lines, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fH", rust_tools.hover_range.hover_range, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fm", rust_tools.expand_macro.expand_macro, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fc", rust_tools.open_cargo_toml.open_cargo_toml, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fk", ":RustMoveItemUp<CR>", {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fj", ":RustMoveItemDown<CR>", {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fh", rust_tools.hover_actions.hover_actions, {
-                                buffer = bufnr,
-                            })
-
-                            vim.keymap.set("n", "<leader>fa", rust_tools.code_action_group.code_action_group, {
-                                buffer = bufnr,
-                            })
-                            on_attach(client, bufnr)
-                        end,
-                    },
-                },
-            }
-            rust_tools.setup(rustopts)
 
             -- NOTE: ANSIBLE LSP
             -- I use ansible a lot, define exceptions for servers that can use
@@ -491,7 +418,7 @@ return {
                 "asm_lsp",
                 "denols"
             }) do
-                lspconfig[server].setup(opts)
+                lspconfig[server].setup(server_opts)
             end
 
             -- Custom Servers outside of lspconfig
