@@ -57,6 +57,7 @@ if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
 
 	if ! command -v open >/dev/null 2>&1 && command -v xdg-open >/dev/null 2>&1; then
 		alias open="xdg-open"
+		alias o="xdg-open"
 	fi
 fi
 
