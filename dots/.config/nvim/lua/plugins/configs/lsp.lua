@@ -103,12 +103,18 @@ return {
                 server = {
                     on_attach = on_attach,
                 },
+                dap = {
+                    adapter = {
+                        type = "server",
+                        port = "${port}",
+                        executable = {
+                            command = "codelldb",
+                            args = { "--port", "${port}" },
+                        },
+                    }
+                },
                 tools = {
                     executor = require("rustaceanvim.executors").termopen,
-                    on_initialized = function()
-                        vim.g.rustaceanvim.dap = { adaptper = require('rustaceanvim.dap').get_codelldb_adapter(codelldb_path,
-                            liblldb_path) }
-                    end,
                     hover_actions = {
                         replace_builtin_hover = false,
                     },
