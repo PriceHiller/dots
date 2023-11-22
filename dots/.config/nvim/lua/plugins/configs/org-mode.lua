@@ -21,9 +21,15 @@ return {
                 }
             }
         },
+        ft = { "org" },
+        keys = {
+            { "<leader>o", desc = "> Org" },
+        },
+        init = function()
+            require("orgmode").setup_ts_grammar()
+        end,
         config = function()
             -- Load treesitter grammar for org
-            require("orgmode").setup_ts_grammar()
 
             -- Setup orgmode
             require("orgmode").setup({
