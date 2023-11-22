@@ -102,7 +102,7 @@ return {
                     {
                         provider = function(self)
                             local padding = 1
-                            return pad(padding) .. " " .. self.mode_names[self.mode] .. pad(padding)
+                            return pad(padding) .. " " .. self.mode_names[self.mode] .. pad(padding)
                         end,
                         hl = function(self)
                             return { bg = self:mode_color(), bold = true, fg = colors.sumiInk0 }
