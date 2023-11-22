@@ -204,7 +204,9 @@ return {
                         NotificationError = { link = "NvimNotifyError" },
                         org_table_sep = { fg = colors.springBlue, bg = colors.winterBlue },
                         org_table_header = { fg = colors.crystalBlue, bg = colors.winterBlue },
-                        org_table = { bg = colors.winterBlue }
+                        org_table = { bg = colors.winterBlue },
+                        ["@OrgTSBlock.org"] = { fg = colors.fujiGray, bold = true, italic = true },
+                        ["@OrgTSDirective.org"] = { link = "@OrgTSBlock.org" }
                     }
 
                     return overrides
