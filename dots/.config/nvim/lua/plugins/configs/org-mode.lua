@@ -36,6 +36,7 @@ return {
                 org_agenda_files = "~/Notes/**/*",
                 org_default_notes_file = "~/Notes/notes.org",
                 org_startup_folded = "inherit",
+                org_todo_keywords = {'TODO(t)', 'NEXT(n)', '|', 'DONE(d)', "CANCELLED(c)" },
                 calendar_week_start_day = 0,
                 org_agenda_start_on_weekday = 0,
                 org_capture_templates = {
