@@ -22,3 +22,6 @@
 [submodule "dots/.config/zsh/config/plugins/zsh-nix-shell"]
 	path = dots/.config/zsh/config/plugins/zsh-nix-shell
 	url = https://github.com/chisui/zsh-nix-shell
+[submodule "dots/.config/zsh/config/plugins/powerlevel10k"]
+	path = dots/.config/zsh/config/plugins/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
