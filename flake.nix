@@ -24,6 +24,7 @@
           ({
             nixpkgs.overlays = [
               inputs.neovim-nightly-overlay.overlay
+              (self: super: { kanagawa-gtk-theme = super.callPackage ./pkgs/kanagawa-gtk { }; })
             ];
             home = {
               username = "${username}";
