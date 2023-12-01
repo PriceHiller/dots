@@ -40,11 +40,18 @@ return {
                 type = "text",
                 val = function()
                     local version = vim.version()
-                    return ("─────── v%s.%s.%s+%s ───────"):format(
+                    if version.build ~= vim.NIL then
+                        return ("─────── v%s.%s.%s+%s ───────"):format(
+                            version.major,
+                            version.minor,
+                            version.patch,
+                            version.build
+                        )
+                    end
+                    return ("─────── v%s.%s.%s ───────"):format(
                         version.major,
                         version.minor,
-                        version.patch,
-                        version.build
+                        version.patch
                     )
                 end,
                 opts = { position = "center", hl = "@boolean" },
