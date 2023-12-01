@@ -24,7 +24,20 @@
           ({
             nixpkgs.overlays = [
               inputs.neovim-nightly-overlay.overlay
-              (self: super: { kanagawa-gtk-theme = super.callPackage ./pkgs/kanagawa-gtk { }; })
+              (self: super: {
+                kanagawa-gtk-theme = super.callPackage ./pkgs/kanagawa-gtk { };
+                lxappearance = super.lxappearance.overrideAttrs (oldAttrs: {
+                  postInstall = ''
+                    wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
+                  '';
+                });
+                opensnitch-ui = super.opensnitch-ui.overrideAttrs
+                  (oldAttrs: rec {
+                    propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [
+                      super.python311Packages.qt-material
+                    ];
+                  });
+              })
             ];
             home = {
               username = "${username}";
