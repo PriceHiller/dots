@@ -21,6 +21,7 @@ stdenvNoCC.mkDerivation {
     runHook preInstall
     mkdir -p $out/share/themes/{Kanagawa-Border,Kanagawa-Borderless}
     mkdir -p $out/share/icons
+    sed -e 's/oomox-//' -i icons/*/index.theme
     cp -r icons/Kanagawa $out/share/icons
     cp -r themes/Kanagawa-B/* $out/share/themes/Kanagawa-Border
     cp -r themes/Kanagawa-BL/* $out/share/themes/Kanagawa-Borderless
