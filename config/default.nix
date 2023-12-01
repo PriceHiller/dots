@@ -64,6 +64,7 @@ in
       webcord
       blueman
       gtk-engine-murrine
+      opensnitch-ui
     ];
 
     file =
@@ -147,4 +148,22 @@ in
     platformTheme = "gtk";
   };
 
+  services.blueman-applet.enable = true;
+  systemd.user.services.opensnitch-ui = {
+    Unit = {
+      Description = "Opensnitch ui";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    environment = {
+      QT_QPA_PLATFORMTHEME = "${gtkStyle}";
+      PATH = "${config.home.profileDirectory}/bin";
+    };
+    Service = {
+      ExecStart = "${pkgs.opensnitch-ui}/bin/opensnitch-ui";
+    };
+
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
 }
