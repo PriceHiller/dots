@@ -49,7 +49,7 @@ set-wallpapers() {
 }
 
 main() {
-	until systemctl --user is-active swww --quiet; do
+	until swww init; do
 		sleep .1
 	done
 	log "swww daemon running, setting wallpapers"
