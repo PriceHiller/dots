@@ -1,4 +1,0 @@
-[Unit]
-Description=Compositor target for WM to be launched manually
-Requires=graphical-session.target
-After=graphical-session.target
