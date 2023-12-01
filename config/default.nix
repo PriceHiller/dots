@@ -65,6 +65,11 @@ in
       blueman
       gtk-engine-murrine
       opensnitch-ui
+      twemoji-color-emoji
+      open-sans
+      noto-fonts
+      fira-code
+      nerdfonts
     ];
 
     file =
