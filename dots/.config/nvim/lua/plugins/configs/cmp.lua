@@ -17,6 +17,12 @@ return {
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
             "FelipeLema/cmp-async-path",
+            {
+                "tzachar/cmp-fuzzy-buffer",
+                dependencies = {
+                    "tzachar/fuzzy.nvim",
+                }
+            },
             -- Snippets
             {
                 "L3MON4D3/LuaSnip",
@@ -106,13 +112,22 @@ return {
             local standard_sources = function(sources)
                 sources = sources or {}
                 local default_sources = {
-                    { name = "nvim_lsp",     priority = 11 },
-                    { name = "luasnip",      priority = 10 }, -- For luasnip users.
+                    { name = "nvim_lsp", priority = 11 },
+                    { name = "luasnip",  priority = 10 }, -- For luasnip users.
+                    {
+                        name = "fuzzy_buffer",
+                        priority = 8,
+                    },
                     {
                         name = "rg",
                         priority = 7,
                         keyword_length = 3,
                         max_item_count = 10,
+                        option = {
+                            "--smart-case",
+                            "--hidden",
+                            "--max-depth 4"
+                        }
                     },
                     { name = "async_path", priority = 6 },
                     { name = "zsh",        priority = 5 },
@@ -130,7 +145,6 @@ return {
                     ---@param entry cmp.Entry
                     ---@param vim_item vim.CompletedItem
                     format = function(entry, vim_item)
-
                         -- vim.notify(vim.inspect(entry))
                         local selections = {
                             ["vim-dadbod-completion"] = { symbol = "󰆼 ", name = "DB", hl_group = "DadbodCompletion" },
@@ -141,10 +155,11 @@ return {
                             crates = { symbol = " ", name = "Crates", hl_group = "Crates" },
                             cmdline_history = { symbol = " ", name = "Cmd History", hl_group = "CmdHistory" },
                             rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
+                            fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
                             npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
                             conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
-                            docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker"}
+                            docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker" }
                         }
 
                         local extra_kind_icons = {
@@ -308,7 +323,9 @@ return {
                 },
                 sources = standard_sources(),
                 sorting = {
+                    priority_weight = 2,
                     comparators = {
+                        require('cmp_fuzzy_buffer.compare'),
                         compare.score,
                         compare.offset,
                         compare.recently_used,
@@ -335,16 +352,22 @@ return {
                 }),
             })
 
-            cmp.setup.filetype("sql", { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
-            cmp.setup.filetype("mysql", { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
-            cmp.setup.filetype("plsql", { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+            cmp.setup.filetype("sql",
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+            cmp.setup.filetype("mysql",
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+            cmp.setup.filetype("plsql",
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
             cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
             cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 99 } }) })
 
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({ { name = "rg" } }),
+                sources = cmp.config.sources({
+                    { name = "fuzzy_buffer" },
+                    { name = "rg" }
+                }),
             })
 
             cmp.setup.cmdline("?", {
@@ -371,6 +394,7 @@ return {
                         },
                     },
                     { name = "cmdline_history", max_item_count = 3 },
+                    { name = "fuzzy_buffer" },
                     { name = "rg" },
                 }),
             })
