@@ -16,7 +16,6 @@ return {
             "David-Kunz/cmp-npm",
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
-            "f3fora/cmp-spell",
             "FelipeLema/cmp-async-path",
             -- Snippets
             {
@@ -120,7 +119,6 @@ return {
                     { name = "emoji",      keyword_length = 2 },
                     { name = "calc" },
                     { name = "npm",        keyword_length = 2 },
-                    { name = "spell",      keyword_length = 2 },
                 }
 
                 vim.tbl_map(function(source) table.insert(default_sources, 1, source) end, sources)
@@ -145,7 +143,6 @@ return {
                             rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
                             npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
                             conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
-                            spell = { symbol = "󰏪 ", name = "Spell", hl_group = "Spell" },
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
                             docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker"}
                         }
