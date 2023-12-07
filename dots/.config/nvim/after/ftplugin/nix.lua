@@ -7,9 +7,9 @@ vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
 
 vim.keymap.set("n", "<leader>fr", function()
     local cmd = {
-        "nix-instantiate",
-        "--eval",
-        "--strict",
+        "nix",
+        "eval",
+        "--file",
         vim.api.nvim_buf_get_name(0),
     }
     require("toggleterm").exec(table.concat(cmd, " "))
@@ -20,10 +20,10 @@ end, {
 
 vim.keymap.set("n", "<leader>fj", function()
     local cmd = {
-        "nix-instantiate",
-        "--eval",
-        "--strict",
+        "nix",
+        "eval",
         "--json",
+        "--file",
         vim.api.nvim_buf_get_name(0),
         "|",
         "jq",
