@@ -238,9 +238,6 @@ return {
                             return kind
                         else
                             local word = entry:get_insert_text()
-                            if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-                                word = vim.lsp.util.parse_snippet(word)
-                            end
                             word = str.oneline(word)
 
                             -- concatenates the string
