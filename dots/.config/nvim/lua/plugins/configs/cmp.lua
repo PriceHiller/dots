@@ -145,7 +145,6 @@ return {
                     ---@param entry cmp.Entry
                     ---@param vim_item vim.CompletedItem
                     format = function(entry, vim_item)
-                        -- vim.notify(vim.inspect(entry))
                         local selections = {
                             ["vim-dadbod-completion"] = { symbol = "󰆼 ", name = "DB", hl_group = "DadbodCompletion" },
                             calc = { symbol = " ", name = "Calculator", hl_group = "Calculator" },
@@ -167,16 +166,19 @@ return {
                         }
 
                         local selection
+                        local lsp_name
                         if entry.source.name == "nvim_lsp" then
-                            -- vim.notify(vim.inspect(entry.source.source))
-                            selection = selections[entry.source.source.client.name]
+                            lsp_name = entry.source.source.client.name
+                            selection = selections[lsp_name]
                         else
                             selection = selections[entry.source.name]
                         end
+                        local completion_item = vim_item
+                        local abbr_max_width = 50
                         if not selection then
                             local kind = require("lspkind").cmp_format({
                                 mode = "symbol_text",
-                                maxwidth = 50,
+                                maxwidth = abbr_max_width,
                             })(entry, vim_item)
                             if string.match(kind.kind, ".* Color$") or string.match(kind.kind, ".* Variable$") then
                                 ---@type string
@@ -234,24 +236,30 @@ return {
                                 strings[1] = extra_kind_icons[strings[1]] or ""
                             end
                             kind.kind = " " .. strings[1] .. " "
+                            if not kind.menu and lsp_name then
+                                kind.menu =  " " .. lsp_name
+                            end
 
-                            return kind
+                            completion_item = kind
                         else
+                            completion_item.kind = " " .. selection.symbol
+                            completion_item.menu = selection.symbol .. selection.name
+                            completion_item.kind_hl_group = "CmpCustomSelection" .. selection.hl_group
+                        end
+
+                        if not completion_item.abbr then
                             local word = entry:get_insert_text()
                             word = str.oneline(word)
-
-                            -- concatenates the string
-                            local max = 50
-                            if string.len(word) >= max then
-                                local before = string.sub(word, 1, math.floor((max - 3) / 2))
-                                word = before .. "..."
-                            end
-                            vim_item.kind = " " .. selection.symbol
-                            vim_item.menu = selection.symbol .. selection.name
-                            vim_item.kind_hl_group = "CmpCustomSelection" .. selection.hl_group
-                            vim_item.abbr = word
-                            return vim_item
+                            completion_item.abbr = word
                         end
+
+                        if string.len(completion_item.abbr) >= abbr_max_width then
+                            local before = string.sub(completion_item.abbr, 1, math.floor((abbr_max_width - 3) / 2))
+                            completion_item.abbr = before .. "..."
+                        end
+
+                        -- concatenates the string
+                        return completion_item
                     end,
                 },
                 view = {
