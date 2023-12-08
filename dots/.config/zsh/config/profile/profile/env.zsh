@@ -59,9 +59,10 @@ export TIMEFMT
 export REPORTTIME=600
 
 ### SSH ###
-export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/ssh-agent.sock}"
-ssh-add &>/dev/null
-[[ "${?}" -gt 2 ]] && eval "$(ssh-agent -a "${SSH_AUTH_SOCK}")" &>/dev/null
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.sock"
+ssh-add -l >/dev/null
+[ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" -t 24h >/dev/null
+
 
 ### FZF ###
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color=always'
