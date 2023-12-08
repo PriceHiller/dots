@@ -158,7 +158,8 @@ return {
                             npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
                             conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
-                            docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker" }
+                            docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker" },
+                            luasnip = { symbol = " ", name = "Snippet" }
                         }
 
                         local extra_kind_icons = {
@@ -237,14 +238,16 @@ return {
                             end
                             kind.kind = " " .. strings[1] .. " "
                             if not kind.menu and lsp_name then
-                                kind.menu =  " " .. lsp_name
+                                kind.menu = " " .. lsp_name
                             end
 
                             completion_item = kind
                         else
                             completion_item.kind = " " .. selection.symbol
                             completion_item.menu = selection.symbol .. selection.name
-                            completion_item.kind_hl_group = "CmpCustomSelection" .. selection.hl_group
+                            if selection.hl_group then
+                                completion_item.kind_hl_group = "CmpCustomSelection" .. selection.hl_group
+                            end
                         end
 
                         if not completion_item.abbr then
