@@ -419,7 +419,6 @@ return {
                 "terraformls",
                 "tflint",
                 "vimls",
-                "rnix",
                 "marksman",
                 "asm_lsp",
                 "denols"
