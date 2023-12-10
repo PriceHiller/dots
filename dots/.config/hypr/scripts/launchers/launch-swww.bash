@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 log() {
 	printf "%s\n" "${*}"
@@ -48,10 +47,14 @@ set-wallpapers() {
 	set-wallpaper "eDP-1" "${HOME}/.dot_files/dots/.local/share/wallpapers/Industrial-Shaded.png"
 }
 
-main() {
+init() {
 	until swww init; do
 		sleep .1
 	done
+}
+
+main() {
+	init
 	log "swww daemon running, setting wallpapers"
 	while :; do
 		while IFS= read -r line
@@ -61,7 +64,8 @@ main() {
 			fi
 			sleep .1
 		done < <(swww query)
-		sleep .1
+		sleep .5
+		swww init
 	done
 }
 
