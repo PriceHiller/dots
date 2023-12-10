@@ -29,8 +29,6 @@ local edges = {
 -- title of the active pane in that tab.
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    log.debug("received event", { prefix = "format-tab-title", ignore_result = true })
-
     local function tab_title(tab_info)
         local title = tab_info.tab_title
         -- if the tab title is explicitly set, take that
@@ -83,7 +81,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 end)
 
 wezterm.on("update-right-status", function(window, pane)
-    log.debug("received event", { prefix = "update-status", ignore_result = true })
     -- Each element holds the text for a cell in a "powerline" style << fade
 
     -- Figure out the cwd and host of the current pane.
