@@ -25,6 +25,24 @@ return {
                     markdown = filetypes.markdown.prettierd,
                     css = filetypes.css.prettierd,
                     lua = filetypes.lua.stylua,
+                    psql = function ()
+                        return {
+                            exe = "sql-formatter",
+                            args = {
+                                "-l",
+                                "postgresql",
+                                "--fix",
+                            },
+                        }
+                    end,
+                    sql = function ()
+                        return {
+                            exe = "sql-formatter",
+                            args = {
+                                "--fix",
+                            },
+                        }
+                    end,
                     asm = function()
                         return {
                             exe = "asmfmt",
