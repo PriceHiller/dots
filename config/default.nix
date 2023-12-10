@@ -12,7 +12,7 @@ let
       })
       # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
       (builtins.attrNames (builtins.readDir ../dots/${dir}))));
-    gtkStyle = "gtk2";
+  gtkStyle = "gtk2";
 in
 {
   programs.home-manager.enable = true;
@@ -37,7 +37,6 @@ in
       llvm
       openssh
       openssl
-      pkg-config
       wget
       rsync
       readline
@@ -56,21 +55,19 @@ in
       ripgrep
       fd
       nixfmt
-      qt6Packages.qt6gtk2
-      qt6Packages.qt6ct
-      libsForQt5.qtstyleplugins
-      libsForQt5.qt5ct
+      gtk2
       lxappearance
       webcord
-      blueman
       gtk-engine-murrine
       opensnitch-ui
-      twemoji-color-emoji
+      twitter-color-emoji
       open-sans
       noto-fonts
       fira-code
       nerdfonts
+      direnv
     ];
+
 
     file =
       {
@@ -148,27 +145,34 @@ in
       gtk4.extraConfig = extraGtkConfig;
     };
 
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-  };
-
-  services.blueman-applet.enable = true;
-  systemd.user.services.opensnitch-ui = {
-    Unit = {
-      Description = "Opensnitch ui";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
+  systemd.user = {
+    targets.compositor = {
+      Unit = {
+        Description = "Compositor target for WM";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
     };
+    services = {
+      opensnitch-ui = {
+        Unit = {
+          Description = "Opensnitch ui";
+          PartOf = [ "compositor.target" ];
+          After = [ "compositor.target" ];
+          ConditionEnvironment = [ "WAYLAND_DISPLAY" "HOME" "XDG_RUNTIME_DIR" ];
+        };
 
-    environment = {
-      QT_QPA_PLATFORMTHEME = "${gtkStyle}";
-      PATH = "${config.home.profileDirectory}/bin";
-    };
-    Service = {
-      ExecStart = "${pkgs.opensnitch-ui}/bin/opensnitch-ui";
-    };
+        Service = {
+          ExecStart = "${pkgs.opensnitch-ui}/bin/opensnitch-ui";
+        };
 
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+        environment = {
+          QT_QPA_PLATFORMTHEME = "${gtkStyle}";
+          PATH = "${config.home.profileDirectory}/bin";
+        };
+
+        Install = { WantedBy = [ "compositor.target" ]; };
+      };
+    };
   };
 }
