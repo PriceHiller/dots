@@ -172,3 +172,13 @@ File-Strip-Blank() {
 		mv "${file}" "${file//[[:blank:]]/-}"
 	done
 }
+
+precmd() {
+	if [[ -n "${WEZTERM_PANE}" ]]; then
+		echo "\x1b]0;wezterm\x1b\\"
+	fi
+}
+
+preexec() {
+	echo "\x1b]0;${2}\x1b\\"
+}
