@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local color_names = require("config.theme.colors").color_names
-local log = require("lib.log")
 
 local edges = {
     solid = {
@@ -49,7 +48,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
     local title = tab_title(tab)
     if #title > max_width - 1 then
-        title = " " .. wezterm.truncate_right(title, max_width - 6) .. "..."
+        title = " " .. wezterm.truncate_right(title, max_width - 6) .. "…"
     else
         title = " " .. title .. " "
     end
