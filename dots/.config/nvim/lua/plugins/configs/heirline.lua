@@ -555,7 +555,7 @@ return {
                                 hl = { fg = colors.oniViolet, bg = utils.get_highlight("WinBarNC").bg },
                             },
                             {
-                                provider = " ",
+                                provider = "  ",
                                 hl = {
                                     bg = colors.oniViolet,
                                     fg = colors.sumiInk0,
