@@ -8,6 +8,7 @@ return {
         opts = function()
             vim.keymap.set("n", "zR", require("ufo").openAllFolds)
             vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+            vim.keymap.set("n", "zm", require("ufo").closeFoldsWith)
 
             -- Show numbers for fold text
             local handler = function(virtText, lnum, endLnum, width, truncate)
