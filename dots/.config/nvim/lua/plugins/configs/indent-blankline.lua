@@ -46,6 +46,9 @@ return {
                             lua = {
                                 "return_statement",
                                 "table_constructor"
+                            },
+                            nix = {
+                                "binding"
                             }
                         }
                     },
