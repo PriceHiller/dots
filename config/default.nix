@@ -67,6 +67,7 @@ in
       nerdfonts
       direnv
       passage
+      swappy
     ];
 
 
