@@ -25,7 +25,6 @@ return {
             { "<leader>tn", ":Telescope neoclip default<CR>", desc = "Telescope: Neoclip Buffer" },
             { "<leader>tr", ":Telescope resume<CR>", desc = "Telescope: Resume" },
             { "<leader>tR", ":Telescope registers<CR>", desc = "Telescope: Registers" },
-            { "<leader>tt", ":Telescope file_browser<CR>", desc = "Telescope: File Tree" },
             { "<leader>ts", ":Telescope spell_suggest<CR>", desc = "Telescope: Spell Suggest" },
             { "<leader>tl", ":Telescope resume<CR>", desc = "Telescope: Previous State" },
             { "<leader>tT", ":TodoTelescope<CR>", desc = "Telescope: Todo Items" },
@@ -35,9 +34,9 @@ return {
             { "<leader>tm", ":Telescope man_pages<CR>", desc = "Telescope: Man Pages" },
             { "<leader>tq", ":Telescope quickfixhistry", desc = "LSP: Telescope Quickfix History" },
             { "<leader>nv", ":Telescope notify<CR>", desc = "Notifications: Search" },
+            { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope" }
         },
         dependencies = {
-            "nvim-telescope/telescope-file-browser.nvim",
             "artart222/telescope_find_directories",
             "nvim-telescope/telescope-ui-select.nvim",
             "debugloop/telescope-undo.nvim",
@@ -147,7 +146,6 @@ return {
             })
 
             telescope.load_extension("find_directories")
-            telescope.load_extension("file_browser")
             telescope.load_extension("notify")
             telescope.load_extension("fzf")
             telescope.load_extension("ui-select")
