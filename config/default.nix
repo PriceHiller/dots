@@ -66,6 +66,7 @@ in
       fira-code
       nerdfonts
       direnv
+      passage
     ];
 
 
