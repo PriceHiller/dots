@@ -355,25 +355,25 @@ return {
             -- Git Commit Completions
             cmp.setup.filetype("gitcommit", {
                 sources = standard_sources({
-                    { name = "git",                 priority = 99 },
-                    { name = "conventionalcommits", priority = 98 }
+                    { name = "git",                 priority = 20 },
+                    { name = "conventionalcommits", priority = 19 }
                 }),
             })
 
             cmp.setup.filetype("octo", {
                 sources = standard_sources({
-                    { name = "git", priority = 99 }
+                    { name = "git", priority = 20 }
                 }),
             })
 
             cmp.setup.filetype("sql",
-                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) })
             cmp.setup.filetype("mysql",
-                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) })
             cmp.setup.filetype("plsql",
-                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 99 } }) })
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) })
             cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
-            cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 99 } }) })
+            cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 20 } }) })
 
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
