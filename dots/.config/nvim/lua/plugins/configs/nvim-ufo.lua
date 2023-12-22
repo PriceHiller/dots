@@ -1,21 +1,25 @@
 vim.api.nvim_create_autocmd("BufReadPre", {
     callback = function()
         vim.b.ufo_foldlevel = 0
-    end,
+    end
 })
 
-local change_buf_foldlevel_by = function(num)
-    local foldlevel = vim.b.ufo_foldlevel or 0
-    if foldlevel + num >= 0 then
-        foldlevel = foldlevel + num
-    end
-    vim.b.ufo_foldlevel = foldlevel
-    require("ufo").closeFoldsWith(foldlevel)
-end
-
+---@param num integer Set the fold level to this number
 local set_buf_foldlevel = function(num)
     vim.b.ufo_foldlevel = num
     require("ufo").closeFoldsWith(num)
+end
+
+---@param num integer The amount to change the UFO fold level by
+local change_buf_foldlevel_by = function(num)
+    local foldlevel = vim.b.ufo_foldlevel or 0
+    -- Ensure the foldlevel can't be set negatively
+    if foldlevel + num >= 0 then
+        foldlevel = foldlevel + num
+    else
+        foldlevel = 0
+    end
+    set_buf_foldlevel(foldlevel)
 end
 
 return {
@@ -47,7 +51,7 @@ return {
                     if count == 0 then
                         count = nil
                     end
-                    change_buf_foldlevel_by(count or -1)
+                    change_buf_foldlevel_by(-(count) or -1)
                 end,
                 desc = "UFO: Fold Less",
             },
