@@ -1,3 +1,23 @@
+vim.api.nvim_create_autocmd("BufReadPre", {
+    callback = function()
+        vim.b.ufo_foldlevel = 0
+    end
+})
+
+local change_buf_foldlevel_by = function(num)
+    local foldlevel = vim.b.ufo_foldlevel or 0
+    if foldlevel + num >= 0 then
+        foldlevel = foldlevel + num
+    end
+    vim.b.ufo_foldlevel = foldlevel
+    require("ufo").closeFoldsWith(foldlevel)
+end
+
+local set_buf_foldlevel = function(num)
+    vim.b.ufo_foldlevel = num
+    require("ufo").closeFoldsWith(num)
+end
+
 return {
     {
         "kevinhwang91/nvim-ufo",
@@ -5,10 +25,57 @@ return {
             "kevinhwang91/promise-async",
         },
         event = { "BufRead", "BufNewFile" },
+        keys = {
+            {
+                "zR",
+                function()
+                    require("ufo").openAllFolds()
+                end,
+                desc = "UFO: Open All Folds"
+            },
+            {
+                "zM",
+                function()
+                    require("ufo").closeAllFolds()
+                end,
+                desc = "UFO: Close All Folds"
+            },
+            {
+                "zm",
+                function()
+                    local count = vim.v.count
+                    if count == 0 then
+                        count = nil
+                    end
+                    change_buf_foldlevel_by(count or -1)
+                end,
+                desc = "UFO: Fold Less"
+            },
+            {
+                "zr",
+                function()
+                    local count = vim.v.count
+                    if count == 0 then
+                        count = nil
+                    end
+                    change_buf_foldlevel_by(count or 1)
+                end,
+                desc = "UFO: Fold More"
+            },
+            {
+                "zS",
+                function()
+                    if vim.v.count == 0 then
+                        vim.notify("No foldlevel given to set!", vim.log.levels.WARN)
+                    else
+                        set_buf_foldlevel(vim.v.count)
+                    end
+                end,
+                desc = "UFO: Set Foldlevel"
+            },
+        },
         opts = function()
-            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-            vim.keymap.set("n", "zm", require("ufo").closeFoldsWith)
+            vim.opt.foldlevel = 99
 
             -- Show numbers for fold text
             local handler = function(virtText, lnum, endLnum, width, truncate)
