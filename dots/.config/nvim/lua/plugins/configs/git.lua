@@ -83,6 +83,45 @@ return {
         cmd = {
             "GitLink"
         },
-        config = true
+        opts = function()
+            --- @param s string
+            --- @param t string
+            local function string_endswith(s, t)
+                return string.len(s) >= string.len(t) and string.sub(s, #s - #t + 1) == t
+            end
+
+            --- @param lk gitlinker.Linker
+            local gitlab_orion_router = function(type)
+                return function(lk)
+                    local builder = "https://"
+                        .. lk.host
+                        .. "/"
+                        .. (string_endswith(lk.repo, ".git") and lk.repo:sub(1, #lk.repo - 4) or lk.repo)
+                        .. "/"
+                        .. type
+                        .. "/"
+                        .. lk.rev
+                        .. "/"
+                        .. lk.file
+                        .. "#L"
+                        .. lk.lstart
+
+                    if lk.lend > lk.lstart then
+                        builder = builder .. "-" .. lk.lend
+                    end
+                    return builder
+                end
+            end
+            return {
+                router = {
+                    browse = {
+                        ["^gitlab%.orion%-technologies%.io"] = gitlab_orion_router("blob")
+                    },
+                    blame = {
+                        ["^gitlab%.orion%-technologies%.io"] = gitlab_orion_router("blame")
+                    }
+                },
+            }
+        end
     }
 }
