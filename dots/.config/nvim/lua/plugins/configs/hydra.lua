@@ -100,7 +100,7 @@ return {
                     { "u", gitsigns.undo_stage_hunk },
                     { "S", gitsigns.stage_buffer },
                     { "p", gitsigns.preview_hunk },
-                    { "d", gitsigns.toggle_deleted,    { nowait = true } },
+                    { "d", gitsigns.toggle_deleted, { nowait = true } },
                     { "b", gitsigns.blame_line },
                     {
                         "B",
@@ -108,9 +108,9 @@ return {
                             gitsigns.blame_line({ full = true })
                         end,
                     },
-                    { "/",       gitsigns.show,     { exit = true } }, -- show the base of the file
+                    { "/", gitsigns.show, { exit = true } }, -- show the base of the file
                     { "<Enter>", "<cmd>Neogit<CR>", { exit = true } },
-                    { "q",       nil,               { exit = true, nowait = true } },
+                    { "q", nil, { exit = true, nowait = true } },
                 },
             })
 
@@ -150,26 +150,36 @@ _b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional 
 ^^                _<F7>_: Step Out                 _<F8>_: Step Back
                 ]],
                 heads = {
-                    { "c",    ":DapContinue<CR>" },
-                    { "r",    ":DapRunLast<CR>" },
-                    { "e",    ":DapTerminate<CR>" },
-                    { "b",    ":DapToggleBreakpoint<CR>" },
-                    { "B",    function() require("dap").set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end },
-                    { "l",    function() require("dap").set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end },
-                    { "s",    require("dapui").toggle },
-                    { "R",    require("dap").run_to_cursor },
+                    { "c", ":DapContinue<CR>" },
+                    { "r", ":DapRunLast<CR>" },
+                    { "e", ":DapTerminate<CR>" },
+                    { "b", ":DapToggleBreakpoint<CR>" },
+                    {
+                        "B",
+                        function()
+                            require("dap").set_breakpoint(vim.fn.input("Breakpoint Condition: "))
+                        end,
+                    },
+                    {
+                        "l",
+                        function()
+                            require("dap").set_breakpoint(vim.fn.input("Breakpoint Condition: "))
+                        end,
+                    },
+                    { "s", require("dapui").toggle },
+                    { "R", require("dap").run_to_cursor },
                     { "<F5>", ":DapStepOver<CR>" },
                     { "<F6>", ":DapStepInto<CR>" },
                     { "<F7>", ":DapStepOut<CR>" },
-                    { "<F8>", require("dap").step_back }
+                    { "<F8>", require("dap").step_back },
                 },
                 config = {
                     color = "pink",
                     invoke_on_body = true,
                     hint = {
-                        border = "solid"
-                    }
-                }
+                        border = "solid",
+                    },
+                },
             })
 
             -- Hydra for diagrams
@@ -197,12 +207,12 @@ _b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional 
                 mode = "n",
                 body = "<leader>hD",
                 heads = {
-                    { "H",     "<C-v>h:VBox<CR>" },
-                    { "J",     "<C-v>j:VBox<CR>" },
-                    { "K",     "<C-v>k:VBox<CR>" },
-                    { "L",     "<C-v>l:VBox<CR>" },
-                    { "f",     ":VBox<CR>",      { mode = "v" } },
-                    { "<Esc>", nil,              { exit = true } },
+                    { "H", "<C-v>h:VBox<CR>" },
+                    { "J", "<C-v>j:VBox<CR>" },
+                    { "K", "<C-v>k:VBox<CR>" },
+                    { "L", "<C-v>l:VBox<CR>" },
+                    { "f", ":VBox<CR>", { mode = "v" } },
+                    { "<Esc>", nil, { exit = true } },
                 },
             })
 

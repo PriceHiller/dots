@@ -34,7 +34,7 @@ return {
             { "<leader>tm", ":Telescope man_pages<CR>", desc = "Telescope: Man Pages" },
             { "<leader>tq", ":Telescope quickfixhistry", desc = "LSP: Telescope Quickfix History" },
             { "<leader>nv", ":Telescope notify<CR>", desc = "Notifications: Search" },
-            { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope" }
+            { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope" },
         },
         dependencies = {
             "artart222/telescope_find_directories",
@@ -58,7 +58,7 @@ return {
                             "f",
                             "--strip-cwd-prefix",
                             "--exclude",
-                            ".git/"
+                            ".git/",
                         },
                     },
                 },
@@ -71,7 +71,7 @@ return {
                         "--line-number",
                         "--column",
                         "--smart-case",
-                        "--hidden"
+                        "--hidden",
                     },
                     history = {
                         path = "~/.local/share/nvim/databases/telescope_history.sqlite3",

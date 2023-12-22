@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd("BufReadPre", {
     callback = function()
         vim.b.ufo_foldlevel = 0
-    end
+    end,
 })
 
 local change_buf_foldlevel_by = function(num)
@@ -31,14 +31,14 @@ return {
                 function()
                     require("ufo").openAllFolds()
                 end,
-                desc = "UFO: Open All Folds"
+                desc = "UFO: Open All Folds",
             },
             {
                 "zM",
                 function()
                     require("ufo").closeAllFolds()
                 end,
-                desc = "UFO: Close All Folds"
+                desc = "UFO: Close All Folds",
             },
             {
                 "zm",
@@ -49,7 +49,7 @@ return {
                     end
                     change_buf_foldlevel_by(count or -1)
                 end,
-                desc = "UFO: Fold Less"
+                desc = "UFO: Fold Less",
             },
             {
                 "zr",
@@ -60,7 +60,7 @@ return {
                     end
                     change_buf_foldlevel_by(count or 1)
                 end,
-                desc = "UFO: Fold More"
+                desc = "UFO: Fold More",
             },
             {
                 "zS",
@@ -71,7 +71,7 @@ return {
                         set_buf_foldlevel(vim.v.count)
                     end
                 end,
-                desc = "UFO: Set Foldlevel"
+                desc = "UFO: Set Foldlevel",
             },
         },
         opts = function()

@@ -206,7 +206,7 @@ return {
                         org_table_header = { fg = colors.crystalBlue, bg = colors.winterBlue },
                         org_table = { bg = colors.winterBlue },
                         ["@OrgTSBlock.org"] = { fg = colors.fujiGray, bold = true, italic = true },
-                        ["@OrgTSDirective.org"] = { link = "@OrgTSBlock.org" }
+                        ["@OrgTSDirective.org"] = { link = "@OrgTSBlock.org" },
                     }
 
                     return overrides

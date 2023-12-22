@@ -10,9 +10,9 @@ return {
             {
                 "petertriho/cmp-git",
                 dependencies = {
-                    "nvim-lua/plenary.nvim"
+                    "nvim-lua/plenary.nvim",
                 },
-                opts = {}
+                opts = {},
             },
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "hrsh7th/cmp-calc",
@@ -27,7 +27,7 @@ return {
                 "tzachar/cmp-fuzzy-buffer",
                 dependencies = {
                     "tzachar/fuzzy.nvim",
-                }
+                },
             },
             -- Snippets
             {
@@ -55,7 +55,7 @@ return {
             -- Load Snippets
             require("luasnip.loaders.from_vscode").lazy_load()
             require("luasnip.loaders.from_lua").load({
-                paths = vim.fn.stdpath("config") .. "/lua/plugins/snippets"
+                paths = vim.fn.stdpath("config") .. "/lua/plugins/snippets",
             })
 
             local colors_bg_color = vim.api.nvim_get_hl(0, { name = "CmpCustomSelectionColor" }).bg
@@ -119,7 +119,7 @@ return {
                 sources = sources or {}
                 local default_sources = {
                     { name = "nvim_lsp", priority = 11 },
-                    { name = "luasnip",  priority = 10 }, -- For luasnip users.
+                    { name = "luasnip", priority = 10 }, -- For luasnip users.
                     {
                         name = "fuzzy_buffer",
                         priority = 8,
@@ -132,17 +132,19 @@ return {
                         option = {
                             "--smart-case",
                             "--hidden",
-                            "--max-depth 4"
-                        }
+                            "--max-depth 4",
+                        },
                     },
                     { name = "async_path", priority = 6 },
-                    { name = "zsh",        priority = 5 },
-                    { name = "emoji",      keyword_length = 2 },
+                    { name = "zsh", priority = 5 },
+                    { name = "emoji", keyword_length = 2 },
                     { name = "calc" },
-                    { name = "npm",        keyword_length = 2 },
+                    { name = "npm", keyword_length = 2 },
                 }
 
-                vim.tbl_map(function(source) table.insert(default_sources, 1, source) end, sources)
+                vim.tbl_map(function(source)
+                    table.insert(default_sources, 1, source)
+                end, sources)
                 return cmp.config.sources(default_sources)
             end
             cmp.setup({
@@ -165,7 +167,7 @@ return {
                             conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
                             docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker" },
-                            luasnip = { symbol = " ", name = "Snippet" }
+                            luasnip = { symbol = " ", name = "Snippet" },
                         }
 
                         local extra_kind_icons = {
@@ -339,7 +341,7 @@ return {
                 sorting = {
                     priority_weight = 2,
                     comparators = {
-                        require('cmp_fuzzy_buffer.compare'),
+                        require("cmp_fuzzy_buffer.compare"),
                         compare.score,
                         compare.offset,
                         compare.recently_used,
@@ -355,23 +357,29 @@ return {
             -- Git Commit Completions
             cmp.setup.filetype("gitcommit", {
                 sources = standard_sources({
-                    { name = "git",                 priority = 20 },
-                    { name = "conventionalcommits", priority = 19 }
+                    { name = "git", priority = 20 },
+                    { name = "conventionalcommits", priority = 19 },
                 }),
             })
 
             cmp.setup.filetype("octo", {
                 sources = standard_sources({
-                    { name = "git", priority = 20 }
+                    { name = "git", priority = 20 },
                 }),
             })
 
-            cmp.setup.filetype("sql",
-                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) })
-            cmp.setup.filetype("mysql",
-                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) })
-            cmp.setup.filetype("plsql",
-                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) })
+            cmp.setup.filetype(
+                "sql",
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) }
+            )
+            cmp.setup.filetype(
+                "mysql",
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) }
+            )
+            cmp.setup.filetype(
+                "plsql",
+                { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) }
+            )
             cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
             cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 20 } }) })
 
@@ -380,7 +388,7 @@ return {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { name = "fuzzy_buffer" },
-                    { name = "rg" }
+                    { name = "rg" },
                 }),
             })
 

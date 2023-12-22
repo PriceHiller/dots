@@ -16,10 +16,10 @@ return {
                             "",
                             "󰬪",
                             "󱆭",
-                        }
-                    }
-                }
-            }
+                        },
+                    },
+                },
+            },
         },
         ft = { "org" },
         keys = {
@@ -36,7 +36,7 @@ return {
                 org_agenda_files = "~/Notes/**/*",
                 org_default_notes_file = "~/Notes/notes.org",
                 org_startup_folded = "inherit",
-                org_todo_keywords = {'TODO(t)', 'NEXT(n)', '|', 'DONE(d)', "CANCELLED(c)" },
+                org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
                 win_split_mode = "auto",
                 org_capture_templates = {
                     t = {
@@ -46,12 +46,12 @@ return {
                     j = {
                         description = "Journal",
                         template = "\n* %? %U    :journal:",
-                        target = "~/Notes/journal/%<%Y-%m-%d>.org"
+                        target = "~/Notes/journal/%<%Y-%m-%d>.org",
                     },
                 },
                 emacs_config = {
-                    config_path = "$HOME/.config/emacs/init.el"
-                }
+                    config_path = "$HOME/.config/emacs/init.el",
+                },
             })
 
             vim.api.nvim_set_hl(0, "org_code", { link = "@field" })
@@ -65,5 +65,5 @@ return {
                 vim.cmd.edit()
             end
         end,
-    }
+    },
 }
