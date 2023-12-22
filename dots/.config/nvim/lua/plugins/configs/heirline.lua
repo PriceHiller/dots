@@ -702,6 +702,43 @@ return {
                         end,
                     },
                     {
+                        provider = function()
+                            return (vim.b.ufo_foldlevel or vim.opt_local.foldlevel:get()) .. " "
+                        end,
+                        hl = {
+                            fg = colors.fujiWhite,
+                            bg = colors.sumiInk4,
+                        },
+                    },
+                    {
+                        provider = seps.full.left,
+                        hl = function()
+                            return { fg = colors.surimiOrange, bg = colors.sumiInk4 }
+                        end,
+                    },
+                    {
+                        provider = "  ",
+                        hl = {
+                            fg = colors.sumiInk0,
+                            bg = colors.surimiOrange,
+                        },
+                    },
+                    {
+                        provider = seps.full.right,
+                        hl = function()
+                            return { fg = colors.surimiOrange, bg = utils.get_highlight("WinBar").bg }
+                        end,
+                    },
+                },
+                margin(1),
+                {
+                    {
+                        provider = seps.full.left,
+                        hl = function()
+                            return { fg = colors.sumiInk4, bg = utils.get_highlight("WinBar").bg }
+                        end,
+                    },
+                    {
                         provider = "%p%% ",
                         hl = {
                             fg = colors.fujiWhite,
