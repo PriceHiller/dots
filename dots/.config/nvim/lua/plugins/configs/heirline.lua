@@ -1061,14 +1061,11 @@ return {
                     disable_winbar_cb = function(args)
                         if args.event == "FileType" then
                             local ft = args.match
-                            local matches = vim.tbl_filter(
-                                function(excluded_ft)
-                                    return ft:lower():find(excluded_ft) ~= nil
-                                end,
-                                {
-                                    ".*neogit.*"
-                                }
-                            )
+                            local matches = vim.tbl_filter(function(excluded_ft)
+                                return ft:lower():find(excluded_ft) ~= nil
+                            end, {
+                                ".*neogit.*",
+                            })
                             if #matches > 0 then
                                 return false
                             end

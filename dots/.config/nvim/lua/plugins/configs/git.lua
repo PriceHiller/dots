@@ -22,7 +22,7 @@ return {
                 auto_refresh = true,
                 filewatcher = {
                     enabled = true,
-                    interval = 1000
+                    interval = 1000,
                 },
                 graph_style = "unicode",
                 integrations = {
@@ -81,7 +81,7 @@ return {
     {
         "linrongbin16/gitlinker.nvim",
         cmd = {
-            "GitLink"
+            "GitLink",
         },
         opts = function()
             --- @param s string
@@ -115,13 +115,13 @@ return {
             return {
                 router = {
                     browse = {
-                        ["^gitlab%.orion%-technologies%.io"] = gitlab_orion_router("blob")
+                        ["^gitlab%.orion%-technologies%.io"] = gitlab_orion_router("blob"),
                     },
                     blame = {
-                        ["^gitlab%.orion%-technologies%.io"] = gitlab_orion_router("blame")
-                    }
+                        ["^gitlab%.orion%-technologies%.io"] = gitlab_orion_router("blame"),
+                    },
                 },
             }
-        end
-    }
+        end,
+    },
 }

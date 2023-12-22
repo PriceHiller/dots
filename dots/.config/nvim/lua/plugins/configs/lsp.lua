@@ -29,8 +29,7 @@ local function on_attach(client, bufnr)
     end
 end
 
-local lsp_capabilities =
-    require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local server_opts = {
     capabilities = lsp_capabilities,
     on_attach = on_attach,
@@ -96,8 +95,8 @@ return {
         end,
     },
     {
-        'mrcjkb/rustaceanvim',
-        ft = { 'rust' },
+        "mrcjkb/rustaceanvim",
+        ft = { "rust" },
         config = function()
             vim.g.rustaceanvim = {
                 server = {
@@ -111,7 +110,7 @@ return {
                             command = "codelldb",
                             args = { "--port", "${port}" },
                         },
-                    }
+                    },
                 },
                 tools = {
                     executor = require("rustaceanvim.executors").termopen,
@@ -120,7 +119,7 @@ return {
                     },
                 },
             }
-        end
+        end,
     },
     {
         "neovim/nvim-lspconfig",
@@ -144,7 +143,7 @@ return {
             },
         },
         keys = {
-            { "<leader>l",  desc = "> LSP" },
+            { "<leader>l", desc = "> LSP" },
             {
                 "<leader>lh",
                 function()
@@ -156,11 +155,11 @@ return {
                 end,
                 desc = "LSP: Toggle Diagnostics",
             },
-            { "<leader>lD", vim.lsp.buf.declaration,    desc = "LSP: Declaration" },
-            { "<leader>k",  vim.lsp.buf.hover,          desc = "LSP: Hover" },
-            { "<leader>K",  vim.lsp.buf.signature_help, desc = "LSP: Sig Help" },
-            { "<leader>lc", vim.lsp.buf.code_action,    desc = "LSP: Code Action" },
-            { "<leader>lR", ":LspRestart<CR>",          desc = "LSP: Restart" },
+            { "<leader>lD", vim.lsp.buf.declaration, desc = "LSP: Declaration" },
+            { "<leader>k", vim.lsp.buf.hover, desc = "LSP: Hover" },
+            { "<leader>K", vim.lsp.buf.signature_help, desc = "LSP: Sig Help" },
+            { "<leader>lc", vim.lsp.buf.code_action, desc = "LSP: Code Action" },
+            { "<leader>lR", ":LspRestart<CR>", desc = "LSP: Restart" },
             {
                 "<leader>ls",
                 function()
@@ -265,11 +264,11 @@ return {
                 python = {
                     analysis = {
                         diagnosticMode = "workspace",
-                        typeCheckingMode = "strict"
-                    }
+                        typeCheckingMode = "strict",
+                    },
                 },
                 capabilities = lsp_capabilities,
-                on_attach = on_attach
+                on_attach = on_attach,
             })
 
             lspconfig.yamlls.setup({
@@ -307,11 +306,11 @@ return {
             lspconfig.docker_compose_language_service.setup({
                 settings = {
                     telemetry = {
-                        enableTelemetry = false
-                    }
+                        enableTelemetry = false,
+                    },
                 },
                 capabilities = lsp_capabilities,
-                on_attach = on_attach
+                on_attach = on_attach,
             })
 
             lspconfig.powershell_es.setup({

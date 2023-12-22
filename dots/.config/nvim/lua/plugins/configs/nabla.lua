@@ -2,19 +2,25 @@ return {
     {
         "jbyuki/nabla.nvim",
         keys = {
-            { ";nn", function() require("nabla").popup() end, desc = "Nabla: Popup" },
+            {
+                ";nn",
+                function()
+                    require("nabla").popup()
+                end,
+                desc = "Nabla: Popup",
+            },
             {
                 ";nv",
                 function()
                     require("nabla").toggle_virt()
                 end,
-                desc = "Nabla: Toggle Virt Lines"
-            }
+                desc = "Nabla: Toggle Virt Lines",
+            },
         },
         ft = {
             "org",
-            "tex"
+            "tex",
         },
-        config = false
-    }
+        config = false,
+    },
 }

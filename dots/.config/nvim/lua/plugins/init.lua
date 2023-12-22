@@ -10,8 +10,10 @@ if not vim.uv.fs_stat(lazypath) then
         lazypath,
     }):wait()
 
-    if status.code >  0 then
-        error("Failed to install lazy.nvim!\n====STDOUT====\n" .. status.stdout .. "\n====STDERR====\n" ..status.stderr)
+    if status.code > 0 then
+        error(
+            "Failed to install lazy.nvim!\n====STDOUT====\n" .. status.stdout .. "\n====STDERR====\n" .. status.stderr
+        )
     end
 end
 vim.opt.runtimepath:prepend(lazypath)

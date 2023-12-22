@@ -3,11 +3,11 @@ return {
     {
         "danymat/neogen",
         keys = {
-            { "<leader>ng",  desc = "> Neogen" },
-            { "<leader>ngf", "<cmd>Neogen func<CR>",  desc = "Neogen: Function Annotation" },
+            { "<leader>ng", desc = "> Neogen" },
+            { "<leader>ngf", "<cmd>Neogen func<CR>", desc = "Neogen: Function Annotation" },
             { "<leader>ngc", "<cmd>Neogen class<CR>", desc = "Neogen: Class Annotation" },
-            { "<leader>ngt", "<cmd>Neogen type<CR>",  desc = "Neogen: Type Annotation" },
-            { "<leader>ngb", "<cmd>Neogen file<CR>",  desc = "Neogen: File Annotation" },
+            { "<leader>ngt", "<cmd>Neogen type<CR>", desc = "Neogen: Type Annotation" },
+            { "<leader>ngb", "<cmd>Neogen file<CR>", desc = "Neogen: File Annotation" },
         },
         cmd = {
             "Neogen",
@@ -32,7 +32,7 @@ return {
         },
         config = function()
             require("treesitter-context").setup({
-                max_lines = 3
+                max_lines = 3,
             })
             vim.cmd.TSContextEnable()
         end,
@@ -144,7 +144,7 @@ return {
                     disable = function(_, buf)
                         local disabled_filetypes = {
                             "tex",
-                            "log"
+                            "log",
                         }
 
                         for _, ft in ipairs(disabled_filetypes) do

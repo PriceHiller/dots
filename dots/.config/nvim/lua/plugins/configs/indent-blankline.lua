@@ -11,7 +11,7 @@ return {
                 exclude = {
                     buftypes = {
                         "terminal",
-                        "nofile"
+                        "nofile",
                     },
                     filetypes = {
                         "help",
@@ -31,13 +31,13 @@ return {
                         "NeogitPopup",
                         "NeogitLogView",
                         "norg",
-                        "org"
-                    }
+                        "org",
+                    },
                 },
                 indent = {
                     char = "▏",
                     tab_char = "▏",
-                    smart_indent_cap = true
+                    smart_indent_cap = true,
                 },
                 scope = {
                     enabled = true,
@@ -45,12 +45,12 @@ return {
                         node_type = {
                             lua = {
                                 "return_statement",
-                                "table_constructor"
+                                "table_constructor",
                             },
                             nix = {
-                                "binding"
-                            }
-                        }
+                                "binding",
+                            },
+                        },
                     },
                     highlight = {
                         "RainbowDelimiterRed",
@@ -60,8 +60,8 @@ return {
                         "RainbowDelimiterGreen",
                         "RainbowDelimiterViolet",
                         "RainbowDelimiterCyan",
-                    }
-                }
+                    },
+                },
             })
         end,
     },

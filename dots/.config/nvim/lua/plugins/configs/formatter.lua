@@ -25,7 +25,7 @@ return {
                     markdown = filetypes.markdown.prettierd,
                     css = filetypes.css.prettierd,
                     lua = filetypes.lua.stylua,
-                    sql = function ()
+                    sql = function()
                         return {
                             exe = "sql-formatter",
                             args = {

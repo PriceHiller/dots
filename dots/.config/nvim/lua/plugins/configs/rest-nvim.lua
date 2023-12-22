@@ -4,10 +4,10 @@ return {
         ft = { "http" },
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter"
+            "nvim-treesitter/nvim-treesitter",
         },
-        config = function ()
+        config = function()
             require("rest-nvim").setup({})
-        end
-    }
+        end,
+    },
 }
