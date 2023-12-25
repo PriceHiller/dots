@@ -64,16 +64,6 @@ M.setup = function()
         end
     end, { silent = true, desc = "LSP: Toggle Diagnostics" })
 
-    -- Toggle showing command bar
-    vim.keymap.set("n", "<leader>sc", function()
-        local current_cmdheight = vim.opt.cmdheight:get()
-        if current_cmdheight > 0 then
-            vim.opt.cmdheight = 0
-        else
-            vim.opt.cmdheight = 1
-        end
-    end, { silent = true, desc = "Toggle Cmdline" })
-
     -- Toggle relativenumber
     vim.keymap.set("n", "<leader>sn", function()
         vim.opt.relativenumber = not vim.opt.relativenumber:get()
