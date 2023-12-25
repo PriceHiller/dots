@@ -41,3 +41,7 @@ set database                    "plain"
 
 set synctex true
 set synctex-editor-command "code -g %{input}:%{line}"
+
+set continuous-hist-save true
+set page-cache-size 100
+set scroll-step 120
