@@ -53,7 +53,7 @@ return {
                     end
                     change_buf_foldlevel_by(-(count))
                 end,
-                desc = "UFO: Fold Less",
+                desc = "UFO: Fold More",
             },
             {
                 "zr",
@@ -64,7 +64,7 @@ return {
                     end
                     change_buf_foldlevel_by(count)
                 end,
-                desc = "UFO: Fold More",
+                desc = "UFO: Fold Less",
             },
             {
                 "zS",
