@@ -49,9 +49,9 @@ return {
                 function()
                     local count = vim.v.count
                     if count == 0 then
-                        count = nil
+                        count = 1
                     end
-                    change_buf_foldlevel_by(-(count) or -1)
+                    change_buf_foldlevel_by(-(count))
                 end,
                 desc = "UFO: Fold Less",
             },
@@ -60,9 +60,9 @@ return {
                 function()
                     local count = vim.v.count
                     if count == 0 then
-                        count = nil
+                        count = 1
                     end
-                    change_buf_foldlevel_by(count or 1)
+                    change_buf_foldlevel_by(count)
                 end,
                 desc = "UFO: Fold More",
             },
