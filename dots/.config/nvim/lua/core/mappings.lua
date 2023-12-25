@@ -105,9 +105,6 @@ M.setup = function()
 
     -- Binding to allow shift tab dedent
     vim.keymap.set("i", "<S-Tab>", "<C-d>", { silent = true, desc = "Insert: Dedent" })
-
-    -- Binding to make tab toggle fold
-    vim.keymap.set("n", "<Tab>", "za", { silent = true, desc = "Fold: Toggle" })
 end
 
 return M
