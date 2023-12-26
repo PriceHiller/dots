@@ -105,6 +105,12 @@ M.setup = function()
 
     -- Binding to allow shift tab dedent
     vim.keymap.set("i", "<S-Tab>", "<C-d>", { silent = true, desc = "Insert: Dedent" })
+
+    -- Allow macros to be invoked over a visual range via a keybind in visual mode
+    vim.keymap.set("x", "@", "':normal! @'.getcharstr().'<CR>'",
+        { silent = true, expr = true, desc = "Call Macro Against Visual Selection" })
+    vim.keymap.set("x", "Q", ':normal! @<C-R>=reg_recorded()<CR><CR>',
+        { silent = true, desc = "Call Last Macro Against Visual Selection" })
 end
 
 return M
