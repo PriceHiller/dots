@@ -161,7 +161,7 @@ in
           Description = "Opensnitch ui";
           PartOf = [ "compositor.target" ];
           After = [ "compositor.target" ];
-          ConditionEnvironment = [ "WAYLAND_DISPLAY" "HOME" "XDG_RUNTIME_DIR" ];
+          ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
         };
 
         Service = {
