@@ -35,6 +35,15 @@ return {
                             },
                         }
                     end,
+                    zsh = function()
+                        return {
+                            exe = "shfmt",
+                            args = {
+                                "-"
+                            },
+                            stdin = true
+                        }
+                    end,
                     asm = function()
                         return {
                             exe = "asmfmt",
