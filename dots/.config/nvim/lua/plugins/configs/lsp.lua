@@ -127,7 +127,20 @@ return {
             "folke/neodev.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             "williamboman/mason-lspconfig.nvim",
-            { "williamboman/mason.nvim", cmd = { "Mason" } },
+            {
+                "williamboman/mason.nvim",
+                cmd = {
+                    "Mason",
+                    "MasonLog",
+                    "MasonUpdate",
+                    "MasonInstall",
+                    "MasonUninstall",
+                    "MasonUninstallAll"
+                },
+                opts = {
+                    max_concurrent_installers = 12
+                }
+            },
             "simrat39/rust-tools.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
@@ -191,10 +204,6 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require("mason").setup({
-                max_concurrent_installers = 12,
-            })
-
             local mason_lspconfig = require("mason-lspconfig")
             local lspconfig = require("lspconfig")
 
