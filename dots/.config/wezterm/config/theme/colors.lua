@@ -59,7 +59,7 @@ local colors = {
 
     kanagawa = {
         foreground = color_names.kanagawa.fujiWhite,
-        background = color_names.kanagawa.sumiInk1,
+        background = color_names.kanagawa.sumiInk0,
 
         cursor_bg = color_names.kanagawa.oldWhite,
         cursor_fg = color_names.kanagawa.oldWhite,
