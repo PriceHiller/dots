@@ -82,10 +82,6 @@ in
           source = ../dots/.omnisharp;
           force = true;
         };
-        ".zshrc" = {
-          source = ../dots/.zshrc;
-          force = true;
-        };
         ".latexmkrc" = {
           source = ../dots/.latexmkrc;
           force = true;
@@ -102,10 +98,8 @@ in
     zsh = {
       enable = true;
       initExtra = ''
-        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-      '';
-      profileExtra = ''
-        export GTK_PATH="$HOME/.nix-profile/lib/gtk-2.0"
+        source "$HOME/.config/zsh/zsh"
+        __HM_SESS_VARS_SOURCED= source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       '';
     };
     neovim = {
