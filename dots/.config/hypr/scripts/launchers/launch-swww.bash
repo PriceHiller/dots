@@ -51,11 +51,11 @@ init() {
 	until swww init; do
 		sleep .1
 	done
+	log "swww daemon started"
 }
 
 main() {
 	init
-	log "swww daemon running, setting wallpapers"
 	while :; do
 		while IFS= read -r line
 		do
@@ -65,7 +65,7 @@ main() {
 			sleep .1
 		done < <(swww query)
 		sleep .5
-		swww init
+		init
 	done
 }
 
