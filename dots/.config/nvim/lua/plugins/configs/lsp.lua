@@ -358,7 +358,7 @@ return {
                             onSave = true,
                             executable = "tectonic",
                             forwardSearchAfter = true,
-                            args = { "-X", "compile", "%f", "--synctex" },
+                            args = { "-X", "compile", "%f", "--synctex", "-Z", "continue-on-errors" },
                         },
                         forwardSearch = {
                             executable = "zathura",
