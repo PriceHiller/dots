@@ -50,6 +50,7 @@ in
       jq
       tectonic
       fzf
+      delta
       eza
       luajit
       ripgrep
