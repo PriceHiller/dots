@@ -35,6 +35,7 @@ in
       yamllint
       curl
       llvm
+      llvmPackages.libcxxStdenv
       openssh
       openssl
       wget
@@ -52,6 +53,7 @@ in
       fzf
       delta
       eza
+      nixd
       luajit
       ripgrep
       fd
@@ -69,6 +71,10 @@ in
       direnv
       passage
       swappy
+      openssl
+      glibc
+      openssl.dev
+      glibc.static
     ];
 
 
@@ -92,6 +98,8 @@ in
     sessionVariables = {
       GTK_THEME = "Kanagawa-Borderless";
       QT_QPA_PLATFORMTHEME = "${gtkStyle}";
+      LD_LIBRARY_PATH = "${config.home.homeDirectory}/.nix-profile/lib";
+      PKG_CONFIG_PATH = "${config.home.homeDirectory}/.nix-profile/lib/pkgconfig";
     };
   };
 
