@@ -1,4 +1,4 @@
-{ pkgs, config, bob, ... }:
+{ pkgs, config, ... }:
 let
   dotsDir = "${config.home.homeDirectory}/.dot_files/dots";
   softLinkDots = dir:
@@ -18,7 +18,7 @@ in
   programs.home-manager.enable = true;
   home = {
     packages = with pkgs; [
-      bob.packages.${pkgs.system}.default
+      bob-nvim
       sqlite
       luajit
       imagemagick
