@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    bob = {
+      url = "path:./pkgs/bob-nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,7 +14,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, ... }:
+  outputs = inputs @ { home-manager, bob, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       username = "sam";
@@ -20,6 +24,9 @@
       targets.genericLinux.enable = true;
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = {
+          inherit bob;
+        };
         modules = [
           ({
             nixpkgs.overlays = [

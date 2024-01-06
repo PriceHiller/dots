@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, bob, ... }:
 let
   dotsDir = "${config.home.homeDirectory}/.dot_files/dots";
   softLinkDots = dir:
@@ -18,7 +18,7 @@ in
   programs.home-manager.enable = true;
   home = {
     packages = with pkgs; [
-      gcc
+      bob.packages.${pkgs.system}.default
       sqlite
       luajit
       imagemagick
