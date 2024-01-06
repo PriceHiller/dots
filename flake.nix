@@ -24,9 +24,6 @@
       targets.genericLinux.enable = true;
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = {
-          inherit bob;
-        };
         modules = [
           ({
             nixpkgs.overlays = [
@@ -38,6 +35,7 @@
                     wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
                   '';
                 });
+                bob-nvim = bob.overlays.${system}.default;
                 opensnitch-ui = super.opensnitch-ui.overrideAttrs
                   (oldAttrs: rec {
                     propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [
