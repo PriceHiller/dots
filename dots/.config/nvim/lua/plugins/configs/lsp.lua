@@ -429,6 +429,7 @@ return {
                 "vimls",
                 "marksman",
                 "asm_lsp",
+                "typst_lsp"
             }) do
                 lspconfig[server].setup(server_opts)
             end
