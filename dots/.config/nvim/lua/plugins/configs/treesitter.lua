@@ -126,6 +126,17 @@ return {
             "RRethy/nvim-treesitter-endwise",
         },
         config = function()
+            local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+            parser_config.typst = {
+                install_info = {
+                    url = "https://github.com/uben0/tree-sitter-typst",
+                    files = { "src/parser.c", "src/scanner.c" },
+                    branch = "master",
+                    generate_requires_npm = true,
+                },
+                maintainers = { "uben0" },
+                experimental = true
+            }
             require("nvim-treesitter.configs").setup({
                 auto_install = true,
                 ignore_install = { "comment" },
