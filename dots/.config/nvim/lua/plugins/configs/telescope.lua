@@ -39,6 +39,14 @@ return {
         dependencies = {
             "artart222/telescope_find_directories",
             "nvim-telescope/telescope-ui-select.nvim",
+            {
+                "nvim-telescope/telescope-frecency.nvim",
+                cmd = {
+                    "FrecencyMigrateDB",
+                    "FrecencyValidate",
+                    "FrecencyDelete"
+                },
+            },
             "debugloop/telescope-undo.nvim",
             "rcarriga/nvim-notify",
             { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
@@ -142,6 +150,10 @@ return {
                             preview_height = 0.8,
                         },
                     },
+                    frecency = {
+                        db_safe_mode = false,
+                        auto_validate = false
+                    },
                 },
             })
 
@@ -151,6 +163,7 @@ return {
             telescope.load_extension("ui-select")
             telescope.load_extension("smart_history")
             telescope.load_extension("undo")
+            telescope.load_extension("frecency")
 
             vim.api.nvim_create_user_command("Search", function()
                 -- Thank you u/SPEKTRUMdagreat :)
