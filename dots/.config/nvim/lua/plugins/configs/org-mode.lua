@@ -52,12 +52,12 @@ return {
             })
 
             vim.api.nvim_set_hl(0, "org_code", { link = "@field" })
-            vim.api.nvim_set_hl(0, "org_code_delimiter", { link = "@string.special" })
-            vim.api.nvim_set_hl(0, "org_verbatim_delimiter", { link = "@string.special" })
-            vim.api.nvim_set_hl(0, "org_italic_delimiter", { link = "@string.special" })
-            vim.api.nvim_set_hl(0, "org_bold_delimiter", { link = "@string.special" })
-            vim.api.nvim_set_hl(0, "org_underline_delimiter", { link = "@string.special" })
-            vim.api.nvim_set_hl(0, "org_strikethrough_delimiter", { link = "@string.special" })
+            vim.api.nvim_set_hl(0, "org_code_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_verbatim_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_italic_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_bold_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_underline_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_strikethrough_delimiter", { link = "@punctuation.delimiter" })
             if vim.bo.filetype == "org" then
                 vim.cmd.edit()
             end
