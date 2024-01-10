@@ -171,10 +171,10 @@ return {
                 },
                 opts = { margin = 5 },
             }
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "alpha",
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "AlphaReady",
                 desc = "Alpha Main Handler",
-                callback = function()
+                callback = function(args)
                     vim.opt_local.cursorline = false
 
                     local alpha_timer = vim.loop.new_timer()
@@ -187,12 +187,14 @@ return {
                         end)
                     )
 
-                    vim.api.nvim_create_autocmd("BufUnload", {
-                        buffer = 0,
+                    vim.api.nvim_create_autocmd("User", {
+                        pattern = "AlphaClosed",
                         desc = "Shut down alpha timer",
                         callback = function()
                             ---@diagnostic disable-next-line: need-check-nil
                             alpha_timer:close()
+                            vim.api.nvim_del_autocmd(args.id)
+                            return true
                         end,
                     })
                 end,
