@@ -1,6 +1,10 @@
 local wezterm = require("wezterm")
 
 return {
+    font_dirs = {
+        (os.getenv("XDG_DATA_HOME") or os.getenv("HOME") .. "/.local/share") .. "/fonts",
+        "/home/sam/.local/share/fonts"
+    },
     use_cap_height_to_scale_fallback_fonts = true,
     line_height = 1.0,
     font = wezterm.font_with_fallback({
