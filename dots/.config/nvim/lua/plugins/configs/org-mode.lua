@@ -30,7 +30,10 @@ return {
             require("orgmode").setup_ts_grammar()
             -- Setup orgmode
             require("orgmode").setup({
-                org_agenda_files = "~/Notes/**/*",
+                org_agenda_files = {
+                    "~/Git/College/**/*",
+                    "~/Notes/**/*"
+                },
                 org_default_notes_file = "~/Notes/notes.org",
                 org_startup_folded = "inherit",
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
