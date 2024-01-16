@@ -105,11 +105,17 @@ in
     };
   };
 
+  xdg = {
+    enable = true;
+    mime.enable = true;
+  };
+
   programs = {
     zsh = {
       enable = true;
       initExtra = ''
         source "$HOME/.config/zsh/zsh"
+        export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"
         __HM_SESS_VARS_SOURCED= source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       '';
     };
