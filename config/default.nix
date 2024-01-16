@@ -19,6 +19,7 @@ in
   home = {
     packages = with pkgs; [
       bob-nvim
+      emacs-pgtk
       sqlite
       luajit
       imagemagick

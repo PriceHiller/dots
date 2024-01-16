@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
   outputs = inputs @ { home-manager, bob, nixpkgs, ... }:
@@ -28,6 +29,7 @@
           ({
             nixpkgs.overlays = [
               inputs.neovim-nightly-overlay.overlay
+              inputs.emacs-overlay.overlays.emacs
               (self: super: {
                 kanagawa-gtk-theme = super.callPackage ./pkgs/kanagawa-gtk { };
                 lxappearance = super.lxappearance.overrideAttrs (oldAttrs: {
