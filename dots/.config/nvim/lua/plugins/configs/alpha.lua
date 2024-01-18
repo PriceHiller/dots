@@ -183,7 +183,12 @@ return {
                         50,
                         1000,
                         vim.schedule_wrap(function()
-                            vim.cmd("AlphaRedraw")
+                            ---@diagnostic disable-next-line: param-type-mismatch
+                            local success, _ = pcall(vim.cmd, "AlphaRedraw")
+                            if not success and not alpha_timer:is_closing() then
+                                vim.api.nvim_del_autocmd(args.id)
+                                alpha_timer:close()
+                            end
                         end)
                     )
 
@@ -192,8 +197,10 @@ return {
                         desc = "Shut down alpha timer",
                         callback = function()
                             ---@diagnostic disable-next-line: need-check-nil
-                            alpha_timer:close()
-                            vim.api.nvim_del_autocmd(args.id)
+                            if not alpha_timer:is_closing() then
+                                alpha_timer:close()
+                                vim.api.nvim_del_autocmd(args.id)
+                            end
                             return true
                         end,
                     })
