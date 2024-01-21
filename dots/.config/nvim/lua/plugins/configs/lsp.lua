@@ -195,7 +195,7 @@ return {
                 desc = "LSP: Toggle Diagnostic Style",
             },
             {
-                "<leader>lT",
+                "<leader>ll",
                 function()
                     vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
                 end,
