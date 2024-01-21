@@ -5,6 +5,6 @@ vim.api.nvim_set_hl(
     vim.tbl_deep_extend(
         "force",
         vim.api.nvim_get_hl(0, { name = "@text.title.typst", link = false }),
-        { underline = true }
+        { underline = true, bold = true }
     )
 )
