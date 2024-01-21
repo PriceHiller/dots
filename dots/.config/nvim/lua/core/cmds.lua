@@ -14,7 +14,7 @@ M.setup = function()
             bufhidden = "wipe",
             swapfile = false,
             readonly = true,
-            winbar = vim.opt.winbar:get()
+            winbar = vim.opt.winbar:get(),
         }
         for option, value in pairs(opts) do
             vim.api.nvim_set_option_value(option, value, { scope = "local" })

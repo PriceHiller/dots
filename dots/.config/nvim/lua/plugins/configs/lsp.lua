@@ -135,11 +135,11 @@ return {
                     "MasonUpdate",
                     "MasonInstall",
                     "MasonUninstall",
-                    "MasonUninstallAll"
+                    "MasonUninstallAll",
                 },
                 opts = {
-                    max_concurrent_installers = 12
-                }
+                    max_concurrent_installers = 12,
+                },
             },
             "simrat39/rust-tools.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
@@ -429,7 +429,7 @@ return {
                 "vimls",
                 "marksman",
                 "asm_lsp",
-                "typst_lsp"
+                "typst_lsp",
             }) do
                 lspconfig[server].setup(server_opts)
             end

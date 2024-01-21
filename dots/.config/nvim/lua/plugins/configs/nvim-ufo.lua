@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd("BufReadPre", {
     callback = function()
         vim.b.ufo_foldlevel = 0
-    end
+    end,
 })
 
 ---@param num integer Set the fold level to this number
@@ -51,7 +51,7 @@ return {
                     if count == 0 then
                         count = 1
                     end
-                    change_buf_foldlevel_by(-(count))
+                    change_buf_foldlevel_by(-count)
                 end,
                 desc = "UFO: Fold More",
             },

@@ -39,9 +39,9 @@ return {
                         return {
                             exe = "shfmt",
                             args = {
-                                "-"
+                                "-",
                             },
-                            stdin = true
+                            stdin = true,
                         }
                     end,
                     asm = function()

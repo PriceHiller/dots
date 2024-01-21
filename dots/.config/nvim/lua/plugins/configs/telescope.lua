@@ -43,7 +43,7 @@ return {
                 cmd = {
                     "FrecencyMigrateDB",
                     "FrecencyValidate",
-                    "FrecencyDelete"
+                    "FrecencyDelete",
                 },
             },
             "debugloop/telescope-undo.nvim",
@@ -151,7 +151,7 @@ return {
                     },
                     frecency = {
                         db_safe_mode = false,
-                        auto_validate = false
+                        auto_validate = false,
                     },
                 },
             })
