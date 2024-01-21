@@ -35,6 +35,9 @@ return {
                     "~/Notes/**/*"
                 },
                 org_default_notes_file = "~/Notes/notes.org",
+                org_agenda_start_day = "-1d",
+                calendar_week_start_day = 0,
+                org_agenda_span = "month",
                 org_startup_folded = "inherit",
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
                 win_split_mode = "auto",
