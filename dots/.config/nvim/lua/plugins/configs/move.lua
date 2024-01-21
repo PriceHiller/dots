@@ -4,7 +4,7 @@ return {
         event = "VeryLazy",
         keys = {
             "<A-j>",
-            "<A-j>",
+            "<A-k>",
             "<A-h>",
             "<A-l>",
         },
