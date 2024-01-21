@@ -111,6 +111,9 @@ M.setup = function()
         { silent = true, expr = true, desc = "Call Macro Against Visual Selection" })
     vim.keymap.set("x", "Q", ':normal! @<C-R>=reg_recorded()<CR><CR>',
         { silent = true, desc = "Call Last Macro Against Visual Selection" })
+
+    -- Insert an Em Dash in insert mode
+    vim.keymap.set("i", "<A-->", "—", { silent = true, desc = "Insert: Em Dash" })
 end
 
 return M
