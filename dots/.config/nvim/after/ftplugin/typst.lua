@@ -8,3 +8,8 @@ vim.api.nvim_set_hl(
         { underline = true, bold = true }
     )
 )
+vim.api.nvim_set_hl(
+    0,
+    "@text.emph.typst",
+    { link = "@text.emphasis" }
+)
