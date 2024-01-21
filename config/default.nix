@@ -72,7 +72,7 @@ in
       swappy
       stylua
       typstfmt
-      typst
+      typst-dev
     ] ++ [
       # gcc
       # glibc

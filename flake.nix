@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    typst.url = "github:typst/typst";
     bob = {
       url = "path:./pkgs/bob-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +31,7 @@
             nixpkgs.overlays = [
               inputs.neovim-nightly-overlay.overlay
               inputs.emacs-overlay.overlays.emacs
+              inputs.typst.overlays.default
               (self: super: {
                 kanagawa-gtk-theme = super.callPackage ./pkgs/kanagawa-gtk { };
                 lxappearance = super.lxappearance.overrideAttrs (oldAttrs: {
