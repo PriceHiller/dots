@@ -1,5 +1,24 @@
 return {
     {
+        "sindrets/diffview.nvim",
+        keys = {
+            { "<localleader>dd", "<cmd>DiffviewOpen<CR>",        desc = "Diff View: Open" },
+            { "<localleader>dh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff View: File History" },
+        },
+        cmd = {
+            "DiffviewToggleFiles",
+            "DiffviewFileHistory",
+            "DiffviewFocusFiles",
+            "DiffviewRefresh",
+            "DiffviewClose",
+            "DiffviewOpen",
+            "DiffviewLog",
+        },
+        opts = {
+            enhanced_diff_hl = true,
+        },
+    },
+    {
         "neogitorg/neogit",
         cmd = { "Neogit" },
         keys = {
@@ -38,25 +57,7 @@ return {
             }
         end,
         dependencies = {
-            {
-                keys = {
-                    { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "Diff View: Open" },
-                    { "<leader>gh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff View: File History" },
-                },
-                "sindrets/diffview.nvim",
-                cmd = {
-                    "DiffviewToggleFiles",
-                    "DiffviewFileHistory",
-                    "DiffviewFocusFiles",
-                    "DiffviewRefresh",
-                    "DiffviewClose",
-                    "DiffviewOpen",
-                    "DiffviewLog",
-                },
-                opts = {
-                    enhanced_diff_hl = true,
-                },
-            },
+            "sindrets/diffview.nvim",
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
         },
