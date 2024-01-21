@@ -59,7 +59,7 @@ return {
                 },
             })
 
-            vim.api.nvim_set_hl(0, "org_code", { link = "@field" })
+            vim.api.nvim_set_hl(0, "org_code", { link = "@variable.parameter" })
             vim.api.nvim_set_hl(0, "org_code_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_verbatim_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_italic_delimiter", { link = "@punctuation.delimiter" })
