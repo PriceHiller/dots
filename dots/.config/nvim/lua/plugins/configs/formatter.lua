@@ -50,6 +50,12 @@ return {
                             stdin = true,
                         }
                     end,
+                    typst = function()
+                        return {
+                            exe = "typstfmt",
+                            stdin = true
+                        }
+                    end
                 },
             }
         end,
