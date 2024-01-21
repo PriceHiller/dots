@@ -71,6 +71,8 @@ in
       passage
       swappy
       stylua
+      typstfmt
+      typst
     ] ++ [
       # gcc
       # glibc
