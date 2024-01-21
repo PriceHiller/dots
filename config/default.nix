@@ -70,6 +70,7 @@ in
       direnv
       passage
       swappy
+      stylua
     ] ++ [
       # gcc
       # glibc
