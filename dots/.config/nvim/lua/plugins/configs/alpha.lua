@@ -70,7 +70,7 @@ return {
                         .. "ms"
                 end,
 
-                opts = { hl = "@conditional", position = "center" },
+                opts = { hl = "@keyword.conditional", position = "center" },
             }
 
             vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@string" })
@@ -97,7 +97,7 @@ return {
                 val = function()
                     return vim.fn.strftime("%c")
                 end,
-                opts = { hl = "@field", position = "center" },
+                opts = { hl = "@variable.member", position = "center" },
             }
 
             -- Menu
