@@ -904,7 +904,7 @@ return {
                                 provider = " [",
                                 hl = {
                                     fg = colors.peachRed,
-                                    bg = colors.sumiInk4
+                                    bg = colors.sumiInk4,
                                 },
                             },
                             {
@@ -921,7 +921,7 @@ return {
                                 provider = "]",
                                 hl = {
                                     fg = colors.peachRed,
-                                    bg = colors.sumiInk4
+                                    bg = colors.sumiInk4,
                                 },
                             },
                         },

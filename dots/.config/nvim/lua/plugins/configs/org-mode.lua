@@ -1,6 +1,7 @@
 return {
     {
         "nvim-orgmode/orgmode",
+        dir = "~/Git/Neovim/Orgmode",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter" },
             {
@@ -32,7 +33,7 @@ return {
             require("orgmode").setup({
                 org_agenda_files = {
                     "~/Git/College/**/*",
-                    "~/Notes/**/*"
+                    "~/Notes/**/*",
                 },
                 org_default_notes_file = "~/Notes/notes.org",
                 org_agenda_start_day = "-1d",

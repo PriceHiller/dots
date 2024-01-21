@@ -5,7 +5,7 @@ return {
             "nvim-tree/nvim-web-devicons",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
-            "miversen33/netman.nvim"
+            "miversen33/netman.nvim",
         },
         cmd = "Neotree",
         keys = {
@@ -21,9 +21,9 @@ return {
                     if vim.fn.isdirectory(f) ~= 0 then
                         vim.cmd("Neotree current dir=" .. f)
                         -- neo-tree is loaded now, delete the init autocmd
-                        vim.api.nvim_clear_autocmds { group = "NeoTreeInit" }
+                        vim.api.nvim_clear_autocmds({ group = "NeoTreeInit" })
                     end
-                end
+                end,
             })
         end,
         opts = function()
