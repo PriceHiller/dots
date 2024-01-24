@@ -39,6 +39,28 @@ return {
                     vim.api.nvim_set_hl(0, "NvimNotifyTrace", { fg = colors.oniViolet })
 
                     local overrides = {
+                        -- HACK: Placed here until kanagawa supports new TS colors in nightly
+                        ["@string.regexp"] = { link = "@string.regex" },
+                        ["@variable.parameter"] = { link = "@parameter" },
+                        ["@exception"] = { link = "@exception" },
+                        ["@string.special.symbol"] = { link = "@symbol" },
+                        ["@markup.strong"] = { link = "@text.strong" },
+                        ["@markup.italic"] = { link = "@text.emphasis" },
+                        ["@markup.heading"] = { link = "@text.title" },
+                        ["@markup.raw"] = { link = "@text.literal" },
+                        ["@markup.quote"] = { link = "@text.quote" },
+                        ["@markup.math"] = { link = "@text.math" },
+                        ["@markup.environment"] = { link = "@text.environment" },
+                        ["@markup.environment.name"] = { link = "@text.environment.name" },
+                        ["@markup.link.url"] = { link = "Special" },
+                        ["@markup.link.label"] = { link = "Identifier" },
+                        ["@comment.note"] = { link = "@text.note" },
+                        ["@comment.warning"] = { link = "@text.warning" },
+                        ["@comment.danger"] = { link = "@text.danger" },
+                        ["@diff.plus"] = { link = "@text.diff.add" },
+                        ["@diff.minus"] = { link = "@text.diff.delete" },
+
+
                         CursorLineNr = { fg = colors.roninYellow, bg = palette.theme.ui.bg_p1 },
                         CursorLineFold = { fg = colors.crystalBlue, bg = palette.theme.ui.bg_p1 },
                         CursorLineSign = { bg = palette.theme.ui.bg_p1 },
@@ -177,6 +199,7 @@ return {
                         ["@text"] = { fg = colors.fujiWhite },
                         ["@markup.raw.markdown_inline"] = { link = "String" },
                         ["@markup.raw.delimiter.markdown_inline"] = { link = "@punctuation.delimiter" },
+                        ["@markup.raw.delimiter.markdown"] = { link = "@punctuation.delimiter" },
                         ["@markup.link.markdown_inline"] = { fg = colors.crystalBlue },
                         ["@text.title.1.marker.markdown"] = { fg = colors.surimiOrange },
                         ["@text.title.2.marker.markdown"] = { fg = colors.surimiOrange },
@@ -209,11 +232,19 @@ return {
                         NotificationInfo = { link = "NvimNotifyInfo" },
                         NotificationWarning = { link = "NvimNotifyWarn" },
                         NotificationError = { link = "NvimNotifyError" },
-                        org_table_sep = { fg = colors.springBlue, bg = colors.winterBlue },
-                        org_table_header = { fg = colors.crystalBlue, bg = colors.winterBlue },
-                        org_table = { bg = colors.winterBlue },
+
+                        -- Org mode specific
+                        org_verbatim = { bg = colors.sumiInk0, fg = colors.springGreen },
+                        org_code = { fg = colors.carpYellow, bg = colors.sumiInk0 },
+                        org_table_sep = { fg = colors.springBlue },
+                        org_table_header = { fg = colors.crystalBlue },
                         ["@OrgTSBlock.org"] = { fg = colors.fujiGray, bold = true, italic = true },
                         ["@OrgTSDirective.org"] = { link = "@OrgTSBlock.org" },
+
+                        -- Markdown specific
+                        ["@markdown_check_undone"] = { fg = colors.carpYellow },
+                        ["@markdown_check_ndone"] = { fg = colors.springGreen },
+
                     }
 
                     return overrides
