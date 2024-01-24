@@ -71,6 +71,7 @@ in
       stylua
       typstfmt
       typst
+      hurl
     ] ++ [
       gnumake
       cmake
