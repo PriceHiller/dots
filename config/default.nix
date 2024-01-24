@@ -40,8 +40,6 @@ in
       wget
       rsync
       readline
-      gnumake
-      cmake
       git
       gh
       ffmpeg
@@ -74,13 +72,14 @@ in
       typstfmt
       typst
     ] ++ [
-      # gcc
-      # glibc
-      # libgccjit
-      # openssl.dev
-      # glibc.static
-      # llvm
-      # llvmPackages.libcxxStdenv
+      gnumake
+      cmake
+      gcc
+      glibc
+      openssl.dev
+      glibc.static
+      llvm
+      llvmPackages.libcxxStdenv
     ];
 
 
