@@ -37,7 +37,7 @@
                     wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
                   '';
                 });
-                bob-nvim = bob.overlays.${system}.default;
+                bob-nvim = inputs.bob.overlays.${system}.default;
                 opensnitch-ui = super.opensnitch-ui.overrideAttrs
                   (oldAttrs: rec {
                     propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [
