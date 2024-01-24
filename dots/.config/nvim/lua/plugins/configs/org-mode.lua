@@ -66,7 +66,7 @@ return {
             vim.api.nvim_set_hl(0, "org_underline_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_strikethrough_delimiter", { link = "@punctuation.delimiter" })
             if vim.bo.filetype == "org" then
-                vim.cmd.edit()
+                vim.cmd.doautocmd("FileType org")
             end
         end,
     },
