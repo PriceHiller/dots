@@ -118,10 +118,6 @@ return {
         event = { "BufReadPre", "BufNewFile", "WinLeave" },
         dependencies = {
             "nvim-treesitter/playground",
-            {
-                "pfeiferj/nvim-hurl",
-                config = true,
-            },
             "nvim-treesitter/nvim-treesitter-textobjects",
             "RRethy/nvim-treesitter-endwise",
         },
