@@ -1,7 +1,6 @@
 return {
     {
         "nvim-orgmode/orgmode",
-        dir = "~/Git/Neovim/Orgmode",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter" },
             {
@@ -41,6 +40,7 @@ return {
                 org_agenda_span = "month",
                 org_startup_folded = "inherit",
                 org_hide_emphasis_markers = true,
+                org_startup_indented = true,
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
                 win_split_mode = "auto",
                 org_capture_templates = {
