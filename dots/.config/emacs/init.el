@@ -130,7 +130,7 @@
   (doom-themes-org-config))
 
 (use-package doom-modeline
-  :custom    
+  :custom
   (doom-modeline-height 25)
   (doom-modeline-bar-width 5)
   (doom-modeline-icon t)
@@ -683,7 +683,7 @@
                 (org-level-6 . 1.15)
                 (org-level-7 . 1.1)
                 (org-level-8 . 1.1)))
-  (set-face-attribute (car face) nil :font "FiraCode Nerd Font" :weight 'medium :height (cdr face)))
+  (set-face-attribute (car face) nil :font "Fira Code" :weight 'medium :height (cdr face)))
 (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
