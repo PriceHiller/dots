@@ -1067,6 +1067,7 @@ return {
                                 return ft:lower():find(excluded_ft) ~= nil
                             end, {
                                 ".*neogit.*",
+                                ".*no-neck-pain.*"
                             })
                             if #matches > 0 then
                                 return false
