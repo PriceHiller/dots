@@ -14,23 +14,6 @@ return {
         dependencies = {
             "mfussenegger/nvim-dap",
         },
-        opts = function()
-            vim.fn.sign_define(
-                "DapBreakpoint",
-                { text = "● ", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
-            )
-            vim.fn.sign_define(
-                "DapBreakpointCondition",
-                { text = "● ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
-            )
-            vim.fn.sign_define("DapLogPoint", { text = "● ", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
-            vim.fn.sign_define("DapStopped", { text = "→ ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
-            vim.fn.sign_define(
-                "DapBreakpointReject",
-                { text = "●", texthl = "DiagnosticSignHint", linehl = "", numhl = "" }
-            )
-            return {}
-        end,
     },
     {
         "theHamsta/nvim-dap-virtual-text",
@@ -125,6 +108,23 @@ return {
                 desc = "DAP: Run Last",
             },
         },
+        init = function()
+            vim.fn.sign_define(
+                "DapBreakpoint",
+                { text = "● ", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
+            )
+            vim.fn.sign_define(
+                "DapBreakpointCondition",
+                { text = "● ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" }
+            )
+            vim.fn.sign_define("DapLogPoint", { text = "● ", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
+            vim.fn.sign_define("DapStopped", { text = "→ ", texthl = "DiagnosticSignWarn", linehl = "", numhl = "" })
+            vim.fn.sign_define(
+                "DapBreakpointReject",
+                { text = "●", texthl = "DiagnosticSignHint", linehl = "", numhl = "" }
+            )
+            return {}
+        end,
         config = function()
             require("dap.ext.vscode").load_launchjs()
 
