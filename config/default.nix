@@ -162,6 +162,12 @@ in
       gtk4.extraConfig = extraGtkConfig;
     };
 
+  services = {
+    cliphist = {
+      enable = true;
+    };
+  };
+
   systemd.user = {
     targets.compositor = {
       Unit = {
