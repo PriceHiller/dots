@@ -147,6 +147,7 @@ return {
                         CmpCustomSelectionNpm = { fg = colors.fujiWhite, bg = colors.peachRed },
                         CmpCustomSelectionCommit = { fg = colors.fujiWhite, bg = colors.peachRed },
                         CmpCustomSelectionSnippet = { fg = colors.fujiWhite, bg = colors.peachRed },
+                        CmpCustomSelectionLuaLatexSymbol = { fg = colors.fujiWhite, bg = colors.surimiOrange },
                         TelescopeNormal = { bg = colors.sumiInk2 },
                         TelescopeBorder = { bg = colors.sumiInk2, fg = colors.sumiInk1 },
                         TelescopePromptBorder = { bg = colors.sumiInk0, fg = colors.sumiInk0 },
