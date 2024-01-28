@@ -12,7 +12,7 @@ return {
             {
                 ";nv",
                 function()
-                    require("nabla").toggle_virt()
+                    require("nabla").toggle_virt({ autogen = true, silent = true })
                 end,
                 desc = "Nabla: Toggle Virt Lines",
             },
