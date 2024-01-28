@@ -42,6 +42,7 @@ return {
                         -- HACK: Placed here until kanagawa supports new TS colors in nightly
                         ["@string.regexp"] = { link = "@string.regex" },
                         ["@variable.parameter"] = { link = "@parameter" },
+                        ["@variable.member"] = { link = "@field" },
                         ["@exception"] = { link = "@exception" },
                         ["@string.special.symbol"] = { link = "@symbol" },
                         ["@markup.strong"] = { link = "@text.strong" },
@@ -61,6 +62,7 @@ return {
                         ["@diff.minus"] = { link = "@text.diff.delete" },
 
 
+                        ["@field"] = { fg = colors.carpYellow },
                         CursorLineNr = { fg = colors.roninYellow, bg = palette.theme.ui.bg_p1 },
                         CursorLineFold = { fg = colors.crystalBlue, bg = palette.theme.ui.bg_p1 },
                         CursorLineSign = { bg = palette.theme.ui.bg_p1 },
