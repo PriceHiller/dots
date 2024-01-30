@@ -47,7 +47,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local edge_fg = color_names.kanagawa.oniViolet
 
     local title = tab_title(tab)
-    if #title > max_width - 1 then
+    if #title > max_width - 2 then
         title = " " .. wezterm.truncate_right(title, max_width - 6) .. "…"
     else
         title = " " .. title .. " "
