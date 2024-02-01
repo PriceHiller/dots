@@ -7,13 +7,13 @@ return {
             debug = false,
             mode = "split",
             formatters = {
-                json = { 'jq' },
+                json = { "jq" },
                 html = {
-                    'prettier',
-                    '--parser',
-                    'html',
+                    "prettier",
+                    "--parser",
+                    "html",
                 },
             },
         },
-    }
+    },
 }

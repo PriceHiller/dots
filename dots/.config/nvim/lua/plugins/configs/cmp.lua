@@ -119,8 +119,8 @@ return {
             local standard_sources = function(sources)
                 sources = sources or {}
                 local default_sources = {
-                    { name = "nvim_lsp", },
-                    { name = "luasnip", }, -- For luasnip users.
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" }, -- For luasnip users.
                     {
                         name = "fuzzy_buffer",
                     },
@@ -140,7 +140,7 @@ return {
                         option = { cache = true },
                         trigger_characters = { "\\" },
                     },
-                    { name = "zsh", },
+                    { name = "zsh" },
                     { name = "emoji", keyword_length = 2 },
                     { name = "calc" },
                     { name = "npm", keyword_length = 2 },
@@ -172,7 +172,7 @@ return {
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
                             docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker" },
                             luasnip = { symbol = " ", name = "Snippet" },
-                            ["lua-latex-symbols"] = { symbol = "󰡱 ", name = "Math", hl_group = "LuaLatexSymbol" }
+                            ["lua-latex-symbols"] = { symbol = "󰡱 ", name = "Math", hl_group = "LuaLatexSymbol" },
                         }
 
                         local extra_kind_icons = {

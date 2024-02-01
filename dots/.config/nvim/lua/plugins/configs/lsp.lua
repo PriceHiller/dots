@@ -290,7 +290,7 @@ return {
                     yaml = {
                         schemaStore = {
                             enable = false,
-                            url = ""
+                            url = "",
                         },
                         schemas = require("schemastore").yaml.schemas({
                             validate = { enable = true },
@@ -299,9 +299,9 @@ return {
                                     description = "Gitea Actions",
                                     fileMatch = ".gitea/workflows/*",
                                     name = "gitea-workflow.json",
-                                    url = "https://json.schemastore.org/github-workflow.json"
-                                }
-                            }
+                                    url = "https://json.schemastore.org/github-workflow.json",
+                                },
+                            },
                         }),
                     },
                 },

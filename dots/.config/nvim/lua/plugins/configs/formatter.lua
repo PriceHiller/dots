@@ -53,9 +53,9 @@ return {
                     typst = function()
                         return {
                             exe = "typstfmt",
-                            stdin = true
+                            stdin = true,
                         }
-                    end
+                    end,
                 },
             }
         end,
