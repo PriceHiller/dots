@@ -5,20 +5,20 @@ vim.keymap.set("n", "<leader>fr", "<Cmd>Hurl<CR>", {
 vim.opt_local.commentstring = "# %s"
 
 vim.keymap.set("n", "<leader>fr", "<cmd>HurlRunner<CR>", {
-    desc = "Hurl: Runner"
+    desc = "Hurl: Runner",
 })
 vim.keymap.set("n", "<leader>fa", "<cmd>HurlRunnerAt<CR>", {
-    desc = "Hurl: Run Api request"
+    desc = "Hurl: Run Api request",
 })
 vim.keymap.set("n", "<leader>fe", "<cmd>HurlRunnerToEntry<CR>", {
-    desc = "Hurl: Run Api request to entry"
+    desc = "Hurl: Run Api request to entry",
 })
 vim.keymap.set("n", "<leader>fm", "<cmd>HurlToggleMode<CR>", {
-    desc = "Hurl: Toggle Mode"
+    desc = "Hurl: Toggle Mode",
 })
 vim.keymap.set("n", "<leader>rv", "<cmd>HurlVerbose<CR>", {
-    desc = "Hurl: Run Api in verbose mode"
+    desc = "Hurl: Run Api in verbose mode",
 })
 vim.keymap.set("v", "<leader>fr", ":HurlRunner<CR>", {
-    desc = "Hurl: Runner"
+    desc = "Hurl: Runner",
 })

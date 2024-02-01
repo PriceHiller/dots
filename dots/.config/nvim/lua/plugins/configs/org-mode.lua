@@ -21,6 +21,7 @@ return {
                 },
             },
         },
+        dir = "~/Git/Neovim/Orgmode",
         ft = { "org" },
         keys = {
             { "<leader>o", desc = "> Org" },

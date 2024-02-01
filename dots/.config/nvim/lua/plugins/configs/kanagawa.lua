@@ -61,7 +61,6 @@ return {
                         ["@diff.plus"] = { link = "@text.diff.add" },
                         ["@diff.minus"] = { link = "@text.diff.delete" },
 
-
                         ["@field"] = { fg = colors.carpYellow },
                         CursorLineNr = { fg = colors.roninYellow, bg = palette.theme.ui.bg_p1 },
                         CursorLineFold = { fg = colors.crystalBlue, bg = palette.theme.ui.bg_p1 },
@@ -247,7 +246,6 @@ return {
                         -- Markdown specific
                         ["@markdown_check_undone"] = { fg = colors.carpYellow },
                         ["@markdown_check_ndone"] = { fg = colors.springGreen },
-
                     }
 
                     return overrides
