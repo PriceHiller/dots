@@ -3,7 +3,6 @@
 export PATH="${PATH}:${HOME}/.local/bin"
 
 ### Shell ###
-export LANG=en_US.UTF-8
 export ZSH_HIGHLIGHT_MAXLENGTH=10000
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=2
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
