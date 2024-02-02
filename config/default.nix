@@ -1,105 +1,103 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 let
   dotsDir = "${config.home.homeDirectory}/.dot_files/dots";
   softLinkDots = dir:
-    (builtins.listToAttrs (map
-      (n: {
-        name = "${dir + "/" + n}";
-        value = {
-          source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/${dir}/${n}";
-          force = true;
-        };
-      })
-      # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
+    (builtins.listToAttrs (map (n: {
+      name = "${dir + "/" + n}";
+      value = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/${dir}/${n}";
+        force = true;
+      };
+    })
+    # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
       (builtins.attrNames (builtins.readDir ../dots/${dir}))));
   gtkStyle = "gtk2";
-in
-{
+in {
   programs.home-manager.enable = true;
   home = {
-    packages = with pkgs; [
-      bob-nvim
-      emacs-pgtk
-      sqlite
-      luajit
-      imagemagick
-      dotnet-sdk_8
-      cargo
-      rustc
-      shellcheck
-      openjdk
-      go
-      nodejs
-      poetry
-      python3
-      ruby
-      yamllint
-      curl
-      openssh
-      openssl
-      wget
-      rsync
-      readline
-      git
-      gh
-      ffmpeg
-      silicon
-      man
-      jq
-      tectonic
-      fzf
-      delta
-      eza
-      nixd
-      luajit
-      ripgrep
-      fd
-      nixfmt
-      gtk2
-      lxappearance
-      webcord
-      gtk-engine-murrine
-      opensnitch-ui
-      twitter-color-emoji
-      open-sans
-      noto-fonts
-      fira-code
-      nerdfonts
-      direnv
-      passage
-      swappy
-      stylua
-      typstfmt
-      typst
-      hurl
-    ] ++ [
-      gnumake
-      cmake
-      gcc
-      glibc
-      openssl.dev
-      glibc.static
-      llvm
-      llvmPackages.libcxxStdenv
-    ];
+    packages = with pkgs;
+      [
+        bob-nvim
+        emacs-pgtk
+        sqlite
+        luajit
+        imagemagick
+        dotnet-sdk_8
+        cargo
+        rustc
+        shellcheck
+        openjdk
+        go
+        nodejs
+        poetry
+        python3
+        ruby
+        yamllint
+        curl
+        openssh
+        openssl
+        wget
+        rsync
+        readline
+        git
+        gh
+        ffmpeg
+        silicon
+        man
+        jq
+        tectonic
+        fzf
+        delta
+        eza
+        nixd
+        luajit
+        ripgrep
+        fd
+        nixfmt
+        gtk2
+        lxappearance
+        webcord
+        gtk-engine-murrine
+        opensnitch-ui
+        twitter-color-emoji
+        open-sans
+        noto-fonts
+        fira-code
+        nerdfonts
+        direnv
+        passage
+        swappy
+        stylua
+        typstfmt
+        typst
+        hurl
+        waybar
+      ] ++ [ ansible ansible-lint ] ++ [
+        # gnumake
+        # cmake
+        # gcc
+        # glibc
+        # openssl.dev
+        # glibc.static
+        # llvm
+        # llvmPackages.libcxxStdenv
+      ];
 
-
-    file =
-      {
-        ".local/" = {
-          source = ../dots/.local;
-          recursive = true;
-          force = true;
-        };
-        ".omnisharp" = {
-          source = ../dots/.omnisharp;
-          force = true;
-        };
-        ".latexmkrc" = {
-          source = ../dots/.latexmkrc;
-          force = true;
-        };
-      } // softLinkDots ".config";
+    file = {
+      ".local/" = {
+        source = ../dots/.local;
+        recursive = true;
+        force = true;
+      };
+      ".omnisharp" = {
+        source = ../dots/.omnisharp;
+        force = true;
+      };
+      ".latexmkrc" = {
+        source = ../dots/.latexmkrc;
+        force = true;
+      };
+    } // softLinkDots ".config";
 
     sessionVariables = {
       GTK_THEME = "Kanagawa-Borderless";
@@ -131,42 +129,36 @@ in
     };
   };
 
-  gtk =
-    let
-      extraGtkConfig = {
-        gtk-application-prefer-dark-theme = true;
-        gtk-cursor-theme-size = 0;
-        gtk-enable-event-sounds = 1;
-        gtk-enable-input-feedback-sounds = 1;
-        gtk-xft-antialias = 1;
-        gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintfull";
-      };
-    in
-    {
-      enable = true;
-      theme = {
-        name = "Kanagawa-Borderless";
-        package = pkgs.kanagawa-gtk-theme;
-      };
-      iconTheme = {
-        name = "Kanagawa";
-        package = pkgs.kanagawa-gtk-theme;
-      };
-      font = {
-        name = "Open Sans";
-        size = 11;
-        package = pkgs.open-sans;
-      };
-      gtk3.extraConfig = extraGtkConfig;
-      gtk4.extraConfig = extraGtkConfig;
+  gtk = let
+    extraGtkConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-cursor-theme-size = 0;
+      gtk-enable-event-sounds = 1;
+      gtk-enable-input-feedback-sounds = 1;
+      gtk-xft-antialias = 1;
+      gtk-xft-hinting = 1;
+      gtk-xft-hintstyle = "hintfull";
     };
-
-  services = {
-    cliphist = {
-      enable = true;
+  in {
+    enable = true;
+    theme = {
+      name = "Kanagawa-Borderless";
+      package = pkgs.kanagawa-gtk-theme;
     };
+    iconTheme = {
+      name = "Kanagawa";
+      package = pkgs.kanagawa-gtk-theme;
+    };
+    font = {
+      name = "Open Sans";
+      size = 11;
+      package = pkgs.open-sans;
+    };
+    gtk3.extraConfig = extraGtkConfig;
+    gtk4.extraConfig = extraGtkConfig;
   };
+
+  services = { cliphist = { enable = true; }; };
 
   systemd.user = {
     targets.compositor = {
@@ -185,9 +177,7 @@ in
           ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
         };
 
-        Service = {
-          ExecStart = "${pkgs.opensnitch-ui}/bin/opensnitch-ui";
-        };
+        Service = { ExecStart = "${pkgs.opensnitch-ui}/bin/opensnitch-ui"; };
 
         environment = {
           QT_QPA_PLATFORMTHEME = "${gtkStyle}";
