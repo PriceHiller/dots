@@ -71,7 +71,6 @@ in {
         typstfmt
         typst
         hurl
-        waybar
       ] ++ [ ansible ansible-lint ] ++ [
         # gnumake
         # cmake
@@ -113,6 +112,11 @@ in {
   };
 
   programs = {
+    waybar = {
+      enable = true;
+      systemd.enable = true;
+
+    };
     zsh = {
       enable = true;
       initExtra = ''
