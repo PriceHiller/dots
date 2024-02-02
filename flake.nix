@@ -13,6 +13,10 @@
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { home-manager, nixpkgs, ... }:
@@ -23,8 +27,11 @@
     {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
       targets.genericLinux.enable = true;
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration rec {
         pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = {
+          inherit inputs;
+        };
         modules = [
           ({
             nixpkgs.overlays = [
