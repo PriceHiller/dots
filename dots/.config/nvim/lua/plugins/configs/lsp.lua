@@ -280,6 +280,10 @@ return {
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
+                        hint = {
+                            enable = true,
+                            setType = true
+                        },
                         completion = {
                             callSnippet = "Replace",
                         },
