@@ -5,7 +5,20 @@ local function on_attach(client, bufnr)
         title = "LSP",
     })
 
+    local function disable_format_capability(capabilities)
+        capabilities.documentFormattingProvider = false
+        capabilities.documentRangeFormattingProvider = false
+    end
+    local ignored_fmt_lsps = {
+        "lua_ls"
+    }
     local capabilities = client.server_capabilities
+    -- vim.notify(vim.inspect(capabilities))
+    for _, lsp_name in ipairs(ignored_fmt_lsps) do
+        if client.name == lsp_name then
+            disable_format_capability(capabilities)
+        end
+    end
     -- Enable inlay hints if the language server provides them
     if capabilities.inlayHintProvider then
         vim.api.nvim_create_autocmd("InsertEnter", {
