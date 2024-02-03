@@ -8,20 +8,20 @@ return {
             -- HACK: Ensure all signs get the correct CursorLineSign set to their "culhl" value
             -- This, in effect, extends the CursorLine background highlight into the signcolumn
             vim.uv.new_timer():start(
-                50,
-                1000,
+                100,
+                100,
                 vim.schedule_wrap(function()
                     -- Make all signs support "CusorLine.*" highlights
-                    local signs_defined = vim.fn.sign_getdefined()
+                    local signs_defined = vim.fn.sign_getdefined() or {}
                     if #signs_defined == last_sign_def_len or #signs_defined == 0 then
                         return
                     end
-                    last_sign_def_len = signs_defined
+                    last_sign_def_len = #signs_defined
                     local bg = vim.api.nvim_get_hl(0, { name = "SignColumn", link = false }).bg
                     local cl_bg = vim.api.nvim_get_hl(0, { name = "CursorLineSign", link = false }).bg
                     for _, sign in ipairs(signs_defined) do
                         local name = sign.texthl
-                        if name then
+                        if name and not sign.culhl then
                             local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
                             vim.api.nvim_set_hl(0, name, { fg = hl.fg, bg = bg })
                             name = name .. "Cul"
