@@ -92,6 +92,29 @@ return {
         end,
     },
     {
+        "aznhe21/actions-preview.nvim",
+        opts = {
+            telescope = {
+                border = {},
+                layout_strategy = "vertical",
+                layout_config = {
+                    width = 0.8,
+                    height = 0.7
+                }
+            },
+        },
+        keys = {
+            {
+                "<leader>lc",
+                function()
+                    require("actions-preview").code_actions()
+                end,
+                desc = "LSP: Code Action",
+                mode = { "n", "v" },
+            },
+        },
+    },
+    {
         "mrcjkb/rustaceanvim",
         ft = { "rust" },
         config = function()
@@ -168,7 +191,6 @@ return {
             { "<leader>lD", vim.lsp.buf.declaration, desc = "LSP: Declaration" },
             { "<leader>k", vim.lsp.buf.hover, desc = "LSP: Hover" },
             { "<leader>K", vim.lsp.buf.signature_help, desc = "LSP: Sig Help" },
-            { "<leader>lc", vim.lsp.buf.code_action, desc = "LSP: Code Action" },
             { "<leader>lR", ":LspRestart<CR>", desc = "LSP: Restart" },
             {
                 "<leader>ls",
