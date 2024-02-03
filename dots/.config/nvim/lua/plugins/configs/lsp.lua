@@ -79,16 +79,13 @@ return {
         opts = function()
             local text_icon = ""
             local nvim_lightbulb = require("nvim-lightbulb")
-            vim.fn.sign_define(
-                "LightBulbSign",
-                { text = text_icon, numhl = "DiagnosticSignHint", texthl = "DiagnosticSignHint", priority = 9 }
-            )
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
                 callback = nvim_lightbulb.update_lightbulb,
             })
             return {
+                link_highlights = false,
                 sign = {
-                    priority = 9,
+                    enabled = true,
                     text = text_icon,
                 },
             }

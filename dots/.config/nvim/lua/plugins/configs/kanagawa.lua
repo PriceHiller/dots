@@ -65,6 +65,7 @@ return {
                         CursorLineNr = { fg = colors.roninYellow, bg = palette.theme.ui.bg_p1 },
                         CursorLineFold = { fg = colors.crystalBlue, bg = palette.theme.ui.bg_p1 },
                         CursorLineSign = { bg = palette.theme.ui.bg_p1 },
+                        LightBulbSign = { fg = colors.crystalBlue, bg = palette.theme.ui.bg_p1 },
                         WinSeparator = { fg = colors.fujiGray },
                         StatusLine = { fg = colors.fujiWhite, bg = colors.sumiInk0 },
                         WinBar = { fg = colors.fujiWhite, bg = nil },
