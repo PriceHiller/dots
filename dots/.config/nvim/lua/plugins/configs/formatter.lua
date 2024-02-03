@@ -14,6 +14,7 @@ return {
                 end,
                 -- I know this is a lie below, but I'm used to the key being LSP bound, so fuck it
                 desc = "LSP: Format",
+                mode = { "v", "n" }
             },
         },
         opts = function()
