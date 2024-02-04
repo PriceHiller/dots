@@ -104,6 +104,7 @@ M.setup = function()
             local extension_callbacks = {
                 ["pdf"] = open_mime,
                 ["djvu"] = "pdf",
+                ["wav"] = open_mime,
                 ["png"] = open_mime,
                 ["jpg"] = "png",
                 ["mp4"] = open_mime,
