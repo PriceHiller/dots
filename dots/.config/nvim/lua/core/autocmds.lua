@@ -72,11 +72,11 @@ M.setup = function()
         vim.notify("Intercept file open set to " .. intercept_state, vim.log.levels.INFO, {
             title = "Intercept File Open",
         })
-    end, { desc = "Toggles intercepting BufNew to open files in custom programs" })
+    end, { desc = "Toggles intercepting BufEnter to open files in custom programs" })
 
     -- NOTE: Add "BufReadPre" to the autocmd events to also intercept files given on the command line, e.g.
     -- `nvim myfile.txt`
-    vim.api.nvim_create_autocmd({ "BufNew" }, {
+    vim.api.nvim_create_autocmd({ "BufEnter" }, {
         group = augroup,
         callback = function(args)
             ---@type string
@@ -102,17 +102,11 @@ M.setup = function()
             end
 
             local extension_callbacks = {
-                ["pdf"] = function(buf, fpath, fname)
-                    open_mime(buf, fpath, fname)
-                end,
+                ["pdf"] = open_mime,
                 ["djvu"] = "pdf",
-                ["png"] = function(buf, fpath, fname)
-                    open_mime(buf, fpath, fname)
-                end,
+                ["png"] = open_mime,
                 ["jpg"] = "png",
-                ["mp4"] = function(buf, fpath, fname)
-                    open_mime(buf, fpath, fname)
-                end,
+                ["mp4"] = open_mime,
                 ["gif"] = "mp4",
             }
 
