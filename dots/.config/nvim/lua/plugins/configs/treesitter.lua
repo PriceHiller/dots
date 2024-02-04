@@ -136,6 +136,16 @@ return {
             require("nvim-treesitter.configs").setup({
                 auto_install = true,
                 ignore_install = { "comment" },
+                ensure_installed = {
+                    "org",
+                    "regex",
+                    "vim",
+                    "lua",
+                    "bash",
+                    "markdown",
+                    "markdown_inline",
+                    "typst",
+                },
                 incremental_selection = {
                     enable = true,
                     keymaps = {
