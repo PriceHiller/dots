@@ -185,9 +185,41 @@ in {
 
   systemd.user = {
     sessionVariables = config.home.sessionVariables;
+    targets.compositor = {
+      Unit = {
+        Description = "Unit for DE to launch";
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" "DISPLAY" ];
+      };
+    };
     services = {
-      opensnitch-ui.Unit.ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
-      easyeffects.Unit.ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+      waybar = {
+        Install.WantedBy = [ "compositor.target" ];
+        Unit = {
+          PartOf = [ "compositor.target" ];
+          After = [ "compositor.target" ];
+        };
+      };
+      opensnitch-ui = {
+        Install.WantedBy = [ "compositor.target" ];
+        Unit = {
+          PartOf = [ "compositor.target" ];
+          After = [ "compositor.target" ];
+        };
+      };
+      easyeffects = {
+        Install.WantedBy = [ "compositor.target" ];
+        Unit = {
+          PartOf = [ "compositor.target" ];
+          After = [ "compositor.target" ];
+        };
+      };
+      cliphist = {
+        Install.WantedBy = [ "compositor.target" ];
+        Unit = {
+          PartOf = [ "compositor.target" ];
+          After = [ "compositor.target" ];
+        };
+      };
     };
   };
 }
