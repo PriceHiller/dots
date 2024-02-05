@@ -71,6 +71,15 @@ in {
         typstfmt
         typst
         hurl
+        easyeffects
+        egl-wayland
+      ] ++ [
+        libsForQt5.qtstyleplugins
+        libsForQt5.qtcurve
+        qt6Packages.qt6gtk2
+        gtk-engine-murrine
+        gnome.gnome-themes-extra
+        gtk_engines
       ] ++ [ ansible ansible-lint ] ++ [
         # gnumake
         # cmake
@@ -101,6 +110,7 @@ in {
     sessionVariables = {
       GTK_THEME = "Kanagawa-Borderless";
       QT_QPA_PLATFORMTHEME = "${gtkStyle}";
+      GTK_PATH = "${config.home.homeDirectory}/.nix-profile/lib/gtk-2.0";
       # LD_LIBRARY_PATH = "${config.home.homeDirectory}/.nix-profile/lib";
       # PKG_CONFIG_PATH = "${config.home.homeDirectory}/.nix-profile/lib/pkgconfig";
     };
@@ -133,6 +143,11 @@ in {
     };
   };
 
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+  };
+
   gtk = let
     extraGtkConfig = {
       gtk-application-prefer-dark-theme = true;
@@ -162,34 +177,16 @@ in {
     gtk4.extraConfig = extraGtkConfig;
   };
 
-  services = { cliphist = { enable = true; }; };
+  services = {
+    cliphist.enable = true;
+    easyeffects.enable = true;
+    opensnitch-ui.enable = true;
+  };
 
   systemd.user = {
-    targets.compositor = {
-      Unit = {
-        Description = "Compositor target for WM";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-    };
     services = {
-      opensnitch-ui = {
-        Unit = {
-          Description = "Opensnitch ui";
-          PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
-          ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
-        };
-
-        Service = { ExecStart = "${pkgs.opensnitch-ui}/bin/opensnitch-ui"; };
-
-        environment = {
-          QT_QPA_PLATFORMTHEME = "${gtkStyle}";
-          PATH = "${config.home.profileDirectory}/bin";
-        };
-
-        Install = { WantedBy = [ "compositor.target" ]; };
-      };
+      opensnitch-ui.Unit.ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
+      easyeffects.Unit.ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
     };
   };
 }
