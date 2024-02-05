@@ -30,7 +30,6 @@ in {
         go
         nodejs
         poetry
-        python3
         ruby
         yamllint
         curl
