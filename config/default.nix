@@ -184,6 +184,7 @@ in {
   };
 
   systemd.user = {
+    sessionVariables = config.home.sessionVariables;
     services = {
       opensnitch-ui.Unit.ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
       easyeffects.Unit.ConditionEnvironment = [ "WAYLAND_DISPLAY" ];
