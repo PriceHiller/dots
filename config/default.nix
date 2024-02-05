@@ -193,6 +193,7 @@ in {
     };
     services = {
       waybar = {
+        Service.Environment="GTK_THEME='THIS THEME DOES NOT EXIST!'";
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
