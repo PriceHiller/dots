@@ -7,6 +7,10 @@
       url = "path:./pkgs/bob-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    deepfilternet = {
+      url = "path:./pkgs/deepfilternet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,48 +23,48 @@
     };
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, ... }:
+  outputs = inputs@{ home-manager, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       username = "sam";
-    in
-    {
+      lib = nixpkgs.lib;
+    in {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
       targets.genericLinux.enable = true;
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration rec {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          ({
-            nixpkgs.overlays = [
-              inputs.neovim-nightly-overlay.overlay
-              inputs.emacs-overlay.overlays.emacs
-              (self: super: {
-                kanagawa-gtk-theme = super.callPackage ./pkgs/kanagawa-gtk { };
-                lxappearance = super.lxappearance.overrideAttrs (oldAttrs: {
-                  postInstall = ''
-                    wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
-                  '';
-                });
-                bob-nvim = inputs.bob.overlays.${system}.default;
-                opensnitch-ui = super.opensnitch-ui.overrideAttrs
-                  (oldAttrs: rec {
-                    propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [
-                      super.python311Packages.qt-material
-                    ];
+      homeConfigurations.${username} =
+        home-manager.lib.homeManagerConfiguration rec {
+          pkgs = nixpkgs.legacyPackages.${system};
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ({
+              nixpkgs.overlays = [
+                inputs.neovim-nightly-overlay.overlay
+                inputs.emacs-overlay.overlays.emacs
+                inputs.bob.overlays.default
+                inputs.deepfilternet.overlays.default
+                (final: prev:
+                {
+                  kanagawa-gtk-theme = prev.callPackage ./pkgs/kanagawa-gtk { };
+                  lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
+                    postInstall = ''
+                      wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
+                    '';
                   });
-              })
-            ];
-            home = {
-              username = "${username}";
-              homeDirectory = "/home/${username}";
-              stateVersion = "24.05";
-            };
-          })
-          ./config
-        ];
-      };
+                  opensnitch-ui = prev.opensnitch-ui.overrideAttrs
+                    (oldAttrs: rec {
+                      propagatedBuildInputs = oldAttrs.propagatedBuildInputs
+                        ++ [ prev.python311Packages.qt-material ];
+                    });
+                })
+              ];
+              home = {
+                username = "${username}";
+                homeDirectory = "/home/${username}";
+                stateVersion = "24.05";
+              };
+            })
+            ./config
+          ];
+        };
     };
 }
