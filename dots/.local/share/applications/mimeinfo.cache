@@ -1,7 +1,0 @@
-[MIME Cache]
-application/x-sh=wezterm-open.desktop;
-application/x-shellscript=wezterm-open.desktop;
-image/*=wezterm-open.desktop;
-inode/directory=wezterm-open.desktop;
-text/*=wezterm-open.desktop;
-x-scheme-handler/ssh=wezterm-open.desktop;
