@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, config, inputs, lib, ... }:
 let
   dotsDir = "${config.home.homeDirectory}/.dot_files/dots";
   softLinkDots = dir:
@@ -91,9 +91,8 @@ in {
       ];
 
     file = {
-      ".local/" = {
-        source = ../dots/.local;
-        recursive = true;
+      ".local/share/wallpapers" = {
+        source = ../dots/.local/share/wallpapers;
         force = true;
       };
       ".omnisharp" = {
@@ -105,19 +104,17 @@ in {
         force = true;
       };
     } // softLinkDots ".config";
-
-    sessionVariables = {
-      GTK_THEME = "Kanagawa-Borderless";
-      QT_QPA_PLATFORMTHEME = "${gtkStyle}";
-      GTK_PATH = "${config.home.homeDirectory}/.nix-profile/lib/gtk-2.0";
-      # LD_LIBRARY_PATH = "${config.home.homeDirectory}/.nix-profile/lib";
-      # PKG_CONFIG_PATH = "${config.home.homeDirectory}/.nix-profile/lib/pkgconfig";
-    };
   };
 
   xdg = {
     enable = true;
     mime.enable = true;
+    mimeApps.enable = true;
+    systemDirs.data = [
+      "${config.home.homeDirectory}/.nix-profile/share"
+      "/usr/share"
+      "/usr/local/share"
+    ];
   };
 
   programs = {
@@ -130,7 +127,6 @@ in {
       enable = true;
       initExtra = ''
         source "$HOME/.config/zsh/zsh"
-        export XDG_DATA_DIRS="$HOME/.nix-profile/share:$XDG_DATA_DIRS"
         __HM_SESS_VARS_SOURCED= source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       '';
     };
@@ -160,12 +156,12 @@ in {
   in {
     enable = true;
     theme = {
-      name = "Kanagawa-Borderless";
+      name = "Kanagawa-BL";
       package = pkgs.kanagawa-gtk-theme;
     };
     iconTheme = {
       name = "Kanagawa";
-      package = pkgs.kanagawa-gtk-theme;
+      package = pkgs.kanagawa-gtk-icon-theme;
     };
     font = {
       name = "Open Sans";
@@ -183,16 +179,19 @@ in {
   };
 
   systemd.user = {
-    sessionVariables = config.home.sessionVariables;
     targets.compositor = {
       Unit = {
         Description = "Unit for DE to launch";
-        ConditionEnvironment = [ "WAYLAND_DISPLAY" "DISPLAY" ];
+        ConditionEnvironment =
+          [ "WAYLAND_DISPLAY" "DISPLAY" ];
       };
     };
     services = {
       waybar = {
-        Service.Environment="GTK_THEME='THIS THEME DOES NOT EXIST!'";
+        Service.Environment = [
+          "GTK_THEME='THIS THEME DOES NOT EXIST!'"
+        ];
+        Service.ExecStartPre = "env";
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
@@ -203,7 +202,7 @@ in {
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
+          After = [ "compositor.target" "waybar.service" ];
         };
       };
       easyeffects = {

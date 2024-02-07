@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    kanagawa-gtk = {
+      url = "path:./pkgs/kanagawa-gtk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     bob = {
       url = "path:./pkgs/bob-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +34,9 @@
       lib = nixpkgs.lib;
     in {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
-      targets.genericLinux.enable = true;
+      targets.genericLinux = {
+        enable = true;
+      };
       homeConfigurations.${username} =
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = nixpkgs.legacyPackages.${system};
@@ -42,9 +48,8 @@
                 inputs.emacs-overlay.overlays.emacs
                 inputs.bob.overlays.default
                 inputs.deepfilternet.overlays.default
-                (final: prev:
-                {
-                  kanagawa-gtk-theme = prev.callPackage ./pkgs/kanagawa-gtk { };
+                inputs.kanagawa-gtk.overlays.default
+                (final: prev: {
                   lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
                     postInstall = ''
                       wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
