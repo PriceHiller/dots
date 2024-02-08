@@ -109,7 +109,36 @@ in {
   xdg = {
     enable = true;
     mime.enable = true;
-    mimeApps.enable = true;
+    mimeApps = {
+      enable = true;
+      associations.added = {
+        "x-scheme-handler/http" = [ "firefoxdeveloperedition.desktop" ];
+        "x-scheme-handler/https" = [ "firefoxdeveloperedition.desktop" ];
+        "x-scheme-handler/chrome" = [ "firefoxdeveloperedition.desktop" ];
+        "text/html" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-htm" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-html" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-shtml" = [ "firefoxdeveloperedition.desktop" ];
+        "application/xhtml+xml" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-xhtml" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-xht" = [ "firefoxdeveloperedition.desktop" ];
+
+      };
+      defaultApplications = {
+        "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+        "x-scheme-handler/http" = [ "firefoxdeveloperedition.desktop" ];
+        "x-scheme-handler/https" = [ "firefoxdeveloperedition.desktop" ];
+        "x-scheme-handler/chrome" = [ "firefoxdeveloperedition.desktop" ];
+        "text/html" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-htm" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-html" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-shtml" = [ "firefoxdeveloperedition.desktop" ];
+        "application/xhtml+xml" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-xhtml" = [ "firefoxdeveloperedition.desktop" ];
+        "application/x-extension-xht" = [ "firefoxdeveloperedition.desktop" ];
+
+      };
+    };
     systemDirs.data = [
       "${config.home.homeDirectory}/.nix-profile/share"
       "/usr/share"
@@ -118,6 +147,10 @@ in {
   };
 
   programs = {
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-devedition;
+    };
     waybar = {
       enable = true;
       systemd.enable = true;
@@ -182,15 +215,12 @@ in {
     targets.compositor = {
       Unit = {
         Description = "Unit for DE to launch";
-        ConditionEnvironment =
-          [ "WAYLAND_DISPLAY" "DISPLAY" ];
+        ConditionEnvironment = [ "WAYLAND_DISPLAY" "DISPLAY" ];
       };
     };
     services = {
       waybar = {
-        Service.Environment = [
-          "GTK_THEME='THIS THEME DOES NOT EXIST!'"
-        ];
+        Service.Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
         Service.ExecStartPre = "env";
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
