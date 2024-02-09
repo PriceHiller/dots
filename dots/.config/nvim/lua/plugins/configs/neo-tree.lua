@@ -19,7 +19,7 @@ return {
                 callback = function()
                     local f = vim.fn.expand("%:p")
                     if vim.fn.isdirectory(f) ~= 0 then
-                        vim.cmd("Neotree current dir=" .. f)
+                        require("neo-tree")
                         -- neo-tree is loaded now, delete the init autocmd
                         return true
                     end
@@ -27,8 +27,6 @@ return {
             })
         end,
         opts = function()
-            vim.g.neo_tree_remove_legacy_commands = 1
-
             return {
                 sources = {
                     "filesystem",
@@ -52,7 +50,6 @@ return {
                 },
                 filesystem = {
                     use_libuv_file_watcher = true,
-                    hijack_netrw_behavior = "open_current",
                 },
                 window = {
                     mappings = {
