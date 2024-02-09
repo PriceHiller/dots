@@ -446,19 +446,9 @@ return {
             lspconfig.gopls.setup({
                 capabilities = lsp_capabilities,
                 on_attach = on_attach,
-                settings = {
-                    gopls = {
-                        hints = {
-                            assignVariableTypes = true,
-                            compositeLiteralFields = true,
-                            compositeLiteralTypes = true,
-                            constantValues = true,
-                            functionTypeParameters = true,
-                            parameterNames = true,
-                            rangeVariableTypes = true,
-                        },
-                    },
-                },
+                fillstruct = 'gopls',
+                dap_debug = true,
+                dap_debug_gui = true
             })
 
             -- NOTE: GENERIC LSP SERVERS
