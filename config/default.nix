@@ -23,8 +23,6 @@ in {
         luajit
         imagemagick
         dotnet-sdk_8
-        cargo
-        rustc
         shellcheck
         openjdk
         go
