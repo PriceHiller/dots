@@ -21,7 +21,7 @@ return {
                     if vim.fn.isdirectory(f) ~= 0 then
                         vim.cmd("Neotree current dir=" .. f)
                         -- neo-tree is loaded now, delete the init autocmd
-                        vim.api.nvim_clear_autocmds({ group = "NeoTreeInit" })
+                        return true
                     end
                 end,
             })
