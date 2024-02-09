@@ -2,6 +2,9 @@ return {
     {
         "rcarriga/nvim-dap-ui",
         event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("dapui").setup()
+        end,
         keys = {
             {
                 "<leader>dt",
