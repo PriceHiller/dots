@@ -64,7 +64,6 @@ in {
         fira-code
         nerdfonts
         direnv
-        passage
         swappy
         stylua
         typstfmt
@@ -72,6 +71,10 @@ in {
         hurl
         easyeffects
         egl-wayland
+      ] ++ [
+        age
+        age-plugin-yubikey
+        passage
       ] ++ [
         libsForQt5.qtstyleplugins
         libsForQt5.qtcurve
