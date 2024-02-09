@@ -120,28 +120,29 @@ return {
                 sources = sources or {}
                 local default_sources = {
                     { name = "nvim_lsp" },
-                    { name = "luasnip" }, -- For luasnip users.
+                    { name = "luasnip", max_item_count = 5 }, -- For luasnip users.
+                    { name = "async_path" },
                     {
                         name = "fuzzy_buffer",
+                        max_item_count = 5
                     },
                     {
                         name = "rg",
                         keyword_length = 3,
-                        max_item_count = 10,
+                        max_item_count = 5,
                         option = {
                             "--smart-case",
                             "--hidden",
                             "--max-depth 4",
                         },
                     },
-                    { name = "async_path" },
                     {
                         name = "lua-latex-symbols",
                         option = { cache = true },
                         trigger_characters = { "\\" },
                     },
-                    { name = "zsh" },
-                    { name = "emoji", keyword_length = 2 },
+                    { name = "zsh", max_item_count = 5 },
+                    { name = "emoji", keyword_length = 2, max_item_count = 10 },
                     { name = "calc" },
                     { name = "npm", keyword_length = 2 },
                 }
@@ -400,23 +401,12 @@ return {
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "fuzzy_buffer" },
-                    { name = "rg" },
-                }),
+                sources = cmp.config.sources({  name = "fuzzy_buffer" }),
             })
 
             cmp.setup.cmdline("?", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({ { name = "rg" } }),
-            })
-
-            cmp.setup.cmdline("@", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "rg" },
-                    { name = "cmdline_history", max_item_count = 3 },
-                }),
+                sources = cmp.config.sources({  name = "fuzzy_buffer" }),
             })
 
             -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -430,8 +420,7 @@ return {
                         },
                     },
                     { name = "cmdline_history", max_item_count = 3 },
-                    { name = "fuzzy_buffer" },
-                    { name = "rg" },
+                    { name = "fuzzy_buffer", max_item_count = 3 },
                 }),
             })
         end,
