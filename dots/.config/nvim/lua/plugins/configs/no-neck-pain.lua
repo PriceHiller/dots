@@ -4,7 +4,7 @@ return {
         opts = {
             width = 160,
         },
-        cmds = {
+        cmd = {
             "NoNeckPain",
             "NoNeckPainResize",
             "NoNeckPainWidthDown",
