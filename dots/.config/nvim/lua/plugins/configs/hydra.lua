@@ -151,7 +151,7 @@ _b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional 
                 ]],
                 heads = {
                     { "c", ":DapContinue<CR>" },
-                    { "r", ":DapRunLast<CR>" },
+                    { "r", require("dap").run_last },
                     { "e", ":DapTerminate<CR>" },
                     { "b", ":DapToggleBreakpoint<CR>" },
                     {
