@@ -64,7 +64,7 @@ return {
                     },
                 },
                 emacs_config = {
-                    config_path = "$HOME/.config/emacs/init.el",
+                    config_path = "$XDG_CONFIG_HOME/emacs/init.el",
                 },
             })
 
