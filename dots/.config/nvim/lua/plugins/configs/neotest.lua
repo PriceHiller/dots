@@ -10,6 +10,7 @@ return {
             "nvim-neotest/neotest-plenary"
         },
         keys = {
+            { "<localleader>n",          desc = "> Neotest" },
             { "<localleader>nrr", "<cmd>Neotest run<CR>",            desc = "Neotest: Run Test" },
             { "<localleader>nrl", "<cmd>Neotest run file<CR>",       desc = "Neotest: Run Tests in File" },
             { "<localleader>nrl", "<cmd>Neotest run last<CR>",       desc = "Neotest: Run Last Tests" },
@@ -23,8 +24,8 @@ return {
         opts = function()
             return {
                 diagnostic = {
-                    enable = true,
-                    severity  = 1
+                    enable   = true,
+                    severity = 1
                 },
                 discovery = {
                     concurrent = 4

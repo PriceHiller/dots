@@ -13,7 +13,7 @@ return {
             "NoNeckPainToggleRightSide",
         },
         keys = {
-            { "<leader>bb", "<cmd>NoNeckPain<cr>", desc = "NoNeckPain: Toggle" },
+            { "<localleader>b", "<cmd>NoNeckPain<cr>", desc = "NoNeckPain: Toggle" },
         },
     },
 }
