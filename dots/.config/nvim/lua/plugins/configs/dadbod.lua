@@ -21,9 +21,10 @@ return {
         },
         ft = { "sql" },
         keys = {
-            { "<leader>aa", "<cmd>DBUIToggle<CR>", desc = "Dadbod: Toggle UI" },
+            { "<leader>a",  desc = "Dadbod" },
+            { "<leader>aa", "<cmd>DBUIToggle<CR>",        desc = "Dadbod: Toggle UI" },
             { "<leader>ac", "<cmd>DBUIAddConnection<CR>", desc = "Dadbod: Add Connection" },
-            { "<leader>ab", "<cmd>DBUIFindBuffer<CR>", desc = "Dadbod: Find Buffer" },
+            { "<leader>ab", "<cmd>DBUIFindBuffer<CR>",    desc = "Dadbod: Find Buffer" },
         },
         init = function()
             vim.g.db_ui_use_nerd_fonts = 1

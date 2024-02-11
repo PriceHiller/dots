@@ -3,6 +3,7 @@ return {
         "dhruvasagar/vim-table-mode",
         keys = {
             { ";;", "<cmd>TableModeRealign<CR>", desc = "Table Mode: Realign" },
+            { ";t", desc = "> Table Mode" },
         },
         lazy = false,
         init = function()
