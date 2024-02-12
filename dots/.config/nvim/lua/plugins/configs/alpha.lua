@@ -78,7 +78,7 @@ return {
                 type = "text",
                 val = function()
                     if require("lazy.status").has_updates() then
-                        vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@exception" })
+                        vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@keyword.return" })
                         return "Plugin updates available!"
                     else
                         vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@string" })
