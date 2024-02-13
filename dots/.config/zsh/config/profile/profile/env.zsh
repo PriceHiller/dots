@@ -57,12 +57,6 @@ __EOS__
 export TIMEFMT
 export REPORTTIME=600
 
-### SSH ###
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.sock"
-ssh-add -l >/dev/null
-[ $? -ge 2 ] && ssh-agent -a "$SSH_AUTH_SOCK" -t 24h >/dev/null
-
-
 ### FZF ###
 export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color=always'
 export FZF_DEFAULT_OPTS="--height=80% --layout=reverse --info=inline --border --margin=1 --ansi"
