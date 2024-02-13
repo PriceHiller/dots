@@ -25,7 +25,6 @@ in {
         dotnet-sdk_8
         shellcheck
         openjdk
-        go
         nodejs
         poetry
         ruby
@@ -69,6 +68,9 @@ in {
         hurl
         easyeffects
         egl-wayland
+      ] ++ [
+        go
+        (lib.hiPrio gotools)
       ] ++ [
         age
         age-plugin-yubikey
