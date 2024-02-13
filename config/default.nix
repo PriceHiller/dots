@@ -148,6 +148,13 @@ in {
   };
 
   programs = {
+    gpg = {
+      enable = true;
+      scdaemonSettings = {
+        pcsc-driver = "/usr/lib/libpcsclite.so";
+        disable-ccid = true;
+      };
+    };
     firefox = {
       enable = true;
       package = pkgs.firefox-devedition;
@@ -210,6 +217,20 @@ in {
     cliphist.enable = true;
     easyeffects.enable = true;
     opensnitch-ui.enable = true;
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      enableZshIntegration = true;
+      maxCacheTtl = 14400;
+      maxCacheTtlSsh = 14400;
+      sshKeys = [
+        "530D3EC95C32AB9EC33714AAF865738D6E77680A"
+      ];
+      extraConfig = ''
+        pinentry-program /usr/bin/pinentry-gtk-2
+        allow-loopback-pinentry
+      '';
+    };
   };
 
   systemd.user = {
