@@ -19,6 +19,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    waybar = {
+      url = "github:Alexays/Waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     wezterm = {
@@ -34,9 +38,7 @@
       lib = nixpkgs.lib;
     in {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
-      targets.genericLinux = {
-        enable = true;
-      };
+      targets.genericLinux = { enable = true; };
       homeConfigurations.${username} =
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = nixpkgs.legacyPackages.${system};
@@ -50,6 +52,7 @@
                 inputs.deepfilternet.overlays.default
                 inputs.kanagawa-gtk.overlays.default
                 (final: prev: {
+                  waybar = inputs.waybar.packages.${system}.default;
                   lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
                     postInstall = ''
                       wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
