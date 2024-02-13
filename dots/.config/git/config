@@ -1,7 +1,7 @@
 [user]
 	name = Price Hiller
 	email = price@orion-technologies.io
-	signingkey = /home/sam/.ssh/keys/id_ed25519_signing
+	signingkey = C3FADDE7A8534BEB
 
 [init]
 	defaultBranch = Development
@@ -60,9 +60,6 @@
 
 [credential]
 	helper = store
-
-[gpg]
-	format = ssh
 [commit]
 	gpgsign = true
 [log]
