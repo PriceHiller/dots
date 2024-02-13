@@ -1,0 +1,17 @@
+* Neovim Configuration
+This is my Neovim configuration. There are many like it, but this one is mine.
+
+I make no promises things in here are the most well thought out configuration nor capable of
+working outside of the narrow scope I set up my systems in.
+
+I am sure /much/ of it will work on any computer with a bash or zsh shell, but I don't want to
+invest the effort at the time of writing to find out and make it work across a bunch of use cases.
+
+
+* TODO Neogit
+- [ ] Determine why Neogit's diff hunks are not highlighted until I palce a cursor over a hunk.
+  - Right now the diffs have 0 highlighting which makes it annoying to just glance at them —
+    requires manual movement of the cursor position 🫤
+
+* TODO CI Automation
+- [ ] Configure a pipeline to enforce formatting via stylua
