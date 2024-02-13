@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     kanagawa-gtk = {
       url = "path:./pkgs/kanagawa-gtk";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,5 +75,13 @@
             ./config
           ];
         };
-    };
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; };
+      in {
+        devShells.default = pkgs.mkShell {
+          shellHook = ''
+            nix eval --json --file ./.nixd.nix > .nixd.json
+          '';
+        };
+      });
 }
