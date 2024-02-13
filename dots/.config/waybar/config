@@ -20,6 +20,7 @@
         ],
         "modules-right": [
             "custom/pacman-update",
+            "systemd-failed-units",
             "tray",
             "backlight",
             "network",
@@ -106,7 +107,8 @@
         },
         "backlight": {
             "format": "󰃠 {percent}%",
-            "scroll-step": 5.0
+            "scroll-step": 5.0,
+            "device": "intel_backlight"
         },
         "network": {
             "on-click-right": "~/.config/waybar/scripts/set-rfkill.bash",
@@ -224,6 +226,11 @@
             "app_ids-mapping": {
                 "firefoxdeveloperedition": "firefox-developer-edition"
             }
+        },
+        "systemd-failed-units": {
+            "format": "✗ Degraded Units: {nr_failed}",
+            "system": true,
+            "user": true
         },
         "tray": {
             "icon-size": 14

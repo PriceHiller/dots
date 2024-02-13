@@ -72,6 +72,7 @@ tooltip label,
 #taskbar,
 #tray,
 #backlight,
+#systemd-failed-units,
 #tray menu,
 #custom-lock {
   background-color: #16161d;
@@ -266,6 +267,15 @@ tooltip {
 /* Pacman Updates */
 #custom-pacman-update {
   color: #7e9cd8;
+}
+
+#systemd-failed-units.ok {
+  color: #98BB6C;
+}
+
+#systemd-failed-units.degraded {
+  color: #FF5D62;
+  font-weight: bolder;
 }
 
 /* Tray */
