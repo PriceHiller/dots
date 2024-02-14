@@ -4,23 +4,6 @@ return {
         branch = "nightly",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter" },
-            {
-                "akinsho/org-bullets.nvim",
-                opts = {
-                    concealcursor = true,
-                    symbols = {
-                        list = "",
-                        headlines = {
-                            "󰀘",
-                            "",
-                            "󰺕",
-                            "",
-                            "󰬪",
-                            "󱆭",
-                        },
-                    },
-                },
-            },
         },
         event = "VeryLazy",
         ft = { "org" },

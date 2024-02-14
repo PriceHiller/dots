@@ -221,9 +221,10 @@ return {
                         ["@OrgTSBlock.org"] = { fg = colors.fujiGray, bold = true, italic = true },
                         ["@OrgTSDirective.org"] = { link = "@OrgTSBlock.org" },
 
-                        -- Markdown specific
-                        ["@markdown_check_undone"] = { fg = colors.carpYellow },
-                        ["@markdown_check_ndone"] = { fg = colors.springGreen },
+                        -- Markup specific
+                        ["@markup.list.checked"] = { fg = colors.springGreen },
+                        ["@markup.list.indeterminate"] = { fg = colors.carpYellow },
+                        ["@markup.list.unchecked"] = { fg = colors.crystalBlue },
                     }
 
                     return overrides
