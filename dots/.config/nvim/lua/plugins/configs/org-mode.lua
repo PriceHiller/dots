@@ -1,6 +1,7 @@
 return {
     {
         "nvim-orgmode/orgmode",
+        branch = "nightly",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter" },
             {
