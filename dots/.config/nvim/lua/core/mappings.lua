@@ -105,6 +105,8 @@ M.setup = function()
 
     -- Binding to allow shift tab dedent
     vim.keymap.set("i", "<S-Tab>", "<C-d>", { silent = true, desc = "Insert: Dedent" })
+    -- Binding to allow shift space indent
+    vim.keymap.set("i", "<S-Space>", "<C-t>", { silent = true, desc = "Insert: Indent" })
 
     -- Insert an Em Dash in insert mode
     vim.keymap.set("i", "<A-->", "—", { silent = true, desc = "Insert: Em Dash" })
