@@ -19,12 +19,12 @@ return {
                     "~/Git/College/**/*",
                     "~/Notes/**/*",
                 },
-                -- notifications = {
-                --     enabled = true,
-                --     cron_enabled = true,
-                --     repeater_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
-                --     deadline_warning_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 }
-                -- },
+                notifications = {
+                    enabled = true,
+                    cron_enabled = true,
+                    repeater_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
+                    deadline_warning_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 }
+                },
                 org_id_link_to_org_use_id = true,
                 org_default_notes_file = "~/Notes/notes.org",
                 org_agenda_start_day = "-1d",
