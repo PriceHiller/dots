@@ -21,7 +21,6 @@ return {
                 },
             },
         },
-        dir = "~/Git/Neovim/Orgmode",
         event = "VeryLazy",
         ft = { "org" },
         keys = {
