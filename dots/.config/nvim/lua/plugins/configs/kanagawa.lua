@@ -225,6 +225,9 @@ return {
                         ["@markup.list.checked"] = { fg = colors.springGreen },
                         ["@markup.list.indeterminate"] = { fg = colors.carpYellow },
                         ["@markup.list.unchecked"] = { fg = colors.crystalBlue },
+                        ["@OrgTSCheckboxChecked.org"] = { link = "@markup.list.checked" },
+                        ["@OrgTSCheckboxHalfChecked.org"] = { link = "@markup.list.indeterminate"},
+                        ["@OrgTSCheckbox.org"] = { link = "@markup.list.unchecked" },
                     }
 
                     return overrides
