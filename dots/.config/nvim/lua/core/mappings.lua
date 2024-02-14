@@ -108,6 +108,10 @@ M.setup = function()
     -- Binding to allow shift space indent
     vim.keymap.set("i", "<S-Space>", "<C-t>", { silent = true, desc = "Insert: Indent" })
 
+    -- Create newline from anywhere in current line without modifying current line
+    vim.keymap.set("i", "<S-CR>", "<C-o>o", { silent = true, desc = "Insert: New Line" })
+    vim.keymap.set("i", "<C-S-CR>", "<C-o>O", { silent = true, desc = "Insert: New Line" })
+
     -- Insert an Em Dash in insert mode
     vim.keymap.set("i", "<A-->", "—", { silent = true, desc = "Insert: Em Dash" })
 end
