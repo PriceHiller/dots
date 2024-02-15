@@ -1009,7 +1009,7 @@ return {
                                 local count = self.status_dict.added or 0
                                 return count > 0 and (" " .. count)
                             end,
-                            hl = { fg = utils.get_highlight("DiffAdd").fg, bg = colors.sumiInk4 },
+                            hl = { fg = utils.get_highlight("Character").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
