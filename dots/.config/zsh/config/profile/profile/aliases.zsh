@@ -13,7 +13,7 @@ fi
 if command -v git >/dev/null 2>&1; then
 
 	if command -v nvim >/dev/null 2>&1; then
-		alias g="nvim -c 'Neogit'"
+		alias gg="nvim -c 'Neogit'"
 	fi
 
 	alias gc="git commit"
