@@ -103,10 +103,10 @@ M.setup = function()
     vim.keymap.set("n", "]q", "<cmd>cnewer<CR>", { silent = true, desc = "Quickfix: Newer" })
     vim.keymap.set("n", "]q", "<cmd>colder<CR>", { silent = true, desc = "Quickfix: Older" })
 
-    -- Binding to allow shift tab dedent
-    vim.keymap.set("i", "<S-Tab>", "<C-d>", { silent = true, desc = "Insert: Dedent" })
-    -- Binding to allow shift space indent
-    vim.keymap.set("i", "<S-Space>", "<C-t>", { silent = true, desc = "Insert: Indent" })
+    -- Binding to allow ctrl - < dedent
+    vim.keymap.set("i", "<C-<>", "<C-d>", { silent = true, desc = "Insert: Dedent" })
+    -- Binding to allow ctrl - > indent
+    vim.keymap.set("i", "<C->>", "<C-t>", { silent = true, desc = "Insert: Indent" })
 
     -- Create newline from anywhere in current line without modifying current line
     vim.keymap.set("i", "<S-CR>", "<C-o>o", { silent = true, desc = "Insert: New Line" })
