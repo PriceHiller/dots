@@ -1,3 +1,4 @@
+;; extends
 ;; All scopes: comments
 (comment) @comment @spell
 
@@ -76,4 +77,4 @@
 (ref) @text.reference
 
 ;; Math
-(math) @text.math
+(math) @markup.math
