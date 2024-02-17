@@ -10,7 +10,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-e8W1ntXmopGO4f5UqlbuEGqKCLy3fueEplwDIOoIiQA=",
+        "narHash": "sha256-3t3BYdZ4huZQjQ2vbZ80MECnjrzr1q4N+4zsM42YsYY=",
         "path": "./pkgs/bob-nvim",
         "type": "path"
       },
@@ -45,7 +45,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-elpx6gSJG0+qSYM9CMoraxNtsB7lbViKEmxjkwXutlY=",
+        "narHash": "sha256-9w21t9eYr50+QbN3cLl0wNpLbwA4hPvbUybbW1N7tAc=",
         "path": "./pkgs/deepfilternet",
         "type": "path"
       },
@@ -377,7 +377,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-UjBXE2f9PVgboWZZgXxhttP4rThHJznExuCmkPjeggc=",
+        "narHash": "sha256-jhTO3BW4rgndpwy5ICqyn4COD3R4w2bBLqHByNeU6gw=",
         "path": "./pkgs/kanagawa-gtk",
         "type": "path"
       },
