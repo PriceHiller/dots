@@ -32,7 +32,7 @@
     };
   };
 
-  outputs = inputs@{ home-manager, nixpkgs, ... }:
+  outputs = inputs@{ self, home-manager, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       username = "sam";
@@ -43,7 +43,7 @@
       homeConfigurations.${username} =
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = nixpkgs.legacyPackages.${system};
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs; inherit self; };
           modules = [
             ({
               nixpkgs.overlays = [
