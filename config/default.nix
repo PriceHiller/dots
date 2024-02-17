@@ -68,6 +68,7 @@ in {
         hurl
         easyeffects
         egl-wayland
+        helvum
       ] ++ [
         go
         (lib.hiPrio gotools)
