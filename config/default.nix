@@ -1,6 +1,6 @@
-{ pkgs, config, inputs, lib, ... }:
+{ self, pkgs, config, inputs, lib, ... }:
 let
-  dotsDir = "${config.home.homeDirectory}/.dot_files/dots";
+  dotsDir = "${self}/dots";
   softLinkDots = dir:
     (builtins.listToAttrs (map (n: {
       name = "${dir + "/" + n}";
