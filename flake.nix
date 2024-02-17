@@ -12,10 +12,6 @@
       url = "path:./pkgs/bob-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deepfilternet = {
-      url = "path:./pkgs/deepfilternet";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +46,6 @@
                 inputs.neovim-nightly-overlay.overlay
                 inputs.emacs-overlay.overlays.emacs
                 inputs.bob.overlays.default
-                inputs.deepfilternet.overlays.default
                 inputs.kanagawa-gtk.overlays.default
                 (final: prev: {
                   waybar = inputs.waybar.packages.${system}.default;
