@@ -121,6 +121,19 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "RRethy/nvim-treesitter-endwise",
         },
+        init = function()
+            vim.api.nvim_create_autocmd("BufEnter", {
+                group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
+                callback = function()
+                    local f = vim.fn.expand("%:p")
+                    if vim.fn.isdirectory(f) == 0 then
+                        require("neo-tree")
+                        -- neo-tree is loaded now, delete the init autocmd
+                        return true
+                    end
+                end,
+            })
+        end,
         config = function()
             local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
             parser_config.typst = {
