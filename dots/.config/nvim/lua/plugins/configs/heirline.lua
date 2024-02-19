@@ -6,7 +6,6 @@ return {
             "lewis6991/gitsigns.nvim",
         },
         opts = function()
-            local core_utils = require("utils.funcs")
             local colors = require("kanagawa.colors").setup().palette
 
             local seps = {
@@ -1009,21 +1008,21 @@ return {
                                 local count = self.status_dict.added or 0
                                 return count > 0 and (" " .. count)
                             end,
-                            hl = { fg = utils.get_highlight("Character").fg, bg = colors.sumiInk4 },
+                            hl = { fg = utils.get_highlight("@diff.plus").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
                                 local count = self.status_dict.changed or 0
                                 return count > 0 and ("  " .. count)
                             end,
-                            hl = { fg = utils.get_highlight("DiffChanged").fg, bg = colors.sumiInk4 },
+                            hl = { fg = utils.get_highlight("@diff.delta").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
                                 local count = self.status_dict.removed or 0
                                 return count > 0 and ("  " .. count)
                             end,
-                            hl = { fg = utils.get_highlight("DiffDelete").fg, bg = colors.sumiInk4 },
+                            hl = { fg = utils.get_highlight("@diff.minus").fg, bg = colors.sumiInk4 },
                         },
                         {
                             condition = function(self)
