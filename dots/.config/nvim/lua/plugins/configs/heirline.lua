@@ -342,16 +342,16 @@ return {
             -- also, we are adding a nice icon for terminal buffers.
             local StatusLineFileFlags = {
                 {
-                    condition = function(self)
-                        return vim.api.nvim_buf_get_option(self.bufnr, "modified")
+                    condition = function()
+                        return vim.bo.modified
                     end,
                     provider = "  ",
                     hl = { fg = colors.springGreen },
                 },
                 {
-                    condition = function(self)
-                        return not vim.api.nvim_buf_get_option(self.bufnr, "modifiable")
-                            or vim.api.nvim_buf_get_option(self.bufnr, "readonly")
+                    condition = function()
+                        return not vim.bo.modifiable
+                            or vim.bo.readonly
                     end,
                     provider = " ",
                     hl = { fg = colors.roninYellow },
@@ -393,8 +393,8 @@ return {
 
             -- a nice "x" button to close the buffer
             local StatusLineCloseButton = {
-                condition = function(self)
-                    return not vim.api.nvim_buf_get_option(self.bufnr, "modified")
+                condition = function()
+                    return not vim.bo.modified
                 end,
                 {
                     provider = " 󰅙 ",
@@ -979,7 +979,6 @@ return {
                         },
                         {
                             provider = function(self)
-                                local branch = self.status_dict.head
                                 return " " .. self.status_dict.head
                             end,
                             hl = { fg = colors.sumiInk0, bg = colors.autumnGreen },
