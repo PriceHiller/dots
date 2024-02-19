@@ -122,15 +122,11 @@ return {
             "RRethy/nvim-treesitter-endwise",
         },
         init = function()
-            vim.api.nvim_create_autocmd("BufEnter", {
-                group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
+            vim.api.nvim_create_autocmd("FileReadPre", {
+                once = true,
                 callback = function()
-                    local f = vim.fn.expand("%:p")
-                    if vim.fn.isdirectory(f) == 0 then
-                        require("neo-tree")
-                        -- neo-tree is loaded now, delete the init autocmd
-                        return true
-                    end
+                    require("nvim-treesitter")
+                    return true
                 end,
             })
         end,
