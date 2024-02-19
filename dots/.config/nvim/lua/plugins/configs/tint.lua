@@ -12,12 +12,12 @@ return {
                 local ignoredFiletypes = { "DiffviewFiles", "DiffviewFileHistory", "neo-tree" }
                 local ignoredBuftypes = { "terminal" }
 
-                local isDiff = vim.api.nvim_win_get_option(winid, "diff")
+                local isDiff = vim.api.nvim_get_option_value("diff", { win = winid })
                 local isFloating = vim.api.nvim_win_get_config(winid).relative ~= ""
                 local isIgnoredBuftype =
-                    vim.tbl_contains(ignoredBuftypes, vim.api.nvim_buf_get_option(bufid, "buftype"))
+                    vim.tbl_contains(ignoredBuftypes, vim.api.nvim_get_option_value("buftype", { buf = bufid }))
                 local isIgnoredFiletype =
-                    vim.tbl_contains(ignoredFiletypes, vim.api.nvim_buf_get_option(bufid, "filetype"))
+                    vim.tbl_contains(ignoredFiletypes, vim.api.nvim_get_option_value("filetype", { buf = bufid }))
 
                 return isDiff or isFloating or isIgnoredBuftype or isIgnoredFiletype
             end,
