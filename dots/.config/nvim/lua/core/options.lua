@@ -139,9 +139,6 @@ M.setup = function()
 
     -- Allow per project configuration via exrc
     opt.exrc = true
-
-    -- Add `r` & `o` beyond the defaults provided, supports comment leaders
-    opt.formatoptions = "tcqjro"
 end
 
 return M
