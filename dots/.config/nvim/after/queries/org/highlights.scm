@@ -1,7 +1,7 @@
 ; extends
 ((bullet)
- @punctuation.special
- (#any-of? @punctuation.special "-" "*" "+")
+ @markup.list
+ (#any-of? @markup.list "-" "*" "+")
  (#set! conceal "•"))
 
 ((checkbox !status) @markup.list.unchecked (#set! conceal ""))
@@ -27,3 +27,16 @@
   (row
     (cell (contents) @markup.heading))
   (hr) @punctuation.special)
+
+
+; Quote highlights
+(block
+   name: (expr) @org-block-start-name (#any-of? @org-block-start-name "quote" "QUOTE")
+   contents: (contents) @markup.quote
+   end_name: (expr) @org-block-end-name (#any-of? @org-block-end-name "quote" "QUOTE"))
+
+(block
+   name: (expr) @org-block-start-name (#any-of? @org-block-start-name "src" "SRC")
+   !parameter
+   contents: (contents) @markup.raw.block
+   end_name: (expr) @org-block-end-name (#any-of? @org-block-end-name "src" "SRC"))
