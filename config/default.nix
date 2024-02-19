@@ -245,8 +245,10 @@ in {
     };
     services = {
       waybar = {
-        Service.Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
-        Service.ExecStartPre = "env";
+        Service = {
+          Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
+          RestartSec = 3;
+        };
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
@@ -254,6 +256,7 @@ in {
         };
       };
       opensnitch-ui = {
+        Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
@@ -261,6 +264,7 @@ in {
         };
       };
       easyeffects = {
+        Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
@@ -268,6 +272,7 @@ in {
         };
       };
       cliphist = {
+        Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
