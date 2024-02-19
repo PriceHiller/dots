@@ -2,7 +2,7 @@
 
 log() {
 	printf "%s\n" "${*}"
-	systemd-cat -t init-wallpapers -p info echo "${*}"
+	systemd-cat -t wallpaper -p info echo "${*}"
 }
 
 get-monitor-wallpaper() {
@@ -23,8 +23,11 @@ set-wallpaper() {
 }
 
 set-wallpapers() {
+	log "Setting wallpapers"
 	### Set default wallpaper ###
-	local default_wallpaper="${HOME}/.dot_files/dots/.local/share/wallpapers/Nebula.jpg"
+	local wallpapers_dir
+	wallpapers_dir="$(realpath "${XDG_DATA_HOME}/wallpapers")"
+	local default_wallpaper="${wallpapers_dir}/Nebula.jpg"
 
 	# Monitors to not set a default for, to be set later down the script
 	local excluded_monitors=("eDP-1")
@@ -38,16 +41,18 @@ set-wallpapers() {
 				break
 			fi
 		done
-		if "${set_mon_wallpaper}"; then
+		if ${set_mon_wallpaper}; then
 			set-wallpaper "${monitor}" "${default_wallpaper}"
 		fi
 	done < <(hyprctl monitors -j | jq -r '.[].name')
 
 	### Set any non defaults ###
-	set-wallpaper "eDP-1" "${HOME}/.dot_files/dots/.local/share/wallpapers/Industrial-Shaded.png"
+	set-wallpaper "eDP-1" "${wallpapers_dir}/Industrial-Shaded.png"
 }
 
 init() {
+	log "Killing existing swww daemon if an swww daemon is running"
+	swww kill >/dev/null || true
 	until swww init; do
 		sleep .1
 	done
@@ -55,7 +60,9 @@ init() {
 }
 
 main() {
+	log "Starting up swww!"
 	init
+
 	while :; do
 		while IFS= read -r line
 		do
@@ -65,7 +72,6 @@ main() {
 			sleep .1
 		done < <(swww query)
 		sleep .5
-		init
 	done
 }
 

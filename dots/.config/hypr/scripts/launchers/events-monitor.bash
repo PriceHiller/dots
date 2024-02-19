@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+log() {
+	local monitor="${1}"
+	local msg="${2}"
+	printf "%s: %s\n" "${monitor}" "${msg}"
+}
+
 monitor-dir() {
 	local event="${1}"
 	local directory="${2}"
@@ -20,8 +26,10 @@ monitor-ssid() {
 		ssid="$(printf "%s" "${ssid}" | xargs)"
 		if [[ "${ssid}" != "${previous_ssid}" ]]; then
 			if [[ -z "${ssid// /}" ]]; then
+				log "SSID" "Wifi Disconnected"
 				notify-send "${notify_title}" "Wifi Disconnected" -a "${notify_app}"
 			else
+				log "SSID" "Wifi Connected to ${ssid}"
 				notify-send "${notify_title}" "Wifi Connected to ${ssid}" -a "${notify_app}"
 			fi
 			previous_ssid="${ssid}"
@@ -39,14 +47,22 @@ monitor-laptop-lid() {
 		case "${laptop_lid_state}" in
 		"CLOSED")
 			if hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1") | .name' >/dev/null; then
-				hyprctl keyword monitor "eDP-1, disable" >/dev/null && printf "Disabled laptop screen as the laptop was shut\n"
+				printf "Laptop screen was shut, attempting to disable it...\n"
+				if hyprctl keyword monitor "eDP-1, disable"; then
+					local msg="Laptop screen successfully disabled"
+					log "Laptop Clamshell" "${msg}"
+					notify-send "Laptop Clamshell Error" "${msg}" -a "Laptop Clamshell"
+				else
+					local msg="Received an error when disabling the laptop screen in clamshell mode!\n"
+					log "Laptop Clamshell" "${msg}"
+					notify-send "Laptop Clamshell Error" "${msg}" -a "Laptop Clamshell"
+				fi
 			fi
 			;;
 		esac
 		sleep 1
 	done
 }
-kill -9 "$(pgrep -f "${BASH_SOURCE[0]}" | grep -v "${$}")"
 monitor-ssid &
 monitor-laptop-lid &
 wait
