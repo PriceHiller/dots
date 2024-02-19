@@ -17,6 +17,7 @@ return {
                 org_agenda_files = {
                     "~/Git/College/**/*",
                     "~/Notes/**/*",
+                    vim.fn.stdpath("config") .. "/**/*"
                 },
                 notifications = {
                     enabled = true,
