@@ -79,6 +79,7 @@ return {
                         "--column",
                         "--smart-case",
                         "--hidden",
+                        "--glob=!.git/*"
                     },
                     history = {
                         path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
