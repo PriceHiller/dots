@@ -9,9 +9,9 @@ invest the effort at the time of writing to find out and make it work across a b
 
 
 * TODO Neogit
-- [ ] Determine why Neogit's diff hunks are not highlighted until I palce a cursor over a hunk.
+- [ ] Determine why Neogit's diff hunks are not highlighted until I place a cursor over a hunk.
   - Right now the diffs have 0 highlighting which makes it annoying to just glance at them —
     requires manual movement of the cursor position 🫤
 
 * TODO CI Automation
-- [ ] Configure a pipeline to enforce formatting via stylua
+- [ ] Configure a pipeline to enforce formatting via Stylua
