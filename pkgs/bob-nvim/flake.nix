@@ -37,6 +37,8 @@
           nativeBuildInputs = [ rust-toolchain ];
         };
       }) // {
-        overlays.default = final: prev: { bob-nvim = self.packages.${final.system}.default; };
+        overlays.default = final: prev: {
+          bob-nvim = self.packages.${final.system}.default;
+        };
       };
 }

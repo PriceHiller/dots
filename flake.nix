@@ -39,7 +39,10 @@
       homeConfigurations.${username} =
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = nixpkgs.legacyPackages.${system};
-          extraSpecialArgs = { inherit inputs; inherit self; };
+          extraSpecialArgs = {
+            inherit inputs;
+            inherit self;
+          };
           modules = [
             ({
               nixpkgs.overlays = [
