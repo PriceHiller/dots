@@ -15,12 +15,11 @@ return {
             -- Correctly hijack netrw, thanks to
             -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1247#issuecomment-1836294271
             vim.api.nvim_create_autocmd("BufEnter", {
-                group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
+                once = true,
                 callback = function()
                     local f = vim.fn.expand("%:p")
-                    if vim.fn.isdirectory(f) ~= 0 then
+                    if vim.fn.isdirectory(f) == 1 then
                         require("neo-tree")
-                        -- neo-tree is loaded now, delete the init autocmd
                         return true
                     end
                 end,

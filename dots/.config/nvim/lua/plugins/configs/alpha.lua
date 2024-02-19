@@ -2,6 +2,19 @@ return {
     {
         "goolord/alpha-nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        init = function()
+            vim.api.nvim_create_autocmd("BufEnter", {
+                once = true,
+                callback = function()
+                    local f = vim.fn.expand("%:p")
+                    if vim.fn.isdirectory(f) == 0 then
+                        require("alpha")
+                        return true
+                    end
+                end,
+            })
+        end,
+        lazy = true,
         opts = function()
             -- Set header
             local header = {
