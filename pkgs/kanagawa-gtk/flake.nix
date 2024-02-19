@@ -82,7 +82,8 @@
       }) // {
         overlays.default = final: prev: {
           kanagawa-gtk-theme = self.packages.${final.system}.kanagawa-gtk-theme;
-          kanagawa-gtk-icon-theme = self.packages.${final.system}.kanagwa-icon-theme;
+          kanagawa-gtk-icon-theme =
+            self.packages.${final.system}.kanagwa-icon-theme;
         };
       };
 }

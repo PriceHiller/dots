@@ -69,14 +69,8 @@ in {
         easyeffects
         egl-wayland
         helvum
-      ] ++ [
-        go
-        (lib.hiPrio gotools)
-      ] ++ [
-        age
-        age-plugin-yubikey
-        passage
-      ] ++ [
+      ] ++ [ go (lib.hiPrio gotools) ] ++ [ age age-plugin-yubikey passage ]
+      ++ [
         libsForQt5.qtstyleplugins
         libsForQt5.qtcurve
         qt6Packages.qt6gtk2
@@ -226,9 +220,7 @@ in {
       enableZshIntegration = true;
       maxCacheTtl = 14400;
       maxCacheTtlSsh = 14400;
-      sshKeys = [
-        "530D3EC95C32AB9EC33714AAF865738D6E77680A"
-      ];
+      sshKeys = [ "530D3EC95C32AB9EC33714AAF865738D6E77680A" ];
       extraConfig = ''
         pinentry-program /usr/bin/pinentry-gtk-2
         allow-loopback-pinentry
