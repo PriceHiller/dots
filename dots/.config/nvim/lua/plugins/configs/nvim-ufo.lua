@@ -106,7 +106,7 @@ return {
                     end
                     curWidth = curWidth + chunkWidth
                 end
-                table.insert(newVirtText, { suffix, "@conditional" })
+                table.insert(newVirtText, { suffix, "@label" })
                 return newVirtText
             end
 
