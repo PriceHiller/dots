@@ -1,15 +1,14 @@
 local M = {}
 
 M.setup = function()
-    local function lspSymbol(name, icon, priority)
+    local function lspSymbol(name, icon)
         local hl = "DiagnosticSign" .. name
-        vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl, priority = priority })
+        vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
     end
-
-    lspSymbol("Error", "󰅙", 20)
-    lspSymbol("Warn", "", 15)
-    lspSymbol("Info", "󰋼", 10)
-    lspSymbol("Hint", "", 10)
+    lspSymbol("Error", "󰅙")
+    lspSymbol("Warn", "")
+    lspSymbol("Info", "󰋼")
+    lspSymbol("Hint", "")
 
     vim.diagnostic.config({
         virtual_text = false,
