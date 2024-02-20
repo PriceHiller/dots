@@ -31,12 +31,24 @@
 
 ; Quote highlights
 (block
-   name: (expr) @org-block-start-name (#any-of? @org-block-start-name "quote" "QUOTE")
-   contents: (contents) @markup.quote
-   end_name: (expr) @org-block-end-name (#any-of? @org-block-end-name "quote" "QUOTE"))
+  name: (expr) @org-block-start-name (#any-of? @org-block-start-name "quote" "QUOTE")
+  contents: (contents) @markup.quote
+  end_name: (expr) @org-block-end-name (#any-of? @org-block-end-name "quote" "QUOTE"))
 
 (block
-   name: (expr) @org-block-start-name (#any-of? @org-block-start-name "src" "SRC")
-   !parameter
-   contents: (contents) @markup.raw.block
-   end_name: (expr) @org-block-end-name (#any-of? @org-block-end-name "src" "SRC"))
+  name: (expr) @org-block-start-name (#any-of? @org-block-start-name "src" "SRC")
+  !parameter
+  contents: (contents) @markup.raw.block
+  end_name: (expr) @org-block-end-name (#any-of? @org-block-end-name "src" "SRC"))
+
+; Improved timestamp highlights
+(entry
+  timestamp:
+  (timestamp
+    ("<"  @org.timestamp.active.delimiter)
+    (">" @org.timestamp.active.delimiter)))
+(entry
+  timestamp:
+  (timestamp
+    ("["  @org.timestamp.inactive.delimiter)
+    ("]" @org.timestamp.inactive.delimiter)))

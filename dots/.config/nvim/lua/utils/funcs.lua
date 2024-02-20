@@ -51,18 +51,6 @@ U.title_case = function(str)
     return string.gsub(str, "(%a)([%w_']*)", inner)
 end
 
----Get the effective given highlight, optionally overriding some of its fields
----@param name string Highlight name
----@param opts? vim.api.keyset.highlight
----@return fun(): vim.api.keyset.highlight
-U.get_hl = function(name, opts)
-    ---@return vim.api.keyset.highlight
-    return function()
-        ---@diagnostic disable-next-line: return-type-mismatch
-        return vim.tbl_deep_extend("force", vim.api.nvim_get_hl(0, { name = name, link = false }), opts or {})
-    end
-end
-
 ---@alias Highlight.Keys
 ---| '"bold"'
 ---| '"standout"'
@@ -94,6 +82,25 @@ end
 ---| '"bg_indexed"'
 ---| '"force"'
 ---| '"url"'
+
+---Get the effective given highlight, optionally overriding some of its fields
+---@param name string Highlight name
+---@param opts? vim.api.keyset.highlight | table<Highlight.Keys, fun(): string | integer>
+---@return fun(): vim.api.keyset.highlight
+U.get_hl = function(name, opts)
+    opts = vim.iter(opts or {}):fold({}, function(t, k, v)
+        if type(v) == "function" then
+            v = v()
+        end
+        t[k] = v
+        return t
+    end)
+    ---@return vim.api.keyset.highlight
+    return function()
+        ---@diagnostic disable-next-line: return-type-mismatch
+        return vim.tbl_deep_extend("force", vim.api.nvim_get_hl(0, { name = name, link = false }), opts or {})
+    end
+end
 
 ---Get only the specified items from the highlight
 ---@param name string Highlight name
