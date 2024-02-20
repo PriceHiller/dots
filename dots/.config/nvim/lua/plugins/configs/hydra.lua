@@ -1,6 +1,6 @@
 return {
     {
-        "anuvyklack/hydra.nvim",
+        "nvimtools/hydra.nvim",
         dependencies = {
             "anuvyklack/keymap-layer.nvim",
             "lewis6991/gitsigns.nvim",
@@ -22,7 +22,6 @@ return {
                 config = {
                     {
                         position = "bottom-right",
-                        border = "solid",
                     },
                 },
                 mode = "n",
@@ -54,7 +53,6 @@ return {
                     invoke_on_body = true,
                     hint = {
                         position = "bottom-right",
-                        border = "solid",
                     },
                     on_enter = function()
                         vim.bo.modifiable = false
@@ -122,7 +120,6 @@ return {
                 config = {
                     {
                         position = "bottom-right",
-                        border = "solid",
                     },
                 },
                 heads = {
@@ -176,9 +173,7 @@ _b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional 
                 config = {
                     color = "pink",
                     invoke_on_body = true,
-                    hint = {
-                        border = "solid",
-                    },
+                    hint = {},
                 },
             })
 
@@ -195,9 +190,7 @@ _b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional 
                 config = {
                     color = "pink",
                     invoke_on_body = true,
-                    hint = {
-                        border = "solid",
-                    },
+                    hint = {},
                     on_enter = function()
                         vim.o.virtualedit = "all"
                         vim.o.cursorline = true
@@ -235,7 +228,6 @@ _b_: Toggle Breakpoint    _l_: Toggle Log Breakpoint    _B_: Toggle Conditional 
                     color = "amaranth",
                     invoke_on_body = true,
                     hint = {
-                        border = "solid",
                         position = "middle",
                     },
                 },
