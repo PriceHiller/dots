@@ -244,14 +244,14 @@ return {
                 { "@markup.heading.6",                  { fg = colors.sakuraPink, bold = true } },
                 { "@markup.heading.7",                  { fg = colors.lightBlue, bold = true } },
                 { "@markup.heading.8",                  { fg = colors.springGreen, bold = true } },
-                { "@OrgTSHeadlineLevel1.org",           { link = "@markup.heading.1" } },
-                { "@OrgTSHeadlineLevel2.org",           { link = "@markup.heading.2" } },
-                { "@OrgTSHeadlineLevel3.org",           { link = "@markup.heading.3" } },
-                { "@OrgTSHeadlineLevel4.org",           { link = "@markup.heading.4" } },
-                { "@OrgTSHeadlineLevel5.org",           { link = "@markup.heading.5" } },
-                { "@OrgTSHeadlineLevel6.org",           { link = "@markup.heading.6" } },
-                { "@OrgTSHeadlineLevel7.org",           { link = "@markup.heading.7" } },
-                { "@OrgTSHeadlineLevel8.org",           { link = "@markup.heading.8" } },
+                { "@org.headline.level1",               { link = "@markup.heading.1" } },
+                { "@org.headline.level2.org",           { link = "@markup.heading.2" } },
+                { "@org.headline.level3.org",           { link = "@markup.heading.3" } },
+                { "@org.headline.level4.org",           { link = "@markup.heading.4" } },
+                { "@org.headline.level5.org",           { link = "@markup.heading.5" } },
+                { "@org.headline.level6.org",           { link = "@markup.heading.6" } },
+                { "@org.headline.level7.org",           { link = "@markup.heading.7" } },
+                { "@org.headline.level8.org",           { link = "@markup.heading.8" } },
                 { "@markup.heading.1.marker",           { link = "@markup.heading.1" } },
                 { "@markup.heading.2.marker",           { link = "@markup.heading.2" } },
                 { "@markup.heading.3.marker",           { link = "@markup.heading.3" } },
@@ -268,7 +268,8 @@ return {
                 local hl_name = tbl[1]
                 local hl_opts = tbl[2]
                 if t[hl_name] then
-                    vim.notify(string.format("Duplicate highlight '%s' defined at index '%d'!", hl_name, index), vim.log.levels.ERROR)
+                    vim.notify(string.format("Duplicate highlight '%s' defined at index '%d'!", hl_name, index),
+                        vim.log.levels.ERROR)
                 end
 
                 if type(hl_opts) == "function" then
