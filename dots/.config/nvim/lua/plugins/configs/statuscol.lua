@@ -23,10 +23,11 @@ return {
                         local name = sign.texthl
                         if name and not sign.culhl then
                             local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-                            vim.api.nvim_set_hl(0, name, { fg = hl.fg, bg = bg })
-                            name = name .. "Cul"
-                            vim.api.nvim_set_hl(0, name, { fg = hl.fg, bg = cl_bg })
-                            vim.fn.sign_define(sign.name, { culhl = name })
+                            vim.api.nvim_set_hl(0, name, vim.tbl_deep_extend("force", hl, { bg = bg, force = true }))
+                            local cul_hl_name = name .. "Cul"
+                            vim.api.nvim_set_hl(0, cul_hl_name, vim.tbl_deep_extend("force", hl, { bg = cl_bg, nocombine = true, force = true }))
+                            sign.culhl = cul_hl_name
+                            vim.fn.sign_define(sign.name, sign)
                         end
                     end
                 end)
