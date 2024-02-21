@@ -2,7 +2,7 @@ local opt_local = vim.opt_local
 
 opt_local.tabstop = 2
 opt_local.shiftwidth = 2
-opt_local.commenstring = "# %s"
+opt_local.commentstring = "# %s"
 
 vim.keymap.set("n", "<leader>fr", function()
     local cmd = {
