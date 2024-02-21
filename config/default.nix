@@ -53,7 +53,6 @@ in {
         gtk2
         lxappearance
         webcord
-        gtk-engine-murrine
         opensnitch-ui
         twitter-color-emoji
         open-sans
@@ -69,6 +68,7 @@ in {
         easyeffects
         egl-wayland
         helvum
+        brightnessctl
       ] ++ [ go (lib.hiPrio gotools) ] ++ [ age age-plugin-yubikey passage ]
       ++ [
         libsForQt5.qtstyleplugins
