@@ -256,7 +256,6 @@ in {
         };
       };
       easyeffects = {
-        Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
