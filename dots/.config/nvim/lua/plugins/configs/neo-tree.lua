@@ -43,7 +43,11 @@ return {
                             source = "buffers",
                         },
                         {
+                            source = "git_status",
+                        },
+                        {
                             source = "remote",
+                            display_name = " Remote"
                         },
                     },
                 },
