@@ -10,9 +10,11 @@ I am sure /much/ of it will work on any computer with a bash or zsh shell, but I
 invest the effort at the time of writing to find out and make it work across a bunch of use cases.
 
 
-* TODO Neogit
+* DONE Neogit
 SCHEDULED: <2024-02-23 Fri> DEADLINE: <2024-02-25 Sun>
-- [ ] Determine why Neogit's diff hunks are not highlighted until I place a cursor over a hunk.
+- [X] Determine why Neogit's diff hunks are not highlighted until I place a cursor over a hunk.
+  - This was fixed upstream and with the manual foldmethod set in ~987e89c~ this is working as
+    expected.
   - Right now the diffs have 0 highlighting which makes it annoying to just glance at them —
     requires manual movement of the cursor position 🫤
 
