@@ -65,7 +65,7 @@ M.setup = function()
     end, { silent = true, desc = "LSP: Toggle Diagnostics" })
 
     -- Toggle relativenumber
-    vim.keymap.set("n", "<leader>sn", function()
+    vim.keymap.set("n", "<leader>sr", function()
         vim.opt.relativenumber = not vim.opt.relativenumber:get()
     end, { silent = true, desc = "Toggle Relativenumber" })
 
