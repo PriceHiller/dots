@@ -18,4 +18,6 @@ setopt AUTO_PUSHD
 setopt HASH_CMDS
 setopt COMBININGCHARS
 
+setopt RM_STAR_SILENT
+
 unsetopt BEEP
