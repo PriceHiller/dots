@@ -238,7 +238,32 @@ return {
                 { "@markup.list.unchecked", { fg = colors.crystalBlue } },
                 { "@markup.verbatim", { fg = colors.springGreen, bg = colors.sumiInk0 } },
                 { "@org.verbatim", { link = "@markup.verbatim" } },
-                { "@org.verbatim.delimiter", { link = "@markup.verbatim" } },
+                {
+                    "@org.verbatim.delimiter",
+                    {
+                        fg = function()
+                            return get_hl("@markup.raw.delimiter")().fg
+                        end,
+                        bg = function()
+                            return get_hl("@org.verbatim")().bg
+                        end,
+                    },
+                },
+                { "@org.code", { link = "@markup.raw" } },
+                {
+                    "@org.code.delimiter",
+                    {
+                        fg = function()
+                            return get_hl("@markup.raw.delimiter")().fg
+                        end,
+                        bg = function()
+                            return get_hl("@org.code")().bg
+                        end,
+                    },
+                },
+                { "@org.italic.delimiter", get_hl("@markup.raw.delimiter", { italic = true }) },
+                { "@org.bold.delimiter", get_hl("@markup.raw.delimiter", { bold = true }) },
+                { "@org.strikethrough.delimiter", get_hl("@markup.raw.delimiter", { strikethrough = true }) },
                 { "@org.timestamp", { underline = true, italic = false } },
                 { "@org.timestamp.active", get_hl("@org.timestamp", { fg = colors.springViolet1 }) },
                 {
