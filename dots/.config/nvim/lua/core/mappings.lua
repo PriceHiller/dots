@@ -114,6 +114,9 @@ M.setup = function()
 
     -- Insert an Em Dash in insert mode
     vim.keymap.set("i", "<A-->", "—", { silent = true, desc = "Insert: Em Dash" })
+
+    -- Keymap to toggle folds easier
+    vim.keymap.set("n", "<Tab>", "za", { silent = true, desc = "Toggle Fold" })
 end
 
 return M
