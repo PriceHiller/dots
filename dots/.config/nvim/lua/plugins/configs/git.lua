@@ -32,6 +32,7 @@ return {
                 pattern = "*Neogit*",
                 callback = function()
                     vim.opt_local.list = false
+                    vim.opt_local.foldmethod = "manual"
                 end,
             })
 
