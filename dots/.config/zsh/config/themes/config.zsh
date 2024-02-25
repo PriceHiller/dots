@@ -105,7 +105,7 @@
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     # cpu_arch              # CPU architecture
-	public_ip             # public IP address
+    # public_ip             # public IP address
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline
