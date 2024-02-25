@@ -51,7 +51,7 @@ monitor-laptop-lid() {
 				if hyprctl keyword monitor "eDP-1, disable"; then
 					local msg="Laptop screen successfully disabled"
 					log "Laptop Clamshell" "${msg}"
-					notify-send "Laptop Clamshell Error" "${msg}" -a "Laptop Clamshell"
+					notify-send "Laptop Clamshell" "${msg}" -a "Laptop Clamshell"
 				else
 					local msg="Received an error when disabling the laptop screen in clamshell mode!\n"
 					log "Laptop Clamshell" "${msg}"
