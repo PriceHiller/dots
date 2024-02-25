@@ -11,6 +11,8 @@ return {
             { "<leader>h", desc = "> Hydra" },
             { "<C-w>>" },
             { "<C-w><" },
+            { "<C-w>+" },
+            { "<C-w>-" },
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
@@ -117,11 +119,6 @@ return {
                 name = "Window Sizing",
                 mode = "n",
                 body = "<C-w>",
-                config = {
-                    {
-                        position = "bottom-right",
-                    },
-                },
                 heads = {
                     { "<", "2<C-w><" },
                     { ">", "2<C-w>>", { desc = "←/→" } },
