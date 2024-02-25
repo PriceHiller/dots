@@ -15,11 +15,9 @@ set-wallpaper() {
 	local monitor="${1}"
 	local wallpaper_path="${2}"
 
-	until [[ "$(get-monitor-wallpaper "${monitor}")" == "${wallpaper_path}" ]]; do
-		log "Setting wallpaper for monitor: '${monitor}' to '${wallpaper_path}'"
-		swww img -t none "${wallpaper_path}" -o "${monitor}"
-		log "Set wallpaper for monitor: '${monitor}' to '${wallpaper_path}'"
-	done
+	log "Setting wallpaper for monitor: '${monitor}' to '${wallpaper_path}'"
+	swww img -t none "${wallpaper_path}" -o "${monitor}"
+	log "Set wallpaper for monitor: '${monitor}' to '${wallpaper_path}'"
 }
 
 set-wallpapers() {
@@ -64,9 +62,8 @@ main() {
 	init
 
 	while :; do
-		while IFS= read -r line
-		do
-			if grep "color: 000000" <<< "${line}"; then
+		while IFS= read -r line; do
+			if grep "color: 000000" <<<"${line}"; then
 				set-wallpapers
 			fi
 			sleep .1
