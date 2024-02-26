@@ -19,7 +19,7 @@ local change_buf_foldlevel_by = function(num)
     else
         foldlevel = 0
     end
-    if vim.b.ufo_foldlevel and foldlevel > vim.b.ufo_foldlevel_max then
+    if vim.b.ufo_foldlevel_max and foldlevel > vim.b.ufo_foldlevel_max then
         return
     end
     set_buf_foldlevel(foldlevel)
