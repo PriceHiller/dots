@@ -14,3 +14,7 @@ require("plugins.init")
 -- NOTE: into non-postload regions then handled in postload modules.
 require("plugins.postload")
 require("core.postload")
+
+if vim.g.neovide then
+    require("neovide")
+end
