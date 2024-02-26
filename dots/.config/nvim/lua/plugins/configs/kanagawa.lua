@@ -324,6 +324,10 @@ return {
                 { "@markup.quote.org", get_hl("@markup.quote", { bg = colors.sumiInk5 }) },
             }
 
+            if vim.g.neovide then
+                table.insert(extra_hls, 1, { "Normal", { fg = colors.fujiWhite, bg = "#1d2031" } })
+            end
+
             vim.iter(extra_hls):enumerate():fold({}, function(t, index, tbl)
                 local hl_name = tbl[1]
                 local hl_opts = tbl[2]
