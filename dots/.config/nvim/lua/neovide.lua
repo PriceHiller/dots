@@ -1,5 +1,9 @@
 vim.opt.linespace = -1
 
+-- Floating and Popupmenu Transparency
+vim.opt.winblend = 10
+vim.opt.pumblend = 10
+
 -- Allow clipboard copy paste in neovim
 vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true }) -- Save
 vim.keymap.set("v", "<D-c>", '"+y', { noremap = true, silent = true }) -- Copy
