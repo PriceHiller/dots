@@ -19,7 +19,7 @@ return {
             })
 
             require("kanagawa").setup({
-                transparent = true,
+                transparent = not vim.g.neovide,
                 dim_inactive = true,
                 globalStatus = true,
                 theme = "wave",
