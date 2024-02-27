@@ -18,7 +18,8 @@ return {
                 once = true,
                 callback = function()
                     local f = vim.fn.expand("%:p")
-                    if vim.fn.isdirectory(f) == 1 then
+                    local isdir = vim.fn.isdirectory(f)
+                    if isdir == 1 or f == "" then
                         require("neo-tree")
                         return true
                     end
