@@ -4,6 +4,14 @@ vim.opt.linespace = -1
 vim.opt.winblend = 10
 vim.opt.pumblend = 10
 
+-- Float blur amount
+vim.g.neovide_floating_blur_amount_x = 5.0
+vim.g.neovide_floating_blur_amount_y = 5.0
+vim.g.neovide_floating_shadow = true
+vim.g.neovide_floating_z_height = 10
+vim.g.neovide_light_angle_degrees = 45
+vim.g.neovide_light_radius = 5
+
 -- Allow clipboard copy paste in neovim
 vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true }) -- Save
 vim.keymap.set("v", "<D-c>", '"+y', { noremap = true, silent = true }) -- Copy
