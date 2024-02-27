@@ -3,8 +3,8 @@ vim.opt.winblend = 10
 vim.opt.pumblend = 10
 
 -- Float blur amount
-vim.g.neovide_floating_blur_amount_x = 5.0
-vim.g.neovide_floating_blur_amount_y = 5.0
+vim.g.neovide_floating_blur_amount_x = 10.0
+vim.g.neovide_floating_blur_amount_y = 10.0
 vim.g.neovide_floating_shadow = true
 vim.g.neovide_floating_z_height = 10
 vim.g.neovide_light_angle_degrees = 45
