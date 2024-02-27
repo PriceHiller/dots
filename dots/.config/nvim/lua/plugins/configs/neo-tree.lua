@@ -1,3 +1,5 @@
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
 return {
     {
         "nvim-neo-tree/neo-tree.nvim",
@@ -15,11 +17,10 @@ return {
             -- Correctly hijack netrw, thanks to
             -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1247#issuecomment-1836294271
             vim.api.nvim_create_autocmd("BufEnter", {
-                once = true,
-                callback = function()
-                    local f = vim.fn.expand("%:p")
-                    local isdir = vim.fn.isdirectory(f)
-                    if isdir == 1 or f == "" then
+                desc = "Lazy loads neo-tree when opening a directory",
+                callback = function(args)
+                    local stats = vim.uv.fs_stat(args.file)
+                    if stats and stats.type == "directory" then
                         require("neo-tree")
                         return true
                     end
@@ -48,7 +49,7 @@ return {
                         },
                         {
                             source = "remote",
-                            display_name = " Remote"
+                            display_name = " Remote",
                         },
                     },
                 },
