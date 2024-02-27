@@ -10,6 +10,10 @@ vim.g.neovide_floating_z_height = 10
 vim.g.neovide_light_angle_degrees = 45
 vim.g.neovide_light_radius = 5
 
+-- Do not use fullscreen on startup — annoying af
+vim.g.neovide_remember_window_size = false
+vim.g.neovide_fullscreen = false
+
 -- Allow clipboard copy paste in neovim
 vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true }) -- Save
 vim.keymap.set("v", "<D-c>", '"+y', { noremap = true, silent = true }) -- Copy
