@@ -1,5 +1,3 @@
-vim.opt.linespace = -1
-
 -- Floating and Popupmenu Transparency
 vim.opt.winblend = 10
 vim.opt.pumblend = 10
