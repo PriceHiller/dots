@@ -16,3 +16,11 @@ vim.keymap.set('t', '<D-v>', '<C-\\><C-n>"+Pi', { noremap = true, silent = true 
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+
+-- Next/prev tabs
+vim.api.nvim_set_keymap("n", "<D-x>", ":tabnext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<D-z>", ":tabprevious<CR>", { noremap = true, silent = true })
+
+-- Spawn new terminal in new tab
+vim.api.nvim_set_keymap("n", "<D-t>", ":tabnew | terminal<CR>", { noremap = true, silent = true })
+
