@@ -23,7 +23,7 @@ return {
             "David-Kunz/cmp-npm",
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
-            "FelipeLema/cmp-async-path",
+            { "hrsh7th/cmp-path" },
             {
                 "tzachar/cmp-fuzzy-buffer",
                 dependencies = {
@@ -121,7 +121,7 @@ return {
                 local default_sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip", max_item_count = 5 }, -- For luasnip users.
-                    { name = "async_path" },
+                    { name = "path" },
                     {
                         name = "fuzzy_buffer",
                         max_item_count = 5
