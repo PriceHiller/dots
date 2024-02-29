@@ -1,3 +1,5 @@
+local config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
+
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -34,10 +36,21 @@ return {
             { "<leader>tq", ":Telescope quickfixhistry", desc = "LSP: Telescope Quickfix History" },
             { "<leader>nv", ":Telescope notify<CR>", desc = "Notifications: Search" },
             { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope" },
+            {
+                "<leader>tz",
+                function()
+                    local z_lua_path = config_home .. "/zsh/config/plugins/z.lua/z.lua"
+                    require("telescope").extensions.z.list({
+                        cmd = { "lua", z_lua_path, "-l" }
+                    })
+                end,
+                desc = "Telescope: Z"
+            },
         },
         dependencies = {
             "artart222/telescope_find_directories",
             "nvim-telescope/telescope-ui-select.nvim",
+            "nvim-telescope/telescope-z.nvim",
             {
                 "nvim-telescope/telescope-frecency.nvim",
                 cmd = {
@@ -164,6 +177,7 @@ return {
             telescope.load_extension("smart_history")
             telescope.load_extension("undo")
             telescope.load_extension("frecency")
+            telescope.load_extension("z")
         end,
     },
 }
