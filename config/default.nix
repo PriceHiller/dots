@@ -117,6 +117,10 @@ in {
       };
     } // softLinkDots ".config";
 
+    sessionVariables = {
+      TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
+      WSLENV = "TERMINFO_DIRS";
+    };
     sessionPath = [
       "${config.xdg.dataHome}/bin"
     ];
