@@ -194,6 +194,7 @@ return {
                 { "TreesitterContext", { bg = colors.sumiInk0 } },
                 { "FloatTitle", { bg = "NONE" } },
                 { "DiffviewFilePanelTitle", { fg = colors.crystalBlue } },
+                { "DiffviewDiffDeleteDim", { fg = function() return get_hl("Comment")().fg end } },
                 { "LspInlayHint", { fg = colors.springViolet2, bg = colors.winterBlue } },
                 { "@text", { fg = colors.fujiWhite } },
                 { "RainbowDelimiterRed", { fg = colors.peachRed } },
