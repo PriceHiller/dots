@@ -31,6 +31,7 @@ in {
       [
         bob-nvim
         (nixGLWrap neovide)
+        (nixGLWrap wezterm)
         emacs-pgtk
         sqlite
         luajit
