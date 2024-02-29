@@ -139,6 +139,10 @@ M.setup = function()
 
     -- Allow per project configuration via exrc
     opt.exrc = true
+
+    -- Backups
+    opt.backupdir = vim.fn.stdpath('state') .. "/backup//"
+    opt.backup = true
 end
 
 return M
