@@ -100,7 +100,7 @@ return {
                     },
                     mappings = {
                         i = {
-                            ["<C-d>"] = actions.cycle_history_next,
+                            ["<C-d>"] = actions.cycle_history_next + actions.delete_buffer + actions.move_to_top,
                             ["<C-s>"] = actions.cycle_history_prev,
                             ["<C-q>"] = actions.smart_send_to_qflist,
                         },
