@@ -26,6 +26,7 @@
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:guibou/nixGL";
   };
 
   outputs = inputs@{ self, home-manager, nixpkgs, ... }:
@@ -50,6 +51,7 @@
                 inputs.emacs-overlay.overlays.emacs
                 inputs.bob.overlays.default
                 inputs.kanagawa-gtk.overlays.default
+                inputs.nixgl.overlay
                 (final: prev: {
                   waybar = inputs.waybar.packages.${system}.default;
                   lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
