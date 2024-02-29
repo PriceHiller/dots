@@ -12,12 +12,25 @@ let
     # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
       (builtins.attrNames (builtins.readDir ../dots/${dir}))));
   gtkStyle = "gtk2";
+  nixGLWrap = pkg:
+    pkgs.runCommand "${pkg.name}-nixgl-wrapper" { } ''
+      mkdir $out
+      ln -s ${pkg}/* $out
+      rm $out/bin
+      mkdir $out/bin
+      for bin in ${pkg}/bin/*; do
+       wrapped_bin=$out/bin/$(basename $bin)
+       echo "exec ${lib.getExe pkgs.nixgl.nixGLIntel} $bin \$@" > $wrapped_bin
+       chmod +x $wrapped_bin
+      done
+    '';
 in {
   programs.home-manager.enable = true;
   home = {
     packages = with pkgs;
       [
         bob-nvim
+        (nixGLWrap neovide)
         emacs-pgtk
         sqlite
         luajit
@@ -102,6 +115,10 @@ in {
         force = true;
       };
     } // softLinkDots ".config";
+
+    sessionPath = [
+      "${config.xdg.dataHome}/bin"
+    ];
   };
 
   xdg = {
@@ -142,9 +159,13 @@ in {
       "/usr/share"
       "/usr/local/share"
     ];
+    configFile."bob/config.toml".text = ''
+      installation_location = "${config.xdg.dataHome}/bin"
+    '';
   };
 
   programs = {
+    wofi.enable = true;
     gpg = {
       enable = true;
       scdaemonSettings = {
@@ -167,12 +188,6 @@ in {
         source "$HOME/.config/zsh/zsh"
         __HM_SESS_VARS_SOURCED= source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       '';
-    };
-    neovim = {
-      enable = true;
-      extraPackages = with pkgs; [ sqlite gh ];
-      # Magick is required for image.nvim
-      extraLuaPackages = lp: [ lp.magick ];
     };
   };
 

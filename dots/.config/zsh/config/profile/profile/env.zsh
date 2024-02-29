@@ -110,9 +110,6 @@ if [[ -r "${usr/libexec/java_home}" ]]; then
 	export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-### BOB, Neovim Version Manager ###
-export PATH="${XDG_DATA_HOME}/bob/nvim-bin:${PATH}"
-
 ### Editor ###
 if command -v nvim >/dev/null 2>&1; then
 	export EDITOR=nvim
