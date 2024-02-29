@@ -222,6 +222,9 @@ return {
                 { "NotificationWarning", { link = "NvimNotifyWarn" } },
                 { "NotificationError", { link = "NvimNotifyError" } },
 
+                -- LSP hls
+                { "@lsp.typemod.variable.global", { fg = colors.lightBlue }},
+
                 -- Markup specific
                 { "@markup.raw", { fg = colors.carpYellow, bg = colors.sumiInk2 } },
                 { "@markup.raw.block", select_hl("@markup.raw", { "fg" }) },
