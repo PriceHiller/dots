@@ -241,6 +241,8 @@ return {
                 { "@markup.list.indeterminate", { fg = colors.carpYellow } },
                 { "@markup.list.unchecked", { fg = colors.crystalBlue } },
                 { "@markup.verbatim", { fg = colors.springGreen, bg = colors.sumiInk0 } },
+                { "@org.tag.body", { fg = colors.waveAqua2, italic = true } },
+                { "@org.tag.delimiter", { link = "@punctuation.delimiter" } },
                 { "@org.verbatim", { link = "@markup.verbatim" } },
                 {
                     "@org.verbatim.delimiter",

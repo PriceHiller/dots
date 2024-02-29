@@ -52,3 +52,7 @@
   (timestamp
     ("["  @org.timestamp.inactive.delimiter)
     ("]" @org.timestamp.inactive.delimiter)))
+
+; Improved list delimiter highlights
+(tag_list ":" @org.tag.delimiter)
+(tag) @org.tag.body
