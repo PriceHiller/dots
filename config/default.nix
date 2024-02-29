@@ -32,6 +32,7 @@ in {
         bob-nvim
         (nixGLWrap neovide)
         (nixGLWrap wezterm)
+        fontconfig
         emacs-pgtk
         sqlite
         luajit
@@ -118,13 +119,15 @@ in {
     } // softLinkDots ".config";
 
     sessionVariables = {
-      TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
+      TERMINFO_DIRS =
+        "${config.home.homeDirectory}/.nix-profile/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
+      LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
-    sessionPath = [
-      "${config.xdg.dataHome}/bin"
-    ];
+    sessionPath = [ "${config.xdg.dataHome}/bin" ];
   };
+
+  fonts.fontconfig.enable = true;
 
   xdg = {
     enable = true;
@@ -164,9 +167,46 @@ in {
       "/usr/share"
       "/usr/local/share"
     ];
-    configFile."bob/config.toml".text = ''
-      installation_location = "${config.xdg.dataHome}/bin"
-    '';
+    configFile = {
+      "fontconfig/fonts.conf".text = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+          <alias>
+            <family>sans-serif</family>
+            <prefer>
+              <family>Noto Sans</family>
+              <family>Fira Code</family>
+            </prefer>
+          </alias>
+          <alias>
+            <family>serif</family>
+            <prefer>
+              <family>Noto Serif</family>
+              <family>Fira Code</family>
+            </prefer>
+          </alias>
+          <alias>
+            <family>monospace</family>
+            <prefer>
+              <family>Fira Code</family>
+              <family>FiraCode Nerd Font</family>
+              <family>Noto Sans Mono</family>
+            </prefer>
+          </alias>
+          <alias>
+            <family>emoji</family>
+            <prefer>
+              <family>Twemoji</family>
+              <family>Noto Color Emoji</family>
+            </prefer>
+          </alias>
+        </fontconfig>
+      '';
+      "bob/config.toml".text = ''
+        installation_location = "${config.xdg.dataHome}/bin"
+      '';
+    };
   };
 
   programs = {
