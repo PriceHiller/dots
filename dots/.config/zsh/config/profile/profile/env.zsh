@@ -110,18 +110,33 @@ if [[ -r "${usr/libexec/java_home}" ]]; then
 	export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-### Editor ###
-if command -v nvim >/dev/null 2>&1; then
-	export EDITOR=nvim
-	export VISUAL=nvim
-	export MANPAGER="nvim +Man!"
-elif command -v vim >/dev/null 2>&1; then
-	export EDITOR=vim
-	export VISUAL=vim
-else
-	export EDITOR=vi
-	export VISUAL=less
-fi
+# ### Editor ###
+() {
+	local new_editor
+	local new_visual
+	local new_manpager
+	if [[ -n "${XDG_CURRENT_DESKTOP}" ]] && command -v neovide >/dev/null 2>&1; then
+		new_editor="neovide --no-fork"
+		new_visual="neovide --no-fork"
+		new_manpager="${XDG_CONFIG_HOME}/zsh/config/profile/profile/manpager_wrapper_func.bash"
+	elif command -v nvim >/dev/null 2>&1; then
+		new_editor=nvim
+		new_visual=nvim
+		new_manpager="nvim +Man!"
+	elif command -v vim >/dev/null 2>&1; then
+		new_editor=vim
+		new_visual=vim
+		new_manpager=less
+	else
+		new_editor=vi
+		new_visual=vi
+		new_manpager=less
+	fi
+
+	export EDITOR="${EDITOR:-$new_editor}"
+	export VISUAL="${VISUAL:-$new_visual}"
+	export MANPAGER="${MANPAGER:-$new_manpager}"
+}
 
 ### Rust ###
 export CARGO_HOME="${HOME}/.cargo"
