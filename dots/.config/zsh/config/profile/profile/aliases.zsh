@@ -73,7 +73,6 @@ if command -v wezterm >/dev/null 2>&1; then
 fi
 
 ### Misc ###
-alias e="${EDITOR}"
 alias Get-Public-IPV4="dig @resolver4.opendns.com myip.opendns.com +short -4"
 alias Get-Public-IPV6="dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6"
 alias cv="command -v"

@@ -182,3 +182,8 @@ precmd() {
 preexec() {
 	echo "\x1b]0;${2}\x1b\\"
 }
+
+# Editor with single letter
+e() {
+	eval "${EDITOR} ${@}"
+}
