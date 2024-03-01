@@ -326,7 +326,6 @@ return {
                 { "@markup.heading.6.marker", { link = "@markup.heading.6" } },
                 { "@markup.heading.7.marker", { link = "@markup.heading.7" } },
                 { "@markup.heading.8.marker", { link = "@markup.heading.8" } },
-                { "@markup.quote", get_hl("@markup.quote", { italic = true }) },
                 { "@markup.quote.org", get_hl("@markup.quote", { bg = colors.sumiInk5 }) },
             }
 
