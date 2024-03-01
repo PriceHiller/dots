@@ -14,9 +14,17 @@ M.setup = function()
         },
     })
 
-    vim.treesitter.language.register("yaml", "azure-pipelines")
-    vim.treesitter.language.register("gitignore", "dockerignore")
-    vim.treesitter.language.register("html", "xml")
+    ---Maps a given file type to a treesitter language to use for the given file type
+    ---@type table<string, string>
+    local fts_to_lang_registration = {
+        ["azure-pipelines"] = "yaml",
+        ["dockerignore"] = "gitignore",
+        ["zsh"] = "bash"
+    }
+
+    vim.iter(fts_to_lang_registration):each(function(filetype, language)
+        vim.treesitter.language.register(language, filetype)
+    end)
 end
 
 return M
