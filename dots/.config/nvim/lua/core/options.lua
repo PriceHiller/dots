@@ -141,7 +141,8 @@ M.setup = function()
     opt.exrc = true
 
     -- Backups
-    opt.backupdir = vim.fn.stdpath('state') .. "/backup//"
+    opt.backupdir = vim.fn.stdpath("state") .. "/backup//"
+    opt.backupskip = opt.backupskip + "*/*passage.*"
     opt.backup = true
 end
 
