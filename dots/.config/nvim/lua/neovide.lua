@@ -15,17 +15,9 @@ vim.g.neovide_remember_window_size = false
 vim.g.neovide_fullscreen = false
 
 -- Allow clipboard copy paste in neovim
-vim.keymap.set("n", "<D-s>", ":w<CR>", { noremap = true, silent = true }) -- Save
-vim.keymap.set("v", "<D-c>", '"+y', { noremap = true, silent = true }) -- Copy
-vim.keymap.set("n", "<D-v>", '"+P', { noremap = true, silent = true }) -- Paste normal mode
-vim.keymap.set("v", "<D-v>", '"+P', { noremap = true, silent = true }) -- Paste visual mode
-vim.keymap.set("c", "<D-v>", "<C-R>+", { noremap = true, silent = true }) -- Paste command mode
-vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli', { noremap = true, silent = true }) -- Paste insert mode
-vim.keymap.set('t', '<D-v>', '<C-\\><C-n>"+Pi', { noremap = true, silent = true }) -- Paste terminal mode
-
-vim.keymap.set("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.keymap.set("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.keymap.set("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<D-v>', '"+P') -- Paste normal and visual mode
+vim.keymap.set({ 'i', 'c' }, '<D-v>', '<C-R>+') -- Paste insert and command mode
+vim.keymap.set('t', '<D-v>', [[<C-\><C-N>"+P]]) -- Paste terminal mode
 
 -- Next/prev tabs
 vim.keymap.set({ "", "!", "v", "t" }, "<D-x>", "<cmd>tabnext<CR>", { noremap = true, silent = true })
