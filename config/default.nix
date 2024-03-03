@@ -84,6 +84,7 @@ in {
         egl-wayland
         helvum
         brightnessctl
+        keyd
       ] ++ [ go (lib.hiPrio gotools) ] ++ [ age age-plugin-yubikey passage ]
       ++ [
         libsForQt5.qtstyleplugins
@@ -296,6 +297,17 @@ in {
       };
     };
     services = {
+      keyd-application-mapper = {
+        Unit = {
+          Description = "Keyd - Linux Keyboard Remapper";
+          PartOf = [ "keyd.service" ];
+        };
+        Service = {
+          ExecStart = "keyd-application-mapper";
+          RestartSec = 3;
+        };
+        Install.WantedBy = [ "compositor.target" ];
+      };
       waybar = {
         Service = {
           Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
