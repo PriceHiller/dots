@@ -96,8 +96,18 @@ M.setup = function()
     -- Binding to keep S-Space in terminals from not sending <Space>
     vim.keymap.set("t", "<S-Space>", "<Space>", { silent = true, desc = "Terminal: Hack S-Space to Space" })
 
-    vim.keymap.set("n", "<C-j>", indent_traverse(1, true), { silent = true, desc = "Move: To next equal indent" })
-    vim.keymap.set("n", "<C-k>", indent_traverse(-1, true), { silent = true, desc = "Move: To previous equal indent" })
+    vim.keymap.set(
+        { "n", "v" },
+        "<C-j>",
+        indent_traverse(1, true),
+        { silent = true, desc = "Move: To next equal indent" }
+    )
+    vim.keymap.set(
+        { "n", "v" },
+        "<C-k>",
+        indent_traverse(-1, true),
+        { silent = true, desc = "Move: To previous equal indent" }
+    )
 
     -- Binding to go to older and newer quickfix list
     vim.keymap.set("n", "]q", "<cmd>cnewer<CR>", { silent = true, desc = "Quickfix: Newer" })
