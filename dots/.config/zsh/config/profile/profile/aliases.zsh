@@ -4,10 +4,17 @@
 	### Eza ###
 	if command -v eza >/dev/null 2>&1; then
 		alias exa='eza' # This helps some preview commands work from separate repos
-		alias ls="eza --icons --group --group-directories-first --octal-permissions --classify"
+		alias ls="eza --icons=always --all --group-directories-first --long --header --octal-permissions --classify --group"
 		alias l="ls -alh"
 		alias ll="l"
-		alias tree="ls --tree"
+		tree() {
+			local cmd="ls --tree"
+			if [[ -n "${*}" ]]; then
+				eval "${cmd} ${@}"
+			else
+				eval "${cmd}"
+			fi
+		}
 	fi
 
 	### Git ###
