@@ -222,8 +222,19 @@ return {
                 { "NotificationWarning", { link = "NvimNotifyWarn" } },
                 { "NotificationError", { link = "NvimNotifyError" } },
 
+                {
+                    "@comment.warning.gitcommit",
+                    {
+                        undercurl = true,
+                        sp = function()
+                            return get_hl("@comment.warning")().bg
+                        end,
+                        nocombine = true,
+                    },
+                },
+
                 -- LSP hls
-                { "@lsp.typemod.variable.global", { fg = colors.lightBlue }},
+                { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
 
                 -- Markup specific
                 { "@markup.raw", { fg = colors.carpYellow, bg = colors.sumiInk2 } },
