@@ -53,6 +53,8 @@ return {
                 { "Winbar", { bg = nil } },
                 { "StatusLineNC", { bg = nil } },
                 { "WinBarNC", { bg = nil } },
+                { "Visual", { bg = colors.sumiInk5 }},
+                { "CursorLine", { bg = colors.sumiInk4 }},
                 { "CursorLineNr", { fg = colors.roninYellow, bg = palette.theme.ui.bg_m1 } },
                 { "CursorLineFold", { fg = colors.crystalBlue, bg = palette.theme.ui.bg_m1 } },
                 { "CursorLineSign", { bg = palette.theme.ui.bg_m1 } },
