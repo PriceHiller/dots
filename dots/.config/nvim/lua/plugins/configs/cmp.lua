@@ -23,7 +23,7 @@ return {
             "David-Kunz/cmp-npm",
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
-            { "hrsh7th/cmp-path" },
+            "FelipeLema/cmp-async-path",
             {
                 "tzachar/cmp-fuzzy-buffer",
                 dependencies = {
@@ -119,12 +119,12 @@ return {
             local standard_sources = function(sources)
                 sources = sources or {}
                 local default_sources = {
+                    { name = "async_path" },
                     { name = "nvim_lsp" },
                     { name = "luasnip", max_item_count = 5 }, -- For luasnip users.
-                    { name = "path" },
                     {
                         name = "fuzzy_buffer",
-                        max_item_count = 5
+                        max_item_count = 5,
                     },
                     {
                         name = "rg",
@@ -401,22 +401,25 @@ return {
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({  name = "fuzzy_buffer" }),
+                sources = cmp.config.sources({ name = "fuzzy_buffer" }),
             })
 
             cmp.setup.cmdline("?", {
                 mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({  name = "fuzzy_buffer" }),
+                sources = cmp.config.sources({ name = "fuzzy_buffer" }),
             })
 
             -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
+                    { name = "async_path" },
                     {
                         name = "cmdline",
                         option = {
-                            ignore_cmds = { "!" },
+                            ignore_cmds = {
+                                "!",
+                            },
                         },
                     },
                     { name = "cmdline_history", max_item_count = 3 },
