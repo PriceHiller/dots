@@ -39,12 +39,42 @@ return {
             {
                 "<leader>tz",
                 function()
+                    local previewers = require("telescope.previewers.term_previewer")
+                    local from_entry = require("telescope.from_entry")
                     local z_lua_path = config_home .. "/zsh/config/plugins/z.lua/z.lua"
                     require("telescope").extensions.z.list({
-                        cmd = { "lua", z_lua_path, "-l" }
+                        cmd = { "zsh", "-c", "lua " .. z_lua_path .. " -l | tac" },
+                        previewer = previewers.new_termopen_previewer({
+                            get_command = function(entry)
+                                return {
+                                    "eza",
+                                    "--all",
+                                    "--icons=always",
+                                    "--group-directories-first",
+                                    "--classify",
+                                    "--dereference",
+                                    "--icons",
+                                    "--tree",
+                                    "-L",
+                                    "1",
+                                    from_entry.path(entry) .. "/",
+                                }
+                            end,
+                            scroll_fn = function(self, direction)
+                                if not self.state then
+                                    return
+                                end
+                                local bufnr = self.state.termopen_bufnr
+                                local input = direction > 0 and string.char(0x05) or string.char(0x19)
+                                local count = math.abs(direction)
+                                vim.api.nvim_win_call(vim.fn.bufwinid(bufnr), function()
+                                    vim.cmd([[normal! ]] .. count .. input)
+                                end)
+                            end,
+                        }),
                     })
                 end,
-                desc = "Telescope: Z"
+                desc = "Telescope: Z",
             },
         },
         dependencies = {
@@ -92,7 +122,7 @@ return {
                         "--column",
                         "--smart-case",
                         "--hidden",
-                        "--glob=!.git/*"
+                        "--glob=!.git/*",
                     },
                     history = {
                         path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
@@ -100,6 +130,10 @@ return {
                     },
                     mappings = {
                         i = {
+                            ['<C-j>'] = actions.preview_scrolling_down,
+                            ['<C-k>'] = actions.preview_scrolling_up,
+                            ['<C-h>'] = actions.preview_scrolling_left,
+                            ['<C-l>'] = actions.preview_scrolling_right,
                             ["<C-d>"] = actions.cycle_history_next + actions.delete_buffer + actions.move_to_top,
                             ["<C-s>"] = actions.cycle_history_prev,
                             ["<C-q>"] = actions.smart_send_to_qflist,
