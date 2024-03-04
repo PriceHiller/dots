@@ -185,5 +185,9 @@ preexec() {
 
 # Editor with single letter
 e() {
-	eval "${EDITOR} ${@}"
+	if [[ "${EDITOR}" =~ "neovide*" ]]; then
+		neovide "${@}"
+	else
+		eval "${EDITOR} ${@}"
+	fi
 }
