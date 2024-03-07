@@ -466,9 +466,25 @@ return {
                 dap_debug_gui = true,
             })
 
+            lspconfig.nil_ls.setup({
+                capabilities = lsp_capabilities,
+                on_attach = on_attach,
+                settings = {
+                    ["nil"] = {
+                        formatting = { command = { "nixfmt" } },
+                        nix = {
+                            maxMemoryMB = 60000,
+                            flake = {
+                                autoArchive = true,
+                                autoEvalInputs = true
+                            }
+                        }
+                    },
+                },
+            })
+
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
-                "nixd",
                 "clangd",
                 "cmake",
                 "bashls",
