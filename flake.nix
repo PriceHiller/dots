@@ -33,12 +33,11 @@
     let
       system = "x86_64-linux";
       username = "sam";
-      lib = nixpkgs.lib;
     in {
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
       targets.genericLinux = { enable = true; };
       homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration rec {
+        home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             inherit inputs;
@@ -60,7 +59,7 @@
                     '';
                   });
                   opensnitch-ui = prev.opensnitch-ui.overrideAttrs
-                    (oldAttrs: rec {
+                    (oldAttrs: {
                       propagatedBuildInputs = oldAttrs.propagatedBuildInputs
                         ++ [ prev.python311Packages.qt-material ];
                     });
@@ -75,13 +74,5 @@
             ./config
           ];
         };
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
-      in {
-        devShells.default = pkgs.mkShell {
-          shellHook = ''
-            nix eval --json --file ./.nixd.nix > .nixd.json
-          '';
-        };
-      });
+    };
 }

@@ -60,7 +60,6 @@ in {
         fzf
         delta
         eza
-        nixd
         luajit
         ripgrep
         fd
