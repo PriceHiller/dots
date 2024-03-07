@@ -23,6 +23,7 @@ return {
             { "<leader>tb", ":Telescope buffers<CR>", desc = "Telescope: Buffers" },
             { "<leader>th", ":Telescope help_tags<CR>", desc = "Telescope: Help Tags" },
             { "<leader>to", ":Telescope oldfiles<CR>", desc = "Telescope: Recent Files" },
+            { "<leader>tF", ":Telescope frecency<CR>", desc = "Telescope: Frecency" },
             { "<leader>tn", ":Telescope neoclip default<CR>", desc = "Telescope: Neoclip Buffer" },
             { "<leader>tr", ":Telescope resume<CR>", desc = "Telescope: Resume" },
             { "<leader>tR", ":Telescope registers<CR>", desc = "Telescope: Registers" },
@@ -205,8 +206,8 @@ return {
                         },
                     },
                     frecency = {
-                        db_safe_mode = false,
-                        auto_validate = false,
+                        show_scores = true,
+                        auto_validate = true,
                     },
                 },
             })
