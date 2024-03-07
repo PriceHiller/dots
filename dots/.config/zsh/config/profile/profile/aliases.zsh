@@ -4,7 +4,7 @@
 	### Eza ###
 	if command -v eza >/dev/null 2>&1; then
 		alias exa='eza' # This helps some preview commands work from separate repos
-		alias ls="eza --icons=always --all --group-directories-first --long --header --octal-permissions --classify --group"
+		alias ls="eza --icons=always --group-directories-first --long --header --octal-permissions --classify --group"
 		alias l="ls -alh"
 		alias ll="l"
 		tree() {
