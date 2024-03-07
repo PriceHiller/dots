@@ -1,4 +1,4 @@
-{ self, pkgs, config, inputs, lib, ... }:
+{ pkgs, config, lib, ... }:
 let
   dotsDir = "${config.home.homeDirectory}/.config/home-manager/dots";
   softLinkDots = dir:
@@ -11,7 +11,6 @@ let
     })
     # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
       (builtins.attrNames (builtins.readDir ../dots/${dir}))));
-  gtkStyle = "gtk2";
   nixGLWrap = pkg:
     pkgs.runCommand "${pkg.name}-nixgl-wrapper" { } ''
       mkdir $out
