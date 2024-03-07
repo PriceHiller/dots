@@ -10,7 +10,7 @@ local function on_attach(client, bufnr)
         capabilities.documentRangeFormattingProvider = false
     end
     local ignored_fmt_lsps = {
-        "lua_ls"
+        "lua_ls",
     }
     local capabilities = client.server_capabilities
     -- vim.notify(vim.inspect(capabilities))
@@ -49,9 +49,6 @@ local server_opts = {
 }
 
 local lsp_server_bin_dir = vim.fn.stdpath("data") .. "/mason/bin/"
-local codelldb_path = lsp_server_bin_dir .. "codelldb"
-local liblldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
-
 return {
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -67,6 +64,7 @@ return {
             {
                 "<leader>lt",
                 function()
+                    ---@diagnostic disable-next-line: undefined-field
                     local virtual_lines_enabled = not vim.diagnostic.config().virtual_lines
                     vim.diagnostic.config({
                         virtual_lines = virtual_lines_enabled,
@@ -80,9 +78,16 @@ return {
     },
     {
         "smjonas/inc-rename.nvim",
-        cmd = { "Increname" },
+        cmd = { "IncRename" },
         keys = {
-            { "<leader>ln", ":IncRename ", desc = "LSP: Rename" },
+            {
+                "<leader>ln",
+                function()
+                    return ":IncRename " .. vim.fn.expand("<cword>")
+                end,
+                desc = "LSP: Rename",
+                expr = true,
+            },
         },
         opts = {},
     },
@@ -112,8 +117,8 @@ return {
                 layout_strategy = "vertical",
                 layout_config = {
                     width = 0.8,
-                    height = 0.7
-                }
+                    height = 0.7,
+                },
             },
         },
         keys = {
@@ -275,17 +280,24 @@ return {
 
             -- NOTE: LUA LSP
             require("neodev").setup({
-                override = function(root_dir, library)
-                    local cur_file = vim.api.nvim_buf_get_name(0)
+                override = function(root_dir, options)
+                    local cur_file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
 
                     if root_dir:find("/tmp", 1, true) == 1 then
-                        library.enabled = true
-                        library.plugins = true
+                        options.enabled = true
+                        options.plugins = true
+                    end
+
+                    local config_path = vim.fn.stdpath("config")
+                    config_path = (config_path and vim.fn.resolve(config_path) or "")
+                    if cur_file:find("^" .. vim.pesc(config_path) .. ".*") then
+                        options.enabled = true
+                        options.plugins = true
                     end
 
                     if cur_file:find("%.nvim%.lua") ~= nil then
-                        library.enabled = true
-                        library.plugins = true
+                        options.enabled = true
+                        options.plugins = true
                     end
                 end,
             })
@@ -293,9 +305,12 @@ return {
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
+                        runtime = {
+                            version = "LuaJIT",
+                        },
                         hint = {
                             enable = true,
-                            setType = true
+                            setType = true,
                         },
                         completion = {
                             callSnippet = "Replace",
@@ -446,9 +461,9 @@ return {
             lspconfig.gopls.setup({
                 capabilities = lsp_capabilities,
                 on_attach = on_attach,
-                fillstruct = 'gopls',
+                fillstruct = "gopls",
                 dap_debug = true,
-                dap_debug_gui = true
+                dap_debug_gui = true,
             })
 
             -- NOTE: GENERIC LSP SERVERS
@@ -470,28 +485,10 @@ return {
                 "marksman",
                 "asm_lsp",
                 "typst_lsp",
+                "nginx_language_server",
             }) do
                 lspconfig[server].setup(server_opts)
             end
-
-            -- Custom Servers outside of lspconfig
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "nginx",
-                desc = "Nginx Language Server Handler",
-                callback = function()
-                    local client_id = vim.lsp.start({
-                        name = "Nginx-ls",
-                        cmd = { lsp_server_bin_dir .. "nginx-language-server" },
-                        root_dir = vim.fn.getcwd(),
-                        capabilities = lsp_capabilities,
-                        on_attach = on_attach,
-                    })
-
-                    if client_id then
-                        vim.lsp.buf_attach_client(0, client_id)
-                    end
-                end,
-            })
         end,
     },
 }
