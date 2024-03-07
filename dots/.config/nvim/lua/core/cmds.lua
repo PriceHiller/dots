@@ -1,7 +1,5 @@
 local M = {}
 M.setup = function()
-    -- NOTE: TrimTrailingWhitespace user command
-
     -- If invoked as a preview callback, performs 'inccommand' preview by
     -- highlighting trailing whitespace in the current buffer.
     local function trim_space_preview(opts, preview_ns, preview_buf)
@@ -69,8 +67,6 @@ M.setup = function()
         { nargs = "?", range = "%", addr = "lines", preview = trim_space_preview }
     )
 
-    -- NOTE: DiffSaved user command
-
     vim.api.nvim_create_user_command("DiffSaved", function()
         -- Thanks to sindrets: https://github.com/sindrets/dotfiles/blob/1990282dba25aaf49897f0fc70ebb50f424fc9c4/.config/nvim/lua/user/lib.lua#L175
         -- Minor alterations by me
@@ -97,6 +93,17 @@ M.setup = function()
         end
         vim.cmd.wincmd("l")
     end, {})
+
+    vim.api.nvim_create_user_command("SudoWrite", function(opts)
+        opts.args = vim.trim(opts.args)
+        local cmd = ":silent! w! !sudo tee " .. (#opts.args > 0 and opts.args or "%") .. " >/dev/null "
+        vim.cmd(cmd)
+        vim.cmd.edit({ bang = true, mods = { silent = true, confirm = false } })
+        vim.bo.readonly = false
+    end, {
+        nargs = "*",
+        desc = "Sudo Write"
+    })
 end
 
 return M
