@@ -19,5 +19,5 @@ SCHEDULED: <2024-02-23 Fri> DEADLINE: <2024-02-25 Sun>
     requires manual movement of the cursor position 🫤
 
 * TODO CI Automation
-SCHEDULED: <2024-02-21 Wed> DEADLINE: <2024-02-25 Sun>
+SCHEDULED: <2024-03-04 Mon> DEADLINE: <2024-03-15 Fri>
 - [ ] Configure a pipeline to enforce formatting via Stylua
