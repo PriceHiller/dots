@@ -277,11 +277,11 @@ in {
       enable = true;
       enableSshSupport = true;
       enableZshIntegration = true;
+      pinentryFlavor = "gtk2";
       maxCacheTtl = 14400;
       maxCacheTtlSsh = 14400;
       sshKeys = [ "530D3EC95C32AB9EC33714AAF865738D6E77680A" ];
       extraConfig = ''
-        pinentry-program /usr/bin/pinentry-gtk-2
         allow-loopback-pinentry
       '';
     };
