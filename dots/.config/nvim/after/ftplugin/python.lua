@@ -39,3 +39,11 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
         vim.api.nvim_input("<Esc>m'" .. row + 1 .. "gg" .. col + 1 .. "|if<Esc>`'la")
     end,
 })
+
+vim.keymap.set("n", "<leader>fr", function()
+    vim.cmd.write()
+    require("toggleterm").exec("python " .. vim.api.nvim_buf_get_name(0))
+end, {
+    buffer = true,
+    desc = "Python: Save and Run Current Buffer",
+})
