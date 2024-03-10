@@ -31,6 +31,7 @@ return {
                 calendar_week_start_day = 0,
                 org_agenda_span = "month",
                 org_startup_folded = "inherit",
+                win_border = 'none',
                 org_hide_emphasis_markers = true,
                 org_startup_indented = true,
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
