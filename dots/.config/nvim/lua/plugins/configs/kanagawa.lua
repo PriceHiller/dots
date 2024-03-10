@@ -312,6 +312,18 @@ return {
                         nocombine = true,
                     },
                 },
+                {
+                    "@org.priority.highest",
+                    { fg = colors.samuraiRed, nocombine = true, underline = true, bold = true },
+                },
+                {
+                    "@org.priority.default",
+                    { fg = colors.roninYellow, nocombine = true, underline = true, bold = true },
+                },
+                {
+                    "@org.priority.lowest",
+                    { fg = colors.fujiWhite, nocombine = true, underline = true, bold = true },
+                },
 
                 -- Titles/Headlines
                 { "@markup.heading.1", { fg = colors.crystalBlue, bold = true } },
