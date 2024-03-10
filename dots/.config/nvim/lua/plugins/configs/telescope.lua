@@ -5,6 +5,9 @@ return {
         "nvim-telescope/telescope.nvim",
         cmd = {
             "Telescope",
+            "FrecencyMigrateDB",
+            "FrecencyValidate",
+            "FrecencyDelete",
         },
         keys = {
             {
@@ -84,11 +87,6 @@ return {
             "nvim-telescope/telescope-z.nvim",
             {
                 "nvim-telescope/telescope-frecency.nvim",
-                cmd = {
-                    "FrecencyMigrateDB",
-                    "FrecencyValidate",
-                    "FrecencyDelete",
-                },
             },
             "debugloop/telescope-undo.nvim",
             "rcarriga/nvim-notify",
