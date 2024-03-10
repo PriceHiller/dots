@@ -282,35 +282,15 @@ return {
                 { "@org.italic.delimiter", get_hl("@markup.raw.delimiter", { italic = true }) },
                 { "@org.bold.delimiter", get_hl("@markup.raw.delimiter", { bold = true }) },
                 { "@org.strikethrough.delimiter", get_hl("@markup.raw.delimiter", { strikethrough = true }) },
-                { "@org.timestamp", { underline = true, italic = false } },
-                { "@org.timestamp.active", get_hl("@org.timestamp", { fg = colors.springViolet1 }) },
+                { "@org.timestamp.active", { fg = colors.springViolet1, underline = true } },
                 {
                     "@org.timestamp.active.delimiter",
-                    {
-                        fg = function()
-                            return get_hl("@org.timestamp.active")().fg
-                        end,
-                        underline = false,
-                        nocombine = true,
-                    },
+                    get_hl("@org.timestamp.active", { underline = false, nocombine = true }),
                 },
-                {
-                    "@org.timestamp.inactive",
-                    get_hl("@org.timestamp", {
-                        fg = function()
-                            return get_hl("@comment")().fg
-                        end,
-                    }),
-                },
+                { "@org.timestamp.inactive", { fg = colors.springViolet2 } },
                 {
                     "@org.timestamp.inactive.delimiter",
-                    {
-                        fg = function()
-                            return get_hl("@org.timestamp.inactive")().fg
-                        end,
-                        underline = false,
-                        nocombine = true,
-                    },
+                    get_hl("@org.timestamp.inactive"),
                 },
                 {
                     "@org.priority.highest",
