@@ -102,7 +102,22 @@ M.setup = function()
         vim.bo.readonly = false
     end, {
         nargs = "*",
-        desc = "Sudo Write"
+        desc = "Sudo Write",
+    })
+
+    vim.api.nvim_create_user_command("Tmp", function(opts)
+        local fname = vim.trim(opts.args)
+        local tmp_dir = vim.fn.fnamemodify(vim.fn.tempname(), ":p:h")
+        vim.cmd.cd(tmp_dir)
+        if fname ~= "" then
+            vim.cmd.edit({ args = { fname }, bang = true })
+            vim.cmd.write({ bang = true })
+        else
+            vim.cmd.edit({ args = { tmp_dir } })
+        end
+    end, {
+        nargs = "*",
+        desc = "Create tempfile and cd to its directory",
     })
 end
 
