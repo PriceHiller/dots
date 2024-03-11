@@ -12,21 +12,22 @@ set completion-group-fg         "#DCD7BA"
 set completion-highlight-bg     "#957FB8"
 set completion-highlight-fg     "#1F1F28"
 
-set index-bg                    "#1F1F28"
+set index-bg                    "#16161D"
 set index-fg                    "#957FB8"
 set index-active-bg             "#957FB8"
 set index-active-fg             "#1F1F28"
 
-set inputbar-bg                 "#1F1F28"
+set inputbar-bg                 "#252535"
 set inputbar-fg                 "#DCD7BA"
 
-set statusbar-bg                "#1F1F28"
+set statusbar-bg                "#181820"
 set statusbar-fg                "#DCD7BA"
 
+set highlight                   "#000000"
 set highlight-color             "rgba(255, 160, 102, 0.5)"
-set highlight-active-color      "#FF5D62"
+set highlight-active-color      "rgba(255, 93, 98, 0.7)"
 
-set default-bg                  "#1F1F28"
+set default-bg                  "#16161D"
 set default-fg                  "#DCD7BA"
 set render-loading              "true"
 set render-loading-bg           "#1F1F28"
@@ -40,8 +41,11 @@ set recolor-keephue             "true"
 set database                    "plain"
 
 set synctex true
-set synctex-editor-command "code -g %{input}:%{line}"
+set synctex-editor-command      "code -g %{input}:%{line}"
 
-set continuous-hist-save true
-set page-cache-size 100
-set scroll-step 120
+set continuous-hist-save        "true"
+set page-cache-size             "100"
+set scroll-step                 "120"
+
+set selection-clipboard         "clipboard"
+set statusbar-home-tilde        "true"
