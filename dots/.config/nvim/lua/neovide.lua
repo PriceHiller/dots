@@ -1,5 +1,5 @@
 -- Floating and Popupmenu Transparency
-vim.opt.winblend = 10
+vim.opt.winblend = 20
 vim.opt.pumblend = 10
 
 -- Float blur amount
