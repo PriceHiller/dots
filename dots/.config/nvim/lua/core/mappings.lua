@@ -56,14 +56,6 @@ M.setup = function()
     -- Set current focused file as cwd
     vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
 
-    vim.keymap.set("n", "<leader>lh", function()
-        if vim.diagnostic.is_disabled() then
-            vim.diagnostic.enable()
-        else
-            vim.diagnostic.disable()
-        end
-    end, { silent = true, desc = "LSP: Toggle Diagnostics" })
-
     -- Toggle relativenumber
     vim.keymap.set("n", "<leader>sr", function()
         vim.opt.relativenumber = not vim.opt.relativenumber:get()
