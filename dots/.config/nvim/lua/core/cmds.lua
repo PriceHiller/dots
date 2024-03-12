@@ -112,6 +112,7 @@ M.setup = function()
         if fname ~= "" then
             vim.cmd.edit({ args = { fname }, bang = true })
             vim.cmd.write({ bang = true })
+            vim.cmd.edit({ args = { fname }, bang = true })
         else
             vim.cmd.edit({ args = { tmp_dir } })
         end
