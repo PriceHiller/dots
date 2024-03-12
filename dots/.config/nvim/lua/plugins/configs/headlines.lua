@@ -4,10 +4,10 @@ return {
         dependencies = "nvim-treesitter/nvim-treesitter",
         opts = function()
             local bullets = {
+                "󰪥",
                 "󰀘",
-                "",
                 "󰺕",
-                "",
+                "",
                 "󰬪",
                 "󱆭",
             }
