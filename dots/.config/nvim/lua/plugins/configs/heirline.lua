@@ -350,8 +350,7 @@ return {
                 },
                 {
                     condition = function()
-                        return not vim.bo.modifiable
-                            or vim.bo.readonly
+                        return not vim.bo.modifiable or vim.bo.readonly
                     end,
                     provider = " ",
                     hl = { fg = colors.roninYellow },
@@ -529,6 +528,9 @@ return {
                 },
             }
             local ActiveWinbar = {
+                init = function(self)
+                    self.bufnr = vim.api.nvim_get_current_buf()
+                end,
                 condition = conditions.is_active,
                 {
                     {
@@ -554,7 +556,9 @@ return {
                                 hl = { fg = colors.oniViolet, bg = utils.get_highlight("WinBarNC").bg },
                             },
                             {
-                                provider = "  ",
+                                provider = function(self)
+                                    return " " .. (vim.diagnostic.is_disabled(self.bufnr) and "󱃓 " or"󰪥 " )
+                                end,
                                 hl = {
                                     bg = colors.oniViolet,
                                     fg = colors.sumiInk0,
