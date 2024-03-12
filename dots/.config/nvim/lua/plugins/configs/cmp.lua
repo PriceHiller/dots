@@ -413,7 +413,6 @@ return {
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
-                    { name = "async_path" },
                     {
                         name = "cmdline",
                         option = {
