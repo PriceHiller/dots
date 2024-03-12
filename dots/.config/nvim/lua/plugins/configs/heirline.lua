@@ -557,7 +557,7 @@ return {
                             },
                             {
                                 provider = function(self)
-                                    return " " .. (vim.diagnostic.is_disabled(self.bufnr) and "󱃓 " or"󰪥 " )
+                                    return " " .. (vim.diagnostic.is_disabled(self.bufnr) and "󱃓 " or "󰪥 ")
                                 end,
                                 hl = {
                                     bg = colors.oniViolet,
@@ -939,13 +939,44 @@ return {
                     margin(1),
                     {
                         {
-                            provider = seps.full.left,
-                            hl = { fg = colors.sumiInk4, bg = utils.get_highlight("StatusLine").bg },
-                        },
-                        {
-                            FileNameBlock,
-                            static = {
-                                bg_color_right = utils.get_highlight("StatusLine").bg,
+                            {
+                                provider = seps.full.left,
+                                hl = {
+                                    fg = colors.lightBlue,
+                                    bg = utils.get_highlight("StatusLine").bg,
+                                },
+                            },
+                            {
+                                provider = "  ",
+                                hl = {
+                                    fg = colors.sumiInk0,
+                                    bg = colors.lightBlue,
+                                },
+                            },
+                            {
+                                provider = seps.full.right,
+                                hl = {
+                                    fg = colors.lightBlue,
+                                    bg = colors.waveAqua2
+                                },
+                            },
+                            {
+                                provider = function()
+                                    local cwd = vim.fn.fnamemodify(vim.uv.cwd(), ":~")
+                                    cwd = (cwd == "~" and cwd .. "/" or cwd)
+                                    return " " .. cwd
+                                end,
+                                hl = {
+                                    fg = colors.sumiInk0,
+                                    bg = colors.waveAqua2
+                                },
+                            },
+                            {
+                                provider = seps.full.right,
+                                hl = {
+                                    fg = colors.waveAqua2,
+                                    bg = utils.get_highlight("StatusLine").bg,
+                                },
                             },
                         },
                     },
