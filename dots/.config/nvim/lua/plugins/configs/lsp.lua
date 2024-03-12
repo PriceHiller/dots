@@ -198,13 +198,14 @@ return {
             {
                 "<leader>lh",
                 function()
-                    if vim.diagnostic.is_disabled() then
-                        vim.diagnostic.enable()
+                    local curr_buf = vim.api.nvim_get_current_buf()
+                    if vim.diagnostic.is_disabled(curr_buf) then
+                        vim.diagnostic.enable(curr_buf)
                     else
-                        vim.diagnostic.disable()
+                        vim.diagnostic.disable(curr_buf)
                     end
                 end,
-                desc = "LSP: Toggle Diagnostics",
+                desc = "LSP: Toggle Diagnostics in Current Buffer",
             },
             { "<leader>lD", vim.lsp.buf.declaration, desc = "LSP: Declaration" },
             { "<leader>k", vim.lsp.buf.hover, desc = "LSP: Hover" },
