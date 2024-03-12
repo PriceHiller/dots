@@ -120,6 +120,61 @@ M.setup = function()
         nargs = "*",
         desc = "Create tempfile and cd to its directory",
     })
+
+    local config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
+    local z_lua_path = config_home .. "/zsh/config/plugins/z.lua/z.lua"
+    local cached_z_listing = {}
+    vim.api.nvim_create_user_command("Z", function(opts)
+        cached_z_listing = {}
+        local cmd = { "lua", z_lua_path, "-e", opts.args }
+        local cmd_out = vim.system(cmd, { text = true }):wait()
+        if cmd_out.code > 0 then
+            vim.notify(
+                "Failed with code `" .. cmd_out.code .. "`\nSTDERR: " .. (cmd_out.stderr or ""),
+                vim.log.levels.WARN,
+                {
+                    title = "z.lua",
+                    ---@param win integer The window handle
+                    on_open = function(win)
+                        vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(win) })
+                    end,
+                }
+            )
+        elseif cmd_out.stdout == "" then
+            vim.notify("Did not receive a match from `z.lua`!", vim.log.levels.WARN, {
+                title = "z.lua",
+                ---@param win integer The window handle
+                on_open = function(win)
+                    vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(win) })
+                end,
+            })
+        else
+            local stripped_stdout = cmd_out.stdout:gsub("\n$", "")
+            vim.system({"lua", z_lua_path, "--add", stripped_stdout})
+            vim.cmd("silent! cd " .. stripped_stdout)
+            vim.notify("Chdir to `" .. stripped_stdout .. "`", vim.log.levels.INFO, {
+                title = "z.lua",
+                ---@param win integer The window handle
+                on_open = function(win)
+                    vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(win) })
+                end,
+            })
+        end
+    end, {
+        nargs = "+",
+        complete = function(_, _, _)
+            local cmd = { "lua", z_lua_path, "--complete" }
+            local cmd_out
+            if #cached_z_listing == 0 then
+                cmd_out = vim.system(cmd, { text = true }):wait()
+                if cmd_out.code == 0 and cmd_out.stdout then
+                    cached_z_listing = vim.split(cmd_out.stdout, "\n")
+                end
+            end
+            return cached_z_listing
+        end,
+        desc = "Invoke `z.lua`",
+    })
 end
 
 return M
