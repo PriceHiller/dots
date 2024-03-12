@@ -189,7 +189,7 @@ return {
                             selection = selections[entry.source.name]
                         end
                         local completion_item = vim_item
-                        local abbr_max_width = 50
+                        local abbr_max_width = 72
                         if not selection then
                             local kind = require("lspkind").cmp_format({
                                 mode = "symbol_text",
@@ -270,6 +270,12 @@ return {
                             completion_item.abbr = word
                         end
 
+                        --- If the completion item looks like a file path and exists, go ahead and
+                        --- abbreviate it relative to the home directory
+                        if vim.fn.isdirectory(completion_item.abbr) == 1 or vim.fn.filereadable(completion_item.abbr) == 1 then
+                            completion_item.abbr = vim.fn.fnamemodify(completion_item.abbr, ":~")
+                        end
+
                         if string.len(completion_item.abbr) >= abbr_max_width then
                             local before = string.sub(completion_item.abbr, 1, math.floor((abbr_max_width - 3) / 2))
                             completion_item.abbr = before .. "..."
@@ -285,6 +291,13 @@ return {
                         selection_order = "near_cursor",
                     },
                 },
+                matching = {
+                    disallow_partial_fuzzy_matching = false,
+                    disallow_fullfuzzy_matching = false,
+                    disallow_partial_matching = false,
+                    disallow_fuzzy_matching = false,
+                    disallow_prefix_unmatching = false
+                },
                 window = {
                     documentation = {
                         side_padding = 0,
@@ -295,7 +308,7 @@ return {
                         side_padding = 0,
                     },
                 },
-                experimental = { ghost_text = { hl_group = "CmpGhostText" }, native_menu = false },
+                experimental = { ghost_text = { hl_group = "CmpGhostText" } },
                 snippet = {
                     -- REQUIRED - you must specify a snippet engine
                     expand = function(args)
@@ -420,6 +433,7 @@ return {
                                 "!",
                             },
                         },
+                        priority = 100
                     },
                     { name = "cmdline_history", max_item_count = 3 },
                     { name = "fuzzy_buffer", max_item_count = 3 },
