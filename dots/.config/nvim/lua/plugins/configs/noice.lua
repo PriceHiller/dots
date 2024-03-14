@@ -78,18 +78,6 @@ return {
                     local opts = {
                         stages = "slide",
                         fps = 60,
-                        on_open = function(win)
-                            local buf = vim.api.nvim_win_get_buf(win)
-                            local ft = vim.bo[buf].filetype
-                            if ft == "" or ft == "notify" then
-                                vim.api.nvim_set_option_value(
-                                    "filetype",
-                                    "markdown",
-                                    { buf = vim.api.nvim_win_get_buf(win) }
-                                )
-                            vim.api.nvim_set_option_value("wrap", true, { win = win })
-                            end
-                        end,
                         render = function(bufnr, notif, highlights, _)
                             local left_icon = notif.icon .. " "
                             local max_message_width = math.max(math.max(unpack(vim.tbl_map(function(line)
