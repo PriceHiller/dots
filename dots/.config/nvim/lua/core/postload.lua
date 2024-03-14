@@ -1,5 +1,3 @@
-local M = {}
-
 local augroup = vim.api.nvim_create_augroup("user-autocmds", { clear = false })
 vim.api.nvim_create_autocmd("BufReadPre", {
     group = augroup,
@@ -20,4 +18,5 @@ vim.api.nvim_create_autocmd("BufReadPre", {
     end,
 })
 
-return M
+-- Keymap to easily invoke `Z` user command
+vim.keymap.set("n", "<leader>z", ":Z ", { silent = true, desc = "Invoke `Z`" })
