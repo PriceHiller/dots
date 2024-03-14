@@ -595,7 +595,7 @@ return {
                                 hl = function()
                                     local bg = utils.get_highlight("WinBar").bg
                                     if conditions.has_diagnostics() then
-                                        bg = colors.sumiInk2
+                                        bg = colors.sumiInk4
                                     end
                                     return { fg = colors.oniViolet2, bg = bg }
                                 end,
@@ -619,36 +619,41 @@ return {
                         update = { "DiagnosticChanged", "BufEnter" },
                         {
                             provider = " ",
-                            hl = { fg = colors.sumiInk2, bg = colors.sumiInk2 },
+                            hl = { fg = colors.sumiInk4, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
                                 -- 0 is just another output, we can decide to print it or not!
                                 return self.errors > 0 and (self.error_icon .. self.errors .. " ")
                             end,
-                            hl = { fg = utils.get_highlight("DiagnosticError").fg, bg = colors.sumiInk2 },
+                            hl = { fg = utils.get_highlight("DiagnosticError").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
                                 return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
                             end,
-                            hl = { fg = utils.get_highlight("DiagnosticWarn").fg, bg = colors.sumiInk2 },
+                            hl = { fg = utils.get_highlight("DiagnosticWarn").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
                                 return self.info > 0 and (self.info_icon .. self.info .. " ")
                             end,
-                            hl = { fg = utils.get_highlight("DiagnosticInfo").fg, bg = colors.sumiInk2 },
+                            hl = { fg = utils.get_highlight("DiagnosticInfo").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = function(self)
                                 return self.hints > 0 and (self.hint_icon .. self.hints)
                             end,
-                            hl = { fg = utils.get_highlight("DiagnosticHint").fg, bg = colors.sumiInk2 },
+                            hl = { fg = utils.get_highlight("DiagnosticHint").fg, bg = colors.sumiInk4 },
                         },
                         {
                             provider = seps.full.right,
-                            hl = { fg = colors.sumiInk2, bg = utils.get_highlight("WinBar").bg },
+                            hl = function()
+                                return {
+                                    fg = colors.sumiInk4,
+                                    bg = utils.get_highlight("WinBar").bg,
+                                }
+                            end,
                         },
                     },
                 },
@@ -957,7 +962,7 @@ return {
                                 provider = seps.full.right,
                                 hl = {
                                     fg = colors.lightBlue,
-                                    bg = colors.waveAqua2
+                                    bg = colors.waveAqua2,
                                 },
                             },
                             {
@@ -968,7 +973,7 @@ return {
                                 end,
                                 hl = {
                                     fg = colors.sumiInk0,
-                                    bg = colors.waveAqua2
+                                    bg = colors.waveAqua2,
                                 },
                             },
                             {
