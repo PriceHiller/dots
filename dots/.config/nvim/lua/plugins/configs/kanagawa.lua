@@ -95,7 +95,7 @@ return {
                 { "NeogitUnmergedChanges", { fg = colors.springGreen, bold = true } },
                 { "NeogitUnstagedChanges", { fg = colors.peachRed, bold = true } },
                 { "NeogitUntrackedFiles", { fg = colors.peachRed, bold = true } },
-                { "NeogitRecentCommits", { fg = colors.crystalBlue, bold = true } },
+                { "NeogitSectionHeader", { fg = colors.crystalBlue, bold = true } },
                 { "NeogitCommitViewHeader", { fg = colors.crystalBlue, bold = true, italic = true } },
                 { "NeogitFilePath", { fg = colors.autumnYellow, italic = true } },
                 { "NeogitNotificationInfo", { fg = colors.springGreen, bold = true } },
