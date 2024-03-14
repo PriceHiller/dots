@@ -27,6 +27,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:guibou/nixGL";
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, home-manager, nixpkgs, ... }:
@@ -45,6 +49,7 @@
           };
           modules = [
             ({
+              imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
                 inputs.neovim-nightly-overlay.overlay
                 inputs.emacs-overlay.overlays.emacs
@@ -58,11 +63,10 @@
                       wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
                     '';
                   });
-                  opensnitch-ui = prev.opensnitch-ui.overrideAttrs
-                    (oldAttrs: {
-                      propagatedBuildInputs = oldAttrs.propagatedBuildInputs
-                        ++ [ prev.python311Packages.qt-material ];
-                    });
+                  opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
+                    propagatedBuildInputs = oldAttrs.propagatedBuildInputs
+                      ++ [ prev.python311Packages.qt-material ];
+                  });
                 })
               ];
               home = {
@@ -74,5 +78,25 @@
             ./config
           ];
         };
-    };
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ inputs.agenix.overlays.default ];
+        };
+      in {
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            age
+            age-plugin-yubikey
+            pkgs.agenix
+            nixos-rebuild
+            pkgs.deploy-rs
+          ];
+          shellHook = ''
+            export RULES="$PWD/secrets/secrets.nix"
+            nix eval --json --file ./.nixd.nix > .nixd.json
+          '';
+        };
+      });
 }
