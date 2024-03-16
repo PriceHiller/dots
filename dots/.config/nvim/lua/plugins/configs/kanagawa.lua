@@ -52,8 +52,8 @@ return {
                 { "NvimNotifyTrace", { fg = colors.oniViolet } },
                 { "StatusLineNC", { bg = nil } },
                 { "WinBarNC", { bg = nil } },
-                { "Visual", { bg = colors.sumiInk5 }},
-                { "CursorLine", { bg = colors.sumiInk4 }},
+                { "Visual", { bg = colors.sumiInk5 } },
+                { "CursorLine", { bg = colors.sumiInk4 } },
                 { "CursorLineNr", { fg = colors.roninYellow, bg = palette.theme.ui.bg_m1 } },
                 { "CursorLineFold", { fg = colors.crystalBlue, bg = palette.theme.ui.bg_m1 } },
                 { "CursorLineSign", { bg = palette.theme.ui.bg_m1 } },
@@ -194,7 +194,14 @@ return {
                 { "TreesitterContext", { bg = colors.sumiInk0 } },
                 { "FloatTitle", { bg = "NONE" } },
                 { "DiffviewFilePanelTitle", { fg = colors.crystalBlue } },
-                { "DiffviewDiffDeleteDim", { fg = function() return get_hl("Comment")().fg end } },
+                {
+                    "DiffviewDiffDeleteDim",
+                    {
+                        fg = function()
+                            return get_hl("Comment")().fg
+                        end,
+                    },
+                },
                 { "LspInlayHint", { fg = colors.springViolet2, bg = colors.winterBlue } },
                 { "@text", { fg = colors.fujiWhite } },
                 { "RainbowDelimiterRed", { fg = colors.peachRed } },

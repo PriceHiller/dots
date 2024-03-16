@@ -14,7 +14,7 @@ return {
                 icons = false,
                 run_in_floaterm = true,
                 trouble = true,
-                luasnip = true
+                luasnip = true,
             })
         end,
         event = { "CmdlineEnter" },

@@ -8,33 +8,33 @@ return {
     key_tables = {
         -- NOTE: Pane Resizing Submap
         resize_pane = {
-            { key = "LeftArrow",  action = wezterm.action.AdjustPaneSize({ "Left", adjust_pane_size_amount }) },
-            { key = "h",          action = wezterm.action.AdjustPaneSize({ "Left", adjust_pane_size_amount }) },
+            { key = "LeftArrow", action = wezterm.action.AdjustPaneSize({ "Left", adjust_pane_size_amount }) },
+            { key = "h", action = wezterm.action.AdjustPaneSize({ "Left", adjust_pane_size_amount }) },
             { key = "RightArrow", action = wezterm.action.AdjustPaneSize({ "Right", adjust_pane_size_amount }) },
-            { key = "l",          action = wezterm.action.AdjustPaneSize({ "Right", adjust_pane_size_amount }) },
-            { key = "UpArrow",    action = wezterm.action.AdjustPaneSize({ "Up", adjust_pane_size_amount }) },
-            { key = "k",          action = wezterm.action.AdjustPaneSize({ "Up", adjust_pane_size_amount }) },
-            { key = "DownArrow",  action = wezterm.action.AdjustPaneSize({ "Down", adjust_pane_size_amount }) },
-            { key = "j",          action = wezterm.action.AdjustPaneSize({ "Down", adjust_pane_size_amount }) },
+            { key = "l", action = wezterm.action.AdjustPaneSize({ "Right", adjust_pane_size_amount }) },
+            { key = "UpArrow", action = wezterm.action.AdjustPaneSize({ "Up", adjust_pane_size_amount }) },
+            { key = "k", action = wezterm.action.AdjustPaneSize({ "Up", adjust_pane_size_amount }) },
+            { key = "DownArrow", action = wezterm.action.AdjustPaneSize({ "Down", adjust_pane_size_amount }) },
+            { key = "j", action = wezterm.action.AdjustPaneSize({ "Down", adjust_pane_size_amount }) },
 
             -- Cancel the mode by pressing escape
-            { key = "Escape",     action = "PopKeyTable" },
+            { key = "Escape", action = "PopKeyTable" },
         },
 
         -- NOTE: Pane Rotate Position Submap
         rotate_panes = {
-            { key = "h",          action = wezterm.action.RotatePanes("CounterClockwise") },
-            { key = "LeftArrow",  action = wezterm.action.RotatePanes("CounterClockwise") },
-            { key = "l",          action = wezterm.action.RotatePanes("Clockwise") },
+            { key = "h", action = wezterm.action.RotatePanes("CounterClockwise") },
+            { key = "LeftArrow", action = wezterm.action.RotatePanes("CounterClockwise") },
+            { key = "l", action = wezterm.action.RotatePanes("Clockwise") },
             { key = "RightArrow", action = wezterm.action.RotatePanes("Clockwise") },
-            { key = "Escape",     action = "PopKeyTable" },
-        }
+            { key = "Escape", action = "PopKeyTable" },
+        },
     },
     keys = {
         {
             key = "r",
             mods = "SUPER",
-            action = "ReloadConfiguration"
+            action = "ReloadConfiguration",
         },
         {
             key = "z",
@@ -71,7 +71,7 @@ return {
                 CloseCurrentTab = { confirm = false },
             }),
         },
-        { key = "Copy",  action = wezterm.action({ CopyTo = "Clipboard" }) },
+        { key = "Copy", action = wezterm.action({ CopyTo = "Clipboard" }) },
         { key = "Paste", action = wezterm.action({ PasteFrom = "Clipboard" }) },
         -- NOTE: Pane Splitting
         {
@@ -115,9 +115,9 @@ return {
             mods = "CTRL",
             action = wezterm.action({ ActivatePaneDirection = "Down" }),
         },
-        { key = "=", mods = "CTRL",   action = "IncreaseFontSize" },
-        { key = "-", mods = "CTRL",   action = "DecreaseFontSize" },
-        { key = "0", mods = "CTRL",   action = "ResetFontSize" },
+        { key = "=", mods = "CTRL", action = "IncreaseFontSize" },
+        { key = "-", mods = "CTRL", action = "DecreaseFontSize" },
+        { key = "0", mods = "CTRL", action = "ResetFontSize" },
 
         -- NOTE: Leader dependent binds
         { key = "h", mods = "LEADER", action = wezterm.action({ EmitEvent = "trigger-nvim-with-scrollback" }) },
@@ -153,7 +153,6 @@ return {
                 name = "rotate_panes",
                 one_shot = false,
             }),
-        }
-
+        },
     },
 }

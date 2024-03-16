@@ -477,9 +477,9 @@ return {
                             maxMemoryMB = 60000,
                             flake = {
                                 autoArchive = true,
-                                autoEvalInputs = true
-                            }
-                        }
+                                autoEvalInputs = true,
+                            },
+                        },
                     },
                 },
             })

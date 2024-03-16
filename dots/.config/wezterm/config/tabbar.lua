@@ -57,7 +57,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         title = "N/A"
     end
 
-
     if tab.is_active then
         bg = color_names.kanagawa.sumiInk0
         fg = color_names.kanagawa.oniViolet
@@ -146,9 +145,10 @@ wezterm.on("update-right-status", function(window, pane)
     local key_table = window:active_key_table()
     if key_table then
         leader = leader_text
-        key_table = "󰌌 " .. key_table:gsub("_", " "):gsub("(%l)(%w*)", function (a,b)
-            return string.upper(a)..b
-        end)
+        key_table = "󰌌 "
+            .. key_table:gsub("_", " "):gsub("(%l)(%w*)", function(a, b)
+                return string.upper(a) .. b
+            end)
     end
 
     -- Color palette for the backgrounds of each cell
@@ -157,8 +157,8 @@ wezterm.on("update-right-status", function(window, pane)
         { bg = color_names.kanagawa.carpYellow, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.springGreen, fg = color_names.kanagawa.sumiInk0 },
         { bg = color_names.kanagawa.crystalBlue, fg = color_names.kanagawa.sumiInk0 },
-        { bg = color_names.kanagawa.oniViolet,   fg = color_names.kanagawa.sumiInk0 },
-        { bg = color_names.kanagawa.waveRed,     fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.oniViolet, fg = color_names.kanagawa.sumiInk0 },
+        { bg = color_names.kanagawa.waveRed, fg = color_names.kanagawa.sumiInk0 },
     }
     -- The elements to be formatted
     local elements = {}
