@@ -109,14 +109,15 @@ end
 U.select_hl = function(name, fields)
     ---@return vim.api.keyset.highlight
     return function()
-        return vim.iter(U.get_hl(name)()):filter(function(k, _)
-            return vim.list_contains(fields, k)
-        end):fold({}, function(t, k, v)
-            t[k] = v
-            return t
-        end)
+        return vim.iter(U.get_hl(name)())
+            :filter(function(k, _)
+                return vim.list_contains(fields, k)
+            end)
+            :fold({}, function(t, k, v)
+                t[k] = v
+                return t
+            end)
     end
 end
 
 return U
-

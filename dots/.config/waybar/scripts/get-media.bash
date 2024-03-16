@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-get-album-info () {
+get-album-info() {
 	local class
 	local text=""
 
@@ -24,7 +24,6 @@ get-album-info () {
 		sleep .5
 	done
 }
-
 
 main() {
 	get-album-info

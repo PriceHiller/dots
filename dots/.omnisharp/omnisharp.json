@@ -1,5 +1,5 @@
 {
-    "RoslynExtensionsOptions": {
-        "enableDecompilationSupport": true
-    }
+  "RoslynExtensionsOptions": {
+    "enableDecompilationSupport": true
+  }
 }

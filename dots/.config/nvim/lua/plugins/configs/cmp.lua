@@ -272,7 +272,10 @@ return {
 
                         --- If the completion item looks like a file path and exists, go ahead and
                         --- abbreviate it relative to the home directory
-                        if vim.fn.isdirectory(completion_item.abbr) == 1 or vim.fn.filereadable(completion_item.abbr) == 1 then
+                        if
+                            vim.fn.isdirectory(completion_item.abbr) == 1
+                            or vim.fn.filereadable(completion_item.abbr) == 1
+                        then
                             completion_item.abbr = vim.fn.fnamemodify(completion_item.abbr, ":~")
                         end
 
@@ -296,7 +299,7 @@ return {
                     disallow_fullfuzzy_matching = false,
                     disallow_partial_matching = false,
                     disallow_fuzzy_matching = false,
-                    disallow_prefix_unmatching = false
+                    disallow_prefix_unmatching = false,
                 },
                 window = {
                     documentation = {
@@ -433,7 +436,7 @@ return {
                                 "!",
                             },
                         },
-                        priority = 100
+                        priority = 100,
                     },
                     { name = "cmdline_history", max_item_count = 3 },
                     { name = "fuzzy_buffer", max_item_count = 3 },

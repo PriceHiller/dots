@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-main () {
+main() {
 	local notify_application_name="RF Status"
 	local enable_airplane_mode=true
 
@@ -10,7 +10,6 @@ main () {
 	local rf_hard_status
 	local device
 	local device_type
-
 
 	for rf_status in $(rfkill -J | jq '.rfkilldevices[]' | jq -r tostring); do
 		rf_soft_status="$(printf "%s" "${rf_status}" | jq -r '.soft')"
@@ -44,7 +43,6 @@ main () {
 			notify-send "󱡺 Failed to Disable Airplane Mode" "An error has occurred! Unable to modify rf status of some devices!" -a "${notify_application_name}" -u "critical"
 		fi
 	fi
-
 
 }
 

@@ -8,7 +8,7 @@ return {
             "Nmlogs",
             "Nmdelete",
             "Nmread",
-            "Nmwrite"
+            "Nmwrite",
         },
         config = function()
             require("netman")
