@@ -8,7 +8,6 @@ return {
         },
         config = function()
             require("go").setup({
-                max_line_len = vim.opt.textwidth,
                 lsp_keymaps = false,
                 dap_debug_keymap = false,
                 lsp_codelens = false,
