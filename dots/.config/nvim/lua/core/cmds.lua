@@ -150,7 +150,6 @@ M.setup = function()
             })
         else
             local stripped_stdout = cmd_out.stdout:gsub("\n$", "")
-            vim.system({"lua", z_lua_path, "--add", stripped_stdout})
             vim.cmd("silent! cd " .. stripped_stdout)
             vim.notify("Chdir to `" .. stripped_stdout .. "`", vim.log.levels.INFO, {
                 title = "z.lua",
@@ -174,6 +173,32 @@ M.setup = function()
             return cached_z_listing
         end,
         desc = "Invoke `z.lua`",
+    })
+
+    vim.api.nvim_create_autocmd("DirChanged", {
+        callback = function(args)
+            vim.system({ "lua", z_lua_path, "--add", args.file }, { text = true }, function(out)
+                if out.code ~= 0 then
+                    vim.notify(
+                        "Failed to regiser directory with `z.lua`!\n====STDERR====\n"
+                            .. out.stderr
+                            .. "\n====STDOUT====\n"
+                            .. out.stdout,
+                        vim.log.levels.WARN,
+                        {
+                            title = "z.lua",
+                            on_open = function(win)
+                                vim.api.nvim_set_option_value(
+                                    "filetype",
+                                    "markdown",
+                                    { buf = vim.api.nvim_win_get_buf(win) }
+                                )
+                            end,
+                        }
+                    )
+                end
+            end)
+        end,
     })
 end
 
