@@ -22,12 +22,12 @@ it under ~$HOME/.dot_files~.
 As such, the ~install.bash~ script wraps up the logic for running the flake outside of the default
 path ~home-manager~ expects.
 
-* TODO Various Tasks to get done [0/2]
+* TODO Various Tasks to get done [1/2]
 
 - [ ] Clean up and better modularize the config
   - Currently a large portion of this config lives in ~config/default.nix~ which, while ok for
     now, will get out of hand down the road
-- [ ] Implement automation to autoformat various paths
+- [X] Implement automation to autoformat various paths
   - Looking through the commit history I have semi-regular ~style~ commits for formatting.
   - Would be good to add a global git hook on the client side for pre push validation
   - Would also be good to get a CI runner up that validates on the server side
