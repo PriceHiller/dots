@@ -224,6 +224,7 @@ return {
             {
                 "<leader>lt",
                 function()
+                    ---@diagnostic disable-next-line: undefined-field
                     local virtual_lines_enabled = not vim.diagnostic.config().virtual_lines
                     vim.diagnostic.config({
                         virtual_lines = virtual_lines_enabled,
