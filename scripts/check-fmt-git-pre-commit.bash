@@ -14,7 +14,7 @@ main() {
 		if [[ -r "${fpath}" ]]; then
 			files+=("${fpath}")
 		fi
-	done < <(git ls-tree --full-name --full-tree --name-only -r HEAD)
+	done < <(git diff --name-only --staged --diff-filter=d)
 
 	Fmt -- "${files[@]}"
 }

@@ -28,6 +28,7 @@ in {
   home = {
     packages = with pkgs;
       [
+        Fmt
         nodePackages.prettier
         shfmt
         bob-nvim
@@ -236,7 +237,7 @@ in {
     };
     git = {
       enable = true;
-      hooks = { pre-commit = ../scripts/check-fmt-git-files.bash; };
+      hooks = { pre-commit = ../scripts/check-fmt-git-pre-commit.bash; };
       userName = "Price Hiller";
       userEmail = "price@orion-technologies.io";
       aliases = { unstage = "reset HEAD --"; };

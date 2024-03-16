@@ -41,7 +41,7 @@
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
       targets.genericLinux = { enable = true; };
       homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration {
+        home-manager.lib.homeManagerConfiguration rec {
           pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             inherit inputs;
@@ -57,6 +57,7 @@
                 inputs.kanagawa-gtk.overlays.default
                 inputs.nixgl.overlay
                 (final: prev: {
+                  Fmt = pkgs.writeScriptBin "Fmt" (builtins.readFile ./scripts/fmt.bash);
                   waybar = inputs.waybar.packages.${system}.default;
                   lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
                     postInstall = ''
