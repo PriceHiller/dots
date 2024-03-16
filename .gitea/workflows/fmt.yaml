@@ -1,0 +1,14 @@
+name: Check Formatting of Files
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  Check-Formatting:
+    runs-on: default
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Check formatting
+        run: ./scripts/check-fmt-git-files.bash
