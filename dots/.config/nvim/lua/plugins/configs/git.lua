@@ -36,38 +36,6 @@ return {
                 end,
             })
 
-            local ensure_neogit_refresh = function()
-                local times_to_repeat = 10
-                local neogit = require("neogit")
-                if not neogit then
-                    return
-                end
-
-                neogit.dispatch_refresh()
-                local repeat_attempt = 0
-                while repeat_attempt < times_to_repeat do
-                    repeat_attempt = repeat_attempt + 1
-                    vim.wait(100, function()
-                        pcall(neogit.dispatch_refresh)
-                        return true
-                    end)
-                end
-            end
-
-            vim.api.nvim_create_autocmd("BufEnter", {
-                pattern = "*Neogit*",
-                callback = function()
-                    ensure_neogit_refresh()
-                end,
-            })
-
-            vim.api.nvim_create_autocmd("User", {
-                pattern = "^Neogit*",
-                callback = function()
-                    ensure_neogit_refresh()
-                end,
-            })
-
             ---@type NeogitConfig
             return {
                 disable_insert_on_commit = "auto",
