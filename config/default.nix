@@ -28,6 +28,8 @@ in {
   home = {
     packages = with pkgs;
       [
+        nodePackages.prettier
+        shfmt
         bob-nvim
         (nixGLWrap neovide)
         (nixGLWrap wezterm)
@@ -374,7 +376,8 @@ in {
           After = [ "compositor.target" ];
         };
       };
-      gromit-mpx.Service.ExecStart = lib.mkForce "echo 'Disabled, managed by WM'";
+      gromit-mpx.Service.ExecStart =
+        lib.mkForce "echo 'Disabled, managed by WM'";
       opensnitch-ui = {
         Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
