@@ -1,5 +1,5 @@
 ./.luarc.json
-result/
+result
 .luarc.json
 .direnv
 .nixd.json

@@ -10,5 +10,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
+      - name: Install `Fmt` package
+        run: nix --experimental-features "flakes nix-command" build 'path:./pkgs/Fmt' --out-link fmt-result
+
       - name: Check formatting
-        run: ./scripts/check-fmt-git-files.bash
+        run: PATH="${PATH}:${PWD}/fmt-result/bin" ./scripts/check-fmt-git-files.bash
