@@ -12,6 +12,10 @@
       url = "path:./pkgs/bob-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    Fmt = {
+      url = "path:./pkgs/Fmt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +45,7 @@
       defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
       targets.genericLinux = { enable = true; };
       homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration rec {
+        home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             inherit inputs;
@@ -54,10 +58,10 @@
                 inputs.neovim-nightly-overlay.overlay
                 inputs.emacs-overlay.overlays.emacs
                 inputs.bob.overlays.default
+                inputs.Fmt.overlays.default
                 inputs.kanagawa-gtk.overlays.default
                 inputs.nixgl.overlay
                 (final: prev: {
-                  Fmt = pkgs.writeScriptBin "Fmt" (builtins.readFile ./scripts/fmt.bash);
                   waybar = inputs.waybar.packages.${system}.default;
                   lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
                     postInstall = ''
@@ -96,7 +100,6 @@
           ];
           shellHook = ''
             export RULES="$PWD/secrets/secrets.nix"
-            nix eval --json --file ./.nixd.nix > .nixd.json
           '';
         };
       });

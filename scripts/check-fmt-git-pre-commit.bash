@@ -16,7 +16,9 @@ main() {
 		fi
 	done < <(git diff --name-only --staged --diff-filter=d)
 
-	Fmt -- "${files[@]}"
+	if ((${#files[@]} > 0)); then
+		Fmt -- "${files[@]}"
+	fi
 }
 
 main "${@}"

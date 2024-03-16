@@ -83,16 +83,17 @@ usage() {
 	cat <<-__EOS__
 		Usage: ${base} "path-to-a-file-to-format" "another-file-to-format" "and-another-file"
 		    -f | --fmt
-		        Enables format mode. By default this script only checks if the
-		        formatting of files is correct.
+		      Enables format mode. By default this script only checks if the
+		      formatting of files is correct.
 
-		        Example:
-		            ${base} --fmt -- "file-to-format"
+		      Example:
+		          ${base} --fmt -- "file-to-format"
+
 		    -F | --fail-fast
-		        Fails on the first format error instead of gathering all errors.
+		      Fails on the first format error instead of gathering all errors.
 
-		        Example:
-		            ${base} --fail-fast -- "file-to-format"
+		      Example:
+		          ${base} --fail-fast -- "file-to-format"
 	__EOS__
 }
 
