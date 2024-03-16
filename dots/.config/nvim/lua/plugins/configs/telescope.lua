@@ -206,6 +206,7 @@ return {
                     frecency = {
                         show_scores = true,
                         auto_validate = true,
+                        db_safe_mode = false
                     },
                 },
             })
