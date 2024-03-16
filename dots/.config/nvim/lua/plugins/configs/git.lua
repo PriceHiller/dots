@@ -36,6 +36,13 @@ return {
                 end,
             })
 
+            vim.api.nvim_create_autocmd("BufEnter", {
+                pattern = "*Neogit*",
+                callback = function()
+                    require("neogit").dispatch_refresh()
+                end
+            })
+
             ---@type NeogitConfig
             return {
                 disable_insert_on_commit = "auto",
