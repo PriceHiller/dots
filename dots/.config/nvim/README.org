@@ -18,6 +18,6 @@ SCHEDULED: <2024-02-23 Fri> DEADLINE: <2024-02-25 Sun>
   - Right now the diffs have 0 highlighting which makes it annoying to just glance at them —
     requires manual movement of the cursor position 🫤
 
-* TODO CI Automation
+* DONE CI Automation
 SCHEDULED: <2024-03-04 Mon> DEADLINE: <2024-03-15 Fri>
-- [ ] Configure a pipeline to enforce formatting via Stylua
+- [X] Configure a pipeline to enforce formatting via Stylua
