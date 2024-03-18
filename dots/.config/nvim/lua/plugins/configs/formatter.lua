@@ -5,7 +5,22 @@ return {
             {
                 "<leader>lf",
                 function()
-                    local active_clients = vim.lsp.get_clients({ bufnr = 0, method = "textDocument/formatting" })
+                    local active_clients = vim.iter(
+                        vim.lsp.get_clients({ bufnr = 0, method = "textDocument/formatting" })
+                    )
+                        :filter(function(lsp_client)
+                            -- Exclude some language server formatters.
+                            --
+                            -- I chose not to override the `textDocument/formatting` handler because
+                            -- it felt kinda hacky and some language servers don't play nice with
+                            -- changing their handlers. Figured this was easier.
+                            if lsp_client.config and lsp_client.config.name then
+                                return not vim.list_contains({
+                                    "lua_ls",
+                                }, lsp_client.config.name)
+                            end
+                            return true
+                        end)
                     if #active_clients > 0 then
                         vim.lsp.buf.format({ async = true })
                     else
