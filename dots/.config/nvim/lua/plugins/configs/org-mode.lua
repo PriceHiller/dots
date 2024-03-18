@@ -76,15 +76,15 @@ return {
             "Telescope orgmode refile_heading",
         },
         keys = {
-            { "<leader>ot", desc = "> Orgmode Telescope" },
+            { "<leader>os", desc = "> Orgmode Telescope" },
             {
-                "<leader>ots",
+                "<leader>oss",
                 ":Telescope orgmode search_headings<CR>",
                 desc = "Telescope: Orgmode Search Headings",
                 silent = true,
             },
             {
-                "<leader>otr",
+                "<leader>osr",
                 ":Telescope orgmode refile_heading<CR>",
                 desc = "Telescope: Orgmode Refile Heading",
                 silent = true,
