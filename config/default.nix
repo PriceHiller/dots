@@ -61,7 +61,6 @@ in {
         fzf
         delta
         eza
-        luajit
         ripgrep
         fd
         nixfmt
