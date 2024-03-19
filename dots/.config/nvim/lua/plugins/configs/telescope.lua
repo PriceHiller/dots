@@ -3,6 +3,7 @@ local config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
 return {
     {
         "nvim-telescope/telescope.nvim",
+        event = "DirChanged",
         cmd = {
             "Telescope",
             "FrecencyMigrateDB",
