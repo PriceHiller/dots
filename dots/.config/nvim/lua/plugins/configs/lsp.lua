@@ -192,9 +192,41 @@ return {
                 event = { "BufReadPre", "BufNewFile" },
                 config = true,
             },
+            {
+                "nvimtools/none-ls.nvim",
+                config = function()
+                    local null_ls = require("null-ls")
+                    null_ls.setup({
+                        sources = {
+                            null_ls.builtins.formatting.stylua,
+                            null_ls.builtins.formatting.asmfmt,
+                            null_ls.builtins.formatting.black,
+                            null_ls.builtins.formatting.typstfmt,
+                            null_ls.builtins.formatting.cmake_format,
+                            null_ls.builtins.formatting.shfmt,
+                            null_ls.builtins.formatting.shellharden,
+                            null_ls.builtins.formatting.prettierd,
+                            null_ls.builtins.diagnostics.hadolint,
+                        },
+                    })
+                end,
+            },
         },
         keys = {
             { "<leader>l", desc = "> LSP" },
+            {
+                "<leader>lf",
+                function()
+                    vim.lsp.buf.format({
+                        async = true,
+                        filter = function(client)
+                            return not vim.list_contains({ "lua_ls" }, client.name)
+                        end,
+                    })
+                end,
+                desc = "LSP: Format",
+                mode = { "v", "n" },
+            },
             {
                 "<leader>lh",
                 function()
