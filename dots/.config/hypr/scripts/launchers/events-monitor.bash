@@ -40,15 +40,36 @@ monitor-ssid() {
 
 monitor-laptop-lid() {
 	local laptop_lid_state
+	local laptop_lid_last_state
 	while :; do
+		sleep 1
 		laptop_lid_state="$(</proc/acpi/button/lid/LID0/state)"
 		laptop_lid_state="${laptop_lid_state##* }"
 		laptop_lid_state="${laptop_lid_state^^}"
+		if [[ "${laptop_lid_state}" == "${laptop_lid_last_state}" ]]; then
+			continue
+		fi
 		case "${laptop_lid_state}" in
+		"OPEN")
+			if hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1") | .name' >/dev/null; then
+				printf "Laptop screen was opened, attempting to enable it...\n"
+				if hyprctl dispatch dpms on eDP-1; then
+					laptop_lid_last_state="${laptop_lid_state}"
+					local msg="Laptop screen successfully enabled"
+					log "Laptop Clamshell" "${msg}"
+					notify-send "Laptop Clamshell" "${msg}" -a "Laptop Clamshell"
+				else
+					local msg="Received an error when enabling the laptop screen!\n"
+					log "Laptop Clamshell" "${msg}"
+					notify-send "Laptop Clamshell Error" "${msg}" -a "Laptop Clamshell"
+				fi
+			fi
+			;;
 		"CLOSED")
 			if hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1") | .name' >/dev/null; then
 				printf "Laptop screen was shut, attempting to disable it...\n"
-				if hyprctl keyword monitor "eDP-1, disable"; then
+				if hyprctl dispatch dpms off eDP-1; then
+					laptop_lid_last_state="${laptop_lid_state}"
 					local msg="Laptop screen successfully disabled"
 					log "Laptop Clamshell" "${msg}"
 					notify-send "Laptop Clamshell" "${msg}" -a "Laptop Clamshell"
@@ -60,7 +81,6 @@ monitor-laptop-lid() {
 			fi
 			;;
 		esac
-		sleep 1
 	done
 }
 monitor-ssid &
