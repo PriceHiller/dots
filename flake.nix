@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     Fmt = {
-      url = "path:./pkgs/Fmt";
+      url = "path:pkgs/Fmt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -41,12 +41,25 @@
     let
       system = "x86_64-linux";
       username = "sam";
+      pkgs = nixpkgs.legacyPackages.${system};
     in {
-      defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
-      targets.genericLinux = { enable = true; };
+      packages.x86_64-linux.default = home-manager.defaultPackage.x86_64-linux;
+      checks.${system} = {
+        formatting = pkgs.runCommand "check-dot-file-formatting" {
+          buildInputs = with pkgs; [
+            findutils
+            inputs.Fmt.packages.x86_64-linux.default
+          ];
+        } ''
+          set -euo pipefail
+          cd ${self}
+          Fmt -- $(find . -type f)
+          printf "TEST COMPLETED!\n" > $out
+        '';
+      };
       homeConfigurations.${username} =
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
+          inherit pkgs;
           extraSpecialArgs = {
             inherit inputs;
             inherit self;

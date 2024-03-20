@@ -1,4 +1,3 @@
-#!/usr/bin/env -S nix --extra-experimental-features "flakes nix-command" shell nixpkgs#bash nixpkgs#stylua nixpkgs#gnugrep nixpkgs#nixfmt nixpkgs#nodePackages.prettier nixpkgs#shfmt --command bash
 # vim: ft=sh
 
 set -euo pipefail

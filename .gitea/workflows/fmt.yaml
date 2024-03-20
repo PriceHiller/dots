@@ -10,8 +10,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Install `Fmt` package
-        run: nix --experimental-features "flakes nix-command" build 'path:./pkgs/Fmt' --out-link fmt-result
-
       - name: Check formatting
-        run: PATH="${PATH}:${PWD}/fmt-result/bin" ./scripts/check-fmt-git-files.bash
+        run: |
+          for f in **/flake.nix; do
+            nix flake lock --update-input "$(basename "$(dirname "$f")")" || true
+          done
+          nix flake lock --update-input Fmt
+          nix --experimental-features "flakes nix-command" flake check
