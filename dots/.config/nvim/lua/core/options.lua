@@ -97,7 +97,7 @@ M.setup = function()
 
     -- Set listcharacters
     opt.list = true
-    opt.listchars:append("tab:-->")
+    opt.listchars:append("tab:  ")
     opt.listchars:append("trail:·")
     opt.listchars:append("extends:◣")
     opt.listchars:append("precedes:◢")

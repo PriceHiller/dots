@@ -332,6 +332,9 @@ return {
                 { "@markup.heading.7.marker", { link = "@markup.heading.7" } },
                 { "@markup.heading.8.marker", { link = "@markup.heading.8" } },
                 { "@markup.quote.org", get_hl("@markup.quote", { bg = colors.sumiInk5 }) },
+
+                -- For Visual Whitespace plugin
+                { "visual-whitespace", get_hl("Visual", { fg = colors.fujiGray }) },
             }
 
             if vim.g.neovide then
