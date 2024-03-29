@@ -84,5 +84,4 @@ monitor-laptop-lid() {
 	done
 }
 monitor-ssid &
-monitor-laptop-lid &
 wait
