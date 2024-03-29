@@ -25,7 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,7 +68,6 @@
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
                 inputs.neovim-nightly-overlay.overlay
-                inputs.emacs-overlay.overlays.emacs
                 inputs.bob.overlays.default
                 inputs.Fmt.overlays.default
                 inputs.kanagawa-gtk.overlays.default
