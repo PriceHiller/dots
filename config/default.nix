@@ -35,7 +35,7 @@ in {
         (nixGLWrap neovide)
         (nixGLWrap wezterm)
         fontconfig
-        emacs-pgtk
+        emacs
         sqlite
         luajit
         imagemagick
