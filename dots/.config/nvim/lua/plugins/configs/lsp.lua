@@ -239,7 +239,6 @@ return {
                 end,
                 desc = "LSP: Toggle Diagnostics in Current Buffer",
             },
-            { "<leader>lD", vim.lsp.buf.declaration, desc = "LSP: Declaration" },
             { "<leader>k", vim.lsp.buf.hover, desc = "LSP: Hover" },
             { "<leader>K", vim.lsp.buf.signature_help, desc = "LSP: Sig Help" },
             { "<leader>lR", ":LspRestart<CR>", desc = "LSP: Restart" },
