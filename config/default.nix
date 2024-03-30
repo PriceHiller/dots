@@ -435,6 +435,40 @@ in {
       };
     };
     services = {
+      swww-daemon = {
+        Service = {
+          RestartSec = 3;
+          ExecStart = "${pkgs.swww}/bin/swww-daemon";
+        };
+        Install.WantedBy = [ "compositor.target" ];
+        Unit = {
+          Description = "Wayland Wallpaper Service";
+          PartOf = [ "compositor.target" ];
+          After = [ "compositor.target" ];
+        };
+      };
+      swww-wallpapers = {
+        Service = {
+          RestartSec = 3;
+          Type = "oneshot";
+          Environment = [
+            "SWWW_TRANSITION_FPS=120"
+            "SWWW_TRANSITION_STEP=30"
+            "SWWW_TRANSITION_DURATION=0.75"
+          ];
+          ExecStart = let wallpaper-dir = "${dotsDir}/.local/share/wallpapers";
+          in [
+            "${pkgs.swww}/bin/swww img -t random ${wallpaper-dir}/Nebula.jpg"
+            "${pkgs.swww}/bin/swww img -t wipe --transition-angle 40 -o eDP-1 ${wallpaper-dir}/Autumn-Leaves.jpg"
+          ];
+        };
+        Install.WantedBy = [ "swww-daemon.service" ];
+        Unit = {
+          Description = "Wayland Wallpaper Service";
+          PartOf = [ "swww-daemon.service" ];
+          After = [ "swww-daemon.service" ];
+        };
+      };
       keyd-application-mapper = {
         Unit = {
           Description = "Keyd - Linux Keyboard Remapper";
