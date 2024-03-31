@@ -75,6 +75,11 @@
 			alias sysu="systemctl --user"
 			alias sys="systemctl"
 		fi
+
+		if command -v journalctl >/dev/null 2>&1; then
+			alias jrnu="journalctl --user"
+			alias jrn="journalctl"
+		fi
 	fi
 
 	### Bat ###
