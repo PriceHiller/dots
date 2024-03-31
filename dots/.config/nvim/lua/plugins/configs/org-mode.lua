@@ -66,7 +66,7 @@ return {
         end,
     },
     {
-        "lyz-code/telescope-orgmode.nvim",
+        "https://git.orion-technologies.io/Price/telescope-orgmode.nvim",
         dependencies = {
             "nvim-orgmode/orgmode",
             "nvim-telescope/telescope.nvim",
