@@ -88,7 +88,7 @@
 	fi
 
 	### Wezterm ###
-	if command -v wezterm >/dev/null 2>&1; then
+	if [[ -v WEZTERM_CONFIG_DIR ]] && command -v wezterm >/dev/null 2>&1; then
 		alias img="wezterm imgcat"
 		alias ssh="TERM=xterm-256color ssh"
 	fi
@@ -101,5 +101,10 @@
 
 	if command -v arecord >/dev/null 2>&1; then
 		alias audio-record="arecord -f dat -r 41000 -d 5 $(date_iso_8601).wav"
+	fi
+
+	# Override the `img` alias if we're in Neovide
+	if ! alias img >/dev/null 2>&1 && command -v swappy >/dev/null 2>&1; then
+		alias img="swappy -f -"
 	fi
 }
