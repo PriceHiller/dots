@@ -10,7 +10,6 @@ return {
             { "<leader>o", desc = "> Org" },
         },
         config = function()
-            require('orgmode').setup_ts_grammar()
             -- Setup orgmode
             require("orgmode").setup({
                 org_agenda_files = {
