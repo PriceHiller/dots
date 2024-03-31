@@ -10,8 +10,7 @@ return {
             { "<leader>o", desc = "> Org" },
         },
         config = function()
-            -- Load treesitter grammar for org
-            require("orgmode").setup_ts_grammar()
+            require('orgmode').setup_ts_grammar()
             -- Setup orgmode
             require("orgmode").setup({
                 org_agenda_files = {
@@ -27,6 +26,7 @@ return {
                 },
                 org_id_link_to_org_use_id = true,
                 org_default_notes_file = "~/Notes/notes.org",
+                org_highlight_latex_and_related = "entities",
                 org_agenda_start_day = "-1d",
                 calendar_week_start_day = 0,
                 org_agenda_span = "month",

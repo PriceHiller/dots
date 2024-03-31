@@ -335,6 +335,8 @@ return {
 
                 -- For Visual Whitespace plugin
                 { "visual-whitespace", get_hl("Visual", { fg = colors.fujiGray }) },
+                -- Better hl for latex fragments in org files
+                { "texMathZoneX", { fg = colors.surimiOrange }}
             }
 
             if vim.g.neovide then
