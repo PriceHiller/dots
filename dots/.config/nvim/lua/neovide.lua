@@ -29,3 +29,6 @@ vim.keymap.set({ "n" }, "<C-S-Right>", "<cmd>vertical belowright terminal<CR>", 
 vim.keymap.set({ "n" }, "<C-S-Left>", "<cmd>vertical aboveleft terminal<CR>", { noremap = true, silent = true })
 vim.keymap.set({ "n" }, "<C-S-Up>", "<cmd>horizontal aboveleft terminal<CR>", { noremap = true, silent = true })
 vim.keymap.set({ "n" }, "<C-S-Down>", "<cmd>horizontal belowright terminal<CR>", { noremap = true, silent = true })
+
+-- Set Neovide specific vars for use elsewhere (e.g. terminal sessions)
+vim.env.NEOVIDE_SESSION = 1
