@@ -76,7 +76,7 @@ M.setup = function()
 
     -- NOTE: Add "BufReadPre" to the autocmd events to also intercept files given on the command line, e.g.
     -- `nvim myfile.txt`
-    vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    vim.api.nvim_create_autocmd({ "BufNew" }, {
         group = augroup,
         callback = function(args)
             ---@type string
@@ -96,6 +96,9 @@ M.setup = function()
             local function open_mime(buf, fpath, fname)
                 vim.notify(string.format("Opening `%s` in external program", fname), vim.log.levels.INFO, {
                     title = "Open File in External Program",
+                    on_open = function(win)
+                        vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(win) })
+                    end,
                 })
                 vim.system({ "xdg-open", fpath }, { detach = true })
                 vim.api.nvim_buf_delete(buf, { force = true })
