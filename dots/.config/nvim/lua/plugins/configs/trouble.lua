@@ -1,5 +1,25 @@
 return {
     {
+        "folke/todo-comments.nvim",
+        event = "VeryLazy",
+        cmd = {
+            "TodoTrouble",
+            "TodoTelescope",
+            "TodoQuickFix",
+            "TodoLocList",
+        },
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            keywords = {
+                SECURITY = {
+                    icon = "󰒃",
+                    color = "warning",
+                    alt = { "SEC", "SECURITY" },
+                },
+            },
+        },
+    },
+    {
         "folke/trouble.nvim",
         branch = "dev",
         keys = {
@@ -34,25 +54,7 @@ return {
         event = { "QuickFixCmdPre" },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
-            {
-                "folke/todo-comments.nvim",
-                cmd = {
-                    "TodoTrouble",
-                    "TodoTelescope",
-                    "TodoQuickFix",
-                    "TodoLocList",
-                },
-                dependencies = { "nvim-lua/plenary.nvim" },
-                opts = {
-                    keywords = {
-                        SECURITY = {
-                            icon = "󰒃",
-                            color = "warning",
-                            alt = { "SEC", "SECURITY" },
-                        },
-                    },
-                },
-            },
+            "todo-comments.nvim"
         },
         opts = {
             win = {
