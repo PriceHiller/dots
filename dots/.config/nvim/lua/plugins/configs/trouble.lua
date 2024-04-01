@@ -54,7 +54,7 @@ return {
         event = { "QuickFixCmdPre" },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
-            "todo-comments.nvim"
+            "todo-comments.nvim",
         },
         opts = {
             win = {
