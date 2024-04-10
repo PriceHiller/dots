@@ -11,8 +11,10 @@ return {
                 callback = function()
                     local win = vim.api.nvim_get_current_win()
                     local set_opts = function()
-                        vim.wo[win].statuscolumn = [[%!v:lua.StatusCol()]]
-                        vim.wo[win].foldcolumn = "1"
+                        pcall(function()
+                            vim.wo[win].statuscolumn = [[%!v:lua.StatusCol()]]
+                            vim.wo[win].foldcolumn = "1"
+                        end)
                     end
                     set_opts()
                     vim.defer_fn(set_opts, 10)
