@@ -18,7 +18,13 @@ return {
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "hrsh7th/cmp-calc",
             "davidsierradz/cmp-conventionalcommits",
-            "tamago324/cmp-zsh",
+            {
+                "tamago324/cmp-zsh",
+                opts = {
+                    zshrc = true,
+                    filetypes = { "*" },
+                },
+            },
             "dmitmel/cmp-cmdline-history",
             "David-Kunz/cmp-npm",
             "lukas-reineke/cmp-rg",
