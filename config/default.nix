@@ -211,13 +211,7 @@ in {
 
   programs = {
     wofi.enable = true;
-    gpg = {
-      enable = true;
-      scdaemonSettings = {
-        pcsc-driver = "/usr/lib/libpcsclite.so";
-        disable-ccid = true;
-      };
-    };
+    gpg.enable = true;
     firefox = {
       enable = true;
       package = pkgs.firefox-devedition;
