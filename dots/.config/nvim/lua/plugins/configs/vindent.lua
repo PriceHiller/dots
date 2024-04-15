@@ -1,6 +1,6 @@
 return {
     {
-        url = "https://git.orion-technologies.io/Price/Virt-Indent.nvim.git",
+        dir = "~/Git/Neovim/virt-indent.nvim",
         ft = { "org", "markdown" },
-    }
+    },
 }
