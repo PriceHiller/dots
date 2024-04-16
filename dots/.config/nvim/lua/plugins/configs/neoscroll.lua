@@ -8,7 +8,7 @@ return {
             end
         end,
         opts = {
-            easing_function = "circular",
+            easing_function = "quadratic",
         },
     },
 }
