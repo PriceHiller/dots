@@ -30,5 +30,22 @@ vim.keymap.set({ "n" }, "<C-S-Left>", "<cmd>vertical aboveleft terminal<CR>", { 
 vim.keymap.set({ "n" }, "<C-S-Up>", "<cmd>horizontal aboveleft terminal<CR>", { noremap = true, silent = true })
 vim.keymap.set({ "n" }, "<C-S-Down>", "<cmd>horizontal belowright terminal<CR>", { noremap = true, silent = true })
 
+-- Zoom in & out
+vim.g.neovide_scale_factor = 1
+local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+end
+vim.keymap.set("n", "<D-=>", function()
+    change_scale_factor(1.1)
+end, { silent = true, desc = "Neovide: Zoom In" })
+
+vim.keymap.set("n", "<D-->", function()
+    change_scale_factor(1 / 1.1)
+end, { noremap = true, silent = true, desc = "Neovide: Zoom out" })
+
+vim.keymap.set("n", "<D-0>", function()
+    vim.g.neovide_scale_factor = 1
+end, { noremap = true, silent = true, desc = "Neovide: Reset Zoom" })
+
 -- Set Neovide specific vars for use elsewhere (e.g. terminal sessions)
 vim.env.NEOVIDE_SESSION = 1
