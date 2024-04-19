@@ -430,8 +430,20 @@ in {
     };
     services = {
       swww-daemon = {
-        Service = {
+        Service =
+        let
+          cleanup-socket-script = pkgs.writeShellScript "swww-daemon-cleanup-socket" ''
+            # Remove the existing swww.socket if it exists, avoids some issues with swww-daemon
+            # startup where swww-daemon claims the address is already in use
+            if [[ -w "$XDG_RUNTIME_DIR/swww.socket" ]]; then
+              rm -f $XDG_RUNTIME_DIR/swww.socket || exit 1
+            fi
+          '';
+          in {
           RestartSec = 3;
+          PassEnvironment = [ "XDG_RUNTIME_DIR" ];
+          ExecStartPre = "${cleanup-socket-script}";
+          ExecStopPost = "${cleanup-socket-script}";
           ExecStart = "${pkgs.swww}/bin/swww-daemon";
         };
         Install.WantedBy = [ "compositor.target" ];
