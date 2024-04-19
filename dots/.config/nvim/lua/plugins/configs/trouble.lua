@@ -36,7 +36,7 @@ return {
                 "<cmd>Trouble lsp_type_definitions toggle win.position=right<CR>",
                 desc = "LSP: Type Definitions",
             },
-            { "<leader>xx", "<cmd>Trouble lsp toggle focus=false win.position=right<CR>", desc = "Trouble: LSP" },
+            { "<leader>xx", "<cmd>Trouble lsp toggle win.position=right<CR>", desc = "Trouble: LSP" },
             {
                 "<leader>xd",
                 "<cmd>Trouble diagnostics toggle win.position=right<cr>",
@@ -47,7 +47,7 @@ return {
             { "<leader>xt", "<cmd>Trouble todo toggle win.position=right<cr>", desc = "Trouble: Todo Items" },
             {
                 "<leader>xo",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
+                "<cmd>Trouble symbols toggle<cr>",
                 desc = "Trouble: Symbols",
             },
         },
@@ -57,6 +57,9 @@ return {
             "todo-comments.nvim",
         },
         opts = {
+            focus = true,
+            auto_close = true,
+            max_items = 2000,
             win = {
                 type = "split",
             },
