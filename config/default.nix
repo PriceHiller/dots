@@ -84,6 +84,7 @@ in {
         helvum
         brightnessctl
         keyd
+        tidal-hifi
       ] ++ [ go (lib.hiPrio gotools) ] ++ [ age age-plugin-yubikey passage ]
       ++ [
         libsForQt5.qtstyleplugins
