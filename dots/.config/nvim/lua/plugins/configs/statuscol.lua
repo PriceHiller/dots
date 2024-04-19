@@ -3,7 +3,6 @@ return {
         "luukvbaal/statuscol.nvim",
         opts = function()
             local builtin = require("statuscol.builtin")
-            local last_sign_def_len = 0
 
             vim.api.nvim_create_autocmd({ "BufEnter" }, {
                 desc = "Ensure Neogit Status doesn't fuck the gutter up -- 🤮",
