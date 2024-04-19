@@ -29,6 +29,7 @@
 			alias gl="${editor_to_use} -c 'call feedkeys(\":Neogit log\<CR>l\")'"
 		fi
 
+		alias g="git"
 		alias gc="git commit"
 		alias gcm="git commit -m"
 		alias ga="git add"
