@@ -63,7 +63,7 @@ in {
         eza
         ripgrep
         fd
-        nixfmt
+        nixfmt-rfc-style
         gtk2
         lxappearance
         webcord
