@@ -25,15 +25,7 @@ return {
             })
 
             local std_condition = function(args)
-                local buf_opt = function(option_name)
-                    local value = vim.api.nvim_get_option_value(option_name, { buf = args.buf })
-                    if value == "" then
-                        return nil
-                    else
-                        return value
-                    end
-                end
-                return (not buf_opt("bufhidden"))
+                return #vim.api.nvim_get_option_value("bufhidden", { buf = args.buf }) == 0
             end
 
             return {
