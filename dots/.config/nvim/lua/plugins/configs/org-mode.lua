@@ -47,7 +47,7 @@ return {
                     },
                     j = {
                         description = "Journal",
-                        template = "\n* %? %U    :journal:",
+                        template = "\n* %? %U",
                         target = "~/Notes/journal/%<%Y-%m-%d>.org",
                     },
                 },
