@@ -84,6 +84,13 @@ return {
                             std_condition,
                         },
                     },
+                    {
+                        text = { "▕" },
+                        hl = "NonText",
+                        condition = {
+                            std_condition,
+                        },
+                    },
                 },
             }
         end,
