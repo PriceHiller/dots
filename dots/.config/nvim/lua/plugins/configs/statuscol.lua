@@ -25,6 +25,18 @@ return {
                 end,
             })
 
+            local std_condition = function(args)
+                local buf_opt = function(option_name)
+                    local value = vim.api.nvim_get_option_value(option_name, { buf = args.buf })
+                    if value == "" then
+                        return nil
+                    else
+                        return value
+                    end
+                end
+                return not buf_opt("bufhidden")
+            end
+
             return {
                 setopt = true,
                 relculright = false,
@@ -32,6 +44,47 @@ return {
                     { text = { "%s" }, click = "v:lua.ScSa" },
                     { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
                     { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+                    {
+                        text = {
+                            function(args)
+                                local get_mark = function()
+                                    local local_mark_buf = vim.iter(vim.fn.getmarklist(args.buf))
+                                        :filter(function(mark)
+                                            local lnum = mark.pos[2]
+                                            return lnum == args.lnum
+                                        end)
+                                        :next()
+                                    if local_mark_buf then
+                                        return local_mark_buf.mark:sub(-1)
+                                    end
+
+                                    local bufname = vim.api.nvim_buf_get_name(args.buf)
+                                    local global_mark_buf = vim.iter(vim.fn.getmarklist())
+                                        :filter(function(mark)
+                                            local lnum = mark.pos[2]
+                                            return lnum == args.lnum
+                                                and (mark.file == bufname or vim.fn.expand(mark.file) == bufname)
+                                        end)
+                                        :next()
+
+                                    if global_mark_buf then
+                                        return global_mark_buf.mark:sub(-1)
+                                    end
+
+                                    return " "
+                                end
+                                local mark = get_mark()
+                                if args.relnum == 0 then
+                                    return "%#Character#" .. mark .. "%*"
+                                else
+                                    return mark
+                                end
+                            end,
+                        },
+                        condition = {
+                            std_condition,
+                        },
+                    },
                 },
             }
         end,
