@@ -31,6 +31,9 @@ return {
             return {
                 setopt = true,
                 relculright = false,
+                bt_ignore = {
+                    "help",
+                },
                 segments = {
                     { text = { "%s" }, click = "v:lua.ScSa" },
                     { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
