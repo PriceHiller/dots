@@ -33,7 +33,7 @@ return {
                         return value
                     end
                 end
-                return (not buf_opt("bufhidden")) or (args.fold.width > 0)
+                return (not buf_opt("bufhidden"))
             end
 
             return {
