@@ -220,7 +220,6 @@ in {
     waybar = {
       enable = true;
       systemd.enable = true;
-
     };
     zsh = {
       enable = true;
@@ -315,7 +314,7 @@ in {
 
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
   };
 
   gtk = let
