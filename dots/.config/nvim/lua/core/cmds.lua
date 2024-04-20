@@ -114,7 +114,7 @@ M.setup = function()
             vim.cmd.write({ bang = true })
             vim.cmd.edit({ args = { fname }, bang = true })
         else
-            vim.cmd.edit({ args = { tmp_dir } })
+            pcall(vim.cmd.edit, { args = { tmp_dir } })
         end
     end, {
         nargs = "*",
