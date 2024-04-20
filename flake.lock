@@ -9,7 +9,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-w//f0CiJqZtYO1MYA7DzwPnNFZh/dxPx6+ZP9tNoUEs=",
+        "narHash": "sha256-nQ8iqn/VyJJc96TlwtT6SvKcPFZKFA99tnk6pKgxkWE=",
         "path": "pkgs/Fmt",
         "type": "path"
       },

@@ -10,15 +10,29 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, bob }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      bob,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         rust-toolchain = pkgs.symlinkJoin {
           name = "rust-toolchain";
-          paths = with pkgs; [ rustc cargo cargo-watch rust-analyzer rustfmt ];
+          paths = with pkgs; [
+            rustc
+            cargo
+            cargo-watch
+            rust-analyzer
+            rustfmt
+          ];
         };
-      in rec {
+      in
+      rec {
         # This builds the blog binary then runs it and collects the output. Once done it throws away the binary and
         # shoves the newly created static site into the result.
         packages.default = pkgs.rustPlatform.buildRustPackage {
@@ -36,9 +50,9 @@
           '';
           nativeBuildInputs = [ rust-toolchain ];
         };
-      }) // {
-        overlays.default = final: prev: {
-          bob-nvim = self.packages.${final.system}.default;
-        };
-      };
+      }
+    )
+    // {
+      overlays.default = final: prev: { bob-nvim = self.packages.${final.system}.default; };
+    };
 }
