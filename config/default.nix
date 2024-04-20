@@ -85,6 +85,7 @@ in {
         brightnessctl
         keyd
         tidal-hifi
+        nix-output-monitor
       ] ++ [ go (lib.hiPrio gotools) ] ++ [ age age-plugin-yubikey passage ]
       ++ [
         libsForQt5.qtstyleplugins
