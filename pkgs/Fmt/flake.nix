@@ -6,10 +6,18 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
-      in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
         packages.default = pkgs.writeShellApplication {
           name = "Fmt";
           runtimeInputs = with pkgs; [
@@ -19,13 +27,16 @@
             nodePackages.prettier
             shfmt
           ];
-          text = (''
-            #!${pkgs.bash}/bin/bash
-          '' + builtins.readFile ./fmt.bash);
+          text = (
+            ''
+              #!${pkgs.bash}/bin/bash
+            ''
+            + builtins.readFile ./fmt.bash
+          );
         };
-      }) // {
-        overlays.default = final: prev: {
-          Fmt = self.packages.${final.system}.default;
-        };
-      };
+      }
+    )
+    // {
+      overlays.default = final: prev: { Fmt = self.packages.${final.system}.default; };
+    };
 }

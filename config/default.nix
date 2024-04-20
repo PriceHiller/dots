@@ -1,17 +1,27 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   dotsDir = "${config.home.homeDirectory}/.config/home-manager/dots";
-  softLinkDots = dir:
-    (builtins.listToAttrs (map (n: {
-      name = "${dir + "/" + n}";
-      value = {
-        source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/${dir}/${n}";
-        force = true;
-      };
-    })
-    # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
-      (builtins.attrNames (builtins.readDir ../dots/${dir}))));
-  nixGLWrap = pkg:
+  softLinkDots =
+    dir:
+    (builtins.listToAttrs (
+      map
+        (n: {
+          name = "${dir + "/" + n}";
+          value = {
+            source = config.lib.file.mkOutOfStoreSymlink "${dotsDir}/${dir}/${n}";
+            force = true;
+          };
+        })
+        # HACK: We don't use the absolute path in readDir to respect pure evaluation in nix flakes.
+        (builtins.attrNames (builtins.readDir ../dots/${dir}))
+    ));
+  nixGLWrap =
+    pkg:
     pkgs.runCommand "${pkg.name}-nixgl-wrapper" { } ''
       mkdir $out
       ln -s ${pkg}/* $out
@@ -23,10 +33,12 @@ let
        chmod +x $wrapped_bin
       done
     '';
-in {
+in
+{
   programs.home-manager.enable = true;
   home = {
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         Fmt
         nodePackages.prettier
@@ -85,7 +97,16 @@ in {
         keyd
         tidal-hifi
         nix-output-monitor
-      ] ++ [ go (lib.hiPrio gotools) ] ++ [ age age-plugin-yubikey passage ]
+      ]
+      ++ [
+        go
+        (lib.hiPrio gotools)
+      ]
+      ++ [
+        age
+        age-plugin-yubikey
+        passage
+      ]
       ++ [
         libsForQt5.qtstyleplugins
         libsForQt5.qtcurve
@@ -93,7 +114,12 @@ in {
         gtk-engine-murrine
         gnome.gnome-themes-extra
         gtk_engines
-      ] ++ [ ansible ansible-lint ] ++ [
+      ]
+      ++ [
+        ansible
+        ansible-lint
+      ]
+      ++ [
         # gnumake
         # cmake
         # gcc
@@ -120,8 +146,7 @@ in {
     } // softLinkDots ".config";
 
     sessionVariables = {
-      TERMINFO_DIRS =
-        "${config.home.homeDirectory}/.nix-profile/share/terminfo";
+      TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
@@ -146,7 +171,6 @@ in {
         "application/xhtml+xml" = [ "firefoxdeveloperedition.desktop" ];
         "application/x-extension-xhtml" = [ "firefoxdeveloperedition.desktop" ];
         "application/x-extension-xht" = [ "firefoxdeveloperedition.desktop" ];
-
       };
       defaultApplications = {
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
@@ -160,7 +184,6 @@ in {
         "application/xhtml+xml" = [ "firefoxdeveloperedition.desktop" ];
         "application/x-extension-xhtml" = [ "firefoxdeveloperedition.desktop" ];
         "application/x-extension-xht" = [ "firefoxdeveloperedition.desktop" ];
-
       };
     };
     systemDirs.data = [
@@ -232,7 +255,9 @@ in {
       enable = true;
       userName = "Price Hiller";
       userEmail = "price@orion-technologies.io";
-      aliases = { unstage = "reset HEAD --"; };
+      aliases = {
+        unstage = "reset HEAD --";
+      };
       extraConfig = {
         init.defaultBranch = "Development";
         merge.conflictstyle = "zdiff3";
@@ -291,7 +316,9 @@ in {
         options = {
           navigate = true;
           features = "interactive decorations";
-          interactive = { keep-plus-minus-markers = false; };
+          interactive = {
+            keep-plus-minus-markers = false;
+          };
           decorations = {
             commit-decoration-style = "bold box ul";
             dark = true;
@@ -317,34 +344,36 @@ in {
     platformTheme.name = "gtk";
   };
 
-  gtk = let
-    extraGtkConfig = {
-      gtk-application-prefer-dark-theme = true;
-      gtk-cursor-theme-size = 0;
-      gtk-enable-event-sounds = 1;
-      gtk-enable-input-feedback-sounds = 1;
-      gtk-xft-antialias = 1;
-      gtk-xft-hinting = 1;
-      gtk-xft-hintstyle = "hintfull";
+  gtk =
+    let
+      extraGtkConfig = {
+        gtk-application-prefer-dark-theme = true;
+        gtk-cursor-theme-size = 0;
+        gtk-enable-event-sounds = 1;
+        gtk-enable-input-feedback-sounds = 1;
+        gtk-xft-antialias = 1;
+        gtk-xft-hinting = 1;
+        gtk-xft-hintstyle = "hintfull";
+      };
+    in
+    {
+      enable = true;
+      theme = {
+        name = "Kanagawa-BL";
+        package = pkgs.kanagawa-gtk-theme;
+      };
+      iconTheme = {
+        name = "Kanagawa";
+        package = pkgs.kanagawa-gtk-icon-theme;
+      };
+      font = {
+        name = "Open Sans";
+        size = 11;
+        package = pkgs.open-sans;
+      };
+      gtk3.extraConfig = extraGtkConfig;
+      gtk4.extraConfig = extraGtkConfig;
     };
-  in {
-    enable = true;
-    theme = {
-      name = "Kanagawa-BL";
-      package = pkgs.kanagawa-gtk-theme;
-    };
-    iconTheme = {
-      name = "Kanagawa";
-      package = pkgs.kanagawa-gtk-icon-theme;
-    };
-    font = {
-      name = "Open Sans";
-      size = 11;
-      package = pkgs.open-sans;
-    };
-    gtk3.extraConfig = extraGtkConfig;
-    gtk4.extraConfig = extraGtkConfig;
-  };
 
   services = {
     gromit-mpx = {
@@ -388,19 +417,30 @@ in {
           device = "default";
           color = "red";
           arrowSize = 5;
-          modifiers = [ "CONTROL" "SHIFT" ];
+          modifiers = [
+            "CONTROL"
+            "SHIFT"
+          ];
         }
         {
           device = "default";
           color = "blue";
           arrowSize = 5;
-          modifiers = [ "CONTROL" "SHIFT" "2" ];
+          modifiers = [
+            "CONTROL"
+            "SHIFT"
+            "2"
+          ];
         }
         {
           device = "default";
           color = "yellow";
           arrowSize = 5;
-          modifiers = [ "CONTROL" "SHIFT" "3" ];
+          modifiers = [
+            "CONTROL"
+            "SHIFT"
+            "3"
+          ];
         }
       ];
     };
@@ -425,27 +465,31 @@ in {
     targets.compositor = {
       Unit = {
         Description = "Unit for DE to launch";
-        ConditionEnvironment = [ "WAYLAND_DISPLAY" "DISPLAY" ];
+        ConditionEnvironment = [
+          "WAYLAND_DISPLAY"
+          "DISPLAY"
+        ];
       };
     };
     services = {
       swww-daemon = {
         Service =
-        let
-          cleanup-socket-script = pkgs.writeShellScript "swww-daemon-cleanup-socket" ''
-            # Remove the existing swww.socket if it exists, avoids some issues with swww-daemon
-            # startup where swww-daemon claims the address is already in use
-            if [[ -w "$XDG_RUNTIME_DIR/swww.socket" ]]; then
-              rm -f $XDG_RUNTIME_DIR/swww.socket || exit 1
-            fi
-          '';
-          in {
-          RestartSec = 3;
-          PassEnvironment = [ "XDG_RUNTIME_DIR" ];
-          ExecStartPre = "${cleanup-socket-script}";
-          ExecStopPost = "${cleanup-socket-script}";
-          ExecStart = "${pkgs.swww}/bin/swww-daemon";
-        };
+          let
+            cleanup-socket-script = pkgs.writeShellScript "swww-daemon-cleanup-socket" ''
+              # Remove the existing swww.socket if it exists, avoids some issues with swww-daemon
+              # startup where swww-daemon claims the address is already in use
+              if [[ -w "$XDG_RUNTIME_DIR/swww.socket" ]]; then
+                rm -f $XDG_RUNTIME_DIR/swww.socket || exit 1
+              fi
+            '';
+          in
+          {
+            RestartSec = 3;
+            PassEnvironment = [ "XDG_RUNTIME_DIR" ];
+            ExecStartPre = "${cleanup-socket-script}";
+            ExecStopPost = "${cleanup-socket-script}";
+            ExecStart = "${pkgs.swww}/bin/swww-daemon";
+          };
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           Description = "Wayland Wallpaper Service";
@@ -462,11 +506,14 @@ in {
             "SWWW_TRANSITION_STEP=30"
             "SWWW_TRANSITION_DURATION=0.75"
           ];
-          ExecStart = let wallpaper-dir = "${dotsDir}/.local/share/wallpapers";
-          in [
-            "${pkgs.swww}/bin/swww img -t random ${wallpaper-dir}/Nebula.jpg"
-            "${pkgs.swww}/bin/swww img -t wipe --transition-angle 40 -o eDP-1 ${wallpaper-dir}/Autumn-Leaves.jpg"
-          ];
+          ExecStart =
+            let
+              wallpaper-dir = "${dotsDir}/.local/share/wallpapers";
+            in
+            [
+              "${pkgs.swww}/bin/swww img -t random ${wallpaper-dir}/Nebula.jpg"
+              "${pkgs.swww}/bin/swww img -t wipe --transition-angle 40 -o eDP-1 ${wallpaper-dir}/Autumn-Leaves.jpg"
+            ];
         };
         Install.WantedBy = [ "swww-daemon.service" ];
         Unit = {
@@ -497,14 +544,16 @@ in {
           After = [ "compositor.target" ];
         };
       };
-      gromit-mpx.Service.ExecStart =
-        lib.mkForce "echo 'Disabled, managed by WM'";
+      gromit-mpx.Service.ExecStart = lib.mkForce "echo 'Disabled, managed by WM'";
       opensnitch-ui = {
         Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" "waybar.service" ];
+          After = [
+            "compositor.target"
+            "waybar.service"
+          ];
         };
       };
       easyeffects = {

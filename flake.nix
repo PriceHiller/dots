@@ -36,71 +36,82 @@
     };
   };
 
-  outputs = inputs@{ self, home-manager, nixpkgs, ... }:
+  outputs =
+    inputs@{
+      self,
+      home-manager,
+      nixpkgs,
+      ...
+    }:
     let
       system = "x86_64-linux";
       username = "sam";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in
+    {
       packages.x86_64-linux.default = home-manager.defaultPackage.x86_64-linux;
       checks.${system} = {
-        formatting = pkgs.runCommand "check-dot-file-formatting" {
-          buildInputs = with pkgs; [
-            findutils
-            inputs.Fmt.packages.x86_64-linux.default
-          ];
-        } ''
-          set -euo pipefail
-          cd ${self}
-          Fmt -- $(find . -type f)
-          printf "TEST COMPLETED!\n" > $out
-        '';
-      };
-      homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit inputs;
-            inherit self;
-          };
-          modules = [
-            ({
-              imports = [ inputs.agenix.homeManagerModules.default ];
-              nixpkgs.overlays = [
-                inputs.neovim-nightly-overlay.overlay
-                inputs.bob.overlays.default
-                inputs.Fmt.overlays.default
-                inputs.kanagawa-gtk.overlays.default
-                inputs.nixgl.overlay
-                (final: prev: {
-                  waybar = inputs.waybar.packages.${system}.default;
-                  lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
-                    postInstall = ''
-                      wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
-                    '';
-                  });
-                  opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
-                    propagatedBuildInputs = oldAttrs.propagatedBuildInputs
-                      ++ [ prev.python311Packages.qt-material ];
-                  });
-                })
+        formatting =
+          pkgs.runCommand "check-dot-file-formatting"
+            {
+              buildInputs = with pkgs; [
+                findutils
+                inputs.Fmt.packages.x86_64-linux.default
               ];
-              home = {
-                username = "${username}";
-                homeDirectory = "/home/${username}";
-                stateVersion = "24.05";
-              };
-            })
-            ./config
-          ];
+            }
+            ''
+              set -euo pipefail
+              cd ${self}
+              Fmt -- $(find . -type f)
+              printf "TEST COMPLETED!\n" > $out
+            '';
+      };
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit self;
         };
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+        modules = [
+          ({
+            imports = [ inputs.agenix.homeManagerModules.default ];
+            nixpkgs.overlays = [
+              inputs.neovim-nightly-overlay.overlay
+              inputs.bob.overlays.default
+              inputs.Fmt.overlays.default
+              inputs.kanagawa-gtk.overlays.default
+              inputs.nixgl.overlay
+              (final: prev: {
+                waybar = inputs.waybar.packages.${system}.default;
+                lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
+                  postInstall = ''
+                    wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
+                  '';
+                });
+                opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
+                  propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python311Packages.qt-material ];
+                });
+              })
+            ];
+            home = {
+              username = "${username}";
+              homeDirectory = "/home/${username}";
+              stateVersion = "24.05";
+            };
+          })
+          ./config
+        ];
+      };
+    }
+    // inputs.flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ inputs.agenix.overlays.default ];
         };
-      in {
+      in
+      {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             age
@@ -113,5 +124,6 @@
             export RULES="$PWD/secrets/secrets.nix"
           '';
         };
-      });
+      }
+    );
 }
