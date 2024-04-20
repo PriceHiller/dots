@@ -66,7 +66,6 @@ in {
         nixfmt-rfc-style
         gtk2
         lxappearance
-        webcord
         opensnitch-ui
         twitter-color-emoji
         open-sans
