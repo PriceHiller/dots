@@ -76,6 +76,9 @@ return {
                             end,
                         },
                         condition = {
+                            function(args)
+                                return args.virtnum == 0
+                            end,
                             std_condition,
                         },
                     },
