@@ -52,6 +52,7 @@ return {
                 disable_commit_confirmation = true,
                 disable_builtin_notifications = true,
                 auto_refresh = true,
+                disable_signs = true,
                 filewatcher = {
                     enabled = true,
                     interval = 1000,
