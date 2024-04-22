@@ -294,6 +294,9 @@ return {
                         return completion_item
                     end,
                 },
+                performance = {
+                    fetching_timeout = 100
+                },
                 view = {
                     entries = {
                         name = "custom",
