@@ -42,16 +42,6 @@ return {
                         text = {
                             function(args)
                                 local get_mark = function()
-                                    local local_mark_buf = vim.iter(vim.fn.getmarklist(args.buf))
-                                        :filter(function(mark)
-                                            local lnum = mark.pos[2]
-                                            return lnum == args.lnum
-                                        end)
-                                        :next()
-                                    if local_mark_buf then
-                                        return local_mark_buf.mark:sub(-1)
-                                    end
-
                                     local bufname = vim.api.nvim_buf_get_name(args.buf)
                                     local global_mark_buf = vim.iter(vim.fn.getmarklist())
                                         :filter(function(mark)
@@ -63,6 +53,16 @@ return {
 
                                     if global_mark_buf then
                                         return global_mark_buf.mark:sub(-1)
+                                    end
+
+                                    local local_mark_buf = vim.iter(vim.fn.getmarklist(args.buf))
+                                        :filter(function(mark)
+                                            local lnum = mark.pos[2]
+                                            return lnum == args.lnum
+                                        end)
+                                        :next()
+                                    if local_mark_buf then
+                                        return local_mark_buf.mark:sub(-1)
                                     end
 
                                     return " "
