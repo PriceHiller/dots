@@ -297,6 +297,7 @@ return {
                 view = {
                     entries = {
                         name = "custom",
+                        follow_cursor = true,
                         selection_order = "near_cursor",
                     },
                 },
