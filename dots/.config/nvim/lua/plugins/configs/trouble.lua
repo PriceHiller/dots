@@ -36,7 +36,17 @@ return {
                 "<cmd>Trouble lsp_type_definitions toggle win.position=right<CR>",
                 desc = "LSP: Type Definitions",
             },
-            { "<leader>xx", "<cmd>Trouble lsp toggle win.position=right<CR>", desc = "Trouble: LSP" },
+            {
+                "<leader>xx",
+                function()
+                    local trouble = require("trouble")
+                    if trouble.is_open() then
+                        ---@diagnostic disable-next-line: missing-parameter
+                        trouble.focus()
+                    end
+                end,
+                desc = "Trouble: Focus Trouble",
+            },
             {
                 "<leader>xd",
                 "<cmd>Trouble diagnostics toggle win.position=right<cr>",
@@ -59,7 +69,6 @@ return {
         opts = {
             focus = true,
             auto_close = true,
-            max_items = 2000,
             win = {
                 type = "split",
             },
