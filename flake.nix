@@ -2,7 +2,7 @@
   description = "Price Hiller's home manager configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     kanagawa-gtk = {
       url = "path:./pkgs/kanagawa-gtk";
