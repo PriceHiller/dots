@@ -97,6 +97,7 @@ in
         keyd
         tidal-hifi
         nix-output-monitor
+        ungoogled-chromium
       ]
       ++ [
         go
