@@ -1,0 +1,26 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = true
+charset = utf-8
+max_line_length = 100
+indent_style = space
+
+# We don't want to mess with encrypted files if they exist in the repo
+[*.age]
+indent_style = unset
+indent_size = unset
+tab_width = unset
+end_of_line = unset
+charset = unset
+trim_trailing_whitespace = unset
+insert_final_newline = unset
+max_line_length = unset
+
+[{*.bash,.envrc}]
+indent_style = tab
+
+[*.nix]
+indent_size = 2

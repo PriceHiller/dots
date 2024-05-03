@@ -1,0 +1,5 @@
+{ modulesPath, ... }:
+
+{
+  zramSwap.enable = true;
+}

@@ -2,19 +2,13 @@
   description = "Price Hiller's home manager configuration";
 
   inputs = {
+    nix.url = "github:nixos/nix";
+    deploy-rs.url = "github:serokell/deploy-rs";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    kanagawa-gtk = {
-      url = "path:./pkgs/kanagawa-gtk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     bob = {
-      url = "path:./pkgs/bob-nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    Fmt = {
-      url = "path:pkgs/Fmt";
-      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
+      url = "github:MordechaiHadad/bob";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,96 +28,249 @@
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    blog = {
+      url = "git+https://git.orion-technologies.io/blog/blog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    inputs@{
-      self,
-      home-manager,
-      nixpkgs,
-      ...
-    }:
+    inputs@{ self, nixpkgs, ... }:
     let
-      system = "x86_64-linux";
-      username = "sam";
-      pkgs = nixpkgs.legacyPackages.${system};
+      inherit (self) outputs;
+      forAllSystems =
+        function:
+        nixpkgs.lib.genAttrs
+          [
+            "aarch64-linux"
+            "i686-linux"
+            "x86_64-linux"
+            "aarch64-darwin"
+            "x86_64-darwin"
+          ]
+          (
+            system:
+            function (
+              import nixpkgs {
+                inherit system;
+                overlays = [
+                  inputs.agenix.overlays.default
+                  inputs.neovim-nightly-overlay.overlay
+                ];
+              }
+            )
+          );
+      mkHomeCfg =
+        user: home-config:
+        let
+          username = "${builtins.head (builtins.match "(.+)(@.+)?" user)}";
+        in
+        inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ({
+              imports = [ inputs.agenix.homeManagerModules.default ];
+              nixpkgs.overlays = [
+                inputs.neovim-nightly-overlay.overlay
+                inputs.nixgl.overlay
+                self.overlays.modifications
+                self.overlays.additions
+              ];
+              home = {
+                stateVersion = "24.05";
+                username = "${username}";
+                homeDirectory = "/home/${username}";
+              };
+            })
+            home-config
+          ];
+        };
     in
     {
-      packages.x86_64-linux.default = home-manager.defaultPackage.x86_64-linux;
-      checks.${system} = {
-        formatting =
-          pkgs.runCommand "check-dot-file-formatting"
-            {
-              buildInputs = with pkgs; [
-                findutils
-                inputs.Fmt.packages.x86_64-linux.default
-              ];
-            }
-            ''
-              set -euo pipefail
-              cd ${self}
-              Fmt -- $(find . -type f)
-              printf "TEST COMPLETED!\n" > $out
-            '';
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+      packages = forAllSystems (pkgs: import ./pkgs pkgs);
+      homeConfigurations = builtins.mapAttrs (mkHomeCfg) {
+        "price@orion" = ./users/price/home.nix;
+        "sam" = ./users/sam/home.nix;
       };
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit self;
-        };
-        modules = [
-          ({
-            imports = [ inputs.agenix.homeManagerModules.default ];
-            nixpkgs.overlays = [
-              inputs.neovim-nightly-overlay.overlay
-              inputs.bob.overlays.default
-              inputs.Fmt.overlays.default
-              inputs.kanagawa-gtk.overlays.default
-              inputs.nixgl.overlay
-              (final: prev: {
-                waybar = inputs.waybar.packages.${system}.default;
-                lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
-                  postInstall = ''
-                    wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
-                  '';
-                });
-                opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
-                  propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python311Packages.qt-material ];
-                });
-              })
-            ];
-            home = {
-              username = "${username}";
-              homeDirectory = "/home/${username}";
-              stateVersion = "24.05";
-            };
-          })
-          ./config
-        ];
-      };
-    }
-    // inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ inputs.agenix.overlays.default ];
-        };
-      in
-      {
-        devShells.default = pkgs.mkShell {
+      overlays = import ./overlays { inherit inputs; };
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShell {
           packages = with pkgs; [
             age
             age-plugin-yubikey
             pkgs.agenix
             nixos-rebuild
+            nixos-install-tools
             pkgs.deploy-rs
           ];
           shellHook = ''
             export RULES="$PWD/secrets/secrets.nix"
           '';
         };
-      }
-    );
+      });
+      apps = forAllSystems (pkgs: {
+        home-manager-init = {
+          type = "app";
+          program = "${
+            pkgs.writeShellApplication {
+              name = "home-manager-init";
+              runtimeInputs = with pkgs; [
+                git
+                nix
+              ];
+              text = ''
+                #!${pkgs.bash}/bin/bash
+                cd "$(git rev-parse --show-toplevel)"
+                nix run --extra-experimental-features 'nix-command flakes' github:nix-community/home-manager -- switch --extra-experimental-features 'nix-command flakes' --flake "git+file://$(pwd)?submodules=1" "$@"
+              '';
+            }
+          }/bin/home-manager-init";
+        };
+        install-host = {
+          type = "app";
+          program = "${
+            pkgs.writeShellApplication {
+              name = "install-host";
+              runtimeInputs = with pkgs; [
+                openssh
+                coreutils-full
+                git
+                agenix
+                nix
+              ];
+              text = (
+                ''
+                  #!${pkgs.bash}/bin/bash
+                  # The below `cd` invocation ensures the installer is running from the toplevel of
+                  # the flake and thus has correct paths available.
+                  cd "$(git rev-parse --show-toplevel)"
+                ''
+                + builtins.readFile ./scripts/install-host.bash
+              );
+            }
+          }/bin/install-host";
+        };
+      });
+      nixosConfigurations =
+        let
+          lib = (import ./lib { lib = nixpkgs.lib; }) // nixpkgs.lib;
+          persist-dir = "/persist";
+          defaults = {
+            config = {
+              nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+              environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
+              environment.persistence.save = {
+                hideMounts = true;
+                persistentStoragePath = "${persist-dir}/save";
+              };
+              environment.persistence.ephemeral = {
+                persistentStoragePath = "${persist-dir}/ephemeral";
+                hideMounts = true;
+                directories = [
+                  "/var/lib"
+                  "/etc/nixos"
+                ];
+              };
+            };
+          };
+        in
+        {
+          orion =
+            let
+              hostname = "orion";
+            in
+            nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              specialArgs = {
+                inherit self;
+                inherit inputs;
+                inherit outputs;
+                inherit hostname;
+                inherit lib;
+                inherit persist-dir;
+                root-disk = "/dev/vda";
+              };
+              modules = [
+                defaults
+                inputs.impermanence.nixosModules.impermanence
+                inputs.agenix.nixosModules.default
+                inputs.disko.nixosModules.disko
+                {
+                  config =
+                    (import "${self}/secrets" {
+                      agenix = false;
+                      inherit lib;
+                    }).${hostname};
+                }
+                ./hosts/${hostname}
+              ];
+            };
+          luna =
+            let
+              hostname = "luna";
+            in
+            nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              specialArgs = {
+                inherit self;
+                inherit inputs;
+                inherit hostname;
+                inherit nixpkgs;
+                inherit lib;
+                inherit persist-dir;
+                root-disk = "/dev/nvme0n1";
+                fqdn = "orion-technologies.io";
+              };
+              modules = [
+                defaults
+                inputs.impermanence.nixosModules.impermanence
+                inputs.agenix.nixosModules.default
+                inputs.disko.nixosModules.disko
+                {
+                  config =
+                    (import "${self}/secrets" {
+                      agenix = false;
+                      inherit lib;
+                    }).${hostname};
+                }
+                ./hosts/${hostname}
+              ];
+            };
+        };
+      deploy.nodes =
+        let
+          deploy-rs = inputs.deploy-rs;
+        in
+        {
+          orion = {
+            hostname = "orion";
+            fastConnection = true;
+            profiles.system = {
+              sshUser = "price";
+              user = "root";
+              path = deploy-rs.lib.x86_64-linux.activate.nixos outputs.nixosConfigurations.orion;
+            };
+          };
+          luna = {
+            hostname = "luna.hosts.orion-technologies.io";
+            fastConnection = true;
+            profiles.system = {
+              sshUser = "price";
+              user = "root";
+              path = deploy-rs.lib.x86_64-linux.activate.nixos outputs.nixosConfigurations.luna;
+            };
+          };
+        };
+    };
 }
