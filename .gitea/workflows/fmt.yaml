@@ -12,8 +12,4 @@ jobs:
 
       - name: Check formatting
         run: |
-          for f in **/flake.nix; do
-            nix flake lock --update-input "$(basename "$(dirname "$f")")" || true
-          done
-          nix flake lock --update-input Fmt
           nix --experimental-features "flakes nix-command" flake check

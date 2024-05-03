@@ -1,27 +1,27 @@
 [submodule "dots/.config/zsh/config/plugins/zsh-syntax-highlighting"]
-	path = dots/.config/zsh/config/plugins/zsh-syntax-highlighting
+	path = users/price/dots/.config/zsh/config/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "dots/.config/zsh/config/plugins/zsh-completions"]
-	path = dots/.config/zsh/config/plugins/zsh-completions
+	path = users/price/dots/.config/zsh/config/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "dots/.config/zsh/config/plugins/zsh-autosuggestions"]
-	path = dots/.config/zsh/config/plugins/zsh-autosuggestions
+	path = users/price/dots/.config/zsh/config/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "dots/.config/zsh/config/plugins/fzf-tab"]
-	path = dots/.config/zsh/config/plugins/fzf-tab
+	path = users/price/dots/.config/zsh/config/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab.git
 [submodule "dots/.config/zsh/config/plugins/z.lua"]
-	path = dots/.config/zsh/config/plugins/z.lua
+	path = users/price/dots/.config/zsh/config/plugins/z.lua
 	url = https://github.com/skywind3000/z.lua.git
 [submodule "dots/.config/zsh/config/plugins/nix-zsh-completions"]
-	path = dots/.config/zsh/config/plugins/nix-zsh-completions
+	path = users/price/dots/.config/zsh/config/plugins/nix-zsh-completions
 	url = https://github.com/spwhitt/nix-zsh-completions
 [submodule "dots/.config/zsh/config/themes/powerlevel10k"]
-	path = dots/.config/zsh/config/themes/powerlevel10k
+	path = users/price/dots/.config/zsh/config/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
 [submodule "dots/.config/zsh/config/plugins/zsh-nix-shell"]
-	path = dots/.config/zsh/config/plugins/zsh-nix-shell
+	path = users/price/dots/.config/zsh/config/plugins/zsh-nix-shell
 	url = https://github.com/chisui/zsh-nix-shell
 [submodule "dots/.config/zsh/config/plugins/powerlevel10k"]
-	path = dots/.config/zsh/config/plugins/powerlevel10k
+	path = users/price/dots/.config/zsh/config/plugins/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git

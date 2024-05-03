@@ -1,0 +1,117 @@
+return {
+    {
+        "nvim-orgmode/orgmode",
+        dependencies = {
+            { "nvim-treesitter/nvim-treesitter" },
+        },
+        event = "VeryLazy",
+        ft = { "org" },
+        keys = {
+            { "<leader>o", desc = "> Org" },
+        },
+        config = function()
+            -- Setup orgmode
+            require("orgmode").setup({
+                org_agenda_files = {
+                    "~/Git/College/**/*",
+                    "~/Notes/**/*",
+                    vim.fn.stdpath("config") .. "/**/*",
+                },
+                notifications = {
+                    enabled = true,
+                    cron_enabled = true,
+                    repeater_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
+                    deadline_warning_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
+                },
+                org_id_link_to_org_use_id = true,
+                org_default_notes_file = "~/Notes/notes.org",
+                org_highlight_latex_and_related = "entities",
+                org_agenda_start_day = "-1d",
+                calendar_week_start_day = 0,
+                org_agenda_span = "month",
+                org_startup_folded = "inherit",
+                win_border = "none",
+                org_hide_emphasis_markers = true,
+                org_startup_indented = true,
+                org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
+                win_split_mode = "auto",
+                org_capture_templates = {
+                    t = {
+                        description = "Todo",
+                        template = "* TODO %?\n%u",
+                        target = "~/Notes/todo/%<%Y-%m-%d>.org",
+                    },
+                    n = {
+                        description = "Note",
+                        template = "* %?\n%u",
+                        target = "~/Notes/journal/%<%Y-%m-%d>.org",
+                    },
+                    s = {
+                        description = "Snippet",
+                        template = "* %? :snippet:\n%u",
+                        target = "~/Notes/snippets/%<%Y-%m-%d>.org",
+                    },
+                },
+                emacs_config = {
+                    config_path = (function()
+                        local xdg_emacs_init_path = "/emacs/init.el"
+
+                        -- Use XDG_CONFIG_HOME by default
+                        if vim.env.XDG_CONFIG_HOME then
+                            return vim.env.XDG_CONFIG_HOME .. xdg_emacs_init_path
+                        end
+
+                        -- Fallback to searching for the emacs config relative to the Neovim config
+                        local nvim_cfg_dir = vim.fn.stdpath("config")
+                        ---@diagnostic disable-next-line: param-type-mismatch
+                        local cfg_dir = vim.fn.fnamemodify(nvim_cfg_dir, ":h")
+                        if vim.uv.fs_stat(cfg_dir .. xdg_emacs_init_path) then
+                            return cfg_dir .. xdg_emacs_init_path
+                        end
+
+                        -- Failing that, fallback to pulling on `$HOME/.emacs/init.el`
+                        local home_emacs_init = vim.env.HOME .. ".emacs/init.el"
+                        assert(vim.uv.fs_stat(home_emacs_init), "Failed to locate a valid emacs configuration!")
+                        return home_emacs_init
+                    end)(),
+                },
+            })
+
+            vim.api.nvim_set_hl(0, "org_code_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_verbatim_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_italic_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_bold_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_underline_delimiter", { link = "@punctuation.delimiter" })
+            vim.api.nvim_set_hl(0, "org_strikethrough_delimiter", { link = "@punctuation.delimiter" })
+        end,
+    },
+    {
+        "https://git.orion-technologies.io/Price/telescope-orgmode.nvim",
+        dependencies = {
+            "nvim-orgmode/orgmode",
+            "nvim-telescope/telescope.nvim",
+        },
+        cmd = {
+            "Telescope orgmode search_headings",
+            "Telescope orgmode refile_heading",
+        },
+        keys = {
+            { "<leader>os", desc = "> Orgmode Telescope" },
+            {
+                "<leader>oss",
+                ":Telescope orgmode search_headings<CR>",
+                desc = "Telescope: Orgmode Search Headings",
+                silent = true,
+            },
+            {
+                "<leader>osr",
+                ":Telescope orgmode refile_heading<CR>",
+                desc = "Telescope: Orgmode Refile Heading",
+                silent = true,
+            },
+        },
+        config = function()
+            require("telescope").load_extension("orgmode")
+        end,
+    },
+}
