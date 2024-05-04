@@ -29,8 +29,4 @@ local config = wlib.Table.merge(gpu, events, fonts, theme, tabbar, misc, renderi
 
 log.debug("Final Wezterm Config: " .. require("lib.inspect").inspect(config, { newline = " ", indent = "" }))
 
--- HACK: temporarily disable Wayland support and instead fallback to XWayland. Wezterm doesn't properly
--- support Wayland right now 🫤
--- See: https://github.com/wez/wezterm/issues/5103
-config.enable_wayland = false
 return config
