@@ -145,16 +145,4 @@ U.write_file = function(path, mode, ...)
     return path
 end
 
----Evalutes the provided cmd and places the result in a new window asynchronously.
----
----Basic wrapper around `vim.system`
----@see vim.system
----@param cmd string[] The command to execute
----@param opts vim.systemOpts? Additional options to pass to `vim.system`
-U.eval_current_buf = function(cmd, opts)
-    local curr_buf = vim.api.nvim_get_current_buf()
-    local buf_content = table.concat(vim.api.nvim_buf_get_lines(curr_buf, 0, -1, false), "\n")
-    vim.system(cmd, opts or {}, function(out) end)
-end
-
 return U
