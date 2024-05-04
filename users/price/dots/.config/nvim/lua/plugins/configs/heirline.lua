@@ -967,9 +967,8 @@ return {
                             },
                             {
                                 provider = function()
-                                    local cwd = vim.fn.fnamemodify(vim.uv.cwd(), ":~")
-                                    cwd = (cwd == "~" and cwd .. "/" or cwd)
-                                    return " " .. cwd
+                                    local cwd = vim.uv.cwd() or ""
+                                    return " " .. vim.fn.pathshorten(vim.fn.fnamemodify(cwd, ":~"))
                                 end,
                                 hl = {
                                     fg = colors.sumiInk0,
