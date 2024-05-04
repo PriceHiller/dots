@@ -44,7 +44,6 @@ in
         neovide
         wezterm
         fontconfig
-        emacs
         sqlite
         luajit
         imagemagick
@@ -121,7 +120,8 @@ in
         glibc.static
         llvm
         llvmPackages.libcxxStdenv
-      ];
+      ]
+      ++ [ rust-analyzer ];
 
     file = {
       ".local/share/wallpapers" = {
@@ -230,6 +230,15 @@ in
   };
 
   programs = {
+    emacs = {
+      enable = true;
+      package = pkgs.emacsPgtk.overrideAttrs (old: {
+        passthru = old.passthru // {
+          treeSitter = true;
+        };
+      });
+      extraPackages = (epkgs: (with epkgs; [ treesit-grammars.with-all-grammars ]));
+    };
     wofi.enable = true;
     gpg.enable = true;
     firefox = {
