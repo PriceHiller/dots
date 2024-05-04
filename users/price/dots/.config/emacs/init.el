@@ -1,12 +1,12 @@
 ;; -*- lexical-binding: t -*-
 ;; Install elpaca
-(defvar elpaca-installer-version 0.5)
+(defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                              :ref nil
-                              :files (:defaults (:exclude "extensions"))
+                              :ref nil :depth 1
+                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
                               :build (:not elpaca--activate-package)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
@@ -18,8 +18,10 @@
     (when (< emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
         (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                 ((zerop (call-process "git" nil buffer t "clone"
-                                       (plist-get order :repo) repo)))
+                 ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                 ,@(when-let ((depth (plist-get order :depth)))
+                                                     (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                 ,(plist-get order :repo) ,repo))))
                  ((zerop (call-process "git" nil buffer t "checkout"
                                        (or (plist-get order :ref) "--"))))
                  (emacs (concat invocation-directory invocation-name))
@@ -37,16 +39,19 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
+(setq package-enable-at-startup nil)
+
 ;; Elpaca use package support
 (elpaca elpaca-use-package
   (elpaca-use-package-mode)
-  (setq elpaca-use-package-by-default t))
+  (setq use-package-always-ensure t))
 
 ;; Block until current queue processed
 (elpaca-wait)
 
 ;; General for keybindings
 (use-package general
+  :ensure t
   :demand t)
 (elpaca-wait)
 
@@ -121,13 +126,14 @@
  '(tool-bar-mode nil))
 
 ;; Doom Themes
-(use-package doom-themes
+(use-package kanagawa-theme
+  :custom
+  (kanagwa-theme-org-bold t)
+  (kanagawa-theme-org-height t)
+  (kanagawa-theme-keyword-italic t)
+  (kanagawa-theme-comment-italic t)
   :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config))
+  (load-theme 'kanagawa t))
 
 (use-package doom-modeline
   :custom
@@ -218,7 +224,7 @@
   (global-evil-matchit-mode))
 
 (use-package targets
-  :elpaca (:host github
+  :ensure (:host github
                  :depth 1
                  :repo "noctuid/targets.el"
   :custom
@@ -282,7 +288,7 @@
 
 ;; We do setup for hotfuzz in the orderless package
 (use-package hotfuzz
-  :elpaca (:host github
+  :ensure (:host github
                  :depth 1
                  :repo "axelf4/hotfuzz"
                  :pre-build (("cmake" "-DCMAKE_C_FLAGS='-O3 -march=native'" ".") ("cmake" "--build" "."))))
@@ -360,7 +366,7 @@
 
 ;; Add extensions
 (use-package cape
-  :elpaca (:host github
+  :ensure (:host github
 		 :repo "minad/cape"
 		 :depth 1)
   :init
@@ -493,7 +499,7 @@
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
-  :elpaca (:host github
+  :ensure (:host github
                  :depth 1
                  :repo "minad/marginalia")
   :general
@@ -537,13 +543,13 @@
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :init
   (savehist-mode))
 
 ;; Treesitter
-(use-package tree-sitter-langs
-  :elpaca (:host github :repo "emacs-tree-sitter/tree-sitter-langs"))
+(use-package tree-sitter-langs)
+
 
 (use-package tree-sitter
   :after tree-sitter-langs
@@ -553,18 +559,17 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package treesit-auto
-  :elpaca (:host github :repo "renzmann/treesit-auto")
+  :ensure (:host github :repo "renzmann/treesit-auto")
   :after tree-sitter
-  :init
-  (setq treesit-language-source-alist
-        '((emacs-lisp "https://github.com/Wilfred/tree-sitter-elisp")))
-  :config
+  :custom
   (setq treesit-auto-install 'prompt)
+  :config
   (global-treesit-auto-mode))
 
 (use-package ts-fold
-  :elpaca (:host github :repo "emacs-tree-sitter/ts-fold")
-  :after treesit-auto
+  :ensure (:host github :repo "emacs-tree-sitter/ts-fold")
+  :after
+  tree-sitter
   :config
   (global-ts-fold-mode)
   (global-ts-fold-indicators-mode)
@@ -656,7 +661,7 @@
 (use-package rustic
   :general
   (key-leader
-    :states 'normal
+    :states 'normal 'rustic-mode
     "f r" '(rustic-cargo-run :which-key "Cargo: Run"))
   :config
   (rustic-mode))
@@ -700,7 +705,7 @@
 (tool-bar-mode -1)  ; Disable toolbar
 (tooltip-mode) ; Enable tooltips
 (set-fringe-mode 10)  ; Breathing room
-(setq visible-bell t) ; Enable visible bell
+(setq visible-bell nil) ; Enable visible bell
 (blink-cursor-mode 0) ; Disable blinking  cursor
 (setq display-line-numbers-type 'relative)
 (column-number-mode t)
@@ -714,3 +719,5 @@
 (save-place-mode 1)
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
+(set-frame-parameter nil 'alpha-background 85)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
