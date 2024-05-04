@@ -48,7 +48,7 @@
             },
             "tooltip": true,
             "interval": 30,
-            "full-at": 95,
+            "full-at": 75,
             "format-time": "~{H}h:{M}m",
             "format-plugged": "󰚥{icon} {capacity}%",
             "format-charging": "󱐋{icon} {capacity}%",
