@@ -8,7 +8,6 @@ configure() {
 
 init() {
 	local wkdir="${BASE_ZSH_CONFIG_DIR}/config/plugins"
-	source "${wkdir}/powerlevel10k/powerlevel10k.zsh-theme"
 	source "${wkdir}/fzf-tab/fzf-tab.plugin.zsh"
 	source "${wkdir}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 	source "${wkdir}/zsh-completions/zsh-completions.plugin.zsh"
