@@ -191,3 +191,9 @@ e() {
 		eval "${EDITOR} ${@}"
 	fi
 }
+
+# Open file with default program and detach
+o() {
+	local in="${@}"
+	xdg-open "${@}" & disown
+}
