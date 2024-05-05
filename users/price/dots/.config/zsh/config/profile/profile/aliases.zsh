@@ -67,11 +67,6 @@
 			alias p="wl-paste"
 		fi
 
-		if ! command -v open >/dev/null 2>&1 && command -v xdg-open >/dev/null 2>&1; then
-			alias open="xdg-open"
-			alias o="xdg-open"
-		fi
-
 		if command -v systemctl >/dev/null 2>&1; then
 			alias sysu="systemctl --user"
 			alias sys="systemctl"
