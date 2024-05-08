@@ -1,0 +1,206 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](fg:surimiorange)\
+$os\
+$username\
+[](bg:carpyellow fg:surimiorange)\
+$directory\
+[](fg:carpyellow bg:waveaqua1)\
+$git_branch\
+$git_status\
+[](fg:waveaqua1 bg:crystalblue)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:crystalblue bg:springviolet1)\
+$docker_context\
+$conda\
+[](fg:springviolet1 bg:oniviolet2)\
+$time\
+[ ](fg:oniviolet2)\
+$all$line_break$character"""
+
+palette = 'kanagawa'
+
+[palettes.kanagawa]
+fg0 = '#16161D'
+black = '#16161D'
+red = '#FF5D62'
+green = '#98BB6C'
+blue = '#7E9CD8'
+yellow = '#E6C384'
+purple = '#957FB8'
+cyan = '#A3D4D5'
+white = '#DCD7BA'
+sumiink0 = '#16161D'
+sumiink1 = '#181820'
+sumiink2 = '#1a1a22'
+sumiink3 = '#1F1F28'
+sumiink4 = '#2A2A37'
+sumiink5 = '#363646'
+sumiink6 = '#54546D'
+waveblue1 = '#223249'
+waveblue2 = '#2D4F67'
+wintergreen = '#2B3328'
+winteryellow = '#49443C'
+winterred = '#43242B'
+winterblue = '#252535'
+autumngreen = '#76946A'
+autumnred = '#C34043'
+autumnyellow = '#DCA561'
+samuraired = '#E82424'
+roninyellow = '#FF9E3B'
+waveaqua1 = '#6A9589'
+dragonblue = '#658594'
+oldwhite = '#C8C093'
+fujiwhite = '#DCD7BA'
+fujigray = '#727169'
+oniviolet = '#957FB8'
+oniviolet2 = '#b8b4d0'
+crystalblue = '#7E9CD8'
+springviolet1 = '#938AA9'
+springviolet2 = '#9CABCA'
+springblue = '#7FB4CA'
+lightblue = '#A3D4D5'
+waveaqua2 = '#7AA89F'
+springgreen = '#98BB6C'
+boatyellow1 = '#938056'
+boatyellow2 = '#C0A36E'
+carpyellow = '#E6C384'
+sakurapink = '#D27E99'
+wavered = '#E46876'
+peachred = '#FF5D62'
+surimiorange = '#FFA066'
+katanagray = '#717C7C'
+
+[os]
+disabled = false
+style = "bg:surimiorange fg:fg0"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[username]
+show_always = true
+style_user = "bg:surimiorange fg:fg0"
+style_root = "bg:surimiorange fg:fg0"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:fg0 bg:carpyellow"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:waveaqua1"
+format = '[[ $symbol $branch ](fg:fg0 bg:waveaqua1)]($style)'
+
+[git_status]
+style = "bg:waveaqua1"
+format = '[[($all_status$ahead_behind )](fg:fg0 bg:waveaqua1)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[c]
+symbol = " "
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[php]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[java]
+symbol = " "
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[python]
+symbol = ""
+style = "bg:crystalblue"
+format = '[[ $symbol( $version) ](fg:fg0 bg:crystalblue)]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:OnioViolet2"
+format = '[[ $symbol( $context) ](fg:#83a598 bg:OnioViolet2)]($style)'
+
+[conda]
+style = "bg:OnioViolet2"
+format = '[[ $symbol( $environment) ](fg:#83a598 bg:OnioViolet2)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:springblue"
+format = '[[  $time ](fg:fg0 bg:oniviolet2)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[>](bold fg:springgreen)'
+error_symbol = '[>](bold fg:peachred)'
+vimcmd_symbol = '[<](bold fg:springgreen)'
+vimcmd_replace_one_symbol = '[<](bold fg:oniviolet)'
+vimcmd_replace_symbol = '[<](bold fg:oniviolet)'
+vimcmd_visual_symbol = '[<](bold fg:carpyellow)'
