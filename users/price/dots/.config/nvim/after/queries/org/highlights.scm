@@ -10,13 +10,13 @@
    status:
    (expr)
    @org-checkbox-content (#any-of? @org-checkbox-content "x" "X")) @markup.list.checked
- (#set! conceal "󰄲"))
+ (#set! @markup.list.checked conceal "󰄲"))
 
 ((checkbox
    status:
    (expr)
    @org-checkbox-content (#any-of? @org-checkbox-content "-")) @markup.list.indeterminate
- (#set! conceal "󰍵"))
+ (#set! @markup.list.indeterminate conceal "󰍵"))
 
 ; Table highlights
 (row
