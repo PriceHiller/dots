@@ -1,5 +1,7 @@
 *
 !.gitignore
 !init.el
-!lisp
 !early-init.el
+!config
+!config/*
+!config/**/*

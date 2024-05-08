@@ -56,13 +56,8 @@
 (elpaca-wait)
 
 (general-create-definer key-leader
-  :states 'normal
+  :states '(normal override)
   :prefix "SPC")
-
-(general-create-definer key-local-leader
-  :states 'normal
-  :prefix ";")
-
 
 (key-leader
   :states 'normal
@@ -123,6 +118,8 @@
  '(custom-safe-themes
    '("d445c7b530713eac282ecdeea07a8fa59692c83045bf84dd112dd738c7bcad1d"
      default))
+ '(doom-modeline-check-simple-format t nil nil "Customized with use-package doom-modeline")
+ '(indent-bars-width-frac 0.05)
  '(tool-bar-mode nil))
 
 ;; Doom Themes
@@ -165,9 +162,7 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package nerd-icons-dired
-  :after nerd-icons
-  :init
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :after nerd-icons)
 
 (use-package treemacs
   :defer t
@@ -343,11 +338,14 @@
   (corfu-min-width 60)
   (corfu-max-width corfu-min-width)
   (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-prefix 1)
+  (corfu-on-exact-match nil)
   (corfu-preselect 'prompt)
+  (corfu-separator ?\s)
   (tab-always-indent 'complete)
   (corfu-scroll-margin 5)
   (corfu-popupinfo-delay 0.1)
-  (corfu-separator ?\s)
   :general
   (:keymaps 'corfu-map
             :states 'insert
@@ -362,6 +360,7 @@
             "M-d" #'corfu-show-location)
   :init
   (global-corfu-mode)
+  (corfu-history-mode)
   (corfu-popupinfo-mode))
 
 ;; Add extensions
@@ -474,7 +473,6 @@
    '(("flyspell-correct-*" grid reverse)
      (org-refile grid reverse indexed)
      (consult-yank-pop indexed)
-     (consult-flycheck)
      (consult-lsp-diagnostics)
      ))
   :init
@@ -587,10 +585,6 @@
   :config
   (undo-fu-session-global-mode))
 
-;; Set background colors for color codes
-(use-package rainbow-mode
-  :config
-  (rainbow-mode t))
 
 ;; Setup Language Servers
 
@@ -598,14 +592,13 @@
   :general
   (key-leader
     :states 'visual
-    "l f r" '(lsp-format-buffer :which-key "LSP Format: Region"))
+    "l f" '(lsp-format-buffer :which-key "LSP Format: Region"))
   (key-leader
     :states 'normal
     "k" '(lsp-ui-doc-glance :which-key "LSP: Glance Symbol")
     "K" '(lsp-describe-thing-at-point :which-key "LSP: Full Doc")
     "l" '(nil :which-key "LSP")
-    "l f" '(nil :which-key "LSP Format")
-    "l f f" '(lsp-format-buffer :which-key "LSP Format: Buffer")
+    "l f" '(lsp-format-buffer :which-key "LSP Format: Buffer")
     "l i" '(lsp-treemacs-implementations :which-key "LSP: Implementation")
     "l r" '(lsp-treemacs-references :which-key "LSP: Refrences")
     "l n" '(lsp-rename :which-key "LSP: Rename")
@@ -621,6 +614,8 @@
   :custom
   (lsp-keymap-prefix "M-l")
   (lsp-auto-execute-action 'nil)
+  (lsp-auto-guess-root t)
+  (lsp-enable-which-key-integration t)
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          ;; (XXX-mode . lsp)
          ;; if you want which-key integration
@@ -661,45 +656,30 @@
 (use-package rustic
   :general
   (key-leader
-    :states 'normal 'rustic-mode
+    :states '(normal rustic-mode)
     "f r" '(rustic-cargo-run :which-key "Cargo: Run"))
   :config
   (rustic-mode))
 
-
 ;;; Org Mode Appearance ------------------------------------
-(use-package org-bullets
-  :hook (org-mode-hook . (lambda ()
-			   (org-bullets-mode 1)
-			   (org-toggle-pretty-entities))))
+(require 'files)
+(use-package org
+  :hook (org-mode . org-indent-mode)
+  :general
+  (key-leader
+    :states 'normal
+    "o" '(nil :which-key "Org"))
+  :custom
+  (org-agenda-files '("~/Notes" "~/Git/College"))
+  (org-hide-emphasis-markers t))
 
-;; Load org-faces to make sure we can set appropriate faces
-(require 'org-faces)
+(use-package org-modern
+  :after org
+  :config
+  (global-org-modern-mode))
 
-;; Hide emphasis markers on formatted text
-(setq org-hide-emphasis-markers t)
-
-;; Resize Org headings
-(dolist (face '((org-level-1 . 1.45)
-                (org-level-2 . 1.35)
-                (org-level-3 . 1.3)
-                (org-level-4 . 1.25)
-                (org-level-5 . 1.2)
-                (org-level-6 . 1.15)
-                (org-level-7 . 1.1)
-                (org-level-8 . 1.1)))
-  (set-face-attribute (car face) nil :font "Fira Code" :weight 'medium :height (cdr face)))
-(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
-
-;; Misc settings
+;; Emacs Settings
+(electric-pair-mode)
 (menu-bar-mode -1) ; Disable menubar
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)  ; Disable toolbar
@@ -717,7 +697,6 @@
 (recentf-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (save-place-mode 1)
-(setq custom-file (locate-user-emacs-file "custom-vars.el"))
-(load custom-file 'noerror 'nomessage)
-(set-frame-parameter nil 'alpha-background 85)
-(add-to-list 'default-frame-alist '(alpha-background . 85))
+
+(mapc 'load (file-expand-wildcards (expand-file-name "./config/*.el" user-emacs-directory)))
+(mapc 'load (file-expand-wildcards (expand-file-name "./config/**/*.el" user-emacs-directory)))

@@ -1,0 +1,6 @@
+(use-package indent-bars
+  :ensure (:host github
+                 :depth 1
+                 :repo "jdtsmith/indent-bars")
+  :custom
+  (indent-bars-width-frace 0.2))
