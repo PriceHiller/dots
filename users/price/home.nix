@@ -34,6 +34,7 @@ in
         unzip
         bat
         Fmt
+        starship
         nodePackages.prettier
         cargo
         rustc
