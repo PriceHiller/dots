@@ -25,7 +25,7 @@ $conda\
 [](fg:springviolet1 bg:oniviolet2)\
 $time\
 [ ](fg:oniviolet2)\
-$all$line_break$character"""
+$line_break$character"""
 
 palette = 'kanagawa'
 
