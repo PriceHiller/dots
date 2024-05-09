@@ -24,7 +24,9 @@ $docker_context\
 $conda\
 [](fg:springviolet1 bg:oniviolet2)\
 $time\
-[ ](fg:oniviolet2)\
+[](fg:oniviolet2 bg:sumiink5)\
+$status\
+[ ](fg:sumiink5)\
 $line_break$character"""
 
 palette = 'kanagawa'
@@ -195,6 +197,16 @@ format = '[[  $time ](fg:fg0 bg:oniviolet2)]($style)'
 
 [line_break]
 disabled = false
+
+[status]
+disabled = false
+symbol = '[ ](bold fg:peachred bg:sumiink5)'
+recognize_signal_code = false
+success_symbol = '[ ](bold fg:springgreen bg:sumiink5)'
+pipestatus = true
+pipestatus_separator = '│'
+pipestatus_format = '[$pipestatus](bg:sumiink5)'
+format = '[ $symbol$status ](bg:sumiink5)'
 
 [character]
 disabled = false
