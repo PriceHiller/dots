@@ -124,6 +124,22 @@
           '';
         };
       });
+      checks = forAllSystems (pkgs: {
+        formatting =
+          pkgs.runCommand "check-fmt"
+            {
+              buildInputs = with pkgs; [
+                findutils
+                (import ./pkgs { inherit pkgs; }).Fmt
+              ];
+            }
+            ''
+              set -euo pipefail
+              cd "${self}"
+              find . -type f | xargs Fmt
+              touch $out
+            '';
+      });
       apps = forAllSystems (pkgs: {
         home-manager-init = {
           type = "app";
