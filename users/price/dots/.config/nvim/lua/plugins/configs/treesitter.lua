@@ -105,15 +105,8 @@ return {
         build = ":TSUpdate",
         event = { "BufReadPre", "BufNewFile", "WinLeave" },
         dependencies = {
-            "nvim-treesitter/playground",
             "nvim-treesitter/nvim-treesitter-textobjects",
             "RRethy/nvim-treesitter-endwise",
-            {
-                "andymass/vim-matchup",
-                init = function()
-                    vim.g.matchup_matchparen_offscreen = { method = nil }
-                end,
-            },
         },
         init = function()
             vim.api.nvim_create_autocmd("FileReadPre", {
@@ -170,7 +163,6 @@ return {
                         end
                     end,
                 },
-                matchup = { enable = true },
                 autotag = {
                     enable = true,
                 },
