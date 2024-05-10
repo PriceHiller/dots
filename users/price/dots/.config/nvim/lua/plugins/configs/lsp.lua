@@ -24,14 +24,14 @@ local function on_attach(client, bufnr)
         vim.api.nvim_create_autocmd("InsertEnter", {
             buffer = bufnr,
             callback = function()
-                vim.lsp.inlay_hint.enable(bufnr, true)
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
             end,
             group = lsp_augroup,
         })
         vim.api.nvim_create_autocmd("InsertLeave", {
             buffer = bufnr,
             callback = function()
-                vim.lsp.inlay_hint.enable(bufnr, false)
+                vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
             end,
             group = lsp_augroup,
         })
@@ -230,12 +230,8 @@ return {
             {
                 "<leader>lh",
                 function()
-                    local curr_buf = vim.api.nvim_get_current_buf()
-                    if vim.diagnostic.is_disabled(curr_buf) then
-                        vim.diagnostic.enable(curr_buf)
-                    else
-                        vim.diagnostic.disable(curr_buf)
-                    end
+                    local kwargs = { buf = vim.api.nvim_get_current_buf() }
+                    vim.diagnostic.enable(not vim.diagnostic.is_enabled(kwargs), kwargs)
                 end,
                 desc = "LSP: Toggle Diagnostics in Current Buffer",
             },
@@ -267,7 +263,8 @@ return {
             {
                 "<leader>ll",
                 function()
-                    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+                    local kwargs = { bufnr = 0 }
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(kwargs), kwargs)
                 end,
                 desc = "LSP: Toggle Inlay Hints",
             },
