@@ -112,11 +112,7 @@ fi
 	local new_editor
 	local new_visual
 	local new_manpager
-	if [[ -n "${XDG_CURRENT_DESKTOP}" ]] && command -v neovide >/dev/null 2>&1; then
-		new_editor="neovide --no-fork"
-		new_visual="neovide --no-fork"
-		new_manpager="${XDG_CONFIG_HOME}/zsh/config/profile/profile/manpager_wrapper_func.bash"
-	elif command -v nvim >/dev/null 2>&1; then
+	if command -v nvim >/dev/null 2>&1; then
 		new_editor=nvim
 		new_visual=nvim
 		new_manpager="nvim +Man!"
