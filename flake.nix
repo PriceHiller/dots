@@ -67,6 +67,8 @@
                 overlays = [
                   inputs.agenix.overlays.default
                   inputs.neovim-nightly-overlay.overlay
+                  self.overlays.modifications
+                  self.overlays.additions
                 ];
               }
             )
@@ -113,8 +115,8 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             age
+            agenix
             age-plugin-yubikey
-            pkgs.agenix
             nixos-rebuild
             nixos-install-tools
             pkgs.deploy-rs
