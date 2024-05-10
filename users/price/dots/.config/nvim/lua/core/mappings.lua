@@ -121,8 +121,8 @@ M.setup = function()
     vim.keymap.set("n", "<Tab>", "za", { silent = true, desc = "Toggle Fold" })
 
     -- Alias <leader>/ to toggle comments
-    vim.keymap.set("n", "<leader>/", "gcc", { silent = true, desc = "Comment: Toggle Line" })
-    vim.keymap.set("v", "<leader>/", "gc", { silent = true, desc = "Comment: Toggle Selection" })
+    vim.keymap.set("n", "<leader>/", "gcc", { silent = true, remap = true, desc = "Comment: Toggle Line" })
+    vim.keymap.set("v", "<leader>/", "gc", { silent = true, remap = true, desc = "Comment: Toggle Selection" })
 end
 
 return M
