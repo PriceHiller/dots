@@ -13,15 +13,6 @@ so you may find some Mac specific things (especially in my ~zsh~) config.
 For the record, feel free to take what you want. I'm not worried about getting contribution for
 dot files. They're largely just for fun, not something important. 🙂
 
-* Using the Dots from Nix
-
-I have included a ~install.bash~ script at the top level of this repository. I did this because I
-don't like storing my ~home-manager~ config under ~$HOME/.config/home-manager~ and prefer to keep
-it under ~$HOME/.dot_files~.
-
-As such, the ~install.bash~ script wraps up the logic for running the flake outside of the default
-path ~home-manager~ expects.
-
 * TODO Various Tasks to get done [1/2]
 
 - [ ] Clean up and better modularize the config
