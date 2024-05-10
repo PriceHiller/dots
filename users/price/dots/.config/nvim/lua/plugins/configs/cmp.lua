@@ -439,6 +439,7 @@ return {
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
+                    { name = "cmdline_history", max_item_count = 3 },
                     {
                         name = "cmdline",
                         option = {
@@ -447,9 +448,7 @@ return {
                             },
                         },
                         priority = 100,
-                        max_item_count = 5,
                     },
-                    { name = "cmdline_history", max_item_count = 3 },
                 }),
             })
         end,
