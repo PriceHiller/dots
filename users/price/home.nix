@@ -233,7 +233,7 @@ in
   programs = {
     emacs = {
       enable = true;
-      package = pkgs.emacsPgtk.overrideAttrs (old: {
+      package = pkgs.emacs-pgtk.overrideAttrs (old: {
         passthru = old.passthru // {
           treeSitter = true;
         };
