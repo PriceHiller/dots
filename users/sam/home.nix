@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   nixGLWrap =
     pkg:
@@ -16,7 +21,11 @@ let
 in
 {
   imports = [ ../price/home.nix ];
-  xdg.systemDirs.data = [ "/usr/share" ];
+  xdg.systemDirs.data = [
+    "${config.home.homeDirectory}/.nix-profile/share"
+    "/usr/share"
+    "/usr/local/share"
+  ];
   home = {
     packages = with pkgs; [
       (lib.hiPrio (nixGLWrap neovide))

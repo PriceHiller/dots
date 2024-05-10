@@ -143,12 +143,6 @@ in
       TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
       GTK_PATH = "${pkgs.gtk-engine-murrine}/lib/gtk-2.0";
-      # PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.sqlite.dev}/lib/pkgconfig";
-      # LD_LIBRARY_PATH = with pkgs; lib.makeLibraryPath [
-      #   openssl
-      #   curl
-      #   sqlite
-      # ];
     };
     sessionPath = [ "${config.xdg.dataHome}/bin" ];
   };
