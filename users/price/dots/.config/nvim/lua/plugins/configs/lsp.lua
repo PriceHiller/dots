@@ -19,23 +19,6 @@ local function on_attach(client, bufnr)
             disable_format_capability(capabilities)
         end
     end
-    -- Enable inlay hints if the language server provides them
-    if capabilities.inlayHintProvider then
-        vim.api.nvim_create_autocmd("InsertEnter", {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            end,
-            group = lsp_augroup,
-        })
-        vim.api.nvim_create_autocmd("InsertLeave", {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-            end,
-            group = lsp_augroup,
-        })
-    end
 
     if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
         require("hlargs").disable_buf(bufnr)
