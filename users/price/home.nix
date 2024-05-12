@@ -233,7 +233,13 @@ in
           treeSitter = true;
         };
       });
-      extraPackages = (epkgs: (with epkgs; [ treesit-grammars.with-all-grammars ]));
+      extraPackages = (
+        epkgs:
+        (with epkgs; [
+          treesit-grammars.with-all-grammars
+          melpaPackages.pdf-tools
+        ])
+      );
     };
     wofi.enable = true;
     gpg.enable = true;
