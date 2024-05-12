@@ -56,7 +56,8 @@
 (elpaca-wait)
 
 (general-create-definer key-leader
-  :states '(normal override)
+  :states 'normal
+  :keymaps 'override
   :prefix "SPC")
 
 (key-leader
@@ -155,17 +156,22 @@
   :config
   (doom-modeline-mode))
 
+(use-package transient)
+(use-package magit
+  :after transient)
+
 (use-package nerd-icons)
 
 (use-package nerd-icons-ibuffer
   :ensure t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
-(use-package nerd-icons-dired
-  :after nerd-icons)
+(use-package all-the-icons
+  :if (display-graphic-p))
 
 (use-package treemacs
   :defer t
+  :init
   :general
   (key-leader
     :states 'normal
@@ -188,10 +194,8 @@
   (treemacs-follow-mode t)
   :hook (treemacs-mode . (lambda () (display-line-numbers-mode -1))))
 
-(use-package treemacs-nerd-icons
-  :after nerd-icons treemacs
-  :config
-  (treemacs-load-theme "nerd-icons"))
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once))
 
 (use-package treemacs-evil
   :after treemacs)
@@ -199,7 +203,8 @@
 ;; Download Evil
 (use-package goto-chg)
 (use-package evil
-  :after goto-chg
+  :defer nil
+  :general
   :custom
   (evl-kbd-macro-suppress-motion-error t)
   (evil-want-C-u-scroll t)
@@ -214,7 +219,9 @@
   :config
   (evil-mode 1))
 
+
 (use-package evil-matchit
+  :after evil
   :config
   (global-evil-matchit-mode))
 
@@ -234,6 +241,7 @@
                  :remote-key nil)))
 
 (use-package evil-surround
+  :after evil
   :config
   (global-evil-surround-mode 1))
 
@@ -242,17 +250,28 @@
   :config
   (evil-collection-init))
 
+(use-package evil-goggles
+  :after evil evil-surround
+  :config
+  (evil-goggles-mode)
+  (evil-goggles-use-diff-faces))
+
 ;; Allow to jump to characters, etc.
 (use-package avy
   :general
-  (:keymaps 'normal
+  (:keymaps '(normal operator)
             "f" 'avy-goto-char))
 
 ;; Improved PDF Experience
 (use-package pdf-tools
-  :config
+  :ensure nil
+  :init
   (pdf-tools-install)
-  (defun pdf-tools-settings () )
+  :config
+  (keymap-set pdf-view-mode-map "<remap> <scroll-up-command>"
+              #'pdf-view-scroll-up-or-next-page)
+  (keymap-set pdf-view-mode-map "<remap> <scroll-down-command>"
+              #'pdf-view-scroll-down-or-previous-page)
   (add-hook 'pdf-tools-enabled-hook (lambda ()
                                       (pdf-view-themed-minor-mode)
                                       (display-line-numbers-mode -1))))
@@ -350,6 +369,8 @@
   (:keymaps 'corfu-map
             :states 'insert
             "TAB" #'corfu-next
+            [remap pixel-scroll-interpolate-up] #'corfu-scroll-down
+            [remap pixel-scroll-interpolate-down] #'corfu-scroll-up
             [tab] #'corfu-next
             "S-TAB" #'corfu-previous
             [backtab] #'corfu-previous
@@ -441,6 +462,8 @@
   (:keymaps '(normal insert visual motion)
             "M-." #'vertico-repeat) ; Perfectly return to the state of the last Vertico minibuffer usage
   (:keymaps 'vertico-map
+            [remap pixel-scroll-interpolate-up] #'vertico-scroll-down
+            [remap pixel-scroll-interpolate-down] #'vertico-scroll-up
             "C-<return>" #'vertico-insert
             "<escape>" #'minibuffer-keyboard-quit
             "M-s" #'vertico-next-group
@@ -585,6 +608,20 @@
   :config
   (undo-fu-session-global-mode))
 
+;; Better wrapping
+(use-package adaptive-wrap
+  :custom
+  (adaptive-wrap-extra-indent 1)
+  :config
+  (defun turn-on-adaptive-wrap-prefix-mode ()
+    "Turns on adaptive-wrap-prefix-mode."
+    (interactive)
+    (adaptive-wrap-prefix-mode 1))
+  (define-globalized-minor-mode global-adaptive-wrap-prefix-mode
+    adaptive-wrap-prefix-mode
+    turn-on-adaptive-wrap-prefix-mode)
+  (global-visual-line-mode 1)
+  (global-adaptive-wrap-prefix-mode 1))
 
 ;; Setup Language Servers
 
@@ -652,6 +689,39 @@
   (dap-auto-configure-mode)
   (dap-mode))
 
+;; Better scrolling
+(defun pixel-scroll-kbd-up ()
+  (interactive)
+  (let ((half-height (/ (window-height) 2)))
+    (unless (pos-visible-in-window-p (point-min))
+      (pixel-scroll-precision-interpolate (* 10 half-height)))
+    (pixel-scroll-precision-interpolate (* 10 half-height))))
+
+(defun pixel-scroll-kbd-down ()
+  (interactive)
+  (let ((half-height (/ (window-height) 2)))
+    (unless (pos-visible-in-window-p (point-max))
+      (pixel-scroll-precision-interpolate (* 10 (- half-height))))
+    (pixel-scroll-precision-interpolate (* 10 (- half-height)))))
+
+(use-package pixel-scroll
+  :ensure nil
+  :bind
+  :general
+  (:keymaps 'pixel-scroll-precision-mode-map
+            :states 'normal
+            "C-u" #'pixel-scroll-kbd-up
+            "C-d" #'pixel-scroll-kbd-down
+            "C-f" #'pixel-scroll-interpolate-down
+            "C-b" #'pixel-scroll-interpolate-up)
+  :bind
+  ([remap scroll-up-command]   . pixel-scroll-interpolate-down)
+  ([remap scroll-down-command] . pixel-scroll-interpolate-up)
+  :custom
+  (pixel-scroll-precision-interpolate-page t)
+  :init
+  (pixel-scroll-precision-mode 1))
+
 ;; Rust integration
 (use-package rustic
   :general
@@ -700,3 +770,17 @@
 
 (mapc 'load (file-expand-wildcards (expand-file-name "./config/*.el" user-emacs-directory)))
 (mapc 'load (file-expand-wildcards (expand-file-name "./config/**/*.el" user-emacs-directory)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(avy-lead-face ((t (:foreground "#FF5D62" :slant oblique :weight bold))))
+ '(evil-goggles-change-face ((t (:inherit diff-removed))))
+ '(evil-goggles-delete-face ((t (:inherit diff-removed))))
+ '(evil-goggles-paste-face ((t (:inherit diff-added))))
+ '(evil-goggles-undo-redo-add-face ((t (:inherit diff-added))))
+ '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
+ '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
+ '(evil-goggles-yank-face ((t (:inherit diff-changed))))
+ '(italic ((t (:slant oblique)))))
