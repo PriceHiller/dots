@@ -14,6 +14,10 @@ vim.g.neovide_light_radius = 5
 vim.g.neovide_remember_window_size = false
 vim.g.neovide_fullscreen = false
 
+-- Cursor goodiness
+vim.g.neovide_cursor_vfx_mode = "ripple"
+vim.g.neovide_cursor_vfx_particle_lifetime = 0.3
+
 -- Allow clipboard copy paste in neovim
 vim.keymap.set({ "n", "v" }, "<D-v>", '"+P') -- Paste normal and visual mode
 vim.keymap.set({ "i", "c" }, "<D-v>", "<C-R>+") -- Paste insert and command mode
