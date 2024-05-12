@@ -28,6 +28,7 @@ in
     packages =
       with pkgs;
       [
+        nix-prefetch-scripts
         mako
         wl-clipboard
         grim
