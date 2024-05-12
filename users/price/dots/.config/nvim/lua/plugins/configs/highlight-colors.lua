@@ -1,15 +1,4 @@
 return {
-    -- HACK: Yeah, I know there's two color plugins here. nvim-highlight-colors supports css variables and ccc.nvim
-    -- does not. Ccc, on the other hand, ensures colors are ALWAYS shown even in split windows whereas
-    -- nvim-highlight-colors does not 😦
-    {
-        "brenoprata10/nvim-highlight-colors",
-        event = { "BufReadPre", "BufNewFile" },
-        cmd = {
-            "HighlightColors",
-        },
-        config = true,
-    },
     {
         "uga-rosa/ccc.nvim",
         event = { "BufReadPre", "BufNewFile" },
