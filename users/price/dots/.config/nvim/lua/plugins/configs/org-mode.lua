@@ -32,7 +32,8 @@ return {
                 org_startup_folded = "inherit",
                 win_border = "none",
                 org_hide_emphasis_markers = true,
-                org_startup_indented = true,
+                org_startup_indented = false,
+                org_adapt_indentation = false,
                 org_todo_keywords = { "TODO(t)", "NEXT(n)", "|", "DONE(d)", "CANCELLED(c)" },
                 win_split_mode = "auto",
                 org_capture_templates = {
