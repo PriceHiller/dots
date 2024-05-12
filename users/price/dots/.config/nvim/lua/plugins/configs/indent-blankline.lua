@@ -6,7 +6,6 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require("ibl").setup()
             require("ibl").setup({
                 exclude = {
                     buftypes = {
