@@ -83,9 +83,9 @@ return {
             vim.g.rainbow_delimiters = {
                 strategy = {
                     on_attach = function()
-                        if vim.fn.line("$") > 10000 then
+                        if vim.fn.line("$") > 100000 then
                             return nil
-                        elseif vim.fn.line("$") > 1000 then
+                        elseif vim.fn.line("$") > 10000 then
                             return rainbow_delimiters.strategy["global"]
                         end
                         return rainbow_delimiters.strategy["local"]
