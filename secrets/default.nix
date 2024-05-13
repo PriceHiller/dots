@@ -17,6 +17,7 @@ let
         users-price-pw = "${secrets}/users-price-pw.age";
         gitea-db-pass = "${secrets}/gitea-db-pass.age";
         gitea-runner-token = "${secrets}/gitea-runner-token.age";
+        gh-ts-autotag-runner-token = "${secrets}/gh-ts-autotag-runner-token.age";
       };
     orion =
       let
