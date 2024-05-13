@@ -32,6 +32,7 @@ M.setup = function()
     opt.shiftwidth = 4
     opt.smartindent = true
     opt.breakindent = true
+    opt.breakindentopt = "shift:2"
     opt.expandtab = true
     opt.smarttab = true
     opt.shiftround = true
