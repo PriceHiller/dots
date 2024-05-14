@@ -127,7 +127,8 @@ M.setup = function()
     vim.api.nvim_create_user_command("Z", function(opts)
         cached_z_listing = {}
         local cmd = { "lua", z_lua_path, "-e", opts.args }
-        local cmd_out = vim.system(cmd, { text = true, env = { _ZL_MATCH_MODE = "1" } }):wait()
+        local cmd_out = vim.system(cmd, { text = true, env = { _ZL_MATCH_MODE = "1", PWD = tostring(vim.uv.cwd()) } })
+            :wait()
         if cmd_out.code > 0 then
             vim.notify(
                 "Failed with code `" .. cmd_out.code .. "`\nSTDERR: " .. (cmd_out.stderr or ""),
