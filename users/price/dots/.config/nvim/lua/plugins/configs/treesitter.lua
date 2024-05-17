@@ -41,7 +41,7 @@ return {
         "PriceHiller/nvim-ts-autotag",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
-        config = true
+        config = true,
     },
     {
         url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
