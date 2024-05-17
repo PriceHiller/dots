@@ -39,18 +39,21 @@ return {
                 org_capture_templates = {
                     t = {
                         description = "Todo",
-                        template = "* TODO %?\n%u",
-                        target = "~/Notes/todo/%<%Y-%m-%d>.org",
+                        template = "* TODO %?\nSCHEDULED: %T",
+                        target = "~/Notes/todo.org",
+                        datetree = true,
                     },
                     n = {
                         description = "Note",
-                        template = "* %?\n%u",
-                        target = "~/Notes/journal/%<%Y-%m-%d>.org",
+                        template = "* %?",
+                        target = "~/Notes/journal.org",
+                        datetree = true,
                     },
                     s = {
                         description = "Snippet",
-                        template = "* %? :snippet:\n%u",
-                        target = "~/Notes/snippets/%<%Y-%m-%d>.org",
+                        template = "* %? :snippet:",
+                        target = "~/Notes/snippets.org",
+                        datetree = true,
                     },
                 },
                 emacs_config = {
