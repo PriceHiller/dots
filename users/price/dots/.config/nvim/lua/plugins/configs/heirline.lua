@@ -557,7 +557,11 @@ return {
                             },
                             {
                                 provider = function(self)
-                                    return " " .. (vim.diagnostic.is_disabled(self.bufnr) and "󱃓 " or "󰪥 ")
+                                    return " "
+                                        .. (
+                                            (not vim.diagnostic.is_enabled({ bufnr = self.bufnr })) and "󱃓 "
+                                            or "󰪥 "
+                                        )
                                 end,
                                 hl = {
                                     bg = colors.oniViolet,
