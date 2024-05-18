@@ -2,6 +2,9 @@ return {
     {
         "folke/noice.nvim",
         lazy = false,
+        init = function()
+            vim.opt.cmdheight = 0
+        end,
         opts = {
             lsp = {
                 override = {

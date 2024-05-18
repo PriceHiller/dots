@@ -122,9 +122,6 @@ M.setup = function()
     opt.modeline = true
     opt.modelines = 5
 
-    -- Set command bar height
-    opt.cmdheight = 1
-
     -- Set splitkeep
     vim.opt.splitkeep = "cursor"
 
