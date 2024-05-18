@@ -7,6 +7,7 @@
       url = "https://github.com/PriceHiller/nvim-ts-autotag";
       tokenFile = config.age.secrets.gh-ts-autotag-runner-token.path;
       extraPackages = with pkgs; [
+        stylua
         tree-sitter
         fd
         neovim
