@@ -10,6 +10,7 @@
         stylua
         tree-sitter
         fd
+        nodejs-slim
         neovim
         gnumake
         gcc
