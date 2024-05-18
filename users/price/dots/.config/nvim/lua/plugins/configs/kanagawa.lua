@@ -242,7 +242,7 @@ return {
                 { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
 
                 -- Markup specific
-                { "@markup.raw", { fg = colors.carpYellow, bg = colors.sumiInk2 } },
+                { "@markup.raw", { fg = colors.oniViolet2, bg = colors.sumiInk1 } },
                 { "@markup.raw.block", select_hl("@markup.raw", { "fg" }) },
                 { "@markup.raw.delimiter", { link = "@punctuation.delimiter" } },
                 {
