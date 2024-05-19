@@ -348,15 +348,15 @@ return {
             -- also, we are adding a nice icon for terminal buffers.
             local StatusLineFileFlags = {
                 {
-                    condition = function()
-                        return vim.bo.modified
+                    condition = function(self)
+                        return vim.bo[self.bufnr].modified
                     end,
                     provider = "  ",
                     hl = { fg = colors.springGreen },
                 },
                 {
-                    condition = function()
-                        return not vim.bo.modifiable or vim.bo.readonly
+                    condition = function(self)
+                        return not vim.bo[self.bufnr].modifiable or vim.bo[self.bufnr].readonly
                     end,
                     provider = " ",
                     hl = { fg = colors.roninYellow },
