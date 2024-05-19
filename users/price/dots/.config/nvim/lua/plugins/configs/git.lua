@@ -32,7 +32,6 @@ return {
     {
         "neogitorg/neogit",
         cmd = { "Neogit" },
-        branch = "nightly",
         keys = {
             { "<leader>g", desc = "> Git" },
             { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit: Open" },
