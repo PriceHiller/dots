@@ -228,11 +228,6 @@ in
   programs = {
     emacs = {
       enable = true;
-      package = pkgs.emacs-pgtk.overrideAttrs (old: {
-        passthru = old.passthru // {
-          treeSitter = true;
-        };
-      });
       extraPackages = (
         epkgs:
         (with epkgs; [
