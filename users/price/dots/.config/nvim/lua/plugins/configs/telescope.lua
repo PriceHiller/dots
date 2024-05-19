@@ -91,7 +91,6 @@ return {
             },
             "debugloop/telescope-undo.nvim",
             "rcarriga/nvim-notify",
-            { "nvim-telescope/telescope-smart-history.nvim", dependencies = "tami5/sqlite.lua" },
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         config = function()
@@ -216,7 +215,6 @@ return {
             telescope.load_extension("notify")
             telescope.load_extension("fzf")
             telescope.load_extension("ui-select")
-            telescope.load_extension("smart_history")
             telescope.load_extension("undo")
             telescope.load_extension("frecency")
             telescope.load_extension("z")
