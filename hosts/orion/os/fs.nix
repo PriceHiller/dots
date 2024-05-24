@@ -1,6 +1,4 @@
 {
-  modulesPath,
-  config,
   lib,
   root-disk,
   persist-dir,

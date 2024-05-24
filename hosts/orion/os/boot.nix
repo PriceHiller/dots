@@ -1,8 +1,7 @@
 { modulesPath, pkgs, ... }:
 {
 
-  # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
     loader = {
@@ -13,23 +12,14 @@
     kernelParams = [ "audit=1" ];
     extraModulePackages = [ ];
     initrd = {
-      # VM modules
       availableKernelModules = [
-        "ahci"
         "xhci_pci"
-        "virtio_pci"
-        "sr_mod"
-        "virtio_blk"
+        "thunderbolt"
+        "vmd"
+        "nvme"
+        "usbhid"
+        "rtsx_pci_sdmmc"
       ];
-      # Actual Host modules
-      # availableKernelModules = [
-      #   "xhci_pci"
-      #   "thunderbolt"
-      #   "vmd"
-      #   "nvme"
-      #   "usbhid"
-      #   "rtsx_pci_sdmmc"
-      # ];
       systemd = {
         enable = true;
         initrdBin = [
