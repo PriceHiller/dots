@@ -267,7 +267,7 @@ in
         unstage = "reset HEAD --";
       };
       extraConfig = {
-        init.defaultBranch = "Development";
+        init.defaultBranch = "main";
         merge.conflictstyle = "zdiff3";
         branch.autosetupmerge = "always";
         remote.pushDefault = "origin";
