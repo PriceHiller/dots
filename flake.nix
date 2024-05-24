@@ -62,7 +62,7 @@
                 inherit system;
                 overlays = [
                   inputs.agenix.overlays.default
-                  inputs.neovim-nightly-overlay.overlay
+                  inputs.neovim-nightly-overlay.overlays.default
                   self.overlays.modifications
                   self.overlays.additions
                 ];
@@ -83,7 +83,7 @@
             ({
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
-                inputs.neovim-nightly-overlay.overlay
+                inputs.neovim-nightly-overlay.overlays.default
                 inputs.nixgl.overlay
                 self.overlays.modifications
                 self.overlays.additions
@@ -186,7 +186,7 @@
           persist-dir = "/persist";
           defaults = {
             config = {
-              nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+              nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
               environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
               environment.persistence.save = {
                 hideMounts = true;
