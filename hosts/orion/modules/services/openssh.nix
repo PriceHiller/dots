@@ -1,7 +1,7 @@
 { config, ... }:
 {
   services.openssh = {
-    enable = true;
+    enable = false;
     startWhenNeeded = true;
     # We set the hostkeys manually so they persist through reboots
     hostKeys = [
