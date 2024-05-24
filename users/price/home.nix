@@ -58,6 +58,7 @@ in
         yamllint
         curl
         openssh
+        maven
         openssl
         wget
         rsync
