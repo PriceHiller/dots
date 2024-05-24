@@ -12,6 +12,10 @@ return {
             { "<C-w><" },
             { "<C-w>+" },
             { "<C-w>-" },
+            { "zl" },
+            { "zL" },
+            { "zh" },
+            { "zH" },
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
@@ -20,13 +24,13 @@ return {
             -- Side Scroll
             hydra({
                 name = "Side scroll",
-                config = {
-                    {
-                        position = "bottom-right",
-                    },
-                },
                 mode = "n",
                 body = "z",
+                config = {
+                    hint = {
+                        type = "window",
+                    },
+                },
                 heads = {
                     { "h", "5zh" },
                     { "l", "5zl", { desc = "←/→" } },
@@ -118,6 +122,11 @@ return {
                 name = "Window Sizing",
                 mode = "n",
                 body = "<C-w>",
+                config = {
+                    hint = {
+                        type = "window",
+                    },
+                },
                 heads = {
                     { "<", "2<C-w><" },
                     { ">", "2<C-w>>", { desc = "←/→" } },
