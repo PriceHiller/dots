@@ -102,7 +102,7 @@
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
       packages = forAllSystems (pkgs: import ./pkgs pkgs);
       homeConfigurations = builtins.mapAttrs (mkHomeCfg) {
-        "price@orion" = ./users/price/home.nix;
+        "price" = ./users/price/home.nix;
         "sam" = ./users/sam/home.nix;
       };
       overlays = import ./overlays { inherit inputs; };
