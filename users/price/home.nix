@@ -74,6 +74,7 @@ in
         eza
         ripgrep
         fd
+        playerctl
         nixfmt-rfc-style
         lxappearance
         opensnitch-ui
