@@ -69,7 +69,7 @@ main() {
 	new_sys_key="$(gen-system-key "${system}" "${priv_key_path}")"
 	printf "Finished generating system keys\n"
 	local nixos_anywhere_log
-	nixos_anywhere_log="$(nix run github:nix-community/nixos-anywhere -- --flake "${flake}" "${conn}" --stop-after-disko -p "${ssh_port}" 2>&1 | tee >(cat >&2))"
+	nixos_anywhere_log="$(nix --extra-experimental-features "nix-command flakes" run github:nix-community/nixos-anywhere -- --flake "${flake}" "${conn}" --stop-after-disko -p "${ssh_port}" 2>&1 | tee >(cat >&2))"
 	local ssh_login_key="${nixos_anywhere_log##*$'\n'}"
 	ssh_login_key="${ssh_login_key#*\'}"
 	ssh_login_key="${ssh_login_key%\'*}"
