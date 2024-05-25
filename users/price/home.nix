@@ -89,6 +89,7 @@ in
         typstfmt
         typst
         hurl
+        mullvad-vpn
         easyeffects
         egl-wayland
         helvum
