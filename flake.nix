@@ -217,7 +217,7 @@
                 inherit hostname;
                 inherit lib;
                 inherit persist-dir;
-                root-disk = "/dev/vda";
+                root-disk = "/dev/nvme0n1";
               };
               modules = [
                 defaults
