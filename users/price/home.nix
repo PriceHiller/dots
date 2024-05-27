@@ -67,6 +67,7 @@ in
         ffmpeg
         silicon
         man
+        thunderbird
         jq
         tectonic
         fzf
