@@ -1,14 +1,13 @@
 * Price Hiller's Dots
 This is a mirror from my Git server over [[https://git.orion-technologies.io/Price/dots][here]].
 
-These are my dot files. All the actual dots can be found under ~dots/~.
+These are my dot files. All the actual dots can be found under ~users/price/dots/~.
 
 I've gone pretty far to break things up and make my dots as easy as possible to install for a
-new system. Currently I'm rolling non-NixOS Linux, so some things are a bit /weird/. I set up my
-system using _Ansible_ over [[https://git.orion-technologies.io/Ansible/Dot_Files][here]].
+new system.
 
-In the future I intend to move my personal computer to NixOS. In the past I was running on a Mac,
-so you may find some Mac specific things (especially in my ~zsh~) config.
+In the past I was running on a Mac, so you may find some Mac specific things (especially in my
+~zsh~) config.
 
 For the record, feel free to take what you want. I'm not worried about getting contribution for
 dot files. They're largely just for fun, not something important. 🙂
@@ -16,7 +15,7 @@ dot files. They're largely just for fun, not something important. 🙂
 * TODO Various Tasks to get done [1/2]
 
 - [ ] Clean up and better modularize the config
-  - Currently a large portion of this config lives in ~config/default.nix~ which, while ok for
+  - Currently a large portion of this config lives in ~users/price/home.nix~ which, while ok for
     now, will get out of hand down the road
 - [X] Implement automation to autoformat various paths
   - Looking through the commit history I have semi-regular ~style~ commits for formatting.
