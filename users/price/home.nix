@@ -30,6 +30,7 @@ in
     packages =
       with pkgs;
       [
+        pulseaudio
         nix-prefetch-scripts
         mako
         wl-clipboard
