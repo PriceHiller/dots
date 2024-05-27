@@ -63,10 +63,7 @@ export FZF_DEFAULT_OPTS="--height=80% --layout=reverse --info=inline --border --
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
 ### Python ###
-export PYENV_ROOT="${HOME}/.local/share/pyenv"
-export PATH="${PATH}:${PYENV_ROOT}/bin"
 export PATH="${PATH}:${HOME}/.local/share/poetry/bin"
-eval "$(pyenv init -)"
 
 ### MAC ##
 if [[ "$OSTYPE" = "darwin"* ]]; then
