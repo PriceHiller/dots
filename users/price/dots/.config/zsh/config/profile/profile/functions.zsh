@@ -185,11 +185,7 @@ preexec() {
 
 # Editor with single letter
 e() {
-	if [[ "${EDITOR}" =~ "neovide*" ]]; then
-		neovide "${@}"
-	else
-		eval "${EDITOR} ${@}"
-	fi
+	eval "${EDITOR} ${@}"
 }
 
 # Open file with default program and detach
