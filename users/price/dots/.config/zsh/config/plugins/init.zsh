@@ -12,7 +12,7 @@ init() {
 	source "${wkdir}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 	source "${wkdir}/zsh-completions/zsh-completions.plugin.zsh"
 	source "${wkdir}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-	source "${wkdir}/nix-zsh-completions/nix.plugin.zsh"
+	source "${wkdir}/nix-zsh-completions/nix-zsh-completions.plugin.zsh"
 	source "${wkdir}/zsh-nix-shell/nix-shell.plugin.zsh"
 
 	FPATH="${FPATH}:${wkdir}/nix-zsh-completions"
