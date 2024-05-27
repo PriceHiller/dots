@@ -592,6 +592,21 @@ in
           After = [ "compositor.target" ];
         };
       };
+      polkit-gnome-authentication-agent-1 = {
+        Unit = {
+          Description = "Gnome Polkit authentication agent";
+          Documentation = "https://gitlab.freedesktop.org/polkit/polkit/";
+          After = [ "graphical-session-pre.target" ];
+          PartOf = [ "graphical-session.target" ];
+        };
+
+        Service = {
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "always";
+        };
+
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
     };
   };
 }
