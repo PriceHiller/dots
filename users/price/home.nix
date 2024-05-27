@@ -35,6 +35,7 @@ in
         mako
         wl-clipboard
         grim
+        slurp
         unzip
         bat
         Fmt
