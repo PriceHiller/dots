@@ -130,7 +130,9 @@ fi
 
 ### Rust ###
 export CARGO_HOME="${HOME}/.cargo"
-source "${CARGO_HOME}/env"
+if [[ -r "${CARGO_HOME}/env" ]]; then
+    source "${CARGO_HOME}/env"
+fi
 export RUSTUP_HOME="${HOME}/.rustup"
 export PATH="${PATH}:${CARGO_HOME}/bin"
 
