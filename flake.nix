@@ -18,7 +18,6 @@
       url = "github:Alexays/Waybar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,7 +61,6 @@
                 inherit system;
                 overlays = [
                   inputs.agenix.overlays.default
-                  inputs.neovim-nightly-overlay.overlays.default
                   self.overlays.modifications
                   self.overlays.additions
                 ];
@@ -83,7 +81,6 @@
             ({
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
-                inputs.neovim-nightly-overlay.overlays.default
                 inputs.nixgl.overlay
                 self.overlays.modifications
                 self.overlays.additions
@@ -186,7 +183,6 @@
           persist-dir = "/persist";
           defaults = {
             config = {
-              nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
               environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
               environment.persistence.save = {
                 hideMounts = true;
