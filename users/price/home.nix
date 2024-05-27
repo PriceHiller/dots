@@ -82,7 +82,6 @@ in
         playerctl
         nixfmt-rfc-style
         lxappearance
-        opensnitch-ui
         twitter-color-emoji
         open-sans
         noto-fonts
@@ -474,7 +473,6 @@ in
     };
     cliphist.enable = true;
     easyeffects.enable = true;
-    opensnitch-ui.enable = true;
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -574,17 +572,6 @@ in
         };
       };
       gromit-mpx.Service.ExecStart = lib.mkForce "echo 'Disabled, managed by WM'";
-      opensnitch-ui = {
-        Service.RestartSec = 3;
-        Install.WantedBy = [ "compositor.target" ];
-        Unit = {
-          PartOf = [ "compositor.target" ];
-          After = [
-            "compositor.target"
-            "waybar.service"
-          ];
-        };
-      };
       easyeffects = {
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
