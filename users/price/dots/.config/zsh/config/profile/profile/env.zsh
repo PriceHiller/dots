@@ -123,9 +123,11 @@ fi
 		new_manpager=less
 	fi
 
-	export EDITOR="${EDITOR:-$new_editor}"
-	export VISUAL="${VISUAL:-$new_visual}"
-	export MANPAGER="${MANPAGER:-$new_manpager}"
+    if [[ -n "${new_editor}" ]]; then
+        export EDITOR="${new_editor}"
+        export VISUAL="${new_visual}"
+        export MANPAGER="${new_manpager}"
+    fi
 }
 
 ### Rust ###
