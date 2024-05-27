@@ -4,7 +4,6 @@
     rustPlatform = pkgs.rustPlatform;
     fetchFromGitHub = pkgs.fetchFromGitHub;
   };
-  neovide = pkgs.callPackage ./neovide/package.nix { };
   Fmt = pkgs.writeShellApplication {
     name = "Fmt";
     runtimeInputs = with pkgs; [
