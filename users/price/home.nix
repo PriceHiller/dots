@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  clib,
   ...
 }:
 let
@@ -19,6 +20,7 @@ let
     ));
 in
 {
+  imports = (clib.recurseFilesInDirs [ ./conf ] ".nix");
   programs.home-manager.enable = true;
   nixpkgs = {
     config.allowUnfree = true;
