@@ -150,7 +150,10 @@ in
     sessionVariables = {
       TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
-      LD_LIBRARY_PATH = lib.strings.makeLibraryPath [ "${config.home.homeDirectory}/.nix-profile/" ];
+      LD_LIBRARY_PATH = lib.strings.makeLibraryPath [
+        "${config.home.homeDirectory}/.nix-profile/"
+        "${pkgs.sqlite.out}"
+      ];
       PKG_CONFIG_PATH = "${config.home.homeDirectory}/.nix-profile/lib/pkgconfig";
       GTK_PATH = "${pkgs.gtk-engine-murrine}/lib/gtk-2.0";
     };
