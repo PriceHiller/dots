@@ -2,7 +2,7 @@
 
 export SAVEHIST=10000
 export HISTSIZE=10000
-export HISTFILE="${XDG_CACHE_HOME}/zsh_history"
+export HISTFILE="${XDG_DATA_HOME}/zsh_history"
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
