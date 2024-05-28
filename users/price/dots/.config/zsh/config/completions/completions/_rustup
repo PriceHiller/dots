@@ -1,3 +1,0 @@
-#compdef rustup
-
-source <(rustup completions zsh)

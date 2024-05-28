@@ -1,4 +1,0 @@
-#compdef nvim-env
-
-local file_name_comp='*: :_files -W ${NVIM_ENVS_DIR} -g "*.norg(:r)" -S " "'
-_arguments "${file_name_comp}"

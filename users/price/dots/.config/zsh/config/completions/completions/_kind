@@ -1,3 +1,0 @@
-#compdef kind
-
-source <(kind completion zsh)

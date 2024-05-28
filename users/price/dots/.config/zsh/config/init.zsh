@@ -15,7 +15,6 @@ init() {
 	source "${wkdir}/style/init.zsh"
 	source "${wkdir}/omz/init.zsh"
 	source "${wkdir}/plugins/init.zsh"
-	source "${wkdir}/completions/init.zsh"
 	source "${wkdir}/themes/init.zsh"
 }
 
