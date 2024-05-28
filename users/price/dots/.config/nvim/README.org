@@ -22,5 +22,5 @@ SCHEDULED: <2024-02-23 Fri> DEADLINE: <2024-02-25 Sun>
 SCHEDULED: <2024-03-04 Mon> DEADLINE: <2024-03-15 Fri>
 - [X] Configure a pipeline to enforce formatting via Stylua
 
-* TODO Use native Neovim snippets isntead of Luasnip
+* TODO Use native Neovim snippets instead of Luasnip
 SCHEDULED: <2024-05-17 Fri>
