@@ -25,7 +25,7 @@ return {
         },
         keys = {
             {
-                "F",
+                "<leader>w",
                 function()
                     local win_id = require("window-picker").pick_window() or vim.api.nvim_get_current_win()
                     vim.api.nvim_set_current_win(win_id)
