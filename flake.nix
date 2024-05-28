@@ -22,7 +22,6 @@
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixgl.url = "github:guibou/nixGL";
     agenix = {
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,7 +81,6 @@
             ({
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
-                inputs.nixgl.overlay
                 self.overlays.modifications
                 self.overlays.additions
               ];
@@ -101,7 +99,6 @@
       packages = forAllSystems (pkgs: import ./pkgs pkgs);
       homeConfigurations = builtins.mapAttrs (mkHomeCfg) {
         "price" = ./users/price/home.nix;
-        "sam" = ./users/sam/home.nix;
       };
       overlays = import ./overlays { inherit inputs; };
       devShells = forAllSystems (pkgs: {
