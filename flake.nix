@@ -97,9 +97,7 @@
     {
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
       packages = forAllSystems (pkgs: import ./pkgs pkgs);
-      homeConfigurations = builtins.mapAttrs (mkHomeCfg) {
-        "price" = ./users/price/home.nix;
-      };
+      homeConfigurations = builtins.mapAttrs (mkHomeCfg) { "price" = ./users/price/home.nix; };
       overlays = import ./overlays { inherit inputs; };
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {

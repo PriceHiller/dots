@@ -51,6 +51,7 @@ in
         wezterm
         fontconfig
         sqlite
+        swaylock-effects
         luajit
         imagemagick
         dotnet-sdk_8
