@@ -1,3 +1,0 @@
-#compdef bob
-
-source <(gh completion -s zsh)

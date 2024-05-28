@@ -1,2 +1,0 @@
-#compdef cargo
-source <(rustup compeltions zsh cargo)
