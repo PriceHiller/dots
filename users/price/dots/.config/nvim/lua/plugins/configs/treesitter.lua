@@ -50,7 +50,7 @@ return {
         end,
     },
     {
-        url = "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+        "HiPhish/rainbow-delimiters.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
