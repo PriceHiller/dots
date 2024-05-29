@@ -141,10 +141,6 @@ in
         source = ./dots/.local/share/wallpapers;
         force = true;
       };
-      ".omnisharp" = {
-        source = ./dots/.omnisharp;
-        force = true;
-      };
       ".latexmkrc" = {
         source = ./dots/.latexmkrc;
         force = true;
@@ -152,6 +148,10 @@ in
     } // softLinkDots ".config";
 
     sessionVariables = {
+      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+      OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
+      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
       TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
       LD_LIBRARY_PATH = lib.strings.makeLibraryPath [
