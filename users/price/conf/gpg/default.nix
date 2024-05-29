@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.gpg = {
+    homedir = "${config.xdg.dataHome}/gnupg";
     enable = true;
     mutableKeys = false;
     mutableTrust = false;
