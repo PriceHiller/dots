@@ -297,15 +297,15 @@ return {
                 },
                 {
                     "@org.priority.highest",
-                    { fg = colors.samuraiRed, nocombine = true, underline = true, bold = true },
+                    { fg = colors.samuraiRed, bg = "#fabebe", nocombine = true, underdouble = true, bold = true },
                 },
                 {
                     "@org.priority.default",
-                    { fg = colors.roninYellow, nocombine = true, underline = true, bold = true },
+                    { fg = "#fa7f02", bg = "#fcd99a", nocombine = true, underline = true, bold = true },
                 },
                 {
                     "@org.priority.lowest",
-                    { fg = colors.fujiWhite, nocombine = true, underline = true, bold = true },
+                    { fg = colors.fujiWhite, bg = colors.fujiGray, nocombine = true, underline = true, bold = true },
                 },
 
                 -- Titles/Headlines
