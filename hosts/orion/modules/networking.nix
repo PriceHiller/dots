@@ -44,7 +44,7 @@ in
       Cache=yes
       CacheFromLocalhost=no
       DNSSEC=allow-downgrade
-      DNSOverTLS=yes
+      DNSOverTLS=opportunistic
       MulticastDNS=yes
     '';
   };
