@@ -319,7 +319,7 @@ in
       };
       signing = {
         signByDefault = true;
-        key = "C3FADDE7A8534BEB";
+        key = null;
       };
       delta = {
         enable = true;
