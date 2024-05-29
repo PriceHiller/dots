@@ -11,4 +11,5 @@
     git
     vim
   ];
+  time.timeZone = "America/Chicago";
 }
