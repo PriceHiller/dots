@@ -7,7 +7,7 @@
     root.hashedPasswordFile = config.age.secrets.users-root-pw.path;
     price = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "keyd" ];
       group = "price";
       shell = pkgs.zsh;
       createHome = true;
