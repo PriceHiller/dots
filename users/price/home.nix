@@ -141,10 +141,6 @@ in
         source = ./dots/.local/share/wallpapers;
         force = true;
       };
-      ".latexmkrc" = {
-        source = ./dots/.latexmkrc;
-        force = true;
-      };
     } // softLinkDots ".config";
 
     sessionVariables = {
