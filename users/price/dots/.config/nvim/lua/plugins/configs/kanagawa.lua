@@ -323,6 +323,8 @@ return {
                         fg = colors.waveRed,
                     },
                 },
+                { "@org.agenda.day", { fg = colors.oniViolet, bold = true, underdouble = true } },
+                { "@org.agenda.today", { fg = colors.springBlue, bold = true, underdouble = true } },
 
                 -- Titles/Headlines
                 { "@markup.heading.1", { fg = colors.crystalBlue, bold = true } },
