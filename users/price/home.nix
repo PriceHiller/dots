@@ -64,6 +64,7 @@ in
         curl
         openssh
         maven
+        pavucontrol
         openssl
         wget
         rsync
