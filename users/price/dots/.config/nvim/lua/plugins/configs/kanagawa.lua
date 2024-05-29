@@ -295,6 +295,8 @@ return {
                     "@org.timestamp.inactive.delimiter",
                     get_hl("@org.timestamp.inactive"),
                 },
+                { "@org.keyword.done", { fg = colors.springGreen, bold = true, italic = true } },
+                { "@org.keyword.todo", { fg = colors.samuraiRed, bold = true, italic = true } },
                 {
                     "@org.priority.highest",
                     { fg = colors.samuraiRed, bg = "#fabebe", nocombine = true, underdouble = true, bold = true },
@@ -306,6 +308,20 @@ return {
                 {
                     "@org.priority.lowest",
                     { fg = colors.fujiWhite, bg = colors.fujiGray, nocombine = true, underline = true, bold = true },
+                },
+                {
+                    "@org.agenda.scheduled_past",
+                    {
+                        fg = colors.springViolet2,
+                        italic = true,
+                    },
+                },
+                {
+                    "@org.agenda.deadline",
+                    {
+                        underdotted = true,
+                        fg = colors.waveRed,
+                    },
                 },
 
                 -- Titles/Headlines
