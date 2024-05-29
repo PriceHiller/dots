@@ -536,7 +536,7 @@ in
           PartOf = [ "keyd.service" ];
         };
         Service = {
-          ExecStart = "keyd-application-mapper";
+          ExecStart = "${pkgs.keyd}/bin/keyd-application-mapper";
           RestartSec = 3;
         };
         Install.WantedBy = [ "compositor.target" ];

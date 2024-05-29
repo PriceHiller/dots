@@ -2,6 +2,7 @@
 {
   security.sudo.wheelNeedsPassword = false;
   users.groups.price = { };
+  users.mutableUsers = false;
   users.users = {
     root.hashedPasswordFile = config.age.secrets.users-root-pw.path;
     price = {
