@@ -21,7 +21,6 @@ return {
     },
     {
         "folke/trouble.nvim",
-        branch = "dev",
         keys = {
             { "<leader>x", desc = "> Trouble" },
             { "<leader>lr", "<cmd>Trouble lsp_references toggle win.position=right<cr>", desc = "LSP: References" },
