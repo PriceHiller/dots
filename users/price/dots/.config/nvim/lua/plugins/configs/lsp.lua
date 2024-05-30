@@ -189,11 +189,6 @@ return {
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
             {
-                "pmizio/typescript-tools.nvim",
-                build = "npm i -g @styled/typescript-styled-plugin typescript",
-                dependencies = { "nvim-lua/plenary.nvim" },
-            },
-            {
                 "m-demare/hlargs.nvim",
                 event = { "BufReadPre", "BufNewFile" },
                 config = true,
@@ -468,31 +463,6 @@ return {
                 },
             })
 
-            -- Custom config from typescript tools
-            require("typescript-tools").setup({
-                on_attach = on_attach,
-                settings = {
-                    expose_as_code_action = {
-                        "fix_all",
-                        "add_missing_imports",
-                        "remove_unused",
-                        "remove_unused_imports",
-                        "organize_imports",
-                    },
-                    tsserver_plugins = {
-                        "@styled/typescript-styled-plugin",
-                    },
-                    tsserver_file_preferences = {
-                        includeInlayParameterNameHints = "all",
-                        includeInlayEnumMemberValueHints = true,
-                        includeInlayFunctionLikeReturnTypeHints = true,
-                        includeInlayFunctionParameterTypeHints = true,
-                        includeInlayPropertyDeclarationTypeHints = true,
-                        includeInlayVariableTypeHints = true,
-                    },
-                },
-            })
-
             lspconfig.gopls.setup({
                 capabilities = lsp_capabilities,
                 on_attach = on_attach,
@@ -533,6 +503,7 @@ return {
                 "terraformls",
                 "tflint",
                 "vimls",
+                "tsserver",
                 "marksman",
                 "asm_lsp",
                 "typst_lsp",
