@@ -52,6 +52,9 @@ return {
                 disable_builtin_notifications = true,
                 auto_refresh = true,
                 disable_signs = true,
+                preview_buffer = {
+                    kind = "split"
+                },
                 filewatcher = {
                     enabled = true,
                     interval = 1000,
