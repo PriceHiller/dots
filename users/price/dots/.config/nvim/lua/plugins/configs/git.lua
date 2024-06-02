@@ -54,7 +54,7 @@ return {
                 auto_show_console = false,
                 disable_signs = true,
                 preview_buffer = {
-                    kind = "split"
+                    kind = "split",
                 },
                 filewatcher = {
                     enabled = true,

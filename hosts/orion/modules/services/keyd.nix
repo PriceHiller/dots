@@ -1,6 +1,6 @@
 { ... }:
 {
-  users.groups.keyd = {};
+  users.groups.keyd = { };
   systemd.services.keyd.serviceConfig.Group = "keyd";
   services.keyd = {
     enable = true;
