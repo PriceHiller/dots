@@ -30,6 +30,7 @@ in
     packages =
       with pkgs;
       [
+        zathura
         pulseaudio
         nix-prefetch-scripts
         mako
