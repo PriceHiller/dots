@@ -51,6 +51,7 @@ return {
                 disable_commit_confirmation = true,
                 disable_builtin_notifications = true,
                 auto_refresh = true,
+                auto_show_console = false,
                 disable_signs = true,
                 preview_buffer = {
                     kind = "split"
