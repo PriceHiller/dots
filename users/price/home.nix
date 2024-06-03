@@ -30,6 +30,7 @@ in
     packages =
       with pkgs;
       [
+        libreoffice-fresh
         zathura
         pulseaudio
         nix-prefetch-scripts
