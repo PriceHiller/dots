@@ -30,6 +30,7 @@ in
     packages =
       with pkgs;
       [
+        kooha
         libreoffice-fresh
         zathura
         pulseaudio
