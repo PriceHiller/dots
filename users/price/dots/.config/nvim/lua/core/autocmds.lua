@@ -110,6 +110,7 @@ M.setup = function()
                 ["wav"] = open_mime,
                 ["png"] = open_mime,
                 ["jpg"] = "png",
+                ["docx"] = open_mime,
                 ["mp4"] = open_mime,
                 ["pptx"] = open_mime,
                 ["gif"] = "mp4",
