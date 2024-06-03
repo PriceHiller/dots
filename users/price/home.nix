@@ -64,6 +64,7 @@ in
         yamllint
         curl
         openssh
+        gradle
         maven
         pavucontrol
         openssl
@@ -240,6 +241,10 @@ in
   };
 
   programs = {
+    eclipse = {
+      enable = true;
+      package = pkgs.eclipses.eclipse-java;
+    };
     emacs = {
       enable = true;
       extraPackages = (
