@@ -1,7 +1,6 @@
-local lsp_augroup = vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
 local function on_attach(client, bufnr)
     -- Set autocommands conditional on server_capabilities
-    vim.notify("Attached server " .. client.name, "info", {
+    vim.notify("Attached server " .. client.name, vim.log.levels.INFO, {
         title = "LSP",
     })
 
@@ -145,7 +144,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "folke/neodev.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             "williamboman/mason-lspconfig.nvim",
             {
@@ -247,8 +245,20 @@ return {
                 end,
                 desc = "LSP: Diagnostic Open Float",
             },
-            { "[l", vim.diagnostic.goto_prev, desc = "LSP: Diagnostic Previous" },
-            { "]l", vim.diagnostic.goto_next, desc = "LSP: Diagnostic Next" },
+            {
+                "[l",
+                function()
+                    vim.diagnostic.jump({ count = -1 })
+                end,
+                desc = "LSP: Diagnostic Previous",
+            },
+            {
+                "]l",
+                function()
+                    vim.diagnostic.jump({ count = 1 })
+                end,
+                desc = "LSP: Diagnostic Next",
+            },
             {
                 "<leader>lt",
                 function()
@@ -307,30 +317,6 @@ return {
                         },
                     },
                 },
-            })
-
-            -- NOTE: LUA LSP
-            require("neodev").setup({
-                override = function(root_dir, options)
-                    local cur_file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-
-                    if root_dir:find("/tmp", 1, true) == 1 then
-                        options.enabled = true
-                        options.plugins = true
-                    end
-
-                    local config_path = vim.fn.stdpath("config")
-                    config_path = (config_path and vim.fn.resolve(config_path) or "")
-                    if cur_file:find("^" .. vim.pesc(config_path) .. ".*") then
-                        options.enabled = true
-                        options.plugins = true
-                    end
-
-                    if cur_file:find("%.nvim%.lua") ~= nil then
-                        options.enabled = true
-                        options.plugins = true
-                    end
-                end,
             })
 
             lspconfig.lua_ls.setup({
