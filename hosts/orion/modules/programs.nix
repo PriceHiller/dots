@@ -2,10 +2,7 @@
 {
   programs = {
     dconf.enable = true;
-    zsh = {
-      enable = true;
-      enableGlobalCompInit = false;
-    };
+    zsh.enable = true;
     nix-ld.enable = true;
   };
 }
