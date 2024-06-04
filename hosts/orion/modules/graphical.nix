@@ -1,8 +1,16 @@
 { pkgs, ... }:
 {
-  services.displayManager.sddm = {
-    wayland.enable = true;
-    enable = true;
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = "price";
+    };
+    defaultSession = "hyprland";
+    sddm = {
+      wayland.enable = true;
+      enable = true;
+      autoLogin.relogin = true;
+    };
   };
   programs.hyprland = {
     enable = true;
