@@ -235,9 +235,6 @@ in
           </alias>
         </fontconfig>
       '';
-      "bob/config.toml".text = ''
-        installation_location = "${config.xdg.dataHome}/bin"
-      '';
     };
   };
 
