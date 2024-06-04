@@ -40,7 +40,6 @@ in
         grim
         slurp
         unzip
-        bat
         Fmt
         starship
         nodePackages.prettier
