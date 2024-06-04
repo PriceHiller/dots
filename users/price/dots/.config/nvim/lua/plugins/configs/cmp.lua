@@ -4,6 +4,18 @@ return {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "ModeChanged" },
         dependencies = {
+            {
+                "folke/lazydev.nvim",
+                opts = {
+                    library = {
+                        "luvit-meta/library",
+                    },
+                },
+                dependencies = {
+                    { "Bilal2453/luvit-meta", lazy = true },
+                },
+                ft = "lua",
+            },
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-emoji",
@@ -54,7 +66,6 @@ return {
         },
         config = function()
             local cmp = require("cmp")
-            local types = require("cmp.types")
             local str = require("cmp.utils.str")
             local compare = cmp.config.compare
             local luasnip = require("luasnip")
@@ -62,7 +73,7 @@ return {
             -- Load Snippets
             require("luasnip.loaders.from_vscode").lazy_load()
             require("luasnip.loaders.from_lua").load({
-                paths = vim.fn.stdpath("config") .. "/lua/plugins/snippets",
+                paths = { vim.fn.stdpath("config") .. "/lua/plugins/snippets" },
             })
 
             local colors_bg_color = vim.api.nvim_get_hl(0, { name = "CmpCustomSelectionColor" }).bg
@@ -126,6 +137,7 @@ return {
                 sources = sources or {}
                 local default_sources = {
                     { name = "async_path" },
+                    { name = "lazydev", group_index = 0 },
                     { name = "nvim_lsp" },
                     { name = "luasnip", max_item_count = 5 }, -- For luasnip users.
                     {
