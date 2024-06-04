@@ -1,0 +1,22 @@
+; kanagawa
+;
+; kanagawa (https://github.com/rebelot/kanagawa.nvim/)
+
+[STYLE]
+; Colors
+base00 = #16161D
+base01 = #1F1F28
+base02 = #2A2A37
+base03 = #54546D
+base04 = #938056
+base05 = #C0A36E
+base06 = #C8C093
+base07 = #DCD7BA
+base08 = #E46876
+base09 = #FF9E3B
+base0a = #E6C384
+base0b = #76946A
+base0c = #98BB6C
+base0d = #223249
+base0e = #D27E99
+base0f = #FFA066
