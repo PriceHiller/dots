@@ -35,7 +35,6 @@ return {
             })
 
             vim.cmd.colorscheme("kanagawa")
-            local palette = require("kanagawa.colors").setup()
             local colors = require("kanagawa.colors").setup().palette
 
             -- HACK: This table was formed as an array to ensure the ordering of the keys. Since some
@@ -60,6 +59,7 @@ return {
                 { "WinSeparator", { fg = colors.fujiGray } },
                 { "StatusLine", { fg = colors.fujiWhite, bg = colors.sumiInk0 } },
                 { "WinBar", { link = "StatusLine" } },
+                { "NeogitCommandText", { fg = colors.oniViolet2 } },
                 { "NeogitPopupSectionTitle", { fg = colors.crystalBlue } },
                 { "NeogitPopupConfigEnabled", { fg = colors.springBlue, italic = true } },
                 { "NeogitPopupActionkey", { fg = colors.surimiOrange } },
