@@ -167,6 +167,12 @@ return {
                     require("lspconfig").jdtls.setup({
                         capabilities = lsp_capabilities,
                         on_attach = on_attach,
+                        init_options = {
+                            extendedClientCapabilities = {
+                                -- Have to disable this to make jdtls actually show hovers lol
+                                clientHoverProvider = false,
+                            },
+                        },
                         settings = {
                             java = {
                                 inlayHints = {
