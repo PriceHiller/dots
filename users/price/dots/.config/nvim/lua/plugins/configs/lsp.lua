@@ -145,10 +145,40 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "Decodetalkers/csharpls-extended-lsp.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            {
+                "williamboman/mason-lspconfig.nvim",
+                dependencies = {
+                    "neovim/nvim-lspconfig",
+                },
+                opts = {
+
+                    automatic_installation = true,
+                    ensure_installed = {
+                        "tsserver",
+                    },
+                },
+            },
             {
                 "nvim-java/nvim-java",
-                config = true,
+                ft = { "java" },
+                config = function()
+                    require("java").setup()
+
+                    require("lspconfig").jdtls.setup({
+                        capabilities = lsp_capabilities,
+                        on_attach = on_attach,
+                        settings = {
+                            java = {
+                                inlayHints = {
+                                    parameterNames = {
+                                        enabled = "all",
+                                        exclusions = { "this" },
+                                    },
+                                },
+                            },
+                        },
+                    })
+                end,
                 dependencies = {
                     "nvim-java/lua-async-await",
                     "nvim-java/nvim-java-refactor",
@@ -156,21 +186,19 @@ return {
                     "nvim-java/nvim-java-test",
                     "nvim-java/nvim-java-dap",
                     "MunifTanjim/nui.nvim",
-                    "neovim/nvim-lspconfig",
                     "mfussenegger/nvim-dap",
-                    {
-                        "williamboman/mason.nvim",
-                        opts = {
-                            registries = {
-                                "github:nvim-java/mason-registry",
-                                "github:mason-org/mason-registry",
-                            },
-                        },
-                    },
+                    "williamboman/mason.nvim",
                 },
             },
             {
                 "williamboman/mason.nvim",
+                opts = {
+                    max_concurrent_installers = 12,
+                    registries = {
+                        "github:nvim-java/mason-registry",
+                        "github:mason-org/mason-registry",
+                    },
+                },
                 cmd = {
                     "Mason",
                     "MasonLog",
@@ -179,11 +207,7 @@ return {
                     "MasonUninstall",
                     "MasonUninstallAll",
                 },
-                opts = {
-                    max_concurrent_installers = 12,
-                },
             },
-            "simrat39/rust-tools.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
             {
@@ -282,16 +306,7 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local mason_lspconfig = require("mason-lspconfig")
             local lspconfig = require("lspconfig")
-
-            -- NOTE: Keep this near top
-            mason_lspconfig.setup({
-                automatic_installation = true,
-                ensure_installed = {
-                    "tsserver",
-                },
-            })
 
             -- NOTE: ANSIBLE LSP
             -- I use ansible a lot, define exceptions for servers that can use
@@ -484,7 +499,6 @@ return {
                 "eslint",
                 "html",
                 "cssls",
-                "jdtls",
                 "kotlin_language_server",
                 "terraformls",
                 "tflint",
