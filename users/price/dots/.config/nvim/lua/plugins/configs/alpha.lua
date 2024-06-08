@@ -121,7 +121,7 @@ return {
                     position = "center",
                     text = txt,
                     shortcut = sc,
-                    cursor = 4,
+                    cursor = 2,
                     width = 30,
                     align_shortcut = "right",
                     hl_shortcut = "Number",
