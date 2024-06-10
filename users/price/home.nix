@@ -30,6 +30,8 @@ in
     packages =
       with pkgs;
       [
+        typescript
+        deno
         vimiv-qt
         kooha
         libreoffice-fresh
