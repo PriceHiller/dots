@@ -107,7 +107,12 @@ return {
             {
                 "<leader>lc",
                 function()
-                    require("actions-preview").code_actions()
+                    -- HACK: Make code actions work with `nvim-java`, tracking https://github.com/aznhe21/actions-preview.nvim/issues/50
+                    if vim.bo.filetype == "java" then
+                        vim.lsp.buf.code_action()
+                    else
+                        require("actions-preview").code_actions()
+                    end
                 end,
                 desc = "LSP: Code Action",
                 mode = { "n", "v" },
@@ -160,31 +165,6 @@ return {
             },
             {
                 "nvim-java/nvim-java",
-                ft = { "java" },
-                config = function()
-                    require("java").setup()
-
-                    require("lspconfig").jdtls.setup({
-                        capabilities = lsp_capabilities,
-                        on_attach = on_attach,
-                        init_options = {
-                            extendedClientCapabilities = {
-                                -- Have to disable this to make jdtls actually show hovers lol
-                                clientHoverProvider = false,
-                            },
-                        },
-                        settings = {
-                            java = {
-                                inlayHints = {
-                                    parameterNames = {
-                                        enabled = "all",
-                                        exclusions = { "this" },
-                                    },
-                                },
-                            },
-                        },
-                    })
-                end,
                 dependencies = {
                     "nvim-java/lua-async-await",
                     "nvim-java/nvim-java-refactor",
@@ -312,7 +292,29 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
+            require("java").setup()
+
             local lspconfig = require("lspconfig")
+            lspconfig.jdtls.setup({
+                capabilities = lsp_capabilities,
+                on_attach = on_attach,
+                init_options = {
+                    extendedClientCapabilities = {
+                        -- Have to disable this to make jdtls actually show hovers lol
+                        clientHoverProvider = false,
+                    },
+                },
+                settings = {
+                    java = {
+                        inlayHints = {
+                            parameterNames = {
+                                enabled = "all",
+                                exclusions = { "this" },
+                            },
+                        },
+                    },
+                },
+            })
 
             -- NOTE: ANSIBLE LSP
             -- I use ansible a lot, define exceptions for servers that can use
