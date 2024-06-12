@@ -32,7 +32,7 @@ return {
             -- NOTE: Vim Mode
             local VimMode = {
                 init = function(self)
-                    self.mode = vim.fn.mode(1)
+                    self.mode = vim.api.nvim_get_mode().mode
                 end,
                 static = {
                     mode_names = { -- change the strings if you like it vvvvverbose!
@@ -87,7 +87,7 @@ return {
                         t = colors.peachRed,
                     },
                     mode_color = function(self)
-                        local mode = conditions.is_active() and vim.fn.mode() or "n"
+                        local mode = conditions.is_active() and vim.api.nvim_get_mode().mode or "n"
                         return self.mode_colors[mode]
                     end,
                 },
@@ -889,7 +889,8 @@ return {
                     },
                     {
                         condition = function()
-                            return vim.fn.reg_recording() ~= ""
+                            local _, reg_recording = pcall(vim.fn.reg_recording)
+                            return reg_recording ~= ""
                         end,
                         update = {
                             "RecordingEnter",
