@@ -34,6 +34,7 @@ return {
                 calendar_week_start_day = 0,
                 org_log_into_drawer = "LOGBOOK",
                 org_tags_column = 0,
+                org_deadline_warning_days = 0,
                 org_agenda_start_on_weekday = false,
                 org_agenda_span = "month",
                 org_startup_folded = "inherit",
