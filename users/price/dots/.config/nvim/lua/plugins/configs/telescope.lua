@@ -19,6 +19,19 @@ return {
             { "<leader>t", desc = "> Telescope" },
             { "<leader>tg", desc = "> Telescope: Git" },
             { "<leader>tw", ":Telescope live_grep<CR>", desc = "Telescope: Grep for Word", silent = true },
+            {
+                "<leader>tW",
+                function()
+                    require("telescope.builtin").live_grep({
+                        additional_args = {
+                            "--hidden",
+                            "--no-ignore",
+                        },
+                    })
+                end,
+                desc = "Telescope: Grep for Word Everywhere",
+                silent = true,
+            },
             { "<leader>tgs", ":Telescope git_status<CR>", desc = "Telescope: Git Status", silent = true },
             { "<leader>tgc", ":Telescope git_commits<CR>", desc = "Telescope: Git Commits", silent = true },
             { "<leader>tgb", ":Telescope git_branches<CR>", desc = "Telescope: Git Branches", silent = true },
