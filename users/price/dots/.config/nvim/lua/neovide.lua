@@ -29,10 +29,32 @@ vim.keymap.set({ "", "!", "v", "t" }, "<D-z>", "<cmd>tabprevious<CR>", { noremap
 
 -- Spawn new terminal in new tab
 vim.keymap.set({ "", "!", "v", "t" }, "<D-t>", "<cmd>tabnew | terminal<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "n" }, "<C-S-Right>", "<cmd>vertical belowright terminal<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "n" }, "<C-S-Left>", "<cmd>vertical aboveleft terminal<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "n" }, "<C-S-Up>", "<cmd>horizontal aboveleft terminal<CR>", { noremap = true, silent = true })
-vim.keymap.set({ "n" }, "<C-S-Down>", "<cmd>horizontal belowright terminal<CR>", { noremap = true, silent = true })
+
+-- Spawn terminal in split direction
+vim.keymap.set(
+    { "", "!", "v", "t" },
+    "<C-S-Right>",
+    "<cmd>vertical belowright terminal<CR>",
+    { noremap = true, silent = true }
+)
+vim.keymap.set(
+    { "", "!", "v", "t" },
+    "<C-S-Left>",
+    "<cmd>vertical aboveleft terminal<CR>",
+    { noremap = true, silent = true }
+)
+vim.keymap.set(
+    { "", "!", "v", "t" },
+    "<C-S-Up>",
+    "<cmd>horizontal aboveleft terminal<CR>",
+    { noremap = true, silent = true }
+)
+vim.keymap.set(
+    { "", "!", "v", "t" },
+    "<C-S-Down>",
+    "<cmd>horizontal belowright terminal<CR>",
+    { noremap = true, silent = true }
+)
 
 -- Zoom in & out
 vim.g.neovide_scale_factor = 1
