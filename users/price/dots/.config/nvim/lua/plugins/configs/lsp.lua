@@ -152,9 +152,6 @@ return {
             "Decodetalkers/csharpls-extended-lsp.nvim",
             {
                 "williamboman/mason-lspconfig.nvim",
-                dependencies = {
-                    "neovim/nvim-lspconfig",
-                },
                 opts = {
 
                     automatic_installation = true,
@@ -292,20 +289,36 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require("java").setup()
+            require("mason-lspconfig").setup({
+                automatic_installation = true,
+                ensure_installed = {
+                    "tsserver",
+                },
+                handlers = {
+                    ["jdtls"] = function()
+                        require("java").setup({
+                            notifications = {
+                                dap = false,
+                            },
+                        })
+                    end,
+                },
+            })
 
             local lspconfig = require("lspconfig")
+
             lspconfig.jdtls.setup({
                 capabilities = lsp_capabilities,
                 on_attach = on_attach,
-                init_options = {
-                    extendedClientCapabilities = {
-                        -- Have to disable this to make jdtls actually show hovers lol
-                        clientHoverProvider = false,
-                    },
-                },
+                -- HACK: Have to define this to make jdtls show hovers, etc.
+                init_options = {},
                 settings = {
                     java = {
+                        completion = {
+                            postfix = {
+                                enabled = true,
+                            },
+                        },
                         inlayHints = {
                             parameterNames = {
                                 enabled = "all",
