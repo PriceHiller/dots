@@ -48,7 +48,7 @@ return {
                                 if args.relnum == 0 then
                                     return "%#Character#" .. mark .. "%*"
                                 else
-                                    return mark
+                                    return "%#Question#" .. mark .. "%*"
                                 end
                             end,
                         },
