@@ -123,6 +123,9 @@ M.setup = function()
     -- Alias <leader>/ to toggle comments
     vim.keymap.set("n", "<leader>/", "gcc", { silent = true, remap = true, desc = "Comment: Toggle Line" })
     vim.keymap.set("v", "<leader>/", "gc", { silent = true, remap = true, desc = "Comment: Toggle Selection" })
+
+    -- Bring up messages via keybind
+    vim.keymap.set("n", ";m", "<cmd>message<CR>", { silent = true, noremap = true, desc = "View Messages" })
 end
 
 return M
