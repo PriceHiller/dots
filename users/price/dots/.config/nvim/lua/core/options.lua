@@ -31,6 +31,7 @@ M.setup = function()
     opt.tabstop = 4
     opt.shiftwidth = 4
     opt.smartindent = true
+    opt.breakat = " \t;,"
     opt.breakindent = true
     opt.breakindentopt = ""
     opt.expandtab = true
