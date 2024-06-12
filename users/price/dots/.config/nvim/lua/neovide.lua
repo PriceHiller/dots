@@ -18,10 +18,37 @@ vim.g.neovide_fullscreen = false
 vim.g.neovide_cursor_vfx_mode = "ripple"
 vim.g.neovide_cursor_vfx_particle_lifetime = 0.3
 
--- Allow clipboard copy paste in neovim
-vim.keymap.set({ "n", "v" }, "<D-v>", '"+P') -- Paste normal and visual mode
-vim.keymap.set({ "i", "c" }, "<D-v>", "<C-R>+") -- Paste insert and command mode
-vim.keymap.set("t", "<D-v>", [[<C-\><C-N>"+Pi]]) -- Paste terminal mode
+-- ===== Allow clipboard copy paste in neovim
+-- Paste normal and visual mode
+vim.keymap.set({ "n", "v" }, "<D-v>", '"+P')
+-- Paste insert and command mode
+vim.keymap.set({ "i", "c" }, "<D-v>", function()
+    local register = "+"
+    local register_type = vim.fn.getregtype(register)
+    local register_content = vim.fn.getreg(register)
+    -- Set the register to be pasted `charwise`, see `:h charwise`
+    vim.fn.setreg(register, register_content, "c")
+    -- Handle pasting at the end of lines. Because we're invoking `normal!` commands whilst in
+    -- `insert` mode, we have to handle EOL stuff. For some reason (and I'm too lazy to investiage),
+    -- `nvim_feedkeys` doesn't block correctly here and the last `setreg` call is triggered too
+    -- early.
+    local cmd = '"' .. register .. "g"
+    if vim.fn.charcol(".") == (vim.fn.charcol("$")) then
+        -- At eol, paste AFTER the cursor
+        vim.cmd.normal({ cmd .. "p", bang = true })
+        -- Since we're in insert mode and we just invoked a `normal` mode command, the cursor is
+        -- actually offset one column to the left from where it should be -- move it over by one.
+        local win = vim.api.nvim_get_current_win()
+        local row, col = unpack(vim.api.nvim_win_get_cursor(win))
+        vim.api.nvim_win_set_cursor(win, { row, col + 1 })
+    else
+        vim.cmd.normal({ cmd .. "P", bang = true })
+    end
+    -- Restore the register's type back to what it was previously
+    vim.fn.setreg(register, register_content, register_type)
+end)
+-- Paste terminal mode
+vim.keymap.set("t", "<D-v>", [[<C-\><C-N>"+Pi]])
 
 -- Next/prev tabs
 vim.keymap.set({ "", "!", "v", "t" }, "<D-x>", "<cmd>tabnext<CR>", { noremap = true, silent = true })
