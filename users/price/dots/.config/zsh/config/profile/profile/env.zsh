@@ -139,13 +139,13 @@ fi
 export PATH="${PATH}:${CARGO_HOME}/bin"
 
 ## Dotnet ###
-export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
-export DOTNET_ROOT="${XDG_DATA_HOME}/dotnet"
-export PATH="${PATH}:${XDG_DATA_HOME}/dotnet"
+export DOTNET_ROOT="${DOTNET_ROOT:-"$XDG_DATA_HOME/dotnet"}"
+export DOTNET_CLI_HOME="${DOTNET_ROOT}"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export NUGET_PACKAGES="${XDG_DATA_HOME}/NugetPackages"
-export OMNISHARPHOME="${XDG_CONFIG_HOME}/omnisharp"
-export PATH="${PATH}:${HOME}/.dotnet/tools"
+export NUGET_PACKAGES="${NUGET_PACKAGES:-"$XDG_DATA_HOME/NugetPackages"}"
+export OMNISHARPHOME="${OMNISHARPHOME:-"$XDG_CONFIG_HOME/omnisharp"}"
+export PATH="${PATH}:${DOTNET_ROOT}"
+export PATH="${PATH}:${DOTNET_CLI_HOME}/tools"
 
 ### Go ###
 export GOPATH="${XDG_DATA_HOME}/go"
