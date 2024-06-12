@@ -3,6 +3,10 @@
   programs.gpg = {
     homedir = "${config.xdg.dataHome}/gnupg";
     enable = true;
+    scdaemonSettings = {
+      pcsc-shared = true;
+      disable-ccid = true;
+    };
     mutableKeys = false;
     mutableTrust = false;
     publicKeys = [
