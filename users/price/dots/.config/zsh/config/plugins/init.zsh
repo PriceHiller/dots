@@ -17,8 +17,7 @@ init() {
 
 	FPATH="${FPATH}:${wkdir}/nix-zsh-completions"
 
-    export _ZL_DATA="${XDG_CACHE_HOME}/zlua"
-    touch "${_ZL_DATA}"
+    export _ZL_DATA="${_ZL_DATA:-"$XDG_CACHE_HOME/zlua"}"
 	eval "$(lua "${wkdir}/z.lua/z.lua" --init zsh enhanced once)"
 
 	[[ -r "${XDG_CONFIG_HOME}/fzf/fzf.zsh" ]]  && source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"

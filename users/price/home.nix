@@ -148,6 +148,7 @@ in
     } // softLinkDots ".config";
 
     sessionVariables = {
+      _ZL_DATA = "${config.xdg.cacheHome}/zlua";
       RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
