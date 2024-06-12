@@ -12,6 +12,11 @@ return {
         config = function()
             -- Setup orgmode
             require("orgmode").setup({
+                mappings = {
+                    agenda = {
+                        org_agenda_filter = "F",
+                    },
+                },
                 org_agenda_files = {
                     "~/Git/College/**/*",
                     "~/Notes/**/*",
