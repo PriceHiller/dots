@@ -32,6 +32,8 @@ in
       [
         typescript
         deno
+        powershell
+        csharp-ls
         vimiv-qt
         kooha
         libreoffice-fresh
