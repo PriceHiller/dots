@@ -60,6 +60,8 @@ return {
                     mappings = {
                         ["<space>"] = "none",
                         ["/"] = "none",
+                        ["f"] = "none",
+                        ["F"] = "fuzzy_finder",
                     },
                 },
             }
