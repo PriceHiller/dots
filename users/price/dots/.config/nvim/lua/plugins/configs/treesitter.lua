@@ -38,7 +38,7 @@ return {
         end,
     },
     {
-        "PriceHiller/nvim-ts-autotag",
+        "windwp/nvim-ts-autotag",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
