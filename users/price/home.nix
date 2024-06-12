@@ -33,6 +33,7 @@ in
         typescript
         deno
         powershell
+        vesktop
         csharp-ls
         vimiv-qt
         kooha
