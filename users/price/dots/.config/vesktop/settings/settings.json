@@ -148,7 +148,9 @@
             "timestampMode": 0
         },
         "CustomIdle": {
-            "enabled": false
+            "enabled": false,
+            "idleTimeout": 10,
+            "remainInIdle": true
         },
         "Dearrow": {
             "enabled": false
@@ -172,7 +174,18 @@
             "enabled": false
         },
         "FakeNitro": {
-            "enabled": false
+            "enabled": false,
+            "enableEmojiBypass": true,
+            "emojiSize": 48,
+            "transformEmojis": true,
+            "enableStickerBypass": true,
+            "stickerSize": 160,
+            "transformStickers": true,
+            "transformCompoundSentence": false,
+            "enableStreamQualityBypass": true,
+            "useHyperLinks": true,
+            "hyperLinkText": "{{NAME}}",
+            "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
             "enabled": false
@@ -252,7 +265,9 @@
             "enabled": false
         },
         "MemberCount": {
-            "enabled": true
+            "enabled": true,
+            "memberList": true,
+            "toolTip": true
         },
         "MessageClickActions": {
             "enabled": true,
@@ -272,11 +287,11 @@
         },
         "MessageLogger": {
             "enabled": true,
-            "deleteStyle": "text",
+            "deleteStyle": "overlay",
             "logDeletes": true,
             "logEdits": true,
-            "ignoreBots": false,
-            "ignoreSelf": false,
+            "ignoreBots": true,
+            "ignoreSelf": true,
             "ignoreUsers": "",
             "ignoreChannels": "",
             "ignoreGuilds": ""
@@ -475,7 +490,11 @@
             "enabled": false
         },
         "RoleColorEverywhere": {
-            "enabled": false
+            "enabled": true,
+            "chatMentions": true,
+            "memberList": true,
+            "voiceUsers": true,
+            "reactorsList": true
         },
         "SearchReply": {
             "enabled": false
@@ -665,6 +684,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1718178443697
+        "settingsSyncVersion": 1718200979417
     }
 }
