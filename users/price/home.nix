@@ -249,6 +249,10 @@ in
       enable = true;
       package = pkgs.eclipses.eclipse-java;
     };
+    man = {
+      enable = true;
+      generateCaches = true;
+    };
     emacs = {
       enable = true;
       extraPackages = (
