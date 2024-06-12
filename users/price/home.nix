@@ -34,7 +34,6 @@ in
         deno
         powershell
         vesktop
-        csharp-ls
         vimiv-qt
         kooha
         libreoffice-fresh
@@ -62,7 +61,6 @@ in
         swaylock-effects
         luajit
         imagemagick
-        dotnet-sdk_8
         shellcheck
         openjdk
         nodejs
