@@ -1,7 +1,7 @@
 return {
     {
         "rebelot/heirline.nvim",
-        event = "ColorScheme",
+        lazy = false,
         dependencies = {
             "lewis6991/gitsigns.nvim",
         },
