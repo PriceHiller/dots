@@ -120,10 +120,6 @@ in
         libsForQt5.qt5ct
       ]
       ++ [
-        go
-        (lib.hiPrio gotools)
-      ]
-      ++ [
         age
         age-plugin-yubikey
         passage
