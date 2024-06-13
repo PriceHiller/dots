@@ -11,6 +11,7 @@ return {
                 lsp_keymaps = false,
                 dap_debug_keymap = false,
                 lsp_codelens = false,
+                diagnostic = false,
                 icons = false,
                 run_in_floaterm = true,
                 trouble = true,

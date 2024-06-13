@@ -44,12 +44,20 @@ return {
             --
             ---@type { [1]: string, [2]: vim.api.keyset.highlight | fun(): vim.api.keyset.highlight | table<Highlight.Keys, fun(): string | integer> }[]
             local extra_hls = {
+                -- For diagnostics
+                { "CustomErrorBg", { bg = "#3d1b22" } },
+
+                -- Nvim notify
                 { "NvimNotifyError", { fg = colors.samuraiRed } },
                 { "NvimNotifyWarn", { fg = colors.roninYellow } },
                 { "NvimNotifyInfo", { fg = colors.springGreen } },
                 { "NvimNotifyDebug", { fg = colors.crystalBlue } },
                 { "NvimNotifyTrace", { fg = colors.oniViolet } },
+
+                -- Built-ins
                 { "StatusLineNC", { bg = nil } },
+                { "menuSel", { bg = colors.sumiInk0, fg = "NONE" } },
+                { "Pmenu", { fg = colors.fujiWhite, bg = colors.sumiInk2 } },
                 { "WinBarNC", { bg = nil } },
                 { "Visual", { bg = colors.sumiInk5 } },
                 { "CursorLine", { bg = colors.sumiInk4 } },
@@ -59,6 +67,18 @@ return {
                 { "WinSeparator", { fg = colors.fujiGray } },
                 { "StatusLine", { fg = colors.fujiWhite, bg = colors.sumiInk0 } },
                 { "WinBar", { link = "StatusLine" } },
+
+                -- Gitsigns Colors
+                { "GitSignsAdd", { fg = colors.autumnGreen } },
+                { "GitSignsDelete", { fg = colors.autumnRed } },
+                { "GitSignsChange", { fg = colors.autumnYellow } },
+                { "GitSignsStagedAdd", { link = "GitSignsChangeAdd" } },
+                { "GitSignsStagedDelete", { link = "GitSignsDelete" } },
+                { "GitSignsStagedChangedelete", { link = "GitSignsDelete" } },
+                { "GitSignsStagedChange", { link = "GitSignsChange" } },
+                { "GitSignsUntracked", { link = "GitSignsChange" } },
+
+                -- Neogit
                 { "NeogitCommandText", { fg = colors.oniViolet2 } },
                 { "NeogitPopupSectionTitle", { fg = colors.crystalBlue } },
                 { "NeogitPopupConfigEnabled", { fg = colors.springBlue, italic = true } },
@@ -96,8 +116,8 @@ return {
                 { "NeogitNotificationInfo", { fg = colors.springGreen, bold = true } },
                 { "NeogitNotificationWarning", { fg = colors.roninYellow, bold = true } },
                 { "NeogitNotificationError", { fg = colors.samuraiRed, bold = true } },
-                { "menuSel", { bg = colors.sumiInk0, fg = "NONE" } },
-                { "Pmenu", { fg = colors.fujiWhite, bg = colors.sumiInk2 } },
+
+                -- Cmp
                 { "CmpGhostText", { fg = colors.boatYellow1, italic = true } },
                 { "CmpItemAbbrDeprecated", { fg = colors.fujiGray, bg = "NONE" } },
                 { "CmpItemAbbrMatch", { fg = colors.crystalBlue, bg = "NONE" } },
@@ -145,6 +165,8 @@ return {
                 { "CmpCustomSelectionCommit", { fg = colors.fujiWhite, bg = colors.peachRed } },
                 { "CmpCustomSelectionSnippet", { fg = colors.fujiWhite, bg = colors.peachRed } },
                 { "CmpCustomSelectionLuaLatexSymbol", { fg = colors.fujiWhite, bg = colors.surimiOrange } },
+
+                -- Telescope
                 { "TelescopeNormal", { bg = colors.sumiInk2 } },
                 { "TelescopeBorder", { bg = colors.sumiInk2, fg = colors.sumiInk1 } },
                 { "TelescopePromptBorder", { bg = colors.sumiInk0, fg = colors.sumiInk0 } },
@@ -154,6 +176,7 @@ return {
                 { "TelescopePreviewNormal", { bg = colors.sumiInk4 } },
                 { "TelescopePreviewBorder", { link = "TelescopePreviewNormal" } },
                 { "TelescopeResultsTitle", { fg = "NONE", bg = "NONE" } },
+
                 { "IlluminatedWordText", { bg = colors.waveBlue2 } },
                 { "IlluminatedWordRead", { bg = colors.waveBlue2 } },
                 { "IlluminatedWordWrite", { bg = colors.waveBlue2 } },

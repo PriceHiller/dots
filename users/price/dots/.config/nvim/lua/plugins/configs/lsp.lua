@@ -252,22 +252,21 @@ return {
             {
                 "<leader>ls",
                 function()
-                    vim.diagnostic.open_float(nil, { focus = true, scope = "cursor" })
-                    vim.cmd.vsplit()
+                    vim.diagnostic.open_float(nil, { focus = false, scope = "cursor" })
                 end,
                 desc = "LSP: Diagnostic Open Float",
             },
             {
                 "[l",
                 function()
-                    vim.diagnostic.jump({ count = -1 })
+                    vim.diagnostic.jump({ count = -1, float = true })
                 end,
                 desc = "LSP: Diagnostic Previous",
             },
             {
                 "]l",
                 function()
-                    vim.diagnostic.jump({ count = 1 })
+                    vim.diagnostic.jump({ count = 1, float = true })
                 end,
                 desc = "LSP: Diagnostic Next",
             },
