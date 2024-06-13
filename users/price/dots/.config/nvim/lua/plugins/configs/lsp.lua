@@ -56,7 +56,12 @@ return {
                 desc = "LSP: Toggle Diagnostic Style",
             },
         },
-        config = true,
+        config = function()
+            vim.diagnostic.config({
+                virtual_text = false,
+            })
+            require("lsp_lines").setup()
+        end,
     },
     {
         "smjonas/inc-rename.nvim",
