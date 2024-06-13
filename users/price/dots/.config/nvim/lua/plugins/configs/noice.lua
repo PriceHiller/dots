@@ -97,13 +97,16 @@ return {
                     local opts = {
                         stages = "slide",
                         fps = 60,
-                        render = function(bufnr, notif, highlights, _)
-                            local left_icon = notif.icon .. " "
+                        ---@param bufnr integer
+                        ---@param notification notify.Record
+                        ---@param highlights notify.Highlights
+                        render = function(bufnr, notification, highlights, config)
+                            local left_icon = notification.icon .. " "
                             local max_message_width = math.max(math.max(unpack(vim.tbl_map(function(line)
                                 return vim.fn.strchars(line)
-                            end, notif.message))))
-                            local right_title = notif.title[2]
-                            local left_title = notif.title[1]
+                            end, notification.message))))
+                            local right_title = notification.title[2]
+                            local left_title = notification.title[1]
                             local title_accum = vim.str_utfindex(left_icon)
                                 + vim.str_utfindex(right_title)
                                 + vim.str_utfindex(left_title)
@@ -125,12 +128,22 @@ return {
                                 virt_text_pos = "right_align",
                                 priority = 10,
                             })
-                            vim.api.nvim_buf_set_lines(bufnr, 1, -1, false, notif.message)
+
+                            -- -- If we only have a single very long message then break it at 80 columns
+                            local max_width = 80
+                            if #notification.message == 1 then
+                                local message = notification.message[1]
+                                notification.message = {}
+                                for i = 0, vim.fn.strcharlen(message), max_width do
+                                    table.insert(notification.message, vim.fn.slice(message, i, max_width + i))
+                                end
+                            end
+                            vim.api.nvim_buf_set_lines(bufnr, 1, -1, false, notification.message)
 
                             vim.api.nvim_buf_set_extmark(bufnr, namespace, 1, 0, {
                                 hl_group = highlights.body,
-                                end_line = #notif.message,
-                                end_col = #notif.message[#notif.message],
+                                end_line = #notification.message,
+                                end_col = #notification.message[#notification.message],
                                 priority = 50, -- Allow treesitter to override
                             })
                         end,
