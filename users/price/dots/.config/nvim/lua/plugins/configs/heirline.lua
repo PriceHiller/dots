@@ -15,9 +15,6 @@ return {
 
             local utils = require("heirline.utils")
             local conditions = require("heirline.conditions")
-            local lsp_attached = function()
-                return next(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })) ~= nil
-            end
 
             local pad = function(num)
                 return string.rep(" ", num)
@@ -555,7 +552,7 @@ return {
                     {
                         {
                             condition = function()
-                                return lsp_attached() or conditions.has_diagnostics()
+                                return conditions.lsp_attached() or conditions.has_diagnostics()
                             end,
                             {
                                 provider = seps.full.left,
@@ -578,7 +575,7 @@ return {
                                 provider = seps.full.right,
                                 hl = function()
                                     local bg = colors.oniViolet2
-                                    if conditions.has_diagnostics() and not lsp_attached() then
+                                    if conditions.has_diagnostics() and not conditions.lsp_attached() then
                                         bg = colors.sumiInk2
                                     end
 
@@ -587,13 +584,13 @@ return {
                             },
                         },
                         {
-                            condition = lsp_attached,
+                            condition = utils.lsp_attached,
                             {
-                                update = { "LspAttach", "LspDetach" },
-
                                 provider = function()
                                     local names = {}
-                                    for _, server in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+                                    for _, server in
+                                        ipairs(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
+                                    do
                                         table.insert(names, server.name)
                                     end
                                     return " " .. table.concat(names, ", ")
