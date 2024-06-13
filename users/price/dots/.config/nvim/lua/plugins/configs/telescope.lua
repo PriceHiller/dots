@@ -58,7 +58,6 @@ return {
             { "<leader>tu", ":Telescope undo<CR>", desc = "Telescope: Undo History", silent = true },
             { "<leader>tm", ":Telescope man_pages<CR>", desc = "Telescope: Man Pages", silent = true },
             { "<leader>tq", ":Telescope quickfixhistry", desc = "LSP: Telescope Quickfix History", silent = true },
-            { "<leader>nv", ":Telescope notify<CR>", desc = "Notifications: Search", silent = true },
             { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope", silent = true },
             {
                 "<leader>tz",
@@ -109,7 +108,6 @@ return {
                 "nvim-telescope/telescope-frecency.nvim",
             },
             "debugloop/telescope-undo.nvim",
-            "rcarriga/nvim-notify",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         config = function()
@@ -231,7 +229,6 @@ return {
             })
 
             telescope.load_extension("find_directories")
-            telescope.load_extension("notify")
             telescope.load_extension("fzf")
             telescope.load_extension("ui-select")
             telescope.load_extension("undo")

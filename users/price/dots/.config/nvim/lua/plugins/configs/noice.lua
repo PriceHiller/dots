@@ -79,6 +79,17 @@ return {
                         end,
                         desc = "Notifications: Dismiss",
                     },
+                    {
+                        "<leader>nv",
+                        function()
+                            if not vim.g.nvim_notify_telescope_loaded then
+                                require("telescope").load_extension("notify")
+                                vim.g.nvim_notify_telescope_loaded = true
+                            end
+                            require("telescope").extensions.notify.notify()
+                        end,
+                        desc = "Notifications: Search",
+                    },
                 },
                 config = function()
                     local base = require("notify.render.base")
