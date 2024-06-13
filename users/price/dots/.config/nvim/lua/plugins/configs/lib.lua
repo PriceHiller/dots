@@ -8,10 +8,6 @@ return {
         lazy = true,
     },
     {
-        "stevearc/dressing.nvim",
-        lazy = true,
-    },
-    {
         "folke/which-key.nvim",
         lazy = true,
         opts = {},
