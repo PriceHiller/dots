@@ -319,7 +319,6 @@ return {
                 {
                     "@org.agenda.deadline",
                     {
-                        underdotted = true,
                         fg = colors.waveRed,
                     },
                 },
