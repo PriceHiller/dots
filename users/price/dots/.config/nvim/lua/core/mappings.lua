@@ -126,6 +126,9 @@ M.setup = function()
 
     -- Bring up messages via keybind
     vim.keymap.set("n", ";m", "<cmd>message<CR>", { silent = true, noremap = true, desc = "View Messages" })
+
+    -- Delete whole world back in insert & cmd mode
+    vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-W>")
 end
 
 return M
