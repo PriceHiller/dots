@@ -56,6 +56,7 @@ in
         bob-nvim
         neovide
         wezterm
+        kitty
         fontconfig
         sqlite
         swaylock-effects
