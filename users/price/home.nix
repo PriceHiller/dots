@@ -30,6 +30,7 @@ in
     packages =
       with pkgs;
       [
+        gcolor3
         typescript
         deno
         powershell
