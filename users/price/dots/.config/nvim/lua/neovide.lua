@@ -21,8 +21,10 @@ vim.g.neovide_cursor_vfx_particle_lifetime = 0.3
 -- ===== Allow clipboard copy paste in neovim
 -- Paste normal and visual mode
 vim.keymap.set({ "n", "v" }, "<D-v>", '"+P')
--- Paste insert and command mode
-vim.keymap.set({ "i", "c" }, "<D-v>", function()
+-- Paste in command mode
+vim.keymap.set("c", "<D-v>", "<C-R>+")
+-- Paste in insert mode
+vim.keymap.set("i", "<D-v>", function()
     local register = "+"
     local register_type = vim.fn.getregtype(register)
     local register_content = vim.fn.getreg(register)
