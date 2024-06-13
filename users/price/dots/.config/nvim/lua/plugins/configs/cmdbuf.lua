@@ -20,14 +20,12 @@ return {
             {
                 "q/",
                 function()
-                    vim.notify("YUP!")
                     require("cmdbuf").split_open(vim.o.cmdwinheight, { type = "vim/search/forward" })
                 end,
             },
             {
                 "q?",
                 function()
-                    vim.notify("YUP!")
                     require("cmdbuf").split_open(vim.o.cmdwinheight, { type = "vim/search/backward" })
                 end,
             },
