@@ -582,30 +582,30 @@ return {
                                     return { fg = colors.oniViolet, bg = bg }
                                 end,
                             },
-                        },
-                        {
-                            condition = utils.lsp_attached,
                             {
-                                provider = function()
-                                    local names = {}
-                                    for _, server in
-                                        ipairs(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
-                                    do
-                                        table.insert(names, server.name)
-                                    end
-                                    return " " .. table.concat(names, ", ")
-                                end,
-                                hl = { fg = colors.sumiInk0, bg = colors.oniViolet2 },
-                            },
-                            {
-                                provider = seps.full.right,
-                                hl = function()
-                                    local bg = utils.get_highlight("WinBar").bg
-                                    if conditions.has_diagnostics() then
-                                        bg = colors.sumiInk4
-                                    end
-                                    return { fg = colors.oniViolet2, bg = bg }
-                                end,
+                                condition = conditions.lsp_attached,
+                                {
+                                    provider = function()
+                                        local names = {}
+                                        for _, server in
+                                            ipairs(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }))
+                                        do
+                                            table.insert(names, server.name)
+                                        end
+                                        return " " .. table.concat(names, ", ")
+                                    end,
+                                    hl = { fg = colors.sumiInk0, bg = colors.oniViolet2 },
+                                },
+                                {
+                                    provider = seps.full.right,
+                                    hl = function()
+                                        local bg = utils.get_highlight("WinBar").bg
+                                        if conditions.has_diagnostics() then
+                                            bg = colors.sumiInk4
+                                        end
+                                        return { fg = colors.oniViolet2, bg = bg }
+                                    end,
+                                },
                             },
                         },
                     },
