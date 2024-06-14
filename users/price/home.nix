@@ -101,7 +101,7 @@ in
         direnv
         swappy
         stylua
-        typstfmt
+        typstyle
         typst
         hurl
         mullvad-vpn
