@@ -10,6 +10,11 @@
           port = 2200;
         };
         "luna.hosts.orion-technologies.io" = luna;
+        asgard = {
+          hostname = "asgard-eternal.com";
+          user = "asgard";
+        };
+        "asgard-eternal.com" = asgard;
       }
       # NOTE: UTSA Hosts behind VPN server
       // builtins.listToAttrs (
