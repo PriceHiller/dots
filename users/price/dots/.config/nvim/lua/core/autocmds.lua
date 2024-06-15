@@ -112,6 +112,7 @@ M.setup = function()
                 ["jpg"] = "png",
                 ["docx"] = open_mime,
                 ["mp4"] = open_mime,
+                ["webm"] = open_mime,
                 ["pptx"] = open_mime,
                 ["gif"] = "mp4",
             }
