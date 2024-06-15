@@ -212,7 +212,7 @@ return {
                             null_ls.builtins.formatting.stylua,
                             null_ls.builtins.formatting.asmfmt,
                             null_ls.builtins.formatting.black,
-                            null_ls.builtins.formatting.typstfmt,
+                            null_ls.builtins.formatting.typstyle,
                             null_ls.builtins.formatting.cmake_format,
                             null_ls.builtins.formatting.shfmt,
                             null_ls.builtins.formatting.shellharden,
