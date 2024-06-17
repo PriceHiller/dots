@@ -468,7 +468,6 @@ in
         }
       ];
     };
-    cliphist.enable = true;
     easyeffects.enable = true;
   };
 
@@ -558,14 +557,6 @@ in
       };
       gromit-mpx.Service.ExecStart = lib.mkForce "echo 'Disabled, managed by WM'";
       easyeffects = {
-        Install.WantedBy = [ "compositor.target" ];
-        Unit = {
-          PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
-        };
-      };
-      cliphist = {
-        Service.RestartSec = 3;
         Install.WantedBy = [ "compositor.target" ];
         Unit = {
           PartOf = [ "compositor.target" ];
