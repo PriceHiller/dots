@@ -69,11 +69,6 @@ return {
             focus = true,
             auto_close = true,
             auto_jump = true,
-            modes = {
-                quickfix = {
-                    auto_open = true,
-                },
-            },
             win = {
                 position = "right",
                 type = "split",
