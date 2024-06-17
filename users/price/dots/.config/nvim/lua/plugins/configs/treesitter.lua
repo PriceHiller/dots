@@ -135,6 +135,13 @@ return {
                         local disabled_filetypes = {
                             "tex",
                             "log",
+                            "csv",
+                            "tsv",
+                            "csv_semicolon",
+                            "csv_whitespace",
+                            "csv_pipe",
+                            "rfc_csv",
+                            "rfc_semicolon",
                         }
 
                         for _, ft in ipairs(disabled_filetypes) do
