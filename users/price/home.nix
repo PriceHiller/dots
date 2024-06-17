@@ -113,7 +113,7 @@ in
         tidal-hifi
         nix-output-monitor
         sops
-        ungoogled-chromium
+        chromium
         tree-sitter
         qt6Packages.qt6gtk2
         qt6Packages.qt6ct
