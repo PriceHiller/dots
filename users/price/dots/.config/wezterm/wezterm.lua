@@ -26,6 +26,8 @@ if not found then
 end
 
 local config = wlib.Table.merge(gpu, events, fonts, theme, tabbar, misc, rendering, keybinds, os_config)
+-- Disabled until wezterm figures out wayland 🙁
+config.enable_wayland = false
 
 log.debug("Final Wezterm Config: " .. require("lib.inspect").inspect(config, { newline = " ", indent = "" }))
 
