@@ -14,14 +14,6 @@ return {
                 end,
             })
 
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "gitcommit",
-                callback = function()
-                    vim.api.nvim_win_set_cursor(0, { 1, 0 })
-                    vim.cmd.startinsert()
-                end,
-            })
-
             require("neogit").setup({
                 disable_insert_on_commit = true,
                 disable_commit_confirmation = true,
