@@ -72,7 +72,7 @@ return {
                 { "GitSignsAdd", { fg = colors.autumnGreen } },
                 { "GitSignsDelete", { fg = colors.autumnRed } },
                 { "GitSignsChange", { fg = colors.autumnYellow } },
-                { "GitSignsStagedAdd", { link = "GitSignsChangeAdd" } },
+                { "GitSignsStagedAdd", { link = "GitSignsAdd" } },
                 { "GitSignsStagedDelete", { link = "GitSignsDelete" } },
                 { "GitSignsStagedChangedelete", { link = "GitSignsDelete" } },
                 { "GitSignsStagedChange", { link = "GitSignsChange" } },
