@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   security.sudo.wheelNeedsPassword = false;
   users.groups.price = { };
@@ -10,6 +15,7 @@
       extraGroups = [
         "wheel"
         "keyd"
+        (lib.mkIf config.virtualisation.docker.enable "docker")
       ];
       group = "price";
       shell = pkgs.zsh;
