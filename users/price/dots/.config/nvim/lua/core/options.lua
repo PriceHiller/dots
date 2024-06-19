@@ -31,13 +31,17 @@ M.setup = function()
     opt.tabstop = 4
     opt.shiftwidth = 4
     opt.smartindent = true
-    opt.breakat = " \t;,"
-    opt.formatlistpat = [[^\s*\(-\|\d\.\)\s*]]
-    opt.breakindent = true
-    opt.breakindentopt = "list:2"
     opt.expandtab = true
     opt.smarttab = true
     opt.shiftround = true
+
+    -- Wrapping behavior
+    opt.wrap = true
+    opt.breakat = " \t;,"
+    opt.linebreak = true
+    opt.formatlistpat = [[^\s*\(-\|\d\.\)\s*]]
+    opt.breakindent = true
+    opt.breakindentopt = "list:2"
 
     -- Search settings
     opt.hlsearch = true
