@@ -7,13 +7,6 @@ return {
             { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit: Open" },
         },
         config = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "*Neogit*",
-                callback = function()
-                    vim.opt_local.foldmethod = "manual"
-                end,
-            })
-
             require("neogit").setup({
                 disable_insert_on_commit = true,
                 disable_commit_confirmation = true,
