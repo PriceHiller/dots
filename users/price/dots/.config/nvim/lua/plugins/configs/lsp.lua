@@ -533,7 +533,6 @@ return {
                 "tflint",
                 "vimls",
                 "tsserver",
-                "marksman",
                 "asm_lsp",
                 "typst_lsp",
                 "nginx_language_server",
