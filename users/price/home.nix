@@ -64,7 +64,6 @@ in
         luajit
         imagemagick
         shellcheck
-        openjdk
         nodejs
         poetry
         ruby
