@@ -301,6 +301,10 @@ return {
                 handlers = {
                     ["jdtls"] = function()
                         require("java").setup({
+                            -- Handled by $JAVA_HOME
+                            jdk = {
+                                auto_install = false,
+                            },
                             notifications = {
                                 dap = false,
                             },
