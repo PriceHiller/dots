@@ -23,3 +23,4 @@ dot files. They're largely just for fun, not something important. 🙂
   - Would also be good to get a CI runner up that validates on the server side
 - [ ] Enhance our custom ~Fmt~ program to avoid certain files.
     - I don't need to format some files that are handled automatically by other programs
+- [ ] Migrate the ~Kanagawa.tmTheme~ for ~bat~ to a nix attribute set, using ~tmTheme~ for home manager's bat configuration is deprecated.
