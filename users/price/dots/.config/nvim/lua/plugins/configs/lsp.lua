@@ -384,17 +384,6 @@ return {
             })
 
             -- NOTE: PYTHON LSP
-            lspconfig.pyright.setup({
-                python = {
-                    analysis = {
-                        diagnosticMode = "workspace",
-                        typeCheckingMode = "strict",
-                    },
-                },
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
-            })
-
             lspconfig.yamlls.setup({
                 settings = {
                     redhat = {
@@ -524,6 +513,7 @@ return {
                 "cmake",
                 "bashls",
                 "dockerls",
+                "basedpyright",
                 "docker_compose_language_service",
                 "eslint",
                 "html",
