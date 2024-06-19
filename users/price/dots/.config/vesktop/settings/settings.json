@@ -1,5 +1,5 @@
 {
-    "autoUpdate": false,
+    "autoUpdate": true,
     "autoUpdateNotification": true,
     "useQuickCss": true,
     "themeLinks": [
@@ -78,7 +78,7 @@
             "sidebarAnim": true
         },
         "BetterGifAltText": {
-            "enabled": false
+            "enabled": true
         },
         "BetterGifPicker": {
             "enabled": true
@@ -218,7 +218,7 @@
             "enabled": false
         },
         "GifPaste": {
-            "enabled": false
+            "enabled": true
         },
         "GreetStickerPicker": {
             "enabled": false
@@ -352,7 +352,7 @@
             "enabled": false
         },
         "NewGuildSettings": {
-            "enabled": false
+            "enabled": true
         },
         "NoBlockedMessages": {
             "enabled": false
@@ -376,7 +376,7 @@
             "enabled": false
         },
         "NoProfileThemes": {
-            "enabled": false
+            "enabled": true
         },
         "NoReplyMention": {
             "enabled": false
@@ -429,7 +429,9 @@
             "onboarding": true
         },
         "PermissionsViewer": {
-            "enabled": false
+            "enabled": false,
+            "permissionsSortOrder": 0,
+            "defaultPermissionsDropdownState": false
         },
         "petpet": {
             "enabled": false
@@ -490,7 +492,7 @@
             "enabled": false
         },
         "RoleColorEverywhere": {
-            "enabled": true,
+            "enabled": false,
             "chatMentions": true,
             "memberList": true,
             "voiceUsers": true,
@@ -516,7 +518,11 @@
             "enabled": false
         },
         "ShikiCodeblocks": {
-            "enabled": false
+            "enabled": false,
+            "theme": "https://raw.githubusercontent.com/shikijs/shiki/0b28ad8ccfbf2615f2d9d38ea8255416b8ac3043/packages/shiki/themes/dark-plus.json",
+            "tryHljs": "SECONDARY",
+            "useDevIcon": "GREYSCALE",
+            "bgOpacity": 100
         },
         "ShowAllMessageButtons": {
             "enabled": false
@@ -585,7 +591,7 @@
             "includeCurrentChannel": true,
             "includeMutedChannels": false,
             "includeBlockedUsers": false,
-            "indicatorMode": 3
+            "indicatorMode": 1
         },
         "TypingTweaks": {
             "enabled": true,
@@ -672,6 +678,9 @@
         },
         "SupportHelper": {
             "enabled": false
+        },
+        "SettingsStoreAPI": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -684,6 +693,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1718200979417
+        "settingsSyncVersion": 1718769847454
     }
 }
