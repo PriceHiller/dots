@@ -26,6 +26,6 @@
       ];
     };
   };
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   services.spice-vdagentd.enable = true;
 }
