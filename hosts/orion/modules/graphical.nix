@@ -26,6 +26,13 @@
       ];
     };
   };
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver
+      libvdpau
+    ];
+  };
   services.spice-vdagentd.enable = true;
 }
