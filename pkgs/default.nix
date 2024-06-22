@@ -4,6 +4,7 @@
     rustPlatform = pkgs.rustPlatform;
     fetchFromGitHub = pkgs.fetchFromGitHub;
   };
+  screen-cap = pkgs.callPackage ./screen-cap/default.nix { };
   Fmt = pkgs.writeShellApplication {
     name = "Fmt";
     runtimeInputs = with pkgs; [
