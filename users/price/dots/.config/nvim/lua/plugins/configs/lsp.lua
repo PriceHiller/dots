@@ -209,6 +209,7 @@ return {
                     local null_ls = require("null-ls")
                     null_ls.setup({
                         sources = {
+                            null_ls.builtins.formatting.google_java_format,
                             null_ls.builtins.formatting.stylua,
                             null_ls.builtins.formatting.asmfmt,
                             null_ls.builtins.formatting.black,
@@ -231,7 +232,7 @@ return {
                     vim.lsp.buf.format({
                         async = true,
                         filter = function(client)
-                            return not vim.list_contains({ "lua_ls" }, client.name)
+                            return not vim.list_contains({ "lua_ls", "jdtls" }, client.name)
                         end,
                     })
                 end,
