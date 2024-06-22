@@ -1,14 +1,4 @@
-#!/usr/bin/env -S nix shell github:nix-community/nixgl#nixGLIntel nixpkgs#bash nixpkgs#wl-screenrec nixpkgs#gifski nixpkgs#inotify-tools nixpkgs#libnotify nixpkgs#mktemp nixpkgs#slurp nixpkgs#slurp --command bash
-
-# Dependencies:
-#	- wl-screenrec: https://github.com/russelltg/wl-screenrec
-#	- notification daemon: https://archlinux.org/packages/?name=notification-daemon
-#	- wl-clipboard: https://github.com/bugaevc/wl-clipboard
-#	- gifski: https://github.com/sindresorhus/Gifski
-#
-#	Gifski is necessary because `wl-screenrec` doesn't support gifs
-
-# set -euoE pipefail
+set -euoE pipefail
 
 mk-screen-cap() {
 	local program_name="Screen Capture"
@@ -40,7 +30,7 @@ mk-screen-cap() {
 
 		local geometry
 		geometry="$(slurp)"
-		nixGLIntel wl-screenrec --filename "$tmp_file" --geometry "$geometry" &
+		wl-screenrec --filename "$tmp_file" --geometry "$geometry" &
 		local pid="${!}"
 		printf "%s" "$pid" >"$pid_file"
 		printf "Putting pid: '%d' into pid file: '%s'\n" "$pid" "$pid_file"
