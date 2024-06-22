@@ -30,6 +30,8 @@ in
     packages =
       with pkgs;
       [
+        plantuml
+        graphviz
         gcolor3
         typescript
         deno
