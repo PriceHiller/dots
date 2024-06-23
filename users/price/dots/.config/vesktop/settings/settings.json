@@ -23,7 +23,7 @@
             "enabled": true
         },
         "MessageAccessoriesAPI": {
-            "enabled": false
+            "enabled": true
         },
         "MessageDecorationsAPI": {
             "enabled": true
@@ -681,6 +681,9 @@
         },
         "SettingsStoreAPI": {
             "enabled": false
+        },
+        "UserSettingsAPI": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -693,6 +696,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1718769847454
+        "settingsSyncVersion": 1719128377334
     }
 }
