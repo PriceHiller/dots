@@ -19,7 +19,6 @@ return {
                 },
                 filewatcher = {
                     enabled = true,
-                    interval = 1000,
                 },
                 graph_style = "unicode",
                 integrations = {
