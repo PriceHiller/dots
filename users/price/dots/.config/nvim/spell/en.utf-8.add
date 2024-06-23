@@ -320,3 +320,5 @@ lookups
 incrementing
 rebalance
 backend
+STDIN
+stdin
