@@ -65,6 +65,7 @@ in
         sqlite
         swaylock-effects
         luajit
+        luarocks
         imagemagick
         shellcheck
         nodejs
