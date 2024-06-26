@@ -12,7 +12,7 @@ return {
         end,
         config = function()
             vim.api.nvim_create_autocmd("BufWritePost", {
-                pattern = "lua/plugins/configs/kanagawa.lua",
+                pattern = ".*lua/plugins/configs/kanagawa.lua",
                 callback = function()
                     vim.schedule(vim.cmd.KanagawaCompile)
                 end,
