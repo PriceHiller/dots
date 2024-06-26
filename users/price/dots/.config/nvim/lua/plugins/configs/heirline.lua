@@ -85,7 +85,7 @@ return {
                     },
                     mode_color = function(self)
                         local mode = conditions.is_active() and vim.api.nvim_get_mode().mode or "n"
-                        return self.mode_colors[mode]
+                        return self.mode_colors[mode] or colors.crystalBlue
                     end,
                 },
                 {
