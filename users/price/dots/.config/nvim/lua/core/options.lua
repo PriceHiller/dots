@@ -96,9 +96,6 @@ M.setup = function()
     -- Better completion experience
     opt.completeopt = "menuone,noselect"
 
-    -- Set max text width
-    opt.textwidth = 100
-
     -- Make statusline global
     opt.laststatus = 3
 
