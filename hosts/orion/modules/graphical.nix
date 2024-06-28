@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  # Allow Chromium & Electron apps run natively in wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services.displayManager = {
     autoLogin = {
       enable = true;
