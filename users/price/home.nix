@@ -31,6 +31,7 @@ in
       with pkgs;
       [
         plantuml
+        libnotify
         graphviz
         gcolor3
         typescript
