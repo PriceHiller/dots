@@ -10,6 +10,7 @@ return {
             require("plugins.configs.kanagawa")
             vim.cmd.KanagawaCompile()
         end,
+        lazy = false,
         config = function()
             vim.api.nvim_create_autocmd("BufWritePost", {
                 pattern = ".*lua/plugins/configs/kanagawa.lua",
