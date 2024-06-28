@@ -115,14 +115,13 @@
           pkgs.runCommand "check-fmt"
             {
               buildInputs = with pkgs; [
-                findutils
+                fd
                 (import ./pkgs { inherit pkgs; }).Fmt
               ];
             }
             ''
-              set -euo pipefail
-              cd "${self}"
-              find . -type f | xargs Fmt
+              set -eEuo pipefail
+              fd --exec-batch=Fmt
               touch $out
             '';
       });
