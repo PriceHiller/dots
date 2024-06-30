@@ -152,48 +152,86 @@ return {
         end,
     },
     {
+        "williamboman/mason.nvim",
+        opts = {
+            max_concurrent_installers = 12,
+            registries = {
+                "github:nvim-java/mason-registry",
+                "github:mason-org/mason-registry",
+            },
+        },
+        cmd = {
+            "Mason",
+            "MasonLog",
+            "MasonUpdate",
+            "MasonInstall",
+            "MasonUninstall",
+            "MasonUninstallAll",
+        },
+    },
+    {
+        "nvim-java/nvim-java",
+        ft = { "java" },
+        config = function()
+            require("lspconfig").jdtls.setup({
+                capabilities = lsp_capabilities,
+                on_attach = on_attach,
+                -- HACK: Have to define this to make jdtls show hovers, etc.
+                init_options = {},
+                settings = {
+                    java = {
+                        completion = {
+                            postfix = {
+                                enabled = true,
+                            },
+                        },
+                        inlayHints = {
+                            parameterNames = {
+                                enabled = "all",
+                                exclusions = { "this" },
+                            },
+                        },
+                    },
+                },
+            })
+        end,
+        dependencies = {
+            "nvim-java/lua-async-await",
+            "nvim-java/nvim-java-refactor",
+            "nvim-java/nvim-java-core",
+            "nvim-java/nvim-java-test",
+            "nvim-java/nvim-java-dap",
+            "MunifTanjim/nui.nvim",
+            "mfussenegger/nvim-dap",
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
+            "williamboman/mason.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
-
                     automatic_installation = true,
                     ensure_installed = {
                         "tsserver",
                     },
-                },
-            },
-            {
-                "nvim-java/nvim-java",
-                dependencies = {
-                    "nvim-java/lua-async-await",
-                    "nvim-java/nvim-java-refactor",
-                    "nvim-java/nvim-java-core",
-                    "nvim-java/nvim-java-test",
-                    "nvim-java/nvim-java-dap",
-                    "MunifTanjim/nui.nvim",
-                    "mfussenegger/nvim-dap",
-                    "williamboman/mason.nvim",
-                },
-            },
-            {
-                "williamboman/mason.nvim",
-                opts = {
-                    max_concurrent_installers = 12,
-                    registries = {
-                        "github:nvim-java/mason-registry",
-                        "github:mason-org/mason-registry",
+                    handlers = {
+                        ["jdtls"] = function()
+                            require("java").setup({
+                                -- Handled by $JAVA_HOME
+                                jdk = {
+                                    auto_install = false,
+                                },
+                                notifications = {
+                                    dap = false,
+                                },
+                            })
+                        end,
                     },
-                },
-                cmd = {
-                    "Mason",
-                    "MasonLog",
-                    "MasonUpdate",
-                    "MasonInstall",
-                    "MasonUninstall",
-                    "MasonUninstallAll",
                 },
             },
             "Hoffs/omnisharp-extended-lsp.nvim",
