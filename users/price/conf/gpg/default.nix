@@ -11,9 +11,6 @@
         trust = "ultimate";
       }
     ];
-    settings = {
-      pinentry-mode = "loopback";
-    };
   };
   services.gpg-agent = {
     enable = true;
