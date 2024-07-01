@@ -208,6 +208,9 @@ return {
                     else
                         ---@diagnostic disable-next-line: cast-local-type
                         filename = vim.fn.fnamemodify(self.filename, ":~:.")
+                        if not conditions.width_percent_below(#filename, 0.5, true) then
+                            filename = vim.fn.pathshorten(filename)
+                        end
                     end
                     if filename == "" then
                         filename = "[No Name]"
@@ -543,6 +546,11 @@ return {
                         end,
                     },
                     {
+                        update = {
+                            "WinResized",
+                            "BufAdd",
+                            "BufEnter",
+                        },
                         FileNameBlock,
                         static = {
                             bg_color_right = nil,
@@ -668,10 +676,14 @@ return {
                     provider = "%=",
                 },
                 {
+                    update = {
+                        "BufAdd",
+                        "BufEnter",
+                        "FileType",
+                    },
                     init = function(self)
                         self.filename = vim.api.nvim_buf_get_name(0)
                     end,
-
                     {
                         provider = seps.full.left,
                         hl = function()
@@ -747,6 +759,7 @@ return {
                 },
                 margin(1),
                 {
+                    update = "CursorMoved",
                     {
                         provider = seps.full.left,
                         hl = function()
@@ -941,7 +954,11 @@ return {
                             {
                                 provider = function()
                                     local cwd = vim.uv.cwd() or ""
-                                    return " " .. vim.fn.pathshorten(vim.fn.fnamemodify(cwd, ":~"))
+                                    cwd = vim.fn.fnamemodify(cwd, ":~")
+                                    if not conditions.width_percent_below(#cwd, 0.3, false) then
+                                        cwd = vim.fn.pathshorten(cwd)
+                                    end
+                                    return " " .. cwd
                                 end,
                                 hl = {
                                     fg = colors.sumiInk0,
