@@ -332,26 +332,6 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require("mason-lspconfig").setup({
-                automatic_installation = true,
-                ensure_installed = {
-                    "tsserver",
-                },
-                handlers = {
-                    ["jdtls"] = function()
-                        require("java").setup({
-                            -- Handled by $JAVA_HOME
-                            jdk = {
-                                auto_install = false,
-                            },
-                            notifications = {
-                                dap = false,
-                            },
-                        })
-                    end,
-                },
-            })
-
             local lspconfig = require("lspconfig")
 
             lspconfig.jdtls.setup({
