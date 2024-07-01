@@ -1,36 +1,3 @@
-local function on_attach(client, bufnr)
-    -- Set autocommands conditional on server_capabilities
-    vim.notify("Attached server " .. client.name, vim.log.levels.INFO, {
-        title = "LSP",
-    })
-
-    local function disable_format_capability(capabilities)
-        capabilities.documentFormattingProvider = false
-        capabilities.documentRangeFormattingProvider = false
-    end
-    local ignored_fmt_lsps = {
-        "lua_ls",
-    }
-    local capabilities = client.server_capabilities
-    -- vim.notify(vim.inspect(capabilities))
-    for _, lsp_name in ipairs(ignored_fmt_lsps) do
-        if client.name == lsp_name then
-            disable_format_capability(capabilities)
-        end
-    end
-
-    if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
-        require("hlargs").disable_buf(bufnr)
-    end
-end
-
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local server_opts = {
-    capabilities = lsp_capabilities,
-    on_attach = on_attach,
-}
-
-local lsp_server_bin_dir = vim.fn.stdpath("data") .. "/mason/bin/"
 return {
     {
         url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -129,9 +96,6 @@ return {
         ft = { "rust" },
         config = function()
             vim.g.rustaceanvim = {
-                server = {
-                    on_attach = on_attach,
-                },
                 dap = {
                     adapter = {
                         type = "server",
@@ -172,29 +136,6 @@ return {
     {
         "nvim-java/nvim-java",
         ft = { "java" },
-        config = function()
-            require("lspconfig").jdtls.setup({
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
-                -- HACK: Have to define this to make jdtls show hovers, etc.
-                init_options = {},
-                settings = {
-                    java = {
-                        completion = {
-                            postfix = {
-                                enabled = true,
-                            },
-                        },
-                        inlayHints = {
-                            parameterNames = {
-                                enabled = "all",
-                                exclusions = { "this" },
-                            },
-                        },
-                    },
-                },
-            })
-        end,
         dependencies = {
             "nvim-java/lua-async-await",
             "nvim-java/nvim-java-refactor",
@@ -332,11 +273,45 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
+            local lsp_capabilities =
+                require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local bufnr = args.buf
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if not client then
+                        return
+                    end
+                    vim.notify("Attached server " .. client.name, vim.log.levels.INFO, {
+                        title = "LSP",
+                    })
+
+                    local function disable_format_capability(capabilities)
+                        capabilities.documentFormattingProvider = false
+                        capabilities.documentRangeFormattingProvider = false
+                    end
+                    local ignored_fmt_lsps = {
+                        "lua_ls",
+                    }
+                    local capabilities = client.server_capabilities
+                    capabilities = vim.tbl_deep_extend("force", capabilities, lsp_capabilities)
+                    if not capabilities then
+                        return
+                    end
+                    for _, lsp_name in ipairs(ignored_fmt_lsps) do
+                        if client.name == lsp_name then
+                            disable_format_capability(capabilities)
+                        end
+                    end
+
+                    if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
+                        require("hlargs").disable_buf(bufnr)
+                    end
+                end,
+            })
             local lspconfig = require("lspconfig")
 
             lspconfig.jdtls.setup({
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
                 -- HACK: Have to define this to make jdtls show hovers, etc.
                 init_options = {},
                 settings = {
@@ -360,8 +335,6 @@ return {
             -- I use ansible a lot, define exceptions for servers that can use
             -- server:setup & vim.cmd at the bottom here
             lspconfig.ansiblels.setup({
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
                 settings = {
                     ansible = {
                         ansible = {
@@ -424,16 +397,12 @@ return {
                         }),
                     },
                 },
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
             })
 
             lspconfig.csharp_ls.setup({
                 handlers = {
                     ["textDocument/definition"] = require("csharpls_extended").handler,
                 },
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
             })
 
             lspconfig.jsonls.setup({
@@ -441,8 +410,6 @@ return {
                     schemas = require("schemastore").json.schemas(),
                     validate = { enable = true },
                 },
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
             })
 
             lspconfig.docker_compose_language_service.setup({
@@ -451,18 +418,14 @@ return {
                         enableTelemetry = false,
                     },
                 },
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
             })
 
             lspconfig.powershell_es.setup({
                 bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/",
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
             })
 
             lspconfig.azure_pipelines_ls.setup({
-                cmd = { lsp_server_bin_dir .. "azure-pipelines-language-server", "--stdio" },
+                cmd = { "azure-pipelines-language-server", "--stdio" },
                 settings = {
                     redhat = {
                         telemetry = {
@@ -478,13 +441,9 @@ return {
                     },
                 },
                 filetypes = { "azure-pipelines" },
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
             })
 
             lspconfig.texlab.setup({
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
                 settings = {
                     texlab = {
                         build = {
@@ -502,16 +461,12 @@ return {
             })
 
             lspconfig.gopls.setup({
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
                 fillstruct = "gopls",
                 dap_debug = true,
                 dap_debug_gui = true,
             })
 
             lspconfig.nil_ls.setup({
-                capabilities = lsp_capabilities,
-                on_attach = on_attach,
                 settings = {
                     ["nil"] = {
                         formatting = { command = { "nixfmt" } },
@@ -546,7 +501,7 @@ return {
                 "typst_lsp",
                 "nginx_language_server",
             }) do
-                lspconfig[server].setup(server_opts)
+                lspconfig[server].setup({})
             end
         end,
     },
