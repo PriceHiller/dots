@@ -754,41 +754,6 @@ return {
                         end,
                     },
                     {
-                        provider = "%p%% ",
-                        hl = {
-                            fg = colors.fujiWhite,
-                            bg = colors.sumiInk4,
-                        },
-                    },
-                    {
-                        provider = seps.full.left,
-                        hl = function()
-                            return { fg = colors.carpYellow, bg = colors.sumiInk4 }
-                        end,
-                    },
-                    {
-                        provider = "  ",
-                        hl = {
-                            fg = colors.sumiInk0,
-                            bg = colors.carpYellow,
-                        },
-                    },
-                    {
-                        provider = seps.full.right,
-                        hl = function()
-                            return { fg = colors.carpYellow, bg = utils.get_highlight("WinBar").bg }
-                        end,
-                    },
-                },
-                margin(1),
-                {
-                    {
-                        provider = seps.full.left,
-                        hl = function()
-                            return { fg = colors.sumiInk4, bg = utils.get_highlight("WinBar").bg }
-                        end,
-                    },
-                    {
                         provider = "%l:%c ",
                         hl = {
                             fg = colors.fujiWhite,
