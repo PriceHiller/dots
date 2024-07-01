@@ -282,8 +282,16 @@ return {
                     if not client then
                         return
                     end
-                    vim.notify("Attached server " .. client.name, vim.log.levels.INFO, {
+                    vim.notify("Attached server `" .. client.name .. "`", vim.log.levels.INFO, {
                         title = "LSP",
+                        ---@param win integer The window handle
+                        on_open = function(win)
+                            vim.api.nvim_set_option_value(
+                                "filetype",
+                                "markdown",
+                                { buf = vim.api.nvim_win_get_buf(win) }
+                            )
+                        end,
                     })
 
                     local function disable_format_capability(capabilities)
