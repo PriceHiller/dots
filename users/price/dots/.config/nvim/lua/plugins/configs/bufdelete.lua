@@ -11,7 +11,15 @@ return {
         "famiu/bufdelete.nvim",
         cmd = "Bdelete",
         keys = {
-            { "<A-x>", "<cmd>Bdelete<cr>", desc = "Close Buffer" },
+            { "<A-x>", "<cmd>Bdelete<cr>", desc = "Close Buffer", mode = { "", "!", "v" } },
+            {
+                "<A-x>",
+                function()
+                    require("bufdelete").bufdelete(0, true)
+                end,
+                desc = "Close Buffer",
+                mode = { "t" },
+            },
         },
     },
 }
