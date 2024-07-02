@@ -546,11 +546,6 @@ return {
                         end,
                     },
                     {
-                        update = {
-                            "WinResized",
-                            "BufAdd",
-                            "BufEnter",
-                        },
                         FileNameBlock,
                         static = {
                             bg_color_right = nil,
