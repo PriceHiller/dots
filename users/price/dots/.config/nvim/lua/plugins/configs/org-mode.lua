@@ -98,7 +98,7 @@ return {
         end,
     },
     {
-        "https://git.orion-technologies.io/Price/telescope-orgmode.nvim",
+        "nvim-orgmode/telescope-orgmode.nvim",
         dependencies = {
             "nvim-orgmode/orgmode",
             "nvim-telescope/telescope.nvim",
@@ -119,6 +119,12 @@ return {
                 "<leader>osr",
                 ":Telescope orgmode refile_heading<CR>",
                 desc = "Telescope: Orgmode Refile Heading",
+                silent = true,
+            },
+            {
+                "<leader>osi",
+                ":Telescope orgmode insert_link<CR>",
+                desc = "Telescope: Orgmode Insert Link",
                 silent = true,
             },
         },
