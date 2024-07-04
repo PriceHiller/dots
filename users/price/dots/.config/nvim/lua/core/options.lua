@@ -37,7 +37,7 @@ M.setup = function()
 
     -- Wrapping behavior
     opt.wrap = true
-    opt.breakat = " \t;,"
+    opt.breakat = " \t;,[]()"
     opt.linebreak = true
     opt.formatlistpat = [[^\s*\(-\|\d\.\)\s*]]
     opt.breakindent = true
