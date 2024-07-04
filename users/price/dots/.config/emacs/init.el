@@ -124,14 +124,15 @@
  '(tool-bar-mode nil))
 
 ;; Doom Themes
-(use-package kanagawa-theme
+(use-package doom-themes
+  :ensure t
   :custom
-  (kanagwa-theme-org-bold t)
-  (kanagawa-theme-org-height t)
-  (kanagawa-theme-keyword-italic t)
-  (kanagawa-theme-comment-italic t)
+  (doom-themes-enable-bold t)
+  (doom-themes-enable-italic t)
   :config
-  (load-theme 'kanagawa t))
+  (load-theme 'doom-one t)
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config))
 
 (use-package doom-modeline
   :custom
