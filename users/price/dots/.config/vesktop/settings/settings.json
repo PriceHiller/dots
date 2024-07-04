@@ -272,8 +272,8 @@
         "MessageClickActions": {
             "enabled": true,
             "enableDeleteOnClick": true,
-            "enableDoubleClickToEdit": true,
-            "enableDoubleClickToReply": true,
+            "enableDoubleClickToEdit": false,
+            "enableDoubleClickToReply": false,
             "requireModifier": false
         },
         "MessageLatency": {
@@ -684,6 +684,9 @@
         },
         "UserSettingsAPI": {
             "enabled": true
+        },
+        "ShowAllRoles": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -696,6 +699,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1719128377334
+        "settingsSyncVersion": 1720042446162
     }
 }
