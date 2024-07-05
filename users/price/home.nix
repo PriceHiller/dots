@@ -23,13 +23,17 @@ in
   imports = (clib.recurseFilesInDirs [ ./conf ] ".nix");
   programs.home-manager.enable = true;
   nixpkgs = {
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      android_sdk.accept_license = true;
+    };
   };
   home = {
     language.base = "en_US.UTF-8";
     packages =
       with pkgs;
       [
+        android-studio-full
         plantuml
         libnotify
         graphviz
