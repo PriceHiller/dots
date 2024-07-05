@@ -135,9 +135,10 @@ in
       ++ [
         gnumake
         cmake
-        gcc
-        glibc
-        glibc.static
+        clang
+        clang-tools
+        ninja
+        ccache
         llvm
         llvmPackages.libcxxStdenv
         pkg-config
