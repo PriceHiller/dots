@@ -1,6 +1,7 @@
 { inputs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
