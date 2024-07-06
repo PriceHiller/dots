@@ -8,6 +8,6 @@
       pager = "never";
       theme = "Kanagawa";
     };
-    themes.Kanagawa = builtins.readFile ./Kanagawa.tmTheme;
+    themes.Kanagawa.src = ./Kanagawa.tmTheme;
   };
 }
