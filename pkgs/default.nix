@@ -5,6 +5,7 @@
     fetchFromGitHub = pkgs.fetchFromGitHub;
   };
   screen-cap = pkgs.callPackage ./screen-cap/default.nix { };
+  neovide = pkgs.callPackage ./neovide/package.nix { };
   Fmt = pkgs.writeShellApplication {
     name = "Fmt";
     runtimeInputs = with pkgs; [
