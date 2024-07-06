@@ -1,21 +1,26 @@
 ---@diagnostic disable: missing-fields
 return {
     {
+        "folke/lazydev.nvim",
+        cmd = "LazyDev",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "luassert-types/library", words = { "assert" } },
+                { path = "busted-types/library", words = { "describe" } },
+                { path = "luvit-meta/library", words = { "vim%.uv", "vim%.loop" } },
+            },
+        },
+        dependencies = {
+            { "Bilal2453/luvit-meta", lazy = true },
+            { "LuaCATS/luassert", lazy = true },
+            { "LuaCATS/busted", lazy = true },
+        },
+    },
+    {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "ModeChanged" },
         dependencies = {
-            {
-                "folke/lazydev.nvim",
-                opts = {
-                    library = {
-                        "luvit-meta/library",
-                    },
-                },
-                dependencies = {
-                    { "Bilal2453/luvit-meta", lazy = true },
-                },
-                ft = "lua",
-            },
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-emoji",
