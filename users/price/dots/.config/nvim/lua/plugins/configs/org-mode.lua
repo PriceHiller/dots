@@ -19,6 +19,7 @@ return {
                 },
                 org_agenda_files = {
                     "~/Git/College/**/*",
+                    "~/Git/Projects/**/*",
                     "~/Notes/**/*",
                     vim.fn.stdpath("config") .. "/**/*",
                 },
