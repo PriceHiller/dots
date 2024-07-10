@@ -15,10 +15,6 @@
     (auto-compile-on-save-mode))
 #+end_src
 
-* Add Additional Package Archives
-#+begin_src emacs-lisp
-#+end_src
-
 * Core
 
 ** Font Settings
@@ -64,6 +60,10 @@ Default to enabling line numbers in all buffers
   (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
+** Preserve Recent Files
+#+begin_src emacs-lisp
+  (recentf-mode t)
+#+end_src
 * Appearance / Themeing
 
 ** Kanagawa Theme
