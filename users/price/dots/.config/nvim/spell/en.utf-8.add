@@ -323,3 +323,5 @@ backend
 STDIN
 stdin
 subdirectories
+preferenced
+reindexed
