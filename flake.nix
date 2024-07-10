@@ -33,6 +33,11 @@
       url = "git+https://git.orion-technologies.io/blog/blog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs =
@@ -77,6 +82,7 @@
             ({
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
+                inputs.emacs-overlay.overlays.default
                 self.overlays.modifications
                 self.overlays.additions
               ];
