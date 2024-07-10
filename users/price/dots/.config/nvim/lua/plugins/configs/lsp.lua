@@ -94,7 +94,7 @@ return {
     {
         "mrcjkb/rustaceanvim",
         ft = { "rust" },
-        config = function()
+        init = function()
             vim.g.rustaceanvim = {
                 dap = {
                     adapter = {
@@ -106,7 +106,27 @@ return {
                         },
                     },
                 },
+                server = {
+                    default_settings = {
+                        ["rust-analyzer"] = {
+                            cargo = {
+                                allFeatures = true,
+                                loadOutDirsFromCheck = true,
+                                runBuildScripts = true,
+                            },
+                            checkOnSave = {
+                                allFeatures = true,
+                                allTargets = true,
+                                command = "clippy",
+                            },
+                            procMacro = {
+                                enable = true,
+                            },
+                        },
+                    },
+                },
                 tools = {
+                    enable_clippy = true,
                     executor = require("rustaceanvim.executors").termopen,
                     hover_actions = {
                         replace_builtin_hover = false,
@@ -114,6 +134,7 @@ return {
                 },
             }
         end,
+        config = false,
     },
     {
         "williamboman/mason.nvim",
