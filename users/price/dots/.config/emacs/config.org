@@ -1,7 +1,6 @@
 #+TITLE: Price Hiller's Emacs Configuration
 #+AUTHOR: Price Hiller
 #+EMAIL: price@orion-technologies.io
-#+OPTIONS: num:nil
 
 * Auto Compile
 
@@ -77,8 +76,10 @@ Default to enabling line numbers in all buffers
 
 * Evil Mode
 #+begin_src emacs-lisp
+  (use-package goto-chg)
   (use-package evil
     :defer nil
+    :after goto-chg
     :custom
     (evl-kbd-macro-suppress-motion-error t)
     (evil-want-C-u-scroll t)
@@ -94,6 +95,33 @@ Default to enabling line numbers in all buffers
     (evil-mode 1))
 #+end_src
 
+** Evil Collection
+More evil keybind support throughout emacs
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :defer nil
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+
+** Evil Surround
+Better surround operations (selecting quotes for instance)
+#+begin_src emacs-lisp
+  (use-package evil-surround
+    :after evil
+    :config
+    (global-evil-surround-mode t))
+#+end_src
+
+** Evil Goggles
+Display visual hints when editing with evil.
+#+begin_src emacs-lisp
+  (use-package evil-goggles
+    :config
+    (evil-goggles-mode)
+    (evil-goggles-use-diff-faces))
+#+end_src
 * General.el
 Used for keybindings
 #+begin_src emacs-lisp
@@ -438,10 +466,10 @@ Used for keybindings
 
 * Save Hist
 #+begin_src emacs-lisp
-(use-package savehist
-  :ensure nil
-  :init
-  (savehist-mode))
+  (use-package savehist
+    :ensure nil
+    :init
+    (savehist-mode))
 #+end_src
 
 * Org Mode
@@ -462,4 +490,13 @@ Used for keybindings
     :after org
     :config
     (global-org-modern-mode))
+#+end_src
+
+* Avy
+#+begin_src emacs-lisp
+  (use-package avy
+    :defer (:wait t)
+    :general
+    (:keymaps '(normal operator)
+              "f" 'avy-goto-char))
 #+end_src
