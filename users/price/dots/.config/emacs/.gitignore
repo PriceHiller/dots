@@ -5,3 +5,4 @@
 !config
 !config/*
 !config/**/*
+!config.org
