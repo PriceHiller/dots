@@ -521,10 +521,10 @@ in
             let
               wallpaper-dir = "${dotsDir}/.local/share/wallpapers";
             in
-            [
-              "${pkgs.swww}/bin/swww img -t random ${wallpaper-dir}/Nebula.jpg"
-              "${pkgs.swww}/bin/swww img -t wipe --transition-angle 40 -o eDP-1 ${wallpaper-dir}/Autumn-Leaves.jpg"
-            ];
+            pkgs.writeShellScript "swww-init-wallpapers" ''
+              "${pkgs.swww}/bin/swww img -t random ${wallpaper-dir}/Nebula.jpg" || true
+              "${pkgs.swww}/bin/swww img -t wipe --transition-angle 40 -o eDP-1 ${wallpaper-dir}/Autumn-Leaves.jpg" || true
+            '';
         };
         Install.WantedBy = [ "swww-daemon.service" ];
         Unit = {
