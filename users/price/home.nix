@@ -255,16 +255,6 @@ in
       enable = true;
       package = pkgs.eclipses.eclipse-java;
     };
-    emacs = {
-      enable = true;
-      extraPackages = (
-        epkgs:
-        (with epkgs; [
-          treesit-grammars.with-all-grammars
-          melpaPackages.pdf-tools
-        ])
-      );
-    };
     wofi.enable = true;
     firefox = {
       enable = true;
