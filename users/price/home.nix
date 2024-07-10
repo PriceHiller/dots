@@ -58,6 +58,7 @@ in
         starship
         nodePackages.prettier
         cargo
+        clippy
         rustc
         rustfmt
         python3
