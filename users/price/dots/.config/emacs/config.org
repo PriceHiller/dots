@@ -1,0 +1,18 @@
+#+TITLE: Price Hiller's Emacs Configuration
+#+AUTHOR: Price Hiller
+#+EMAIL: price@orion-technologies.io
+#+OPTIONS: num:nil
+
+* General.el
+
+#+begin_src emacs-lisp
+;; General for keybindings
+(use-package general
+  :ensure t
+  :demand t)
+(elpaca-wait)
+#+end_src
+
+* Evil Mode
+#+begin_src emacs-lisp
+#+end_src
