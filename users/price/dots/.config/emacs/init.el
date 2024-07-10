@@ -37,11 +37,9 @@
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
-(setq package-enable-at-startup nil)
 (elpaca elpaca-use-package
   (elpaca-use-package-mode)
   (setq use-package-always-ensure t))
 
 ;; Load in the config via org babel
-(package-initialize)
 (org-babel-load-file "~/.config/emacs/config.org")
