@@ -25,19 +25,6 @@ return {
         },
     },
     {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = { "BufReadPre", "BufNewFile" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-        config = function()
-            require("treesitter-context").setup({
-                max_lines = 3,
-            })
-            vim.cmd.TSContextEnable()
-        end,
-    },
-    {
         "windwp/nvim-ts-autotag",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
