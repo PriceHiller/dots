@@ -25,18 +25,20 @@ return {
         config = true,
     },
     {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+        },
+        config = function()
+            local dap_python = require("dap-python")
+            dap_python.test_runner = "pytest"
+            dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3")
+        end,
+    },
+    {
         "mfussenegger/nvim-dap",
         event = { "BufReadPre", "BufNewFile" },
-        dependencies = {
-            {
-                "mfussenegger/nvim-dap-python",
-                config = function()
-                    local dap_python = require("dap-python")
-                    dap_python.test_runner = "pytest"
-                    dap_python.setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python3")
-                end,
-            },
-        },
         keys = {
             { "<leader>d", desc = "> DAP" },
             {
