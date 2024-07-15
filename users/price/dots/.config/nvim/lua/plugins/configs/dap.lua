@@ -138,7 +138,7 @@ return {
 
             --- Gets a path for a given program in the environment
             ---@param program string String of a program in the Mason packages
-            ---@return Path Full path to the program if found, or nil if not
+            ---@return string Full path to the program if found, or nil if not
             local function get_program_path(program)
                 local program_path = vim.fn.stdpath("data") .. "/mason/packages/" .. program .. "/" .. program
                 return program_path
