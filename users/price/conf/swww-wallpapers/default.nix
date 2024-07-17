@@ -24,10 +24,16 @@ in
             ExecStopPost = "${cleanup-socket-script}";
             ExecStart = "${pkgs.swww}/bin/swww-daemon";
           };
-        Install.WantedBy = [ "graphical-session.target" ];
+        Install.WantedBy = [
+          "graphical-session.target"
+          "compositor.target"
+        ];
         Unit = {
           Description = "Wayland Wallpaper Service";
-          PartOf = [ "graphical-session.target" ];
+          PartOf = [
+            "graphical-session.target"
+            "compositor.target"
+          ];
           After = [ "graphical-session.target" ];
         };
       };
