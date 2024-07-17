@@ -152,12 +152,7 @@ in
       ]
       ++ [ rust-analyzer ];
 
-    file = {
-      ".local/share/wallpapers" = {
-        source = ./dots/.local/share/wallpapers;
-        force = true;
-      };
-    } // softLinkDots ".config";
+    file = softLinkDots ".config";
 
     sessionVariables = {
       _ZL_DATA = "${config.xdg.cacheHome}/zlua";
@@ -483,56 +478,6 @@ in
       };
     };
     services = {
-      swww-daemon = {
-        Service =
-          let
-            cleanup-socket-script = pkgs.writeShellScript "swww-daemon-cleanup-socket" ''
-              # Remove the existing swww.socket if it exists, avoids some issues with swww-daemon
-              # startup where swww-daemon claims the address is already in use
-              if [[ -w "$XDG_RUNTIME_DIR/swww.socket" ]]; then
-                rm -f $XDG_RUNTIME_DIR/swww.socket || exit 1
-              fi
-            '';
-          in
-          {
-            RestartSec = 3;
-            PassEnvironment = [ "XDG_RUNTIME_DIR" ];
-            ExecStartPre = "${cleanup-socket-script}";
-            ExecStopPost = "${cleanup-socket-script}";
-            ExecStart = "${pkgs.swww}/bin/swww-daemon";
-          };
-        Install.WantedBy = [ "compositor.target" ];
-        Unit = {
-          Description = "Wayland Wallpaper Service";
-          PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
-        };
-      };
-      swww-wallpapers = {
-        Service = {
-          RestartSec = 3;
-          Type = "oneshot";
-          Environment = [
-            "SWWW_TRANSITION_FPS=120"
-            "SWWW_TRANSITION_STEP=30"
-            "SWWW_TRANSITION_DURATION=0.75"
-          ];
-          ExecStart =
-            let
-              wallpaper-dir = "${dotsDir}/.local/share/wallpapers";
-            in
-            [
-              "${pkgs.swww}/bin/swww img -t random ${wallpaper-dir}/Nebula.jpg"
-              "${pkgs.swww}/bin/swww img -t wipe --transition-angle 40 -o eDP-1 ${wallpaper-dir}/Autumn-Leaves.jpg"
-            ];
-        };
-        Install.WantedBy = [ "swww-daemon.service" ];
-        Unit = {
-          Description = "Wayland Wallpaper Service";
-          PartOf = [ "swww-daemon.service" ];
-          After = [ "swww-daemon.service" ];
-        };
-      };
       keyd-application-mapper = {
         Unit = {
           Description = "Keyd - Linux Keyboard Remapper";
