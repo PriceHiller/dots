@@ -42,7 +42,6 @@ in
         deno
         powershell
         vesktop
-        vimiv-qt
         kooha
         libreoffice-fresh
         zathura
