@@ -232,7 +232,7 @@ return {
                     condition = function()
                         return not vim.bo.modifiable or vim.bo.readonly
                     end,
-                    provider = " ",
+                    provider = "  ",
                     hl = { fg = colors.sumiInk0 },
                 },
             }
@@ -358,7 +358,7 @@ return {
                     condition = function(self)
                         return not vim.bo[self.bufnr].modifiable or vim.bo[self.bufnr].readonly
                     end,
-                    provider = " ",
+                    provider = "  ",
                     hl = { fg = colors.roninYellow },
                 },
             }
