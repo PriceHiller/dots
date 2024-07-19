@@ -396,37 +396,6 @@ return {
                 StatusLineFileFlags,
             }
 
-            -- a nice "x" button to close the buffer
-            local StatusLineCloseButton = {
-                condition = function()
-                    return not vim.bo.modified
-                end,
-                {
-                    provider = " 󰅙 ",
-                    hl = function(self)
-                        local fg = colors.peachRed
-                        local bg = buffer_hl.active.bg
-                        if not self.is_active then
-                            fg = colors.autumnRed
-                            bg = buffer_hl.inactive.bg
-                        end
-                        return { fg = fg, bg = bg }
-                    end,
-                    on_click = {
-                        callback = function(_, minwid)
-                            vim.schedule(function()
-                                vim.api.nvim_buf_delete(minwid, { force = false })
-                                vim.cmd.redrawtabline()
-                            end)
-                        end,
-                        minwid = function(self)
-                            return self.bufnr
-                        end,
-                        name = "heirline_tabline_close_buffer_callback",
-                    },
-                },
-            }
-
             -- The final touch!
             local StatusLineBufferBlock = {
                 {
@@ -442,7 +411,6 @@ return {
                     end,
                 },
                 StatusLineFileNameBlock,
-                StatusLineCloseButton,
                 {
                     provider = seps.full.right,
                     hl = function(self)
