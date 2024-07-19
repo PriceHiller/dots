@@ -6,6 +6,7 @@ return {
             hint = "floating-big-letter",
             ---@param window_ids integer[]
             filter_func = function(window_ids)
+                local cur_win = vim.api.nvim_get_current_win()
                 return vim.iter(window_ids)
                     :filter(function(win_id)
                         local win_type = vim.fn.win_gettype(win_id)
@@ -14,7 +15,7 @@ return {
                             "unknown",
                             "popup",
                             "command",
-                        }, win_type)
+                        }, win_type) and win_id ~= cur_win
                     end)
                     :totable()
             end,
