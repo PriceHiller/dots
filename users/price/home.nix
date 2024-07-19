@@ -45,7 +45,6 @@ in
         kooha
         libreoffice-fresh
         zathura
-        pulseaudio
         nix-prefetch-scripts
         mako
         wl-clipboard
