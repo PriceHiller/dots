@@ -29,6 +29,7 @@ return {
             start_in_insert = false,
             direction = "float",
             autochdir = true,
+            auto_scroll = false,
             winbar = {
                 enable = true,
                 name_formatter = function(term) --  term: Terminal
