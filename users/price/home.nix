@@ -33,6 +33,7 @@ in
     packages =
       with pkgs;
       [
+        devenv
         android-studio-full
         plantuml
         libnotify
