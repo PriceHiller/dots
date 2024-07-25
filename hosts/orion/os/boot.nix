@@ -3,6 +3,9 @@
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  security.tpm2.enable = true;
+  environment.systemPackages = with pkgs; [ tpm2-tss ];
+
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -23,6 +26,7 @@
       ];
       systemd = {
         enable = true;
+        enableTpm2 = true;
         initrdBin = [
           pkgs.libuuid
           pkgs.gawk
