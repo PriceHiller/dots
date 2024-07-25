@@ -125,6 +125,7 @@ in
         qt6Packages.qt6gtk2
         qt6Packages.qt6ct
         libsForQt5.qt5ct
+        strawberry
       ]
       ++ [
         age
