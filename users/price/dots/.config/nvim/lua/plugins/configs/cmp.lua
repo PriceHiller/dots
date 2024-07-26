@@ -62,12 +62,6 @@ return {
                     "saadparwaiz1/cmp_luasnip",
                 },
             },
-            {
-                "saecki/crates.nvim",
-                dependencies = { "nvim-lua/plenary.nvim" },
-                ft = "toml",
-                config = true,
-            },
         },
         config = function()
             local cmp = require("cmp")
@@ -187,7 +181,7 @@ return {
                             orgmode = { symbol = " ", name = "Org", hl_group = "Orgmode" },
                             emoji = { symbol = "󰞅 ", name = "Emoji", hl_group = "Emoji" },
                             zsh = { symbol = " ", name = "Zsh", hl_group = "Zsh" },
-                            crates = { symbol = " ", name = "Crates", hl_group = "Crates" },
+                            ["crates.nvim"] = { symbol = " ", name = "Crates", hl_group = "Crates" },
                             cmdline_history = { symbol = " ", name = "Cmd History", hl_group = "CmdHistory" },
                             rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
                             fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
@@ -205,6 +199,7 @@ return {
 
                         local selection
                         local lsp_name
+                        -- vim.notify(vim.inspect(entry.source))
                         if entry.source.name == "nvim_lsp" then
                             lsp_name = entry.source.source.client.name
                             selection = selections[lsp_name]
@@ -438,7 +433,6 @@ return {
                 "plsql",
                 { sources = standard_sources({ { name = "vim-dadbod-completion", priority = 20 } }) }
             )
-            cmp.setup.filetype("toml", { sources = standard_sources({ { name = "crates" } }) })
             cmp.setup.filetype("org", { sources = standard_sources({ { name = "orgmode", priority = 20 } }) })
 
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
