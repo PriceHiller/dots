@@ -33,6 +33,7 @@ in
     packages =
       with pkgs;
       [
+        htop
         devenv
         android-studio-full
         plantuml
