@@ -33,6 +33,8 @@ in
     packages =
       with pkgs;
       [
+        sqlx-cli
+        postgresql
         htop
         devenv
         android-studio-full
