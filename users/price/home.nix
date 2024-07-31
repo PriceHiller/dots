@@ -33,6 +33,7 @@ in
     packages =
       with pkgs;
       [
+        inkscape
         sqlx-cli
         postgresql
         htop
