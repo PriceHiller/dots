@@ -70,7 +70,6 @@ in
         neovide
         wezterm
         kitty
-        fontconfig
         sqlite
         swaylock-effects
         luajit
@@ -105,11 +104,6 @@ in
         playerctl
         nixfmt-rfc-style
         lxappearance
-        twitter-color-emoji
-        open-sans
-        noto-fonts
-        fira-code
-        nerdfonts
         direnv
         swappy
         stylua
@@ -176,8 +170,6 @@ in
     sessionPath = [ "${config.xdg.dataHome}/bin" ];
   };
 
-  fonts.fontconfig.enable = true;
-
   xdg = {
     enable = true;
     mime.enable = true;
@@ -212,41 +204,6 @@ in
     };
     configFile = {
       "hypr/hyprland.conf".enable = false;
-      "fontconfig/fonts.conf".text = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-          <alias>
-            <family>sans-serif</family>
-            <prefer>
-              <family>Noto Sans</family>
-              <family>Fira Code</family>
-            </prefer>
-          </alias>
-          <alias>
-            <family>serif</family>
-            <prefer>
-              <family>Noto Serif</family>
-              <family>Fira Code</family>
-            </prefer>
-          </alias>
-          <alias>
-            <family>monospace</family>
-            <prefer>
-              <family>Fira Code</family>
-              <family>FiraCode Nerd Font</family>
-              <family>Noto Sans Mono</family>
-            </prefer>
-          </alias>
-          <alias>
-            <family>emoji</family>
-            <prefer>
-              <family>Twemoji</family>
-              <family>Noto Color Emoji</family>
-            </prefer>
-          </alias>
-        </fontconfig>
-      '';
     };
   };
 
@@ -387,11 +344,6 @@ in
       iconTheme = {
         name = "Kanagawa";
         package = pkgs.kanagawa-icon-theme;
-      };
-      font = {
-        name = "Open Sans";
-        size = 11;
-        package = pkgs.open-sans;
       };
       gtk3.extraConfig = extraGtkConfig;
       gtk4.extraConfig = extraGtkConfig;
