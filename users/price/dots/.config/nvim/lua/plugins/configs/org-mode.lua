@@ -47,7 +47,6 @@ return {
                         description = "Todo",
                         template = "* TODO %?\nSCHEDULED: %T",
                         target = "~/Notes/todo.org",
-                        datetree = true,
                     },
                     n = {
                         description = "Note",
