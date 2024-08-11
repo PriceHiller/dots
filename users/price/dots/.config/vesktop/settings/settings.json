@@ -646,9 +646,6 @@
         "VoiceMessages": {
             "enabled": false
         },
-        "WatchTogetherAdblock": {
-            "enabled": false
-        },
         "WebKeybinds": {
             "enabled": false
         },
@@ -687,6 +684,9 @@
         },
         "ShowAllRoles": {
             "enabled": false
+        },
+        "YoutubeAdblock": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -699,6 +699,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1720042446162
+        "settingsSyncVersion": 1723406547539
     }
 }
