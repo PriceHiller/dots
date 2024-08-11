@@ -8,5 +8,6 @@
       enableBashCompletion = true;
     };
     nix-ld.enable = true;
+    steam.enable = true;
   };
 }
