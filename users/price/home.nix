@@ -89,7 +89,6 @@ in
         readline
         gh
         ffmpeg
-        silicon
         man
         thunderbird
         jq
