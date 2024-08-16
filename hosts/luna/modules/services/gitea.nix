@@ -3,6 +3,7 @@
   fqdn,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -136,6 +137,17 @@ in
       locations."/".proxyPass = "http://${config.services.gitea.settings.server.HTTP_ADDR}:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}";
     };
   };
+
+  # TODO: Upstream the below to Nixpkgs. If the runner is using the exact same url as the gitea
+  # service and both are on the same host, then the runner should have a systemd dependency on the
+  # gitea service.
+  systemd.services.gitea-actions-default.requires = lib.mkIf (
+    config.services.gitea.enable
+    && (
+      config.services.gitea-actions-runner.instances.default.url
+      == config.services.gitea.settings.server.ROOT_URL
+    )
+  ) [ "gitea.service" ];
 
   networking.firewall.allowedTCPPorts = [ config.services.gitea.settings.server.SSH_PORT ];
 
