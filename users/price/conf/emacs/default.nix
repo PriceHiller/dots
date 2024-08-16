@@ -7,7 +7,6 @@
       epkgs:
       (with epkgs; [
         treesit-grammars.with-all-grammars
-        melpaPackages.pdf-tools
         vterm
       ])
     );
