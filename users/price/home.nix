@@ -25,7 +25,6 @@ in
   nixpkgs = {
     config = {
       allowUnfree = true;
-      android_sdk.accept_license = true;
     };
   };
   home = {
@@ -38,7 +37,6 @@ in
         postgresql
         htop
         devenv
-        android-studio-full
         plantuml
         libnotify
         graphviz
