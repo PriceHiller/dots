@@ -343,7 +343,7 @@ in
     };
 
   services = {
-    # blueman-applet.enable = true;
+    blueman-applet.enable = true;
     gromit-mpx = {
       enable = true;
       tools = [
