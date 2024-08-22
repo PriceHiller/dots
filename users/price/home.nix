@@ -205,10 +205,6 @@ in
   };
 
   programs = {
-    eclipse = {
-      enable = true;
-      package = pkgs.eclipses.eclipse-java;
-    };
     wofi.enable = true;
     firefox = {
       enable = true;
