@@ -498,6 +498,12 @@ return {
                 },
             })
 
+            lspconfig.typst_lsp.setup({
+                settings = {
+                    exportPdf = "onType",
+                },
+            })
+
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
                 "clangd",
@@ -515,7 +521,6 @@ return {
                 "vimls",
                 "tsserver",
                 "asm_lsp",
-                "typst_lsp",
                 "nginx_language_server",
             }) do
                 lspconfig[server].setup({})
