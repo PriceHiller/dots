@@ -18,6 +18,8 @@ return {
                     "~/Git/College/**/*",
                     "~/Git/Projects/**/*",
                     "~/Notes/**/*",
+                    "~/.config/home-manager/*",
+                    "~/.config/home-manager/docs/**/*",
                     vim.fn.stdpath("config") .. "/**/*",
                 },
                 notifications = {
