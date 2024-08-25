@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   services.postgresqlBackup = {
     location = "/var/backup/postgresql";
@@ -19,7 +14,6 @@
       log_disconnections = true;
       logging_collector = true;
       log_statement = "all";
-      log_destination = lib.mkForce "syslog,jsonlog";
     };
     ensureUsers = [
       {
