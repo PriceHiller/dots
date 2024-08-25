@@ -15,7 +15,6 @@ let
       {
         users-root-pw = "${secrets}/users-root-pw.age";
         users-price-pw = "${secrets}/users-price-pw.age";
-        lakewatch-db-pass = "${secrets}/lakewatch-db-pass.age";
         gitea-db-pass = "${secrets}/gitea-db-pass.age";
         gitea-runner-token = "${secrets}/gitea-runner-token.age";
         gh-ts-autotag-runner-token = "${secrets}/gh-ts-autotag-runner-token.age";

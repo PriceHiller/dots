@@ -6,14 +6,6 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    lakewatch-api = {
-      url = "git+ssh://git@github.com/UTSA-CS-3443/LakeWatch?dir=LakeWatchAPI";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    lakewatch-scraper = {
-      url = "git+ssh://git@github.com/UTSA-CS-3443/LakeWatch?dir=LakeWatchScraper";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     bob = {
       flake = false;
       url = "github:MordechaiHadad/bob";
@@ -237,8 +229,6 @@
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
-                inputs.lakewatch-api.nixosModules.default
-                inputs.lakewatch-scraper.nixosModules.default
                 {
                   config =
                     (import "${self}/secrets" {
