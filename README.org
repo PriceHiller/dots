@@ -12,7 +12,8 @@ In the past I was running on a Mac, so you may find some Mac specific things (es
 For the record, feel free to take what you want. I'm not worried about getting contribution for
 dot files. They're largely just for fun, not something important. 🙂
 
-* TODO Various Tasks to get done [4/4]
+* TODO Various Tasks to get done [4/6]
+SCHEDULED: <2024-08-25 Sun>
 
 - [X] Clean up and better modularize the config
   - Currently a large portion of this config lives in ~users/price/home.nix~ which, while ok for
@@ -27,3 +28,7 @@ dot files. They're largely just for fun, not something important. 🙂
     for now 🤷
 - [x] Migrate the ~Kanagawa.tmTheme~ for ~bat~ to a nix attribute set, using ~tmTheme~ for home manager's bat configuration is deprecated.
   - Not necessary, misread the docs for the home manager module for it 😓
+- [ ] Style NixOS Systems via Stylix
+  - This may make using the kanagawa themes for GTK/QT no longer necessary.
+- [ ] Setup gitea dump removals for Luna
+  - Currently Luna hangs onto gitea dumps for WAY too long, probably would be good to delete Gitea dumps older than a month.
