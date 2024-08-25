@@ -226,6 +226,7 @@
               };
               modules = [
                 defaults
+                ./modules/btrfs-rollback.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
