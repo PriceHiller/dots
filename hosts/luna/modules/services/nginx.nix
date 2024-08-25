@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  fqdn,
-  ...
-}:
+{ inputs, pkgs, ... }:
 {
   services.nginx = {
     enable = true;
@@ -19,7 +14,7 @@
   };
 
   services.nginx.virtualHosts = {
-    "blog.${fqdn}" = {
+    "blog.orion-technologies.io" = {
       forceSSL = true;
       enableACME = true;
       globalRedirect = "price-hiller.com";

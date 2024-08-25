@@ -188,25 +188,7 @@
       });
       nixosConfigurations =
         let
-          lib = (import ./lib { lib = nixpkgs.lib; }) // nixpkgs.lib;
-          persist-dir = "/persist";
-          defaults = {
-            config = {
-              environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
-              environment.persistence.save = {
-                hideMounts = true;
-                persistentStoragePath = "${persist-dir}/save";
-              };
-              environment.persistence.ephemeral = {
-                persistentStoragePath = "${persist-dir}/ephemeral";
-                hideMounts = true;
-                directories = [
-                  "/var/lib"
-                  "/etc/nixos"
-                ];
-              };
-            };
-          };
+          clib = (import ./lib { lib = nixpkgs.lib; });
         in
         {
           orion =
@@ -220,12 +202,9 @@
                 inherit inputs;
                 inherit outputs;
                 inherit hostname;
-                inherit lib;
-                inherit persist-dir;
-                root-disk = "/dev/nvme0n1";
+                inherit clib;
               };
               modules = [
-                defaults
                 ./modules/btrfs-rollback.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
@@ -234,7 +213,7 @@
                   config =
                     (import "${self}/secrets" {
                       agenix = false;
-                      inherit lib;
+                      inherit clib;
                     }).${hostname};
                 }
                 ./hosts/${hostname}
@@ -251,13 +230,9 @@
                 inherit inputs;
                 inherit hostname;
                 inherit nixpkgs;
-                inherit lib;
-                inherit persist-dir;
-                root-disk = "/dev/nvme0n1";
-                fqdn = "orion-technologies.io";
+                inherit clib;
               };
               modules = [
-                defaults
                 ./modules/btrfs-rollback.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
@@ -268,7 +243,7 @@
                   config =
                     (import "${self}/secrets" {
                       agenix = false;
-                      inherit lib;
+                      inherit clib;
                     }).${hostname};
                 }
                 ./hosts/${hostname}

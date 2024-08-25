@@ -1,11 +1,6 @@
-{
-  config,
-  pkgs,
-  fqdn,
-  ...
-}:
+{ config, ... }:
 let
-  grafana_host = "grafana.${fqdn}";
+  grafana_host = "grafana.orion-technologies.io";
 in
 {
   services = {
