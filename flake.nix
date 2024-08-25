@@ -255,15 +255,6 @@
           deploy-rs = inputs.deploy-rs;
         in
         {
-          orion = {
-            hostname = "orion";
-            fastConnection = true;
-            profiles.system = {
-              sshUser = "price";
-              user = "root";
-              path = deploy-rs.lib.x86_64-linux.activate.nixos outputs.nixosConfigurations.orion;
-            };
-          };
           luna = {
             hostname = "luna.hosts.orion-technologies.io";
             fastConnection = true;
