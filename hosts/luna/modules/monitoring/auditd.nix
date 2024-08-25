@@ -1,9 +1,4 @@
-{
-  persist-dir,
-  pkgs,
-  config,
-  ...
-}:
+{ pkgs, config, ... }:
 let
   laurel-user = "_laurel";
 in
@@ -145,7 +140,7 @@ in
     "-a always,exit -F arch=b64 -S open -F dir=/opt -F success=0 -F key=unauthedfileaccess"
     "-a always,exit -F arch=b64 -S open -F dir=/boot -F success=0 -F key=unauthedfileaccess"
     "-a always,exit -F arch=b64 -S open -F dir=/nix -F success=0 -F key=unauthedfileaccess"
-    "-a always,exit -F arch=b64 -S open -F dir=${persist-dir} -F success=0 -F key=unauthedfileaccess"
+    "-a always,exit -F arch=b64 -S open -F dir=/persist -F success=0 -F key=unauthedfileaccess"
 
     # File deletion events by users
     "-a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=-1 -F key=delete"

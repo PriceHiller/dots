@@ -1,10 +1,22 @@
+{ lib, ... }:
+let
+  root-disk = "/dev/nvme0n1";
+  persist-dir = "/persist";
+in
 {
-  lib,
-  root-disk,
-  persist-dir,
-  ...
-}:
-{
+  environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
+  environment.persistence.save = {
+    hideMounts = true;
+    persistentStoragePath = "${persist-dir}/save";
+  };
+  environment.persistence.ephemeral = {
+    persistentStoragePath = "${persist-dir}/ephemeral";
+    hideMounts = true;
+    directories = [
+      "/var/lib"
+      "/etc/nixos"
+    ];
+  };
   services = {
     fstrim.enable = true;
     btrfs.autoScrub = {
@@ -12,7 +24,7 @@
       fileSystems = [
         "/"
         "/nix"
-        "/persist"
+        "${persist-dir}"
       ];
     };
     snapper = {

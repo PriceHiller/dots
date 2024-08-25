@@ -1,7 +1,7 @@
-{ lib, ... }:
+{ clib, ... }:
 {
   imports = (
-    lib.recurseFilesInDirs [
+    clib.recurseFilesInDirs [
       ./os
       ./modules
     ] ".nix"

@@ -1,11 +1,6 @@
-{
-  config,
-  fqdn,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 let
-  prometheus_host = "prometheus.${fqdn}";
+  prometheus_host = "prometheus.orion-technologies.io";
 in
 {
   services = {

@@ -1,9 +1,8 @@
-{
-  lib,
-  root-disk,
-  persist-dir,
-  ...
-}:
+{ lib, ... }:
+let
+  root-disk = "/dev/nvme0n1";
+  persist-dir = "/persist";
+in
 {
   services = {
     fstrim.enable = true;
@@ -15,6 +14,20 @@
         "/persist"
       ];
     };
+  };
+
+  environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
+  environment.persistence.save = {
+    hideMounts = true;
+    persistentStoragePath = "${persist-dir}/save";
+  };
+  environment.persistence.ephemeral = {
+    persistentStoragePath = "${persist-dir}/ephemeral";
+    hideMounts = true;
+    directories = [
+      "/var/lib"
+      "/etc/nixos"
+    ];
   };
 
   fileSystems."${persist-dir}".neededForBoot = true;

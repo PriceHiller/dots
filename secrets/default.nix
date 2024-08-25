@@ -1,6 +1,6 @@
 {
   agenix ? false,
-  lib ? import ../lib { },
+  clib ? import ../clib { },
 }:
 let
   masterKeys = [
@@ -54,7 +54,7 @@ if agenix then
 else
   (builtins.mapAttrs (
     host: secrets:
-    (lib.recursiveMerge (
+    (clib.recursiveMerge (
       builtins.map (secretName: { age.secrets.${secretName}.file = ./${secrets.${secretName}}; }) (
         builtins.attrNames hosts.${host}
       )

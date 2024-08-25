@@ -1,4 +1,4 @@
-{ config, fqdn, ... }:
+{ config, ... }:
 {
   services.lakewatch-api = {
     enable = true;
@@ -14,7 +14,7 @@
       passwordFile = config.age.secrets.lakewatch-db-pass.path;
     };
   };
-  services.nginx.virtualHosts."lakewatch.${fqdn}" = {
+  services.nginx.virtualHosts."lakewatch.orion-technologies.io" = {
     forceSSL = true;
     enableACME = true;
     locations."/".proxyPass = "http://${config.services.lakewatch-api.host}:${builtins.toString config.services.lakewatch-api.port}";
