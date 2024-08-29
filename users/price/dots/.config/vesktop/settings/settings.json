@@ -682,10 +682,10 @@
         "UserSettingsAPI": {
             "enabled": true
         },
-        "ShowAllRoles": {
+        "YoutubeAdblock": {
             "enabled": false
         },
-        "YoutubeAdblock": {
+        "AlwaysExpandRoles": {
             "enabled": false
         }
     },
@@ -699,6 +699,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1723406547539
+        "settingsSyncVersion": 1724963182847
     }
 }
