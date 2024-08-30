@@ -5,6 +5,7 @@
     desktopEntries.thunderbird = {
       name = "thunderbird";
       exec = "${pkgs.thunderbird}/bin/thunderbird";
+      icon = "${pkgs.thunderbird}/share/icons/hicolor/128x128/apps/thunderbird.png";
     };
     mimeApps = {
       associations.added = {
