@@ -154,14 +154,20 @@ in
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
-      TERMINFO_DIRS = "${config.home.homeDirectory}/.nix-profile/share/terminfo";
+      TERMINFO_DIRS = "${config.home.profileDirectory}/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
       LD_LIBRARY_PATH = lib.strings.makeLibraryPath [
-        "${config.home.homeDirectory}/.nix-profile/"
+        "${config.home.profileDirectory}"
         "${pkgs.sqlite.out}"
       ];
-      PKG_CONFIG_PATH = "${config.home.homeDirectory}/.nix-profile/lib/pkgconfig";
+      PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
       GTK_PATH = "${pkgs.gtk-engine-murrine}/lib/gtk-2.0";
+      ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
+      ANSIBLE_HOME = "${config.xdg.dataHome}/ansible";
+      CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
+      DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+      GRADLE_USER_HOME = "${config.xdg.dataHome}/gradle";
+      _JAVA_OPTIONS = "-Djava.util.prefs.userRoot='${config.xdg.configHome}/java'";
     };
     sessionPath = [ "${config.xdg.dataHome}/bin" ];
   };
@@ -169,7 +175,7 @@ in
   xdg = {
     enable = true;
     mime.enable = true;
-    systemDirs.data = [ "${config.home.homeDirectory}/.nix-profile/share/" ];
+    systemDirs.data = [ "${config.home.profileDirectory}/share/" ];
     mimeApps = {
       enable = true;
       associations.added = {

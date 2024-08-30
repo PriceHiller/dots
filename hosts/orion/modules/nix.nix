@@ -11,6 +11,7 @@
         "flakes"
       ];
       auto-optimise-store = true;
+      use-xdg-base-directories = true;
       trusted-users = [ "@wheel" ];
     };
     gc = {
