@@ -5,6 +5,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
+      enableGlobalCompInit = false;
       enableBashCompletion = true;
     };
     nix-ld.enable = true;
