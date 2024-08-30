@@ -90,7 +90,6 @@ in
         gh
         ffmpeg
         man
-        thunderbird
         jq
         tectonic
         fzf
