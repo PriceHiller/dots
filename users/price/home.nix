@@ -56,7 +56,6 @@ in
         unzip
         Fmt
         screen-cap
-        starship
         nodePackages.prettier
         cargo
         clippy
