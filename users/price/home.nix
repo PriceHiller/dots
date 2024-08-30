@@ -176,6 +176,7 @@ in
     enable = true;
     mime.enable = true;
     systemDirs.data = [ "${config.home.profileDirectory}/share/" ];
+    cacheHome = "${config.home.homeDirectory}/.local/cache";
     mimeApps = {
       enable = true;
       associations.added = {
