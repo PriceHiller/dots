@@ -32,6 +32,7 @@ in
     packages =
       with pkgs;
       [
+        nixd
         inkscape
         sqlx-cli
         postgresql
