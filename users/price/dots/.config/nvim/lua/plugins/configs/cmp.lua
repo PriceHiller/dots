@@ -156,6 +156,7 @@ return {
                     {
                         name = "lua-latex-symbols",
                         option = { cache = true },
+                        max_item_count = 5,
                         trigger_characters = { "\\" },
                     },
                     { name = "zsh", max_item_count = 5 },
