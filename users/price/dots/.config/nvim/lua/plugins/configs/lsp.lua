@@ -483,15 +483,22 @@ return {
                 dap_debug_gui = true,
             })
 
-            lspconfig.nil_ls.setup({
+            -- TODO: Make this more general, this will support my own NixOS config and dot file
+            -- stuff, but not generally usable for other projects. Would be good to use something
+            -- like `.nvim.lua` for this or whatever else works 🤷.
+            lspconfig.nixd.setup({
+                cmd = { "nixd", "--semantic-tokens=false" },
                 settings = {
-                    ["nil"] = {
-                        formatting = { command = { "nixfmt" } },
-                        nix = {
-                            maxMemoryMB = 60000,
-                            flake = {
-                                autoArchive = true,
-                                autoEvalInputs = true,
+                    nixd = {
+                        nixpkgs = {
+                            expr = "import <nixpkgs> { }",
+                        },
+                        formatting = {
+                            command = { "nixfmt" },
+                        },
+                        options = {
+                            home_manager = {
+                                expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations.price.options',
                             },
                         },
                     },
