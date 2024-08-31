@@ -324,6 +324,10 @@ return {
                     if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
                         require("hlargs").disable_buf(bufnr)
                     end
+
+                    if capabilities.inlayHintProvider and not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) then
+                        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                    end
                 end,
             })
             local lspconfig = require("lspconfig")
