@@ -7,21 +7,24 @@ return {
             { "<leader>o", desc = "> Org" },
         },
         config = function()
-            -- Setup orgmode
-            require("orgmode").setup({
+            local org = require("orgmode")
+            local agenda_globs = {
+                "~/Git/College/*",
+                "~/Git/College/*/*",
+                "~/Git/Projects/Blog/*",
+                "~/Git/Projects/Blog/docs/**/*",
+                "~/Notes/**/*",
+                "~/.config/home-manager/*",
+                "~/.config/home-manager/docs/**/*",
+                vim.fn.stdpath("config") .. "/**/*",
+            }
+            org.setup({
                 mappings = {
                     agenda = {
                         org_agenda_filter = "F",
                     },
                 },
-                org_agenda_files = {
-                    "~/Git/College/**/*",
-                    "~/Git/Projects/**/*",
-                    "~/Notes/**/*",
-                    "~/.config/home-manager/*",
-                    "~/.config/home-manager/docs/**/*",
-                    vim.fn.stdpath("config") .. "/**/*",
-                },
+                org_agenda_files = agenda_globs,
                 notifications = {
                     enabled = true,
                     cron_enabled = true,
@@ -94,6 +97,61 @@ return {
             vim.api.nvim_set_hl(0, "org_bold_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_underline_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_strikethrough_delimiter", { link = "@punctuation.delimiter" })
+
+            -- NOTE: Everything below is an attempt to get orgmode to sync between different Neovim
+            -- instaces. Ideally Orgmode would write to a central state file using Mutexes, but it
+            -- doesn't. Thus my shitty code below.
+            local watched_dirs = {}
+
+            local function watch_dir(dir)
+                local fs_watch = vim.uv.new_fs_event()
+                if not fs_watch then
+                    error("Failed to create a fs watch for dir: " .. dir)
+                end
+                dir = vim.fn.fnamemodify(dir, ":p")
+                if dir:sub(-1) == "/" then
+                    dir = dir:sub(1, -2)
+                end
+                if vim.tbl_contains(watched_dirs, dir) then
+                    return
+                end
+                table.insert(watched_dirs, dir)
+                fs_watch:start(
+                    dir,
+                    {},
+                    vim.schedule_wrap(function(_, fpath, _)
+                        fpath = dir .. "/" .. fpath
+                        if vim.fn.isdirectory(fpath) == 1 and not vim.tbl_contains(watched_dirs, fpath) then
+                            watch_dir(fpath)
+                            return
+                        end
+
+                        if vim.fn.fnamemodify(fpath, ":e") == "org" then
+                            org.files:load(true)
+                            org.clock:init()
+                        end
+                    end)
+                )
+            end
+
+            vim.defer_fn(function()
+                vim.wait(1000, function()
+                    return org.initialized
+                end)
+                vim.iter(agenda_globs)
+                    :map(function(glob)
+                        glob = vim.fn.fnamemodify(glob, ":p")
+                        local globs = vim.fn.glob(vim.fn.fnamemodify(glob, ":p"), false, true)
+                        local base_glob_dir = glob:gsub("*/", ""):gsub("*", "")
+                        table.insert(globs, base_glob_dir)
+                        return globs
+                    end)
+                    :flatten()
+                    :filter(function(f)
+                        return vim.fn.isdirectory(f) == 1
+                    end)
+                    :map(watch_dir)
+            end, 1000)
         end,
     },
     {
