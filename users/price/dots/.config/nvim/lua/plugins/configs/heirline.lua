@@ -760,6 +760,80 @@ return {
 
             vim.opt.showcmdloc = "statusline"
 
+            local org = require("orgmode")
+            local Orgmode = {
+                condition = function()
+                    return org.initialized and org.clock.clocked_headline and org.clock.clocked_headline:is_clocked_in()
+                end,
+                update = function(self)
+                    local time = os.time()
+                    self.last_updated = self.last_updated or time
+                    if time - self.last_updated >= 1 then
+                        self.last_updated = time
+                        return true
+                    end
+                end,
+                margin(1),
+                {
+                    provider = seps.full.left,
+                    hl = {
+                        fg = colors.sakuraPink,
+                        bg = utils.get_highlight("StatusLine").bg,
+                    },
+                },
+                {
+                    provider = "  ",
+                    hl = {
+                        fg = colors.sumiInk0,
+                        bg = colors.sakuraPink,
+                    },
+                },
+                {
+                    provider = seps.full.right .. " ",
+                    hl = {
+                        fg = colors.sakuraPink,
+                        bg = colors.sumiInk4,
+                    },
+                },
+                {
+                    hl = {
+                        fg = colors.sakuraPink,
+                        bg = colors.sumiInk4,
+                    },
+                    provider = function()
+                        local headline = org.clock.clocked_headline
+                        if not headline then
+                            return
+                        end
+
+                        local clocked_time = headline:get_logbook():get_total_with_active():to_string()
+                        local effort = headline:get_property("effort")
+                        local time_elapsed = ""
+                        if effort then
+                            time_elapsed = ("[%s/%s]"):format(clocked_time, effort)
+                        else
+                            time_elapsed = ("[%s]"):format(clocked_time)
+                        end
+
+                        -- Get the title and remove some org syntax from it
+                        local title = headline:get_title():gsub("[~/*_=+]", "")
+
+                        local message = ("%s %s"):format(time_elapsed, title)
+                        if #message > 60 then
+                            message = message:sub(1, 65) .. "…"
+                        end
+                        return message
+                    end,
+                },
+                {
+                    provider = seps.full.right .. " ",
+                    hl = {
+                        fg = colors.sumiInk4,
+                        bg = utils.get_highlight("StatusLine").bg,
+                    },
+                },
+            }
+
             return {
                 statusline = {
                     {
@@ -1026,6 +1100,7 @@ return {
                             },
                         },
                     },
+                    Orgmode,
                     -- Align Right
                     {
                         provider = "%=",
