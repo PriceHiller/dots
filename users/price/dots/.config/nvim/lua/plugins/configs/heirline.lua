@@ -262,8 +262,7 @@ return {
                 end,
             }, {
                 provider = seps.full.right .. " ",
-                hl = function(self)
-                    local bg = self.bg_color_right
+                hl = function()
                     if conditions.is_active() then
                         return { fg = colors.sumiInk4, bg = colors.carpYellow }
                     else
@@ -291,147 +290,6 @@ return {
                     end
                 end,
             })
-
-            local buffer_hl = {
-                active = {
-                    fg = colors.fujiWhite,
-                    bg = colors.sumiInk4,
-                },
-                inactive = {
-                    fg = colors.fujiGray,
-                    bg = colors.sumiInk3,
-                },
-            }
-            local StatusLineBufnr = {
-                provider = function(self)
-                    return tostring(self.bufnr) .. ". "
-                end,
-                hl = "Comment",
-            }
-
-            -- we redefine the filename component, as we probably only want the tail and not the relative path
-            local StatusLineFileName = {
-                init = function(self)
-                    if self.filename:match("^term://.*") then
-                        self.lfilename = self.filename:gsub(".*:", "")
-                    else
-                        self.lfilename = vim.fn.fnamemodify(self.filename, ":~:.")
-                    end
-                    if self.lfilename == "" then
-                        self.lfilename = "[No Name]"
-                    end
-                end,
-                flexible = 2,
-                {
-                    provider = function(self)
-                        return self.lfilename
-                    end,
-                },
-                {
-                    provider = function(self)
-                        return vim.fn.pathshorten(self.lfilename)
-                    end,
-                },
-                hl = function(self)
-                    local fg
-                    if self.is_active then
-                        fg = buffer_hl.active.fg
-                    else
-                        fg = buffer_hl.inactive.fg
-                    end
-                    return { bold = self.is_active or self.is_visible, italic = true, fg = fg }
-                end,
-            }
-
-            -- this looks exactly like the FileFlags component that we saw in
-            -- #crash-course-part-ii-filename-and-friends, but we are indexing the bufnr explicitly
-            -- also, we are adding a nice icon for terminal buffers.
-            local StatusLineFileFlags = {
-                {
-                    condition = function(self)
-                        return vim.bo[self.bufnr].modified
-                    end,
-                    provider = "  ",
-                    hl = { fg = colors.springGreen },
-                },
-                {
-                    condition = function(self)
-                        return not vim.bo[self.bufnr].modifiable or vim.bo[self.bufnr].readonly
-                    end,
-                    provider = "  ",
-                    hl = { fg = colors.roninYellow },
-                },
-            }
-
-            -- Here the filename block finally comes together
-            local StatusLineFileNameBlock = {
-                init = function(self)
-                    self.filename = vim.api.nvim_buf_get_name(self.bufnr)
-                end,
-                hl = function(self)
-                    if self.is_active then
-                        return buffer_hl.active
-                    else
-                        return buffer_hl.inactive
-                    end
-                end,
-                on_click = {
-                    callback = function(_, minwid, _, button)
-                        if button == "m" then -- close on mouse middle click
-                            vim.schedule(function()
-                                vim.api.nvim_buf_delete(minwid, { force = false })
-                            end)
-                        else
-                            vim.api.nvim_win_set_buf(0, minwid)
-                        end
-                    end,
-                    minwid = function(self)
-                        return self.bufnr
-                    end,
-                    name = "heirline_tabline_buffer_callback",
-                },
-                StatusLineBufnr,
-                FileIcon, -- turns out the version defined in #crash-course-part-ii-filename-and-friends can be reutilized as is here!
-                StatusLineFileName,
-                StatusLineFileFlags,
-            }
-
-            -- The final touch!
-            local StatusLineBufferBlock = {
-                {
-                    provider = seps.full.left,
-                    hl = function(self)
-                        local fg
-                        if self.is_active then
-                            fg = buffer_hl.active.bg
-                        else
-                            fg = buffer_hl.inactive.bg
-                        end
-                        return { fg = fg, bg = utils.get_highlight("StatusLine").bg }
-                    end,
-                },
-                StatusLineFileNameBlock,
-                {
-                    provider = seps.full.right,
-                    hl = function(self)
-                        local fg
-                        if self.is_active then
-                            fg = buffer_hl.active.bg
-                        else
-                            fg = buffer_hl.inactive.bg
-                        end
-                        return { fg = fg, bg = utils.get_highlight("StatusLine").bg }
-                    end,
-                },
-            }
-
-            -- and here we go
-            local BufferLine = utils.make_buflist(
-                StatusLineBufferBlock,
-                -- left truncation, optional (defaults to "<")
-                { provider = "", hl = { fg = colors.katanaGray, bg = utils.get_highlight("StatusLine").bg } },
-                { provider = "", hl = { fg = colors.katanaGray, bg = utils.get_highlight("StatusLine").bg } }
-            )
 
             local Tabpage = {
                 static = {
@@ -693,6 +551,7 @@ return {
                     },
                     {
                         provider = function()
+                            ---@diagnostic disable-next-line: undefined-field
                             return (vim.b.ufo_foldlevel or vim.opt_local.foldlevel:get()) .. " "
                         end,
                         hl = {
@@ -1011,7 +870,6 @@ return {
                             },
                         },
                     },
-                    margin(1),
                     {
                         condition = conditions.is_git_repo,
 
@@ -1021,7 +879,7 @@ return {
                                 or self.status_dict.removed ~= 0
                                 or self.status_dict.changed ~= 0
                         end,
-
+                        margin(1),
                         {
                             provider = seps.full.left,
                             hl = {
@@ -1104,19 +962,6 @@ return {
                     -- Align Right
                     {
                         provider = "%=",
-                    },
-                    BufferLine,
-                    {
-                        provider = seps.full.left,
-                        hl = { fg = colors.roninYellow, bg = utils.get_highlight("StatusLine").bg },
-                    },
-                    {
-                        provider = " 󱧶 ",
-                        hl = { fg = colors.sumiInk0, bg = colors.roninYellow },
-                    },
-                    {
-                        provider = seps.full.right,
-                        hl = { fg = colors.roninYellow, bg = utils.get_highlight("StatusLine").bg },
                     },
                     TabPages,
                 },
