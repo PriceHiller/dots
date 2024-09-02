@@ -36,6 +36,7 @@ return {
             { "<leader>tgc", ":Telescope git_commits<CR>", desc = "Telescope: Git Commits", silent = true },
             { "<leader>tgb", ":Telescope git_branches<CR>", desc = "Telescope: Git Branches", silent = true },
             { "<leader>tf", ":Telescope find_files<CR>", desc = "Telescope: Find Files", silent = true },
+            { "<leader>j", ":Telescope buffers<CR>", desc = "Telescope: Buffers", silent = true },
             { "<leader>tb", ":Telescope buffers<CR>", desc = "Telescope: Buffers", silent = true },
             { "<leader>th", ":Telescope help_tags<CR>", desc = "Telescope: Help Tags", silent = true },
             { "<leader>to", ":Telescope oldfiles<CR>", desc = "Telescope: Recent Files", silent = true },
