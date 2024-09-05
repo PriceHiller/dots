@@ -5,6 +5,7 @@
     nix.url = "github:nixos/nix";
     deploy-rs.url = "github:serokell/deploy-rs";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     bob = {
       flake = false;
