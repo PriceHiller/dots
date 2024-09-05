@@ -167,9 +167,6 @@ return {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
                     automatic_installation = true,
-                    ensure_installed = {
-                        "tsserver",
-                    },
                     handlers = {
                         ["jdtls"] = function()
                             require("java").setup({
@@ -530,7 +527,7 @@ return {
                 "terraformls",
                 "tflint",
                 "vimls",
-                "tsserver",
+                "ts_ls",
                 "asm_lsp",
                 "nginx_language_server",
             }) do
