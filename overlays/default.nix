@@ -9,6 +9,9 @@
         wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
       '';
     });
+    # TODO: Remove this when Zathura's update for 0.5.8 hits nixpkgs-unstable,
+    # see status of https://nixpk.gs/pr-tracker.html?pr=337383
+    zathura = inputs.nixpkgs-master.legacyPackages.${final.system}.pkgs.zathura;
     wezterm = inputs.wezterm.packages.${final.system}.default;
     opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
       propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python311Packages.qt-material ];
