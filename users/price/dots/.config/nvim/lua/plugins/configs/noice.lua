@@ -2,6 +2,8 @@ return {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
+        -- Pinned until https://github.com/folke/noice.nvim/issues/923 is resolved
+        commit = "d9328ef",
         config = function()
             require("noice").setup({
                 lsp = {
