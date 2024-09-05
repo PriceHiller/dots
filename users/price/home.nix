@@ -214,7 +214,7 @@ in
     wofi.enable = true;
     firefox = {
       enable = true;
-      package = pkgs.firefox-devedition;
+      package = pkgs.firefox-devedition-bin;
     };
     waybar = {
       enable = true;
