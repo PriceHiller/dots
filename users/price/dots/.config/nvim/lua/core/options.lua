@@ -39,7 +39,7 @@ M.setup = function()
     opt.wrap = true
     opt.breakat = " \t;,[]()"
     opt.linebreak = true
-    opt.formatlistpat = [[^\s*\(-\|\d\.\)\s*]]
+    opt.formatlistpat = [[^\s*\(-\|\d\.\|+\)\s*]]
     opt.breakindent = true
     opt.breakindentopt = "list:2"
 
