@@ -618,20 +618,25 @@ return {
             }
 
             vim.opt.showcmdloc = "statusline"
+            local timer = vim.uv.new_timer()
+            timer:start(
+                1000,
+                500,
+                vim.schedule_wrap(function()
+                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
+                end)
+            )
 
             local org = require("orgmode")
+            local OrgDate = require("orgmode.objects.date")
             local Orgmode = {
                 condition = function()
-                    return org.initialized and org.clock.clocked_headline and org.clock.clocked_headline:is_clocked_in()
+                    return org.initialized
                 end,
-                update = function(self)
-                    local time = os.time()
-                    self.last_updated = self.last_updated or time
-                    if time - self.last_updated >= 1 then
-                        self.last_updated = time
-                        return true
-                    end
-                end,
+                update = {
+                    "User",
+                    pattern = "HeirlineOrgUpdate",
+                },
                 margin(1),
                 {
                     provider = seps.full.left,
@@ -660,28 +665,48 @@ return {
                         bg = colors.sumiInk4,
                     },
                     provider = function()
-                        local headline = org.clock.clocked_headline
-                        if not headline then
-                            return
-                        end
+                        local clocked_in_task = function()
+                            local headline = org.clock.clocked_headline
+                            if not headline then
+                                return
+                            end
 
-                        local clocked_time = headline:get_logbook():get_total_with_active():to_string()
-                        local effort = headline:get_property("effort")
-                        local time_elapsed = ""
-                        if effort then
-                            time_elapsed = ("[%s/%s]"):format(clocked_time, effort)
-                        else
-                            time_elapsed = ("[%s]"):format(clocked_time)
-                        end
+                            local clocked_time = headline:get_logbook():get_total_with_active():to_string()
+                            local effort = headline:get_property("effort")
+                            local time_elapsed = ""
+                            if effort then
+                                time_elapsed = ("[%s/%s]"):format(clocked_time, effort)
+                            else
+                                time_elapsed = ("[%s]"):format(clocked_time)
+                            end
 
-                        -- Get the title and remove some org syntax from it
-                        local title = headline:get_title():gsub("[~/*_=+]", "")
+                            -- Get the title and remove some org syntax from it
+                            local title = headline:get_title():gsub("[~/*_=+]", "")
 
-                        local message = ("%s %s"):format(time_elapsed, title)
-                        if #message > 60 then
-                            message = message:sub(1, 65) .. "…"
+                            local message = ("%s %s"):format(time_elapsed, title)
+                            if #message > 60 then
+                                message = message:sub(1, 65) .. "…"
+                            end
+                            return message
                         end
-                        return message
+                        local remaining_tasks_today = function()
+                            local remaining_tasks_today = 0
+                            local today = OrgDate:today()
+                            for _, orgfile in pairs(org.files.files) do
+                                ---@type OrgFile
+                                orgfile = orgfile
+                                for _, headline in ipairs(orgfile:get_opened_unfinished_headlines()) do
+                                    for _, date in ipairs(headline:get_deadline_and_scheduled_dates()) do
+                                        if date:is_same_or_before(today, "day") then
+                                            remaining_tasks_today = remaining_tasks_today + 1
+                                            break
+                                        end
+                                    end
+                                end
+                            end
+                            return ("Tasks Remaining: %d"):format(remaining_tasks_today)
+                        end
+                        return clocked_in_task() or remaining_tasks_today()
                     end,
                 },
                 {
