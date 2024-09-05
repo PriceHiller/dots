@@ -1,5 +1,5 @@
 {
-    "autoUpdate": true,
+    "autoUpdate": false,
     "autoUpdateNotification": true,
     "useQuickCss": true,
     "themeLinks": [
@@ -294,7 +294,8 @@
             "ignoreSelf": true,
             "ignoreUsers": "",
             "ignoreChannels": "",
-            "ignoreGuilds": ""
+            "ignoreGuilds": "",
+            "collapseDeleted": false
         },
         "MessageTags": {
             "enabled": false
@@ -687,6 +688,24 @@
         },
         "AlwaysExpandRoles": {
             "enabled": false
+        },
+        "CopyFileContents": {
+            "enabled": false
+        },
+        "ConsoleJanitor": {
+            "enabled": false
+        },
+        "MentionAvatars": {
+            "enabled": false
+        },
+        "NoMaskedUrlPaste": {
+            "enabled": false
+        },
+        "StickerPaste": {
+            "enabled": false
+        },
+        "VolumeBooster": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -699,6 +718,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1724963182847
+        "settingsSyncVersion": 1725245324233
     }
 }
