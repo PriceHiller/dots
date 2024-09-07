@@ -25,7 +25,7 @@ SCHEDULED: <2024-03-04 Mon> DEADLINE: <2024-03-15 Fri>
 * CANCELLED Use native Neovim snippets instead of Luasnip
 SCHEDULED: <2024-05-17 Fri> CLOSED: [2024-07-16 Tue 22:46]
 
-* TODO Extract my ~Z~ custom command to a plugin
-SCHEDULED: <2024-07-26 Fri>
+* DONE Extract my ~Z~ custom command to a plugin
+SCHEDULED: <2024-07-26 Fri> CLOSED: [2024-09-07 Sat 13:40]
 
 See [[./lua/core/cmds.lua]]
