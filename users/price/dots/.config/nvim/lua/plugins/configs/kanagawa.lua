@@ -6,19 +6,8 @@ return {
     {
         "rebelot/kanagawa.nvim",
         priority = 1000,
-        build = function()
-            require("plugins.configs.kanagawa")
-            vim.cmd.KanagawaCompile()
-        end,
         lazy = false,
         config = function()
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                pattern = ".*lua/plugins/configs/kanagawa.lua",
-                callback = function()
-                    vim.schedule(vim.cmd.KanagawaCompile)
-                end,
-            })
-
             require("kanagawa").setup({
                 transparent = not vim.g.neovide,
                 dim_inactive = true,
