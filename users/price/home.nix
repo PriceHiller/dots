@@ -48,7 +48,6 @@ in
         vesktop
         kooha
         libreoffice-fresh
-        zathura
         nix-prefetch-scripts
         mako
         wl-clipboard
