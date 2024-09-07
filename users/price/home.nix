@@ -177,34 +177,7 @@ in
     mime.enable = true;
     systemDirs.data = [ "${config.home.profileDirectory}/share/" ];
     cacheHome = "${config.home.homeDirectory}/.local/cache";
-    mimeApps = {
-      enable = true;
-      associations.added = {
-        "x-scheme-handler/http" = [ "firefox-devedition.desktop" ];
-        "x-scheme-handler/https" = [ "firefox-devedition.desktop" ];
-        "x-scheme-handler/chrome" = [ "firefox-devedition.desktop" ];
-        "text/html" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-htm" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-html" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-shtml" = [ "firefox-devedition.desktop" ];
-        "application/xhtml+xml" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-xhtml" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-xht" = [ "firefox-devedition.desktop" ];
-      };
-      defaultApplications = {
-        "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-        "x-scheme-handler/http" = [ "firefox-devedition.desktop" ];
-        "x-scheme-handler/https" = [ "firefox-devedition.desktop" ];
-        "x-scheme-handler/chrome" = [ "firefox-devedition.desktop" ];
-        "text/html" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-htm" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-html" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-shtml" = [ "firefox-devedition.desktop" ];
-        "application/xhtml+xml" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-xhtml" = [ "firefox-devedition.desktop" ];
-        "application/x-extension-xht" = [ "firefox-devedition.desktop" ];
-      };
-    };
+    mimeApps.enable = true;
     configFile = {
       "hypr/hyprland.conf".enable = false;
     };
@@ -212,10 +185,6 @@ in
 
   programs = {
     wofi.enable = true;
-    firefox = {
-      enable = true;
-      package = pkgs.firefox-devedition-bin;
-    };
     waybar = {
       enable = true;
       systemd.enable = true;
