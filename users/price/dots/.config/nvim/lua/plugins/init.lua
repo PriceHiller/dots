@@ -43,7 +43,6 @@ lazy.setup("plugins.configs", {
             disabled_plugins = {
                 "gzip",
                 "tarPlugin",
-                "tohtml",
                 "tutor",
                 "zipPlugin",
             },
