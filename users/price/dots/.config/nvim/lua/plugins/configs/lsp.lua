@@ -281,6 +281,7 @@ return {
         config = function()
             local lsp_capabilities =
                 require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+            local db_timer = vim.uv.new_timer()
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local bufnr = args.buf
@@ -288,17 +289,32 @@ return {
                     if not client then
                         return
                     end
-                    vim.notify("Attached server `" .. client.name .. "`", vim.log.levels.INFO, {
-                        title = "LSP",
-                        ---@param win integer The window handle
-                        on_open = function(win)
-                            vim.api.nvim_set_option_value(
-                                "filetype",
-                                "markdown",
-                                { buf = vim.api.nvim_win_get_buf(win) }
-                            )
-                        end,
-                    })
+                    if not db_timer:is_active() then
+                        local last_clients = {}
+                        db_timer:start(
+                            100,
+                            100,
+                            vim.schedule_wrap(function()
+                                local cur_clients = vim.lsp.get_clients({ bufnr = bufnr })
+                                if #cur_clients > #last_clients then
+                                    last_clients = cur_clients
+                                end
+                                local messages = {}
+                                for _, cur_client in ipairs(cur_clients) do
+                                    table.insert(messages, "- `" .. cur_client.name .. "`")
+                                end
+
+                                vim.notify(table.concat(messages, "\n"), vim.log.levels.INFO, {
+                                    title = "LSP Attached Servers",
+                                    ---@param win integer The window handle
+                                    on_open = function(win)
+                                        vim.bo[vim.api.nvim_win_get_buf(win)].filetype = "markdown"
+                                    end,
+                                })
+                                db_timer:stop()
+                            end)
+                        )
+                    end
 
                     local function disable_format_capability(capabilities)
                         capabilities.documentFormattingProvider = false
