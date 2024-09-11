@@ -38,7 +38,7 @@ return {
                 },
                 routes = {
                     {
-                        filter = { event = "msg_show", find = "Hop .*:" },
+                        filter = { event = "msg_show", find = "Hop .*:%s*" },
                         opts = { skip = true },
                     },
                     -- Ignore `written` message
