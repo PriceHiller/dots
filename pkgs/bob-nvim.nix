@@ -1,9 +1,12 @@
-{ installShellFiles, rustPlatform, fetchFromGitHub }:
+{
+  installShellFiles,
+  rustPlatform,
+  fetchFromGitHub,
+}:
 
 rustPlatform.buildRustPackage rec {
   pname = "bob";
   version = "3.0.1";
-
 
   buildInputs = [ installShellFiles ];
   src = fetchFromGitHub {
