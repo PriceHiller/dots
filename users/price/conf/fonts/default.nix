@@ -6,6 +6,7 @@
     fira-code
     noto-fonts
     twitter-color-emoji
+    vistafonts
   ];
   fonts = {
     fontconfig = {
