@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs = {
     dconf.enable = true;
@@ -8,7 +8,12 @@
       enableGlobalCompInit = false;
       enableBashCompletion = true;
     };
-    nix-ld.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+      ];
+    };
     steam.enable = true;
   };
 }
