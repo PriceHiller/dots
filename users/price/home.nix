@@ -183,6 +183,7 @@ in
   };
 
   programs = {
+    nix-index.enable = true;
     wofi.enable = true;
     waybar = {
       enable = true;
