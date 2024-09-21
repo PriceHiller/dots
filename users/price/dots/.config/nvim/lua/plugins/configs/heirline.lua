@@ -317,6 +317,51 @@ return {
                 end,
             }
 
+            local cur_bufs = function()
+                return vim.iter(vim.api.nvim_list_bufs())
+                    :filter(function(buf)
+                        return vim.fn.buflisted(buf) == 1
+                    end)
+                    :filter(vim.api.nvim_buf_is_loaded)
+                    :filter(vim.api.nvim_buf_is_valid)
+                    :totable()
+            end
+
+            local Buffers = {
+                update = { "BufNew", "VimEnter", "BufWipeout", "BufUnload", "BufDelete" },
+                condition = function()
+                    return #cur_bufs() > 0
+                end,
+                {
+                    provider = seps.full.left,
+                    hl = { fg = colors.carpYellow, bg = utils.get_highlight("StatusLine").bg },
+                },
+                {
+                    provider = function()
+                        return vim.api.nvim_get_current_buf()
+                    end,
+                    hl = { fg = colors.sumiInk0, bg = colors.carpYellow },
+                },
+                {
+                    provider = " " .. seps.full.left,
+                    hl = { fg = colors.roninYellow, bg = colors.carpYellow },
+                },
+                {
+                    provider = function()
+                        return ("%d  "):format(#cur_bufs())
+                    end,
+                    hl = function()
+                        return {
+                            fg = colors.sumiInk0,
+                            bg = colors.roninYellow,
+                        }
+                    end,
+                },
+                {
+                    provider = seps.full.right,
+                    hl = { fg = colors.roninYellow, bg = utils.get_highlight("StatusLine").bg },
+                },
+            }
             local TabPages = {
                 -- only show this component if there's 2 or more tabpages
                 condition = function()
@@ -988,6 +1033,7 @@ return {
                     {
                         provider = "%=",
                     },
+                    Buffers,
                     TabPages,
                 },
                 winbar = {
