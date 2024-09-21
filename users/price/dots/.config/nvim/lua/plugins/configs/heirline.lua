@@ -328,7 +328,7 @@ return {
             end
 
             local Buffers = {
-                update = { "BufNew", "VimEnter", "BufWipeout", "BufUnload", "BufDelete" },
+                update = { "BufEnter", "BufNew", "VimEnter", "BufWipeout", "BufUnload", "BufDelete" },
                 condition = function()
                     return #cur_bufs() > 0
                 end,
