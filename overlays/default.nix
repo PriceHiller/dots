@@ -3,7 +3,6 @@
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
   modifications = final: prev: {
-    waybar = inputs.waybar.packages.${final.system}.default;
     lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
       postInstall = ''
         wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
