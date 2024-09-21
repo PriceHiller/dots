@@ -166,7 +166,7 @@ return {
             {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
-                    automatic_installation = true,
+                    automatic_installation = { exclude = { "clangd", "asm-lsp" } },
                     handlers = {
                         ["jdtls"] = function()
                             require("java").setup({
