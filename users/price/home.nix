@@ -133,8 +133,10 @@ in
       ++ [
         gnumake
         cmake
-        clang
         clang-tools
+        clang
+        nasm
+        asm-lsp
         ninja
         ccache
         llvm
