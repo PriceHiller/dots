@@ -32,6 +32,7 @@ in
     packages =
       with pkgs;
       [
+        killall
         nixd
         inkscape
         sqlx-cli
