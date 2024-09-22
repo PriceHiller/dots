@@ -46,12 +46,12 @@ return {
                     },
                     -- Ignore `undo` message
                     {
-                        filter = { event = "msg_show", find = "^%d+ .*; before #%d+  %d+.*ago$" },
+                        filter = { event = "msg_show", find = "^%d+ .*; before #%d+ .*$" },
                         opts = { skip = true },
                     },
                     -- Ignore `redo` message
                     {
-                        filter = { event = "msg_show", find = "^%d+ .*; after #%d+  %d+.*ago$" },
+                        filter = { event = "msg_show", find = "^%d+ .*; after #%d+ .*$" },
                         opts = { skip = true },
                     },
                     {
