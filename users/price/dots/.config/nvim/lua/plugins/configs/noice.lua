@@ -41,7 +41,7 @@ return {
                     },
                     -- Ignore `written` message
                     {
-                        filter = { event = "msg_show", find = '^".*" %d*L, %d*B written$' },
+                        filter = { event = "msg_show", find = '^".*" .*%d*L, %d*B written$' },
                         opts = { skip = true },
                     },
                     -- Ignore `undo` message
