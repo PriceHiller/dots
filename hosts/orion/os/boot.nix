@@ -39,7 +39,6 @@ in
     };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "audit=1" ];
     extraModulePackages = [ ];
     initrd = {
       availableKernelModules = [
