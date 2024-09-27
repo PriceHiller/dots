@@ -32,6 +32,14 @@ in
     packages =
       with pkgs;
       [
+        lsof
+        strace
+        ltrace
+        iotop
+        iftop
+        usbutils
+        nmap
+        zip
         killall
         nixd
         inkscape
