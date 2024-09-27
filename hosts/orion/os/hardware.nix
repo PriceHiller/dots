@@ -6,4 +6,5 @@
   boot.extraModprobeConfig = ''
     options iwlwifi power_save=1
   '';
+  services.hardware.bolt.enable = true;
 }
