@@ -1,10 +1,21 @@
-{ modulesPath, pkgs, ... }:
+{
+  modulesPath,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  pkiBundlePath = "/etc/secureboot";
+in
 {
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   security.tpm2.enable = true;
-  environment.systemPackages = with pkgs; [ tpm2-tss ];
+  environment.systemPackages = with pkgs; [
+    tpm2-tss
+    sbctl
+  ];
 
   services.btrfs-rollback = {
     enable = true;
@@ -13,9 +24,17 @@
     snapshot = "root-base";
   };
 
+  environment.persistence.ephemeral.directories = [
+    pkiBundlePath
+  ];
+
   boot = {
+    lanzaboote = {
+      enable = true;
+      pkiBundle = pkiBundlePath;
+    };
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;

@@ -7,6 +7,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     bob = {
       flake = false;
       url = "github:MordechaiHadad/bob";
@@ -199,6 +203,7 @@
               };
               modules = [
                 ./modules/btrfs-rollback.nix
+                inputs.lanzaboote.nixosModules.lanzaboote
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
