@@ -22,3 +22,6 @@
 [submodule "dots/.config/zsh/config/plugins/powerlevel10k"]
 	path = users/price/dots/.config/zsh/config/plugins/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "secrets"]
+	path = secrets
+	url = ssh://gitea@git.orion-technologies.io:2220/Price/Secrets.git

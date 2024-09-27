@@ -39,6 +39,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    secrets = {
+      url = "git+file:secrets?submodules=1";
+      flake = false;
+    };
   };
 
   outputs =
@@ -200,7 +204,7 @@
                 inputs.disko.nixosModules.disko
                 {
                   config =
-                    (import "${self}/secrets" {
+                    (import "${inputs.secrets}" {
                       agenix = false;
                       inherit clib;
                     }).${hostname};
@@ -228,7 +232,7 @@
                 inputs.disko.nixosModules.disko
                 {
                   config =
-                    (import "${self}/secrets" {
+                    (import "${inputs.secrets}" {
                       agenix = false;
                       inherit clib;
                     }).${hostname};
