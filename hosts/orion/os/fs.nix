@@ -72,6 +72,7 @@ in
                 name = "crypted";
                 settings = {
                   allowDiscards = true;
+                  bypassWorkqueues = true;
                 };
                 content = {
                   type = "btrfs";
