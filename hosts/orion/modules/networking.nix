@@ -4,7 +4,7 @@
     enable = true;
     domains = [ "~." ];
     dnsovertls = "true";
-    dnssec = "true";
+    dnssec = "false";
   };
   networking = {
     wireless.iwd = {
