@@ -139,6 +139,14 @@ return {
                     { name = "lazydev", group_index = 0 },
                     { name = "nvim_lsp" },
                     { name = "luasnip", max_item_count = 5 }, -- For luasnip users.
+                    { name = "calc" },
+                    { name = "emoji", keyword_length = 2, max_item_count = 10 },
+                    {
+                        name = "lua-latex-symbols",
+                        option = { cache = true },
+                        max_item_count = 5,
+                        trigger_characters = { "\\" },
+                    },
                     {
                         name = "fuzzy_buffer",
                         max_item_count = 5,
@@ -153,15 +161,7 @@ return {
                             "--max-depth 4",
                         },
                     },
-                    {
-                        name = "lua-latex-symbols",
-                        option = { cache = true },
-                        max_item_count = 5,
-                        trigger_characters = { "\\" },
-                    },
                     { name = "zsh", max_item_count = 5 },
-                    { name = "emoji", keyword_length = 2, max_item_count = 10 },
-                    { name = "calc" },
                     { name = "npm", keyword_length = 2 },
                 }
 
