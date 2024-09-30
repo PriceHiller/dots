@@ -5,6 +5,9 @@
     enable = true;
     mutableKeys = false;
     mutableTrust = false;
+    scdaemonSettings = {
+      disable-ccid = true;
+    };
     publicKeys = [
       {
         source = ./public-gpg-yubikey.asc;
