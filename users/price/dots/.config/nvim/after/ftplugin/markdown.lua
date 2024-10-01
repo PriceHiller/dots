@@ -22,3 +22,5 @@ vim.keymap.set("n", "<C-Space>", function()
         vim.api.nvim_buf_set_lines(0, cur_line - 1, cur_line, true, { updated_task_str })
     end
 end, { buffer = true })
+
+vim.opt.formatlistpat = [[^\s*\(-\|\d\+\.|+\|>\)\s*]]
