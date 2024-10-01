@@ -114,6 +114,31 @@ M.setup = function()
     vim.keymap.set("i", "<S-CR>", "<C-o>o", { silent = true, desc = "Insert: New Line" })
     vim.keymap.set("i", "<C-S-CR>", "<C-o>O", { silent = true, desc = "Insert: New Line" })
 
+    -- Copy first leading word of line onto newline and insert (autolist functionality basically)
+    vim.keymap.set("i", "<C-CR>", function()
+        local line = vim.api.nvim_get_current_line()
+        local indent, word, trailing = line:match("^(%s*)(%S*)(%s*)")
+        if #word == 0 then
+            return
+        end
+
+        local num, num_trail = word:match("^(%d*)(%D*)")
+        -- TODO: If we add a new list item that uses a number in the middle of a bunch of list
+        -- numbers, we should ideally increment all the next number nodes. Might require integrating
+        -- treesitter or, alternatively, just look for all starting list number nodes at the same
+        -- indent level and increment them.
+        if #num > 0 then
+            num = tonumber(num) + 1
+            word = tostring(num) .. num_trail
+        end
+        local new_line = indent .. word .. trailing
+
+        local win = vim.api.nvim_get_current_win()
+        local row, _ = table.unpack(vim.api.nvim_win_get_cursor(win))
+        vim.fn.append(row, new_line)
+        vim.api.nvim_win_set_cursor(win, { row + 1, vim.fn.strdisplaywidth(new_line) })
+    end, { silent = true, desc = "Insert: Autolist" })
+
     -- Insert an Em Dash in insert mode
     vim.keymap.set("i", "<A-->", "—", { silent = true, desc = "Insert: Em Dash" })
 
