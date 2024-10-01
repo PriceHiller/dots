@@ -56,14 +56,18 @@ return {
                     n = {
                         description = "Note",
                         template = "* %?",
+                    },
+                    j = {
+                        description = "Journal",
+                        template = "* %?",
                         target = "~/Notes/journal.org",
                         datetree = true,
                     },
                     s = {
                         description = "Snippet",
-                        template = "* %? :snippet:",
+                        template = "* %?",
                         target = "~/Notes/snippets.org",
-                        datetree = true,
+                        datetree = false,
                     },
                 },
                 emacs_config = {
