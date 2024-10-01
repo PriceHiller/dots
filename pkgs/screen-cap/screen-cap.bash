@@ -39,7 +39,7 @@ mk-screen-cap() {
 		if [[ "$output_type" == "gif" ]]; then
 			printf "Converting recording to gif...\n"
 			local gifski_tmpout
-			gifski_tmpout="${tmp_dir}/$(mktemp --"$tmp_dir" gifski.XXXXXXXXXXX).gif"
+			gifski_tmpout="${tmp_dir}/$(mktemp -- "$tmp_dir" gifski.XXXXXXXXXXX).gif"
 			gifski --output "$gifski_tmpout" "$tmp_file"
 			mv "$gifski_tmpout" "$tmp_file"
 		fi
