@@ -293,8 +293,9 @@ return {
                         local last_clients = {}
                         db_timer:start(
                             100,
-                            100,
+                            0,
                             vim.schedule_wrap(function()
+                                db_timer:stop()
                                 local cur_clients = vim.lsp.get_clients({ bufnr = bufnr })
                                 if #cur_clients > #last_clients then
                                     last_clients = cur_clients
@@ -311,7 +312,6 @@ return {
                                         vim.bo[vim.api.nvim_win_get_buf(win)].filetype = "markdown"
                                     end,
                                 })
-                                db_timer:stop()
                             end)
                         )
                     end
