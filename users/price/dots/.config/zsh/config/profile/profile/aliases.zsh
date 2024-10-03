@@ -51,6 +51,16 @@
 		alias gbc="git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'"
 	fi
 
+    ### Podman ###
+    if command -v podman >/dev/null 2>&1; then
+        alias pd="podman"
+    fi
+
+    ### Docker ###
+    if command -v docker >/dev/null 2>&1; then
+        alias dk="docker"
+    fi
+
 	### Mac ###
 	if [[ "$OSTYPE" = "darwin"* ]]; then
 		alias c="pbcopy"
