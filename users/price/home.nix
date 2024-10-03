@@ -417,7 +417,7 @@ in
         Install.WantedBy = [ "compositor.target" ];
         Service = {
           ExecStart = "${pkgs.xwaylandvideobridge}/bin/xwaylandvideobridge";
-          Restart = "Always";
+          Restart = "always";
         };
         Unit = {
           Description = "Bridge X11 Clients to XDG Portal";
