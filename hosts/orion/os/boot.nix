@@ -50,8 +50,8 @@ in
         "rtsx_pci_sdmmc"
       ];
       systemd = {
+        tpm2.enable = true;
         enable = true;
-        enableTpm2 = true;
       };
     };
   };
