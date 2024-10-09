@@ -266,6 +266,7 @@ return {
                 },
                 { "Headline", { bg = colors.sumiInk0 } },
                 { "@markup.list", { fg = colors.crystalBlue } },
+                { "@markup.list.number", { fg = colors.surimiOrange } },
                 { "@markup.list.checked", { fg = colors.springGreen } },
                 { "@markup.list.indeterminate", { fg = colors.carpYellow } },
                 { "@markup.verbatim", { fg = colors.springGreen, bg = colors.sumiInk0 } },
