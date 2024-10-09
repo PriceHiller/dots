@@ -132,7 +132,7 @@ return {
                             cmdline_history = { symbol = " ", name = "Cmd History", hl_group = "CmdHistory" },
                             rg = { symbol = " ", name = "Ripgrep", hl_group = "Ripgrep" },
                             fuzzy_buffer = { symbol = "󰱼 ", name = "Buffer", hl_group = "Buffer" },
-                            npm = { symbol = " ", name = "Npm,", hl_group = "Npm," },
+                            npm = { symbol = " ", name = "Npm", hl_group = "Npm" },
                             conventionalcommits = { symbol = " ", name = "Commit", hl_group = "Commit" },
                             git = { symbol = "󰊢 ", name = "Git", hl_group = "Git" },
                             docker_compose_language_service = { symbol = "󰡨 ", name = "Docker", hl_group = "Docker" },
