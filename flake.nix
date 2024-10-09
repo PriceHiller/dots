@@ -88,7 +88,7 @@
             inherit inputs;
           };
           modules = [
-            ({
+            {
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
                 inputs.emacs-overlay.overlays.default
@@ -100,7 +100,7 @@
                 username = "${username}";
                 homeDirectory = "/home/${username}";
               };
-            })
+            }
             home-config
           ];
         };
@@ -108,7 +108,7 @@
     {
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
       packages = forAllSystems (pkgs: import ./pkgs pkgs);
-      homeConfigurations = builtins.mapAttrs (mkHomeCfg) { "price" = ./users/price/home.nix; };
+      homeConfigurations = builtins.mapAttrs mkHomeCfg { "price" = ./users/price/home.nix; };
       overlays = import ./overlays { inherit inputs; };
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
