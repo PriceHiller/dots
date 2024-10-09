@@ -2,11 +2,15 @@
 (
   ([
     (list_marker_star)
-    (list_marker_plus)
     (list_marker_minus)
   ]) @markup.list
   (#offset! @markup.list 0 0 0 -1)
   (#set! conceal "•")
+)
+(
+  ([
+    (list_marker_plus)
+  ]) @markup.list.number
 )
 
 ; checkboxes
