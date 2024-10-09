@@ -18,7 +18,8 @@ return {
         },
     },
     {
-        "hrsh7th/nvim-cmp",
+        "iguanacucumber/magazine.nvim",
+        name = "nvim-cmp", -- Otherwise highlighting gets messed up
         event = { "InsertEnter", "ModeChanged" },
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
@@ -32,7 +33,7 @@ return {
                 },
                 opts = {},
             },
-            "hrsh7th/cmp-nvim-lsp-document-symbol",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-calc",
             "davidsierradz/cmp-conventionalcommits",
             {
@@ -75,62 +76,6 @@ return {
                 paths = { vim.fn.stdpath("config") .. "/lua/plugins/snippets" },
             })
 
-            local colors_bg_color = vim.api.nvim_get_hl(0, { name = "CmpCustomSelectionColor" }).bg
-            local cached_colors = {}
-            local function handle_color_hl(color_entry)
-                local cached_hl_grp = cached_colors[color_entry]
-                if cached_hl_grp ~= nil then
-                    return cached_hl_grp
-                else
-                    local hl_grp = string.format("CmpCustomColor%s", color_entry:sub(2))
-                    vim.api.nvim_set_hl(0, hl_grp, { fg = color_entry, bg = colors_bg_color or "#FF0000" })
-                    cached_colors[color_entry] = hl_grp
-                    return hl_grp
-                end
-            end
-
-            local function hslToRgb(h, s, l)
-                h = h / 360
-                s = s / 100
-                l = l / 100
-
-                local r, g, b
-
-                if s == 0 then
-                    r, g, b = l, l, l -- achromatic
-                else
-                    local function hue2rgb(p, q, t)
-                        if t < 0 then
-                            t = t + 1
-                        end
-                        if t > 1 then
-                            t = t - 1
-                        end
-                        if t < 1 / 6 then
-                            return p + (q - p) * 6 * t
-                        end
-                        if t < 1 / 2 then
-                            return q
-                        end
-                        if t < 2 / 3 then
-                            return p + (q - p) * (2 / 3 - t) * 6
-                        end
-                        return p
-                    end
-
-                    local q = l < 0.5 and l * (1 + s) or l + s - l * s
-                    local p = 2 * l - q
-                    r = hue2rgb(p, q, h + 1 / 3)
-                    g = hue2rgb(p, q, h)
-                    b = hue2rgb(p, q, h - 1 / 3)
-                end
-
-                local function round(num)
-                    return num + (2 ^ 52 + 2 ^ 51) - (2 ^ 52 + 2 ^ 51)
-                end
-                return round(r * 255), round(g * 255), round(b * 255)
-            end
-
             ---@param sources table?
             local standard_sources = function(sources)
                 sources = sources or {}
@@ -138,6 +83,7 @@ return {
                     { name = "async_path" },
                     { name = "lazydev", group_index = 0 },
                     { name = "nvim_lsp" },
+                    { "nvim_lsp_signature_help" },
                     { name = "luasnip", max_item_count = 5 }, -- For luasnip users.
                     { name = "calc" },
                     { name = "emoji", keyword_length = 2, max_item_count = 10 },
@@ -214,55 +160,6 @@ return {
                                 mode = "symbol_text",
                                 maxwidth = abbr_max_width,
                             })(entry, vim_item)
-                            if string.match(kind.kind, ".* Color$") or string.match(kind.kind, ".* Variable$") then
-                                ---@type string
-                                local hl = nil
-                                local cmp_item = entry.cache.entries.get_completion_item
-                                if cmp_item.documentation ~= nil then
-                                    hl = cmp_item.documentation
-                                elseif cmp_item.label ~= nil then
-                                    hl = cmp_item.label
-                                end
-
-                                local function rgbToHex(red, green, blue)
-                                    local function convertNumHex(num)
-                                        local conversion = string.format("%x", num)
-                                        if conversion:len() == 0 then
-                                            return "00"
-                                        elseif conversion:len() == 1 then
-                                            return string.format("0%s", conversion)
-                                        else
-                                            return conversion
-                                        end
-                                    end
-                                    return string.format(
-                                        "#%s%s%s",
-                                        convertNumHex(red),
-                                        convertNumHex(green),
-                                        convertNumHex(blue)
-                                    )
-                                end
-
-                                if type(hl) == string then
-                                    local s, _, red, green, blue = string.find(hl, "rgb.*%((%d+), (%d+), (%d+).*%)")
-                                    if s ~= nil then
-                                        hl = rgbToHex(red, green, blue)
-                                    end
-
-                                    local start, _, hue, saturation, lightness =
-                                        hl:find("hsl.*%((%d+), (%d+)%%, (%d+)%%.*%)")
-                                    if start ~= nil then
-                                        red, green, blue =
-                                            hslToRgb(tonumber(hue), tonumber(saturation), tonumber(lightness))
-                                        hl = rgbToHex(red, green, blue)
-                                    end
-
-                                    if hl:match("^#?%x%x%x%x%x%x$") ~= nil then
-                                        kind.kind_hl_group = handle_color_hl(hl)
-                                        kind.kind = " Color"
-                                    end
-                                end
-                            end
 
                             local strings = vim.split(kind.kind, "%s", { trimempty = true })
                             if not strings[2] then
@@ -308,6 +205,7 @@ return {
                     end,
                 },
                 performance = {
+                    debounce = 0,
                     fetching_timeout = 100,
                 },
                 view = {
