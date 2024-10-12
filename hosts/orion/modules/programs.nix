@@ -19,5 +19,9 @@
       package = pkgs.wireshark;
     };
     steam.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 }
