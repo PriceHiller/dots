@@ -32,6 +32,8 @@ in
     packages =
       with pkgs;
       [
+        dig
+        nethogs
         lsof
         strace
         ltrace
