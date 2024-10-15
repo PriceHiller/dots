@@ -2,7 +2,7 @@ return {
     {
         "lukas-reineke/headlines.nvim",
         dependencies = "nvim-treesitter/nvim-treesitter",
-        opts = function()
+        config = function()
             local bullets = {
                 "󰪥",
                 "󰀘",
@@ -21,7 +21,8 @@ return {
                 "@markup.heading.7.marker",
                 "@markup.heading.8.marker",
             }
-            return {
+            local headlines = require("headlines")
+            headlines.setup({
                 markdown = {
                     bullets = bullets,
                     bullet_highlights = bullet_highlights,
@@ -65,9 +66,12 @@ return {
                     bullet_highlights = bullet_highlights,
                     fat_headline_lower_string = "▀",
                 },
-            }
+            })
+            -- TODO: Upstream this fix to headlines.nvim
+            vim.api.nvim_create_autocmd("VimResized", {
+                callback = headlines.refresh,
+            })
         end,
-        config = true,
         ft = { "markdown", "norg", "rmd", "org" },
     },
 }
