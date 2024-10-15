@@ -255,7 +255,7 @@ return {
                 { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
 
                 -- Markup specific
-                { "@markup.raw", { fg = colors.oniViolet2, bg = colors.sumiInk1 } },
+                { "@markup.raw", { fg = colors.springViolet2, bg = colors.sumiInk1 } },
                 { "@markup.raw.block", select_hl("@markup.raw", { "fg" }) },
                 { "@markup.raw.delimiter", { link = "@punctuation.delimiter" } },
                 {
@@ -364,7 +364,7 @@ return {
                 { "@markup.heading.6.marker", { link = "@markup.heading.6" } },
                 { "@markup.heading.7.marker", { link = "@markup.heading.7" } },
                 { "@markup.heading.8.marker", { link = "@markup.heading.8" } },
-                { "@markup.quote.org", get_hl("@markup.quote", { bg = colors.sumiInk5 }) },
+                { "@markup.quote", { fg = colors.oldWhite }},
 
                 -- For Visual Whitespace plugin
                 { "visual-whitespace", get_hl("Visual", { fg = colors.fujiGray }) },
