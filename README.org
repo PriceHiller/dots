@@ -1,5 +1,5 @@
 * Price Hiller's Dots
-This is a mirror from my Git server over [[https://git.orion-technologies.io/Price/dots][here]].
+This is a mirror from my Git server over [[https://git.price-hiller.com/Price/dots][here]].
 
 These are my dot files. All the actual dots can be found under ~users/price/dots/~.
 

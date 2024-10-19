@@ -5,11 +5,11 @@
     matchBlocks =
       rec {
         luna = {
-          hostname = "luna.hosts.orion-technologies.io";
+          hostname = "luna.hosts.price-hiller.com";
           user = "price";
           port = 2200;
         };
-        "luna.hosts.orion-technologies.io" = luna;
+        "luna.hosts.price-hiller.com" = luna;
         asgard = {
           hostname = "asgard-eternal.com";
           user = "asgard";
