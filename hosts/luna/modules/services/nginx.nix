@@ -10,15 +10,11 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "price@orion-technologies.io";
+    defaults.email = "price@price-hiller.com";
   };
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
   services.nginx.virtualHosts = {
-    "blog.orion-technologies.io" = {
-      forceSSL = true;
-      enableACME = true;
-      globalRedirect = "price-hiller.com";
-    };
     "price-hiller.com" = {
       forceSSL = true;
       enableACME = true;

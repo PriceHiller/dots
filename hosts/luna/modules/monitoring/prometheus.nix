@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  prometheus_host = "prometheus.orion-technologies.io";
+  prometheus_host = "prometheus.${config.networking.domain}";
 in
 {
   services = {

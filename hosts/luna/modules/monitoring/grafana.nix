@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  grafana_host = "grafana.orion-technologies.io";
+  grafana_host = "grafana.${config.networking.domain}";
 in
 {
   services = {

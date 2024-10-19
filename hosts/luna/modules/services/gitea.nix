@@ -6,7 +6,7 @@
   ...
 }:
 let
-  gitea_host = "git.orion-technologies.io";
+  gitea_host = "git.${config.networking.domain}";
   # TODO: Move this docker image out to a separate package and NixOS Module
   # Huge thank you to https://icewind.nl/entry/gitea-actions-nix/ -- wouldn't have figured this out
   # without that post 🙂
