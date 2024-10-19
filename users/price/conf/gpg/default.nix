@@ -19,7 +19,7 @@
     enable = true;
     enableSshSupport = true;
     enableZshIntegration = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentryPackage = pkgs.pinentry-gtk2;
     maxCacheTtl = 14400;
     maxCacheTtlSsh = 14400;
     sshKeys = [ "530D3EC95C32AB9EC33714AAF865738D6E77680A" ];
