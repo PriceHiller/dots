@@ -11,9 +11,9 @@ return {
         },
         keys = {
             { "<localleader>n", desc = "> Neotest" },
-            { "<localleader>nrr", "<cmd>Neotest run<CR>", desc = "Neotest: Run Test" },
-            { "<localleader>nrl", "<cmd>Neotest run file<CR>", desc = "Neotest: Run Tests in File" },
-            { "<localleader>nrl", "<cmd>Neotest run last<CR>", desc = "Neotest: Run Last Tests" },
+            { "<localleader>nr", "<cmd>Neotest run<CR>", desc = "Neotest: Run Test" },
+            { "<localleader>nf", "<cmd>Neotest run file<CR>", desc = "Neotest: Run Test(s) in File" },
+            { "<localleader>nl", "<cmd>Neotest run last<CR>", desc = "Neotest: Run Last Test(s)" },
             { "<localleader>np", "<cmd>Neotest output-panel<CR>", desc = "Neotest: Output Panel" },
             { "<localleader>no", "<cmd>Neotest output<CR>", desc = "Neotest: Output" },
             { "<localleader>nn", "<cmd>Neotest summary toggle<CR>", desc = "Neotest: Summary Toggle" },
