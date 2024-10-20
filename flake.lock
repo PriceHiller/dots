@@ -846,10 +846,10 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1729394070,
-        "narHash": "sha256-tUIsAcAI+oYdsLhuoN+pFRR46j7cDI6ltZW88fb5a7Y=",
-        "rev": "26a7346d97b19d44e3f07d912e64cc4e8fd38ec9",
-        "revCount": 5,
+        "lastModified": 1729398725,
+        "narHash": "sha256-5VSA5OW+hwGvCqlZEmqB57bZDIc4Yt46gWiCOnDuLCo=",
+        "rev": "f39f9c879ae7d9227f843a82155900234aa263a6",
+        "revCount": 6,
         "submodules": true,
         "type": "git",
         "url": "file:secrets"
