@@ -241,7 +241,7 @@
             "invertScroll": true,
             "nearestNeighbour": false,
             "square": false,
-            "zoom": 2,
+            "zoom": 1,
             "size": 100,
             "zoomSpeed": 0.5
         },
@@ -706,6 +706,9 @@
         },
         "FullSearchContext": {
             "enabled": false
+        },
+        "AccountPanelServerProfile": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -718,6 +721,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1727811480516
+        "settingsSyncVersion": 1729536505213
     }
 }
