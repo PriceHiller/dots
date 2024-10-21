@@ -161,6 +161,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
+            "actionshrimp/direnv.nvim", -- This ensures that direnv is loaded first
             "williamboman/mason.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             {
