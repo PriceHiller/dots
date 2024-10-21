@@ -458,6 +458,7 @@ return {
                             },
                             {
                                 condition = conditions.lsp_attached,
+                                update = { "LspAttach", "LspDetach" },
                                 {
                                     provider = function()
                                         local names = {}
