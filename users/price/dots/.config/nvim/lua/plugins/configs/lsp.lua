@@ -303,7 +303,10 @@ return {
                                 end
                                 local messages = {}
                                 for _, cur_client in ipairs(cur_clients) do
-                                    table.insert(messages, "- `" .. cur_client.name .. "`")
+                                    local client_name = vim.trim(cur_client.name)
+                                    if client_name ~= "" then
+                                        table.insert(messages, "- `" .. cur_client.name .. "`")
+                                    end
                                 end
 
                                 vim.notify(table.concat(messages, "\n"), vim.log.levels.INFO, {
