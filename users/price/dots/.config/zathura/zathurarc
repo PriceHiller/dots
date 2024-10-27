@@ -49,3 +49,4 @@ set scroll-step                 "120"
 
 set selection-clipboard         "clipboard"
 set statusbar-home-tilde        "true"
+set page-padding                10
