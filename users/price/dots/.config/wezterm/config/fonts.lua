@@ -27,10 +27,10 @@ return {
             family = "MesloLGS Nerd Font",
         },
         {
-            family = "Twemoji",
+            family = "Twitter Color Emoji",
         },
         {
-            family = "Noto Fonts Emoji",
+            family = "Noto Color Emoji",
         },
         { family = "Nerd Font Symbols" },
     }),
