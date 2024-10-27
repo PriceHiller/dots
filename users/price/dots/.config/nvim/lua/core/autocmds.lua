@@ -106,6 +106,7 @@ M.setup = function()
 
             local extensions = {
                 "pdf",
+                "epub",
                 "djvu",
                 "wav",
                 "png",
