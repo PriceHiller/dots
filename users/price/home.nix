@@ -148,6 +148,7 @@ in
         clang
         nasm
         asm-lsp
+        asmfmt
         ninja
         ccache
         llvm
