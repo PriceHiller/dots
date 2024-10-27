@@ -2,11 +2,15 @@
 {
   home.packages = with pkgs; [
     fontconfig
-    nerdfonts
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
     fira-code
+    fira
+    ibm-plex
+    open-sans
     noto-fonts
     twitter-color-emoji
     vistafonts
+    roboto
   ];
   fonts = {
     fontconfig = {
