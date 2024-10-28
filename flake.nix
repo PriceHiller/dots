@@ -7,6 +7,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,6 +93,7 @@
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
                 inputs.emacs-overlay.overlays.default
+                inputs.fenix.overlays.default
                 self.overlays.modifications
                 self.overlays.additions
               ];

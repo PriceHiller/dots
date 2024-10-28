@@ -68,10 +68,6 @@ in
         Fmt
         screen-cap
         nodePackages.prettier
-        cargo
-        clippy
-        rustc
-        rustfmt
         python3
         shfmt
         bob-nvim
@@ -156,15 +152,12 @@ in
         pkg-config
         openssl.dev
         curl.dev
-      ]
-      ++ [ rust-analyzer ];
+      ];
 
     file = softLinkDots ".config";
 
     sessionVariables = {
       _ZL_DATA = "${config.xdg.cacheHome}/zlua";
-      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
-      CARGO_HOME = "${config.xdg.dataHome}/cargo";
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
       TERMINFO_DIRS = "${config.home.profileDirectory}/share/terminfo";
