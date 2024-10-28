@@ -153,7 +153,7 @@ return {
                             ["<C-h>"] = actions.preview_scrolling_left,
                             ["<C-l>"] = actions.preview_scrolling_right,
                             ["<C-d>"] = actions.cycle_history_next,
-                            ["<A-x>"] = actions.delete_buffer + actions.move_to_top,
+                            ["<A-x>"] = actions.delete_buffer,
                             ["<C-s>"] = actions.cycle_history_prev,
                             ["<C-q>"] = actions.smart_send_to_qflist,
                         },
