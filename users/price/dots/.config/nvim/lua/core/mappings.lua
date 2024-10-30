@@ -53,6 +53,11 @@ M.setup = function()
         vim.opt.spell = not vim.opt.spell:get()
     end, { silent = true, desc = "Toggle Spell" })
 
+    -- Toggling wrap
+    vim.keymap.set("n", "<leader>sw", function()
+        vim.opt.wrap = not vim.opt.wrap:get()
+    end, { silent = true, desc = "Toggle Wrap" })
+
     -- Set current focused file as cwd
     vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
 
