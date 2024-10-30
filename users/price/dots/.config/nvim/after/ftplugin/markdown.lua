@@ -5,6 +5,13 @@ vim.opt_local.textwidth = 0
 vim.keymap.set("n", "<leader>fr", "<cmd>MarkdownPreview<CR>", {
     buffer = true,
 })
+vim.keymap.set("n", "<leader>ff", function()
+    vim.cmd("Markview hybridToggle")
+    local hybrid_state = require("markview").state.hybrid_mode and "Enabled" or "Disabled"
+    vim.notify(("%s Markview Hybrid Mode"):format(hybrid_state), vim.log.levels.INFO, { title = "Markview" })
+end, {
+    buffer = true,
+})
 
 vim.keymap.set("n", "<C-Space>", function()
     local cur_line = vim.fn.line(".")
