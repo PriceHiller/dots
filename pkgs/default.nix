@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  bob-nvim = pkgs.callPackage ./bob-nvim.nix {
-    rustPlatform = pkgs.rustPlatform;
-    fetchFromGitHub = pkgs.fetchFromGitHub;
-  };
   screen-cap = pkgs.callPackage ./screen-cap/default.nix { };
   Fmt = pkgs.writeShellApplication {
     name = "Fmt";

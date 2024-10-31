@@ -6,7 +6,6 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,10 +13,6 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    bob = {
-      flake = false;
-      url = "github:MordechaiHadad/bob";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,6 +25,7 @@
     };
     impermanence = {
       url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
@@ -42,7 +38,17 @@
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+    };
+    neovim-src = {
+      url = "github:neovim/neovim";
+      flake = false;
+    };
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs = {
+        neovim-src.follows = "neovim-src";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     secrets = {
       url = "git+file:secrets?submodules=1";
@@ -93,6 +99,7 @@
               imports = [ inputs.agenix.homeManagerModules.default ];
               nixpkgs.overlays = [
                 inputs.emacs-overlay.overlays.default
+                inputs.neovim-nightly-overlay.overlays.default
                 inputs.fenix.overlays.default
                 self.overlays.modifications
                 self.overlays.additions

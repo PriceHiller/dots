@@ -70,8 +70,6 @@ in
         nodePackages.prettier
         python3
         shfmt
-        bob-nvim
-        neovide
         wezterm
         kitty
         sqlite
@@ -148,10 +146,7 @@ in
         ninja
         ccache
         llvm
-        llvmPackages.libcxxStdenv
         pkg-config
-        openssl.dev
-        curl.dev
       ];
 
     file = softLinkDots ".config";
@@ -175,7 +170,9 @@ in
       GRADLE_USER_HOME = "${config.xdg.dataHome}/gradle";
       _JAVA_OPTIONS = "-Djava.util.prefs.userRoot='${config.xdg.configHome}/java'";
     };
-    sessionPath = [ "${config.xdg.dataHome}/bin" ];
+    sessionPath = [
+      "${config.home.homeDirectory}/.local/bin"
+    ];
   };
 
   xdg = {
