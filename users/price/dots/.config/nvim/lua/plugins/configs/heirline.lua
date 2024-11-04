@@ -208,7 +208,7 @@ return {
                     else
                         ---@diagnostic disable-next-line: cast-local-type
                         filename = vim.fn.fnamemodify(self.filename, ":~:.")
-                        if not conditions.width_percent_below(#filename, 0.5, true) then
+                        if not conditions.width_percent_below(#filename, 0.3, true) then
                             filename = vim.fn.pathshorten(filename)
                         end
                     end
