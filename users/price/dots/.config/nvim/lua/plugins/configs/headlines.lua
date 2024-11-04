@@ -23,7 +23,10 @@ return {
             }
             local headlines = require("headlines")
             headlines.setup({
-                markdown = false,
+                markdown = {
+                    bullets = false,
+                    query = false,
+                },
                 rmd = {
                     bullets = bullets,
                     bullet_highlights = bullet_highlights,
