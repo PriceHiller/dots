@@ -526,9 +526,10 @@ return {
                 },
             })
 
-            lspconfig.typst_lsp.setup({
+            lspconfig.tinymist.setup({
                 settings = {
                     exportPdf = "onType",
+                    formatterMode = "typstyle",
                 },
             })
 
