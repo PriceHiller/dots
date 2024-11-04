@@ -122,9 +122,9 @@
             "format-disabled": "󰀝 Wireless Networking Disabled",
             "tooltip-format": "{ifname}: {ipaddr}/{cidr} 󰌹 {gwaddr}",
             "format-icons": {
-                "ethernet": "󰈀",
-                "disconnected": "",
-                "wifi": ""
+                "ethernet": "󰈀 ",
+                "disconnected": " ",
+                "wifi": " "
             },
             "tooltip": true,
             "max-length": 60,
