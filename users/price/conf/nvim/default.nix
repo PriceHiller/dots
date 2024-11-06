@@ -7,6 +7,7 @@
     packages = with pkgs; [
       neovide
       neovim
+      bun
     ];
   };
 }
