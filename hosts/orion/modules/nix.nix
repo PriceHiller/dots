@@ -7,6 +7,7 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       experimental-features = [
+        "pipe-operators"
         "nix-command"
         "flakes"
       ];

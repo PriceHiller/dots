@@ -31,6 +31,7 @@ let
       ];
       # allow using the new flake commands in our workflows
       experimental-features = [
+        "pipe-operators"
         "nix-command"
         "flakes"
       ];

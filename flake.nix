@@ -159,7 +159,7 @@
               text = ''
                 #!${pkgs.bash}/bin/bash
                 cd "$(git rev-parse --show-toplevel)"
-                nix run --extra-experimental-features 'nix-command flakes' github:nix-community/home-manager -- switch --extra-experimental-features 'nix-command flakes' --flake "git+file://$(pwd)?submodules=1" "$@"
+                nix run --extra-experimental-features 'nix-command flakes pipe-operators' github:nix-community/home-manager -- switch --extra-experimental-features 'nix-command flakes' --flake "git+file://$(pwd)?submodules=1" "$@"
               '';
             }
           }/bin/home-manager-init";
