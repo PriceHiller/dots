@@ -3,28 +3,18 @@
   lib ? (import <nixpkgs> { }).lib,
 }:
 rec {
-  hasSuffix =
-    suffix: string:
-    let
-      lenSuffix = builtins.stringLength suffix;
-      lenString = builtins.stringLength string;
-    in
-    (lenString >= lenSuffix && (builtins.substring (lenString - lenSuffix) lenString string) == suffix);
   recurseDir =
     dir:
-    let
-      dirContents = builtins.readDir dir;
-    in
-    (builtins.concatMap (
-      dirItem:
-      let
-        itemType = builtins.getAttr dirItem dirContents;
-        itemPath = dir + "/${dirItem}";
-      in
-      if itemType == "directory" then (recurseDir itemPath) else [ itemPath ]
-    ) (builtins.attrNames dirContents));
+    builtins.readDir dir
+    |> lib.attrsets.mapAttrs' (
+      fEntry: fType: lib.attrsets.nameValuePair (builtins.toString (dir + "/${fEntry}")) fType
+    )
+    |> lib.attrsets.mapAttrsToList (
+      fEntry: fType: if fType == "directory" then (recurseDir "${fEntry}") else "${fEntry}"
+    )
+    |> lib.lists.flatten;
   recurseFilesInDir =
-    dir: suffix: (builtins.filter (file: hasSuffix "${suffix}" file) (recurseDir dir));
+    dir: suffix: (builtins.filter (file: lib.strings.hasSuffix "${suffix}" file) (recurseDir dir));
   recurseFilesInDirs =
     dirs: suffix: (builtins.concatMap (dir: (recurseFilesInDir dir "${suffix}")) dirs);
   # Full credit to https://stackoverflow.com/questions/54504685/nix-function-to-merge-attributes-records-recursively-and-concatenate-arrays/54505212#54505212
