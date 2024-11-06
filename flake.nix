@@ -214,6 +214,14 @@
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
                 {
+                  config = {
+                    nixpkgs.overlays = [
+                      self.overlays.modifications
+                      self.overlays.additions
+                    ];
+                  };
+                }
+                {
                   config =
                     (import "${inputs.secrets}" {
                       agenix = false;
