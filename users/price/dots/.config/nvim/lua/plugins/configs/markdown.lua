@@ -1,10 +1,21 @@
 return {
     {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function()
-            vim.fn["mkdp#util#install"]()
+        "wallpants/github-preview.nvim",
+        ft = "markdown",
+        cmd = {
+            "GithubPreviewToggle",
+            "GithubPreviewStart",
+            "GithubPreviewStop",
+        },
+        config = function()
+            local gpreview = require("github-preview")
+            gpreview.setup({
+                -- theme = {
+                --     "dark"
+                -- }
+            })
+        end,
+    },
     {
         "OXY2DEV/markview.nvim",
         ft = "markdown",

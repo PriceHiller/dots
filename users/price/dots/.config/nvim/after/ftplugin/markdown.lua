@@ -2,8 +2,9 @@ vim.opt_local.tabstop = 2
 vim.opt_local.shiftwidth = 2
 vim.opt_local.textwidth = 0
 
-vim.keymap.set("n", "<leader>fr", "<cmd>MarkdownPreview<CR>", {
+vim.keymap.set("n", "<leader>fr", "<cmd>GithubPreviewToggle<CR>", {
     buffer = true,
+    desc = "Preview Markdown in Browser"
 })
 vim.keymap.set("n", "<leader>ff", function()
     vim.cmd("Markview hybridToggle")
@@ -11,6 +12,7 @@ vim.keymap.set("n", "<leader>ff", function()
     vim.notify(("%s Markview Hybrid Mode"):format(hybrid_state), vim.log.levels.INFO, { title = "Markview" })
 end, {
     buffer = true,
+    desc = "Toggle Markview Hybrid Mode"
 })
 
 vim.keymap.set("n", "<C-Space>", function()
