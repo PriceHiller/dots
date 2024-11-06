@@ -4,7 +4,12 @@
 
   programs.virt-manager.enable = true;
   virtualisation = {
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        runAsRoot = false;
+      };
+    };
     containers.enable = true;
     podman = {
       enable = true;
