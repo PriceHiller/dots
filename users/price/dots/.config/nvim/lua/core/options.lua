@@ -42,7 +42,7 @@ M.setup = function()
     opt.formatlistpat = [[^\s*\(-\|\d\.\|+\)\s*]]
     opt.formatoptions = "jcroqnp"
     opt.breakindent = true
-    opt.breakindentopt = "sbr,list:2"
+    opt.breakindentopt = "sbr,list:-1"
     opt.showbreak = " "
 
     -- Search settings
