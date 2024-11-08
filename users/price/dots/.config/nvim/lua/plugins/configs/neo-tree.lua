@@ -8,6 +8,7 @@ return {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
             "miversen33/netman.nvim",
+            "folke/snacks.nvim",
         },
         cmd = "Neotree",
         keys = {
@@ -27,8 +28,8 @@ return {
                 end,
             })
         end,
-        opts = function()
-            return {
+        config = function()
+            require("neo-tree").setup({
                 sources = {
                     "filesystem",
                     "git_status",
@@ -71,7 +72,19 @@ return {
                         ["F"] = "fuzzy_finder",
                     },
                 },
-            }
+            })
+        end,
+        opts = function(_, opts)
+            local snacks = require("snacks")
+            local function on_move(data)
+                snacks.rename.on_rename_file(data.source, data.destination)
+            end
+            local events = require("neo-tree.events")
+            opts.event_handlers = opts.event_handlers or {}
+            vim.list_extend(opts.event_handlers, {
+                { event = events.FILE_MOVED, handler = on_move },
+                { event = events.FILE_RENAMED, handler = on_move },
+            })
         end,
     },
 }
