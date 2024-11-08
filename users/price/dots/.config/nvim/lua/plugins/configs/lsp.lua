@@ -110,17 +110,19 @@ return {
                     default_settings = {
                         ["rust-analyzer"] = {
                             cargo = {
-                                allFeatures = true,
+                                features = "all",
                                 loadOutDirsFromCheck = true,
                                 runBuildScripts = true,
                             },
-                            checkOnSave = {
-                                allFeatures = true,
-                                allTargets = true,
+                            check = {
                                 command = "clippy",
+                                features = "all",
                             },
-                            procMacro = {
-                                enable = true,
+                            checkOnSave = true,
+                            rustfmt = {
+                                rangeFormatting = {
+                                    enable = true,
+                                },
                             },
                         },
                     },
