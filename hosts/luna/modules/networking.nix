@@ -1,4 +1,4 @@
-{ hostname, config, ... }:
+{ hostname, ... }:
 
 {
   services.resolved = {
@@ -10,7 +10,6 @@
   networking = {
     hostName = hostname;
     domain = "price-hiller.com";
-    fqdn = "${config.networking.hostname}.hosts.${config.networking.domain}";
     nameservers = [
       "194.242.2.2#dns.mullvad.net"
       "2a07:e340::2#dns.mullvad.net"
