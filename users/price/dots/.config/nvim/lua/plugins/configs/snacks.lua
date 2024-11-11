@@ -1,9 +1,34 @@
+vim.api.nvim_create_autocmd("TermOpen", {
+    callback = function(args)
+        vim.keymap.set("n", "q", function()
+            require("snacks").bufdelete.delete({ force = true })
+        end, { silent = true, buffer = args.buf, remap = true, desc = "Close Terminal Buffer" })
+    end,
+})
+
 return {
     {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
         keys = {
+            {
+                "<A-x>",
+                function()
+                    require("snacks").bufdelete.delete()
+                end,
+                desc = "Close Buffer",
+                mode = { "", "!", "v" },
+            },
+
+            {
+                "<A-x>",
+                function()
+                    require("snacks").bufdelete.delete({ force = true })
+                end,
+                desc = "Close Buffer",
+                mode = { "t" },
+            },
             {
                 "<leader>nd",
                 function()
@@ -30,7 +55,7 @@ return {
                     margin = { top = 1 },
                 },
                 words = { enabled = true },
-                statuscolumn = { enabled = false }
+                statuscolumn = { enabled = false },
             })
             _G.bt = snacks.debug.backtrace
             _G.dd = snacks.debug.inspect
