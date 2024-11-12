@@ -1,14 +1,17 @@
 { config, pkgs, ... }:
+let
+  pg_dataDir_base = "/var/lib/postgresql";
+in
 {
   services.postgresqlBackup = {
+    enable = true;
     location = "/var/backup/postgresql";
     backupAll = true;
   };
+
   services.postgresql = {
     enable = true;
-    # Explicitly setting the data dir so upgrades (changing version from 15 -> 16) don't end up
-    # getting lost on system reboots
-    dataDir = "/var/lib/postgresql";
+    dataDir = "${pg_dataDir_base}/${config.services.postgresql.package.psqlSchema}";
     settings = {
       log_connections = true;
       log_disconnections = true;
@@ -27,7 +30,7 @@
 
   environment.persistence.save.directories = [
     {
-      directory = config.services.postgresql.dataDir;
+      directory = "${pg_dataDir_base}";
       user = "postgres";
       group = "postgres";
     }
