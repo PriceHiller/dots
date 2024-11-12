@@ -26,7 +26,6 @@ in
     hideMounts = true;
     directories = [
       "/var/lib"
-      "/etc/nixos"
     ];
   };
 
