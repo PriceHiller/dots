@@ -363,17 +363,18 @@ in
           After = [ "compositor.target" ];
         };
       };
-      polkit-gnome-authentication-agent-1 = {
+      polkit-hyprpolkitagent = {
         Unit = {
-          Description = "Gnome Polkit authentication agent";
-          Documentation = "https://gitlab.freedesktop.org/polkit/polkit/";
-          After = [ "graphical-session-pre.target" ];
-          PartOf = [ "graphical-session.target" ];
+          Description = "Hyprland Polkit authentication agent";
+          Documentation = "https://wiki.hyprland.org/Hypr-Ecosystem/hyprpolkitagent/";
+          After = [ "graphical-session.target" ];
         };
 
         Service = {
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
           Restart = "always";
+          RestartSec = 2;
+          TimeoutStopSec = 10;
         };
 
         Install.WantedBy = [ "graphical-session.target" ];
