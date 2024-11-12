@@ -39,7 +39,9 @@ return {
             {
                 "<leader>nv",
                 function()
-                    require("snacks").notifier.show_history()
+                    require("snacks").notifier.show_history({
+                        sort = { "added" },
+                    })
                 end,
                 desc = "Notifications: Search",
             },
@@ -57,6 +59,10 @@ return {
                 words = { enabled = true },
                 statuscolumn = { enabled = false },
             })
+            snacks.config.styles["notification.history"] = {
+                title = { { "Notification History", "@markup.heading.4" } },
+                border = { { " ", "INVALIDHIGHLIGHTHERE" } },
+            }
             _G.bt = snacks.debug.backtrace
             _G.dd = snacks.debug.inspect
             vim.print = snacks.debug.inspect
