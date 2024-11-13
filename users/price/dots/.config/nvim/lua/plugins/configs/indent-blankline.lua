@@ -34,6 +34,7 @@ return {
                     },
                 },
                 indent = {
+                    repeat_linebreak = true,
                     char = "▏",
                     tab_char = "▏",
                     smart_indent_cap = true,
