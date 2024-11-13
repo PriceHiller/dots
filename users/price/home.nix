@@ -320,19 +320,6 @@ in
       };
     };
     services = {
-      xwaylandvideobridge = {
-        Install.WantedBy = [ "compositor.target" ];
-        Service = {
-          ExecStart = "${pkgs.xwaylandvideobridge}/bin/xwaylandvideobridge";
-          Restart = "always";
-        };
-        Unit = {
-          Description = "Bridge X11 Clients to XDG Portal";
-          Documentation = "https://invent.kde.org/system/xwaylandvideobridge";
-          PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
-        };
-      };
       keyd-application-mapper = {
         Unit = {
           Description = "Keyd - Linux Keyboard Remapper";
