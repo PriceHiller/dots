@@ -148,10 +148,10 @@ return {
                 type = "text",
                 val = function()
                     if lstatus.has_updates() and lstatus.updates() then
-                        vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@keyword.return" })
+                        vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@keyword.return", force = true })
                         return "Plugin updates available!"
                     else
-                        vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@string" })
+                        vim.api.nvim_set_hl(0, "AlphaPluginUpdate", { link = "@string", force = true })
                         return "All plugins up to date"
                     end
                 end,
