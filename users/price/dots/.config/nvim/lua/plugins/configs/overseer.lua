@@ -18,8 +18,8 @@ return {
         },
         keys = {
             { "<leader>r", desc = "Overseer" },
-            { "<leader>rr", "<cmd>OverseerRun<CR>", desc = "Overseer: Run" },
-            { "<leader>rt", "<cmd>OverseerToggle<CR>", desc = "Overseer: Toggle" },
+            { "<leader>rs", "<cmd>OverseerRun<CR>", desc = "Overseer: Run" },
+            { "<leader>rr", "<cmd>OverseerToggle<CR>", desc = "Overseer: Toggle" },
         },
         config = function()
             local overseer = require("overseer")
