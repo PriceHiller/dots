@@ -15,10 +15,17 @@ return {
             { "<leader>kf", "<cmd>Neotest run file<CR>", desc = "Neotest: Run Test(s) in File" },
             { "<leader>kl", "<cmd>Neotest run last<CR>", desc = "Neotest: Run Last Test(s)" },
             { "<leader>kp", "<cmd>Neotest output-panel<CR>", desc = "Neotest: Output Panel" },
-            { "<leader>ko", "<cmd>Neotest output<CR>", desc = "Neotest: Output" },
-            { "<leader>kn", "<cmd>Neotest summary toggle<CR>", desc = "Neotest: Summary Toggle" },
-            { "<leader>kk", "<cmd>Neotest jump prev<CR>", desc = "Neotest: Jump Prev" },
-            { "<leader>kj", "<cmd>Neotest jump next<CR>", desc = "Neotest: Jump Next" },
+            {
+                "<leader>ko",
+                function()
+                    local neotest = require("neotest")
+                    neotest.output.open({ enter = true })
+                end,
+                desc = "Neotest: Output",
+            },
+            { "<leader>kk", "<cmd>Neotest summary toggle<CR>", desc = "Neotest: Summary Toggle" },
+            { "<leader>kn", "<cmd>Neotest jump prev<CR>", desc = "Neotest: Jump Prev" },
+            { "<leader>kN", "<cmd>Neotest jump next<CR>", desc = "Neotest: Jump Next" },
             { "<leader>ka", "<cmd>Neotest attach<CR>", desc = "Neotest: Attach" },
         },
         opts = function()
