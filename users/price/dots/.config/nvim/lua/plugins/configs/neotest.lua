@@ -28,14 +28,25 @@ return {
             { "<leader>kN", "<cmd>Neotest jump next<CR>", desc = "Neotest: Jump Next" },
             { "<leader>ka", "<cmd>Neotest attach<CR>", desc = "Neotest: Attach" },
         },
-        opts = function()
-            return {
+        config = function()
+            vim.api.nvim_create_autocmd("BufWinEnter", {
+                pattern = "*Neotest Summary*",
+                callback = function(args)
+                    local buf = args.buf
+                    for _, winnr in ipairs(vim.fn.win_findbuf(buf)) do
+                        local wo = vim.wo[winnr]
+                        wo.wrap = false
+                        wo.statuscolumn = ""
+                        wo.foldcolumn = "0"
+                        wo.number = false
+                        wo.signcolumn = "no"
+                    end
+                end,
+            })
+            require("neotest").setup({
                 diagnostic = {
                     enable = true,
                     severity = 1,
-                },
-                discovery = {
-                    concurrent = 4,
                 },
                 status = {
                     virtual_text = true,
@@ -45,7 +56,7 @@ return {
                     require("neotest-go"),
                     require("rustaceanvim.neotest"),
                 },
-            }
+            })
         end,
     },
 }
