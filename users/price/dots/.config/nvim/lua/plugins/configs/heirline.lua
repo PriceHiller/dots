@@ -812,8 +812,13 @@ return {
                             if not headline then
                                 return
                             end
+                            headline = headline:refresh()
+                            local logbook = headline:get_logbook()
+                            if not logbook then
+                                return
+                            end
 
-                            local clocked_time = headline:get_logbook():get_total_with_active():to_string()
+                            local clocked_time = logbook:get_total_with_active():to_string()
                             local effort = headline:get_property("effort")
                             local time_elapsed = ""
                             if effort then
