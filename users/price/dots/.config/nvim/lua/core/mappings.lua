@@ -49,7 +49,7 @@ M.setup = function()
     end, { silent = true, desc = "Remove Highlighted Searches" })
 
     -- Spell Checking
-    vim.keymap.set("n", "<leader>st", function()
+    vim.keymap.set("n", "<leader>ss", function()
         vim.opt.spell = not vim.opt.spell:get()
     end, { silent = true, desc = "Toggle Spell" })
 
