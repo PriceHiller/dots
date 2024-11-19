@@ -9,7 +9,7 @@ local bwdelete = function(opts)
 
     local nuke = false
 
-    if vim.fn.win_gettype() ~= '' and not vim.bo[opts.buf].modified then
+    if vim.fn.win_gettype() ~= "" and not vim.bo[opts.buf].modified then
         opts.force = true
         nuke = true
     end
@@ -110,7 +110,7 @@ return {
             })
             snacks.config.styles["notification.history"] = {
                 title = { { "Notification History", "@markup.heading.4" } },
-                border = { " " },
+                border = { { " ", "INVALIDHIGHLIGHTHERE" } },
             }
             _G.bt = snacks.debug.backtrace
             _G.dd = snacks.debug.inspect
