@@ -68,6 +68,7 @@ return {
             local cmp = require("cmp")
             local str = require("cmp.utils.str")
             local compare = cmp.config.compare
+            local cmp_types = require("cmp.types")
             local luasnip = require("luasnip")
 
             -- Load Snippets
@@ -107,7 +108,7 @@ return {
                             "--max-depth 4",
                         },
                     },
-                    { name = "zsh", max_item_count = 5 },
+                    { name = "zsh", max_item_count = 3 },
                     { name = "npm", keyword_length = 2 },
                 }
 
@@ -284,13 +285,18 @@ return {
                 sorting = {
                     priority_weight = 2,
                     comparators = {
-                        compare.locality,
-                        compare.recently_used,
-                        compare.score,
                         require("cmp_fuzzy_buffer.compare"),
+                        compare.locality,
                         compare.offset,
                         compare.exact,
-                        -- Copied from cmp-under-comparator
+                        compare.score,
+                        compare.recently_used,
+                        compare.kind,
+                        compare.length,
+                        compare.order,
+                        --- Copied from cmp-under-comparator
+                        ---@param entry1 cmp.Entry
+                        ---@param entry2 cmp.Entry
                         function(entry1, entry2)
                             local _, entry1_under = entry1.completion_item.label:find("^_+")
                             local _, entry2_under = entry2.completion_item.label:find("^_+")
@@ -349,7 +355,6 @@ return {
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
-                    { name = "cmdline_history", max_item_count = 3 },
                     {
                         name = "cmdline",
                         option = {
@@ -359,6 +364,7 @@ return {
                         },
                         priority = 100,
                     },
+                    { name = "cmdline_history", max_item_count = 3 },
                 }),
             })
         end,
