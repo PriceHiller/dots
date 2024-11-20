@@ -71,15 +71,20 @@ M.setup = function()
     opt.undofile = true
 
     -- Better folding
-    opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    opt.foldmethod = "expr"
+    vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+            if not (pcall(vim.treesitter.start)) then
+                return
+            end
+            vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            vim.opt_local.foldmethod = "expr"
+        end,
+    })
     opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
     vim.o.foldcolumn = "1"
     vim.o.foldlevel = 99
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
-    vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.wo.foldmethod = "expr"
 
     -- Concealment for nicer rendering
     opt.conceallevel = 2
