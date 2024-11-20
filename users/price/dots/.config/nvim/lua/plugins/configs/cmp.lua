@@ -96,12 +96,12 @@ return {
                     },
                     {
                         name = "fuzzy_buffer",
-                        max_item_count = 5,
+                        max_item_count = 3,
                     },
                     {
                         name = "rg",
                         keyword_length = 3,
-                        max_item_count = 5,
+                        max_item_count = 3,
                         option = {
                             "--smart-case",
                             "--hidden",
