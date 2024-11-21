@@ -8,12 +8,7 @@
       enableGlobalCompInit = false;
       enableBashCompletion = true;
     };
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        stdenv.cc.cc
-      ];
-    };
+    nix-ld.enable = true;
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
