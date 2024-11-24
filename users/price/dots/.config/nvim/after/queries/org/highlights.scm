@@ -18,17 +18,6 @@
    @org-checkbox-content (#any-of? @org-checkbox-content "-")) @markup.list.indeterminate
  (#set! @markup.list.indeterminate conceal "󰍵"))
 
-; Table highlights
-(row
-  "|" @punctuation.special)
-(cell
-  "|" @punctuation.special)
-(table
-  (row
-    (cell (contents) @markup.heading))
-  (hr) @punctuation.special)
-
-
 ; Quote highlights
 (block
   name: (expr) @org-block-start-name (#any-of? @org-block-start-name "quote" "QUOTE")
