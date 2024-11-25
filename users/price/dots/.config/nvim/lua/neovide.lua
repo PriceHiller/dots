@@ -1,6 +1,7 @@
 -- Floating and Popupmenu Transparency
-vim.opt.winblend = 20
-vim.opt.pumblend = 10
+vim.opt.winblend = 10
+vim.opt.pumblend = 70
+
 
 -- Float blur amount
 vim.g.neovide_floating_blur_amount_x = 10.0
@@ -102,3 +103,6 @@ end, { noremap = true, silent = true, desc = "Neovide: Reset Zoom" })
 
 -- Set Neovide specific vars for use elsewhere (e.g. terminal sessions)
 vim.env.NEOVIDE_SESSION = 1
+
+-- Group layers for shadows & blurring across entire group
+vim.g.experimental_layer_grouping = true
