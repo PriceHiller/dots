@@ -128,6 +128,7 @@ return {
                     },
                 },
                 defaults = {
+                    winblend = vim.opt.winblend:get(),
                     vimgrep_arguments = {
                         "rg",
                         "--color=never",
