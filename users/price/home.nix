@@ -157,10 +157,6 @@ in
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
       TERMINFO_DIRS = "${config.home.profileDirectory}/share/terminfo";
       WSLENV = "TERMINFO_DIRS";
-      LD_LIBRARY_PATH = lib.strings.makeLibraryPath [
-        "${config.home.profileDirectory}"
-        "${pkgs.sqlite.out}"
-      ];
       PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
       GTK_PATH = "${pkgs.gtk-engine-murrine}/lib/gtk-2.0";
       ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
