@@ -3,7 +3,7 @@ return {
         "AckslD/nvim-neoclip.lua",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "tami5/sqlite.lua" },
+            { "kkharji/sqlite.lua", module = "sqlite" },
             { "nvim-telescope/telescope.nvim" },
         },
         opts = {
