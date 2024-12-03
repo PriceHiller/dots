@@ -1,7 +1,7 @@
 return {
     {
         "mcauley-penney/visual-whitespace.nvim",
-        event = "ModeChanged",
+        event = "ModeChanged *:[vV]",
         opts = {
             highlight = { link = "visual-whitespace" },
         },
