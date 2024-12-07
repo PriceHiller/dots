@@ -117,6 +117,7 @@ in
         brightnessctl
         keyd
         tidal-hifi
+        spotify
         nix-output-monitor
         sops
         chromium
