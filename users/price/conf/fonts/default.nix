@@ -2,9 +2,9 @@
 {
   home.packages = with pkgs; [
     fontconfig
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.symbols-only
     fira-code
-    fira
     ibm-plex
     open-sans
     noto-fonts
@@ -16,15 +16,17 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        sansSerif = [ "Noto Sans" ];
-        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" "Symbols Nerd Font" ];
+        serif = [ "Noto Serif" "Symbols Nerd Font" ];
         monospace = [
-          "Fira Code"
+          "FiraCode Nerd Font"
           "Noto Sans Mono"
+          "Symbols Nerd Font Mono"
         ];
         emoji = [
           "Twemoji"
           "Noto Color Emoji"
+          "Symbols Nerd Font Mono"
         ];
       };
     };
