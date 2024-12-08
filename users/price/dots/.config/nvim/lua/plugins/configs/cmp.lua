@@ -43,7 +43,6 @@ return {
                     filetypes = { "*" },
                 },
             },
-            "dmitmel/cmp-cmdline-history",
             "David-Kunz/cmp-npm",
             "lukas-reineke/cmp-rg",
             "onsails/lspkind.nvim",
@@ -364,7 +363,6 @@ return {
                         },
                         priority = 100,
                     },
-                    { name = "cmdline_history", max_item_count = 3 },
                 }),
             })
         end,
