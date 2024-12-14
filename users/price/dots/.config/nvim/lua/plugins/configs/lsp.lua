@@ -93,7 +93,7 @@ return {
     },
     {
         "mrcjkb/rustaceanvim",
-        ft = { "rust" },
+        lazy = false,
         init = function()
             vim.g.rustaceanvim = {
                 dap = {
@@ -110,13 +110,7 @@ return {
                     default_settings = {
                         ["rust-analyzer"] = {
                             cargo = {
-                                features = "all",
-                                loadOutDirsFromCheck = true,
-                                runBuildScripts = true,
-                            },
-                            check = {
-                                command = "clippy",
-                                features = "all",
+                                targetDir = "target/rust-analyzer/",
                             },
                             checkOnSave = true,
                             rustfmt = {
