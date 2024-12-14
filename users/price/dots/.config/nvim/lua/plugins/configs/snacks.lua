@@ -39,8 +39,8 @@ local map_quick_close = function(bufnr)
         pcall(vim.keymap.del, "n", lhs)
     end)
     vim.keymap.set("n", "q", function()
-        bwdelete({ buf = bufnr, force = true })
-    end, { silent = true, buffer = bufnr, desc = "Close Terminal Buffer" })
+        vim.cmd.bdelete({ args = { bufnr }, bang = true })
+    end, { silent = true, buffer = bufnr, desc = "Quick Close Buffer" })
 end
 
 vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
