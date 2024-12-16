@@ -275,7 +275,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local lsp_capabilities =
-                require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+                require("blink.cmp").get_lsp_capabilities()
             local db_timer = vim.uv.new_timer()
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
