@@ -81,41 +81,10 @@
               }
             )
           );
-      mkHomeCfg =
-        user: home-config:
-        let
-          username = "${builtins.head (builtins.match "(.+)(@.+)?" user)}";
-        in
-        inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            clib = (import ./lib { lib = nixpkgs.lib; });
-            inherit inputs;
-          };
-          modules = [
-            {
-              imports = [ inputs.agenix.homeManagerModules.default ];
-              nixpkgs.overlays = [
-                inputs.emacs-overlay.overlays.default
-                inputs.neovim-nightly-overlay.overlays.default
-                inputs.fenix.overlays.default
-                self.overlays.modifications
-                self.overlays.additions
-              ];
-              home = {
-                stateVersion = "24.11";
-                username = "${username}";
-                homeDirectory = "/home/${username}";
-              };
-            }
-            home-config
-          ];
-        };
     in
     {
       formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
       packages = forAllSystems (pkgs: import ./pkgs pkgs);
-      homeConfigurations = builtins.mapAttrs mkHomeCfg { "price" = ./users/price/home.nix; };
       overlays = import ./overlays { inherit inputs; };
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
@@ -148,23 +117,6 @@
             '';
       });
       apps = forAllSystems (pkgs: {
-        home-manager-init = {
-          type = "app";
-          program = "${
-            pkgs.writeShellApplication {
-              name = "home-manager-init";
-              runtimeInputs = with pkgs; [
-                git
-                nix
-              ];
-              text = ''
-                #!${pkgs.bash}/bin/bash
-                cd "$(git rev-parse --show-toplevel)"
-                nix run --extra-experimental-features 'nix-command flakes pipe-operators' github:nix-community/home-manager -- switch --extra-experimental-features 'nix-command flakes' --flake "git+file://$(pwd)?submodules=1" "$@"
-              '';
-            }
-          }/bin/home-manager-init";
-        };
         install-host = {
           type = "app";
           program = "${
@@ -210,6 +162,18 @@
               };
               modules = [
                 ./modules/btrfs-rollback.nix
+                inputs.home-manager.nixosModules.home-manager
+                {
+                  home-manager = {
+                    extraSpecialArgs = {
+                      clib = (import ./lib { lib = nixpkgs.lib; });
+                      inherit inputs;
+                    };
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    users.price = import ./users/price/home.nix;
+                  };
+                }
                 inputs.lanzaboote.nixosModules.lanzaboote
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
@@ -217,6 +181,9 @@
                 {
                   config = {
                     nixpkgs.overlays = [
+                      inputs.emacs-overlay.overlays.default
+                      inputs.neovim-nightly-overlay.overlays.default
+                      inputs.fenix.overlays.default
                       self.overlays.modifications
                       self.overlays.additions
                     ];

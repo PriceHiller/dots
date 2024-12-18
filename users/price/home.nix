@@ -28,6 +28,7 @@ in
     };
   };
   home = {
+    stateVersion = "24.11";
     language.base = "en_US.UTF-8";
     packages =
       with pkgs;
@@ -156,8 +157,6 @@ in
       _ZL_DATA = "${config.xdg.cacheHome}/zlua";
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
-      TERMINFO_DIRS = "${config.home.profileDirectory}/share/terminfo";
-      WSLENV = "TERMINFO_DIRS";
       PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
       GTK_PATH = "${pkgs.gtk-engine-murrine}/lib/gtk-2.0";
       ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
