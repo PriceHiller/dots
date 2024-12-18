@@ -101,9 +101,7 @@ return {
                     providers = {
                         ripgrep = {
                             module = "blink-ripgrep",
-                            min_keyword_length = 3,
                             max_items = 5,
-                            score_offset = 1,
                             name = "Ripgrep",
                             --- @module "blink-ripgrep"
                             --- @type blink-ripgrep.Options
