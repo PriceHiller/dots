@@ -101,14 +101,15 @@ return {
                     providers = {
                         ripgrep = {
                             module = "blink-ripgrep",
+                            score_offset = -3,
                             max_items = 5,
                             name = "Ripgrep",
                             --- @module "blink-ripgrep"
                             --- @type blink-ripgrep.Options
                             opts = {
                                 prefix_min_len = 3,
+                                search_casing = "--smart-case",
                                 additional_rg_options = {
-                                    "--smart-case",
                                     "--hidden",
                                     "--word-regexp",
                                     "--glob=!.git/*",
