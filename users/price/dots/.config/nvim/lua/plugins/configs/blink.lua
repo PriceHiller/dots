@@ -161,6 +161,7 @@ return {
 
                     ---@diagnostic disable-next-line: missing-fields
                     menu = {
+                        winblend = 50,
                         draw = {
                             padding = 0,
                             columns = {

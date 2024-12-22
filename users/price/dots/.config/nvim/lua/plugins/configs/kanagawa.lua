@@ -46,8 +46,8 @@ return {
 
                 -- Built-ins
                 { "StatusLineNC", { bg = nil } },
-                { "menuSel", { bg = colors.sumiInk0, fg = "NONE" } },
                 { "Pmenu", { fg = colors.fujiWhite, bg = colors.sumiInk2 } },
+                { "PmenuSel", get_hl("PmenuSel", { blend = 25 }) },
                 { "WinBarNC", { bg = nil } },
                 { "Visual", { bg = colors.sumiInk5 } },
                 { "CursorLine", { bg = colors.sumiInk4 } },
@@ -108,7 +108,6 @@ return {
                 { "NeogitNotificationError", { fg = colors.samuraiRed, bold = true } },
 
                 -- Cmp
-                { "CmpGhostText", { fg = colors.boatYellow1, italic = true } },
                 { "BlinkCmpAbbrDeprecated", { fg = colors.fujiGray, bg = "NONE" } },
                 { "BlinkCmpAbbrMatch", { fg = colors.crystalBlue, bg = "NONE" } },
                 { "BlinkCmpAbbrMatchFuzzy", { fg = colors.crystalBlue, bg = "NONE" } },
