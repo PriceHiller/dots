@@ -22,11 +22,6 @@ in
 {
   imports = (clib.recurseFilesInDirs [ ./conf ] ".nix");
   programs.home-manager.enable = true;
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
   home = {
     stateVersion = "24.11";
     language.base = "en_US.UTF-8";
