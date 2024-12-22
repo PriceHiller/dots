@@ -19,7 +19,7 @@ end, {
 
 vim.keymap.set("n", "<leader>ft", function()
     vim.cmd("Markview toggle")
-    local mview_state = markview.state.enabled and "Enabled" or "Disabled"
+    local mview_state = markview.state.enable and "Enabled" or "Disabled"
     vim.notify(("Markview %s"):format(mview_state), vim.log.levels.INFO, { title = "Markview" })
 end, {
     buffer = true,
