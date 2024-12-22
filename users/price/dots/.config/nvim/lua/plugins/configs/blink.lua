@@ -50,7 +50,24 @@ return {
                     preset = "default",
                     ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                     ["<C-e>"] = { "hide", "fallback" },
-                    ["<C-CR>"] = { "accept", "fallback" },
+                    ["<CR>"] = {
+                        function(cmp)
+                            if vim.api.nvim_get_mode().mode:lower() == "c" then
+                                return cmp.accept({
+                                    callback = function()
+                                        vim.api.nvim_feedkeys(
+                                            vim.api.nvim_replace_termcodes("<CR>", true, true, true),
+                                            "n",
+                                            true
+                                        )
+                                    end,
+                                })
+                            else
+                                return cmp.accept()
+                            end
+                        end,
+                        "fallback",
+                    },
                     ["<C-Tab>"] = {
                         function(cmp)
                             if cmp.snippet_active() then
