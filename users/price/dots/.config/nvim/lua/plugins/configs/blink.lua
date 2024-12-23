@@ -113,7 +113,6 @@ return {
                         "buffer",
                         "ripgrep",
                         "dadbod",
-                        "lua-latex-symbols",
                     },
                     providers = {
                         ripgrep = {
@@ -136,11 +135,9 @@ return {
                         ["lua-latex-symbols"] = {
                             name = "lua-latex-symbols",
                             module = "blink.compat.source",
-                            max_items = 5,
                             opts = {
                                 cache = true,
                             },
-                            score_offset = -3,
                         },
                         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
                     },
