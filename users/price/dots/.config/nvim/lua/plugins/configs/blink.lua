@@ -160,11 +160,7 @@ return {
                     menu = {
                         winblend = 50,
                         draw = {
-                            padding = 0,
-                            columns = {
-                                { "kind_icon" },
-                                { "label", "label_description", gap = 1 },
-                            },
+                            padding = { 0, 1 },
                             components = {
                                 kind_icon = {
                                     text = function(ctx)
