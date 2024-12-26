@@ -94,42 +94,6 @@ return {
     {
         "mrcjkb/rustaceanvim",
         lazy = false,
-        init = function()
-            vim.g.rustaceanvim = {
-                dap = {
-                    adapter = {
-                        type = "server",
-                        port = "${port}",
-                        executable = {
-                            command = "codelldb",
-                            args = { "--port", "${port}" },
-                        },
-                    },
-                },
-                server = {
-                    default_settings = {
-                        ["rust-analyzer"] = {
-                            cargo = {
-                                targetDir = "target/rust-analyzer/",
-                            },
-                            checkOnSave = true,
-                            rustfmt = {
-                                rangeFormatting = {
-                                    enable = true,
-                                },
-                            },
-                        },
-                    },
-                },
-                tools = {
-                    enable_clippy = true,
-                    executor = require("rustaceanvim.executors").termopen,
-                    hover_actions = {
-                        replace_builtin_hover = false,
-                    },
-                },
-            }
-        end,
         config = false,
     },
     {
@@ -274,8 +238,7 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local lsp_capabilities =
-                require("blink.cmp").get_lsp_capabilities()
+            local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
             local db_timer = vim.uv.new_timer()
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
