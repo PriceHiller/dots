@@ -39,7 +39,7 @@ return {
             { "<leader>j", ":Telescope buffers<CR>", desc = "Telescope: Buffers", silent = true },
             { "<leader>tb", ":Telescope buffers<CR>", desc = "Telescope: Buffers", silent = true },
             { "<leader>th", ":Telescope help_tags<CR>", desc = "Telescope: Help Tags", silent = true },
-            { "<leader>to", ":Telescope oldfiles<CR>", desc = "Telescope: Recent Files", silent = true },
+            { "<leader>to", ":Telescope smart_open<CR>", desc = "Telescope: Smart Open", silent = true },
             {
                 "<leader>tO",
                 ":Telescope oldfiles only_cwd=true<CR>",
@@ -108,6 +108,13 @@ return {
             },
             "debugloop/telescope-undo.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            {
+                "danielfalk/smart-open.nvim",
+                dependences = {
+                    "kkharji/sqlite.lua",
+                    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+                },
+            },
         },
         config = function()
             local telescope = require("telescope")
@@ -128,6 +135,7 @@ return {
                     },
                 },
                 defaults = {
+                    ---@diagnostic disable-next-line: undefined-field
                     winblend = vim.opt.winblend:get(),
                     vimgrep_arguments = {
                         "rg",
@@ -189,7 +197,6 @@ return {
                     file_sorter = require("telescope.sorters").get_fuzzy_file,
                     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
                     path_display = { "truncate" },
-                    winblend = 0,
                     border = {},
                     borderchars = { " ", "", "", "", "", "", "", "" },
                     results_title = false,
@@ -224,6 +231,9 @@ return {
                         show_scores = true,
                         auto_validate = true,
                         db_safe_mode = false,
+                    },
+                    smart_open = {
+                        match_algorithm = "fzf",
                     },
                 },
             })
