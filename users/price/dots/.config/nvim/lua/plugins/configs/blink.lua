@@ -7,11 +7,10 @@ return {
             library = {
                 { path = "luassert-types/library", words = { "assert" } },
                 { path = "busted-types/library", words = { "describe" } },
-                { path = "luvit-meta/library", words = { "vim%.uv", "vim%.loop" } },
+                { path = "${3rd}/luv/library", words = { "vim%.uv", "vim%.loop" } },
             },
         },
         dependencies = {
-            { "Bilal2453/luvit-meta", lazy = true },
             { "LuaCATS/luassert", lazy = true },
             { "LuaCATS/busted", lazy = true },
         },
@@ -36,9 +35,21 @@ return {
             },
             "amarakon/nvim-cmp-lua-latex-symbols",
             "mikavilpas/blink-ripgrep.nvim",
+            "moyiz/blink-emoji.nvim",
         },
         build = "nix run .#build-plugin",
         config = function()
+            ---@class CustomKindMapItem
+            ---@field icon string
+            ---@field hlgroup string
+
+            ---@type table<string, CustomKindMapItem>
+            local custom_kind_map = {
+                Dadbod = { icon = "󰆼", hlgroup = "Dadbod" },
+                Emoji = { icon = "󰞅", hlgroup = "Emoji" },
+                Ripgrep = { icon = "", hlgroup = "Ripgrep" },
+                ["lua-latex-symbols"] = { icon = "󰿈", hlgroup = "LatexSymbol" },
+            }
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
                 -- 'default' for mappings similar to built-in completion
@@ -107,14 +118,21 @@ return {
                 ---@diagnostic disable-next-line: missing-fields
                 sources = {
                     default = {
+                        "lazydev",
                         "lsp",
                         "path",
                         "snippets",
                         "buffer",
                         "ripgrep",
+                        "emoji",
                         "dadbod",
                     },
                     providers = {
+                        lazydev = {
+                            name = "LazyDev",
+                            module = "lazydev.integrations.blink",
+                            score_offset = 100,
+                        },
                         ripgrep = {
                             module = "blink-ripgrep",
                             score_offset = -3,
@@ -138,6 +156,10 @@ return {
                             opts = {
                                 cache = true,
                             },
+                        },
+                        emoji = {
+                            module = "blink-emoji",
+                            name = "Emoji",
                         },
                         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
                     },
@@ -164,7 +186,19 @@ return {
                             components = {
                                 kind_icon = {
                                     text = function(ctx)
+                                        local cust_kind_item = custom_kind_map[ctx.source_name]
+                                        if cust_kind_item then
+                                            ctx.kind_icon = cust_kind_item.icon
+                                        end
                                         return ctx.icon_gap .. ctx.kind_icon .. ctx.icon_gap
+                                    end,
+                                    highlight = function(ctx)
+                                        local cust_kind_item = custom_kind_map[ctx.source_name]
+                                        if cust_kind_item then
+                                            return "BlinkCmpKindCustom" .. cust_kind_item.hlgroup
+                                        end
+                                        return require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
+                                            or ("BlinkCmpKind" .. ctx.kind)
                                     end,
                                 },
                             },
