@@ -139,7 +139,7 @@ return {
                         },
                         ripgrep = {
                             module = "blink-ripgrep",
-                            score_offset = -3,
+                            score_offset = -5,
                             max_items = 5,
                             name = "Ripgrep",
                             --- @module "blink-ripgrep"
