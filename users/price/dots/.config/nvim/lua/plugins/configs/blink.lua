@@ -50,6 +50,7 @@ return {
                 Ripgrep = { icon = "", hlgroup = "Ripgrep" },
                 ["lua-latex-symbols"] = { icon = "󰿈", hlgroup = "LatexSymbol" },
                 cmdline = { icon = "", hlgroup = "CommandLine" },
+                Orgmode = { icon = "", hlgroup = "Orgmode" },
             }
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
@@ -126,6 +127,7 @@ return {
                         "buffer",
                         "ripgrep",
                         "emoji",
+                        "orgmode",
                         "dadbod",
                     },
                     providers = {
@@ -163,6 +165,11 @@ return {
                             name = "Emoji",
                         },
                         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                        orgmode = {
+                            name = "Orgmode",
+                            module = "orgmode.org.autocompletion.blink",
+                            score_offset = 5,
+                        },
                     },
                 },
 
