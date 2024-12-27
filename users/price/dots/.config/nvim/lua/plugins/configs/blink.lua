@@ -49,6 +49,7 @@ return {
                 Emoji = { icon = "󰞅", hlgroup = "Emoji" },
                 Ripgrep = { icon = "", hlgroup = "Ripgrep" },
                 ["lua-latex-symbols"] = { icon = "󰿈", hlgroup = "LatexSymbol" },
+                cmdline = { icon = "", hlgroup = "CommandLine" },
             }
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
