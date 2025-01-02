@@ -68,7 +68,6 @@
 #submap,
 tooltip,
 tooltip label,
-#custom-pacman-update,
 #taskbar,
 #tray,
 #backlight,
@@ -262,11 +261,6 @@ tooltip {
 
 #workspaces button:hover {
   background: #98bb6c;
-}
-
-/* Pacman Updates */
-#custom-pacman-update {
-  color: #7e9cd8;
 }
 
 #systemd-failed-units.ok {

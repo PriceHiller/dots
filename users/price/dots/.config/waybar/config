@@ -19,7 +19,6 @@
             "custom/media"
         ],
         "modules-right": [
-            "custom/pacman-update",
             "systemd-failed-units",
             "tray",
             "backlight",
@@ -206,14 +205,6 @@
             "return-type": "json",
             "on-click": "playerctl play-pause",
             "exec": "~/.config/waybar/scripts/get-media.bash"
-        },
-        "custom/pacman-update": {
-            "return-type": "json",
-            "exec": "~/.config/waybar/scripts/get-pacman-package-updates.bash",
-            "format": "󰇚 {}",
-            "tooltip": true,
-            "interval": 3600,
-            "signal": 8
         },
         "wlr/taskbar": {
             "format": "{icon}",
