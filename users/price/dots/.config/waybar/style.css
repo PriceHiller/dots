@@ -204,6 +204,7 @@ tooltip {
 
 /* Taskbar, showing icons of open applications */
 #taskbar button {
+  border-radius: 4px;
   margin-top: 0.1em;
   min-height: 0.25em;
   padding-left: 0em;
@@ -213,7 +214,7 @@ tooltip {
 
 #taskbar button.active {
   border-bottom: 0.2em solid #ff9e3b;
-  background-color: rgba(255, 158, 59, 0.3);
+  background-color: rgba(255, 158, 59, 0.2);
 }
 
 #taskbar button:hover {
