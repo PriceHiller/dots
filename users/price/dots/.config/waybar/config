@@ -133,6 +133,7 @@
         "custom/audio-device": {
             "tooltip": false,
             "min-length": 20,
+            "max-length": 30,
             "interval": 1,
             "format": "󰓃 {}",
             "exec": "wpctl status | grep -m 1 '*' | cut -d '.' -f2 | cut -d '[' -f1 | xargs"
