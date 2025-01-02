@@ -19,6 +19,7 @@
             "custom/media"
         ],
         "modules-right": [
+            "privacy",
             "systemd-failed-units",
             "tray",
             "backlight",
@@ -219,6 +220,10 @@
             "app_ids-mapping": {
                 "firefoxdeveloperedition": "firefox-developer-edition"
             }
+        },
+        "privacy": {
+            "icon-spacing": 2,
+            "icon-size": 14,
         },
         "systemd-failed-units": {
             "format": "✗ Degraded Units: {nr_failed}",

@@ -71,6 +71,7 @@ tooltip label,
 #taskbar,
 #tray,
 #backlight,
+#privacy,
 #systemd-failed-units,
 #tray menu,
 #custom-lock {
@@ -261,6 +262,26 @@ tooltip {
 
 #workspaces button:hover {
   background: #98bb6c;
+}
+
+
+#privacy-item.audio-in {
+  color: #FF5D62;
+  -gtk-icon-shadow: 0 0 2px #FF5D62;
+}
+
+#privacy-item.audio-out {
+  color: #98BB6C;
+  -gtk-icon-shadow: 0 0 2px #98BB6C;
+}
+
+#privacy-item.screenshare {
+  color: #A3D4D5;
+  -gtk-icon-shadow: 0 0 2px #A3D4D5;
+}
+
+#privacy-item.screenshare {
+  color: #A3D4D5;
 }
 
 #systemd-failed-units.ok {
