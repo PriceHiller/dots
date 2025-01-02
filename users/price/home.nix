@@ -128,10 +128,6 @@ in
         passage
       ]
       ++ [
-        ansible
-        ansible-lint
-      ]
-      ++ [
         gnumake
         cmake
         clang-tools
