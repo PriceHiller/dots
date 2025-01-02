@@ -251,7 +251,7 @@ return {
                     local alpha_timer = vim.loop.new_timer()
                     ---@diagnostic disable-next-line: need-check-nil
                     alpha_timer:start(
-                        50,
+                        1000,
                         1000,
                         vim.schedule_wrap(function()
                             ---@diagnostic disable-next-line: param-type-mismatch
