@@ -57,7 +57,7 @@ return {
             { "<leader>tc", ":Telescope commands<CR>", desc = "Telescope: Commands", silent = true },
             { "<leader>tu", ":Telescope undo<CR>", desc = "Telescope: Undo History", silent = true },
             { "<leader>tm", ":Telescope man_pages<CR>", desc = "Telescope: Man Pages", silent = true },
-            { "<leader>tq", ":Telescope quickfixhistry", desc = "LSP: Telescope Quickfix History", silent = true },
+            { "<leader>tq", ":Telescope quickfixhistory<CR>", desc = "LSP: Telescope Quickfix History", silent = true },
             { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope", silent = true },
             {
                 "<leader>tz",
