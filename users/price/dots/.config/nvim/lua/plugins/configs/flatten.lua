@@ -14,7 +14,7 @@ return {
                     wezterm = false,
                     kitty = false,
                 },
-                callbacks = {
+                hooks = {
                     should_block = function(argv)
                         -- Note that argv contains all the parts of the CLI command, including
                         -- Neovim's path, commands, options and files.
