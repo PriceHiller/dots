@@ -3,6 +3,10 @@
 {
   nixpkgs.config.allowUnfree = true;
   nix = {
+    optimize-nix-store = {
+      enable = true;
+      randomizedDelaySec = "30min";
+    };
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       experimental-features = [
@@ -10,7 +14,6 @@
         "nix-command"
         "flakes"
       ];
-      auto-optimise-store = true;
       use-xdg-base-directories = true;
       trusted-users = [ "@wheel" ];
       substituters = [
@@ -24,7 +27,7 @@
     };
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = "daily";
       options = "--delete-older-than 7d";
     };
   };

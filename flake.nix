@@ -162,6 +162,7 @@
               };
               modules = [
                 ./modules/btrfs-rollback.nix
+                ./modules/optimize-nix-store.nix
                 inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {
