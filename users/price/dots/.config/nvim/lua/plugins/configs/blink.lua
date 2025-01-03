@@ -189,7 +189,8 @@ return {
 
                     ---@diagnostic disable-next-line: missing-fields
                     menu = {
-                        winblend = 50,
+                        ---@diagnostic disable-next-line: undefined-field
+                        winblend = vim.g.neovide and 90,
                         draw = {
                             padding = { 0, 1 },
                             components = {

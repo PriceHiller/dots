@@ -1,13 +1,16 @@
 -- Floating and Popupmenu Transparency
-vim.opt.winblend = 10
-vim.opt.pumblend = 70
+vim.opt.winblend = 30
+vim.opt.pumblend = 90
 
 
 -- Float blur amount
-vim.g.neovide_floating_blur_amount_x = 10.0
-vim.g.neovide_floating_blur_amount_y = 10.0
+vim.g.neovide_floating_blur_amount_x = 25.0
+vim.g.neovide_floating_blur_amount_y = 25.0
 vim.g.neovide_light_angle_degrees = 45
 vim.g.neovide_light_radius = 5
+
+-- Floating window corner radius
+vim.g.neovide_floating_corner_radius = 0.2
 
 -- Do not use fullscreen on startup — annoying af
 vim.g.neovide_remember_window_size = false
