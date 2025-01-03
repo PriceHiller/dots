@@ -24,13 +24,10 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
             return
         end
 
-        vim.print(node:type())
         local row, col, _, _ = vim.treesitter.get_node_range(node)
 
         -- Return early if string is already a format string
         local first_char = vim.api.nvim_buf_get_text(opts.buf, row, col, row, col + 1, {})[1]
-        vim.print("row " .. row .. " col " .. col)
-        vim.print("char: '" .. first_char .. "'")
         if first_char == "f" then
             return
         end
