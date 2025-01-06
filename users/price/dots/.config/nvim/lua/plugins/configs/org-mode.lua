@@ -30,6 +30,37 @@ return {
                     cron_enabled = true,
                     repeater_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
                     deadline_warning_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
+                    reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
+                    notifier = function(tasks)
+                        local msg = {}
+                        for _, task in ipairs(tasks) do
+                            require("orgmode.utils").concat(msg, {
+                                string.format("# %s (%s)", task.category, task.humanized_duration),
+                                string.format(
+                                    "%s %s [#%s] %s",
+                                    string.rep("*", task.level),
+                                    task.todo,
+                                    task.priority,
+                                    task.title
+                                ),
+                                string.format("%s: <%s>", task.type, task.time:to_string()),
+                                "",
+                            })
+                        end
+                        if #msg > 1 then
+                            table.remove(msg, #msg)
+                            vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
+                                timeout = 3000,
+                                title = "Orgmode Reminder",
+                                ft = "org",
+                                icon = "",
+                                hl = {
+                                    title = "@markup.heading.3",
+                                    border = "@markup.heading.5",
+                                },
+                            })
+                        end
+                    end,
                 },
                 org_id_link_to_org_use_id = true,
                 org_default_notes_file = "~/Notes/notes.org",
