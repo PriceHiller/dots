@@ -181,7 +181,7 @@ return {
                         auto_show_delay_ms = 50,
                     },
                     list = {
-                        selection = "auto_insert",
+                        selection = { preselect = false, auto_insert = true },
                     },
                     ghost_text = {
                         enabled = true,
