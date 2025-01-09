@@ -1,4 +1,7 @@
-{ lib, ... }:
+{
+  lib ? (import <nixpkgs> { }).lib,
+  ...
+}:
 let
   root-disk = "/dev/nvme0n1";
   persist-dir = "/persist";
@@ -38,75 +41,63 @@ in
       content = {
         type = "gpt";
         partitions = {
-          esp =
-            let
-              label = "NixOS-Boot";
-            in
-            {
-              priority = 1;
-              size = "512M";
-              type = "EF00";
-              content = {
-                extraArgs = [
-                  "-n ${label}"
-                  "-F 32"
-                ];
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [
-                  "umask=0077"
-                  "defaults"
-                ];
-              };
+          esp = {
+            priority = 1;
+            size = "512M";
+            type = "EF00";
+            content = {
+              extraArgs = [
+                "-n 'NixOS-Boot'"
+              ];
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [
+                "umask=0077"
+                "defaults"
+              ];
             };
-          root =
-            let
-              label = "NixOS-Primary";
-            in
-            {
-              size = "100%";
+          };
+          root = {
+            size = "100%";
+            content = {
+              type = "luks";
+              name = "crypted";
+              settings = {
+                allowDiscards = true;
+                bypassWorkqueues = true;
+              };
               content = {
-                type = "luks";
-                name = "crypted";
-                settings = {
-                  allowDiscards = true;
-                  bypassWorkqueues = true;
-                };
-                content = {
-                  type = "btrfs";
-                  extraArgs = [
-                    "-f"
-                    "--label ${label}"
-                  ];
-                  postCreateHook = ''
-                    MOUNT="$(mktemp -d)"
-                    mount "/dev/disk/by-label/${label}" "$MOUNT" -o subvol=/
-                    trap 'umount $MOUNT; rm -rf $MOUNT' EXIT
-                    btrfs subvolume snapshot -r "$MOUNT/root" "$MOUNT/root-base"
-                  '';
-                  subvolumes = {
-                    "/root" = {
-                      mountpoint = "/";
-                    };
-                    "/nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                    "/persist" = {
-                      mountpoint = "/persist";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
+                type = "btrfs";
+                extraArgs = [
+                  "-f"
+                  "-L NixOS-Primary"
+                ];
+                preUnmountHook = ''
+                  btrfs subvolume snapshot -r "root" "root-base"
+                '';
+                subvolumes = {
+                  "/root" = {
+                    mountpoint = "/";
+                  };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                 };
               };
             };
+          };
         };
       };
     };
