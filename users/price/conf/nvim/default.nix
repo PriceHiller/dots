@@ -36,4 +36,7 @@
       bun
     ];
   };
+  xdg.mimeApps.defaultApplications = {
+    "text/plain" = [ "neovide.desktop" ];
+  };
 }
