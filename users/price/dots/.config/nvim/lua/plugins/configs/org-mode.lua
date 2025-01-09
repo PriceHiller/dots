@@ -77,6 +77,9 @@ return {
                 org_startup_indented = false,
                 org_adapt_indentation = false,
                 org_todo_keywords = { "TODO(t)", "WAIT(n)", "|", "DONE(d)", "CANCELLED(c)" },
+                org_todo_keyword_faces = {
+                    CANCELLED = ':weight bold'
+                },
                 win_split_mode = "auto",
                 org_capture_templates = {
                     t = {
