@@ -108,9 +108,6 @@ return {
                 { "NeogitNotificationError", { fg = colors.samuraiRed, bold = true } },
 
                 -- Cmp
-                { "BlinkCmpAbbrDeprecated", { fg = colors.fujiGray, bg = "NONE" } },
-                { "BlinkCmpAbbrMatch", { fg = colors.crystalBlue, bg = "NONE" } },
-                { "BlinkCmpAbbrMatchFuzzy", { fg = colors.crystalBlue, bg = "NONE" } },
                 { "BlinkCmpMenu", { fg = colors.roninYellow, bg = "NONE" } },
                 { "BlinkCmpKindField", { fg = colors.fujiWhite, bg = colors.sakuraPink, blend = 0 } },
                 { "BlinkCmpKindProperty", { fg = colors.fujiWhite, bg = colors.sakuraPink, blend = 0 } },
