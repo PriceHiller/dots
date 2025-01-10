@@ -21,11 +21,22 @@ get-album-info() {
 	printf '{"class": "%s", "text": "%s"}\n' "${class}" "${text}"
 }
 
-main() {
-	get-album-info
+album-info-dbus-update() {
 	while IFS= read -r _; do
 		get-album-info
 	done < <(busctl --user monitor --json=short --match 'interface=org.mpris.MediaPlayer2.Player,type=signal')
+}
+
+album-info-poller() {
+	while sleep 1; do
+		get-album-info
+	done
+}
+
+main() {
+	album-info-dbus-update &
+	album-info-poller &
+	wait
 }
 
 main
