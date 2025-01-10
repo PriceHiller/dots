@@ -20,7 +20,7 @@
         ],
         "modules-right": [
             "privacy",
-            "systemd-failed-units",
+            "custom/systemd-failed-units",
             "tray",
             "backlight",
             "network",
@@ -225,10 +225,10 @@
             "icon-spacing": 2,
             "icon-size": 14,
         },
-        "systemd-failed-units": {
-            "format": "✗ Degraded Units: {nr_failed}",
-            "system": true,
-            "user": true
+        "custom/systemd-failed-units": {
+            "exec": "~/.config/waybar/scripts/systemd-status.py",
+            "return-type": "json",
+            "interval": 3
         },
         "tray": {
             "icon-size": 14

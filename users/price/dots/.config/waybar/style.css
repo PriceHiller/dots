@@ -72,7 +72,7 @@ tooltip label,
 #tray,
 #backlight,
 #privacy,
-#systemd-failed-units,
+#custom-systemd-failed-units,
 #tray menu,
 #custom-lock {
   background-color: #16161d;
@@ -285,11 +285,11 @@ tooltip {
   color: #A3D4D5;
 }
 
-#systemd-failed-units.ok {
+#custom-systemd-failed-units.ok {
   color: #98BB6C;
 }
 
-#systemd-failed-units.degraded {
+#custom-systemd-failed-units.degraded {
   color: #FF5D62;
   font-weight: bolder;
 }
