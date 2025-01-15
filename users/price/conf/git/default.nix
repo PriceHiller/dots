@@ -4,8 +4,7 @@
   programs.git = {
     enable = true;
     userName = "Price Hiller";
-    # TODO: Migrate GPG to price@price-hiller.com
-    userEmail = "price@orion-technologies.io";
+    userEmail = "price@price-hiller.com";
     aliases = {
       unstage = "reset HEAD --";
     };
