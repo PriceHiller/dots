@@ -32,11 +32,12 @@
           '';
           index = "home.html";
         };
-        "/.well-known/openpgpkey/hu/rnmhgp3dsaq8hjgu49j8oongugr5cg4" = {
-          index = pkgs.writeText "pgp-pub-wkd" builtins.readFile ./public-pgp-key.asc;
+        "^~ /.well-known/openpgpkey/hu/" = {
+          alias = "${./gpg-wkd}/$1";
           extraConfig = ''
             default_type application/octet-stream;
             add_header Access-Control-Allow-Origin "*";
+            add_header Last-Modified "";
           '';
         };
       };
