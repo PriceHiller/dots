@@ -7,7 +7,8 @@ return {
             { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit: Open" },
         },
         config = function()
-            require("neogit").setup({
+            local neogit = require("neogit")
+            neogit.setup({
                 disable_insert_on_commit = true,
                 disable_commit_confirmation = true,
                 disable_builtin_notifications = true,
@@ -30,6 +31,13 @@ return {
                         ["L"] = "LogPopup",
                     },
                 },
+            })
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "Neogit*",
+                desc = "Handle Neogit Refreshes",
+                callback = function()
+                    neogit.status:refresh()
+                end,
             })
         end,
         dependencies = {
