@@ -120,7 +120,7 @@ return {
                 desc = "Pick: Files",
             },
             {
-                "<leader>fl",
+                "<leader>fw",
                 function()
                     require("snacks").picker.grep()
                 end,
@@ -184,7 +184,7 @@ return {
                 },
                 words = { enabled = true },
                 input = {
-                    enabled = true
+                    enabled = true,
                 },
                 statuscolumn = { enabled = false },
                 picker = {
@@ -333,6 +333,13 @@ return {
                     formatters = {
                         file = {
                             filename_first = true,
+                        },
+                    },
+                    sources = {
+                        grep = {
+                            hidden = true,
+                            ignored = true,
+                            buffers = true,
                         },
                     },
                 },
