@@ -16,7 +16,7 @@ local nix_eval = function()
     }, " ")
 end
 
-vim.keymap.set("n", "<leader>fr", function()
+vim.keymap.set("n", "<localleader>fr", function()
     vim.cmd.write()
     require("toggleterm").exec("nix eval --file " .. vim.api.nvim_buf_get_name(0))
 end, {

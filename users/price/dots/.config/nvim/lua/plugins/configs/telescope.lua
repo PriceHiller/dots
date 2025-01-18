@@ -101,7 +101,6 @@ return {
             },
         },
         dependencies = {
-            "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-z.nvim",
             {
                 "nvim-telescope/telescope-frecency.nvim",
@@ -202,9 +201,6 @@ return {
                     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
                 },
                 extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown(),
-                    },
                     undo = {
                         side_by_side = true,
                         use_delta = true,
@@ -229,7 +225,6 @@ return {
             })
 
             telescope.load_extension("fzf")
-            telescope.load_extension("ui-select")
             telescope.load_extension("undo")
             telescope.load_extension("frecency")
             telescope.load_extension("z")

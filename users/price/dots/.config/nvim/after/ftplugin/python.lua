@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
     end,
 })
 
-vim.keymap.set("n", "<leader>fr", function()
+vim.keymap.set("n", "<localleader>fr", function()
     vim.cmd.write()
     require("toggleterm").exec("python " .. vim.api.nvim_buf_get_name(0))
 end, {

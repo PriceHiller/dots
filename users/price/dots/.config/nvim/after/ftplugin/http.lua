@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>fr", ":Rest run<CR>", {
+vim.keymap.set("n", "<localleader>fr", ":Rest run<CR>", {
     buffer = true,
     silent = true,
 })

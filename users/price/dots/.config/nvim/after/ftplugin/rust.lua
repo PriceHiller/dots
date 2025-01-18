@@ -1,5 +1,5 @@
 vim.opt_local.textwidth = 80
-vim.keymap.set("n", "<leader>fr", ":RustLsp runnables<CR>", {
+vim.keymap.set("n", "<localleader>fr", ":RustLsp runnables<CR>", {
     buffer = true,
 })
 vim.keymap.set("n", "<leader>fd", ":RustLsp debuggables<CR>", {

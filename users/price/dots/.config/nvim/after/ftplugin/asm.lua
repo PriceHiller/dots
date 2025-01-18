@@ -1,6 +1,6 @@
 vim.opt_local.commentstring = "# %s"
 
-vim.keymap.set("n", "<leader>fr", function()
+vim.keymap.set("n", "<localleader>fr", function()
     local curr_file = vim.api.nvim_buf_get_name(0)
     local curr_dir = vim.fn.fnamemodify(curr_file, ":h")
     local fname = vim.fn.fnamemodify(curr_file, ":t:r")

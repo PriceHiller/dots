@@ -94,10 +94,87 @@ return {
                 end,
                 desc = "Notifications: Search",
             },
+            {
+                "<leader>p",
+                desc = "> Picker",
+            },
+            {
+                "<leader>j",
+                function()
+                    require("snacks").picker.buffers()
+                end,
+                desc = "Pick: Buffers",
+            },
+            {
+                "<leader>fb",
+                function()
+                    require("snacks").picker.buffers()
+                end,
+                desc = "Pick: Buffers",
+            },
+            {
+                "<leader>ff",
+                function()
+                    require("snacks").picker.files()
+                end,
+                desc = "Pick: Files",
+            },
+            {
+                "<leader>fl",
+                function()
+                    require("snacks").picker.grep()
+                end,
+                desc = "Pick: Grep Words",
+            },
+            {
+                "<leader>fk",
+                function()
+                    require("snacks").picker.recent()
+                end,
+                desc = "Pick: Recent Files",
+            },
+            {
+                "<leader>fr",
+                function()
+                    require("snacks").picker.resume()
+                end,
+                desc = "Pick: Resume",
+            },
+            {
+                "<leader>fm",
+                function()
+                    require("snacks").picker.keymaps()
+                end,
+                desc = "Pick: Keymaps",
+            },
+            {
+                "<leader>fh",
+                function()
+                    require("snacks").picker.command_history()
+                end,
+                desc = "Pick: Command History",
+            },
+            {
+                "<leader>fH",
+                function()
+                    require("snacks").picker.highlights()
+                end,
+                desc = "Pick: Highlights",
+            },
         },
         config = function()
             local snacks = require("snacks")
+
+            ---@class CustomSnacksPickersLayouts: snacks.picker.layouts
             snacks.setup({
+                styles = {
+                    ---@diagnostic disable-next-line: missing-fields
+                    notification_history = {
+                        title = "Notification History",
+                        ---@diagnostic disable-next-line: assign-type-mismatch
+                        border = { { " ", "INVALIDHIGHLIGHTHERE" } },
+                    },
+                },
                 bigfile = { enabled = true },
                 debug = { enabled = true },
                 notifier = {
@@ -106,12 +183,160 @@ return {
                     margin = { top = 1 },
                 },
                 words = { enabled = true },
+                input = {
+                    enabled = true
+                },
                 statuscolumn = { enabled = false },
+                picker = {
+                    prompt = "  ",
+                    ui_select = true,
+                    layouts = {
+                        default = {
+                            layout = {
+                                box = "horizontal",
+                                width = 0.95,
+                                min_width = 120,
+                                height = 0.95,
+                                {
+                                    box = "vertical",
+                                    border = "none",
+                                    {
+                                        win = "input",
+                                        height = 1,
+                                        title = "{source} {live}",
+                                        title_pos = "center",
+                                        border = {
+                                            "",
+                                            " ",
+                                            "",
+                                            "",
+                                            "",
+                                            " ",
+                                            "",
+                                            "",
+                                        },
+                                    },
+                                    {
+                                        border = {
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                        },
+                                        win = "list",
+                                    },
+                                },
+                                {
+                                    win = "preview",
+                                    border = {
+                                        "",
+                                        " ",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                    },
+                                    width = 0.70,
+                                },
+                            },
+                        },
+                        vertical = {
+                            layout = {
+                                box = "vertical",
+                                width = 0.90,
+                                min_width = 80,
+                                height = 0.98,
+                                min_height = 30,
+                                {
+                                    win = "preview",
+                                    height = 0.65,
+                                    border = { "", " ", "", "", "", "", "", "" },
+                                },
+                                {
+                                    win = "input",
+                                    height = 1,
+                                    title = "{source} {live}",
+                                    title_pos = "center",
+                                    border = { "", " ", "", "", "", " ", "", "" },
+                                },
+                                {
+                                    win = "list",
+                                    border = { "", " ", "", "", "", "", "", "" },
+                                },
+                            },
+                        },
+                        vscode = {
+                            preview = false,
+                            layout = {
+                                row = 1,
+                                width = 0.4,
+                                min_width = 80,
+                                height = 0.4,
+                                border = "none",
+                                box = "vertical",
+                                {
+                                    win = "input",
+                                    height = 1,
+                                    border = { "", " ", "", "", "", " ", "", "" },
+                                    title = "{source} {live}",
+                                    title_pos = "center",
+                                },
+                                {
+                                    win = "list",
+                                    border = "none",
+                                },
+                                {
+                                    win = "preview",
+                                    border = "none",
+                                },
+                            },
+                        },
+                        select = {
+                            preview = false,
+                            layout = {
+                                width = 0.5,
+                                min_width = 80,
+                                height = 0.4,
+                                min_height = 10,
+                                box = "vertical",
+                                {
+                                    win = "input",
+                                    height = 1,
+                                    border = { "", " ", "", "", "", " ", "", "" },
+                                    title = " Select ",
+                                    title_pos = "center",
+                                },
+                                {
+                                    win = "list",
+                                    border = "none",
+                                },
+                                {
+                                    win = "preview",
+                                    height = 0.4,
+                                    border = "top",
+                                },
+                            },
+                        },
+                    },
+                    layout = {
+                        cycle = true,
+                        preset = function()
+                            return vim.o.columns >= 120 and "default" or "vertical"
+                        end,
+                    },
+                    formatters = {
+                        file = {
+                            filename_first = true,
+                        },
+                    },
+                },
             })
-            snacks.config.styles["notification.history"] = {
-                title = { { "Notification History", "@markup.heading.4" } },
-                border = { { " ", "INVALIDHIGHLIGHTHERE" } },
-            }
             _G.bt = snacks.debug.backtrace
             _G.dd = snacks.debug.inspect
             vim.print = snacks.debug.inspect

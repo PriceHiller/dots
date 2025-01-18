@@ -2,7 +2,7 @@ local write_file = require("utils.funcs").write_file
 
 vim.opt_local.expandtab = false
 
-vim.keymap.set("n", "<leader>fr", function()
+vim.keymap.set("n", "<localleader>fr", function()
     require("toggleterm").exec(
         write_file(
             vim.fn.tempname(),

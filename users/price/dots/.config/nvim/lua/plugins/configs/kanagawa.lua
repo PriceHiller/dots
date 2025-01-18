@@ -57,6 +57,8 @@ return {
                 { "WinSeparator", { fg = colors.fujiGray } },
                 { "StatusLine", { fg = colors.fujiWhite, bg = colors.sumiInk0 } },
                 { "WinBar", { link = "StatusLine" } },
+                { "FloatTitle", { fg = colors.sumiInk0, bg = colors.crystalBlue, blend = 0 } },
+                { "Title", { fg = colors.crystalBlue, blend = 0 } },
 
                 -- Gitsigns Colors
                 { "GitSignsAdd", { fg = colors.autumnGreen } },
@@ -199,7 +201,6 @@ return {
                 { "TSRainbowViolet", { fg = colors.oniViolet } },
                 { "TSRainbowCyan", { fg = colors.lightBlue } },
                 { "TreesitterContext", { bg = colors.sumiInk0 } },
-                { "FloatTitle", { bg = "NONE" } },
                 { "DiffviewFilePanelTitle", { fg = colors.crystalBlue } },
                 {
                     "DiffviewDiffDeleteDim",
@@ -247,6 +248,22 @@ return {
                         nocombine = true,
                     },
                 },
+
+                -- Snacks Picker hls
+                ---- Input
+                { "SnacksPickerInputTitle", { fg = colors.sumiInk0, bg = colors.oniViolet, blend = 0 } },
+                { "SnacksPickerInput", { fg = colors.fujiWhite, bg = colors.sumiInk0 } },
+                { "SnacksPickerInputBorder", { link = "SnacksPickerInput" } },
+                ---- Preview
+                { "SnacksPickerPreviewTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
+                { "SnacksPickerPreview", { bg = colors.sumiInk5 } },
+                { "SnacksPickerPreviewBorder", { link = "SnacksPickerPreview" } },
+                ---- List
+                { "SnacksPickerListTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
+                { "SnacksPickerList", { bg = colors.sumiInk2 } },
+                { "SnacksPickerListBorder", { link = "SnacksPickerList" } },
+                --- Misc
+                { "SnacksPickerDir", { fg = colors.fujiGray } },
 
                 -- LSP hls
                 { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
