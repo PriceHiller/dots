@@ -258,6 +258,7 @@ return {
                 { "SnacksPickerPreviewTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
                 { "SnacksPickerPreview", { bg = colors.sumiInk5 } },
                 { "SnacksPickerPreviewBorder", { link = "SnacksPickerPreview" } },
+                { "SnacksPickerPreviewCursorLine", { bg = colors.sumiInk6 } },
                 ---- List
                 { "SnacksPickerListTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
                 { "SnacksPickerList", { bg = colors.sumiInk2 } },
