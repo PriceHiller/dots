@@ -75,7 +75,13 @@ in
         imagemagick
         shellcheck
         nodejs
-        poetry
+        (poetry.withPlugins (
+          p: with p; [
+            poetry-plugin-shell
+            poetry-plugin-up
+            poetry-plugin-audit
+          ]
+        ))
         ruby
         yamllint
         curl
