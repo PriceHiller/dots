@@ -78,8 +78,6 @@ in
         (poetry.withPlugins (
           p: with p; [
             poetry-plugin-shell
-            poetry-plugin-up
-            poetry-plugin-audit
           ]
         ))
         ruby
