@@ -26,6 +26,12 @@ in
           stretch = {
             limit = 9000;
           };
+          shake = {
+            timeout = 500;
+            base = 2.0;
+            speed = 2.0;
+            influence = 1.0;
+          };
         };
       };
     };
