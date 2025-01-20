@@ -39,7 +39,8 @@ log() {
 handle-laptop-lid() {
 	local laptop_lid_state
 	local laptop_mon="${1:-"eDP-1"}"
-	local laptop_lid_acpi_path="${2:-"/proc/acpi/button/lid/LID0/state"}"
+	local laptop_mon_options="${2:-""}"
+	local laptop_lid_acpi_path="${3:-"/proc/acpi/button/lid/LID0/state"}"
 	if [[ ! -r "$laptop_lid_acpi_path" ]]; then
 		log "ERROR" "Unable to read laptop state from ACPI path: '${laptop_lid_acpi_path}'"
 		return 1
@@ -51,9 +52,10 @@ handle-laptop-lid() {
 	log "TRACE" "Laptop lid state: '${laptop_lid_state}'"
 	case "$laptop_lid_state" in
 	"OPEN")
-		if ! hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1")' >/dev/null; then
+		if ! hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1")'; then
 			log "TRACE" "Laptop lid is open, attempting to enable it..."
-			if hyprctl keyword monitor "${laptop_mon},enable" >/dev/null; then
+			if hyprctl keyword monitor "${laptop_mon},enable"; then
+				hyprctl keyword monitor "${laptop_mon},${laptop_mon_options}"
 				log "Laptop screen enabled"
 			else
 				log "ERROR" "Received an error when enabling the laptop screen!"
@@ -63,7 +65,7 @@ handle-laptop-lid() {
 	"CLOSED")
 		if hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1")' >/dev/null; then
 			log "TRACE" "Laptop lid is shut, attempting to disable it..."
-			if hyprctl keyword monitor "${laptop_mon},disable" >/dev/null; then
+			if hyprctl keyword monitor "${laptop_mon},disable"; then
 				log "Laptop screen disabled"
 			else
 				log "ERROR" "Received an error when disabling the laptop screen in clamshell mode!"
