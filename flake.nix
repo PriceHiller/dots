@@ -166,6 +166,7 @@
                 inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {
+                    backupFileExtension = "hm.backup";
                     extraSpecialArgs = {
                       clib = (import ./lib { lib = nixpkgs.lib; });
                       inherit inputs;

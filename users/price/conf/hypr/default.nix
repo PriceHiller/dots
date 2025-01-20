@@ -1,0 +1,4 @@
+{ clib, ... }:
+{
+  imports = (clib.dirsIn ./.);
+}

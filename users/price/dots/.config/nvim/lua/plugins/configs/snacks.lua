@@ -339,7 +339,6 @@ return {
                         grep = {
                             hidden = true,
                             ignored = true,
-                            buffers = true,
                         },
                     },
                 },

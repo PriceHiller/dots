@@ -20,7 +20,7 @@ let
     ));
 in
 {
-  imports = (clib.recurseFilesInDirs [ ./conf ] ".nix");
+  imports = [ ./conf ];
   programs.home-manager.enable = true;
   home = {
     stateVersion = "24.11";
@@ -167,9 +167,6 @@ in
     systemDirs.data = [ "${config.home.profileDirectory}/share/" ];
     cacheHome = "${config.home.homeDirectory}/.local/cache";
     mimeApps.enable = true;
-    configFile = {
-      "hypr/hyprland.conf".enable = false;
-    };
   };
 
   programs = {
@@ -328,7 +325,7 @@ in
           After = [ "compositor.target" ];
         };
       };
-      gromit-mpx.Service.ExecStart = lib.mkForce "echo 'Disabled, managed by WM'";
+      gromit-mpx.Service.ExecStart = lib.mkForce "${pkgs.coreutils}/bin/echo 'Disabled, managed by WM'";
       easyeffects = {
         Install.WantedBy = [ "compositor.target" ];
         Unit = {

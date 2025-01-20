@@ -2,6 +2,8 @@
 {
   home.packages = with pkgs; [
     fontconfig
+    overpass
+    nerd-fonts.overpass
     nerd-fonts.fira-code
     nerd-fonts.symbols-only
     fira-code

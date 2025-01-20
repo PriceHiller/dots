@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  wallpapers = ./wallpapers;
+  wallpapers = ../../wallpapers;
 in
 {
   home.packages = [ pkgs.swww ];
