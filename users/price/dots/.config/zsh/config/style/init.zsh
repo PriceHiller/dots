@@ -6,7 +6,6 @@ configure() {
 	### Fzf Tab Configuration ###
 	zstyle ':fzf-tab:*' fzf-pad 100
 
-
 	# Tab completion for CD/directory navigation
 	zstyle ':completion:*:git-checkout:*' sort false
 	zstyle ':completion:*:descriptions' format '[%d]'
@@ -19,10 +18,7 @@ configure() {
 	zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down,3,wrap
 
 	# Tab completion for Systemd unit status
-
-	if $(which systemctl) 2>/dev/null; then
-		zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
-	fi
+    zstyle ':fzf-tab:complete:systemctl-(status|(re|)start|(dis|en)able):*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status -- $word'
 	# Mac does not have systemctl :pensive:
 
 	# Tab Completion for environment variables

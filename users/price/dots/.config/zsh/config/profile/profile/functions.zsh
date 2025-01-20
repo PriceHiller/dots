@@ -174,13 +174,17 @@ File-Strip-Blank() {
 }
 
 precmd() {
-	if [[ -n "${WEZTERM_PANE}" ]]; then
-		echo "\x1b]0;wezterm\x1b\\"
+	if [[ -n "${__SHELL_LAUNCHED}" ]]; then
+		if [[ -n "${WEZTERM_PANE}" ]]; then
+			echo "\x1b]0;wezterm\x1b\\"
+		else
+			echo "\x1b]0;${2}\x1b\\"
+		fi
 	fi
 }
 
 preexec() {
-	echo "\x1b]0;${2}\x1b\\"
+	[[ -z "${__SHELL_LAUNCHED}" ]] && export __SHELL_LAUNCHED=true
 }
 
 # Editor with single letter
