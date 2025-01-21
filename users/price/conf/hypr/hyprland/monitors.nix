@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   laptop-mon = "desc:Samsung Display Corp. 0x414D";
   laptop-mon-options = "preferred,0x0,1.5";
@@ -11,7 +11,7 @@ in
       "${laptop-mon},${laptop-mon-options}"
     ];
     exec = [
-      "${laptop-lid-script}"
+      "${pkgs.coreutils}/bin/sleep 3 && ${laptop-lid-script}"
     ];
     bindl = [
       ",switch:off:Lid Switch,exec,${laptop-lid-script}"
