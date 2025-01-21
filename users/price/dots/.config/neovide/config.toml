@@ -4,12 +4,12 @@ size = 14
 
 [font.features]
 "FiraCode Nerd Font" = [
-    "+zero",
-    "+cv02",
-    "+cv30",
-    "+ss05",
-    "+ss03",
-    "+ss04",
-    "+cv26",
-    "+ss10",
+  "+cv02",
+  "+cv30",
+  "+ss05",
+  "+ss03",
+  "+ss04",
+  "+cv26",
+  "+ss10",
 ]
+
