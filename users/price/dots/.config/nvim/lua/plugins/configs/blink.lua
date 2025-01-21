@@ -146,10 +146,10 @@ return {
                             --- @type blink-ripgrep.Options
                             opts = {
                                 prefix_min_len = 3,
-                                search_casing = "--smart-case",
                                 additional_rg_options = {
+                                    "--max-depth=4",
+                                    "--one-file-system",
                                     "--hidden",
-                                    "--word-regexp",
                                     "--glob=!.git/*",
                                 },
                             },
