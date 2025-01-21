@@ -127,14 +127,14 @@ return {
                 desc = "Pick: Grep Words",
             },
             {
-                "<leader>fk",
+                "<leader>fr",
                 function()
                     require("snacks").picker.recent()
                 end,
                 desc = "Pick: Recent Files",
             },
             {
-                "<leader>fr",
+                "<leader>fk",
                 function()
                     require("snacks").picker.resume()
                 end,
