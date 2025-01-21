@@ -474,11 +474,6 @@ return {
                         formatting = {
                             command = { "nixfmt" },
                         },
-                        options = {
-                            home_manager = {
-                                expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations.price.options',
-                            },
-                        },
                     },
                 },
             })
