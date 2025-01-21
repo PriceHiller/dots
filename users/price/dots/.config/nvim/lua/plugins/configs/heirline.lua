@@ -648,7 +648,7 @@ return {
                         end,
                     },
                     {
-                        provider = "  ",
+                        provider = "  ",
                         hl = {
                             fg = colors.sumiInk0,
                             bg = colors.crystalBlue,
