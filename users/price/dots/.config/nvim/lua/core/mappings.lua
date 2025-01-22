@@ -159,6 +159,17 @@ M.setup = function()
 
     -- Delete whole world back in insert & cmd mode
     vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-W>")
+
+    -- Move cursor using C-(h,j,k,l) in insert mode
+    --
+    -- I know that these are default bindings deep in Vim and technically break `:h digraphs`
+    -- bindings, but I so rarely need actual digraphs that I reall don't care. If it's that big a
+    -- problem I'll come up with something else 🤷
+    vim.keymap.set({ "i" }, "<C-k>", "<Up>")
+    vim.keymap.set({ "i" }, "<C-j>", "<Down>")
+    vim.keymap.set({ "i" }, "<C-l>", "<Right>")
+    vim.keymap.set({ "i" }, "<C-h>", "<Left>")
+    vim.keymap.set({ "i" }, "<C-;>", "<C-k>")
 end
 
 return M
