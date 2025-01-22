@@ -46,7 +46,7 @@
       bind = SUPERALT,v,exec,cd "''${XDG_CONFIG_HOME}/wofi" && cliphist list | wofi --dmenu --width=1000px --style "cliphist.css" --height=90% -D halign=left | cliphist delete
       bind = SUPER,RETURN,exec,wezterm
       bind = SUPERSHIFT,RETURN,exec,neovide --fork
-      bind = SUPERCTRLSHIFT,R,exec,hyprctl reload
+      bind = SUPERCTRL,RETURN,exec,xdg-open "http://"
       bind = SUPER,SPACE,exec,wofi --show drun
       bind = SUPER,F,fullscreen
       bind = SUPER,Q,killactive,
