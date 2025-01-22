@@ -34,23 +34,22 @@ return {
                     notifier = function(tasks)
                         local msg = {}
                         for _, task in ipairs(tasks) do
-                            require("orgmode.utils").concat(msg, {
-                                string.format("# %s (%s)", task.category, task.humanized_duration),
+                            table.insert(msg, string.format("# %s (%s)", task.category, task.humanized_duration))
+                            table.insert(
+                                msg,
                                 string.format(
                                     "%s %s [#%s] %s",
                                     string.rep("*", task.level),
                                     task.todo,
                                     task.priority,
                                     task.title
-                                ),
-                                string.format("%s: <%s>", task.type, task.time:to_string()),
-                                "",
-                            })
+                                )
+                            )
+                            table.insert(msg, string.format("%s: <%s>", task.type, task.time:to_string()))
                         end
                         if #msg > 1 then
-                            table.remove(msg, #msg)
                             vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
-                                timeout = 3000,
+                                timeout = 0,
                                 title = "Orgmode Reminder",
                                 ft = "org",
                                 icon = "",
@@ -78,7 +77,7 @@ return {
                 org_adapt_indentation = false,
                 org_todo_keywords = { "TODO(t)", "WAIT(n)", "|", "DONE(d)", "CANCELLED(c)" },
                 org_todo_keyword_faces = {
-                    CANCELLED = ':weight bold'
+                    CANCELLED = ":weight bold",
                 },
                 win_split_mode = "auto",
                 org_capture_templates = {
