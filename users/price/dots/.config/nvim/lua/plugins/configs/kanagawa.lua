@@ -216,7 +216,7 @@ return {
                 { "RainbowDelimiterYellow", { fg = colors.autumnYellow } },
                 { "RainbowDelimiterBlue", { fg = colors.crystalBlue } },
                 { "RainbowDelimiterOrange", { fg = colors.surimiOrange } },
-                { "RainbowDelimiterGreen", { fg = colors.waveAqua1 } },
+                { "RainbowDelimiterGreen", { fg = colors.waveAqua2 } },
                 { "RainbowDelimiterViolet", { fg = colors.oniViolet } },
                 { "RainbowDelimiterCyan", { fg = colors.lightBlue } },
                 { "NotifyERRORBorder", { link = "NvimNotifyError" } },
