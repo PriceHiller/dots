@@ -38,5 +38,6 @@
   };
   xdg.mimeApps.defaultApplications = {
     "text/plain" = [ "neovide.desktop" ];
+    "inode/directory" = [ "neovide.desktop" ];
   };
 }
