@@ -325,7 +325,8 @@ return {
                     get_hl("@org.timestamp.inactive"),
                 },
                 { "@org.keyword.done", { fg = colors.springGreen, bold = true, italic = true } },
-                { "@org.keyword.face.cancelled", { fg = colors.waveRed, bold = true, italic = true } },
+                { "@org.keyword.face.cancelled", { fg = colors.sakuraPink, bold = true, italic = true } },
+                { "@org.keyword.face.wait", { fg = colors.carpYellow, bold = true, italic = true } },
                 { "@org.keyword.todo", { fg = colors.samuraiRed, bold = true, italic = true } },
                 {
                     "@org.priority.highest",
