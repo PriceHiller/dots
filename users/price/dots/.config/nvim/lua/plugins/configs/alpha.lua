@@ -203,7 +203,7 @@ return {
             local buttons = {
                 type = "group",
                 val = {
-                    button("e", "  New File", ":ene <BAR> startinsert <CR>"),
+                    button("e", "  New Scratch Buffer", "<cmd>Tmp scratch.org<CR>"),
                     button("f", "󰈞  Find File", function()
                         require("snacks").picker.files()
                     end),
