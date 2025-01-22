@@ -146,11 +146,6 @@ return {
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
             {
-                "m-demare/hlargs.nvim",
-                event = { "BufReadPre", "BufNewFile" },
-                config = true,
-            },
-            {
                 "nvimtools/none-ls.nvim",
                 config = function()
                     local null_ls = require("null-ls")
@@ -238,73 +233,8 @@ return {
         },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
-            local db_timer = vim.uv.new_timer()
-            vim.api.nvim_create_autocmd("LspAttach", {
-                callback = function(args)
-                    local bufnr = args.buf
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if not client then
-                        return
-                    end
-                    if not db_timer:is_active() then
-                        local last_clients = {}
-                        db_timer:start(
-                            100,
-                            0,
-                            vim.schedule_wrap(function()
-                                db_timer:stop()
-                                local cur_clients = vim.lsp.get_clients({ bufnr = bufnr })
-                                if #cur_clients > #last_clients then
-                                    last_clients = cur_clients
-                                end
-                                local messages = {}
-                                for _, cur_client in ipairs(cur_clients) do
-                                    local client_name = vim.trim(cur_client.name)
-                                    if client_name ~= "" then
-                                        table.insert(messages, "- `" .. cur_client.name .. "`")
-                                    end
-                                end
-
-                                vim.notify(table.concat(messages, "\n"), vim.log.levels.INFO, {
-                                    title = "LSP Attached Servers",
-                                    ---@param win integer The window handle
-                                    on_open = function(win)
-                                        vim.bo[vim.api.nvim_win_get_buf(win)].filetype = "markdown"
-                                    end,
-                                })
-                            end)
-                        )
-                    end
-
-                    local function disable_format_capability(capabilities)
-                        capabilities.documentFormattingProvider = false
-                        capabilities.documentRangeFormattingProvider = false
-                    end
-                    local ignored_fmt_lsps = {
-                        "lua_ls",
-                    }
-                    local capabilities = client.server_capabilities
-                    capabilities = vim.tbl_deep_extend("force", capabilities, lsp_capabilities)
-                    if not capabilities then
-                        return
-                    end
-                    for _, lsp_name in ipairs(ignored_fmt_lsps) do
-                        if client.name == lsp_name then
-                            disable_format_capability(capabilities)
-                        end
-                    end
-
-                    if capabilities.semanticTokensProvider and capabilities.semanticTokensProvider.full then
-                        require("hlargs").disable_buf(bufnr)
-                    end
-
-                    if capabilities.inlayHintProvider and not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) then
-                        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-                    end
-                end,
-            })
             local lspconfig = require("lspconfig")
+            lspconfig.util.default_config = require("blink.cmp").get_lsp_capabilities(lspconfig.util.default_config)
 
             lspconfig.jdtls.setup({
                 -- HACK: Have to define this to make jdtls show hovers, etc.
