@@ -27,6 +27,12 @@ return {
                     end
                 end,
             })
+            vim.api.nvim_create_autocmd("DirChanged", {
+                desc = "Show neo-tree on directory changes",
+                callback = function()
+                    vim.cmd("Neotree show")
+                end,
+            })
         end,
         config = function()
             require("neo-tree").setup({
