@@ -35,21 +35,23 @@ return {
                     notifier = function(tasks)
                         local msg = {}
                         for _, task in ipairs(tasks) do
-                            table.insert(msg, string.format("# %s (%s)", task.category, task.humanized_duration))
-                            table.insert(
-                                msg,
-                                string.format(
-                                    "%s %s [#%s] %s",
-                                    string.rep("*", task.level),
-                                    task.todo,
-                                    task.priority,
-                                    task.title
-                                )
-                            )
-                            table.insert(msg, string.format("%s: <%s>", task.type, task.time:to_string()))
+                            local new_task = {}
+                            table.insert(new_task, string.format("# %s (%s)", task.category, task.humanized_duration))
+                            local title = {
+                                string.rep("*", task.level),
+                                task.todo,
+                            }
+                            if task.priority ~= "" then
+                                table.insert(title, ("[#%s]"):format(task.priority))
+                            end
+                            table.insert(title, task.title)
+                            table.insert(new_task, table.concat(title, " "))
+                            table.insert(new_task, string.format("%s: <%s>", task.type, task.time:to_string()))
+
+                            table.insert(msg, table.concat(new_task, "\n"))
                         end
                         if #msg > 1 then
-                            vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
+                            vim.notify(table.concat(msg, "\n\n"), vim.log.levels.INFO, {
                                 timeout = 0,
                                 title = "Orgmode Reminder",
                                 ft = "org",
