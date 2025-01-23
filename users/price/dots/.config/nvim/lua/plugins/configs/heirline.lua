@@ -714,6 +714,11 @@ return {
                     vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
                 end)
             )
+            vim.api.nvim_create_autocmd("VimResized", {
+                callback = function()
+                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
+                end,
+            })
 
             local org = require("orgmode")
             local OrgDate = require("orgmode.objects.date")
@@ -777,8 +782,8 @@ return {
                             local title = headline:get_title():gsub("[~/*_=+]", "")
 
                             local message = ("%s %s"):format(time_elapsed, title)
-                            if #message > 60 then
-                                message = message:sub(1, 65) .. "…"
+                            if not conditions.width_percent_below(#message, 0.3, false) then
+                                message = message:sub(1, vim.o.columns / 3) .. "…"
                             end
                             return message
                         end
