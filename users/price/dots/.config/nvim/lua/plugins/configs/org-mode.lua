@@ -11,6 +11,7 @@ return {
             local agenda_globs = {
                 "~/Git/College/*",
                 "~/Git/College/*/*",
+                "~/Git/College/*/*/*",
                 "~/Git/Projects/Blog/*",
                 "~/Git/Projects/Blog/docs/**/*",
                 "~/Notes/**/*",
