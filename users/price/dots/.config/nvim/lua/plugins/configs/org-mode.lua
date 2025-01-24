@@ -48,7 +48,10 @@ return {
                             table.insert(new_task, table.concat(title, " "))
                             table.insert(new_task, string.format("%s: <%s>", task.type, task.time:to_string()))
 
-                            table.insert(msg, table.concat(new_task, "\n"))
+                            local built_msg = table.concat(new_task, "\n")
+                            if not vim.list_contains(msg, built_msg) then
+                                table.insert(msg, built_msg)
+                            end
                         end
                         if #msg > 1 then
                             vim.notify(table.concat(msg, "\n\n"), vim.log.levels.INFO, {
