@@ -250,13 +250,14 @@ return {
                 pattern = "AlphaReady",
                 desc = "Alpha Main Handler",
                 callback = function(args)
-                    vim.opt_local.cursorline = false
-
                     local alpha_timer = vim.loop.new_timer()
+                    if not alpha_timer then
+                        error("Failed to create Alpha timer to redraw dashboard!")
+                    end
                     ---@diagnostic disable-next-line: need-check-nil
                     alpha_timer:start(
-                        1000,
-                        1000,
+                        0,
+                        10,
                         vim.schedule_wrap(function()
                             ---@diagnostic disable-next-line: param-type-mismatch
                             local success, _ = pcall(vim.cmd, "AlphaRedraw")
