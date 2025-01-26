@@ -319,19 +319,15 @@ return {
 
             local cur_bufs = function()
                 return vim.iter(vim.api.nvim_list_bufs())
+                    :filter(vim.api.nvim_buf_is_loaded)
                     :filter(function(buf)
                         return vim.fn.buflisted(buf) == 1
                     end)
-                    :filter(vim.api.nvim_buf_is_loaded)
-                    :filter(vim.api.nvim_buf_is_valid)
                     :totable()
             end
 
             local Buffers = {
                 update = { "BufEnter", "BufNew", "VimEnter", "BufWipeout", "BufUnload", "BufDelete" },
-                condition = function()
-                    return #cur_bufs() > 0
-                end,
                 {
                     provider = seps.full.left,
                     hl = { fg = colors.carpYellow, bg = utils.get_highlight("StatusLine").bg },
@@ -348,7 +344,9 @@ return {
                 },
                 {
                     provider = function()
-                        return ("%d  "):format(#cur_bufs())
+                        local num_bufs = #cur_bufs()
+                        local buf_str = (num_bufs > 0 and tostring(num_bufs) or "")
+                        return ("%s  "):format(buf_str)
                     end,
                     hl = function()
                         return {
