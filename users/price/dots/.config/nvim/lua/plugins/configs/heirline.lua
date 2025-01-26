@@ -2,9 +2,6 @@ return {
     {
         "rebelot/heirline.nvim",
         lazy = false,
-        dependencies = {
-            "lewis6991/gitsigns.nvim",
-        },
         opts = function()
             local colors = require("kanagawa.colors").setup().palette
 
