@@ -17,20 +17,32 @@ return {
         init = function()
             -- Correctly hijack netrw, thanks to
             -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1247#issuecomment-1836294271
-            vim.api.nvim_create_autocmd("BufEnter", {
+            vim.api.nvim_create_autocmd("VimEnter", {
                 desc = "Lazy loads neo-tree when opening a directory",
+                once = true,
                 callback = function(args)
                     local stats = vim.uv.fs_stat(args.file)
                     if stats and stats.type == "directory" then
-                        require("neo-tree")
-                        return true
+                        vim.api.nvim_set_current_dir(args.file)
+                        vim.wait(1000, function()
+                            return vim.v.vim_did_enter == 1
+                        end, 5)
+                        require("neo-tree.command").execute({
+                            action = "focus",
+                            source = "filesystem",
+                            reveal_file = args.file,
+                        })
                     end
+                    return true
                 end,
             })
             vim.api.nvim_create_autocmd("DirChanged", {
                 desc = "Show neo-tree on directory changes",
                 callback = function()
-                    vim.cmd("Neotree show")
+                    require("neo-tree.command").execute({
+                        action = "show",
+                        source = "filesystem",
+                    })
                 end,
             })
         end,
@@ -75,7 +87,19 @@ return {
                         ["<space>"] = "none",
                         ["/"] = "none",
                         ["f"] = "none",
-                        ["F"] = "fuzzy_finder",
+                    },
+                },
+                event_handlers = {
+                    -- Ensure neo-tree windows do not set line numbers
+                    {
+                        event = "neo_tree_window_after_open",
+                        handler = function(args)
+                            -- vim.notify(vim.inspect(args))
+                            ---@type integer
+                            local winid = args.winid
+                            vim.wo[winid].number = false
+                            vim.wo[winid].relativenumber = false
+                        end,
                     },
                 },
             })
