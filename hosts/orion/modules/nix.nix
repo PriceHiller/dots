@@ -1,9 +1,13 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   nixpkgs.config.allowUnfree = true;
   nix = {
-    package = pkgs.nixVersions.git;
+    package = inputs.nix.packages.${pkgs.system}.default;
     optimize-nix-store = {
       enable = true;
       randomizedDelaySec = "30min";
