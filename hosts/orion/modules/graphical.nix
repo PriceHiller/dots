@@ -26,11 +26,10 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
+      vpl-gpu-rt
       intel-media-driver
       intel-vaapi-driver
       libvdpau
     ];
   };
-  services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true;
 }
