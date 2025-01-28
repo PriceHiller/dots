@@ -52,7 +52,6 @@ in
         typescript
         deno
         powershell
-        vesktop
         kooha
         libreoffice-fresh
         nix-prefetch-scripts

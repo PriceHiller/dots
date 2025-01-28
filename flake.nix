@@ -18,6 +18,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixcord = {
+      url = "github:kaylorben/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland.url = "github:hyprwm/Hyprland";
     wezterm.url = "github:wez/wezterm?dir=nix";
     agenix = {
@@ -42,9 +46,9 @@
       flake = false;
     };
     neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
+      url = "github:nix-community/neovim-nightly-overlay?rev=76c58ab72d04df8ba83357c2df3c2842371c8356";
       inputs = {
-        neovim-src.follows = "neovim-src";
+        # neovim-src.follows = "neovim-src";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -166,6 +170,9 @@
                 inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {
+                    sharedModules = [
+                      inputs.nixcord.homeManagerModules.nixcord
+                    ];
                     backupFileExtension = "hm.backup";
                     extraSpecialArgs = {
                       clib = (import ./lib { lib = nixpkgs.lib; });
