@@ -2,6 +2,7 @@ return {
     {
         "nvim-orgmode/orgmode",
         event = "VeryLazy",
+        cmd = { "Org" },
         ft = { "org" },
         keys = {
             { "<leader>o", desc = "> Org" },
