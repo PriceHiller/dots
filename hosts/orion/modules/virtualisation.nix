@@ -3,10 +3,7 @@
   environment.systemPackages = with pkgs; [
     docker-compose
     virt-manager
-    virt-viewer
     spice
-    spice-gtk
-    spice-protocol
     virtio-win
     win-spice
     adwaita-icon-theme
@@ -14,10 +11,6 @@
   programs = {
     virt-manager.enable = true;
     dconf.enable = true;
-  };
-  services = {
-    qemuGuest.enable = true;
-    spice-vdagentd.enable = true;
   };
   virtualisation = {
     libvirtd = {
