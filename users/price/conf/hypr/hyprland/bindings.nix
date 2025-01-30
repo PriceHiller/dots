@@ -84,20 +84,20 @@
 
       # --- Workspaces ---
 
-      bind = SUPERSHIFT,left,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
-      bind = SUPERSHIFT,right,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
-      bind = SUPERSHIFT,h,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
-      bind = SUPERSHIFT,l,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
+      bind = SUPERCTRL,left,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
+      bind = SUPERCTRL,right,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
+      bind = SUPERCTRL,h,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
+      bind = SUPERCTRL,l,exec,${./scripts/focus-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
 
-      bind = SUPERCTRL,left,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 )) 1
-      bind = SUPERCTRL,right,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 )) 1
-      bind = SUPERCTRL,h,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 )) 1
-      bind = SUPERCTRL,l,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 )) 1
+      bind = SUPERALT,left,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 )) 1
+      bind = SUPERALT,right,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 )) 1
+      bind = SUPERALT,h,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 )) 1
+      bind = SUPERALT,l,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 )) 1
 
-      bind = SUPERSHIFTCTRL,left,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
-      bind = SUPERSHIFTCTRL,right,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
-      bind = SUPERSHIFTCTRL,h,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
-      bind = SUPERSHIFTCTRL,l,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
+      bind = SUPERCTRLALT,left,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
+      bind = SUPERCTRLALT,right,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
+      bind = SUPERCTRLALT,h,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') - 1 ))
+      bind = SUPERCTRLALT,l,exec,${./scripts/move-workspace-mon.bash} $(( $(hyprctl monitors -j | jq -c '.[] | select(.focused) | .activeWorkspace.id') + 1 ))
 
       bind = SUPER,1,exec,${./scripts/focus-workspace-mon.bash} 1
       bind = SUPER,2,exec,${./scripts/focus-workspace-mon.bash} 2
