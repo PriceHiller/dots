@@ -36,15 +36,6 @@ return {
                     return true
                 end,
             })
-            vim.api.nvim_create_autocmd("DirChanged", {
-                desc = "Show neo-tree on directory changes",
-                callback = function()
-                    require("neo-tree.command").execute({
-                        action = "show",
-                        source = "filesystem",
-                    })
-                end,
-            })
         end,
         config = function()
             require("neo-tree").setup({
@@ -87,19 +78,6 @@ return {
                         ["<space>"] = "none",
                         ["/"] = "none",
                         ["f"] = "none",
-                    },
-                },
-                event_handlers = {
-                    -- Ensure neo-tree windows do not set line numbers
-                    {
-                        event = "neo_tree_window_after_open",
-                        handler = function(args)
-                            -- vim.notify(vim.inspect(args))
-                            ---@type integer
-                            local winid = args.winid
-                            vim.wo[winid].number = false
-                            vim.wo[winid].relativenumber = false
-                        end,
                     },
                 },
             })
