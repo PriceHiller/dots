@@ -24,10 +24,10 @@ end, {
     desc = "Nix: Run with default output",
 })
 
-vim.keymap.set("n", "<leader>fj", function()
+vim.keymap.set("n", "<localleader>fj", function()
     vim.cmd.write()
     local cmd = {
-        "nix eval --file " .. vim.api.nvim_buf_get_name(0),
+        "nix eval --json --file " .. vim.api.nvim_buf_get_name(0),
         "|",
         "jq",
     }
