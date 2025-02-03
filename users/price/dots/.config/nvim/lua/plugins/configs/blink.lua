@@ -47,11 +47,11 @@ return {
             local custom_kind_map = {
                 Dadbod = { icon = "󰆼", hlgroup = "Dadbod" },
                 Emoji = { icon = "󰞅", hlgroup = "Emoji" },
-                Ripgrep = { icon = "", hlgroup = "Ripgrep" },
+                Ripgrep = { icon = "󰱼", hlgroup = "Ripgrep" },
                 ["lua-latex-symbols"] = { icon = "󰿈", hlgroup = "LatexSymbol" },
                 cmdline = { icon = "", hlgroup = "CommandLine" },
                 Orgmode = { icon = "", hlgroup = "Orgmode" },
-                Buffer = { icon = "󰱼", hlgroup = "Buffer" },
+                Buffer = { icon = "󰦨", hlgroup = "Buffer" },
             }
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({

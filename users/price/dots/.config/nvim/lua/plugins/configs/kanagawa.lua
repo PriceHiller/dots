@@ -137,7 +137,7 @@ return {
                 { "BlinkCmpKindColor", { fg = colors.fujiWhite, bg = colors.waveAqua2, blend = 0 } },
                 { "BlinkCmpKindTypeParameter", { fg = colors.fujiWhite, bg = colors.waveAqua2, blend = 0 } },
                 { "BlinkCmpKindCustomEmoji", { fg = colors.fujiWhite, bg = colors.boatYellow2, blend = 0 } },
-                { "BlinkCmpKindCustomRipgrep", { fg = colors.fujiWhite, bg = colors.crystalBlue, blend = 0 } },
+                { "BlinkCmpKindCustomRipgrep", { fg = colors.fujiWhite, bg = colors.waveAqua2, blend = 0 } },
                 { "BlinkCmpKindCustomDadbod", { fg = colors.fujiWhite, bg = colors.oniViolet, blend = 0 } },
                 { "BlinkCmpKindCustomLatexSymbol", { fg = colors.fujiWhite, bg = colors.surimiOrange, blend = 0 } },
                 { "BlinkCmpKindCustomCommandLine", { fg = colors.fujiWhite, bg = colors.springViolet1, blend = 0 } },
