@@ -161,6 +161,13 @@ return {
                 end,
                 desc = "Pick: Highlights",
             },
+            {
+                "<leader>fu",
+                function()
+                    require("snacks").picker.undo()
+                end,
+                desc = "Pick: Highlights",
+            },
         },
         config = function()
             local snacks = require("snacks")
