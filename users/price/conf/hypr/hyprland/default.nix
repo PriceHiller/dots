@@ -10,7 +10,6 @@ in
     ./monitors.nix
     ./window-rules.nix
     ./bindings.nix
-    ./plugins.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
