@@ -26,13 +26,11 @@ in
           };
         Install.WantedBy = [
           "graphical-session.target"
-          "compositor.target"
         ];
         Unit = {
           Description = "Wayland Wallpaper Service";
           PartOf = [
             "graphical-session.target"
-            "compositor.target"
           ];
           After = [ "graphical-session.target" ];
         };
@@ -82,7 +80,6 @@ in
         Unit = {
           Description = "Wayland Wallpaper Service";
           PartOf = [ "swww-daemon.service" ];
-          After = [ "swww-daemon.service" ];
         };
       };
     };

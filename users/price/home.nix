@@ -296,51 +296,40 @@ in
 
   systemd.user = {
     startServices = "sd-switch";
-    targets.compositor = {
-      Unit = {
-        Description = "Unit for DE to launch";
-        ConditionEnvironment = [
-          "WAYLAND_DISPLAY"
-          "DISPLAY"
-        ];
-      };
-    };
     services = {
       keyd-application-mapper = {
         Unit = {
           Description = "Keyd - Linux Keyboard Remapper";
-          PartOf = [ "keyd.service" ];
+          PartOf = [ "graphical-session.target" ];
         };
         Service = {
           ExecStart = "${pkgs.keyd}/bin/keyd-application-mapper";
           RestartSec = 3;
         };
-        Install.WantedBy = [ "compositor.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
       waybar = {
         Service = {
           Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
           RestartSec = 3;
         };
-        Install.WantedBy = [ "compositor.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
         Unit = {
-          PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
+          PartOf = [ "graphical-session.target" ];
         };
       };
       gromit-mpx.Service.ExecStart = lib.mkForce "${pkgs.coreutils}/bin/echo 'Disabled, managed by WM'";
       easyeffects = {
-        Install.WantedBy = [ "compositor.target" ];
+        Install.WantedBy = [ "graphical-session.target" ];
         Unit = {
-          PartOf = [ "compositor.target" ];
-          After = [ "compositor.target" ];
+          PartOf = [ "graphical-session.target" ];
         };
       };
       polkit-hyprpolkitagent = {
         Unit = {
           Description = "Hyprland Polkit authentication agent";
           Documentation = "https://wiki.hyprland.org/Hypr-Ecosystem/hyprpolkitagent/";
-          After = [ "graphical-session.target" ];
+          PartOf = [ "graphical-session.target" ];
         };
 
         Service = {

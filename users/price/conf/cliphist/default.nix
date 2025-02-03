@@ -3,10 +3,9 @@
   services.cliphist.enable = true;
   systemd.user.services.cliphist = {
     Service.RestartSec = 3;
-    Install.WantedBy = [ "compositor.target" ];
+    Install.WantedBy = [ "graphical-session.target" ];
     Unit = {
-      PartOf = [ "compositor.target" ];
-      After = [ "compositor.target" ];
+      PartOf = [ "graphical-session.target" ];
     };
   };
 }
