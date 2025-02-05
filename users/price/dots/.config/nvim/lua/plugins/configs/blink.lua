@@ -37,7 +37,7 @@ return {
             "mikavilpas/blink-ripgrep.nvim",
             "moyiz/blink-emoji.nvim",
         },
-        build = "nix run .#build-plugin",
+        build = "cargo build --release",
         config = function()
             ---@class CustomKindMapItem
             ---@field icon string
