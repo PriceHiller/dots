@@ -3,6 +3,8 @@ local M = {}
 M.setup = function()
     vim.lsp.log.set_format_func(vim.inspect)
     vim.diagnostic.config({
+        virtual_lines = true,
+        virtual_text = false,
         severity_sort = true,
         underline = true,
         update_in_insert = false,

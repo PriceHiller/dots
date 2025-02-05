@@ -170,6 +170,25 @@ M.setup = function()
     vim.keymap.set({ "i" }, "<C-l>", "<Right>")
     vim.keymap.set({ "i" }, "<C-h>", "<Left>")
     vim.keymap.set({ "i" }, "<C-;>", "<C-k>")
+
+    -- Toggle lsp diagnostic appearance
+    vim.keymap.set("n", "<leader>lt", function()
+        ---@diagnostic disable-next-line: undefined-field
+        local diag_config = vim.diagnostic.config()
+        if not diag_config then
+            return
+        end
+        if diag_config.virtual_lines == diag_config.virtual_text  then
+            diag_config.virtual_text = not diag_config.virtual_text
+        end
+        vim.diagnostic.config({
+            virtual_lines = not diag_config.virtual_lines,
+            virtual_text =  not diag_config.virtual_text
+        })
+    end, {
+        silent = true,
+        desc = "LSP: Toggle Virtual Lines",
+    })
 end
 
 return M

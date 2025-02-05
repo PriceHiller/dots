@@ -1,36 +1,5 @@
 return {
     {
-        url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        event = "LspAttach",
-        keys = {
-            {
-                "<leader>lt",
-                function()
-                    require("lsp_lines").toggle()
-                end,
-                desc = "LSP: Toggle Diagnostic Appearance",
-            },
-            {
-                "<leader>lt",
-                function()
-                    ---@diagnostic disable-next-line: undefined-field
-                    local virtual_lines_enabled = not vim.diagnostic.config().virtual_lines
-                    vim.diagnostic.config({
-                        virtual_lines = virtual_lines_enabled,
-                        virtual_text = not virtual_lines_enabled,
-                    })
-                end,
-                desc = "LSP: Toggle Diagnostic Style",
-            },
-        },
-        config = function()
-            vim.diagnostic.config({
-                virtual_text = false,
-            })
-            require("lsp_lines").setup()
-        end,
-    },
-    {
         "smjonas/inc-rename.nvim",
         cmd = { "IncRename" },
         keys = {
@@ -209,18 +178,6 @@ return {
                     vim.diagnostic.jump({ count = 1, float = true })
                 end,
                 desc = "LSP: Diagnostic Next",
-            },
-            {
-                "<leader>lt",
-                function()
-                    ---@diagnostic disable-next-line: undefined-field
-                    local virtual_lines_enabled = not vim.diagnostic.config().virtual_lines
-                    vim.diagnostic.config({
-                        virtual_lines = virtual_lines_enabled,
-                        virtual_text = not virtual_lines_enabled,
-                    })
-                end,
-                desc = "LSP: Toggle Diagnostic Style",
             },
             {
                 "<leader>ll",
