@@ -41,14 +41,9 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-src = {
-      url = "github:neovim/neovim";
-      flake = false;
-    };
     neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay?rev=76c58ab72d04df8ba83357c2df3c2842371c8356";
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
-        # neovim-src.follows = "neovim-src";
         nixpkgs.follows = "nixpkgs";
       };
     };
