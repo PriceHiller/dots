@@ -138,7 +138,13 @@ M.setup = function()
     vim.opt.showtabline = 0
 
     -- Improved diff
-    opt.diffopt:append("linematch:75")
+    for _, diffopt in ipairs({
+        "indent-heuristic",
+        "linematch:60",
+        "algorithm:histogram",
+    }) do
+        opt.diffopt:append(diffopt)
+    end
     opt.fillchars:append("diff:╱")
 
     -- Limit default menu height for completions
