@@ -72,14 +72,9 @@ M.setup = function()
         -- Minor alterations by me
         local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
         local buf_name = vim.api.nvim_buf_get_name(0)
-        vim.cmd("tab split | diffthis")
-        vim.cmd("aboveleft vnew | r # | normal! 1Gdd")
-        vim.cmd.diffthis()
+        vim.cmd(("tab split | aboveleft vnew | r # | set filetype=%s | normal! 0d_ "):format(buf_ft))
         local opts = {
-            buftype = "nowrite",
-            bufhidden = "wipe",
-            swapfile = false,
-            readonly = true,
+            buftype = "nofile",
             winbar = vim.opt.winbar:get(),
         }
         for option, value in pairs(opts) do
@@ -88,10 +83,8 @@ M.setup = function()
         if buf_name then
             pcall(vim.api.nvim_buf_set_name, 0, (vim.fn.fnamemodify(buf_name, ":t") or buf_name) .. " [OLD]")
         end
-        if buf_ft then
-            vim.opt_local.filetype = buf_ft
-        end
         vim.cmd.wincmd("l")
+        vim.cmd("windo diffthis")
     end, {})
 
     vim.api.nvim_create_user_command("SudoWrite", function(opts)
