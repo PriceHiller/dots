@@ -134,7 +134,15 @@ in
     nginx.virtualHosts."${gitea_host}" = {
       enableACME = true;
       forceSSL = true;
-      locations."/".proxyPass = "http://${config.services.gitea.settings.server.HTTP_ADDR}:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}";
+      locations = {
+        "/".proxyPass =
+          "http://${config.services.gitea.settings.server.HTTP_ADDR}:${builtins.toString config.services.gitea.settings.server.HTTP_PORT}";
+        "/robots.txt" = {
+          extraConfig = ''
+            return 200 "User-agent: *\nDisallow: /";
+          '';
+        };
+      };
     };
   };
 
