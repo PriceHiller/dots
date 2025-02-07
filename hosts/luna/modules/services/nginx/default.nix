@@ -30,7 +30,6 @@
             }
             try_files $uri $uri.html $uri/ =404;
           '';
-          index = "home.html";
         };
         "^~ /.well-known/openpgpkey/hu/" = {
           alias = "${./gpg-wkd}/$1";
