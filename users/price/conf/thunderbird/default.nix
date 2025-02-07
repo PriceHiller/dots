@@ -9,12 +9,12 @@
     };
     mimeApps = {
       associations.added = {
-        "x-scheme-handler/mailto" = [ "thunderbird.desktop " ];
-        "text/calendar" = [ "thunderbird.desktop " ];
+        "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
+        "text/calendar" = [ "thunderbird.desktop" ];
       };
       defaultApplications = {
-        "x-scheme-handler/mailto" = [ "thunderbird.desktop " ];
-        "text/calendar" = [ "thunderbird.desktop " ];
+        "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
+        "text/calendar" = [ "thunderbird.desktop" ];
       };
     };
   };
