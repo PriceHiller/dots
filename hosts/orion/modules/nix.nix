@@ -12,7 +12,10 @@
       enable = true;
       randomizedDelaySec = "30min";
     };
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = [
+      "nixpkgs=${inputs.nixpkgs}"
+      "home-manager=${inputs.home-manager}"
+    ];
     settings = {
       experimental-features = [
         "pipe-operators"
