@@ -8,6 +8,9 @@
         wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
       '';
     });
+    libiodbc = prev.libiodbc.overrideAttrs(oldAttrs: {
+      dontCheckForBrokenSymlinks = true;
+    });
     wezterm = inputs.wezterm.packages.${final.system}.default;
     opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
       propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python311Packages.qt-material ];
