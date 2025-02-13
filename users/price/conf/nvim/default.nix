@@ -34,6 +34,7 @@
     packages = with pkgs; [
       neovide
       bun
+      nil
       sqlfluff
     ];
   };
