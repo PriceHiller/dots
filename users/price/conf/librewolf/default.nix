@@ -1,5 +1,16 @@
 { config, lib, ... }:
 let
+  # Converts an attr path to the string representation of that path
+  #   {
+  #     hello = { world = true; };
+  #     goodbye = { moon = "bye"; }
+  #   }
+  #     Becomes
+  #   {
+  #     "hello.world" = true;
+  #     "goodbye.moon" = "bye";
+  #   }
+  #     Works for arbitrarily nested attrsets
   attrsToStringPath =
     attrs:
     let
