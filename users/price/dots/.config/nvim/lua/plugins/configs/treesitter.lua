@@ -77,10 +77,7 @@ return {
         event = { "BufReadPre", "BufNewFile", "WinLeave" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            {
-                "PriceHiller/nvim-treesitter-endwise",
-                branch = "fix/iter-matches"
-            },
+            "RRethy/nvim-treesitter-endwise",
         },
         init = function()
             vim.api.nvim_create_autocmd("FileReadPre", {
