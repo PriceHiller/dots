@@ -118,6 +118,9 @@ return {
                 "nvimtools/none-ls.nvim",
                 config = function()
                     local null_ls = require("null-ls")
+                    local sqlfluff_config = {
+                        extra_args = { "--dialect", "postgres" },
+                    }
                     null_ls.setup({
                         sources = {
                             null_ls.builtins.formatting.google_java_format,
@@ -129,6 +132,8 @@ return {
                             null_ls.builtins.formatting.shfmt,
                             null_ls.builtins.formatting.prettierd,
                             null_ls.builtins.diagnostics.hadolint,
+                            null_ls.builtins.diagnostics.sqlfluff.with(sqlfluff_config),
+                            null_ls.builtins.formatting.sqlfluff.with(sqlfluff_config),
                         },
                     })
                 end,
