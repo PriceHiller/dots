@@ -2,95 +2,88 @@
 {
   programs.nixcord = {
     enable = true;
-    vesktop.enable = true;
-    discord.vencord.unstable = true;
-    vesktopConfig = {
+    config = {
       themeLinks = [
         "https://catppuccin.github.io/discord/dist/catppuccin-macchiato.theme.css"
       ];
       plugins = {
-        AlwaysAnimate = {
+        alwaysAnimate = {
           enable = true;
         };
-        AlwaysTrust = {
+        alwaysTrust = {
           domain = true;
           enable = true;
           file = true;
         };
-        AnonymiseFileNames = {
+        anonymiseFileNames = {
+          enable = true;
           anonymiseByDefault = false;
-          consistent = "image";
-          enable = true;
-          method = 0;
-          randomisedLength = 7;
         };
-        BetterGifAltText = {
+        betterGifAltText = {
           enable = true;
         };
-        BetterGifPicker = {
+        betterGifPicker = {
           enable = true;
         };
-        BetterUploadButton = {
+        betterUploadButton = {
           enable = true;
         };
-        CallTimer = {
+        callTimer = {
           enable = true;
           format = "stopwatch";
         };
-        ChatInputButtonAPI = {
+        chatInputButtonAPI = {
           enable = true;
         };
-        ClearURLs = {
+        clearURLs = {
           enable = true;
         };
-        CommandsAPI = {
+        commandsAPI = {
           enable = true;
         };
-        ForceOwnerCrown = {
+        forceOwnerCrown = {
           enable = true;
         };
-        GifPaste = {
+        gifPaste = {
           enable = true;
         };
-        ImageZoom = {
+        imageZoom = {
           enable = true;
           invertScroll = true;
           nearestNeighbour = false;
           saveZoomValues = true;
-          size = 100;
           square = false;
-          zoom = 1;
-          zoomSpeed = 0.5;
+          zoom = 1.0;
         };
-        MemberCount = {
+        memberCount = {
           enable = true;
           memberList = true;
           toolTip = true;
         };
-        MemberListDecoratorsAPI = {
+        memberListDecoratorsAPI = {
           enable = true;
         };
-        MentionAvatars = {
+        mentionAvatars = {
           enable = true;
           showAtSymbol = true;
         };
-        MessageAccessoriesAPI = {
+        messageAccessoriesAPI = {
           enable = true;
         };
-        MessageClickActions = {
+        messageClickActions = {
           enableDeleteOnClick = true;
           enableDoubleClickToEdit = false;
           enableDoubleClickToReply = false;
           enable = true;
           requireModifier = false;
         };
-        MessageDecorationsAPI = {
+        messageDecorationsAPI = {
           enable = true;
         };
-        MessageEventsAPI = {
+        messageEventsAPI = {
           enable = true;
         };
-        MessageLogger = {
+        messageLogger = {
           collapseDeleted = false;
           deleteStyle = "overlay";
           enable = true;
@@ -102,56 +95,52 @@
           logDeletes = true;
           logEdits = true;
         };
-        MessageUpdaterAPI = {
+        messageUpdaterAPI = {
           enable = true;
         };
-        NewGuildSettings = {
+        newGuildSettings = {
           enable = true;
         };
-        NoProfileThemes = {
+        noProfileThemes = {
           enable = true;
         };
-        NoScreensharePreview = {
+        normalizeMessageLinks = {
           enable = true;
         };
-        NormalizeMessageLinks = {
-          enable = true;
-        };
-        PlatformIndicators = {
+        platformIndicators = {
           badges = true;
           colorMobileIndicator = true;
           enable = true;
-          list = true;
+          lists = true;
           messages = true;
         };
-        PreviewMessage = {
+        previewMessage = {
           enable = true;
         };
-        ReadAllNotificationsButton = {
+        readAllNotificationsButton = {
           enable = true;
         };
-        ReplyTimestamp = {
+        replyTimestamp = {
           enable = true;
         };
-        RevealAllSpoilers = {
+        revealAllSpoilers = {
           enable = true;
         };
-        SendTimestamps = {
+        sendTimestamps = {
           enable = true;
           replaceMessageContents = true;
         };
-        ServerListAPI = {
+        serverListAPI = {
           enable = true;
         };
-        ShikiCodeblocks = {
-          bgOpacity = 59.9132;
-          customTheme = "https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/refs/heads/main/packages/tm-themes/themes/catppuccin-mocha.json";
+        shikiCodeblocks = {
           enable = true;
-          theme = "https://raw.githubusercontent.com/shikijs/shiki/0b28ad8ccfbf2615f2d9d38ea8255416b8ac3043/packages/shiki/themes/vitesse-dark.json";
+          bgOpacity = 59.9132;
+          theme = "https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/refs/heads/main/packages/tm-themes/themes/catppuccin-mocha.json";
           tryHljs = "ALWAYS";
           useDevIcon = "COLOR";
         };
-        ShowHiddenThings = {
+        showHiddenThings = {
           disableDisallowedDiscoveryFilters = true;
           disableDiscoveryFilters = true;
           enable = true;
@@ -159,41 +148,41 @@
           showModView = true;
           showTimeouts = true;
         };
-        SilentTyping = {
+        silentTyping = {
           contextMenu = true;
           enable = true;
           isEnabled = true;
           showIcon = false;
         };
-        TypingIndicator = {
+        typingIndicator = {
           enable = true;
           includeBlockedUsers = true;
           includeCurrentChannel = true;
           includeMutedChannels = true;
-          indicatorMode = 3;
+          indicatorMode = "animatedDots";
         };
-        TypingTweaks = {
+        typingTweaks = {
           alternativeFormatting = true;
           enable = true;
           showAvatars = true;
           showRoleColors = true;
         };
-        Unindent = {
+        unindent = {
           enable = true;
         };
-        UserSettingsAPI = {
+        userSettingsAPI = {
           enable = true;
         };
-        UserVoiceShow = {
+        userVoiceShow = {
           enable = true;
           showInMemberList = true;
           showInMessages = true;
           showInUserProfileModal = true;
         };
-        WebScreenShareFixes = {
+        fakeNitro = {
           enable = true;
         };
-        FakeNitro = {
+        webScreenShareFixes = {
           enable = true;
         };
       };
