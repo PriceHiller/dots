@@ -12,6 +12,11 @@ return {
         config = function()
             require("img-clip").setup({
                 relative_to_current_file = true,
+                filetypes = {
+                    typst = {
+                        template = [[#image("$FILE_PATH")]],
+                    },
+                },
             })
         end,
     },
