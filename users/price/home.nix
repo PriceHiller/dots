@@ -44,7 +44,6 @@ in
         sqlx-cli
         postgresql
         htop
-        devenv
         plantuml
         libnotify
         graphviz
