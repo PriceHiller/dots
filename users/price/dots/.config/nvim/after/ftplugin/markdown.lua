@@ -8,7 +8,7 @@ vim.keymap.set("n", "<localleader>fr", "<cmd>GithubPreviewToggle<CR>", {
 })
 
 local markview = require("markview")
-vim.keymap.set("n", "<leader>ff", function()
+vim.keymap.set("n", "<localleader>ff", function()
     markview.state.hybrid_mode = not markview.state.hybrid_mode
     local hybrid_state = markview.state.hybrid_mode and "Enabled" or "Disabled"
     vim.notify(("%s Markview Hybrid Mode"):format(hybrid_state), vim.log.levels.INFO, { title = "Markview" })
