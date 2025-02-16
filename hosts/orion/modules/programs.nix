@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  environment.sessionVariables = {
+    DO_NOT_TRACK = 1;
+  };
   programs = {
     hyprland.enable = true;
     dconf.enable = true;
