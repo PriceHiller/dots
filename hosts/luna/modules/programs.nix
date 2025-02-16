@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  environment.sessionVariables = {
+    DO_NOT_TRACK = 1;
+  };
   nixpkgs.config.allowUnfree = true;
 
   programs = {
