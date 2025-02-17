@@ -95,7 +95,7 @@ return {
                 desc = "Notifications: Search",
             },
             {
-                "<leader>p",
+                "<leader>f",
                 desc = "> Picker",
             },
             {
