@@ -27,6 +27,12 @@ return {
             { "<leader>ab", "<cmd>DBUIFindBuffer<CR>", desc = "Dadbod: Find Buffer" },
         },
         init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "*sql",
+                callback = function(args)
+                    vim.bo[args.buf].ft = "sql"
+                end
+            })
             vim.g.db_ui_use_nerd_fonts = 1
         end,
     },
