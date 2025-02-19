@@ -54,7 +54,7 @@ return {
                                 table.insert(msg, built_msg)
                             end
                         end
-                        if #msg > 1 then
+                        if #msg > 0 then
                             vim.notify(table.concat(msg, "\n\n"), vim.log.levels.INFO, {
                                 timeout = 0,
                                 title = "Orgmode Reminder",
