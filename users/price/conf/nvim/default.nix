@@ -4,6 +4,34 @@
   ...
 }:
 {
+  systemd.user =
+    let
+      svc-orgmode-name = "nvim-orgmode-notify";
+    in
+    {
+      timers.${svc-orgmode-name} = {
+        Unit = {
+          Description = "Launch nvim orgmode notification service";
+        };
+        Timer = {
+          Unit = "${svc-orgmode-name}.service";
+          AccuracySec = "1s";
+          OnCalendar = "*:*:00";
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
+      services.${svc-orgmode-name} = {
+        Unit = {
+          Description = "Display Nvim Orgmode Notifications via `notify-send`";
+          PartOf = [ "graphical-session.target" ];
+        };
+        Service = {
+          Type = "oneshot";
+          ExecStart = ''${pkgs.neovim}/bin/nvim --headless -c 'lua require("orgmode").cron()' '';
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
+    };
   programs.neovim = {
     enable = true;
     package = pkgs.neovim;
