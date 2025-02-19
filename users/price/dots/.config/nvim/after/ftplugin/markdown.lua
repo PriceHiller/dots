@@ -7,25 +7,6 @@ vim.keymap.set("n", "<localleader>fr", "<cmd>GithubPreviewToggle<CR>", {
     desc = "Preview Markdown in Browser",
 })
 
-local markview = require("markview")
-vim.keymap.set("n", "<localleader>ff", function()
-    markview.state.hybrid_mode = not markview.state.hybrid_mode
-    local hybrid_state = markview.state.hybrid_mode and "Enabled" or "Disabled"
-    vim.notify(("%s Markview Hybrid Mode"):format(hybrid_state), vim.log.levels.INFO, { title = "Markview" })
-end, {
-    buffer = true,
-    desc = "Toggle Markview Hybrid Mode",
-})
-
-vim.keymap.set("n", "<leader>ft", function()
-    vim.cmd("Markview toggle")
-    local mview_state = markview.state.enable and "Enabled" or "Disabled"
-    vim.notify(("Markview %s"):format(mview_state), vim.log.levels.INFO, { title = "Markview" })
-end, {
-    buffer = true,
-    desc = "Toggle Markview",
-})
-
 vim.keymap.set("n", "<C-Space>", function()
     local cur_line = vim.fn.line(".")
     local line_text = vim.fn.getline(".")
