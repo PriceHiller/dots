@@ -389,6 +389,10 @@ return {
                 { "texMathZoneX", { fg = colors.surimiOrange } },
                 -- Use underlines for urls
                 { "@string.special.url", get_hl("@string.special.url", { underline = true, undercurl = false }) },
+
+                -- Yank/Paste hls for plugins etc.
+                { "Yank", { bg = colors.surimiOrange } },
+                { "Paste", { bg = colors.springViolet1 } },
             }
 
             if vim.g.neovide then
