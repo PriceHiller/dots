@@ -67,6 +67,41 @@ return {
                             })
                         end
                     end,
+                    cron_notifier = function(tasks)
+                        for _, task in ipairs(tasks) do
+                            local title = string.format("%s (%s)", task.category, task.humanized_duration)
+                            local subtitle = {
+                                string.rep("*", task.level),
+                                task.todo,
+                            }
+                            if task.priority ~= "" then
+                                table.insert(subtitle, ("[#%s]"):format(task.priority))
+                            end
+                            table.insert(subtitle, task.title)
+
+                            local built_title = table.concat(subtitle, " ")
+                            local date = string.format("%s: %s", task.type, task.time:to_string())
+
+                            local urgency = "normal"
+                            local priority = task.priority:upper()
+                            if priority == "A" then
+                                urgency = "critical"
+                            elseif priority == "C" then
+                                urgency = "low"
+                            end
+                            -- Linux
+                            if vim.fn.executable("notify-send") == 1 then
+                                vim.system({
+                                    "notify-send",
+                                    "--expire-time=0",
+                                    "--app-name=orgmode",
+                                    ("--urgency=%s"):format(urgency),
+                                    title,
+                                    string.format("%s\n%s", built_title, date),
+                                })
+                            end
+                        end
+                    end,
                 },
                 org_id_link_to_org_use_id = true,
                 org_default_notes_file = "~/Notes/notes.org",
