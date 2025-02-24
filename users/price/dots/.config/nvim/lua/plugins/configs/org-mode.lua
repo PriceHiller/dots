@@ -9,53 +9,100 @@ return {
         },
         config = function()
             local org = require("orgmode")
-            local agenda_globs = {
-                "~/Git/College/*",
-                "~/Git/College/*/*",
-                "~/Git/College/*/*/*",
-                "~/Git/Projects/Blog/*",
-                "~/Git/Projects/Blog/docs/**/*",
-                "~/Notes/**/*",
-                "~/.config/home-manager/*",
-                "~/.config/home-manager/docs/**/*",
-                vim.fn.stdpath("config") .. "/**/*",
-            }
+
+            ---@generic T
+            ---@param tasks T[]
+            ---@return T[]
+            local function dedup_notif_tasks(tasks)
+                local unique_tasks = {}
+                for _, task in ipairs(tasks) do
+                    local task_unique = true
+                    ---@type OrgRange
+                    local task_range = task.range
+                    for _, ret_task in ipairs(unique_tasks) do
+                        ---@type OrgRange
+                        local ret_task_range = ret_task.range
+                        if
+                            task_range.start_line == ret_task_range.start_line
+                            and task_range.end_line == ret_task_range.end_line
+                        then
+                            task_unique = false
+                            break
+                        end
+                    end
+                    if task_unique then
+                        table.insert(unique_tasks, task)
+                    end
+                end
+                return unique_tasks
+            end
+
+            ---@class meta.OrgNotification
+            ---@field msg string
+            ---@field task any
+            ---@field header string
+
+            ---@return meta.OrgNotification[]
+            local function build_task_notifications(tasks)
+                ---@type meta.OrgNotification[]
+                local notifications = {}
+                for _, task in ipairs(dedup_notif_tasks(tasks)) do
+                    local new_task = {}
+                    local title = {
+                        string.rep("*", task.level),
+                        task.todo,
+                    }
+                    if task.priority ~= "" then
+                        table.insert(title, ("[#%s]"):format(task.priority))
+                    end
+                    table.insert(title, task.title)
+                    table.insert(new_task, table.concat(title, " "))
+                    table.insert(new_task, string.format("%s: <%s>", task.type, task.time:to_string()))
+
+                    local built_msg = table.concat(new_task, "\n")
+                    table.insert(notifications, {
+                        msg = built_msg,
+                        task = task,
+                        header = string.format("%s (%s)", task.category, task.humanized_duration),
+                    })
+                end
+                return notifications
+            end
+
+            local hour = 60
+            local reminder_times = { 24 * hour, 12 * hour, 8 * hour, 4 * hour, 2 * hour, hour, 30, 15, 5, 0 }
+
             org.setup({
                 mappings = {
                     agenda = {
                         org_agenda_filter = "F",
                     },
                 },
-                org_agenda_files = agenda_globs,
+                org_agenda_files = {
+                    "~/Git/College/*",
+                    "~/Git/College/*/*",
+                    "~/Git/College/*/*/*",
+                    "~/Git/Projects/Blog/*",
+                    "~/Git/Projects/Blog/docs/**/*",
+                    "~/Notes/**/*",
+                    "~/.config/home-manager/*",
+                    "~/.config/home-manager/docs/**/*",
+                    vim.fn.stdpath("config") .. "/**/*",
+                },
                 notifications = {
                     enabled = true,
                     cron_enabled = true,
-                    repeater_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
-                    deadline_warning_reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
-                    reminder_time = { 2880, 1440, 720, 360, 180, 60, 30, 15, 10, 5, 0 },
+                    repeater_reminder_time = reminder_times,
+                    deadline_warning_reminder_time = reminder_times,
+                    reminder_time = reminder_times,
                     notifier = function(tasks)
-                        local msg = {}
-                        for _, task in ipairs(tasks) do
-                            local new_task = {}
-                            table.insert(new_task, string.format("# %s (%s)", task.category, task.humanized_duration))
-                            local title = {
-                                string.rep("*", task.level),
-                                task.todo,
-                            }
-                            if task.priority ~= "" then
-                                table.insert(title, ("[#%s]"):format(task.priority))
+                        local notifications = build_task_notifications(tasks)
+                        local msgs = {}
+                        if #notifications > 0 then
+                            for _, notif in ipairs(notifications) do
+                                table.insert(msgs, ("# %s\n%s"):format(notif.header, notif.msg))
                             end
-                            table.insert(title, task.title)
-                            table.insert(new_task, table.concat(title, " "))
-                            table.insert(new_task, string.format("%s: <%s>", task.type, task.time:to_string()))
-
-                            local built_msg = table.concat(new_task, "\n")
-                            if not vim.list_contains(msg, built_msg) then
-                                table.insert(msg, built_msg)
-                            end
-                        end
-                        if #msg > 0 then
-                            vim.notify(table.concat(msg, "\n\n"), vim.log.levels.INFO, {
+                            vim.notify(table.concat(msgs, "\n\n"), vim.log.levels.INFO, {
                                 timeout = 0,
                                 title = "Orgmode Reminder",
                                 ft = "org",
@@ -68,38 +115,23 @@ return {
                         end
                     end,
                     cron_notifier = function(tasks)
-                        for _, task in ipairs(tasks) do
-                            local title = string.format("%s (%s)", task.category, task.humanized_duration)
-                            local subtitle = {
-                                string.rep("*", task.level),
-                                task.todo,
+                        for _, notif in ipairs(build_task_notifications(tasks)) do
+                            local msg = {
+                                "========= Sending Task =========",
+                                "> " .. table.concat(vim.split(notif.msg, "\n"), "\n> "),
+                                "================================",
                             }
-                            if task.priority ~= "" then
-                                table.insert(subtitle, ("[#%s]"):format(task.priority))
-                            end
-                            table.insert(subtitle, task.title)
-
-                            local built_title = table.concat(subtitle, " ")
-                            local date = string.format("%s: %s", task.type, task.time:to_string())
-
-                            local urgency = "normal"
-                            local priority = task.priority:upper()
-                            if priority == "A" then
-                                urgency = "critical"
-                            elseif priority == "C" then
-                                urgency = "low"
-                            end
-                            -- Linux
-                            if vim.fn.executable("notify-send") == 1 then
-                                vim.system({
-                                    "notify-send",
-                                    "--expire-time=0",
-                                    "--app-name=orgmode",
-                                    ("--urgency=%s"):format(urgency),
-                                    title,
-                                    string.format("%s\n%s", built_title, date),
-                                })
-                            end
+                            print(table.concat(msg, "\n"))
+                            vim.system({
+                                "notify-send",
+                                ("--icon=%s/assets/nvim-orgmode-small.png"):format(
+                                    require("lazy.core.config").options.root .. "/orgmode/"
+                                ),
+                                "--app-name=orgmode",
+                                "--expire-time=0",
+                                notif.header,
+                                notif.msg,
+                            })
                         end
                     end,
                 },
