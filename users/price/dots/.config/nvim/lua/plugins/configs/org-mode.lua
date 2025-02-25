@@ -178,29 +178,6 @@ return {
                         datetree = false,
                     },
                 },
-                emacs_config = {
-                    config_path = (function()
-                        local xdg_emacs_init_path = "/emacs/init.el"
-
-                        -- Use XDG_CONFIG_HOME by default
-                        if vim.env.XDG_CONFIG_HOME then
-                            return vim.env.XDG_CONFIG_HOME .. xdg_emacs_init_path
-                        end
-
-                        -- Fallback to searching for the emacs config relative to the Neovim config
-                        local nvim_cfg_dir = vim.fn.stdpath("config")
-                        ---@diagnostic disable-next-line: param-type-mismatch
-                        local cfg_dir = vim.fn.fnamemodify(nvim_cfg_dir, ":h")
-                        if vim.uv.fs_stat(cfg_dir .. xdg_emacs_init_path) then
-                            return cfg_dir .. xdg_emacs_init_path
-                        end
-
-                        -- Failing that, fallback to pulling on `$HOME/.emacs/init.el`
-                        local home_emacs_init = vim.env.HOME .. ".emacs/init.el"
-                        assert(vim.uv.fs_stat(home_emacs_init), "Failed to locate a valid emacs configuration!")
-                        return home_emacs_init
-                    end)(),
-                },
             })
 
             vim.api.nvim_set_hl(0, "org_code_delimiter", { link = "@punctuation.delimiter" })
