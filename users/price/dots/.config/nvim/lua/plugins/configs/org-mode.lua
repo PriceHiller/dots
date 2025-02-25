@@ -70,7 +70,7 @@ return {
             end
 
             local hour = 60
-            local reminder_times = { 24 * hour, 12 * hour, 8 * hour, 4 * hour, 2 * hour, hour, 30, 15, 5, 0 }
+            local reminder_times = { 24 * hour, 12 * hour, 8 * hour, 4 * hour, 2 * hour, hour, 30, 10, 0 }
 
             org.setup({
                 mappings = {
