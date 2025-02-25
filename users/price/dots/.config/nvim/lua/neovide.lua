@@ -3,13 +3,11 @@ vim.opt.winblend = 30
 vim.opt.pumblend = 90
 
 -- Bg opacity
-vim.g.neovide_normal_opacity = 0.65
+vim.g.neovide_normal_opacity = 0.8
 
 -- Float blur amount
 vim.g.neovide_floating_blur_amount_x = 25.0
 vim.g.neovide_floating_blur_amount_y = 25.0
-vim.g.neovide_light_angle_degrees = 45
-vim.g.neovide_light_radius = 5
 
 -- Floating window corner radius
 vim.g.neovide_floating_corner_radius = 0.2
