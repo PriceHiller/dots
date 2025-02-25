@@ -8,7 +8,7 @@
         enabled = true;
         size = 8;
         passes = 3;
-        noise = 0.01;
+        noise = 0.025;
       };
       shadow.enabled = true;
       dim_special = 0.05;
