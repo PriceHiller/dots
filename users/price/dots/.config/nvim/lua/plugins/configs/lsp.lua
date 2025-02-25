@@ -377,16 +377,6 @@ return {
                     },
                 },
             })
-            lspconfig.nil_ls.setup({
-                settings = {
-                    ["nil"] = {
-                        nix = {
-                            autoEvalInputs = true,
-                            maxMemoryMB = 4096,
-                        },
-                    },
-                },
-            })
 
             lspconfig.tinymist.setup({
                 settings = {
