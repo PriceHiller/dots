@@ -2,6 +2,8 @@
 vim.opt.winblend = 30
 vim.opt.pumblend = 90
 
+-- Bg opacity
+vim.g.neovide_normal_opacity = 0.65
 
 -- Float blur amount
 vim.g.neovide_floating_blur_amount_x = 25.0

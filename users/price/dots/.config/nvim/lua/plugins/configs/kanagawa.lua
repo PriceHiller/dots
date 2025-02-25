@@ -9,7 +9,7 @@ return {
         lazy = false,
         config = function()
             require("kanagawa").setup({
-                transparent = not vim.g.neovide,
+                transparent = true,
                 dim_inactive = true,
                 globalStatus = true,
                 theme = "wave",
@@ -396,7 +396,7 @@ return {
             }
 
             if vim.g.neovide then
-                table.insert(extra_hls, 1, { "Normal", { fg = colors.fujiWhite, bg = "#1a1c2b" } })
+                table.insert(extra_hls, 1, { "Normal", { fg = colors.fujiWhite, bg = colors.sumiInk0 } })
             end
 
             vim.iter(extra_hls):enumerate():fold({}, function(t, index, tbl)
