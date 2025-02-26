@@ -396,7 +396,7 @@ return {
             }
 
             if vim.g.neovide then
-                table.insert(extra_hls, 1, { "Normal", { fg = colors.fujiWhite, bg = colors.sumiInk0 } })
+                table.insert(extra_hls, 1, { "Normal", { fg = colors.fujiWhite, bg = "#16161C" } })
             end
 
             vim.iter(extra_hls):enumerate():fold({}, function(t, index, tbl)
