@@ -22,7 +22,6 @@
       url = "github:kaylorben/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
     wezterm.url = "github:wez/wezterm?dir=nix";
     agenix = {
       url = "github:yaxitech/ragenix";
