@@ -143,16 +143,6 @@ return {
                 { "BlinkCmpKindCustomCommandLine", { fg = colors.fujiWhite, bg = colors.springViolet1, blend = 0 } },
                 { "BlinkCmpKindCustomOrgmode", { fg = colors.fujiWhite, bg = colors.waveAqua1, blend = 0 } },
                 { "BlinkCmpKindCustomBuffer", { fg = colors.fujiWhite, bg = colors.springBlue, blend = 0 } },
-                { "CmpCustomSelectionColor", { bg = colors.sumiInk5, blend = 0 } },
-                { "CmpCustomSelectionGit", { fg = colors.fujiWhite, bg = colors.roninYellow, blend = 0 } },
-                { "CmpCustomSelectionPath", { fg = colors.fujiWhite, bg = colors.autumnYellow, blend = 0 } },
-                { "CmpCustomSelectionCalculator", { fg = colors.fujiWhite, bg = colors.waveBlue2, blend = 0 } },
-                { "CmpCustomSelectionCrates", { fg = colors.fujiWhite, bg = colors.roninYellow, blend = 0 } },
-                { "CmpCustomSelectionDocker", { fg = colors.fujiWhite, bg = colors.springBlue, blend = 0 } },
-                { "CmpCustomSelectionCmdHistory", { fg = colors.fujiWhite, bg = colors.waveBlue2, blend = 0 } },
-                { "CmpCustomSelectionNpm", { fg = colors.fujiWhite, bg = colors.peachRed, blend = 0 } },
-                { "CmpCustomSelectionCommit", { fg = colors.fujiWhite, bg = colors.peachRed, blend = 0 } },
-                { "CmpCustomSelectionSnippet", { fg = colors.fujiWhite, bg = colors.peachRed, blend = 0 } },
 
                 -- Telescope
                 { "TelescopeNormal", { bg = colors.sumiInk2 } },
