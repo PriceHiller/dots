@@ -53,7 +53,7 @@ return {
                 cmdline = { icon = "", hlgroup = "CommandLine" },
                 Orgmode = { icon = "", hlgroup = "Orgmode" },
                 Buffer = { icon = "", hlgroup = "Buffer" },
-                Nix = { icon = "", hlgroup = "Nix" }
+                Nix = { icon = "", hlgroup = "Nix" },
             }
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
@@ -102,6 +102,16 @@ return {
                     ["<C-d>"] = { "scroll_documentation_down", "fallback" },
                 },
 
+                cmdline = {
+                    completion = {
+                        ghost_text = {
+                            enabled = true,
+                        },
+                        menu = {
+                            auto_show = true,
+                        },
+                    },
+                },
                 ---@diagnostic disable-next-line: missing-fields
                 appearance = {
                     use_nvim_cmp_as_default = false,
