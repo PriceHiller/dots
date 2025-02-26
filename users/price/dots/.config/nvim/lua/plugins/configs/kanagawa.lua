@@ -143,6 +143,7 @@ return {
                 { "BlinkCmpKindCustomCommandLine", { fg = colors.fujiWhite, bg = colors.springViolet1, blend = 0 } },
                 { "BlinkCmpKindCustomOrgmode", { fg = colors.fujiWhite, bg = colors.waveAqua1, blend = 0 } },
                 { "BlinkCmpKindCustomBuffer", { fg = colors.fujiWhite, bg = colors.springBlue, blend = 0 } },
+                { "BlinkCmpKindCustomNix", { fg = colors.fujiWhite, bg = colors.surimiOrange, blend = 0 } },
 
                 -- Telescope
                 { "TelescopeNormal", { bg = colors.sumiInk2 } },

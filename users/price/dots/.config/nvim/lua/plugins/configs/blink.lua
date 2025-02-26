@@ -28,6 +28,7 @@ return {
         "saghen/blink.cmp",
         lazy = false, -- lazy loading handled internally
         dependencies = {
+            { "PriceHiller/blink-nix.nvim" },
             "rafamadriz/friendly-snippets",
             {
                 "L3MON4D3/LuaSnip",
@@ -51,7 +52,8 @@ return {
                 ["lua-latex-symbols"] = { icon = "󰿈", hlgroup = "LatexSymbol" },
                 cmdline = { icon = "", hlgroup = "CommandLine" },
                 Orgmode = { icon = "", hlgroup = "Orgmode" },
-                Buffer = { icon = "󰦨", hlgroup = "Buffer" },
+                Buffer = { icon = "", hlgroup = "Buffer" },
+                Nix = { icon = "", hlgroup = "Nix" }
             }
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
@@ -76,24 +78,14 @@ return {
                                         )
                                     end,
                                 })
-                            else
-                                return cmp.accept()
                             end
+                            return cmp.accept()
                         end,
                         "fallback",
                     },
-                    ["<C-Tab>"] = {
-                        function(cmp)
-                            if cmp.snippet_active() then
-                                return cmp.accept()
-                            else
-                                return cmp.select_and_accept()
-                            end
-                        end,
-                        "snippet_forward",
-                        "fallback",
-                    },
-                    ["<C-S-Tab>"] = { "snippet_backward", "fallback" },
+                    ["<C-Tab>"] = { "snippet_forward", "fallback" },
+                    ["<C-A-Tab>"] = { "snippet_backward", "fallback" },
+                    ["<C-S-Tab>"] = { "fallback" },
                     ["<Up>"] = { "select_prev", "fallback" },
                     ["<Down>"] = { "select_next", "fallback" },
                     ["<Tab>"] = { "select_next", "fallback" },
@@ -127,6 +119,7 @@ return {
                         "snippets",
                         "buffer",
                         "ripgrep",
+                        "nix",
                         "emoji",
                         "orgmode",
                         "dadbod",
@@ -161,6 +154,10 @@ return {
                                 cache = true,
                             },
                         },
+                        nix = {
+                            name = "Nix",
+                            module = "blink-nix",
+                        },
                         emoji = {
                             module = "blink-emoji",
                             name = "Emoji",
@@ -187,9 +184,7 @@ return {
                         enabled = true,
                     },
 
-                    ---@diagnostic disable-next-line: missing-fields
                     menu = {
-                        ---@diagnostic disable-next-line: undefined-field
                         winblend = vim.g.neovide and 90,
                         draw = {
                             padding = { 0, 1 },
@@ -207,8 +202,7 @@ return {
                                         if cust_kind_item then
                                             return "BlinkCmpKindCustom" .. cust_kind_item.hlgroup
                                         end
-                                        return require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-                                            or ("BlinkCmpKind" .. ctx.kind)
+                                        return ctx.kind_hl
                                     end,
                                 },
                             },
