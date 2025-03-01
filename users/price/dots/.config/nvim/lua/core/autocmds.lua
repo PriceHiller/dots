@@ -117,6 +117,28 @@ M.setup = function()
             end
         end,
     })
+
+    --- NOTE: Handle OSC 7 dir changed requests, keeps the terminal CWD and Neovim's CWD in sync
+    --- Requires a hook in the shell config to emit the directory on each dir change.
+    vim.api.nvim_create_autocmd({ "TermRequest" }, {
+        desc = "Handles OSC 7 dir change requests",
+        callback = function(ev)
+            if string.sub(vim.v.termrequest, 1, 4) == "\x1b]7;" then
+                local dir = vim.v.termrequest:gsub( "\x1b]7;file://[^/]*", "")
+                vim.b[ev.buf].osc7_dir = dir
+                if vim.api.nvim_get_current_buf() == ev.buf then
+                    vim.cmd.cd(dir)
+                end
+            end
+        end,
+    })
+    vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "DirChanged" }, {
+        callback = function()
+            if vim.b.osc7_dir and vim.fn.isdirectory(vim.b.osc7_dir) == 1 then
+                vim.cmd.cd(vim.b.osc7_dir)
+            end
+        end,
+    })
 end
 
 return M
