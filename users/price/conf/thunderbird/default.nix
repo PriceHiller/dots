@@ -1,6 +1,11 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.thunderbird ];
+  programs.thunderbird = {
+    enable = true;
+    profiles.default = {
+      isDefault = true;
+    };
+  };
   xdg = {
     desktopEntries.thunderbird = {
       name = "thunderbird";
