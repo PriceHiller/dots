@@ -45,6 +45,7 @@ in
         postgresql
         htop
         plantuml
+        graphviz
         libnotify
         graphviz
         gcolor3
