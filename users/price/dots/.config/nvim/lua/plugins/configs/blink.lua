@@ -66,23 +66,7 @@ return {
                     preset = "default",
                     ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                     ["<C-e>"] = { "hide", "fallback" },
-                    ["<CR>"] = {
-                        function(cmp)
-                            if vim.api.nvim_get_mode().mode:lower() == "c" then
-                                return cmp.accept({
-                                    callback = function()
-                                        vim.api.nvim_feedkeys(
-                                            vim.api.nvim_replace_termcodes("<CR>", true, true, true),
-                                            "n",
-                                            true
-                                        )
-                                    end,
-                                })
-                            end
-                            return cmp.accept()
-                        end,
-                        "fallback",
-                    },
+                    ["<CR>"] = { "accept", "fallback" },
                     ["<C-Tab>"] = { "snippet_forward", "fallback" },
                     ["<C-A-Tab>"] = { "snippet_backward", "fallback" },
                     ["<C-S-Tab>"] = { "fallback" },
@@ -103,7 +87,13 @@ return {
                 },
 
                 cmdline = {
+                    keymap = {
+                        ["<CR>"] = { "accept_and_enter", "fallback" },
+                    },
                     completion = {
+                        list = {
+                            selection = { preselect = false, auto_insert = true },
+                        },
                         ghost_text = {
                             enabled = true,
                         },
