@@ -283,6 +283,31 @@ return {
                 end,
             })
 
+            -- HACK: Close the alpha dashboard when switching to a new tab
+            local alpha_buf = nil
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "AlphaReady",
+                once = true,
+                desc = "Get the Alpha Buffer",
+                callback = function(args)
+                    alpha_buf = args.buf
+                    return true
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("TabNewEntered", {
+                desc = "Close the Alpha buffer when moving to another tab",
+                once = true,
+                callback = function()
+                    local group_id = vim.api.nvim_create_augroup("alpha_temp", { clear = false })
+                    if alpha_buf then
+                        require("alpha").close({ buf = alpha_buf, group = group_id })
+                        vim.cmd.tabonly()
+                    end
+                    return true
+                end,
+            })
+
             return opts
         end,
     },
