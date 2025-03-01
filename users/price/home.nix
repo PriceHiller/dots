@@ -62,7 +62,6 @@ in
         Fmt
         screen-cap
         nodePackages.prettier
-        python3
         shfmt
         wezterm
         kitty
@@ -73,11 +72,6 @@ in
         imagemagick
         shellcheck
         nodejs
-        (poetry.withPlugins (
-          p: with p; [
-            poetry-plugin-shell
-          ]
-        ))
         ruby
         yamllint
         curl
