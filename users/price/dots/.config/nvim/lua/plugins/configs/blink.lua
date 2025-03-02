@@ -161,6 +161,7 @@ return {
                         emoji = {
                             module = "blink-emoji",
                             name = "Emoji",
+                            score_offset = -1,
                         },
                         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
                         orgmode = {
