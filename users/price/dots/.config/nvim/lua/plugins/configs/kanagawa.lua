@@ -259,6 +259,7 @@ return {
                 --- Git stuff
                 { "SnacksPickerGitStatusModified", { link = "DiffChanged" } },
                 { "SnacksPickerGitStatusUntracked", { fg = colors.springViolet1 } },
+                { "SnacksPickerGitStatusDeleted", { link = "DiffDeleted" } },
 
                 -- LSP hls
                 { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
