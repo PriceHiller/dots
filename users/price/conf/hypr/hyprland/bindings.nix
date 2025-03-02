@@ -44,7 +44,7 @@
 
       bind = ALT,v,exec,cd "''${XDG_CONFIG_HOME}/wofi" && cliphist list | wofi --dmenu --width=1000px --style "cliphist.css" --height=90% -D halign=left | cliphist decode | wl-copy
       bind = SUPERALT,v,exec,cd "''${XDG_CONFIG_HOME}/wofi" && cliphist list | wofi --dmenu --width=1000px --style "cliphist.css" --height=90% -D halign=left | cliphist delete
-      bind = SUPER,RETURN,exec,wezterm
+      bind = SUPER,RETURN,exec,neovide --fork -- +term
       bind = SUPERSHIFT,RETURN,exec,neovide --fork
       bind = SUPERCTRL,RETURN,exec,xdg-open "http://"
       bind = SUPER,SPACE,exec,wofi --show drun
