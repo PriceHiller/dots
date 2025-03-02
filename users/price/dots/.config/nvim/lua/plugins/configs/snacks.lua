@@ -168,6 +168,13 @@ return {
                 end,
                 desc = "Pick: Highlights",
             },
+            {
+                "<leader>fe",
+                function()
+                    require("snacks").picker.explorer()
+                end,
+                desc = "Pick: Explorer",
+            },
         },
         config = function()
             local snacks = require("snacks")
@@ -194,6 +201,9 @@ return {
                     enabled = true,
                 },
                 statuscolumn = { enabled = false },
+                explorer = {
+                    replace_netrw = true
+                },
                 picker = {
                     prompt = "  ",
                     ui_select = true,
@@ -345,11 +355,33 @@ return {
                     sources = {
                         files = {
                             hidden = true,
-                            ignored = true
+                            ignored = true,
                         },
                         grep = {
                             hidden = true,
                             ignored = true,
+                        },
+                        explorer = {
+                            layout = {
+                                layout = {
+                                    backdrop = false,
+                                    width = 40,
+                                    min_width = 40,
+                                    height = 0,
+                                    position = "left",
+                                    border = "none",
+                                    box = "vertical",
+                                    {
+                                        win = "input",
+                                        height = 1,
+                                        border = "solid",
+                                        title = "{title} {live} {flags}",
+                                        title_pos = "center",
+                                    },
+                                    { win = "list", border = "none" },
+                                    -- { win = "preview", title = "{preview}", height = 0.4, border = "top" },
+                                },
+                            },
                         },
                     },
                 },
