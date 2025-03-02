@@ -202,7 +202,7 @@ return {
                 },
                 statuscolumn = { enabled = false },
                 explorer = {
-                    replace_netrw = true
+                    replace_netrw = true,
                 },
                 picker = {
                     prompt = "  ",
@@ -289,7 +289,6 @@ return {
                             },
                         },
                         vscode = {
-                            preview = false,
                             layout = {
                                 row = 1,
                                 width = 0.4,
@@ -315,7 +314,6 @@ return {
                             },
                         },
                         select = {
-                            preview = false,
                             layout = {
                                 width = 0.5,
                                 min_width = 80,
@@ -341,6 +339,24 @@ return {
                             },
                         },
                     },
+                    actions = {
+                        select = function(picker)
+                            picker.list:select()
+                        end,
+                        deselect_all = function(picker)
+                            picker.list:set_selected({})
+                        end,
+                    },
+                    win = {
+                        list = {
+                            keys = {
+                                ["<S-Tab>"] = false,
+                                ["<Tab>"] = { "select", mode = { "i", "n", "x" } },
+                                ["<C-x>"] = { "deselect_all", mode = { "i", "n", "x" } },
+                                ["q"] = { "close", mode = { "n", "x" } },
+                            },
+                        },
+                    },
                     layout = {
                         cycle = true,
                         preset = function()
@@ -362,6 +378,23 @@ return {
                             ignored = true,
                         },
                         explorer = {
+                            include = { "*" },
+                            git_status_open = true,
+                            diagnostics_open = true,
+                            actions = {
+                                explorer_input_cancel = function(picker)
+                                    picker:norm(function()
+                                        picker:focus("list")
+                                    end)
+                                end,
+                            },
+                            win = {
+                                input = {
+                                    keys = {
+                                        ["<ESC>"] = { "explorer_input_cancel", mode = { "n", "x" } },
+                                    },
+                                },
+                            },
                             layout = {
                                 layout = {
                                     backdrop = false,
@@ -379,7 +412,6 @@ return {
                                         title_pos = "center",
                                     },
                                     { win = "list", border = "none" },
-                                    -- { win = "preview", title = "{preview}", height = 0.4, border = "top" },
                                 },
                             },
                         },

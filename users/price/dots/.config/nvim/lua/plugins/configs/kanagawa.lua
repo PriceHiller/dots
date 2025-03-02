@@ -252,10 +252,13 @@ return {
                 { "SnacksPickerPreviewCursorLine", { bg = colors.sumiInk6 } },
                 ---- List
                 { "SnacksPickerListTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
-                { "SnacksPickerList", { bg = colors.sumiInk2 } },
+                { "SnacksPickerList", { bg = colors.sumiInk3 } },
                 { "SnacksPickerListBorder", { link = "SnacksPickerList" } },
                 --- Misc
                 { "SnacksPickerDir", { fg = colors.fujiGray } },
+                --- Git stuff
+                { "SnacksPickerGitStatusModified", { link = "DiffChanged" } },
+                { "SnacksPickerGitStatusUntracked", { fg = colors.springViolet1 } },
 
                 -- LSP hls
                 { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
