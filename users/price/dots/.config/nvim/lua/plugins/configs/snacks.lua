@@ -201,9 +201,6 @@ return {
                     enabled = true,
                 },
                 statuscolumn = { enabled = false },
-                explorer = {
-                    replace_netrw = true,
-                },
                 picker = {
                     prompt = "  ",
                     ui_select = true,
