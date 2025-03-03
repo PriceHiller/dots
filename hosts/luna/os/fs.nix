@@ -27,11 +27,7 @@ in
       ];
     };
     snapper = {
-      # NOTE: According to `snapper-config(5)` the default timeline count for all timelines is 10
-      # (see TIMELINE_LIMIT_HOURLY, ...DAILY, etc.)
       configs.persist = {
-        TIMELINE_CREATE = true;
-        TIMELINE_CLEANUP = true;
         SUBVOLUME = "${persist-dir}";
       };
     };
