@@ -368,6 +368,11 @@ return {
                         end,
                     },
                     win = {
+                        input = {
+                            keys = {
+                                ["<C-l>"] = { "loclist", mode = { "i", "n" } },
+                            },
+                        },
                         list = {
                             keys = {
                                 ["<S-Tab>"] = false,
