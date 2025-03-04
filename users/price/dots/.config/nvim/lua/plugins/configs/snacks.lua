@@ -120,6 +120,22 @@ return {
                 desc = "Pick: Files",
             },
             {
+                "<leader>fd",
+                function()
+                    require("snacks").picker({
+                        finder = "proc",
+                        title = "Directories",
+                        cmd = "fd",
+                        args = { "--type", "directory", "--hidden", "--exclude", ".git" },
+                        transform = function(item)
+                            item.file = item.text
+                            item.dir = true
+                        end,
+                    })
+                end,
+                desc = "Pick: Directories",
+            },
+            {
                 "<leader>fw",
                 function()
                     require("snacks").picker.grep()
@@ -174,6 +190,13 @@ return {
                     require("snacks").picker.explorer()
                 end,
                 desc = "Pick: Explorer",
+            },
+            {
+                "<leader>fs",
+                function()
+                    require("snacks").picker.spelling()
+                end,
+                desc = "Pick: Spelling",
             },
         },
         config = function()
@@ -360,19 +383,21 @@ return {
                             return vim.o.columns >= 120 and "default" or "vertical"
                         end,
                     },
-                    formatters = {
+                    previewers = {
                         file = {
-                            filename_first = true,
+                            max_size = 100 * 2 ^ 20, -- 100MB
                         },
                     },
                     sources = {
                         files = {
                             hidden = true,
                             ignored = true,
+                            follow = true,
                         },
                         grep = {
                             hidden = true,
                             ignored = true,
+                            follow = true,
                         },
                         explorer = {
                             include = { "*" },
