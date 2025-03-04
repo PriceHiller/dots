@@ -48,6 +48,8 @@ return {
                 { "StatusLineNC", { bg = nil } },
                 { "Pmenu", { fg = colors.fujiWhite, bg = colors.sumiInk2 } },
                 { "PmenuSel", get_hl("PmenuSel", { blend = 25 }) },
+                { "PmenuExtra", get_hl("PmenuExtra", { bg = colors.sumiInk2, blend = 0 }) },
+                { "PmenuExtraSel", get_hl("PmenuExtraSel", { bg = colors.sumiInk2, blend = 0 }) },
                 { "WinBarNC", { bg = nil } },
                 { "Visual", { bg = colors.sumiInk5 } },
                 { "CursorLine", { bg = colors.sumiInk4 } },
