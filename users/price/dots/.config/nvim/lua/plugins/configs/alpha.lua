@@ -295,7 +295,7 @@ return {
                 end,
             })
 
-            vim.api.nvim_create_autocmd("TabNewEntered", {
+            local autocmd = vim.api.nvim_create_autocmd("TabNewEntered", {
                 desc = "Close the Alpha buffer when moving to another tab",
                 once = true,
                 callback = function()
@@ -305,6 +305,14 @@ return {
                         vim.cmd.tabonly()
                     end
                     return true
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "AlphaClosed",
+                desc = "Cleanup Alpha Related Autocmds",
+                callback = function()
+                    pcall(vim.api.nvim_del_autocmd, autocmd)
                 end,
             })
 
