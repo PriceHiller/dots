@@ -10,7 +10,6 @@ return {
         config = function()
             require("kanagawa").setup({
                 transparent = true,
-                dim_inactive = true,
                 globalStatus = true,
                 theme = "wave",
                 colors = {
@@ -390,6 +389,10 @@ return {
                 -- Yank/Paste hls for plugins etc.
                 { "Yank", { bg = colors.surimiOrange } },
                 { "Paste", { bg = colors.springViolet1 } },
+
+                -- Quickfix stuff
+                { "QuickFixHeaderSoft", { link = "NonText" } },
+                { "QuickFixFilenameInvalid", { link = "NonText" } },
             }
 
             if vim.g.neovide then
