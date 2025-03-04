@@ -25,9 +25,6 @@ return {
         keys = {
             { "]g", "<cmd>Gitsigns next_hunk<CR><CR>", desc = "Gitsigns: Next Hunk" },
             { "[g", "<cmd>Gitsigns prev_hunk<CR><CR>", desc = "Gitsigns: Prev Hunk" },
-            { "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", desc = "Gitsigns: Stage Hunk" },
-            { "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", desc = "Gitsigns: Reset Hunk" },
-            { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", desc = "Gitsigns: Unstage Hunk" },
         },
         opts = {
             current_line_blame = true,

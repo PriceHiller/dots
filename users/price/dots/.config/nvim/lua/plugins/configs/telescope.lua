@@ -1,5 +1,3 @@
-local config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
-
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -9,96 +7,6 @@ return {
             "FrecencyMigrateDB",
             "FrecencyValidate",
             "FrecencyDelete",
-        },
-        keys = {
-            {
-                "<leader>lq",
-                ":Telescope diagnostics bufnr=0<CR>",
-                desc = "LSP: Telescope Diagnostics",
-            },
-            { "<leader>t", desc = "> Telescope" },
-            { "<leader>tg", desc = "> Telescope: Git" },
-            { "<leader>tw", ":Telescope live_grep<CR>", desc = "Telescope: Grep for Word", silent = true },
-            {
-                "<leader>tW",
-                function()
-                    require("telescope.builtin").live_grep({
-                        additional_args = {
-                            "--hidden",
-                            "--no-ignore",
-                        },
-                    })
-                end,
-                desc = "Telescope: Grep for Word Everywhere",
-                silent = true,
-            },
-            { "<leader>tgs", ":Telescope git_status<CR>", desc = "Telescope: Git Status", silent = true },
-            { "<leader>tgc", ":Telescope git_commits<CR>", desc = "Telescope: Git Commits", silent = true },
-            { "<leader>tgb", ":Telescope git_branches<CR>", desc = "Telescope: Git Branches", silent = true },
-            { "<leader>tf", ":Telescope find_files<CR>", desc = "Telescope: Find Files", silent = true },
-            { "<leader>j", ":Telescope buffers<CR>", desc = "Telescope: Buffers", silent = true },
-            { "<leader>tb", ":Telescope buffers<CR>", desc = "Telescope: Buffers", silent = true },
-            { "<leader>th", ":Telescope help_tags<CR>", desc = "Telescope: Help Tags", silent = true },
-            { "<leader>to", ":Telescope oldfiles<CR>", desc = "Telescope: Recent FIles", silent = true },
-            {
-                "<leader>tO",
-                ":Telescope oldfiles only_cwd=true<CR>",
-                desc = "Telescope: Recent Files CWD",
-                silent = true,
-            },
-            { "<leader>tF", ":Telescope frecency<CR>", desc = "Telescope: Frecency", silent = true },
-            { "<leader>tn", ":Telescope neoclip default<CR>", desc = "Telescope: Neoclip Buffer", silent = true },
-            { "<leader>tr", ":Telescope resume<CR>", desc = "Telescope: Resume", silent = true },
-            { "<leader>tR", ":Telescope registers<CR>", desc = "Telescope: Registers", silent = true },
-            { "<leader>ts", ":Telescope spell_suggest<CR>", desc = "Telescope: Spell Suggest", silent = true },
-            { "<leader>tl", ":Telescope resume<CR>", desc = "Telescope: Previous State", silent = true },
-            { "<leader>tT", ":TodoTelescope<CR>", desc = "Telescope: Todo Items", silent = true },
-            { "<leader>tk", ":Telescope keymaps<CR>", desc = "Telescope: Keymaps", silent = true },
-            { "<leader>tc", ":Telescope commands<CR>", desc = "Telescope: Commands", silent = true },
-            { "<leader>tu", ":Telescope undo<CR>", desc = "Telescope: Undo History", silent = true },
-            { "<leader>tm", ":Telescope man_pages<CR>", desc = "Telescope: Man Pages", silent = true },
-            { "<leader>tq", ":Telescope quickfixhistory<CR>", desc = "LSP: Telescope Quickfix History", silent = true },
-            { "<leader>tt", ":Telescope<CR>", desc = "Telescope: Open Telescope", silent = true },
-            {
-                "<leader>tz",
-                function()
-                    local previewers = require("telescope.previewers.term_previewer")
-                    local from_entry = require("telescope.from_entry")
-                    local z_lua_path = config_home .. "/zsh/config/plugins/z.lua/z.lua"
-                    require("telescope").extensions.z.list({
-                        cmd = { "zsh", "-c", "lua " .. z_lua_path .. " -l | tac" },
-                        previewer = previewers.new_termopen_previewer({
-                            get_command = function(entry)
-                                return {
-                                    "eza",
-                                    "--all",
-                                    "--icons=always",
-                                    "--group-directories-first",
-                                    "--classify",
-                                    "--dereference",
-                                    "--icons",
-                                    "--tree",
-                                    "-L",
-                                    "1",
-                                    from_entry.path(entry) .. "/",
-                                }
-                            end,
-                            scroll_fn = function(self, direction)
-                                if not self.state then
-                                    return
-                                end
-                                local bufnr = self.state.termopen_bufnr
-                                local input = direction > 0 and string.char(0x05) or string.char(0x19)
-                                local count = math.abs(direction)
-                                vim.api.nvim_win_call(vim.fn.bufwinid(bufnr), function()
-                                    vim.cmd([[normal! ]] .. count .. input)
-                                end)
-                            end,
-                        }),
-                    })
-                end,
-                desc = "Telescope: Z",
-            },
         },
         dependencies = {
             "nvim-telescope/telescope-z.nvim",
