@@ -198,6 +198,28 @@ return {
                 end,
                 desc = "Pick: Spelling",
             },
+            {
+                "<leader>ft",
+                function()
+                    ---@diagnostic disable-next-line: undefined-field
+                    require("snacks").picker.todo_comments()
+                end,
+                desc = "Pick: Todo Comments",
+            },
+            {
+                "<leader>fj",
+                function()
+                    require("snacks").picker.diagnostics()
+                end,
+                desc = "Pick: Diagnostics",
+            },
+            {
+                "<leader>fk",
+                function()
+                    require("snacks").picker.diagnostics_buffer()
+                end,
+                desc = "Pick: Diagnostics Buffer",
+            },
         },
         config = function()
             local snacks = require("snacks")
