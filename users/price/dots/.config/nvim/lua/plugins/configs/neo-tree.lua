@@ -17,7 +17,7 @@ return {
         init = function()
             -- Correctly hijack netrw, thanks to
             -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/1247#issuecomment-1836294271
-            vim.api.nvim_create_autocmd("VimEnter", {
+            vim.api.nvim_create_autocmd({ "VimEnter", "BufAdd" }, {
                 desc = "Lazy loads neo-tree when opening a directory",
                 once = true,
                 callback = function(args)
