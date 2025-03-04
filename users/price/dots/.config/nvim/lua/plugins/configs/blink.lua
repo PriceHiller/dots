@@ -110,6 +110,10 @@ return {
                     nerd_font_variant = "normal",
                 },
 
+                fuzzy = {
+                    implementation = "prefer_rust_with_warning",
+                },
+
                 ---@diagnostic disable-next-line: missing-fields
                 sources = {
                     default = {
@@ -178,13 +182,15 @@ return {
                         auto_show = true,
                         auto_show_delay_ms = 50,
                     },
+                    keyword = {
+                        range = "full",
+                    },
                     list = {
                         selection = { preselect = false, auto_insert = true },
                     },
                     ghost_text = {
                         enabled = true,
                     },
-
                     menu = {
                         winblend = vim.g.neovide and 90,
                         draw = {
