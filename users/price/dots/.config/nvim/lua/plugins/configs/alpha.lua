@@ -207,6 +207,9 @@ return {
                     button("f", "󰈞  Find File", function()
                         require("snacks").picker.files()
                     end),
+                    button("w", "󱎸  Find Word", function()
+                        require("snacks").picker.grep()
+                    end),
                     button("r", "󱝏  Recent", function()
                         require("snacks").picker.recent()
                     end),
