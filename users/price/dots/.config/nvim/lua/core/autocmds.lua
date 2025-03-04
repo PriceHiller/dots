@@ -124,7 +124,8 @@ M.setup = function()
         desc = "Handles OSC 7 dir change requests",
         callback = function(ev)
             if string.sub(vim.v.termrequest, 1, 4) == "\x1b]7;" then
-                local dir = vim.v.termrequest:gsub( "\x1b]7;file://[^/]*", "")
+                local dir = vim.v.termrequest:gsub("\x1b]7;file://[^/]*", "")
+                dir = vim.fn.fnameescape(dir)
                 vim.b[ev.buf].osc7_dir = dir
                 if vim.api.nvim_get_current_buf() == ev.buf then
                     vim.cmd.cd(dir)
