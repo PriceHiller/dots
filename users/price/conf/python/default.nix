@@ -2,7 +2,7 @@
 {
   home = {
     packages = with pkgs; [
-      python314Full
+      python313Full
       uv
       (poetry.withPlugins (
         p: with p; [
@@ -11,7 +11,7 @@
       ))
     ];
     sessionVariables = {
-      PYTHON_HISTORY = "${config.xdg.dataHome}/python/history";
+      PYTHON_HISTORY = "${config.xdg.dataHome}/python_history";
     };
   };
 }
