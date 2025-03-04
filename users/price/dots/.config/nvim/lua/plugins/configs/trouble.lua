@@ -21,6 +21,14 @@ return {
     },
     {
         "folke/trouble.nvim",
+        cmd = {
+            "Trouble",
+        },
+        event = { "QuickFixCmdPre" },
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "todo-comments.nvim",
+        },
         keys = {
             { "<leader>x", desc = "> Trouble" },
             { "<leader>lr", "<cmd>Trouble lsp_references toggle win.position=right<cr>", desc = "LSP: References" },
@@ -60,25 +68,19 @@ return {
                 desc = "Trouble: Symbols",
             },
         },
-        event = { "QuickFixCmdPre" },
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            "todo-comments.nvim",
-        },
-        opts = {
-            focus = true,
-            auto_close = true,
-            auto_jump = true,
-            win = {
-                position = "right",
-                type = "split",
-            },
-            keys = {
-                ["<tab>"] = "fold_toggle",
-            },
-        },
-        cmd = {
-            "Trouble",
-        },
+        config = function()
+            require("trouble").setup({
+                focus = true,
+                auto_close = true,
+                auto_jump = true,
+                win = {
+                    position = "right",
+                    type = "split",
+                },
+                keys = {
+                    ["<tab>"] = "fold_toggle",
+                },
+            })
+        end,
     },
 }
