@@ -45,3 +45,41 @@
 ; Improved list delimiter highlights
 (tag_list ":" @org.tag.delimiter)
 (tag) @org.tag.body
+
+; Headline symbols
+((headline
+   stars:
+   (stars)
+   @org.headline.level1.stars (#eq? @org.headline.level1.stars "*"))
+ (#set! @org.headline.level1.stars conceal "󰪥"))
+
+((headline
+   stars:
+   (stars)
+   @org.headline.level2.stars (#eq? @org.headline.level2.stars "**"))
+ (#set! @org.headline.level2.stars conceal "󰀘"))
+
+((headline
+   stars:
+   (stars)
+   @org.headline.level3.stars (#eq? @org.headline.level3.stars "***"))
+ (#set! @org.headline.level3.stars conceal "󰺕"))
+
+
+((headline
+   stars:
+   (stars)
+   @org.headline.level4.stars (#eq? @org.headline.level4.stars "****"))
+ (#set! @org.headline.level4.stars conceal ""))
+
+((headline
+   stars:
+   (stars)
+   @org.headline.level5.stars (#eq? @org.headline.level5.stars "*****"))
+ (#set! @org.headline.level5.stars conceal "󰬪"))
+
+((headline
+   stars:
+   (stars)
+   @org.headline.level6.stars (#eq? @org.headline.level6.stars "******"))
+ (#set! @org.headline.level6.stars conceal "󱆭"))
