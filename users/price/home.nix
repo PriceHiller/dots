@@ -108,7 +108,6 @@ in
         egl-wayland
         helvum
         brightnessctl
-        keyd
         tidal-hifi
         nix-output-monitor
         sops
@@ -225,17 +224,6 @@ in
   systemd.user = {
     startServices = "sd-switch";
     services = {
-      keyd-application-mapper = {
-        Unit = {
-          Description = "Keyd - Linux Keyboard Remapper";
-          PartOf = [ "graphical-session.target" ];
-        };
-        Service = {
-          ExecStart = "${pkgs.keyd}/bin/keyd-application-mapper";
-          RestartSec = 3;
-        };
-        Install.WantedBy = [ "graphical-session.target" ];
-      };
       waybar = {
         Service = {
           Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
