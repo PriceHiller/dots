@@ -52,6 +52,7 @@ in
     enable = true;
     settings = attrsToStringPath {
       webgl.disabled = false;
+      dom.event.clipboardevents.enabled = false;
       privacy.clearOnShutdown = {
         history = false;
         downloads = false;
