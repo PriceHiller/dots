@@ -261,6 +261,8 @@ return {
                 { "SnacksPickerGitStatusModified", { link = "DiffChanged" } },
                 { "SnacksPickerGitStatusUntracked", { fg = colors.springViolet1 } },
                 { "SnacksPickerGitStatusDeleted", { link = "DiffDeleted" } },
+                --- Matched search item
+                { "SnacksPickerMatch", get_hl("Special", { bg = get_hl("Search")().bg }) },
 
                 -- LSP hls
                 { "@lsp.typemod.variable.global", { fg = colors.lightBlue } },
