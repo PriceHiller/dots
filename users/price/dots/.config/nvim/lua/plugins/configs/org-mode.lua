@@ -199,23 +199,74 @@ return {
             "Telescope orgmode refile_heading",
         },
         keys = {
-            { "<leader>os", desc = "> Orgmode Telescope" },
+            { "<leader>os", desc = "> Orgmode Picker" },
             {
                 "<leader>oss",
-                ":Telescope orgmode search_headings<CR>",
-                desc = "Telescope: Orgmode Search Headings",
-                silent = true,
+                desc = "Orgmode Picker: Search Headings",
+                function()
+                    local org = require("orgmode")
+                    local snacks = require("snacks")
+
+                    snacks.picker({
+                        title = "Org Headlnes",
+                        format = "file",
+                        formatters = {
+                            file = { filename_only = true },
+                            text = { ft = "org" },
+                        },
+                        finder = function()
+                            ---@type snacks.picker.Item[]
+                            local all_headlines = {}
+
+                            for _, file in ipairs(org.files:all()) do
+                                for _, headline in ipairs(file:get_headlines()) do
+                                    local text = vim.iter({
+                                        string.rep("*", headline:get_level()),
+                                        headline:get_todo(),
+                                        (function()
+                                            local priority = headline:get_priority()
+                                            if priority ~= "" then
+                                                return ("[#%s]"):format(priority)
+                                            end
+                                            return nil
+                                        end)(),
+                                        headline:get_title(),
+                                        headline:tags_to_string()[1],
+                                    }):join(" ")
+
+                                    local score = 0
+                                    if headline:is_todo() and not headline:is_done() then
+                                        score = 100
+                                    end
+                                    ---@type snacks.picker.Item
+                                    local item = {
+                                        headline = headline,
+                                        file = file.filename,
+                                        line = text,
+                                        text = text,
+                                        score = score,
+                                        idx = score,
+                                        pos = { headline:get_range().start_line, headline:get_range().end_line },
+                                    }
+
+                                    table.insert(all_headlines, item)
+                                end
+                            end
+                            return all_headlines
+                        end,
+                    })
+                end,
             },
             {
                 "<leader>osr",
                 ":Telescope orgmode refile_heading<CR>",
-                desc = "Telescope: Orgmode Refile Heading",
+                desc = "Orgmode Picker: Refile Heading",
                 silent = true,
             },
             {
                 "<leader>osi",
                 ":Telescope orgmode insert_link<CR>",
-                desc = "Telescope: Orgmode Insert Link",
+                desc = "Orgmode Picker: Insert Link",
                 silent = true,
             },
         },
