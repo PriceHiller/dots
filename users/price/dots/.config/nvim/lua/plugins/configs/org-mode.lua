@@ -158,7 +158,7 @@ return {
                 org_capture_templates = {
                     t = {
                         description = "Todo",
-                        template = "* TODO %?\nSCHEDULED: %T",
+                        template = "* TODO %?\n%T",
                         target = "~/Notes/todo.org",
                     },
                     n = {
