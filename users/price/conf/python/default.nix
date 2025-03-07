@@ -2,6 +2,8 @@
 {
   home = {
     packages = with pkgs; [
+      black
+      basedpyright
       python313Full
       uv
       (poetry.withPlugins (
