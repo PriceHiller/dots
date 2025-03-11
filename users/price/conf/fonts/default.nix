@@ -10,7 +10,7 @@
     ibm-plex
     open-sans
     noto-fonts
-    twitter-color-emoji
+    twemoji-color-font
     vistafonts
     roboto
   ];
@@ -18,15 +18,21 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        sansSerif = [ "Noto Sans" "Symbols Nerd Font" ];
-        serif = [ "Noto Serif" "Symbols Nerd Font" ];
+        sansSerif = [
+          "Noto Sans"
+          "Symbols Nerd Font"
+        ];
+        serif = [
+          "Noto Serif"
+          "Symbols Nerd Font"
+        ];
         monospace = [
           "FiraCode Nerd Font"
           "Noto Sans Mono"
           "Symbols Nerd Font Mono"
         ];
         emoji = [
-          "Twemoji"
+          "Twitter Color Emoji"
           "Noto Color Emoji"
           "Symbols Nerd Font Mono"
         ];
