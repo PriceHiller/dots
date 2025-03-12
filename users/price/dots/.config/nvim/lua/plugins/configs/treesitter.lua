@@ -12,7 +12,6 @@ return {
         cmd = {
             "Neogen",
         },
-        dependencies = "nvim-treesitter/nvim-treesitter",
         opts = {
             snippet_engine = "luasnip",
             languages = {
@@ -26,7 +25,6 @@ return {
     },
     {
         "windwp/nvim-ts-autotag",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("nvim-ts-autotag").setup({
@@ -38,7 +36,6 @@ return {
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local rainbow_delimiters = require("rainbow-delimiters")
@@ -69,6 +66,24 @@ return {
                     "RainbowDelimiterViolet",
                 },
             }
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "FileType",
+        keys = {
+            {
+                "[cc",
+                function()
+                    require("treesitter-context").go_to_context(vim.v.count1)
+                end,
+                desc = "TS Context: Go to Context",
+            },
+        },
+        config = function()
+            require("treesitter-context").setup({
+                max_lines = 5,
+            })
         end,
     },
     {
