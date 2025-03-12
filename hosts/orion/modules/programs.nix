@@ -12,7 +12,6 @@
       enableGlobalCompInit = false;
       enableBashCompletion = true;
     };
-    nix-ld.enable = true;
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
