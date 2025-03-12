@@ -28,6 +28,7 @@ in
     packages =
       with pkgs;
       [
+        xdg-utils
         dig
         nethogs
         lsof
@@ -111,7 +112,6 @@ in
         tidal-hifi
         nix-output-monitor
         sops
-        chromium
         tree-sitter
         qt6Packages.qt6gtk2
         qt6Packages.qt6ct
