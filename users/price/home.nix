@@ -128,8 +128,6 @@ in
       ++ [
         gnumake
         cmake
-        clang-tools
-        clang
         nasm
         asm-lsp
         asmfmt
