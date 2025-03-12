@@ -133,6 +133,10 @@ M.setup = function()
     vim.keymap.set("i", "<A-->", "—", { silent = true, desc = "Insert: Em Dash" })
 
     -- Keymap to toggle folds easier
+    --
+    -- This is done to preseve the `jump` map, see `:h CTRL-I`, has to come before rebinding `<TAB>`
+    -- See https://github.com/neovim/neovim/issues/14090#issuecomment-1113090354
+    vim.keymap.set("n", "<C-i>", "<C-I>")
     vim.keymap.set("n", "<Tab>", "za", { silent = true, desc = "Toggle Fold" })
 
     -- Alias <leader>/ to toggle comments
@@ -163,12 +167,12 @@ M.setup = function()
         if not diag_config then
             return
         end
-        if diag_config.virtual_lines == diag_config.virtual_text  then
+        if diag_config.virtual_lines == diag_config.virtual_text then
             diag_config.virtual_text = not diag_config.virtual_text
         end
         vim.diagnostic.config({
             virtual_lines = not diag_config.virtual_lines,
-            virtual_text =  not diag_config.virtual_text
+            virtual_text = not diag_config.virtual_text,
         })
     end, {
         silent = true,
