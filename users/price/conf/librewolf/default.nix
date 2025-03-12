@@ -30,6 +30,14 @@ let
         ) { } attrs;
     in
     _attrsToStringPath null attrs;
+
+  nixValToLibrewolfPref =
+    val:
+    if builtins.isList val then
+      "[${val |> builtins.map (item: ''"${item}"'') |> lib.strings.concatStringsSep ","}]"
+    else
+      val;
+
 in
 {
 
@@ -50,26 +58,53 @@ in
   };
   programs.librewolf = {
     enable = true;
-    settings = attrsToStringPath {
-      webgl.disabled = false;
-      dom.event.clipboardevents.enabled = false;
-      privacy.clearOnShutdown = {
-        history = false;
-        downloads = false;
-        cookies = false;
-      };
-      network = {
-        cookie.lifetimePolicy = 0;
-        trr = {
-          mode = 3;
-          uri = "https://dns.mullvad.net/dns-query";
-          default_provider_uri = "https://dns10.quad9.net/dns-query";
-          strict_native_fallback = false;
-          retry_on_recoverable_errors = true;
-          disable-heuristics = true;
-          allow-rfc1918 = true;
+    settings =
+      builtins.mapAttrs (_: val: nixValToLibrewolfPref val)
+      <| (attrsToStringPath {
+        identity.fxaccounts.enabled = true;
+        webgl.disabled = false;
+        dom.event.clipboardevents.enabled = false;
+        browser.policies.runOncePerModification = {
+          extensionsInstall = [ ];
+          removeSearchEngines = [
+            "Bing"
+            "Amazon.com"
+            "eBay"
+            "Twitter"
+          ];
+          extensionsUninstall = [
+            "bing@search.mozilla.org"
+            "amazondotcom@search.mozilla.org"
+            "ebay@search.mozilla.org"
+            "twitter@search.mozilla.org"
+          ];
         };
-      };
-    };
+        privacy.clearOnShutdown = {
+          history = false;
+          downloads = false;
+          cookies = false;
+        };
+        sidebar = {
+          main.tools = "syncedtabs,history,bookmarks";
+          verticalTabs = true;
+          revamp = true;
+        };
+        font = {
+          default.x-western = "sans-serif";
+          minimum-size.x-western = 18;
+        };
+        network = {
+          cookie.lifetimePolicy = 0;
+          trr = {
+            mode = 3;
+            uri = "https://dns.mullvad.net/dns-query";
+            default_provider_uri = "https://dns10.quad9.net/dns-query";
+            strict_native_fallback = false;
+            retry_on_recoverable_errors = true;
+            disable-heuristics = true;
+            allow-rfc1918 = true;
+          };
+        };
+      });
   };
 }
