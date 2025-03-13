@@ -26,11 +26,6 @@ in
         "${persist-dir}"
       ];
     };
-    snapper = {
-      configs.persist = {
-        SUBVOLUME = "${persist-dir}";
-      };
-    };
   };
 
   fileSystems."${persist-dir}".neededForBoot = true;
