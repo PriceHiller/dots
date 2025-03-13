@@ -426,6 +426,15 @@ return {
                             ignored = false,
                             follow = true,
                         },
+                        buffers = {
+                            win = {
+                                input = {
+                                    keys = {
+                                        ["<A-x>"] = { "bufdelete", mode = { "n", "i" } },
+                                    },
+                                },
+                            },
+                        },
                         explorer = {
                             include = { "*" },
                             git_status_open = true,
