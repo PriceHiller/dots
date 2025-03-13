@@ -29,6 +29,9 @@ in
     hideMounts = true;
     directories = [
       "/var/lib"
+      # Systemd needs the `/usr` directory to exist on boot -- see
+      # https://github.com/nix-community/impermanence/issues/253#issuecomment-2614528056
+      "/usr/systemd-placeholder"
     ];
   };
 
