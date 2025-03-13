@@ -56,6 +56,10 @@
         pkgs.stdenv.cc.cc
         pkgs.zlib
       ]}"
+      "--suffix"
+      "LUA_PATH"
+      ":"
+      "?;?.lua"
     ];
   };
   home = {
