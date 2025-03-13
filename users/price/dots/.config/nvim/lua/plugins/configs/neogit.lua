@@ -36,7 +36,9 @@ return {
                 pattern = "Neogit*",
                 desc = "Handle Neogit Refreshes",
                 callback = function()
-                    neogit.status:refresh()
+                    vim.schedule_wrap(function()
+                        neogit.status:refresh()
+                    end)
                 end,
             })
             vim.api.nvim_create_autocmd("BufWinEnter", {
