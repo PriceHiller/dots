@@ -426,6 +426,11 @@ return {
                             ignored = false,
                             follow = true,
                         },
+                        recent = {
+                            matcher = {
+                                frecency = false,
+                            },
+                        },
                         buffers = {
                             win = {
                                 input = {
