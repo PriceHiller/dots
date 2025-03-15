@@ -68,6 +68,10 @@
       bun
       nil
       sqlfluff
+      ast-grep
+      ripgrep
+      fd
+      fzf
     ];
   };
   xdg.mimeApps.defaultApplications = {
