@@ -152,6 +152,15 @@ M.setup = function()
 
     -- Allow per project configuration via exrc
     opt.exrc = true
+
+    -- Improve jumplist behavior to restore marks
+    opt.jumpoptions:append("view")
+
+    -- When closing a tab, go to the previously used tab page
+    opt.tabclose = "uselast"
+
+    -- Make terminal cursor in insert mode a vertical line
+    opt.guicursor:append("t:ver25")
 end
 
 return M
