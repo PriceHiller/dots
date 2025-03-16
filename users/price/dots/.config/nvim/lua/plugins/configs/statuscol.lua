@@ -8,7 +8,14 @@ return {
                 setopt = true,
                 relculright = false,
                 segments = {
-                    { text = { "%s" }, click = "v:lua.ScSa" },
+                    {
+                        sign = {
+                            name = { ".*" },
+                            text = { ".*" },
+                            auto = true
+                        },
+                        click = "v:lua.ScSa",
+                    },
                     { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
                     {
                         text = {
