@@ -8,27 +8,33 @@ return {
                 setopt = true,
                 relculright = false,
                 segments = {
-                    {
-                        text = { "%s" },
-                        click = "v:lua.ScSa",
-                    },
+                    { text = { "%s" }, click = "v:lua.ScSa" },
                     { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
                     {
-                        text = { builtin.foldfunc, " " },
-                        click = "v:lua.ScFa",
-                        condition = {
+                        text = {
                             function(args)
-                                return vim.api.nvim_get_option_value("foldcolumn", { win = args.win }) ~= "0"
+                                local fold = builtin.foldfunc(args)
+                                if args.virtnum == 0 then
+                                    return fold
+                                else
+                                    return ""
+                                end
                             end,
                         },
+                        click = "v:lua.ScFa",
                     },
                     {
-                        text = { "▕" },
-                        hl = "NonText",
-                        condition = {
+                        text = {
                             function(args)
-                                return #vim.api.nvim_get_option_value("bufhidden", { buf = args.buf }) == 0
+                                local hl = "%#NonText#"
+                                if args.cul and args.virtnum == 0 and args.relnum == 0 then
+                                    hl = "%#CursorLineSep#"
+                                end
+                                return hl .. "▕" .. "%*"
                             end,
+                        },
+                        condition = {
+                            builtin.not_empty,
                         },
                     },
                 },
