@@ -66,7 +66,6 @@ M.setup = function()
     opt.updatetime = 250
 
     -- Enable persistent undo
-    opt.undodir = vim.fn.stdpath("state") .. "/undo"
     opt.undofile = true
 
     -- Better folding
