@@ -64,7 +64,6 @@ M.setup = function()
     opt.ttimeoutlen = 20
     opt.timeoutlen = 1000
     opt.updatetime = 250
-    opt.signcolumn = "yes"
 
     -- Enable persistent undo
     opt.undodir = vim.fn.stdpath("state") .. "/undo"
