@@ -27,7 +27,7 @@
         # Root directory access/modification
         "-a always,exit -F arch=b64 -F dir=/root -F key=roothomeaccess -F perm=war"
 
-        # Failed Modifications of critcal paths
+        # Failed Modifications of critical paths
         "-a always,exit -F arch=b64 -S open -F dir=/etc -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/bin -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/var -F success=0 -F key=unauthedfileaccess"
