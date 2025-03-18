@@ -5,7 +5,7 @@
     logrotate.settings."/var/log/audit/audit.log" = {
       frequency = "daily";
       compress = true;
-      rotate = 3;
+      rotate = 10;
       size = "1G";
       dateext = true;
     };
