@@ -88,9 +88,7 @@ return {
             {
                 "<leader>nv",
                 function()
-                    require("snacks").notifier.show_history({
-                        sort = { "added" },
-                    })
+                    require("snacks").picker.notifications()
                 end,
                 desc = "Notifications: Search",
             },
@@ -416,6 +414,12 @@ return {
                         },
                     },
                     sources = {
+                        notifications = {
+                            formatters = {
+                                severity = { level = false },
+                            },
+                            confirm = { "copy", "close" },
+                        },
                         undo = {
                             win = {
                                 input = {
