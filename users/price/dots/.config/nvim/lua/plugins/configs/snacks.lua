@@ -416,6 +416,16 @@ return {
                         },
                     },
                     sources = {
+                        undo = {
+                            win = {
+                                input = {
+                                    keys = {
+                                        ["<C-S-a>"] = { "yank_add", mode = { "n", "i" } },
+                                        ["<C-S-d>"] = { "yank_del", mode = { "n", "i" } },
+                                    },
+                                },
+                            },
+                        },
                         files = {
                             hidden = true,
                             ignored = false,
