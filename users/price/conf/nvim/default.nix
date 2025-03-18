@@ -72,6 +72,7 @@
       ripgrep
       fd
       fzf
+      harper
     ];
   };
   xdg.mimeApps.defaultApplications = {

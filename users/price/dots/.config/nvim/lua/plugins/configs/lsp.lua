@@ -96,7 +96,7 @@ return {
             {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
-                    automatic_installation = { exclude = { "clangd", "asm-lsp", "basedpyright" } },
+                    automatic_installation = { exclude = { "clangd", "asm-lsp", "basedpyright", "harper_ls" } },
                     handlers = {
                         ["jdtls"] = function()
                             require("java").setup({
@@ -404,6 +404,7 @@ return {
                 "ts_ls",
                 "asm_lsp",
                 "nginx_language_server",
+                "harper_ls"
             }) do
                 lspconfig[server].setup({})
             end
