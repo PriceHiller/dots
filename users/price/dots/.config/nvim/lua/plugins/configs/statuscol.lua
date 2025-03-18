@@ -7,6 +7,9 @@ return {
             require("statuscol").setup({
                 setopt = true,
                 relculright = false,
+                ft_ignore = {
+                    "neo-tree"
+                },
                 segments = {
                     {
                         sign = {
