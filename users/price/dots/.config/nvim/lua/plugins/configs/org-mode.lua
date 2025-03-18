@@ -73,6 +73,11 @@ return {
             local reminder_times = { 24 * hour, 12 * hour, 8 * hour, 4 * hour, 2 * hour, hour, 30, 10, 0 }
 
             org.setup({
+                ui = {
+                    input = {
+                        use_vim_ui = true
+                    }
+                },
                 mappings = {
                     agenda = {
                         org_agenda_filter = "F",
