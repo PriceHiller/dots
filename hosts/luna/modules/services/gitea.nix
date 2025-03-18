@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -146,6 +147,13 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ config.services.gitea.settings.server.SSH_PORT ];
+
+  systemd.services.gitea-runner-default.serviceConfig.ExecStartPre = lib.mkBefore [
+    # HACK: Delay startup by 10 seconds. This should ensure that the gitea service is good to
+    # go. This will make deployments delay by 10 seconds though if the runner is changed. I'm
+    # willing to accept that trade off.
+    "${pkgs.coreutils}/bin/sleep 10"
+  ];
 
   environment.persistence.save.directories = [
     {
