@@ -63,7 +63,6 @@ in
       <| (attrsToStringPath {
         identity.fxaccounts.enabled = true;
         webgl.disabled = false;
-        dom.event.clipboardevents.enabled = false;
         browser.policies.runOncePerModification = {
           extensionsInstall = [ ];
           removeSearchEngines = [
