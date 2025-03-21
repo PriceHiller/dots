@@ -386,11 +386,19 @@ return {
                         deselect_all = function(picker)
                             picker.list:set_selected({})
                         end,
+                        set_picker_cwd = function(picker, item)
+                            if item then
+                                picker:set_cwd(snacks.picker.util.dir(item))
+                                picker:find({ refresh = true })
+                            end
+                        end,
                     },
                     win = {
                         input = {
                             keys = {
                                 ["<C-l>"] = { "loclist", mode = { "i", "n" } },
+                                ["<C-S-d>"] = { "set_picker_cwd", mode = { "n", "i" } },
+                                ["<C-S-x>"] = { "cd", mode = { "n", "i" } },
                             },
                         },
                         list = {
