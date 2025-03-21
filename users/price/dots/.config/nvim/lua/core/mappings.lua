@@ -124,9 +124,9 @@ M.setup = function()
         local new_line = indent .. word .. trailing
 
         local win = vim.api.nvim_get_current_win()
-        local row, _ = table.unpack(vim.api.nvim_win_get_cursor(win))
-        vim.fn.append(row, new_line)
-        vim.api.nvim_win_set_cursor(win, { row + 1, vim.fn.strdisplaywidth(new_line) })
+        local cursor = vim.api.nvim_win_get_cursor(win)
+        vim.fn.append(cursor[1], new_line)
+        vim.api.nvim_win_set_cursor(win, { cursor[1] + 1, vim.fn.strdisplaywidth(new_line) })
     end, { silent = true, desc = "Insert: Autolist" })
 
     -- Insert an Em Dash in insert mode
