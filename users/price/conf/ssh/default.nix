@@ -6,7 +6,7 @@
       rec {
         luna = {
           hostname = "luna.hosts.price-hiller.com";
-          user = "price";
+          user = "root";
           port = 2200;
         };
         "luna.hosts.price-hiller.com" = luna;

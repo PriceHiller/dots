@@ -20,12 +20,12 @@
       PasswordAuthentication = false;
       AuthenticationMethods = "publickey";
       KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
+      PermitRootLogin = "prohibit-password";
       X11Forwarding = false;
       AllowAgentForwarding = false;
       AllowStreamLocalForwarding = false;
       LogLevel = "VERBOSE";
-      AllowUsers = [ "price" ];
+      AllowUsers = [ "root" ];
     };
     ports = [ 2200 ];
     banner = ''
