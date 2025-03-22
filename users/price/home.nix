@@ -182,6 +182,7 @@ in
     platformTheme.name = "gtk";
   };
 
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
@@ -202,12 +203,12 @@ in
     {
       enable = true;
       theme = {
-        name = "Kanagawa-BL";
-        package = pkgs.kanagawa-gtk-theme;
+        name = "Colloid-Dark";
+        package = pkgs.colloid-gtk-theme;
       };
       iconTheme = {
-        name = "Kanagawa";
-        package = pkgs.kanagawa-icon-theme;
+        name = "Colloid-Dark";
+        package = pkgs.colloid-icon-theme;
       };
       gtk3.extraConfig = extraGtkConfig;
       gtk4.extraConfig = extraGtkConfig;
