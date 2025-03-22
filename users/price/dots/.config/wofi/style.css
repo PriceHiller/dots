@@ -40,7 +40,6 @@
 }
 
 window {
-  font-family: "FiraCode Nerd Font Mono";
   font-size: 12px;
   border-radius: 12px;
   border: 2px solid #ff5d62;
@@ -97,7 +96,7 @@ window {
 }
 
 #text:selected {
-  color: #dcd7ba;
+  color: #16161D;
   font-weight: bold;
 }
 
@@ -112,6 +111,7 @@ window {
   background-color: transparent;
   min-height: 28px;
   font-weight: bold;
+  color: #9CAbCA;
 }
 
 #entry:selected {
