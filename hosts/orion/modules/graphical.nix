@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   # Allow Chromium & Electron apps run natively in wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -14,8 +14,17 @@
       autoLogin.relogin = true;
     };
   };
-  programs.hyprland.enable = true;
-  xdg.autostart.enable = true;
+  programs.hyprland = {
+    enable = true;
+  };
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
