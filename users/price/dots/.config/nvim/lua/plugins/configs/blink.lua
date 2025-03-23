@@ -163,6 +163,7 @@ return {
                             module = "blink-nix",
                         },
                         emoji = {
+                            opts = { insert = true },
                             module = "blink-emoji",
                             name = "Emoji",
                             score_offset = -1,
