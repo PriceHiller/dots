@@ -4,6 +4,12 @@ window {
   font-size: 16px;
 }
 
+
+#text:selected {
+  color: #DCD7BA;
+  font-weight: bold;
+}
+
 #entry {
   border: none;
   border-radius: 16px;
