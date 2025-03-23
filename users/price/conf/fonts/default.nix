@@ -10,7 +10,7 @@
     ibm-plex
     open-sans
     noto-fonts
-    twemoji-color-font
+    twitter-color-emoji
     vistafonts
     roboto
   ];
@@ -33,7 +33,6 @@
         ];
         emoji = [
           "Twitter Color Emoji"
-          "Noto Color Emoji"
           "Symbols Nerd Font Mono"
         ];
       };
