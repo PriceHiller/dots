@@ -240,7 +240,6 @@
             hostname = "luna.hosts.price-hiller.com";
             fastConnection = true;
             profiles.system = {
-              sshUser = "price";
               user = "root";
               path = deploy-rs.lib.x86_64-linux.activate.nixos outputs.nixosConfigurations.luna;
             };
