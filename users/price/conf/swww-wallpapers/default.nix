@@ -60,7 +60,7 @@
                     mons_connected="$(wc -l <<< "$cached_swww_query")"
                     if ((mons_connected != prev_mons_connected)); then
                       prev_mons_connected="$mons_connected"
-                      swww img -t random ${../../wallpapers/Green-Forest.jpg}
+                      swww img -t random ${../../wallpapers/Autumn-Leaves.jpg}
                       if [[ "$cached_swww_query" =~ "eDP-1: "* ]]; then
                         swww img -t wipe --transition-angle 40 -o eDP-1 ${../../wallpapers/Autumn-Leaves.jpg}
                       fi
