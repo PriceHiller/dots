@@ -78,10 +78,15 @@ in
             "twitter@search.mozilla.org"
           ];
         };
-        privacy.clearOnShutdown = {
-          history = false;
-          downloads = false;
-          cookies = false;
+        privacy = {
+          # Disabled for now, causes too many issues for me unfortunately :(
+          # In the future investigate compat with surfing keys and resistFingerprinting
+          resistFingerprinting = false;
+          clearOnShutdown = {
+            history = false;
+            downloads = false;
+            cookies = false;
+          };
         };
         sidebar = {
           main.tools = "syncedtabs,history,bookmarks";
