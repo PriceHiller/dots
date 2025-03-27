@@ -91,7 +91,7 @@ mainbox {
 message {
     border: 2px 0 0;
     border-color: @separatorcolor;
-    padding: 1px;
+    padding: 15px;
 }
 
 textbox {
