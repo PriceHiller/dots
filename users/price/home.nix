@@ -113,9 +113,6 @@ in
         nix-output-monitor
         sops
         tree-sitter
-        qt6Packages.qt6gtk2
-        qt6Packages.qt6ct
-        libsForQt5.qt5ct
         strawberry
         ghidra
       ]
@@ -143,7 +140,6 @@ in
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
       PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
-      GTK_PATH = "${pkgs.gtk-engine-murrine}/lib/gtk-2.0";
       ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
       ANSIBLE_HOME = "${config.xdg.dataHome}/ansible";
       CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
@@ -173,47 +169,6 @@ in
     };
   };
 
-  qt = {
-    enable = true;
-    style = {
-      name = "gtk2";
-      package = pkgs.libsForQt5.breeze-qt5;
-    };
-    platformTheme.name = "gtk";
-  };
-
-  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 24;
-  };
-  gtk =
-    let
-      extraGtkConfig = {
-        gtk-application-prefer-dark-theme = true;
-        gtk-cursor-theme-size = 0;
-        gtk-enable-event-sounds = 1;
-        gtk-enable-input-feedback-sounds = 1;
-        gtk-xft-antialias = 1;
-        gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintfull";
-      };
-    in
-    {
-      enable = true;
-      theme = {
-        name = "Colloid-Dark";
-        package = pkgs.colloid-gtk-theme;
-      };
-      iconTheme = {
-        name = "Colloid-Dark";
-        package = pkgs.colloid-icon-theme;
-      };
-      gtk3.extraConfig = extraGtkConfig;
-      gtk4.extraConfig = extraGtkConfig;
-    };
-
   services = {
     blueman-applet.enable = true;
     easyeffects.enable = true;
@@ -224,7 +179,6 @@ in
     services = {
       waybar = {
         Service = {
-          Environment = [ "GTK_THEME='THIS THEME DOES NOT EXIST!'" ];
           RestartSec = 3;
         };
         Install.WantedBy = [ "graphical-session.target" ];

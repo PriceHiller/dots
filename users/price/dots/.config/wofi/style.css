@@ -97,6 +97,8 @@ window {
 
 #text:selected {
   color: #16161D;
+  /* HACK: Ensure GTK doesn't set a bg color for selected text  */
+  background-color: rgba(0,0,0,0);
   font-weight: bold;
 }
 
