@@ -1,0 +1,223 @@
+/* Based on gruvbox hard */
+* {
+    /* Theme settings */
+    highlight: bold;
+    scrollbar: true;
+
+    /* kangawa colors */
+    kanagawa-sumiInk0: #16161D;
+    kanagawa-sumiInk1: #181820;
+    kanagawa-sumiInk2: #1a1a22;
+    kanagawa-sumiInk3: #1F1F28;
+    kanagawa-sumiInk4: #2A2A37;
+    kanagawa-sumiInk5: #363646;
+    kanagawa-sumiInk6: #54546D;
+    kanagawa-waveBlue1: #223249;
+    kanagawa-waveBlue2: #2D4F67;
+    kanagawa-winterGreen: #2B3328;
+    kanagawa-winterYellow: #49443C;
+    kanagawa-winterRed: #43242B;
+    kanagawa-winterBlue: #252535;
+    kanagawa-autumnGreen: #76946A;
+    kanagawa-autumnRed: #C34043;
+    kanagawa-autumnYellow: #DCA561;
+    kanagawa-samuraiRed: #E82424;
+    kanagawa-roninYellow: #FF9E3B;
+    kanagawa-waveAqua1: #6A9589;
+    kanagawa-oldWhite: #C8C093;
+    kanagawa-fujiWhite: #DCD7BA;
+    kanagawa-fujiGray: #727169;
+    kanagawa-oniViolet: #957FB8;
+    kanagawa-oniViolet2: #b8b4d0;
+    kanagawa-crystalBlue: #7E9CD8;
+    kanagawa-springViolet1: #938AA9;
+    kanagawa-springViolet2: #9CABCA;
+    kanagawa-springBlue: #7FB4CA;
+    kanagawa-lightBlue: #A3D4D5;
+    kanagawa-waveAqua2: #7AA89F;
+    kanagawa-springGreen: #98BB6C;
+    kanagawa-boatYellow1: #938056;
+    kanagawa-boatYellow2: #C0A36E;
+    kanagawa-carpYellow: #E6C384;
+    kanagawa-sakuraPink: #D27E99;
+    kanagawa-waveRed: #E46876;
+    kanagawa-peachRed: #FF5D62;
+    kanagawa-surimiOrange: #FFA066;
+    kanagawa-katanaGray: #717C7C;
+
+    /* Theme colors */
+    background: @kanagawa-sumiInk1;
+    background-color: @background;
+    foreground: @kanagawa-fujiWhite;
+    border-color: @kanagawa-peachRed;
+    separatorcolor: @border-color;
+    scrollbar-handle: @kanagawa-crystalBlue;
+    scrollbar-gutter: @kanagawa-sumiInk4;
+
+    normal-background: @background;
+    normal-foreground: @foreground;
+    alternate-normal-background: @kanagawa-sumiInk4;
+    alternate-normal-foreground: @foreground;
+    selected-normal-background: @kanagawa-surimiOrange;
+    selected-normal-foreground: @kanagawa-sumiInk0;
+
+    active-background: @kanagawa-waveBlue2;
+    active-foreground: @foreground;
+    alternate-active-background: @active-background;
+    alternate-active-foreground: @active-foreground;
+    selected-active-background: @kanagawa-lightBlue;
+    selected-active-foreground: @background;
+
+    urgent-background: @kanagawa-peachRed;
+    urgent-foreground: @background;
+    alternate-urgent-background: @urgent-background;
+    alternate-urgent-foreground: @urgent-foreground;
+    selected-urgent-background: @kanagawa-sakuraPink;
+    selected-urgent-foreground: @urgent-foreground;
+}
+
+window {
+    background-color: @background;
+    border: 3;
+    border-radius: 10;
+    padding: 15;
+}
+
+mainbox {
+    border: 0;
+    padding: 0;
+}
+
+message {
+    border: 2px 0 0;
+    border-color: @separatorcolor;
+    padding: 1px;
+}
+
+textbox {
+    highlight: @highlight;
+    text-color: @foreground;
+}
+
+listview {
+    border: 2px solid 0 0;
+    padding: 10px 0 0;
+    border-color: @separatorcolor;
+    spacing: 4px;
+    scrollbar: @scrollbar;
+}
+
+element {
+    border: 0;
+    border-radius: 10;
+    padding: 2px;
+    spacing: 5px;
+    children: [ element-icon, element-text ];
+}
+
+element.normal.normal {
+    background-color: @normal-background;
+    text-color: @normal-foreground;
+}
+
+element.normal.urgent {
+    background-color: @urgent-background;
+    text-color: @urgent-foreground;
+}
+
+element.normal.active {
+    background-color: @active-background;
+    text-color: @active-foreground;
+}
+
+element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color: @selected-urgent-foreground;
+}
+
+element.selected.active {
+    background-color: @selected-active-background;
+    text-color: @selected-active-foreground;
+}
+
+element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color: @alternate-normal-foreground;
+}
+
+element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color: @alternate-urgent-foreground;
+}
+
+element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color: @alternate-active-foreground;
+}
+
+scrollbar {
+    width: 4px;
+    border: 0;
+    border-radius: 100;
+    handle-color: @scrollbar-handle;
+    background-color: @scrollbar-gutter;
+    handle-width: 8px;
+    padding: 0;
+    margin: 0 8px 0;
+}
+
+mode-switcher {
+    border: 2px 0 0;
+    border-color: @separatorcolor;
+}
+
+inputbar {
+    spacing: 0;
+    text-color: @normal-foreground;
+    padding: 15px;
+    children: [ prompt, textbox-prompt-sep, entry, case-indicator ];
+}
+
+case-indicator,
+entry,
+prompt,
+button {
+    spacing: 0;
+    text-color: @normal-foreground;
+}
+
+entry {
+    text-transform: bold;
+}
+
+prompt {
+    text-color: @kanagawa-carpYellow;
+    text-transform: bold;
+}
+
+button.selected {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+textbox-prompt-sep {
+    expand: false;
+    str: ":";
+    text-color: @normal-foreground;
+    margin: 0 0.3em 0 0;
+}
+
+element-text, element-icon {
+    vertical-align: 0.5;
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element-icon {
+    size: 2em;
+}

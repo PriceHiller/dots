@@ -42,12 +42,12 @@
       bind = ,escape,submap,reset
       submap = reset
 
-      bind = ALT,v,exec,cd "''${XDG_CONFIG_HOME}/wofi" && cliphist list | wofi --dmenu --width=1000px --style "cliphist.css" --height=90% -D halign=left | cliphist decode | wl-copy
-      bind = SUPERALT,v,exec,cd "''${XDG_CONFIG_HOME}/wofi" && cliphist list | wofi --dmenu --width=1000px --style "cliphist.css" --height=90% -D halign=left | cliphist delete
+      bind = ALT,v,exec,PATH="$PATH:${./scripts}" rofi -show cliphist -modes "cliphist:cliphist-rofi.bash" -show-icons
+      bind = SUPERALT,v,exec,cliphist list | rofi -show cliphist | cliphist delete
       bind = SUPER,RETURN,exec,neovide --fork -- +term
       bind = SUPERSHIFT,RETURN,exec,neovide --fork
       bind = SUPERCTRL,RETURN,exec,xdg-open "http://"
-      bind = SUPER,SPACE,exec,wofi --show drun
+      bind = SUPER,SPACE,exec,rofi -show drun
       bind = SUPER,F,fullscreen
       bind = SUPER,Q,killactive,
       bind = SUPER,A,togglefloating,
