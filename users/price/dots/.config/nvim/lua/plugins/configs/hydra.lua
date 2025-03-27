@@ -1,8 +1,6 @@
 return {
     {
-        -- "nvimtools/hydra.nvim",
-        -- TODO: Point this back to `nvimtools` once they decide to update to support nightly
-        "Cathyprime/hydra.nvim",
+        "nvimtools/hydra.nvim",
         dependencies = {
             "lewis6991/gitsigns.nvim",
             "jbyuki/venn.nvim",
