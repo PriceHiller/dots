@@ -28,9 +28,9 @@ album-info-dbus-update() {
 }
 
 album-info-poller() {
-	while sleep 1; do
+	while IFS= read -r _; do
 		get-album-info
-	done
+	done < <(playerctl metadata -F -f '{{ status }}')
 }
 
 main() {
