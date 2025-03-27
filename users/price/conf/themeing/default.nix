@@ -10,6 +10,7 @@
     };
     packages = with pkgs; [
       kdePackages.qt6ct
+      libsForQt5.qt5ct
     ];
   };
 
@@ -21,7 +22,7 @@
 
   xdg.configFile =
     let
-      themeName = "rose-pine-rose";
+      themeName = "rose-pine-moon-rose";
     in
     {
       "Kvantum/kvantum.kvconfig".text = ''
@@ -52,24 +53,16 @@
     color-scheme = "prefer-dark";
   };
 
-  gtk =
-    let
-      extra-gtk-config = {
-        gtk-application-prefer-dark-theme = true;
-      };
-    in
-    {
-      enable = true;
-      theme = {
-        name = "rose-pine";
-        package = pkgs.rose-pine-gtk-theme;
-      };
-      iconTheme = {
-        name = "rose-pine";
-        package = pkgs.rose-pine-icon-theme;
-      };
-      gtk3.extraConfig = extra-gtk-config;
-      gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-      gtk4.extraConfig = extra-gtk-config;
+  gtk = {
+    enable = true;
+    theme = {
+      name = "rose-pine-moon";
+      package = pkgs.rose-pine-gtk-theme;
     };
+    iconTheme = {
+      name = "rose-pine-moon";
+      package = pkgs.rose-pine-icon-theme;
+    };
+    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+  };
 }
