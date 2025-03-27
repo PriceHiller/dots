@@ -80,7 +80,7 @@ in
         openssh
         gradle
         maven
-        pavucontrol
+        pwvucontrol
         openssl
         wget
         rsync
