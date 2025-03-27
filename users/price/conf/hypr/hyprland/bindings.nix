@@ -48,6 +48,7 @@
       bind = SUPERSHIFT,RETURN,exec,neovide --fork
       bind = SUPERCTRL,RETURN,exec,xdg-open "http://"
       bind = SUPER,SPACE,exec,rofi -show drun
+      bind = SUPERCTRL,SPACE,exec,rofi -show window
       bind = SUPER,F,fullscreen
       bind = SUPER,Q,killactive,
       bind = SUPER,A,togglefloating,
