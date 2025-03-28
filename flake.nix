@@ -46,6 +46,12 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    rofi-tools = {
+      url = "github:szaffarano/rofi-tools";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     secrets = {
       url = "git+file:secrets?submodules=1";
       flake = false;

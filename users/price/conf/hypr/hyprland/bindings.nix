@@ -42,8 +42,7 @@
       bind = ,escape,submap,reset
       submap = reset
 
-      bind = ALT,v,exec,PATH="$PATH:${./scripts}" rofi -show cliphist -modes "cliphist:cliphist-rofi.bash" -show-icons
-      bind = SUPERALT,v,exec,cliphist list | rofi -show cliphist | cliphist delete
+      bind = ALT,v,exec,rofi-cliphist
       bind = SUPER,RETURN,exec,neovide --fork -- +term
       bind = SUPERSHIFT,RETURN,exec,neovide --fork
       bind = SUPERCTRL,RETURN,exec,xdg-open "http://"
