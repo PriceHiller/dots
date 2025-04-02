@@ -4,7 +4,11 @@
     packages = with pkgs; [
       black
       basedpyright
-      python313Full
+      (python313.withPackages (
+        py-pkgs: with py-pkgs; [
+          debugpy
+        ]
+      ))
       uv
       (poetry.withPlugins (
         p: with p; [
