@@ -15,9 +15,11 @@ return {
                         sign = {
                             name = { ".*" },
                             text = { ".*" },
-                            auto = true
                         },
                         click = "v:lua.ScSa",
+                        condition = {
+                            builtin.not_empty
+                        }
                     },
                     { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
                     {
