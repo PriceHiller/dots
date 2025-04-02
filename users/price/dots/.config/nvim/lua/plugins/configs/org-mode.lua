@@ -75,8 +75,8 @@ return {
             org.setup({
                 ui = {
                     input = {
-                        use_vim_ui = true
-                    }
+                        use_vim_ui = true,
+                    },
                 },
                 mappings = {
                     agenda = {
@@ -236,7 +236,10 @@ return {
                                             return nil
                                         end)(),
                                         headline:get_title(),
-                                        headline:tags_to_string()[1],
+                                        (function()
+                                            local tags, _ = headline:tags_to_string()
+                                            return tags
+                                        end)(),
                                     }):join(" ")
 
                                     local score = 0
@@ -245,7 +248,6 @@ return {
                                     end
                                     ---@type snacks.picker.Item
                                     local item = {
-                                        headline = headline,
                                         file = file.filename,
                                         line = text,
                                         text = text,
