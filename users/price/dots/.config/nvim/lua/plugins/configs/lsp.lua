@@ -87,6 +87,30 @@ return {
         "nvim-java/nvim-java",
         ft = { "java" },
     },
+    (function()
+        local filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+        }
+        return {
+            "pmizio/typescript-tools.nvim",
+            dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+            ft = filetypes,
+            config = function()
+                require("typescript-tools").setup({
+                    filetypes = filetypes,
+                    settings = {
+                        tsserver_plugins = {
+                            "@vue/typescript-plugin",
+                        },
+                    },
+                })
+            end,
+        }
+    end)(),
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -96,7 +120,9 @@ return {
             {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
-                    automatic_installation = { exclude = { "clangd", "asm-lsp", "basedpyright" } },
+                    automatic_installation = {
+                        exclude = { "clangd", "asm-lsp", "basedpyright", "typescript-language-server" },
+                    },
                     handlers = {
                         ["jdtls"] = function()
                             require("java").setup({
@@ -385,6 +411,14 @@ return {
                 },
             })
 
+            lspconfig.ts_query_ls.setup({
+                settings = {
+                    parser_install_directories = {
+                        vim.fs.joinpath(vim.fn.stdpath("data"), "/lazy/nvim-treesitter/parser/"),
+                    },
+                },
+            })
+
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
                 "taplo",
@@ -394,14 +428,13 @@ return {
                 "dockerls",
                 "basedpyright",
                 "docker_compose_language_service",
-                "eslint",
+                "oxlint",
                 "html",
                 "cssls",
                 "kotlin_language_server",
                 "terraformls",
                 "tflint",
                 "vimls",
-                "ts_ls",
                 "asm_lsp",
                 "nginx_language_server",
             }) do

@@ -174,8 +174,3 @@ export NOTES_DIR="${HOME}/.notes"
 export GITLAB_HOST="https://gitlab.orion-technologies.io"
 export SSLKEYLOGFILE="${XDG_DATA_HOME}/ssl-key-log.log"
 export POWERSHELL_TELEMETRY_OPTOUT=true
-
-### NPM ###
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
-export NPM_CONFIG_PREFIX="${XDG_DATA_HOME}/npm-global"
-export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"

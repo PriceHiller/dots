@@ -63,7 +63,6 @@ in
         unzip
         Fmt
         screen-cap
-        nodePackages.prettier
         shfmt
         wezterm
         kitty
@@ -138,7 +137,6 @@ in
     sessionVariables = {
       _ZL_DATA = "${config.xdg.cacheHome}/zlua";
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
-      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
       PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
       ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
       ANSIBLE_HOME = "${config.xdg.dataHome}/ansible";

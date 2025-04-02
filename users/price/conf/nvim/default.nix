@@ -72,6 +72,10 @@
       ripgrep
       fd
       fzf
+      oxlint
+      typescript
+      vue-language-server
+      typescript-language-server
     ];
   };
   xdg.mimeApps.defaultApplications = {
