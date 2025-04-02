@@ -1,12 +1,9 @@
 { config, ... }:
 {
   programs = {
-    z-lua = {
+    zoxide = {
       enable = true;
-      options = [
-        "enhanced"
-        "once"
-      ];
+      enableZshIntegration = true;
     };
     zsh = {
       enable = true;
