@@ -7,7 +7,7 @@
 {
   nixpkgs.config.allowUnfree = true;
   nix = {
-    package = pkgs.nixVersions.git;
+    package = pkgs.nixVersions.latest;
     optimize-nix-store = {
       enable = true;
       randomizedDelaySec = "30min";
