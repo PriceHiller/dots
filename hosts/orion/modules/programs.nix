@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   environment.sessionVariables = {
     DO_NOT_TRACK = 1;
@@ -22,4 +22,7 @@
       binfmt = true;
     };
   };
+  environment.systemPackages = [
+    config.boot.kernelPackages.perf
+  ];
 }
