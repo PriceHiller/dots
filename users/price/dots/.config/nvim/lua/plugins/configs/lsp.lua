@@ -121,7 +121,14 @@ return {
                 "williamboman/mason-lspconfig.nvim",
                 opts = {
                     automatic_installation = {
-                        exclude = { "clangd", "asm-lsp", "basedpyright", "typescript-language-server" },
+                        exclude = {
+                            "muon",
+                            "clangd",
+                            "asm-lsp",
+                            "basedpyright",
+                            "typescript-language-server",
+                            "cmake",
+                        },
                     },
                     handlers = {
                         ["jdtls"] = function()
@@ -421,6 +428,8 @@ return {
 
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
+                "muon",
+                "cmake",
                 "taplo",
                 "clangd",
                 "cmake",

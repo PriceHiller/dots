@@ -130,6 +130,9 @@ in
         ccache
         llvm
         pkg-config
+        meson
+        muon
+        cmake-language-server
       ];
 
     file = softLinkDots ".config";
