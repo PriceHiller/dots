@@ -1,10 +1,12 @@
 configure() {
 	# Enable Caching
 	zstyle ':completion:*' use-cache on
-	zstyle ':completion:*' cache-path "${HOME}/.cache/.zcompcache"
+    zstyle ':completion:*' menu no
 
 	### Fzf Tab Configuration ###
 	zstyle ':fzf-tab:*' fzf-pad 100
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
+    zstyle ':fzf-tab:*' switch-group '<' '>'
 
 	# Tab completion for CD/directory navigation
 	zstyle ':completion:*:git-checkout:*' sort false
@@ -27,32 +29,10 @@ configure() {
 
 	# Tab Completion for previewing files or directories
 	zstyle ':fzf-tab:complete:(mv|cat|bat|cp|rm|chmod|du|viu|nvim|ls|cd|eza):*' fzf-preview \
-		'[[ -f ${realpath} ]] && bat -P --color=always --theme="Solarized (dark)" --style=header,grid,numbers,snip ${realpath} || eza -al --no-filesize --no-time --no-user --no-permissions ${realpath}'
-
-	### Generic Oh My Zsh Styles ###
+		'[[ -f ${realpath} ]] && bat -P --color=always --style=header,grid,numbers,snip ${realpath} || eza --color=always -1 --all --classify --icons --group-directories-first --git ${realpath}'
 
 	# Highlight the current autocomplete option
 	zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-
-	# Better SSH/Rsync/SCP Autocomplete
-	zstyle ':completion:*:ssh:*' config on
-
-	# Better SSH completions
-	h=()
-	if [[ -r ~/.ssh/config ]]; then
-		h+=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-	fi
-
-	if [[ -r ~/.ssh/known_hosts ]]; then
-		h+=(${${$(cat ~/.ssh/known_hosts | awk '{print $1}')/]:*/}/\[/}) 2>/dev/null
-	fi
-
-	if [[ $#h -gt 0 ]]; then
-		zstyle ':completion:*:ssh:*' hosts $h
-		zstyle ':completion:*:scp:*' hosts $h
-		zstyle ':completion:*:rsync:*' hosts $h
-		zstyle ':completion:*:slogin:*' hosts $h
-	fi
 
 	# Git Completions
 	zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
