@@ -6,6 +6,9 @@
       enable = true;
       libraries = with pkgs; [
         sqlite
+        stdenv.cc.cc
+        glibc.static
+        glibc
       ];
     };
   };
