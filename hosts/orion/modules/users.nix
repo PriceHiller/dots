@@ -6,7 +6,10 @@
 }:
 {
   security.sudo.wheelNeedsPassword = false;
-  users.groups.price = { };
+  users.groups = {
+    price = {};
+    lpadmin = {};
+  };
   users.mutableUsers = false;
   users.users = {
     root.hashedPasswordFile = config.age.secrets.users-root-pw.path;
@@ -16,6 +19,7 @@
         [
           "wheel"
           "keyd"
+          "lpadmin"
           "systemd-journal"
           (lib.mkIf config.virtualisation.docker.enable "docker")
           (lib.mkIf config.programs.wireshark.enable "wireshark")

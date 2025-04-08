@@ -5,6 +5,12 @@
     domains = [ "~." ];
     dnsovertls = "true";
     dnssec = "false";
+    llmnr = "false";
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
   };
   networking = {
     wireless.iwd = {
