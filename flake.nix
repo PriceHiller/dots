@@ -165,8 +165,8 @@
                 inherit clib;
               };
               modules = [
-                ./modules/btrfs-rollback.nix
-                ./modules/optimize-nix-store.nix
+                ./modules/nixos/btrfs-rollback.nix
+                ./modules/nixos/optimize-nix-store.nix
                 inputs.home-manager.nixosModules.home-manager
                 {
                   home-manager = {
@@ -222,7 +222,7 @@
                 inherit clib;
               };
               modules = [
-                ./modules/btrfs-rollback.nix
+                ./modules/nixos/btrfs-rollback.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
