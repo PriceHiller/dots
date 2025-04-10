@@ -716,10 +716,13 @@ return {
             })
 
             local org = require("orgmode")
+            vim.schedule(function()
+                org.files:ensure_loaded()
+            end)
             local OrgDate = require("orgmode.objects.date")
             local Orgmode = {
                 condition = function()
-                    return org.initialized
+                    return org.initialized and org.files.load_state == "loaded"
                 end,
                 update = {
                     "User",
