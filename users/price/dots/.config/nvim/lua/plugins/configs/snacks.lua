@@ -450,7 +450,7 @@ return {
                         },
                         recent = {
                             matcher = {
-                                frecency = false,
+                                history_bonus = true
                             },
                         },
                         buffers = {
