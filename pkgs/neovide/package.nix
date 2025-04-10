@@ -13,7 +13,6 @@
   pkg-config,
   python3,
   removeReferencesTo,
-  apple-sdk_11,
   cctools,
   SDL2,
   fontconfig,
@@ -27,16 +26,17 @@
 
 rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
   pname = "neovide";
-  version = "0.14.0";
+  version = "0.15.0";
 
   src = fetchFromGitHub {
     owner = "neovide";
     repo = "neovide";
-    rev = version;
-    hash = "sha256-4fdC/wChsCICLd69ZjK7IaCH7gDmXvfKllCnRNsdqYI=";
+    rev = "3075a94f2e86ad301ab45816baec87f0c61de748";
+    hash = "sha256-6gcHhT+HtxP6LfHVRtGOadAffswihD+bvuvHrFFNtoI=";
   };
 
-  cargoHash = "sha256-CqnT9FEDzEMSais4dJg7zYVoSPNvIA09hmI0JE2YZIg=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-1ni8AZIwAz5R2Ejt9Fj5qmybvL4KZV/M3BMqQx4HFLU=";
 
   SKIA_SOURCE_DIR =
     let
@@ -44,8 +44,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
         owner = "rust-skia";
         repo = "skia";
         # see rust-skia:skia-bindings/Cargo.toml#package.metadata skia
-        rev = "m131-0.79.1";
-        hash = "sha256-XqXfKNYSiECbN96WVWA67Vy4sPuVvg6KqHESjA8gFJM=";
+        tag = "m135-0.83.1";
+        hash = "sha256-TSGPJl9DfWQtrkNIhv40s8VcuudCjbiSh+QjLc0hKN4=";
       };
       # The externals for skia are taken from skia/DEPS
       externals = linkFarm "skia-externals" (
@@ -81,7 +81,7 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
     SDL2
     fontconfig
     rustPlatform.bindgenHook
-  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [ apple-sdk_11 ];
+  ];
 
   postFixup =
     let
@@ -123,13 +123,13 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
 
   disallowedReferences = [ SKIA_SOURCE_DIR ];
 
-  meta = with lib; {
-    description = "This is a simple graphical user interface for Neovim";
+  meta = {
+    description = "Neovide is a simple, no-nonsense, cross-platform graphical user interface for Neovim";
     mainProgram = "neovide";
-    homepage = "https://github.com/neovide/neovide";
+    homepage = "https://neovide.dev/";
     changelog = "https://github.com/neovide/neovide/releases/tag/${version}";
-    license = with licenses; [ mit ];
-    maintainers = with maintainers; [ ck3d ];
-    platforms = platforms.unix;
+    license = with lib.licenses; [ mit ];
+    maintainers = with lib.maintainers; [ ck3d ];
+    platforms = lib.platforms.unix;
   };
 }
