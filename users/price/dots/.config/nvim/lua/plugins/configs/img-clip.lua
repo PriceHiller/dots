@@ -30,7 +30,6 @@ return {
                         end
                         local assets_dir = relpath .. "assets/" .. vim.fn.fnameescape(vim.fn.expand("%:t:r")) .. "/"
                         assets_dir = vim.fs.normalize(assets_dir, { expand_env = false })
-                        vim.print(assets_dir)
                         return assets_dir
                     end,
                 },
