@@ -9,6 +9,18 @@
         stdenv.cc.cc
         glibc.static
         glibc
+        openssl
+        libssh
+        libsodium
+        systemd
+        zlib
+        zstd
+        curl
+        attr
+        bzip2
+        acl
+        util-linux
+        xz
       ];
     };
   };
