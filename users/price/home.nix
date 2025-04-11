@@ -28,6 +28,7 @@ in
     packages =
       with pkgs;
       [
+        slack
         xdg-utils
         dig
         nethogs
