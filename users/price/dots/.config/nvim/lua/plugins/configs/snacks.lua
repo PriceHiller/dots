@@ -69,7 +69,6 @@ return {
                 desc = "Close Buffer",
                 mode = { "", "!", "v" },
             },
-
             {
                 "<A-x>",
                 function()
@@ -217,6 +216,13 @@ return {
                     require("snacks").picker.diagnostics_buffer()
                 end,
                 desc = "Pick: Diagnostics Buffer",
+            },
+            {
+                "<leader>fp",
+                function()
+                    require("snacks").picker.search_history()
+                end,
+                desc = "Pick: Previous Search History",
             },
         },
         config = function()
@@ -399,6 +405,8 @@ return {
                                 ["<C-l>"] = { "loclist", mode = { "i", "n" } },
                                 ["<C-S-d>"] = { "set_picker_cwd", mode = { "n", "i" } },
                                 ["<C-S-x>"] = { "cd", mode = { "n", "i" } },
+                                ["<C-S-k>"] = { "history_forward", mode = { "i", "n" } },
+                                ["<C-S-j>"] = { "history_back", mode = { "i", "n" } },
                             },
                         },
                         list = {
@@ -450,7 +458,7 @@ return {
                         },
                         recent = {
                             matcher = {
-                                history_bonus = true
+                                history_bonus = true,
                             },
                         },
                         buffers = {
