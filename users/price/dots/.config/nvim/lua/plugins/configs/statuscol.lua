@@ -8,7 +8,7 @@ return {
                 setopt = true,
                 relculright = false,
                 ft_ignore = {
-                    "neo-tree"
+                    "neo-tree",
                 },
                 segments = {
                     {
@@ -18,8 +18,8 @@ return {
                         },
                         click = "v:lua.ScSa",
                         condition = {
-                            builtin.not_empty
-                        }
+                            builtin.not_empty,
+                        },
                     },
                     { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
                     {

@@ -13,10 +13,10 @@ return {
         },
         ft = plantuml_fts,
         cmd = {
-               "PlantumlOpen",
-               "PlantumlStop",
-               "PlantumlSave",
-           },
+            "PlantumlOpen",
+            "PlantumlStop",
+            "PlantumlSave",
+        },
         config = false,
     },
 }

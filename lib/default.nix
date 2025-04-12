@@ -3,7 +3,8 @@
   lib ? (import <nixpkgs> { }).lib,
 }:
 rec {
-  dirsIn = dir:
+  dirsIn =
+    dir:
     builtins.readDir dir
     |> lib.attrsets.filterAttrs (_: fType: fType == "directory")
     |> lib.attrsets.mapAttrsToList (fEntry: _: dir + "/${fEntry}");

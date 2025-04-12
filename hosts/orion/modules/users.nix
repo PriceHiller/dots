@@ -7,8 +7,8 @@
 {
   security.sudo.wheelNeedsPassword = false;
   users.groups = {
-    price = {};
-    lpadmin = {};
+    price = { };
+    lpadmin = { };
   };
   users.mutableUsers = false;
   users.users = {

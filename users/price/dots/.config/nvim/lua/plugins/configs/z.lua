@@ -10,7 +10,7 @@ return {
                 z_comp_cmd = function()
                     return { "zoxide", "query", "--list", "--exclude", vim.fn.getcwd() }
                 end,
-                z_dir_changed_cmd = { "zoxide", "add" }
+                z_dir_changed_cmd = { "zoxide", "add" },
             })
         end,
     },
