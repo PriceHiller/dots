@@ -13,19 +13,12 @@ let
   base = import (inputs.nix + "/docker.nix") {
     inherit pkgs;
     name = "nix-ci-base";
-    maxLayers = 10;
     extraPkgs = with pkgs; [
       nodejs_20
       bash
     ];
     nixConf = {
-      substituters = [
-        "https://cache.nixos.org/"
-      ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
-      # allow using the new flake commands in our workflows
+      sandbox = "true";
       experimental-features = [
         "pipe-operators"
         "nix-command"
@@ -122,6 +115,7 @@ in
         };
         labels = [
           "default:docker://nix-runner:latest"
+          "nix:docker://nix-runner:latest"
           "alpine:docker://alpine:latest"
           "debian:docker://debian:latest"
         ];
