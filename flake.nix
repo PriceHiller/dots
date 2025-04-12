@@ -110,32 +110,6 @@
       checks = forAllSystems (pkgs: {
         formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
-      apps = forAllSystems (pkgs: {
-        install-host = {
-          type = "app";
-          program = "${
-            pkgs.writeShellApplication {
-              name = "install-host";
-              runtimeInputs = with pkgs; [
-                openssh
-                coreutils-full
-                git
-                agenix
-                nix
-              ];
-              text = (
-                ''
-                  #!${pkgs.bash}/bin/bash
-                  # The below `cd` invocation ensures the installer is running from the toplevel of
-                  # the flake and thus has correct paths available.
-                  cd "$(git rev-parse --show-toplevel)"
-                ''
-                + builtins.readFile ./scripts/install-host.bash
-              );
-            }
-          }/bin/install-host";
-        };
-      });
       nixosConfigurations =
         let
           clib = (import ./lib { lib = nixpkgs.lib; });
