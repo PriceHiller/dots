@@ -182,6 +182,11 @@ return {
                     documentation = {
                         auto_show = true,
                         auto_show_delay_ms = 50,
+                        window = {
+                            max_width = 100,
+                            max_height = 80,
+                            winblend = vim.g.neovide and 50,
+                        },
                     },
                     keyword = {
                         range = "full",
@@ -194,6 +199,7 @@ return {
                     },
                     menu = {
                         winblend = vim.g.neovide and 90,
+                        max_height = vim.opt.pumheight:get(),
                         draw = {
                             padding = { 0, 1 },
                             components = {
