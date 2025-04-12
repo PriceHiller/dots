@@ -146,7 +146,7 @@ M.setup = function()
     opt.fillchars:append("diff:╱")
 
     -- Limit default menu height for completions
-    opt.pumheight = 10
+    opt.pumheight = 15
 
     -- Allow per project configuration via exrc
     opt.exrc = true
