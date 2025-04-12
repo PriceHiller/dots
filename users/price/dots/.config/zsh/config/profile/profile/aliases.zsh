@@ -113,4 +113,8 @@
 	if ! alias img >/dev/null 2>&1 && command -v swappy >/dev/null 2>&1; then
 		alias img="swappy -f -"
 	fi
+
+	if command -v rsync >/dev/null 2>&1; then
+		alias rs=rsync --info=PROGRESS2 --human-readable
+	fi
 }
