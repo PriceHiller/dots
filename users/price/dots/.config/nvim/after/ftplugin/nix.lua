@@ -4,6 +4,9 @@ local utils = require("utils.funcs")
 opt_local.tabstop = 2
 opt_local.shiftwidth = 2
 opt_local.commentstring = "# %s"
+-- For some reason nix files get the 'fixeol' option disabled. I'm too lazy to go dig into the
+-- default nix filetype settings shipped with neovim, so this'll have to do
+opt_local.fixendofline = true
 
 local nix_eval = function()
     return table.concat({
