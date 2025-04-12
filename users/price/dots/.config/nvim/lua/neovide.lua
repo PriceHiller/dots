@@ -16,6 +16,9 @@ vim.g.neovide_floating_corner_radius = 0.2
 vim.g.neovide_remember_window_size = false
 vim.g.neovide_fullscreen = false
 
+-- Reduce cursor animation length
+vim.g.neovide_cursor_animation_length = 0.1
+
 -- ===== Allow clipboard copy paste in neovim
 -- Paste normal and visual mode
 vim.keymap.set({ "n", "v" }, "<D-v>", '"+P')
