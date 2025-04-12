@@ -1162,14 +1162,12 @@
         "ref": "refs/heads/main",
         "rev": "82c7754cb7443b610375e4965e1115ee80ddca62",
         "revCount": 11,
-        "submodules": true,
         "type": "git",
-        "url": "file:secrets"
+        "url": "ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git"
       },
       "original": {
-        "submodules": true,
         "type": "git",
-        "url": "file:secrets"
+        "url": "ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git"
       }
     },
     "systems": {

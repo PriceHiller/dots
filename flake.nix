@@ -59,7 +59,7 @@
       };
     };
     secrets = {
-      url = "git+file:secrets?submodules=1";
+      url = "git+ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git";
       flake = false;
     };
   };
