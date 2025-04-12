@@ -171,7 +171,7 @@
                   config =
                     (import "${inputs.secrets}" {
                       agenix = false;
-                      inherit clib;
+                      lib = nixpkgs.lib;
                     }).${hostname};
                 }
                 ./hosts/${hostname}
@@ -199,7 +199,7 @@
                   config =
                     (import "${inputs.secrets}" {
                       agenix = false;
-                      inherit clib;
+                      lib = nixpkgs.lib;
                     }).${hostname};
                 }
                 ./hosts/${hostname}
