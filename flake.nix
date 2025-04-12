@@ -41,10 +41,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    neovim-src = {
+      url = "github:neovim/neovim?ref=6e12ef4a7b4cd966244ac6bce2593943e7df7758";
+      flake = false;
+    };
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        neovim-src.follows = "neovim-src";
       };
     };
     rofi-tools = {
