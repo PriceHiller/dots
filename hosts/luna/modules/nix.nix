@@ -1,6 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 {
   nix = {
+    package = pkgs.nixVersions.latest;
     settings = {
       experimental-features = [
         "pipe-operators"
