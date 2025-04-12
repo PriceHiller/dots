@@ -97,6 +97,3 @@ end, { noremap = true, silent = true, desc = "Neovide: Reset Zoom" })
 
 -- Set Neovide specific vars for use elsewhere (e.g. terminal sessions)
 vim.env.NEOVIDE_SESSION = 1
-
--- Group layers for shadows & blurring across entire group
-vim.g.experimental_layer_grouping = true
