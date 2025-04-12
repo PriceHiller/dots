@@ -21,6 +21,9 @@
         "pipe-operators"
         "nix-command"
         "flakes"
+        "ca-derivations"
+        "recursive-nix"
+        "dynamic-derivations"
       ];
       use-xdg-base-directories = true;
       trusted-users = [ "@wheel" ];
