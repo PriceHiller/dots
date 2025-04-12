@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd({ "User" }, {
 return {
     {
         "notomo/cmdbuf.nvim",
-        event = { "CmdlineEnter", "CmdwinEnter" },
         keys = {
             {
                 "q:",
