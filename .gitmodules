@@ -13,15 +13,9 @@
 [submodule "dots/.config/zsh/config/plugins/nix-zsh-completions"]
 	path = users/price/dots/.config/zsh/config/plugins/nix-zsh-completions
 	url = https://github.com/spwhitt/nix-zsh-completions
-[submodule "dots/.config/zsh/config/themes/powerlevel10k"]
-	path = users/price/dots/.config/zsh/config/themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
 [submodule "dots/.config/zsh/config/plugins/zsh-nix-shell"]
 	path = users/price/dots/.config/zsh/config/plugins/zsh-nix-shell
 	url = https://github.com/chisui/zsh-nix-shell
-[submodule "dots/.config/zsh/config/plugins/powerlevel10k"]
-	path = users/price/dots/.config/zsh/config/plugins/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
 [submodule "secrets"]
 	path = secrets
 	url = ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git

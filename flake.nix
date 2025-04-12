@@ -58,9 +58,14 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    self.submodules = true;
     secrets = {
-      url = "git+ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git";
-      flake = false;
+      url = ./secrets;
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        agenix.follows = "agenix";
+        treefmt-nix.follows = "treefmt-nix";
+      };
     };
   };
 
@@ -168,11 +173,7 @@
                   };
                 }
                 {
-                  config =
-                    (import "${inputs.secrets}" {
-                      agenix = false;
-                      lib = nixpkgs.lib;
-                    }).${hostname};
+                  config = inputs.secrets.secrets.${hostname};
                 }
                 ./hosts/${hostname}
               ];
@@ -196,11 +197,7 @@
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
                 {
-                  config =
-                    (import "${inputs.secrets}" {
-                      agenix = false;
-                      lib = nixpkgs.lib;
-                    }).${hostname};
+                  config = inputs.secrets.secrets.${hostname};
                 }
                 ./hosts/${hostname}
               ];

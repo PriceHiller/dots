@@ -454,7 +454,7 @@
     },
     "flake-utils_4": {
       "inputs": {
-        "systems": "systems_7"
+        "systems": "systems_8"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -933,11 +933,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1743964447,
-        "narHash": "sha256-nEo1t3Q0F+0jQ36HJfbJtiRU4OI+/0jX/iITURKe3EE=",
+        "lastModified": 1744232761,
+        "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "063dece00c5a77e4a0ea24e5e5a5bd75232806f8",
+        "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
         "type": "github"
       },
       "original": {
@@ -1155,20 +1155,27 @@
       }
     },
     "secrets": {
-      "flake": false,
+      "inputs": {
+        "agenix": [
+          "agenix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": "systems_7",
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
       "locked": {
-        "lastModified": 1744446529,
-        "narHash": "sha256-ZwFA4seA81oRAkWxVTKzV9eEXRa/yhi9v+MPsDzroog=",
-        "ref": "refs/heads/main",
-        "rev": "82c7754cb7443b610375e4965e1115ee80ddca62",
-        "revCount": 11,
-        "type": "git",
-        "url": "ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git"
+        "path": "secrets",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://gitea@git.price-hiller.com:2220/Price/Secrets.git"
-      }
+        "path": "secrets",
+        "type": "path"
+      },
+      "parent": []
     },
     "systems": {
       "locked": {
@@ -1260,6 +1267,20 @@
       }
     },
     "systems_7": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "id": "systems",
+        "type": "indirect"
+      }
+    },
+    "systems_8": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
