@@ -40,6 +40,7 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
@@ -85,9 +86,10 @@
               }
             )
           );
+      treefmtEval = forAllSystems (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
     in
     {
-      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+      formatter = forAllSystems (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
       packages = forAllSystems (pkgs: import ./pkgs pkgs);
       overlays = import ./overlays { inherit inputs; };
       devShells = forAllSystems (pkgs: {
@@ -106,19 +108,7 @@
         };
       });
       checks = forAllSystems (pkgs: {
-        formatting =
-          pkgs.runCommand "check-fmt"
-            {
-              buildInputs = with pkgs; [
-                fd
-                (import ./pkgs { inherit pkgs; }).Fmt
-              ];
-            }
-            ''
-              set -eEuo pipefail
-              fd --exec-batch=Fmt
-              touch $out
-            '';
+        formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
       apps = forAllSystems (pkgs: {
         install-host = {
