@@ -1,6 +1,14 @@
 { ... }:
 {
-  services.cliphist.enable = true;
+  services.cliphist = {
+    enable = true;
+    extraOptions = [
+      "-max-dedupe-search"
+      "100"
+      "-max-items"
+      "5000"
+    ];
+  };
   systemd.user.services =
     let
       defaults = {
