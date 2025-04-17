@@ -2,7 +2,7 @@
 {
   home = {
     packages = with pkgs; [
-      black
+      ruff
       basedpyright
       (python313.withPackages (
         py-pkgs: with py-pkgs; [

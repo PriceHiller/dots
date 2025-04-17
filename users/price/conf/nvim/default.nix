@@ -73,6 +73,7 @@
       fd
       fzf
       oxlint
+      ruff
       typescript
       vue-language-server
       typescript-language-server

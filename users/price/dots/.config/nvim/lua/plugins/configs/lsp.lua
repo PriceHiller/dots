@@ -126,6 +126,7 @@ return {
                             "clangd",
                             "asm-lsp",
                             "basedpyright",
+                            "ruff",
                             "typescript-language-server",
                             "cmake",
                         },
@@ -152,14 +153,13 @@ return {
                 config = function()
                     local null_ls = require("null-ls")
                     local sqlfluff_config = {
-                        extra_args = { "--dialect", "postgres" },
+                        extra_args = { "--dialect", "mysql" },
                     }
                     null_ls.setup({
                         sources = {
                             null_ls.builtins.formatting.google_java_format,
                             null_ls.builtins.formatting.stylua,
                             null_ls.builtins.formatting.asmfmt,
-                            null_ls.builtins.formatting.black,
                             null_ls.builtins.formatting.typstyle,
                             null_ls.builtins.formatting.cmake_format,
                             null_ls.builtins.formatting.shfmt,
@@ -426,6 +426,38 @@ return {
                 },
             })
 
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client == nil then
+                        return
+                    end
+                    if client.name == "basedpyright" then
+                        client.server_capabilities.documentFormattingProvider = false
+                        client.server_capabilities.documentOnTypeFormattingProvider = nil
+                        client.server_capabilities.documentRangeFormattingProvider = nil
+                    end
+                    if client.name == "ruff" then
+                        client.server_capabilities.hoverProvider = false
+                    end
+                end,
+                desc = "LSP: Pyright & Ruff compat",
+            })
+            lspconfig.ruff.setup({})
+            lspconfig.basedpyright.setup({
+                settings = {
+                    pyright = {
+                        disableOrganizeImports = true,
+                    },
+                    python = {
+                        analysis = {
+                            ignore = { "*" },
+                        },
+                    },
+                },
+            })
+
             -- NOTE: GENERIC LSP SERVERS
             for _, server in ipairs({
                 "muon",
@@ -435,7 +467,6 @@ return {
                 "cmake",
                 "bashls",
                 "dockerls",
-                "basedpyright",
                 "docker_compose_language_service",
                 "oxlint",
                 "html",
