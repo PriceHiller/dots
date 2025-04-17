@@ -108,7 +108,6 @@ return {
                 auto_install = true,
                 ignore_install = { "comment" },
                 ensure_installed = {
-                    "org",
                     "latex",
                     "regex",
                     "vim",
