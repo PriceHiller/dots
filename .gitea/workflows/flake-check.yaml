@@ -15,8 +15,7 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add - <<< '${{ secrets.SSH_KEY }}'
       - name: Nix Version
-        run:
-          nix --version
+        run: nix --version
       - name: Nix Flake Check
         run: |
           nix flake check
