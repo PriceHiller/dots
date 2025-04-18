@@ -94,6 +94,7 @@ in
         delta
         eza
         ripgrep
+        dust
         fd
         playerctl
         nixfmt-rfc-style
