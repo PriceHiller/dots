@@ -63,6 +63,11 @@ return {
                         },
                     },
                 },
+                default_component_configs = {
+                    name = {
+                        trailing_slash = true,
+                    },
+                },
                 filesystem = {
                     follow_current_file = {
                         enabled = true,
@@ -74,10 +79,21 @@ return {
                     },
                 },
                 window = {
+                    auto_expand_width = true,
+                    position = "left",
+                    relative = "editor",
                     mappings = {
                         ["<space>"] = "none",
                         ["/"] = "none",
                         ["f"] = "none",
+                    },
+                },
+                event_handlers = {
+                    {
+                        event = "neo_tree_window_after_open",
+                        handler = function(args)
+                            vim.wo[args.winid].winfixheight = false
+                        end,
                     },
                 },
             })
