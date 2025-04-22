@@ -7,9 +7,6 @@ return {
             require("statuscol").setup({
                 setopt = true,
                 relculright = false,
-                ft_ignore = {
-                    "neo-tree",
-                },
                 segments = {
                     {
                         sign = {
@@ -50,6 +47,12 @@ return {
                         },
                     },
                 },
+            })
+
+            vim.api.nvim_create_user_command("SCol", function()
+                vim.wo.statuscolumn = "%{%v:lua.require('statuscol').get_statuscol_string()%}"
+            end, {
+                desc = "Set the current `statuscolumn` to statuscol.nvim's",
             })
         end,
     },
