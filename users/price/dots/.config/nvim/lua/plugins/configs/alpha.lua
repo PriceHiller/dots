@@ -105,20 +105,12 @@ return {
             local vim_version = {
                 type = "text",
                 val = function()
-                    local version = vim.version()
-                    if version.build ~= vim.NIL then
-                        return ("─────── v%s.%s.%s+%s ───────"):format(
-                            version.major,
-                            version.minor,
-                            version.patch,
-                            version.build
-                        )
-                    end
-                    return ("─────── v%s.%s.%s ───────"):format(
-                        version.major,
-                        version.minor,
-                        version.patch
-                    )
+                    ---@type string
+                    local version = vim.split(vim.api.nvim_exec2("version", { output = true }).output, "\n")[2]
+                    version = version:gsub("NVIM", "")
+                    version = version:gsub("-nightly", "")
+                    version = vim.trim(version)
+                    return ("─────── %s ───────"):format(version)
                 end,
                 opts = { position = "center", hl = "@boolean" },
             }
