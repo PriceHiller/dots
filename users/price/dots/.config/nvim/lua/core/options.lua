@@ -40,7 +40,7 @@ M.setup = function()
     opt.breakat = " \t;,[]()"
     opt.linebreak = true
     opt.formatlistpat = [[^\s*\(-\|\d\.\|+\)\s*]]
-    opt.formatoptions = "jtcroqnp"
+    opt.formatoptions = "jcroqnp"
     opt.breakindent = true
     opt.breakindentopt = "list:-1"
 
