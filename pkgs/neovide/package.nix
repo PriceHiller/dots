@@ -31,8 +31,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
   src = fetchFromGitHub {
     owner = "neovide";
     repo = "neovide";
-    rev = "3075a94f2e86ad301ab45816baec87f0c61de748";
-    hash = "sha256-6gcHhT+HtxP6LfHVRtGOadAffswihD+bvuvHrFFNtoI=";
+    rev = "627956990b4d85a2a98a13e0c50da2155d15cd72";
+    hash = "sha256-WwLEL6GyLLPbGEJrpSRLTJr+CqevZZ5MBZNUbXLWn3I=";
   };
 
   useFetchCargoVendor = true;
