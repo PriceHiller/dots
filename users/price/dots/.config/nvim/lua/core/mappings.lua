@@ -178,6 +178,17 @@ M.setup = function()
         silent = true,
         desc = "LSP: Toggle Virtual Lines",
     })
+
+    -- Credit to https://www.reddit.com/r/neovim/comments/1k3lhac/tiny_quality_of_life_rebind_make_j_and_k/
+    -- Adds a mark to the jumplist on counted j and k motions and makes j and k by default use
+    -- screen lines instead of real lines (gk, gj)
+    vim.keymap.set("n", "k", function()
+        return vim.v.count > 0 and "m'" .. vim.v.count .. "k" or "gk"
+    end, { expr = true })
+
+    vim.keymap.set("n", "j", function()
+        return vim.v.count > 0 and "m'" .. vim.v.count .. "j" or "gj"
+    end, { expr = true })
 end
 
 return M
