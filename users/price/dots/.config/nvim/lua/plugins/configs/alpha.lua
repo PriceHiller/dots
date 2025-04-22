@@ -260,7 +260,7 @@ return {
                     ---@diagnostic disable-next-line: need-check-nil
                     alpha_timer:start(
                         0,
-                        10,
+                        900,
                         vim.schedule_wrap(function()
                             ---@diagnostic disable-next-line: param-type-mismatch
                             local success, _ = pcall(vim.cmd, "AlphaRedraw")
