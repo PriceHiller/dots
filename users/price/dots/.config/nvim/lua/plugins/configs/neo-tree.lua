@@ -63,11 +63,6 @@ return {
                         },
                     },
                 },
-                default_component_configs = {
-                    name = {
-                        trailing_slash = true,
-                    },
-                },
                 filesystem = {
                     follow_current_file = {
                         enabled = true,
