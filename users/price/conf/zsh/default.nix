@@ -8,7 +8,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      initExtra = builtins.readFile ./init-extra.zsh;
+      initContent = builtins.readFile ./init-extra.zsh;
       completionInit =
         let
           zsh-cache-dir = "${config.xdg.cacheHome}/zsh";
