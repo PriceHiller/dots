@@ -147,7 +147,7 @@ return {
                 desc = "Pick: Recent Files",
             },
             {
-                "<leader>fk",
+                "<leader>fR",
                 function()
                     require("snacks").picker.resume()
                 end,
