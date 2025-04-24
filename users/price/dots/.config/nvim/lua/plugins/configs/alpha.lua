@@ -254,6 +254,10 @@ return {
                         0,
                         900,
                         vim.schedule_wrap(function()
+                            if vim.api.nvim_get_mode().mode:lower() ~= "n" then
+                                return
+                            end
+
                             ---@diagnostic disable-next-line: param-type-mismatch
                             local success, _ = pcall(vim.cmd, "AlphaRedraw")
                             if not success and not alpha_timer:is_closing() then
