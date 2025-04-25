@@ -140,6 +140,13 @@ M.setup = function()
             end
         end,
     })
+
+    -- NOTE: Write to shada on focus lost for new instances of neovim being launched
+    vim.api.nvim_create_autocmd("FocusLost", {
+        callback = function()
+            vim.cmd.wshada()
+        end
+    })
 end
 
 return M
