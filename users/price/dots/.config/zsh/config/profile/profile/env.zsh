@@ -110,8 +110,9 @@ fi
 	local new_visual
 	local new_manpager
 	if command -v nvim >/dev/null 2>&1; then
-		new_editor="nvim --cmd 'let g:flatten_wait=1'"
-		new_visual="nvim --cmd 'let g:flatten_wait=1'"
+        export NVIM_FLATTEN_BLOCK=true
+		new_editor="nvim"
+		new_visual="nvim"
 		new_manpager="nvim +Man!"
 	elif command -v vim >/dev/null 2>&1; then
 		new_editor=vim
