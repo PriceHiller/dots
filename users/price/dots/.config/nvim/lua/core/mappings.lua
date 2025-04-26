@@ -189,6 +189,14 @@ M.setup = function()
     vim.keymap.set("n", "j", function()
         return vim.v.count > 0 and "m'" .. vim.v.count .. "j" or "gj"
     end, { expr = true })
+
+    vim.keymap.set("n", "<localleader>fr", function()
+        local buf = vim.api.nvim_get_current_buf()
+        vim.notify("Opening current file via xdg-open")
+        vim.system({ "xdg-open", vim.api.nvim_buf_get_name(buf) }, { detach = true })
+    end, {
+        desc = "File: XDG Open",
+    })
 end
 
 return M
