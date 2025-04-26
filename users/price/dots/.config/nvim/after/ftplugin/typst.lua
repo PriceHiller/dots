@@ -9,3 +9,13 @@ vim.api.nvim_set_hl(
         { underline = true, bold = true }
     )
 )
+
+vim.keymap.set("n", "<localleader>fr", function()
+    local buf = vim.api.nvim_get_current_buf()
+    local fpath = vim.api.nvim_buf_get_name(buf)
+    local pdf_path = vim.fn.fnamemodify(fpath, ":r") .. ".pdf"
+    vim.system({ "xdg-open", pdf_path }, { detach = true })
+end, {
+    buffer = true,
+    silent = true,
+})
