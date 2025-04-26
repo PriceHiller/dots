@@ -36,6 +36,7 @@ M.setup = function()
             vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
             vim.api.nvim_set_option_value("number", false, { scope = "local" })
             vim.api.nvim_set_option_value("relativenumber", false, { scope = "local" })
+            vim.api.nvim_set_option_value("spell", false, { scope = "local" })
             vim.cmd.startinsert()
         end,
     })
@@ -145,7 +146,7 @@ M.setup = function()
     vim.api.nvim_create_autocmd("FocusLost", {
         callback = function()
             vim.cmd.wshada()
-        end
+        end,
     })
 end
 
