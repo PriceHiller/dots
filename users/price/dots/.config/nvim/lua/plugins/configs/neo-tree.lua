@@ -74,7 +74,6 @@ return {
                     },
                 },
                 window = {
-                    auto_expand_width = true,
                     position = "left",
                     relative = "editor",
                     mappings = {
