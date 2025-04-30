@@ -1,3 +1,5 @@
+vim.opt_local.textwidth = 120
+
 -- Treesitter automatic Python format strings
 -- THANKS https://gist.github.com/linguini1/ee91b6d8c196cbd731d10a61447af6a3
 vim.api.nvim_create_augroup("py-fstring", { clear = true })
