@@ -452,6 +452,7 @@ return {
                     },
                     basedpyright = {
                         analysis = {
+                            diagnosticMode = "workspace",
                             diagnosticSeverityOverrides = {
                                 reportAny = false,
                                 reportExplicitAny = false,
