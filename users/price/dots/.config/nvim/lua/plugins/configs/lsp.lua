@@ -450,9 +450,12 @@ return {
                     pyright = {
                         disableOrganizeImports = true,
                     },
-                    python = {
+                    basedpyright = {
                         analysis = {
-                            ignore = { "*" },
+                            diagnosticSeverityOverrides = {
+                                reportAny = false,
+                                reportExplicitAny = false,
+                            },
                         },
                     },
                 },
