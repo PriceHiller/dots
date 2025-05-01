@@ -140,7 +140,7 @@
                 {
                   home-manager = {
                     sharedModules = [
-                      inputs.nixcord.homeManagerModules.nixcord
+                      inputs.nixcord.homeModules.nixcord
                     ];
                     backupFileExtension = "hm.backup";
                     extraSpecialArgs = {
