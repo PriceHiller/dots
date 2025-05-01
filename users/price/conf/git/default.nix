@@ -8,6 +8,9 @@
     aliases = {
       unstage = "reset HEAD --";
     };
+    ignores = [
+      ".~lock.*#" # Ignore libreoffice lock files
+    ];
     extraConfig = {
       init.defaultBranch = "main";
       merge.conflictstyle = "zdiff3";
