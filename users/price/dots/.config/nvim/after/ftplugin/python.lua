@@ -1,4 +1,4 @@
-vim.opt_local.textwidth = 120
+vim.opt_local.textwidth = 100
 
 -- Treesitter automatic Python format strings
 -- THANKS https://gist.github.com/linguini1/ee91b6d8c196cbd731d10a61447af6a3
