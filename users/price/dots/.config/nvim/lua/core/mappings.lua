@@ -105,8 +105,9 @@ M.setup = function()
     vim.keymap.set("i", "<C-S-CR>", "<C-o>O", { silent = true, desc = "Insert: New Line" })
 
     -- Copy first leading word of line onto newline and insert (autolist functionality basically)
-    vim.keymap.set("i", "<C-CR>", function()
+    vim.keymap.set({ "i", "n" }, "<C-CR>", function()
         local line = vim.api.nvim_get_current_line()
+        ---@type string, string, string
         local indent, word, trailing = line:match("^(%s*)(%S*)(%s*)")
         if #word == 0 then
             return
@@ -121,12 +122,16 @@ M.setup = function()
             num = tonumber(num) + 1
             word = tostring(num) .. num_trail
         end
+        if trailing:sub(-1) ~= " " then
+            trailing = trailing .. " "
+        end
         local new_line = indent .. word .. trailing
 
         local win = vim.api.nvim_get_current_win()
         local cursor = vim.api.nvim_win_get_cursor(win)
         vim.fn.append(cursor[1], new_line)
-        vim.api.nvim_win_set_cursor(win, { cursor[1] + 1, vim.fn.strdisplaywidth(new_line) })
+        vim.cmd.startinsert()
+        vim.api.nvim_win_set_cursor(win, { cursor[1] + 1, vim.fn.strdisplaywidth(new_line) + 1 })
     end, { silent = true, desc = "Insert: Autolist" })
 
     -- Insert an Em Dash in insert mode
