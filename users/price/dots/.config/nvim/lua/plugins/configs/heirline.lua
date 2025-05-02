@@ -1097,7 +1097,14 @@ return {
                     disable_winbar_cb = function(args)
                         return conditions.buffer_matches({
                             buftype = { "nofile", "prompt", "quickfix", "terminal" },
-                            filetype = { "fugitive", "Trouble", "dashboard", ".*neogit.*", "Overseer.*" },
+                            filetype = {
+                                "fugitive",
+                                "Trouble",
+                                "dashboard",
+                                ".*neogit.*",
+                                "Overseer.*",
+                                "rest_nvim_result",
+                            },
                         }, args.buf)
                     end,
                 },
