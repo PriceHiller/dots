@@ -2,7 +2,7 @@
 {
   services.mysql = {
     enable = true;
-    package = pkgs.mariadb;
+    package = pkgs.mysql80;
     ensureUsers = [
       {
         name = "price";
