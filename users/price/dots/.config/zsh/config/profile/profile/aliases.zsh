@@ -111,7 +111,14 @@
 
 	# Override the `img` alias if we're in Neovide
 	if ! alias img >/dev/null 2>&1 && command -v swappy >/dev/null 2>&1; then
-		alias img="swappy -f -"
+		img() {
+			local file="${*}"
+			if [[ -z "${file}" ]]; then
+				swappy -f -
+			else
+				swappy -f "${file}"
+			fi
+		}
 	fi
 
 	if command -v rsync >/dev/null 2>&1; then
