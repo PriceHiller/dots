@@ -716,11 +716,6 @@ return {
             })
 
             local org = require("orgmode")
-            -- PERF: We defer this because it has a huge impact on start up time, better to wait a
-            -- bit before trying to load the files to keep Neovim from doing too much on startup
-            vim.defer_fn(function()
-                org.files:ensure_loaded()
-            end, 500)
             local OrgDate = require("orgmode.objects.date")
             local Orgmode = {
                 condition = function()
