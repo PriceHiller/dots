@@ -7,7 +7,7 @@
       {
         name = "price";
         ensurePermissions = {
-          "price.*" = "ALL PRIVILEGES";
+          "*.*" = "ALL PRIVILEGES";
         };
       }
     ];
