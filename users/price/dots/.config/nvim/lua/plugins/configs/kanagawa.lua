@@ -384,7 +384,7 @@ return {
                 { "@markup.quote", { fg = colors.oldWhite } },
 
                 -- For Visual Whitespace plugin
-                { "visual-whitespace", get_hl("Visual", { fg = colors.fujiGray }) },
+                { "VisualNonText", get_hl("Visual", { fg = colors.fujiGray }) },
                 -- Better hl for latex fragments in org files
                 { "texMathZoneX", { fg = colors.surimiOrange } },
                 -- Use underlines for urls
