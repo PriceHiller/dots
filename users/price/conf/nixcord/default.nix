@@ -134,7 +134,7 @@
           enable = true;
         };
         shikiCodeblocks = {
-          enable = true;
+          enable = false;
           bgOpacity = 59.9132;
           theme = "https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/refs/heads/main/packages/tm-themes/themes/catppuccin-mocha.json";
           tryHljs = "ALWAYS";
