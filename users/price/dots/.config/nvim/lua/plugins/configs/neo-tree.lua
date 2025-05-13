@@ -72,6 +72,22 @@ return {
                     filtered_items = {
                         visible = true,
                     },
+                    window = {
+                        mappings = {
+                            ["<C-CR>"] = {
+                                ---@diagnostic disable-next-line: assign-type-mismatch
+                                function(state)
+                                    local node = state.tree:get_node()
+                                    local path = node.path
+                                    local dir = vim.fn.fnamemodify(path, ":p")
+                                    if vim.fn.isdirectory(dir) == 0 then
+                                        dir = vim.fn.fnamemodify(path, ":h")
+                                    end
+                                    require("oil").open_float(dir)
+                                end,
+                            },
+                        },
+                    },
                 },
                 window = {
                     position = "left",
