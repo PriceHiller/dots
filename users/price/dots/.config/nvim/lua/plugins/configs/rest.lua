@@ -2,10 +2,10 @@ return {
     "rest-nvim/rest.nvim",
     config = false,
     ft = {
-        "http"
+        "http",
     },
     cmd = {
-        "Rest"
+        "Rest",
     },
     dependencies = {
         "nvim-treesitter/nvim-treesitter",

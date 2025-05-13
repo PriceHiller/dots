@@ -28,6 +28,8 @@ in
     packages =
       with pkgs;
       [
+        kdePackages.kdenlive
+        obs-studio
         slack
         xdg-utils
         dig
