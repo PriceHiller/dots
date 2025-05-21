@@ -5,6 +5,7 @@
     nix.url = "github:nixos/nix";
     deploy-rs.url = "github:serokell/deploy-rs";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/24.11";
     nixpkgs-master.url = "github:nixos/nixpkgs";
     fenix = {
       url = "github:nix-community/fenix";
