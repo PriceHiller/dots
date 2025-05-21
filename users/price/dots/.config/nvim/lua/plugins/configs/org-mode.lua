@@ -166,6 +166,11 @@ return {
                         template = "* TODO %?\nSCHEDULED: %t",
                         target = "~/Notes/todo.org",
                     },
+                    i = {
+                        description = "Scheduled Item",
+                        template = "* %?\n%^T",
+                        target = "~/Notes/todo.org",
+                    },
                     n = {
                         description = "Note",
                         template = "* %?",
