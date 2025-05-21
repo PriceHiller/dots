@@ -34,7 +34,7 @@ return {
                 "L3MON4D3/LuaSnip",
                 build = "make install_jsregexp",
             },
-            "amarakon/nvim-cmp-lua-latex-symbols",
+            "erooke/blink-cmp-latex",
             "mikavilpas/blink-ripgrep.nvim",
             "moyiz/blink-emoji.nvim",
         },
@@ -49,7 +49,7 @@ return {
                 Dadbod = { icon = "󰆼", hlgroup = "Dadbod" },
                 Emoji = { icon = "󰞅", hlgroup = "Emoji" },
                 Ripgrep = { icon = "󰱼", hlgroup = "Ripgrep" },
-                ["lua-latex-symbols"] = { icon = "󰿈", hlgroup = "LatexSymbol" },
+                Latex = { icon = "󰿈", hlgroup = "LatexSymbol" },
                 cmdline = { icon = "", hlgroup = "CommandLine" },
                 Orgmode = { icon = "", hlgroup = "Orgmode" },
                 Buffer = { icon = "", hlgroup = "Buffer" },
@@ -76,12 +76,6 @@ return {
                     ["<S-Tab>"] = { "select_prev", "fallback" },
                     ["<C-p>"] = { "select_prev", "fallback" },
                     ["<C-n>"] = { "select_next", "fallback" },
-                    ["\\"] = {
-                        function(cmp)
-                            cmp.show({ providers = { "lua-latex-symbols" } })
-                        end,
-                        "fallback",
-                    },
                     ["<C-s>"] = { "scroll_documentation_up", "fallback" },
                     ["<C-d>"] = { "scroll_documentation_down", "fallback" },
                 },
@@ -125,6 +119,7 @@ return {
                         "ripgrep",
                         "nix",
                         "emoji",
+                        "latex",
                         "orgmode",
                         "dadbod",
                     },
@@ -151,11 +146,11 @@ return {
                                 },
                             },
                         },
-                        ["lua-latex-symbols"] = {
-                            name = "lua-latex-symbols",
-                            module = "blink.compat.source",
+                        latex = {
+                            name = "Latex",
+                            module = "blink-cmp-latex",
                             opts = {
-                                cache = true,
+                                insert_command = false
                             },
                         },
                         nix = {
