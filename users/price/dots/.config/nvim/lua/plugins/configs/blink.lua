@@ -124,6 +124,27 @@ return {
                         "dadbod",
                     },
                     providers = {
+                        path = {
+                            ---@type blink.cmp.PathOpts
+                            opts = {
+                                show_hidden_files_by_default = true,
+                                get_cwd = function(ctx)
+                                    local dir = vim.fn.expand(("#%d:p:h"):format(ctx.bufnr))
+                                    local ft = vim.bo[ctx.bufnr].filetype
+
+                                    local is_in_tmp_dir = vim.fs.root(dir, { "/tmp" })
+                                    local fts_to_use_cwd = {
+                                        "zsh",
+                                        "org",
+                                    }
+
+                                    if vim.list_contains(fts_to_use_cwd, ft) and is_in_tmp_dir ~= nil then
+                                        return vim.fn.getcwd()
+                                    end
+                                    return dir
+                                end,
+                            },
+                        },
                         lazydev = {
                             name = "LazyDev",
                             module = "lazydev.integrations.blink",
