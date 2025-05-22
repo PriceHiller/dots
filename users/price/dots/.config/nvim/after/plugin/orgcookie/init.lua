@@ -1,28 +1,28 @@
 local org = require("orgmode")
 
----@class OrgHeadlineWatcher
+---@class OrgCookieWatcher
 ---@field private bufnr integer Buffer Watcher is attached to
 ---@field private attached boolean Whether the watcher is running
 ---@field private updating boolean
 ---@field private timer uv.uv_timer_t
 ---@field private ns_id integer
-local HeadlineWatcher = {
+local OrgCookieWatcher = {
     ns_id = vim.api.nvim_create_namespace("orgmode.ui.cookie"),
 }
 
----@type table<integer, OrgHeadlineWatcher>
+---@type table<integer, OrgCookieWatcher>
 local watchers = {}
 
----@return table<integer, OrgHeadlineWatcher>
-function HeadlineWatcher.watchers()
+---@return table<integer, OrgCookieWatcher>
+function OrgCookieWatcher.watchers()
     return watchers
 end
 
 --- Creates a new headline watcher
 ---@param bufnr? integer Buffer to watch, if unspecified then uses the current buffer
-function HeadlineWatcher.new(bufnr)
+function OrgCookieWatcher.new(bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
-    local watcher = HeadlineWatcher.watchers()[bufnr]
+    local watcher = OrgCookieWatcher.watchers()[bufnr]
     if watcher then
         return watcher
     end
@@ -30,14 +30,23 @@ function HeadlineWatcher.new(bufnr)
         bufnr = bufnr,
         attached = false,
         updating = false,
-    }, { __index = HeadlineWatcher })
+    }, { __index = OrgCookieWatcher })
     watchers[this.bufnr] = this
     return watchers[this.bufnr]
 end
 
+--- Gets an existing OrgCookieWatcher for the given buffer if it exists
+---@param bufnr? integer Buffer to get the watcher for
+---@return OrgCookieWatcher?
+function OrgCookieWatcher.get(bufnr)
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
+    local watcher = OrgCookieWatcher.watchers()[bufnr]
+    return watcher
+end
+
 ---@param headline OrgHeadline
 ---@return OrgHeadline[]
-function HeadlineWatcher.parent_headlines(headline)
+function OrgCookieWatcher.parent_headlines(headline)
     local located_headlines = {}
     local count = 0
     while true do
@@ -56,7 +65,7 @@ end
 
 ---@param start_line integer
 ---@param end_line integer
-function HeadlineWatcher:del_extmarks(start_line, end_line)
+function OrgCookieWatcher:del_extmarks(start_line, end_line)
     local end_col = vim.fn.col({ end_line + 1, "$" })
     local old_extmarks = vim.api.nvim_buf_get_extmarks(
         self.bufnr,
@@ -71,7 +80,7 @@ function HeadlineWatcher:del_extmarks(start_line, end_line)
 end
 
 ---@param headline OrgHeadline
-function HeadlineWatcher:set_cookie(headline)
+function OrgCookieWatcher:set_cookie(headline)
     local cookie = headline:get_cookie()
     if not cookie then
         local line = headline:node():start()
@@ -115,7 +124,7 @@ end
 
 ---@param headline OrgHeadline
 ---@return [integer, integer]?
-function HeadlineWatcher.get_checkbox_num(headline)
+function OrgCookieWatcher.get_checkbox_num(headline)
     local section = headline:node():parent()
     if not section then
         return nil
@@ -146,7 +155,7 @@ end
 
 ---@param headline OrgHeadline
 ---@return [integer, integer]?
-function HeadlineWatcher.get_todo_num(headline)
+function OrgCookieWatcher.get_todo_num(headline)
     -- Count done children headlines and total children with TODO keywords
     local children = headline:get_child_headlines()
     local headlines_with_todo = vim.tbl_filter(function(h)
@@ -166,7 +175,7 @@ function HeadlineWatcher.get_todo_num(headline)
 end
 
 ---@param headline OrgHeadline
-function HeadlineWatcher.update_cookies(headline)
+function OrgCookieWatcher.update_cookies(headline)
     if not headline:get_cookie() then
         return
     end
@@ -188,7 +197,7 @@ end
 
 ---@param start_line integer 0-index row to start from
 ---@param end_line integer 0-index row to end at
-function HeadlineWatcher:update_cookies_in_range(start_line, end_line)
+function OrgCookieWatcher:update_cookies_in_range(start_line, end_line)
     ---@type table<integer, OrgHeadline>
     local modified_headlines = {}
     for line = start_line, end_line, 1 do
@@ -200,14 +209,14 @@ function HeadlineWatcher:update_cookies_in_range(start_line, end_line)
     end
     for _, headline in pairs(modified_headlines) do
         self:set_cookie(headline)
-        local parents = HeadlineWatcher.parent_headlines(headline)
+        local parents = OrgCookieWatcher.parent_headlines(headline)
         for _, parent in ipairs(parents) do
             self:set_cookie(parent)
         end
     end
 end
 
-function HeadlineWatcher:attach()
+function OrgCookieWatcher:attach()
     if self.attached then
         return
     end
@@ -235,22 +244,26 @@ function HeadlineWatcher:attach()
     })
 end
 
-function HeadlineWatcher:detach()
+function OrgCookieWatcher:detach()
     self.attached = false
     self:del_extmarks(0, vim.api.nvim_buf_line_count(self.bufnr) - 1)
 end
 
-function HeadlineWatcher:delete()
+function OrgCookieWatcher:delete()
     self:detach()
     watchers[self.bufnr] = nil
 end
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "org",
-    callback = function(args)
-        local watcher = HeadlineWatcher.new(args.buf)
-        watcher:attach()
-    end,
-})
+local ft_autocmd_created = false
+if not ft_autocmd_created then
+    ft_autocmd_created = true
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "org",
+        callback = function(args)
+            local watcher = OrgCookieWatcher.new(args.buf)
+            watcher:attach()
+        end,
+    })
+end
 
-return HeadlineWatcher
+return OrgCookieWatcher
