@@ -57,11 +57,12 @@ end
 ---@param start_line integer
 ---@param end_line integer
 function HeadlineWatcher:del_extmarks(start_line, end_line)
+    local end_col = vim.fn.col({ end_line + 1, "$" })
     local old_extmarks = vim.api.nvim_buf_get_extmarks(
         self.bufnr,
         self.ns_id,
-        start_line,
-        end_line,
+        { start_line, 0 },
+        { end_line, end_col - 1 },
         { type = "virt_text", overlap = true }
     )
     for _, ext in ipairs(old_extmarks) do
@@ -73,6 +74,8 @@ end
 function HeadlineWatcher:set_cookie(headline)
     local cookie = headline:get_cookie()
     if not cookie then
+        local line = headline:node():start()
+        self:del_extmarks(line, line)
         return
     end
 
@@ -100,7 +103,7 @@ function HeadlineWatcher:set_cookie(headline)
     table.insert(text, { "]", "@org.cookie.delimiter.right" })
 
     local line, start_col, _ = cookie:start()
-    self:del_extmarks(line - 1, line)
+    self:del_extmarks(line, line)
 
     vim.api.nvim_buf_set_extmark(self.bufnr, self.ns_id, line, start_col, {
         virt_text_pos = "overlay",
