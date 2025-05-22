@@ -110,7 +110,7 @@ function OrgCookieWatcher:_set_cookie(headline)
         table.insert(virt_text, { "???", "@org.cookie.sign.unknown" })
     elseif headline.file:get_node_text(cookie):find("%%") then
         -- Handling a percentage cookie, e.g. [90%]
-        local num = tostring(((complete / total) * 100))
+        local num = ("%.0f"):format(((complete / total) * 100))
         table.insert(virt_text, { num, "@org.cookie.num" })
         table.insert(virt_text, { "%", "@org.cookie.sign.percent" })
     else
@@ -251,6 +251,11 @@ function OrgCookieWatcher:attach()
             end
 
             vim.schedule(function()
+                if start_line > 0 then
+                    -- Sometimes we miss the outer range, so we want to ensure we grab that in those
+                    -- scenarios
+                    start_line = start_line - 1
+                end
                 self:_update_cookies_in_range(start_line, end_line)
             end)
         end,
