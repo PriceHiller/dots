@@ -63,8 +63,8 @@ function OrgCookieWatcher._parent_headlines(headline)
     return located_headlines
 end
 
----@param start_line integer
----@param end_line integer
+---@param start_line integer 0-indexed inclusive
+---@param end_line integer 0-indexed inclusive
 function OrgCookieWatcher:_del_extmarks(start_line, end_line)
     -- This gets us the last column of the line, we want to get all the extmarks from the first
     -- column (0th column) to the very last column of the given range
@@ -86,27 +86,29 @@ end
 function OrgCookieWatcher:_set_cookie(headline)
     local cookie = headline:get_cookie()
     if not cookie then
-        local line = headline:node():start()
+        local headline_ln = headline:node():start()
         -- In the scenario where we are missing a cookie we want to make sure we've invalidated the
         -- old extmarks if they exist
-        self:_del_extmarks(line, line)
+        self:_del_extmarks(headline_ln, headline_ln)
         return
     end
 
-    -- We preference checkboxes for the count
-    local counts = self._get_checkbox_num(headline) or self._get_todo_num(headline)
-    if not counts then
-        return
-    end
+    -- We preference checkboxes for the count, then todos, and if we have neither but still have a
+    -- cookie then we want to show an indication of missing items
+    local counts = self._get_checkbox_num(headline) or self._get_todo_num(headline) or { 0, 0 }
 
     local complete = counts[1]
     local total = counts[2]
 
+    ---@type [string, string]
     local virt_text = {}
 
     -- Now we build up our virtual cookie
     table.insert(virt_text, { "[", "@org.cookie.delimiter.left" })
-    if headline.file:get_node_text(cookie):find("%%") then
+    if total == 0 then
+        -- If we have no items to calculate the cookie based on, we want to represent that
+        table.insert(virt_text, { "???", "@org.cookie.sign.unknown" })
+    elseif headline.file:get_node_text(cookie):find("%%") then
         -- Handling a percentage cookie, e.g. [90%]
         local num = tostring(((complete / total) * 100))
         table.insert(virt_text, { num, "@org.cookie.num" })
