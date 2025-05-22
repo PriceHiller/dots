@@ -193,27 +193,6 @@ function OrgCookieWatcher._get_todo_num(headline)
     return { #dones, #headlines_with_todo }
 end
 
----@param headline OrgHeadline
-function OrgCookieWatcher._update_cookies(headline)
-    if not headline:get_cookie() then
-        return
-    end
-    local has_todos = false
-    for _, ch in ipairs(headline:get_child_headlines()) do
-        local todo, _, _ = ch:get_todo()
-        if todo then
-            has_todos = true
-            break
-        end
-    end
-
-    if has_todos then
-        headline:update_todo_cookie()
-    else
-        headline:update_cookie()
-    end
-end
-
 ---@param start_line integer 0-index row to start from
 ---@param end_line integer 0-index row to end at
 function OrgCookieWatcher:_update_cookies_in_range(start_line, end_line)
