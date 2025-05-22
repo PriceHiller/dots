@@ -355,6 +355,10 @@ return {
                 },
                 { "@org.agenda.day", { fg = colors.crystalBlue, underdotted = true } },
                 { "@org.agenda.today", { fg = colors.roninYellow, bold = true, underline = true } },
+                { "@org.cookie", { bold = true } },
+                { "@org.cookie.delimiter", { fg = colors.peachRed, bold = true } },
+                { "@org.cookie.num", { fg = colors.surimiOrange, bold = true } },
+                { "@org.cookie.sign", { fg = colors.waveRed, bold = true }},
 
                 -- Titles/Headlines
                 { "@markup.heading.1", { fg = colors.crystalBlue, bold = true } },
