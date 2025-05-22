@@ -71,10 +71,10 @@ return {
             return {
                 router = {
                     browse = {
-                        ["^git%.orion%-technologies%.io"] = gitea_router("src"),
+                        ["^git%.price%-hiller%.com"] = gitea_router("src"),
                     },
                     blame = {
-                        ["^git%.orion%-technologies%.io"] = gitea_router("blame/commit"),
+                        ["^git%.price%-hiller%.com"] = gitea_router("blame/commit"),
                     },
                 },
             }
