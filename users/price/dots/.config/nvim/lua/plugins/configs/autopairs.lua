@@ -89,8 +89,8 @@ return {
             local OrgPair = function(char)
                 return Rule(char, char, { "org" })
                     :with_pair(ts_cond.is_not_ts_node({ "block", "link" }))
-                    :with_pair(cond.not_before_text("$"))
-                    :with_pair(cond.not_after_text("$"))
+                    :with_pair(conds.And({ cond.not_before_text("["), cond.not_after_text("]") }))
+                    :with_pair(conds.And({ cond.not_before_text("$"), cond.not_after_text("$") }))
                     :with_move(cond.done())
             end
 
@@ -101,7 +101,7 @@ return {
                 OrgPair("="),
                 OrgPair("$"),
                 OrgPair("/"),
-                OrgPair("*"):with_pair(cond.not_before_regex("^$")),
+                OrgPair("*"):with_pair(cond.not_before_regex("^$")):with_pair(cond.not_before_regex("%*")),
             })
 
             ---@param char string
