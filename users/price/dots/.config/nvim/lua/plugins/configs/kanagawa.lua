@@ -358,7 +358,7 @@ return {
                 { "@org.cookie", { bold = true } },
                 { "@org.cookie.delimiter", { fg = colors.peachRed, bold = true } },
                 { "@org.cookie.num", { fg = colors.surimiOrange, bold = true } },
-                { "@org.cookie.sign", { fg = colors.waveRed, bold = true }},
+                { "@org.cookie.sign", { fg = colors.waveRed, bold = true } },
 
                 -- Titles/Headlines
                 { "@markup.heading.1", { fg = colors.crystalBlue, bold = true } },

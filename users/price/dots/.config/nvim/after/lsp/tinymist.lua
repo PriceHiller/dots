@@ -1,6 +1,6 @@
 return {
-                settings = {
-                    exportPdf = "onType",
-                    formatterMode = "typstyle",
-                },
-            }
+    settings = {
+        exportPdf = "onType",
+        formatterMode = "typstyle",
+    },
+}

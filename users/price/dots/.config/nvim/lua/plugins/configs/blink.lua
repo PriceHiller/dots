@@ -171,7 +171,7 @@ return {
                             name = "Latex",
                             module = "blink-cmp-latex",
                             opts = {
-                                insert_command = false
+                                insert_command = false,
                             },
                         },
                         nix = {
