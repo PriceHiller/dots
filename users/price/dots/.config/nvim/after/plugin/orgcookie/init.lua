@@ -65,21 +65,24 @@ end
 
 ---@param start_line integer 0-indexed inclusive
 ---@param end_line integer 0-indexed inclusive
-function OrgCookieWatcher:_del_extmarks(start_line, end_line)
+function OrgCookieWatcher:_get_extmarks(start_line, end_line)
     -- This gets us the last column of the line, we want to get all the extmarks from the first
     -- column (0th column) to the very last column of the given range
     local end_col = vim.fn.col({ end_line + 1, "$" })
 
-    local old_extmarks = vim.api.nvim_buf_get_extmarks(
+    return vim.api.nvim_buf_get_extmarks(
         self.bufnr,
         self.ns_id,
         { start_line, 0 },
         { end_line, end_col - 1 },
-        { type = "virt_text", overlap = true }
+        { overlap = true }
     )
-    for _, ext in ipairs(old_extmarks) do
-        vim.api.nvim_buf_del_extmark(self.bufnr, self.ns_id, ext[1])
-    end
+end
+
+---@param start_line integer 0-indexed inclusive
+---@param end_line integer 0-indexed inclusive
+function OrgCookieWatcher:_del_extmarks(start_line, end_line)
+    vim.api.nvim_buf_clear_namespace(self.bufnr, self.ns_id, start_line, end_line + 1)
 end
 
 ---@param headline OrgHeadline
@@ -95,52 +98,114 @@ function OrgCookieWatcher:_set_cookie(headline)
 
     -- We preference checkboxes for the count, then todos, and if we have neither but still have a
     -- cookie then we want to show an indication of missing items
-    local counts = self._get_checkbox_num(headline) or self._get_todo_num(headline) or { 0, 0 }
+    ---@type [integer, integer]
+    local counts = self._get_checkbox_num(headline) or self._get_todo_num(headline) or {}
 
+    ---@type integer?
     local complete = counts[1]
+    ---@type integer?
     local total = counts[2]
 
-    ---@type [string, string]
+    ---@type [string, string][]
     local virt_text = {}
 
     -- Now we build up our virtual cookie
     table.insert(virt_text, { "[", "@org.cookie.delimiter.left" })
-    if total == 0 then
-        -- If we have no items to calculate the cookie based on, we want to represent that
-        table.insert(virt_text, { "???", "@org.cookie.sign.unknown" })
-    elseif headline.file:get_node_text(cookie):find("%%") then
+    local cur_cookie_text = vim.treesitter.get_node_text(cookie, self.bufnr, {})
+    if cur_cookie_text:find("%%") then
         -- Handling a percentage cookie, e.g. [90%]
-        local num = ("%.0f"):format(((complete / total) * 100))
-        table.insert(virt_text, { num, "@org.cookie.num" })
+        if total and complete then
+            local num = ("%.0f"):format(((complete / total) * 100))
+            table.insert(virt_text, { num, "@org.cookie.num" })
+        end
         table.insert(virt_text, { "%", "@org.cookie.sign.percent" })
     else
         -- Handling an out of cookie, e.g. [10/12]
-        table.insert(virt_text, { tostring(complete), "@org.cookie.num.complete" })
+        if complete then
+            table.insert(virt_text, { tostring(complete), "@org.cookie.num.complete" })
+        end
         table.insert(virt_text, { "/", "@org.cookie.sign.div" })
-        table.insert(virt_text, { tostring(total), "@org.cookie.num.total" })
+        if total then
+            table.insert(virt_text, { tostring(total), "@org.cookie.num.total" })
+        end
     end
     table.insert(virt_text, { "]", "@org.cookie.delimiter.right" })
 
     local line, start_col, _ = cookie:start()
     local end_line, end_col, _ = cookie:end_()
 
-    -- Ensure we wipe out the old extmark before setting the new one.
-    self:_del_extmarks(line, end_line)
+    ---@type [string, integer, integer][]
+    local hl_ranges = {}
+    local cookie_parts = {}
+    local hl_col_start = start_col
+    for _, vt in pairs(virt_text) do
+        local text, hl = vt[1], vt[2]
+        local hl_col_end = hl_col_start + #text
+        table.insert(hl_ranges, { hl, hl_col_start, hl_col_end })
+        hl_col_start = hl_col_end
+        table.insert(cookie_parts, text)
+    end
+    local new_cookie_text = table.concat(cookie_parts, "")
 
-    -- The virtual cookie text we put in place
-    vim.api.nvim_buf_set_extmark(self.bufnr, self.ns_id, line, start_col, {
-        virt_text_pos = "inline",
-        hl_mode = "combine",
-        priority = 200,
-        virt_text = virt_text,
-    })
+    local update_hls = function()
+        self:_del_extmarks(line, end_line)
+        for _, hl_range in pairs(hl_ranges) do
+            local hl, start_hl_col, end_hl_col = unpack(hl_range)
+            vim.hl.range(self.bufnr, self.ns_id, hl, { line, start_hl_col }, { line, end_hl_col }, {})
+        end
+    end
 
-    -- This ensures the user can see the _actual_ cookie as well as the virtual cookie when relevant
-    vim.api.nvim_buf_set_extmark(self.bufnr, self.ns_id, line, start_col, {
-        hl_mode = "combine",
-        end_col = end_col,
-        conceal = "",
-    })
+    -- Only update the text if we have a difference AND we have valid progress (not 0/0) to show
+    local undotree = vim.fn.undotree(self.bufnr)
+    local after_undo = undotree.seq_cur ~= undotree.seq_last
+    local try_restore_cursor = function()
+        -- Try to restore the cursor position when we're undoing a change that triggered a
+        -- modification of the cookie
+        if after_undo then
+            local row, col = unpack(vim.api.nvim_buf_get_mark(self.bufnr, "."))
+            row = row - 1
+
+            local win = vim.api.nvim_get_current_win()
+            if vim.api.nvim_win_get_buf(win) == self.bufnr then
+                pcall(vim.api.nvim_win_set_cursor, win, { row, col })
+            end
+            return
+        end
+    end
+
+    if cur_cookie_text == new_cookie_text then
+        update_hls()
+        try_restore_cursor()
+        return
+    end
+
+    if after_undo then
+        try_restore_cursor()
+        return
+    end
+    --
+    -- We don't want to update any cookie text if our `undotree` isn't "safe". We have to call
+    -- `undojoin` later on to ensure we don't mangle the `undotree` with the text updates made to
+    -- the cookies. If our `undotree` is in an unsafe state (i.e. can't use `undojoin` safely in the
+    -- current context), then we necessarily don't want to issue any updates.
+    _G._tmp_orgcookie_update_cookie = function()
+        vim.cmd.undojoin()
+        vim.api.nvim_buf_set_text(self.bufnr, line, start_col, line, end_col, { new_cookie_text })
+        update_hls()
+    end
+    vim.api.nvim_cmd({
+        cmd = "lua",
+        args = {
+            "_G._tmp_orgcookie_update_cookie()",
+        },
+        mods = {
+            keeppatterns = true,
+            lockmarks = true,
+            keepmarks = true,
+            keepjumps = true,
+        },
+    }, {})
+    _G._tmp_orgcookie_update_cookie = nil
 end
 
 ---@param headline OrgHeadline
@@ -158,8 +223,8 @@ function OrgCookieWatcher._get_checkbox_num(headline)
         for node in body:iter_children() do
             if node:type() == "list" then
                 local boxes = headline:child_checkboxes(node)
-                num_boxes = num_boxes + #boxes
                 local checked_boxes = vim.tbl_filter(function(box)
+                    num_boxes = num_boxes + 1
                     return box:match("%[%w%]")
                 end, boxes)
                 num_checked_boxes = num_checked_boxes + #checked_boxes
@@ -244,11 +309,21 @@ function OrgCookieWatcher:attach()
     --
     -- There's a way around this by playing entirely with the TS Nodes, but this seems fast enough
     -- so it'll do.
+    local updating = false
+    local last_start_line = -1
+    local last_end_line = -1
     vim.api.nvim_buf_attach(self.bufnr, false, {
         on_lines = function(_, _, _, start_line, _, end_line)
             if not self.attached then
                 return true
             end
+
+            if start_line == last_start_line and end_line == last_end_line and updating then
+                return
+            end
+            last_start_line = start_line
+            last_end_line = end_line
+            updating = true
 
             vim.schedule(function()
                 if start_line > 0 then
@@ -257,6 +332,22 @@ function OrgCookieWatcher:attach()
                     start_line = start_line - 1
                 end
                 self:_update_cookies_in_range(start_line, end_line)
+
+                -- BUG: There's a possible bug that might rear its ugly head here. We have a
+                -- crapalicious guard around this critical section (see if the `if` checks above
+                -- combined with checking `updating`). We only want to update the cookies in the
+                -- given range if we're not currently updating _OR_ the start or end lines differ
+                -- from the previous update while we have a currently running update. Since we
+                -- choose to defer here, there's a small gap where `updating` can be set to false
+                -- despite a new update being started leading to an extra update slipping through
+                -- the cracks when it really shouldn't have been run.
+                --
+                -- TODO: This can possibly be fixed using a queue system that gathers up the changes
+                -- in a fixed interval and then runs all the updates for the gathered ranges at once
+                -- in a single job.
+                updating = false
+                -- vim.defer_fn(function()
+                -- end, 20)
             end)
         end,
         on_reload = function()
