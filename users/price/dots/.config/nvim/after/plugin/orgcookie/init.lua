@@ -155,39 +155,23 @@ function OrgCookieWatcher:_set_cookie(headline)
         end
     end
 
-    -- Only update the text if we have a difference AND we have valid progress (not 0/0) to show
-    local undotree = vim.fn.undotree(self.bufnr)
-    local after_undo = undotree.seq_cur ~= undotree.seq_last
-    local try_restore_cursor = function()
-        -- Try to restore the cursor position when we're undoing a change that triggered a
-        -- modification of the cookie
-        if after_undo then
-            local row, col = unpack(vim.api.nvim_buf_get_mark(self.bufnr, "."))
-            row = row - 1
-
-            local win = vim.api.nvim_get_current_win()
-            if vim.api.nvim_win_get_buf(win) == self.bufnr then
-                pcall(vim.api.nvim_win_set_cursor, win, { row, col })
-            end
-            return
-        end
-    end
-
+    -- If we have the same text, just make sure we reapply the highlights, no need to update the
+    -- underyling text
     if cur_cookie_text == new_cookie_text then
         update_hls()
-        try_restore_cursor()
         return
     end
 
-    if after_undo then
-        try_restore_cursor()
-        return
-    end
-    --
     -- We don't want to update any cookie text if our `undotree` isn't "safe". We have to call
     -- `undojoin` later on to ensure we don't mangle the `undotree` with the text updates made to
     -- the cookies. If our `undotree` is in an unsafe state (i.e. can't use `undojoin` safely in the
     -- current context), then we necessarily don't want to issue any updates.
+    local undotree = vim.fn.undotree(self.bufnr)
+    local after_undo = undotree.seq_cur ~= undotree.seq_last
+    if after_undo then
+        return
+    end
+
     _G._tmp_orgcookie_update_cookie = function()
         vim.cmd.undojoin()
         vim.api.nvim_buf_set_text(self.bufnr, line, start_col, line, end_col, { new_cookie_text })
@@ -345,9 +329,9 @@ function OrgCookieWatcher:attach()
                 -- TODO: This can possibly be fixed using a queue system that gathers up the changes
                 -- in a fixed interval and then runs all the updates for the gathered ranges at once
                 -- in a single job.
-                updating = false
-                -- vim.defer_fn(function()
-                -- end, 20)
+                vim.defer_fn(function()
+                    updating = false
+                end, 20)
             end)
         end,
         on_reload = function()
