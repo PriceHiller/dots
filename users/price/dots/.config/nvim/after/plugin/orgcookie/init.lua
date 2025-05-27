@@ -82,7 +82,7 @@ end
 ---@param start_line integer 0-indexed inclusive
 ---@param end_line integer 0-indexed inclusive
 function OrgCookieWatcher:_del_extmarks(start_line, end_line)
-    vim.api.nvim_buf_clear_namespace(self.bufnr, self.ns_id, start_line, end_line + 1)
+    pcall(vim.api.nvim_buf_clear_namespace, self.bufnr, self.ns_id, start_line, end_line + 1)
 end
 
 ---@param headline OrgHeadline
