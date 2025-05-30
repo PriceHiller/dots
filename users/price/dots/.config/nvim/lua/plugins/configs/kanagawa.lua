@@ -250,9 +250,8 @@ return {
                 { "SnacksPickerInputBorder", { link = "SnacksPickerInput" } },
                 ---- Preview
                 { "SnacksPickerPreviewTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
-                { "SnacksPickerPreview", { bg = colors.sumiInk5 } },
+                { "SnacksPickerPreview", { bg = colors.sumiInk3 } },
                 { "SnacksPickerPreviewBorder", { link = "SnacksPickerPreview" } },
-                { "SnacksPickerPreviewCursorLine", { bg = colors.sumiInk6 } },
                 ---- List
                 { "SnacksPickerListTitle", { fg = colors.sumiInk0, bg = colors.sakuraPink, blend = 0 } },
                 { "SnacksPickerList", { bg = colors.sumiInk3 } },
@@ -325,8 +324,14 @@ return {
                     get_hl("@org.timestamp.inactive"),
                 },
                 { "@org.keyword.done", { fg = colors.springGreen, bold = true, italic = true, underdouble = true } },
-                { "@org.keyword.face.cancelled", { fg = colors.sakuraPink, bold = true, italic = true, underdouble = true } },
-                { "@org.keyword.face.wait", { fg = colors.carpYellow, bold = true, italic = true, underdouble = true } },
+                {
+                    "@org.keyword.face.cancelled",
+                    { fg = colors.sakuraPink, bold = true, italic = true, underdouble = true },
+                },
+                {
+                    "@org.keyword.face.wait",
+                    { fg = colors.carpYellow, bold = true, italic = true, underdouble = true },
+                },
                 { "@org.keyword.todo", { fg = colors.samuraiRed, bold = true, italic = true, underdouble = true } },
                 {
                     "@org.priority.highest",
@@ -355,11 +360,10 @@ return {
                 },
                 { "@org.agenda.day", { fg = colors.crystalBlue, underdotted = true } },
                 { "@org.agenda.today", { fg = colors.roninYellow, bold = true, underline = true } },
-                { "@org.cookie", { bold = true } },
-                { "@org.cookie.delimiter", { fg = colors.peachRed, bold = true } },
-                { "@org.cookie.num", { fg = colors.surimiOrange, bold = true } },
-                { "@org.cookie.sign", { fg = colors.waveRed, bold = true } },
-                { "@org.cookie.sign.unknown", { fg = colors.lightBlue, bold = true } },
+                { "@org.cookie", { bold = false } },
+                { "@org.cookie.delimiter", { fg = colors.peachRed } },
+                { "@org.cookie.num", { fg = colors.surimiOrange } },
+                { "@org.cookie.sign", { fg = colors.waveRed } },
 
                 -- Titles/Headlines
                 { "@markup.heading.1", { fg = colors.crystalBlue, bold = true } },
