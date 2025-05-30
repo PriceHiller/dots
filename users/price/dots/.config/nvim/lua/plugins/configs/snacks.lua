@@ -224,6 +224,52 @@ return {
                 end,
                 desc = "Pick: Previous Search History",
             },
+            {
+                "<leader>f?",
+                function()
+                    require("snacks").picker.help()
+                end,
+                desc = "Pick: :help"
+            },
+            {
+                "<leader>gll",
+                desc = "> Git Log"
+            },
+            {
+                "<leader>gll",
+                function ()
+                    require("snacks").picker.git_log()
+                end,
+                desc = "Pick: Git Log"
+            },
+            {
+                "<leader>glf",
+                function ()
+                    require("snacks").picker.git_log_file()
+                end,
+                desc = "Pick: Git Log File"
+            },
+            {
+                "<leader>glL",
+                function ()
+                    require("snacks").picker.git_log_line()
+                end,
+                desc = "Pick: Git Log Line"
+            },
+            {
+                "<leader>gf",
+                function ()
+                    require("snacks").picker.git_files()
+                end,
+                desc = "Pick: Git Files"
+            },
+            {
+                "<leader>gw",
+                function ()
+                    require("snacks").picker.git_grep()
+                end,
+                desc = "Pick: Git Grep"
+            }
         },
         config = function()
             local snacks = require("snacks")
@@ -251,6 +297,11 @@ return {
                 },
                 statuscolumn = { enabled = false },
                 picker = {
+                    matcher = {
+                        cwd_bonus = true,
+                        frecency = true,
+                        history_bonus = true,
+                    },
                     prompt = "  ",
                     ui_select = true,
                     layouts = {
@@ -456,13 +507,25 @@ return {
                             ignored = false,
                             follow = true,
                         },
-                        recent = {
-                            matcher = {
-                                history_bonus = true,
-                                frecency = false,
-                            },
-                        },
                         buffers = {
+                            matcher = {
+                                sort_empty = true,
+                                on_match = function(_, item)
+                                    ---@type string?
+                                    local flags = item.flags
+                                    if not flags then
+                                        return
+                                    end
+
+                                    if flags:find("#") then
+                                        item.score = 20000
+                                    end
+
+                                    if flags:find("%%") then
+                                        item.score = 0
+                                    end
+                                end,
+                            },
                             win = {
                                 input = {
                                     keys = {
