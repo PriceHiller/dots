@@ -103,9 +103,6 @@ return {
                             end,
                         },
                         click = "v:lua.ScFa",
-                        condition = {
-                            function(args) end,
-                        },
                     },
                     {
                         text = {

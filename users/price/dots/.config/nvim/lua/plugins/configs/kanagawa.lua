@@ -62,6 +62,7 @@ return {
                 { "WinBar", { link = "StatusLine" } },
                 { "FloatTitle", { fg = colors.sumiInk0, bg = colors.crystalBlue, blend = 0 } },
                 { "Title", { fg = colors.crystalBlue, blend = 0 } },
+                { "Folded", { fg = colors.oniViolet, bg = colors.winterBlue } },
 
                 -- Gitsigns Colors
                 { "GitSignsAdd", { fg = colors.autumnGreen } },
@@ -187,7 +188,6 @@ return {
                 { "NoiceCmdlinePopupdBorderIncRename", { fg = colors.peachRed } },
                 { "NoiceMini", { bg = colors.sumiInk4 } },
                 { "NoiceLspProgressClient", { fg = colors.oniViolet, bold = true } },
-                { "Folded", { bg = colors.winterBlue } },
                 { "TSRainbowRed", { fg = colors.peachRed } },
                 { "TSRainbowYellow", { fg = colors.carpYellow } },
                 { "TSRainbowBlue", { fg = colors.crystalBlue } },

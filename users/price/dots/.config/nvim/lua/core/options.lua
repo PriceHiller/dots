@@ -69,20 +69,22 @@ M.setup = function()
     opt.undofile = true
 
     -- Better folding
+    vim.opt.foldtext = ""
+    opt.foldmethod = "indent"
+    opt.foldlevelstart = 99
+    opt.fillchars = { eob = " ", foldopen = "", foldsep = " ", foldclose = "" }
+    vim.o.foldcolumn = "auto"
+    vim.o.foldenable = true
+
+    -- Setup extra folding stuff
     vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-            if not (pcall(vim.treesitter.start)) then
-                return
+        callback = function(args)
+            if pcall(vim.treesitter.start, args.buf) then
+                vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                vim.opt_local.foldmethod = "expr"
             end
-            vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            vim.opt_local.foldmethod = "expr"
         end,
     })
-    opt.fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" }
-    vim.o.foldcolumn = "auto"
-    vim.o.foldlevel = 99
-    vim.o.foldlevelstart = 99
-    vim.o.foldenable = true
 
     -- Concealment for nicer rendering
     opt.conceallevel = 2
@@ -140,7 +142,7 @@ M.setup = function()
         "indent-heuristic",
         "linematch:60",
         "algorithm:histogram",
-        "inline:char"
+        "inline:char",
     }) do
         opt.diffopt:append(diffopt)
     end
