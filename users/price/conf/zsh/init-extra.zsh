@@ -4,10 +4,6 @@ emit_osc7_dir_change() {
 
 chpwd_functions=(${chwpd_functions[@]} "emit_osc7_dir_change")
 
-if [[ -n "$XDG_CONFIG_HOME" && -r "$XDG_CONFIG_HOME/zsh/zsh" ]]; then
-    source "$XDG_CONFIG_HOME/zsh/zsh"
-fi
-
 _prompt_executing=""
 function __emit_osc133() {
     local ret="$?"
@@ -33,3 +29,9 @@ function __restore_prompt_osc133() {
 
 preexec_functions+=(__restore_prompt_osc133)
 precmd_functions+=(__emit_osc133)
+
+
+if [[ -n "$XDG_CONFIG_HOME" && -r "$XDG_CONFIG_HOME/zsh/zsh" ]]; then
+    source "$XDG_CONFIG_HOME/zsh/zsh"
+fi
+
