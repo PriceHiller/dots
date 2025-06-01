@@ -229,47 +229,47 @@ return {
                 function()
                     require("snacks").picker.help()
                 end,
-                desc = "Pick: :help"
+                desc = "Pick: :help",
             },
             {
                 "<leader>gll",
-                desc = "> Git Log"
+                desc = "> Git Log",
             },
             {
                 "<leader>gll",
-                function ()
+                function()
                     require("snacks").picker.git_log()
                 end,
-                desc = "Pick: Git Log"
+                desc = "Pick: Git Log",
             },
             {
                 "<leader>glf",
-                function ()
+                function()
                     require("snacks").picker.git_log_file()
                 end,
-                desc = "Pick: Git Log File"
+                desc = "Pick: Git Log File",
             },
             {
                 "<leader>glL",
-                function ()
+                function()
                     require("snacks").picker.git_log_line()
                 end,
-                desc = "Pick: Git Log Line"
+                desc = "Pick: Git Log Line",
             },
             {
                 "<leader>gf",
-                function ()
+                function()
                     require("snacks").picker.git_files()
                 end,
-                desc = "Pick: Git Files"
+                desc = "Pick: Git Files",
             },
             {
                 "<leader>gw",
-                function ()
+                function()
                     require("snacks").picker.git_grep()
                 end,
-                desc = "Pick: Git Grep"
-            }
+                desc = "Pick: Git Grep",
+            },
         },
         config = function()
             local snacks = require("snacks")
