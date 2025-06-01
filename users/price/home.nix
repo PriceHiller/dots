@@ -2,7 +2,7 @@
   pkgs,
   config,
   lib,
-  clib,
+  osConfig,
   ...
 }:
 let
@@ -23,7 +23,7 @@ in
   imports = [ ./conf ];
   programs.home-manager.enable = true;
   home = {
-    stateVersion = "24.11";
+    stateVersion = "${osConfig.system.stateVersion}";
     language.base = "en_US.UTF-8";
     packages =
       with pkgs;
