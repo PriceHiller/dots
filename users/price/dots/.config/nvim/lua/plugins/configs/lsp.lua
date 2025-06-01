@@ -20,7 +20,7 @@ return {
         opts = function()
             local text_icon = ""
             local nvim_lightbulb = require("nvim-lightbulb")
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "CursorMoved", "CursorMovedI" }, {
                 callback = nvim_lightbulb.update_lightbulb,
             })
             return {
@@ -35,6 +35,10 @@ return {
     {
         "aznhe21/actions-preview.nvim",
         opts = {
+            backend = { "snacks" },
+            snacks = {
+                layout = { preset = "vertical" },
+            },
             telescope = {
                 border = {},
                 layout_strategy = "vertical",
@@ -126,35 +130,6 @@ return {
             "actionshrimp/direnv.nvim", -- This ensures that direnv is loaded first
             "williamboman/mason.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
-            {
-                "williamboman/mason-lspconfig.nvim",
-                opts = {
-                    automatic_installation = {
-                        exclude = {
-                            "muon",
-                            "clangd",
-                            "asm-lsp",
-                            "basedpyright",
-                            "ruff",
-                            "typescript-language-server",
-                            "cmake",
-                        },
-                    },
-                    handlers = {
-                        ["jdtls"] = function()
-                            require("java").setup({
-                                -- Handled by $JAVA_HOME
-                                jdk = {
-                                    auto_install = false,
-                                },
-                                notifications = {
-                                    dap = false,
-                                },
-                            })
-                        end,
-                    },
-                },
-            },
             "Hoffs/omnisharp-extended-lsp.nvim",
             "b0o/schemastore.nvim",
             {

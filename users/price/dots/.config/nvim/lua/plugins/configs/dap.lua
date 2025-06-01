@@ -132,8 +132,6 @@ return {
             return {}
         end,
         config = function()
-            require("dap.ext.vscode").load_launchjs()
-
             local dap = require("dap")
 
             --- Gets a path for a given program in the environment

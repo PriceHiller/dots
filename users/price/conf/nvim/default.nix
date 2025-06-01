@@ -77,6 +77,39 @@
       typescript
       vue-language-server
       typescript-language-server
+      bashdb
+      bash-language-server
+      shfmt
+      texlab
+      ansible-language-server
+      ansible-lint
+      csharp-ls
+      gopls
+      vscode-langservers-extracted
+      docker-language-server
+      docker-compose-language-service
+      hadolint
+      terraform-ls
+      jdt-language-server
+      yaml-language-server
+      tinymist
+      vim-language-server
+      taplo
+      kotlin-language-server
+      powershell-editor-services
+      sql-formatter
+      tflint
+      prettierd
+      nginx-language-server
+      asmfmt
+      asm-lsp
+      sqlfluff
+      google-java-format
+      stylua
+      lua-language-server
+      typstyle
+      cmake-format
+      cmake-language-server
     ];
   };
   xdg.mimeApps.defaultApplications = {
