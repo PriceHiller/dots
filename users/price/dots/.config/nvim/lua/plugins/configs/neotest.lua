@@ -5,7 +5,7 @@ return {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "nvim-neotest/neotest-go",
+            "fredrikaverpil/neotest-golang",
             "mrcjkb/rustaceanvim",
             "nvim-neotest/neotest-plenary",
         },
@@ -53,7 +53,7 @@ return {
                 },
                 adapters = {
                     require("neotest-plenary"),
-                    require("neotest-go"),
+                    require("neotest-golang"),
                     require("rustaceanvim.neotest"),
                 },
             })

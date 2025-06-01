@@ -1,5 +1,4 @@
 return {
-    {},
     {
         "stevearc/quicker.nvim",
         dependencies = {
