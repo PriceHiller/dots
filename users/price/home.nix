@@ -146,7 +146,6 @@ in
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
       PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
       ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
-      ANSIBLE_HOME = "${config.xdg.dataHome}/ansible";
       CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
       DOCKER_CONFIG = "${config.xdg.configHome}/docker";
       GRADLE_USER_HOME = "${config.xdg.dataHome}/gradle";

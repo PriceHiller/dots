@@ -5,7 +5,7 @@
       name = "BreezeX-RosePine-Linux";
       package = pkgs.rose-pine-cursor;
       gtk.enable = true;
-      x11.enable = true;
+      dotIcons.enable = false;
       size = 28;
     };
     packages = with pkgs; [
