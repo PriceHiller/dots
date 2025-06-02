@@ -1,15 +1,5 @@
 { pkgs, config, ... }:
-let
-  rel-dotdir = ".config/zsh-dotdir";
-  dotdir = "${config.home.homeDirectory}/${rel-dotdir}";
-in
 {
-  home = {
-    file.".zshenv".enable = false;
-    sessionVariables = {
-      ZDOTDIR = dotdir;
-    };
-  };
   programs = {
     zoxide = {
       enable = true;
@@ -21,7 +11,7 @@ in
     };
     zsh = {
       enable = true;
-      dotDir = "${rel-dotdir}";
+      dotDir = ".config/zsh-dotdir";
       enableCompletion = true;
       initContent = builtins.readFile ./init-extra.zsh;
       autosuggestion.enable = true;

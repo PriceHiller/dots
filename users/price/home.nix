@@ -142,7 +142,6 @@ in
     file = softLinkDots ".config";
 
     sessionVariables = {
-      _ZL_DATA = "${config.xdg.cacheHome}/zlua";
       OMNISHARPHOME = "${config.xdg.configHome}/omnisharp";
       PKG_CONFIG_PATH = "${config.home.profileDirectory}/lib/pkgconfig";
       ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
