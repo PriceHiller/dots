@@ -95,7 +95,7 @@ return {
                             function(args)
                                 ---@type string
                                 local fold = builtin.foldfunc(args)
-                                if #fold > 0 then
+                                if #fold > 0 and args.virtnum == 0 then
                                     return fold .. " "
                                 else
                                     return ""
