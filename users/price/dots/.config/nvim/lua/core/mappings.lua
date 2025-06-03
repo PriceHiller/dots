@@ -50,6 +50,26 @@ M.setup = function()
 
     -- Set current focused file as cwd
     vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
+    vim.keymap.set("n", "<leader>cg", function()
+        local cur_buf = vim.api.nvim_get_current_buf()
+        local cur_file = vim.api.nvim_buf_get_name(cur_buf)
+        local cur_file_dir = vim.fn.fnamemodify(cur_file, ":p:h")
+        local git_status = vim.system({ "git", "status" }, { cwd = cur_file_dir }):wait()
+        if git_status.code ~= 0 then
+            vim.notify("File is not in a git directory!", vim.log.levels.ERROR)
+            return
+        end
+
+        local git_dir = vim.fs.root(cur_file_dir, ".git")
+        if not git_dir then
+            error(
+                "Failed to locate the root git directory despite git status implying current file is in a git repository!"
+            )
+            return
+        end
+
+        vim.cmd.cd(git_dir)
+    end, { silent = true, desc = "Change CWD to Root of Git Directory For Current File" })
 
     -- Terminal mappings
     vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { silent = true })
