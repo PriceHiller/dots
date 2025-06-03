@@ -106,6 +106,13 @@ return {
 
                 fuzzy = {
                     implementation = "prefer_rust_with_warning",
+                    sorts = {
+                        "exact",
+                        "score",
+                        "sort_text",
+                        "kind",
+                        "label",
+                    },
                 },
 
                 ---@diagnostic disable-next-line: missing-fields
@@ -124,6 +131,9 @@ return {
                         "dadbod",
                     },
                     providers = {
+                        buffer = {
+                            score_offset = -5
+                        },
                         path = {
                             ---@type blink.cmp.PathOpts
                             opts = {
@@ -144,6 +154,7 @@ return {
                                     return dir
                                 end,
                             },
+                            score_offset = 100,
                         },
                         lazydev = {
                             name = "LazyDev",
