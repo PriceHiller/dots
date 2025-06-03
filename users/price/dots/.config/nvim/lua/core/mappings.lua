@@ -67,11 +67,11 @@ M.setup = function()
 
     -- Binding to insert literal tab
     vim.keymap.set("i", "<C-Tab>", function()
-        if vim.opt_local.expandtab:get() then
+        if vim.bo.expandtab then
             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-V><TAB>", true, false, true), "m", true)
         else
-            local spaces = string.rep(" ", vim.opt_local.shiftwidth:get() or 4)
-            vim.api.nvim_feedkeys(spaces, "m", false)
+            local spaces = string.rep(" ", math.max(vim.o.shiftwidth, 4))
+            vim.api.nvim_put({ spaces }, "c", false, true)
         end
     end, { silent = true, desc = "Insert Literal Tab" })
 
