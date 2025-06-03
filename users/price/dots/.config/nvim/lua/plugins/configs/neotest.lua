@@ -1,3 +1,10 @@
+---@param fun fun()
+local function wrap_neotest_flatten_nest(fun)
+    local old = vim.env.NVIM_FLATTEN_NEST
+    vim.env.NVIM_FLATTEN_NEST = 1
+    fun()
+    vim.env.NVIM_FLATTEN_NEST = old
+end
 return {
     {
         "nvim-neotest/neotest",
@@ -5,28 +12,92 @@ return {
             "nvim-lua/plenary.nvim",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "fredrikaverpil/neotest-golang",
+            "nvim-neotest/neotest-go",
             "mrcjkb/rustaceanvim",
             "nvim-neotest/neotest-plenary",
         },
         keys = {
             { "<leader>t", desc = "> Neotest" },
-            { "<leader>tr", "<cmd>Neotest run<CR>", desc = "Neotest: Run Test" },
-            { "<leader>tf", "<cmd>Neotest run file<CR>", desc = "Neotest: Run Test(s) in File" },
-            { "<leader>tl", "<cmd>Neotest run last<CR>", desc = "Neotest: Run Last Test(s)" },
-            { "<leader>tp", "<cmd>Neotest output-panel<CR>", desc = "Neotest: Output Panel" },
+            {
+                "<leader>tr",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest run")
+                    end)
+                end,
+                desc = "Neotest: Run Test",
+            },
+            {
+                "<leader>tf",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest run file")
+                    end)
+                end,
+                desc = "Neotest: Run Test(s) in File",
+            },
+            {
+                "<leader>tl",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest run last")
+                    end)
+                end,
+                desc = "Neotest: Run Last Test(s)",
+            },
+            {
+                "<leader>tp",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest output-panel")
+                    end)
+                end,
+                desc = "Neotest: Output Panel",
+            },
             {
                 "<leader>to",
                 function()
                     local neotest = require("neotest")
-                    neotest.output.open({ enter = true })
+                    vim.env.NVIM_FLATTEN_BLOCK = neotest.output.open({ enter = true })
                 end,
                 desc = "Neotest: Output",
             },
-            { "<leader>tk", "<cmd>Neotest summary toggle<CR>", desc = "Neotest: Summary Toggle" },
-            { "<leader>tn", "<cmd>Neotest jump prev<CR>", desc = "Neotest: Jump Prev" },
-            { "<leader>tN", "<cmd>Neotest jump next<CR>", desc = "Neotest: Jump Next" },
-            { "<leader>ta", "<cmd>Neotest attach<CR>", desc = "Neotest: Attach" },
+            {
+                "<leader>tk",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest summary toggle")
+                    end)
+                end,
+                desc = "Neotest: Summary Toggle",
+            },
+            {
+                "<leader>tn",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest jump prev")
+                    end)
+                end,
+                desc = "Neotest: Jump Prev",
+            },
+            {
+                "<leader>tN",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest jump next")
+                    end)
+                end,
+                desc = "Neotest: Jump Next",
+            },
+            {
+                "<leader>ta",
+                function()
+                    wrap_neotest_flatten_nest(function()
+                        vim.cmd("Neotest attach")
+                    end)
+                end,
+                desc = "Neotest: Attach",
+            },
         },
         config = function()
             vim.api.nvim_create_autocmd("BufWinEnter", {
@@ -53,7 +124,7 @@ return {
                 },
                 adapters = {
                     require("neotest-plenary"),
-                    require("neotest-golang"),
+                    require("neotest-go"),
                     require("rustaceanvim.neotest"),
                 },
             })
