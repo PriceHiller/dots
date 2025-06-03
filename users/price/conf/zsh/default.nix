@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   programs = {
     zoxide = {
@@ -13,28 +18,35 @@
       enable = true;
       dotDir = ".config/zsh-dotdir";
       enableCompletion = true;
-      initContent = builtins.readFile ./init-extra.zsh;
+      initContent =
+        let
+          zsh-cache-dir = "${config.xdg.cacheHome}/zsh";
+        in
+        lib.mkMerge [
+          (builtins.readFile ./init-extra.zsh)
+          "mkdir -p ${zsh-cache-dir} && autoload -Uz compinit && compinit -d ${zsh-cache-dir}/zcompdump-$ZSH_VERSION"
+        ];
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       plugins = [
         {
-          name = "zsh-completions";
-          src = "${pkgs.zsh-completions}/share/zsh-completions";
+          name = "nix-shell";
+          src = "${pkgs.zsh-nix-shell.src}";
         }
         {
-          name = "nix-zsh-completions";
-          src = "${pkgs.nix-zsh-completions}/share/nix-zsh-completions";
+          name = pkgs.zsh-completions.pname;
+          src = pkgs.zsh-completions.src;
+        }
+        {
+          name = pkgs.nix-zsh-completions.pname;
+          src = pkgs.nix-zsh-completions.src;
         }
         {
           name = "fzf-tab";
-          src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+          src = "${pkgs.zsh-fzf-tab.src}";
         }
       ];
-      completionInit =
-        let
-          zsh-cache-dir = "${config.xdg.cacheHome}/zsh";
-        in
-        "mkdir -p ${zsh-cache-dir} && autoload -U compinit && compinit -u -d ${zsh-cache-dir}/zcompdump-$ZSH_VERSION";
+      completionInit = "";
     };
   };
 }
