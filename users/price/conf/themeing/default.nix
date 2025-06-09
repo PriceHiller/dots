@@ -30,23 +30,7 @@
         theme=${themeName}
       '';
 
-      "Kvantum/${themeName}".source = "${
-        pkgs.stdenv.mkDerivation {
-          name = "Rose-Pine-Kvantum";
-          src = builtins.fetchGit {
-            name = "rose-pine-kvantum";
-            url = "https://github.com/rose-pine/kvantum.git";
-            rev = "5a51f5892ba752088dee062a6188b9f0bb59324b";
-          };
-          installPhase = ''
-            runHook preInstall
-            mkdir -p "$out/share/Kvantum"
-            for tar_archive in dist/*; do
-              tar -C "$out/share/Kvantum" -xf "$tar_archive"
-            done
-          '';
-        }
-      }/share/Kvantum/${themeName}";
+      "Kvantum/${themeName}".source = "${pkgs.rose-pine-kvantum }/share/Kvantum/themes/${themeName}/${themeName}.kvconfig";
     };
 
   dconf.settings."org/gnome/desktop/interface" = {
