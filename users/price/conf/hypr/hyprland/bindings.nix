@@ -1,6 +1,9 @@
 { ... }:
 {
   wayland.windowManager.hyprland = {
+    settings = {
+      input.kb_options = "caps:escape";
+    };
     extraConfig = # hyprlang
       ''
         # --- MOUSE ---
