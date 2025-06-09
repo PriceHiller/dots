@@ -7,7 +7,7 @@
       blur = {
         enabled = true;
         size = 8;
-        passes = 3;
+        passes = 1;
         noise = 0.025;
       };
       shadow.enabled = true;
