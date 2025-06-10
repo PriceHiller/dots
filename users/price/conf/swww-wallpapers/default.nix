@@ -54,16 +54,21 @@
                   local prev_mons_connected=0
                   local mons_connected=0
                   local cached_swww_query
+                  swww img -t wipe --transition-angle 40 -o eDP-1 ${../../wallpapers/Autumn-Leaves.jpg}
 
                   while sleep 1; do
                     cached_swww_query="$(swww query)"
                     mons_connected="$(wc -l <<< "$cached_swww_query")"
                     if ((mons_connected != prev_mons_connected)); then
                       prev_mons_connected="$mons_connected"
-                      swww img -t random ${../../wallpapers/Nebula.jpg}
-                      if [[ "$cached_swww_query" =~ "eDP-1: "* ]]; then
-                        swww img -t wipe --transition-angle 40 -o eDP-1 ${../../wallpapers/Autumn-Leaves.jpg}
-                      fi
+                      while IFS= read -r line; do
+                        IFS=" " read -r -a mon_parts <<< "''${line//\:/\ }"
+                        local mon="''${mon_parts[0]}"
+                        if [[ "$mon" != "eDP-1" ]]; then
+                          printf "Setting background image for new monitor: %s\n" "$mon"
+                          swww img -t random -o "$mon" ${../../wallpapers/Nebula.jpg}
+                        fi
+                      done <<< "$cached_swww_query"
                     fi
                   done
                 }
