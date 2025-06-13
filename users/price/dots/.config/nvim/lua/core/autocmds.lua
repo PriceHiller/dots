@@ -28,16 +28,14 @@ M.setup = function()
         end,
     })
 
-    -- NOTE: Disables status column elements in Terminal buffer
+    -- NOTE: Some TermOpen improvements
     vim.api.nvim_create_autocmd("TermOpen", {
         group = augroup,
-        callback = function()
-            vim.api.nvim_set_option_value("statuscolumn", "", { scope = "local" })
-            vim.api.nvim_set_option_value("signcolumn", "no", { scope = "local" })
-            vim.api.nvim_set_option_value("number", false, { scope = "local" })
-            vim.api.nvim_set_option_value("relativenumber", false, { scope = "local" })
+        callback = function(args)
             vim.api.nvim_set_option_value("spell", false, { scope = "local" })
-            vim.cmd.startinsert()
+            if vim.api.nvim_get_current_buf() == args.buf then
+                vim.cmd.startinsert()
+            end
         end,
     })
 
