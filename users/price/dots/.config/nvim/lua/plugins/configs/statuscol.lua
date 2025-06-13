@@ -66,29 +66,6 @@ return {
                     {
                         text = { builtin.lnumfunc },
                         click = "v:lua.ScLa",
-                        condition = {
-                            function(args)
-                                if not args.rnu and not args.nu then
-                                    return false
-                                end
-
-                                local buftype = vim.bo[args.buf]
-                                if buftype ~= "terminal" then
-                                    return true
-                                end
-
-                                local wincfg = vim.api.nvim_win_get_config(args.win)
-                                vim.print(wincfg)
-                                if #wincfg.relative > 0 then
-                                    vim.print(
-                                        ("Win: %d"):format(args.win),
-                                        ("Buf: %d [%s]"):format(args.buf, buftype),
-                                        wincfg
-                                    )
-                                end
-                                return #wincfg.relative == 0
-                            end,
-                        },
                     },
                     {
                         text = {
