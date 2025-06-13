@@ -24,14 +24,6 @@ return {
                             col = "0%",
                         },
                     },
-                    cmdline_input = {
-                        border = {
-                            style = "rounded",
-                        },
-                    },
-                },
-                popupmenu = {
-                    backend = "cmp",
                 },
                 routes = {
                     {
