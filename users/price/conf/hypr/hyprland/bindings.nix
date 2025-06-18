@@ -61,7 +61,7 @@
 
         # --- Screen Captures ---
         # May be videos or screenshots
-        bind = SUPER,S,exec,grim -g "$(slurp)" - | swappy -f - -o - | wl-copy --type image/png
+        bind = SUPER,S,exec,grim -g "$(slurp)" - | oculante -s
         bind = CTRLSUPER,S,exec,grim -g "$(slurp)" - | wl-copy --type image/png
         bind = SUPERSHIFT,S,exec,screen-cap
         bind = SUPERSHIFT,A,exec,screen-cap gif

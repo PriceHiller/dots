@@ -103,7 +103,6 @@ in
         nixfmt-rfc-style
         lxappearance
         direnv
-        swappy
         stylua
         typstyle
         typst

@@ -102,6 +102,8 @@ M.setup = function()
                 "wav",
                 "png",
                 "jpg",
+                "jpeg",
+                "bmp",
                 "docx",
                 "mp4",
                 "webm",

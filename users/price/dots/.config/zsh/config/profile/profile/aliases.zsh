@@ -109,14 +109,14 @@
 		alias audio-record="arecord -f dat -r 41000 -d 5 $(date_iso_8601).wav"
 	fi
 
-	# Override the `img` alias if we're in Neovide
-	if ! alias img >/dev/null 2>&1 && command -v swappy >/dev/null 2>&1; then
+	# Improved `img` alias outside of wezterm
+	if ! alias img >/dev/null 2>&1 && command -v oculante >/dev/null 2>&1; then
 		img() {
 			local file="${*}"
 			if [[ -z "${file}" ]]; then
-				swappy -f -
+				oculante -s
 			else
-				swappy -f "${file}"
+				oculante "${file}"
 			fi
 		}
 	fi

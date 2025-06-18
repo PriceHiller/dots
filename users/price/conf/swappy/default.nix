@@ -3,13 +3,6 @@
   home.packages = with pkgs; [
     swappy
   ];
-  xdg.mimeApps = {
-    defaultApplications = {
-
-      "image/png" = [ "swappy.desktop" ];
-      "image/jpeg" = [ "swappy.desktop" ];
-    };
-  };
   xdg.configFile."swappy/config" = {
     recursive = true;
     text = ''
