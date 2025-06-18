@@ -54,7 +54,7 @@
                   local prev_mons_connected=0
                   local mons_connected=0
                   local cached_swww_query
-                  swww img -t wipe --transition-angle 40 -o eDP-1 ${../../wallpapers/Autumn-Leaves.jpg}
+                  swww img -t wipe --transition-angle 40 -o eDP-1 ${../../wallpapers/Autumn-Leaves.jpg} || true
 
                   while sleep 1; do
                     cached_swww_query="$(swww query)"
