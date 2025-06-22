@@ -1,4 +1,9 @@
-{ clib, ... }:
+{ ... }:
 {
-  imports = (clib.dirsIn ./.);
+  imports = [
+    ./hypridle
+    ./hyprland
+    ./hyprlock
+    ./hyprpaper
+  ];
 }
