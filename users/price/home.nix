@@ -106,7 +106,6 @@ in
         stylua
         typstyle
         typst
-        hurl
         mullvad-vpn
         easyeffects
         egl-wayland
