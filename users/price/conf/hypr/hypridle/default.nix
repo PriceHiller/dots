@@ -19,7 +19,7 @@
           }
           {
             timeout = 60 * 10;
-            on-timeout = "hyprctl dispatch dpms off";
+            on-timeout = "python ${./scripts/is-docked.py} && hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on; brightnessctl -r";
           }
           {
