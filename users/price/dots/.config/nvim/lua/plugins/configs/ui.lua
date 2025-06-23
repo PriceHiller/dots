@@ -5,16 +5,12 @@ return {
         keys = {
             {
                 "<leader>nd",
-                function()
-                    vim.cmd("UI Clear")
-                end,
+                "<cmd>UI clear<CR>",
                 desc = "Notifications: Dismiss",
             },
             {
                 "<leader>nv",
-                function()
-                    vim.cmd.messages()
-                end,
+                "<cmd>messages<CR>",
                 desc = "Notifications: View",
             },
         },
