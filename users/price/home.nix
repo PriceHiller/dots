@@ -31,7 +31,6 @@ in
         imhex
         kdePackages.kdenlive
         obs-studio
-        slack
         xdg-utils
         dig
         nethogs
