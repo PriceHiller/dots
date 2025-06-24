@@ -4,12 +4,12 @@
     enable = true;
     matchBlocks =
       rec {
-        ch-1 = {
+        ch1 = {
           hostname = "129.114.27.58";
           user = "cc";
         };
-        ch-2 = {
-          hostname = "129.114.26.136";
+        ch2 = {
+          hostname = "129.114.24.252";
           user = "cc";
         };
         luna = {
