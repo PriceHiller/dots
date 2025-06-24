@@ -1,20 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python
 
+import json
 from enum import Enum
 from pathlib import Path
-from typing import Self
-
+from typing import Self, override
 
 class LidState(Enum):
     OPEN = 1
-    CLOSED = 2
-    UNKNOWN = 3
+    UNKNOWN = 2
+    CLOSED = 0
 
     @classmethod
     def from_str(cls, input: str) -> Self:
-        state = cls.UNKNOWN
-        state = cls[input.upper()] or cls.UNKNOWN
-        return state
+        if input in ("OPEN", "CLOSED"):
+            return cls[input]
+        return cls["UNKNOWN"]
+
+    @override
+    def __str__(self) -> str:
+        return self.name
 
     @classmethod
     def from_acpi_str(cls, input: str) -> Self:
@@ -29,16 +33,15 @@ class LidState(Enum):
             lid_state_str = f.readline()
         return cls.from_acpi_str(lid_state_str)
 
-def ac_is_connected(acpi_path: str | Path = "/sys/class/power_supply/AC/online") -> bool:
-    connected: bool = False
-    with open(acpi_path) as f:
-        connected = bool(int(f.read(1)))
-    return connected
 
+    def to_dict(self) -> dict[str, str]:
+        return {"lid-state": str(self)}
 
 def main():
-    laptop_is_closed = LidState.read_laptop_lid_state() == LidState.CLOSED
-    res = not int(ac_is_connected() and laptop_is_closed)
+    lid_state = LidState.read_laptop_lid_state()
+    print(json.dumps(lid_state.to_dict()))
+    laptop_is_closed = lid_state == LidState.CLOSED
+    res = not laptop_is_closed
     exit(res)
 
 main()
