@@ -78,6 +78,20 @@ return {
                 mode = { "t" },
             },
             {
+                "<leader>nd",
+                function()
+                    require("snacks").notifier.hide()
+                end,
+                desc = "Notifications: Dismiss",
+            },
+            {
+                "<leader>nv",
+                function()
+                    require("snacks").picker.notifications()
+                end,
+                desc = "Notifications: Search",
+            },
+            {
                 "<leader>f",
                 desc = "> Picker",
             },
@@ -272,6 +286,11 @@ return {
                 },
                 bigfile = { enabled = true },
                 debug = { enabled = true },
+                notifier = {
+                    enabled = true,
+                    style = "compact",
+                    margin = { top = 1 },
+                },
                 words = { enabled = true },
                 input = {
                     enabled = true,

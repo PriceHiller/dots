@@ -406,17 +406,6 @@ return {
                 -- Quickfix stuff
                 { "QuickFixHeaderSoft", { link = "NonText" } },
                 { "QuickFixFilenameInvalid", { link = "NonText" } },
-
-                -- For `ui.nvim`
-                -- Lsp progress
-                { "LspProgress.icon", { fg = colors.crystalBlue, } },
-                { "LspProgress.spinner.undone", { fg = colors.waveAqua2, } },
-                { "LspProgress.spinner.done", { fg = colors.springGreen, } },
-                { "LspProgress.message", { fg = colors.fujiGray, } },
-                { "LspProgress.client.undone", { fg = colors.oniViolet2, bg = colors.winterBlue, }, },
-                { "LspProgress.client.done", { fg = colors.oniViolet2, bg = colors.winterBlue, }, },
-                { "LspProgress.percentage.undone", { fg = colors.surimiOrange, } },
-                { "LspProgress.percentage.done", { fg = colors.surimiOrange } },
             }
 
             if vim.g.neovide then
