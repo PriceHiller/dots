@@ -4,7 +4,22 @@
   lib,
   ...
 }:
+let
+  ZSH-CACHE = "${config.xdg.cacheHome}/zsh";
+in
 {
+  home = {
+    file."${ZSH-CACHE}/.hm-create" = {
+      text = ''
+        Created by hm to ensure `${ZSH-CACHE}` exists.
+
+        Do NOT edit!
+      '';
+      force = true;
+    };
+    file.".zshenv".enable = false;
+  };
+
   programs = {
     zoxide = {
       enable = true;
@@ -18,14 +33,19 @@
       enable = true;
       dotDir = ".config/zsh-dotdir";
       enableCompletion = true;
-      initContent =
-        let
-          zsh-cache-dir = "${config.xdg.cacheHome}/zsh";
-        in
-        lib.mkMerge [
-          (builtins.readFile ./init-extra.zsh)
-          "mkdir -p ${zsh-cache-dir} && autoload -Uz compinit && compinit -d ${zsh-cache-dir}/zcompdump-$ZSH_VERSION"
-        ];
+      completionInit = # zsh
+        ''
+          autoload -Uz compinit && compinit
+          autoload -Uz +X bashcompinit && bashcompinit
+        '';
+      initContent = lib.mkMerge [
+        (
+          # The lib.mkOrder here ensures `fzf-tab` loads _right_ after completion init occurs
+          lib.mkOrder 571 ''source "${pkgs.zsh-fzf-tab.src}/fzf-tab.plugin.zsh"''
+        )
+        ''source "${config.home.homeDirectory}/${config.programs.zsh.dotDir}/.zshenv"''
+        (builtins.readFile ./init-extra.zsh)
+      ];
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       plugins = [
@@ -41,12 +61,7 @@
           name = pkgs.nix-zsh-completions.pname;
           src = pkgs.nix-zsh-completions.src;
         }
-        {
-          name = "fzf-tab";
-          src = "${pkgs.zsh-fzf-tab.src}";
-        }
       ];
-      completionInit = "";
     };
   };
 }
