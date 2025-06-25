@@ -17,7 +17,6 @@ in
       '';
       force = true;
     };
-    file.".zshenv".enable = false;
   };
 
   programs = {
@@ -43,7 +42,6 @@ in
           # The lib.mkOrder here ensures `fzf-tab` loads _right_ after completion init occurs
           lib.mkOrder 571 ''source "${pkgs.zsh-fzf-tab.src}/fzf-tab.plugin.zsh"''
         )
-        ''source "${config.home.homeDirectory}/${config.programs.zsh.dotDir}/.zshenv"''
         (builtins.readFile ./init-extra.zsh)
       ];
       autosuggestion.enable = true;
