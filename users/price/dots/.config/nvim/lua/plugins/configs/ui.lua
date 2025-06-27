@@ -45,7 +45,7 @@ return {
             -- Integrate with blink.cmp
             vim.api.nvim_create_autocmd({ "VimResized", "VimEnter", "CmdlineEnter" }, {
                 callback = function()
-                    vim.g.ui_cmdline_pos = {  vim.o.lines - 1, 0 }
+                    vim.g.ui_cmdline_pos = { vim.o.lines - 1, 0 }
                 end,
             })
 

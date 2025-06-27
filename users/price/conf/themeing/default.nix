@@ -30,7 +30,8 @@
         theme=${themeName}
       '';
 
-      "Kvantum/${themeName}".source = "${pkgs.rose-pine-kvantum }/share/Kvantum/themes/${themeName}/${themeName}.kvconfig";
+      "Kvantum/${themeName}".source =
+        "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/${themeName}/${themeName}.kvconfig";
     };
 
   dconf.settings."org/gnome/desktop/interface" = {

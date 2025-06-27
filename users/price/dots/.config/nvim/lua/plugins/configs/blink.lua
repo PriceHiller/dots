@@ -131,7 +131,7 @@ return {
                     },
                     providers = {
                         buffer = {
-                            score_offset = -5
+                            score_offset = -5,
                         },
                         path = {
                             ---@type blink.cmp.PathOpts
