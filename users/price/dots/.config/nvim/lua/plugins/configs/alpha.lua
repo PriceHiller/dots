@@ -105,8 +105,9 @@ return {
             local vim_version = {
                 type = "text",
                 val = function()
-                    ---@type string
-                    local version = vim.split(vim.api.nvim_exec2("version", { output = true }).output, "\n")[2]
+                    ---@type string[]
+                    local version_lines = vim.split(vim.api.nvim_exec2("version", { output = true }).output, "\n")
+                    local version = version_lines[1] == "" and version_lines[2] or version_lines[1]
                     version = version:gsub("NVIM", "")
                     version = version:gsub("-nightly", "")
                     version = vim.trim(version)
