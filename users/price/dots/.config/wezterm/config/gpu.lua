@@ -1,7 +1,7 @@
 -- We have to provide a good gpu for wezterm to use gpu acceleration. We ideally want to use a vullkan front end, but if
 -- we are unable to locate a card that supports Vulkan we fall back to OpenGL
 local config = {}
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 local log = require("lib.log")
 
 local found_valid_gpu = false

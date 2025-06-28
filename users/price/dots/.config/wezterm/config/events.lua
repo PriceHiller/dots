@@ -1,4 +1,4 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 
 wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
     local scrollback_lines = require("config.misc").scrollback_lines

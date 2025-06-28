@@ -1,4 +1,4 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 
 return {
     font_dirs = {
@@ -7,6 +7,7 @@ return {
     use_cap_height_to_scale_fallback_fonts = true,
     line_height = 1.0,
     font = wezterm.font_with_fallback({
+        ---@diagnostic disable-next-line: missing-fields
         {
             family = "Fira Code",
             harfbuzz_features = {
@@ -20,18 +21,23 @@ return {
                 "ss10",
             },
         },
+        ---@diagnostic disable-next-line: missing-fields
         {
             family = "JetBrains Mono",
         },
+        ---@diagnostic disable-next-line: missing-fields
         {
             family = "MesloLGS Nerd Font",
         },
+        ---@diagnostic disable-next-line: missing-fields
         {
             family = "Twitter Color Emoji",
         },
+        ---@diagnostic disable-next-line: missing-fields
         {
             family = "Noto Color Emoji",
         },
+        ---@diagnostic disable-next-line: missing-fields
         { family = "Nerd Font Symbols" },
     }),
     font_size = 13,

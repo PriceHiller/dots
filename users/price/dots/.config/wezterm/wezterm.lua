@@ -1,4 +1,3 @@
-local wezterm = require("wezterm")
 local wlib = require("lib.wlib")
 local log = require("lib.log")
 
