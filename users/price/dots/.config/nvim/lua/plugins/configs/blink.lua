@@ -8,11 +8,13 @@ return {
                 { path = "luassert-types/library", words = { "assert" } },
                 { path = "busted-types/library", words = { "describe" } },
                 { path = "${3rd}/luv/library", words = { "vim%.uv", "vim%.loop" } },
+                { path = "wezterm-types", mods = { "wezterm" } },
             },
         },
         dependencies = {
             { "LuaCATS/luassert", lazy = true },
             { "LuaCATS/busted", lazy = true },
+            { "gonstoll/wezterm-types", lazy = true },
         },
     },
     {
