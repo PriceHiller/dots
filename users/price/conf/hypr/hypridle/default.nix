@@ -19,7 +19,7 @@
           }
           {
             timeout = 60 * 10;
-            on-timeout = "${./scripts/is-on-ac.py} && hyprctl dispatch dpms off";
+            on-timeout = "! ${./scripts/is-on-ac.py} && hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on; brightnessctl -r";
           }
           {
@@ -33,8 +33,8 @@
             on-resume = "brightnessctl -r";
           }
           {
-            timeout = 60 * 10;
-            on-timeout = "loginctl lock-session; systemctl suspend";
+            timeout = 60 * 15;
+            on-timeout = "! ${./scripts/is-on-ac.py} && systemctl suspend";
           }
         ];
     };
