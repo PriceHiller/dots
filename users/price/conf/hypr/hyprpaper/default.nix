@@ -2,7 +2,7 @@
 {
   services.hyprpaper =
     let
-      eDP-1-wallpaper = builtins.toString ../wallpapers/Nebula.jpg;
+      eDP-1-wallpaper = builtins.toString ../wallpapers/Autumn-Leaves.jpg;
       default-wallpaper = builtins.toString ../wallpapers/Nebula.jpg;
     in
     {
