@@ -1,17 +1,11 @@
 { pkgs, config, ... }:
 let
-  AWS-HOME = "${config.xdg.cacheHome}/aws";
+  AWS-CacheHome = "${config.xdg.cacheHome}/aws";
+  AWS-DataHome = "${config.xdg.dataHome}/aws";
 in
 {
+  link."${AWS-DataHome}/shared-credentials".source = builtins.trace config.age.secrets config.age.secrets.hm-price-aws.path;
   home = {
-    file."${AWS-HOME}/.hm-create" = {
-      text = ''
-        Created by hm to ensure `${AWS-HOME}` exists.
-
-        Do NOT edit!
-      '';
-      force = true;
-    };
     packages = [
       (pkgs.symlinkJoin {
         name = "aws";
@@ -19,7 +13,7 @@ in
         buildInputs = [ pkgs.makeWrapper ];
         postBuild = ''
           wrapProgram "$out/bin/aws" \
-            --set 'HOME' '${AWS-HOME}'
+            --set 'HOME' '${AWS-CacheHome}'
         '';
       })
     ];
@@ -31,6 +25,11 @@ in
       AWS_SHARED_CREDENTIALS_FILE = "${config.xdg.dataHome}/aws/shared-credentials";
     };
   };
+  xdg.configFile."aws/config".text = ''
+    [default]
+    role_arn=arn:aws:iam::762233728178:role/Admin
+    source_profile=default
+  '';
 
   # Integrate AWS cli completions with ZSH
   programs.zsh.initContent = ''complete -C "$(command -v aws_completer)" aws'';

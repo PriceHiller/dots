@@ -137,45 +137,52 @@
                 inherit hostname;
                 inherit clib;
               };
-              modules = [
-                ./modules/nixos/btrfs-rollback.nix
-                ./modules/nixos/optimize-nix-store.nix
-                inputs.home-manager.nixosModules.home-manager
-                {
-                  home-manager = {
-                    sharedModules = [
-                      inputs.nixcord.homeModules.nixcord
-                    ];
-                    backupFileExtension = "hm.backup";
-                    extraSpecialArgs = {
-                      clib = (import ./lib { lib = nixpkgs.lib; });
-                      inherit inputs;
+              modules =
+                let
+                  age-secrets = {
+                    config = inputs.secrets.secrets.${hostname};
+                  };
+                in
+                [
+                  ./modules/nixos/btrfs-rollback.nix
+                  ./modules/nixos/optimize-nix-store.nix
+                  inputs.home-manager.nixosModules.home-manager
+                  {
+                    home-manager = {
+                      sharedModules = [
+                        inputs.nixcord.homeModules.nixcord
+                        inputs.agenix.homeManagerModules.default
+                        age-secrets
+                        ./modules/hm/link-file.nix
+                      ];
+                      backupFileExtension = "hm.backup";
+                      extraSpecialArgs = {
+                        clib = (import ./lib { lib = nixpkgs.lib; });
+                        inherit inputs;
+                      };
+                      useGlobalPkgs = true;
+                      useUserPackages = true;
+                      users.price = import ./users/price/home.nix;
                     };
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    users.price = import ./users/price/home.nix;
-                  };
-                }
-                inputs.lanzaboote.nixosModules.lanzaboote
-                inputs.impermanence.nixosModules.impermanence
-                inputs.agenix.nixosModules.default
-                inputs.disko.nixosModules.disko
-                {
-                  config = {
-                    nixpkgs.overlays = [
-                      inputs.emacs-overlay.overlays.default
-                      inputs.neovim-nightly-overlay.overlays.default
-                      inputs.fenix.overlays.default
-                      self.overlays.modifications
-                      self.overlays.additions
-                    ];
-                  };
-                }
-                {
-                  config = inputs.secrets.secrets.${hostname};
-                }
-                ./hosts/${hostname}
-              ];
+                  }
+                  inputs.lanzaboote.nixosModules.lanzaboote
+                  inputs.impermanence.nixosModules.impermanence
+                  inputs.agenix.nixosModules.default
+                  inputs.disko.nixosModules.disko
+                  {
+                    config = {
+                      nixpkgs.overlays = [
+                        inputs.emacs-overlay.overlays.default
+                        inputs.neovim-nightly-overlay.overlays.default
+                        inputs.fenix.overlays.default
+                        self.overlays.modifications
+                        self.overlays.additions
+                      ];
+                    };
+                  }
+                  age-secrets
+                  ./hosts/${hostname}
+                ];
             };
           luna =
             let
