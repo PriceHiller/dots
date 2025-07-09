@@ -41,4 +41,34 @@ rec {
         );
     in
     f [ ] attrList;
+  # Converts an attr path to the string representation of that path
+  #   {
+  #     hello = { world = true; };
+  #     goodbye = { moon = "bye"; }
+  #   }
+  #     Becomes
+  #   {
+  #     "hello.world" = true;
+  #     "goodbye.moon" = "bye";
+  #   }
+  #     Works for arbitrarily nested attrsets
+  attrsToStringPath =
+    attrs:
+    let
+      _attrsToStringPath =
+        _parent:
+        let
+          parent = if isNull _parent then "" else "${_parent}.";
+        in
+        attrs:
+        lib.attrsets.foldlAttrs (
+          acc: _name:
+          let
+            name = "${parent}${_name}";
+          in
+          value:
+          acc // (if builtins.isAttrs value then _attrsToStringPath name value else { "${name}" = value; })
+        ) { } attrs;
+    in
+    _attrsToStringPath null attrs;
 }
