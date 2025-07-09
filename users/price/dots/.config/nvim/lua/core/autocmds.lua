@@ -92,7 +92,7 @@ M.setup = function()
                     end,
                 })
                 vim.system({ "xdg-open", fpath }, { detach = true })
-                vim.api.nvim_buf_delete(buf, { force = true })
+                vim.api.nvim_buf_delete(buf, {})
             end
 
             local extensions = {
