@@ -169,7 +169,6 @@ if [[ "${TERM}" = "wezterm" ]]; then
 fi
 
 ### Miscellaneous ###
-export AWS_CLI_AUTO_PROMPT=on
 export DOCKER_BUILDKIT=1
 export NOTES_DIR="${HOME}/.notes"
 export GITLAB_HOST="https://gitlab.orion-technologies.io"
