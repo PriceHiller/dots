@@ -19,6 +19,7 @@ local edges = {
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local function tab_title(tab_info)
+
         local title = tab_info.tab_title
         -- if the tab title is explicitly set, take that
         if title and #title > 0 then
@@ -93,38 +94,6 @@ wezterm.on("update-right-status", function(window, pane)
         hostname = "@" .. hostname
     end
 
-    local date = " " .. wezterm.strftime("%a, %b %-d, %I:%M %p")
-
-    -- An entry for each battery (typically 0 or 1 battery)
-    local battery = ""
-    for _, b in ipairs(wezterm.battery_info()) do
-        local charge_percent = b.state_of_charge * 100
-        local battery_icon = "󰁹"
-
-        if charge_percent < 100 then
-            battery_icon = "󰁹"
-        elseif charge_percent < 90 then
-            battery_icon = "󰂂"
-        elseif charge_percent < 80 then
-            battery_icon = "󰂁"
-        elseif charge_percent < 70 then
-            battery_icon = "󰂀"
-        elseif charge_percent < 60 then
-            battery_icon = "󰁿"
-        elseif charge_percent < 50 then
-            battery_icon = "󰁾"
-        elseif charge_percent < 40 then
-            battery_icon = "󰁽"
-        elseif charge_percent < 30 then
-            battery_icon = "󰁼"
-        elseif charge_percent < 20 then
-            battery_icon = "󰁻"
-        elseif charge_percent < 10 then
-            battery_icon = "󰁺"
-        end
-
-        battery = battery_icon .. " " .. string.format("%.0f%%", charge_percent)
-    end
 
     local leader_text = "󰀘 LEADER"
     local leader = ""
@@ -178,8 +147,6 @@ wezterm.on("update-right-status", function(window, pane)
         leader,
         key_table,
         cwd,
-        battery,
-        date,
         hostname,
     }
     while #cells > 0 do
