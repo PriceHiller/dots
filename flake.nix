@@ -53,6 +53,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    zsh-completions = {
+      url = "github:zsh-users/zsh-completions";
+      flake = false;
+    };
     self.submodules = true;
     secrets = {
       url = ./secrets;

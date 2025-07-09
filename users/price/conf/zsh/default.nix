@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
 let
@@ -31,18 +32,18 @@ in
     zsh = {
       enable = true;
       dotDir = ".config/zsh-dotdir";
-      enableCompletion = true;
-      completionInit = # zsh
+      enableCompletion = false;
+      initContent = lib.mkMerge [
+        (builtins.readFile ./init-extra.zsh)
+        # Init completions LAST
+        # zsh
         ''
           autoload -Uz compinit && compinit
-          autoload -Uz +X bashcompinit && bashcompinit
-        '';
-      initContent = lib.mkMerge [
-        (
-          # The lib.mkOrder here ensures `fzf-tab` loads _right_ after completion init occurs
-          lib.mkOrder 571 ''source "${pkgs.zsh-fzf-tab.src}/fzf-tab.plugin.zsh"''
-        )
-        (builtins.readFile ./init-extra.zsh)
+          autoload -Uz bashcompinit && bashcompinit
+        ''
+        # Ensure we load fzf-tab AFTER compinit
+        # zsh
+        ''source "${pkgs.zsh-fzf-tab.src}/fzf-tab.plugin.zsh"''
       ];
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
@@ -52,8 +53,8 @@ in
           src = "${pkgs.zsh-nix-shell.src}";
         }
         {
-          name = pkgs.zsh-completions.pname;
-          src = pkgs.zsh-completions.src;
+          name = "zsh-completions";
+          src = "${inputs.zsh-completions}";
         }
         {
           name = pkgs.nix-zsh-completions.pname;
