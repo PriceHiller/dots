@@ -634,7 +634,7 @@ return {
                     {
                         provider = function()
                             ---@diagnostic disable-next-line: undefined-field
-                            return vim.opt_local.foldlevel:get() .. " "
+                            return (vim.b.ufo_foldlevel or vim.opt_local.foldlevel:get()) .. " "
                         end,
                         hl = {
                             fg = colors.fujiWhite,
