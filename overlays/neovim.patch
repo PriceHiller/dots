@@ -1,0 +1,14 @@
+diff --git a/src/nvim/message.c b/src/nvim/message.c
+index 5c96fb9f73..ae52581058 100644
+--- a/src/nvim/message.c
++++ b/src/nvim/message.c
+@@ -2497,7 +2497,7 @@ void msg_scroll_flush(void)
+ 
+ void msg_reset_scroll(void)
+ {
+-  if (ui_has(kUIMessages)) {
++  if (ui_has(kUIMultigrid) || ui_has(kUIMessages)) {
+     return;
+   }
+   // TODO(bfredl): some duplicate logic with update_screen(). Later on
+

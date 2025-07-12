@@ -11,6 +11,11 @@
     opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
       propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python311Packages.qt-material ];
     });
+    neovim = prev.neovim.overrideAttrs (oldAttrs: {
+      patches = [
+        ./neovim.patch
+      ];
+    });
     age-plugin-yubikey = prev.age-plugin-yubikey.overrideAttrs (oldAttrs: {
       nativeBuildInputs = oldAttrs.nativeBuildInputs or [ ] ++ [ final.makeWrapper ];
       postInstall =
