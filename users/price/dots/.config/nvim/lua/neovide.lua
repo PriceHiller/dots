@@ -57,18 +57,8 @@ vim.keymap.set("t", "<D-v>", [[<C-\><C-N>"+Pi]])
 vim.keymap.set({ "", "!", "v", "t" }, "<D-x>", "<cmd>tabnext<CR>", { noremap = true, silent = true })
 vim.keymap.set({ "", "!", "v", "t" }, "<D-z>", "<cmd>tabprevious<CR>", { noremap = true, silent = true })
 
-vim.keymap.set({ "", "!", "v", "t" }, "<D-t>", function()
-    local cursor_pos = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())
-    local success, _ = pcall(vim.cmd.tabedit, "%")
-    if success then
-        pcall(vim.api.nvim_win_set_cursor, vim.api.nvim_get_current_win(), cursor_pos)
-    else
-        vim.cmd.tabedit()
-    end
-end, { noremap = true, silent = true })
-
 -- Spawn new terminal in new tab
-vim.keymap.set({ "", "!", "v", "t" }, "<C-S-x>", "<cmd>tabnew | terminal<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "", "!", "v", "t" }, "<D-t>", "<cmd>tabnew | terminal<CR>", { noremap = true, silent = true })
 -- Spawn terminal in split direction
 for cmd, binds in pairs({
     ["<cmd>vertical belowright terminal<CR>"] = { "<C-S-Right>", "<C-S>l" },

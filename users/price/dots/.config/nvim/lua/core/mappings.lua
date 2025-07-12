@@ -78,9 +78,6 @@ M.setup = function()
     vim.keymap.set("n", "+", "<C-a>", { silent = true, remap = true, desc = "Increment" })
     vim.keymap.set("n", "-", "<C-x>", { silent = true, remap = true, desc = "Decrement" })
 
-    -- Tabclose binding
-    vim.keymap.set("n", "<C-w>t", "<cmd>tabclose<CR>", { silent = true, desc = "Close Tab" })
-
     -- Buffer bindings
     vim.keymap.set("n", "<A-a>", ":bprevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
     vim.keymap.set("n", "<A-s>", ":bnext<CR>", { silent = true, desc = "Go to Next Buffer" })
@@ -211,6 +208,22 @@ M.setup = function()
     end, {
         desc = "File: XDG Open",
     })
+
+    -- Tab Keybindings
+    vim.keymap.set({ "", "!", "v"}, "<C-CR>", function()
+        local cursor_pos = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())
+        local success, _ = pcall(vim.cmd.tabedit, "%")
+        if success then
+            pcall(vim.api.nvim_win_set_cursor, vim.api.nvim_get_current_win(), cursor_pos)
+        else
+            vim.cmd.tabedit()
+        end
+    end, { noremap = true, silent = true })
+    -- Next/prev tabs
+    vim.keymap.set({ "", "!", "v" }, "<C-'>", "<cmd>tabnext<CR>", { noremap = true, silent = true })
+    vim.keymap.set({ "", "!", "v"}, "<C-;>", "<cmd>tabprevious<CR>", { noremap = true, silent = true })
+    -- Close tab
+    vim.keymap.set({ "", "!", "v"}, "<C-\\>", "<cmd>tabclose<CR>", { noremap = true, silent = true })
 end
 
 return M
