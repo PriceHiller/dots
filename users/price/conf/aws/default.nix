@@ -4,7 +4,7 @@ let
   AWS-DataHome = "${config.xdg.dataHome}/aws";
 in
 {
-  link."${AWS-DataHome}/shared-credentials".source = builtins.trace config.age.secrets config.age.secrets.hm-price-aws.path;
+  link."${AWS-DataHome}/shared-credentials".source = config.age.secrets.hm-price-aws.path;
   home = {
     packages = [
       (pkgs.symlinkJoin {
