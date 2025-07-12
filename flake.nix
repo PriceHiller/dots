@@ -42,7 +42,7 @@
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
     neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay?ref=0fd4be7400745048f8b735871859823c7b76d3ec";
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
