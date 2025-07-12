@@ -4,7 +4,7 @@
     enable = true;
     config = {
       themeLinks = [
-        "https://catppuccin.github.io/discord/dist/catppuccin-macchiato.theme.css"
+        "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-macchiato.theme.css"
       ];
       plugins = {
         alwaysAnimate = {
