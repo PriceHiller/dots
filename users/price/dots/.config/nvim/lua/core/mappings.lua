@@ -119,7 +119,6 @@ M.setup = function()
 
     -- Create newline from anywhere in current line without modifying current line
     vim.keymap.set("i", "<S-CR>", "<C-o>o", { silent = true, desc = "Insert: New Line" })
-    vim.keymap.set("i", "<C-S-CR>", "<C-o>O", { silent = true, desc = "Insert: New Line" })
 
     -- Copy first leading word of line onto newline and insert (autolist functionality basically)
     vim.keymap.set({ "i", "n" }, "<C-CR>", function()
@@ -210,7 +209,7 @@ M.setup = function()
     })
 
     -- Tab Keybindings
-    vim.keymap.set({ "", "!", "v"}, "<C-CR>", function()
+    vim.keymap.set({ "", "!", "v"}, "<C-S-CR>", function()
         local cursor_pos = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())
         local success, _ = pcall(vim.cmd.tabedit, "%")
         if success then
