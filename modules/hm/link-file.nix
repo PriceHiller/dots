@@ -69,7 +69,9 @@ in
             in
             "${pkgs.writeShellScriptBin "link" ''
               mkdir -p "$(${pkgs.coreutils}/bin/dirname "${target}")/" 2>/dev/null || true
-              mv '${target}' "${target}.$(${pkgs.coreutils}/bin/date +'%y-%d-%m').old" 2>/dev/null || true
+              if ! [[ -L '${target}' ]]; then
+                mv '${target}' "${target}.$(${pkgs.coreutils}/bin/date +'%y-%d-%m').old" 2>/dev/null || true
+              fi
               echo "Linking '${source}' to '${target}'"
               ${pkgs.coreutils}/bin/ln -sf "${source}" "${target}"
             ''}/bin/link";
