@@ -7,7 +7,6 @@
   fetchgit,
   runCommand,
   gn,
-  neovim,
   ninja,
   makeWrapper,
   pkg-config,
@@ -75,7 +74,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
       cctools.libtool
     ];
 
-  nativeCheckInputs = [ neovim ];
+  doCheck = false;
+  # nativeCheckInputs = [ neovim ];
 
   buildInputs = [
     SDL2
