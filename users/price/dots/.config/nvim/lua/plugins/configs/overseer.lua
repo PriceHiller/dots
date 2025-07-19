@@ -56,6 +56,26 @@ return {
                     },
                 }
             )
+            overseer.register_template(
+                ---@type overseer.TemplateDefinition
+                {
+                    name = "Watch D2",
+                    desc = "Run `d2 --watch`",
+                    ---@return overseer.TaskDefinition
+                    builder = function(_)
+                        return {
+                            cmd = {
+                                "d2",
+                                "--watch",
+                                vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()),
+                            },
+                        }
+                    end,
+                    condition = {
+                        filetype = "d2",
+                    },
+                }
+            )
         end,
     },
 }

@@ -136,11 +136,45 @@ return {
                 "nvimtools/none-ls.nvim",
                 config = function()
                     local null_ls = require("null-ls")
+                    local h = require("null-ls.helpers")
+                    local methods = require("null-ls.methods")
+                    local d2_validate = h.make_builtin({
+                        name = "d2",
+                        meta = {
+                            url = "https://d2lang.com/",
+                            description = "D2 Validate",
+                        },
+                        method = methods.internal.DIAGNOSTICS_ON_SAVE,
+                        filetypes = { "d2" },
+                        generator_opts = {
+                            command = "d2",
+                            args = {
+                                "$FILENAME",
+                                "-"
+                            },
+                            format = "line",
+                            ignore_stdout = true,
+                            from_stderr = true,
+                            to_temp_file = true,
+                            on_output = h.diagnostics.from_pattern(
+                                [[(%w+):.*(%d+):(%d+): (.+)]],
+                                { "severity", "row", "col", "message" },
+                                {
+                                    severities = {
+                                        err = vim.diagnostic.severity.ERROR,
+                                    },
+                                }
+                            ),
+                        },
+                        factory = h.generator_factory,
+                    })
                     local sqlfluff_config = {
                         extra_args = { "--dialect", "mysql" },
                     }
                     null_ls.setup({
                         sources = {
+                            null_ls.builtins.formatting.d2_fmt,
+                            d2_validate,
                             null_ls.builtins.formatting.google_java_format,
                             null_ls.builtins.formatting.stylua,
                             null_ls.builtins.formatting.asmfmt,
