@@ -46,18 +46,16 @@ M.setup = function()
         return 2
     end
 
-    -- Trims all trailing whitespace in the current buffer.
+    -- Trims trailing whitespace in the current buffer.
     local function trim_space(opts)
-        local line1 = opts.line1
-        local line2 = opts.line2
-        local buf = vim.api.nvim_get_current_buf()
-        local lines = vim.api.nvim_buf_get_lines(buf, line1 - 1, line2, false)
+        local view = vim.fn.winsaveview()
 
-        local new_lines = {}
-        for i, line in ipairs(lines) do
-            new_lines[i] = string.gsub(line, "%s+$", "")
-        end
-        vim.api.nvim_buf_set_lines(buf, line1 - 1, line2, false, new_lines)
+        local range_str = ("%d,%ds"):format(opts.line1, opts.line2)
+        local pat = range_str .. "/\\s\\+$//e"
+        vim.api.nvim_command("silent! undojoin")
+        vim.api.nvim_command("silent keepjumps keeppatterns " .. pat)
+
+        vim.fn.winrestview(view)
     end
 
     -- Create the user command
