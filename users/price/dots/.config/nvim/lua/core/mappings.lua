@@ -219,10 +219,14 @@ M.setup = function()
         end
     end, { noremap = true, silent = true })
     -- Next/prev tabs
-    vim.keymap.set({ "", "!", "v" }, "<C-'>", "<cmd>tabnext<CR>", { noremap = true, silent = true })
-    vim.keymap.set({ "", "!", "v"}, "<C-;>", "<cmd>tabprevious<CR>", { noremap = true, silent = true })
+    vim.keymap.set({ "", "!", "v", "t" }, "<C-:>", "<cmd>tabnext<CR>", { noremap = true, silent = true })
+    vim.keymap.set({ "", "!", "v", "t"}, '<C-">', "<cmd>tabprevious<CR>", { noremap = true, silent = true })
     -- Close tab
-    vim.keymap.set({ "", "!", "v"}, "<C-\\>", "<cmd>tabclose<CR>", { noremap = true, silent = true })
+    vim.keymap.set({ "", "!", "v", "t"}, "<C-|>", "<cmd>tabclose<CR>", { noremap = true, silent = true })
+
+    -- Search within selection
+    vim.keymap.set("x", "z/", "<C-\\><C-n>`</\\%V", { desc = "Search forward within visual selection" })
+    vim.keymap.set("x", "z?", "<C-\\><C-n>`>?\\%V", { desc = "Search backward within visual selection" })
 end
 
 return M
