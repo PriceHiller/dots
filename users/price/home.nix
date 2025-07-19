@@ -119,6 +119,7 @@ in
         tree-sitter
         strawberry
         ghidra
+        d2
       ]
       ++ [
         age
