@@ -28,6 +28,7 @@ in
   xdg.configFile."aws/config".text = ''
     [default]
     role_arn=arn:aws:iam::762233728178:role/Admin
+    region=us-east-1
     source_profile=default
   '';
 
