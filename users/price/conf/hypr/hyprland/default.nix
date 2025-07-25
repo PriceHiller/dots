@@ -25,6 +25,7 @@ in
         "col.inactive_border" = "rgb(${colors.hex.sumiInk4})";
       };
       misc = {
+        enable_anr_dialog = false;
         disable_hyprland_logo = true;
         focus_on_activate = true;
         animate_manual_resizes = true;
