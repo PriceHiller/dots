@@ -171,11 +171,13 @@ return {
                             --- @type blink-ripgrep.Options
                             opts = {
                                 prefix_min_len = 3,
-                                additional_rg_options = {
-                                    "--max-depth=4",
-                                    "--one-file-system",
-                                    "--hidden",
-                                    "--glob=!.git/*",
+                                backend = {
+                                    additional_rg_options = {
+                                        "--max-depth=4",
+                                        "--one-file-system",
+                                        "--hidden",
+                                        "--glob=!.git/*",
+                                    },
                                 },
                             },
                         },
