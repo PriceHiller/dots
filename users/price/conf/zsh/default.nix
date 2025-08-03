@@ -31,7 +31,7 @@ in
     };
     zsh = {
       enable = true;
-      dotDir = ".config/zsh-dotdir";
+      dotDir = "${config.xdg.configHome}/zsh-dotdir";
       enableCompletion = false;
       initContent = lib.mkMerge [
         (builtins.readFile ./init-extra.zsh)
