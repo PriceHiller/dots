@@ -31,6 +31,7 @@ in
     packages =
       with pkgs;
       [
+        terraform
         imhex
         kdePackages.kdenlive
         obs-studio
