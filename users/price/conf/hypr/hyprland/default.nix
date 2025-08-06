@@ -20,17 +20,10 @@ in
     extraConfig = (builtins.readFile ./application/gromit-mpx.conf);
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
       inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
     settings = {
       plugin = {
-        hyprtrails = {
-          color = "rgb(${colors.rgb.waveRed})";
-          bezier_step = 0.1;
-          points_per_step = 10;
-          history_step = 1;
-        };
         hyprexpo = {
           columns = 3;
           gap_size = 5;
