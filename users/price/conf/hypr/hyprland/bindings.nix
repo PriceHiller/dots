@@ -124,8 +124,8 @@
         bind = SUPERCTRL,9,exec,${./scripts/move-workspace-mon.bash} 9
 
         # --- EXPO ---
-        bind = CTRL,up,hyprexpo:expo,toggle
-        bind = CTRL,down,hyprexpo:expo,off
+        bind = CTRLSUPER,up,hyprexpo:expo,toggle
+        bind = CTRLSUPER,down,hyprexpo:expo,off
         bindn = ,escape,hyprexpo:expo,off
       '';
   };
