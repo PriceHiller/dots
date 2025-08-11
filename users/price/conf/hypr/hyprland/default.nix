@@ -20,7 +20,6 @@ in
     extraConfig = (builtins.readFile ./application/gromit-mpx.conf);
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
     settings = {
       plugin = {
@@ -34,21 +33,6 @@ in
           enable_gesture = true; # laptop touchpad
           gesture_fingers = 3; # 3 or 4
           gesture_distance = 300; # how far is the "max"
-        };
-        dynamic-cursors = {
-          enabled = true;
-          mode = "stretch";
-          stretch = {
-            limit = 3000;
-            function = "linear";
-            window = 50;
-          };
-          shake = {
-            timeout = 500;
-            base = 2.0;
-            speed = 4.0;
-            influence = 1.0;
-          };
         };
       };
       general = {
