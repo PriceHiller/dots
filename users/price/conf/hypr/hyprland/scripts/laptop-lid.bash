@@ -2,6 +2,7 @@
 
 set -eEuo pipefail
 
+
 log() {
 	local syslog_id="laptop-lid"
 	local title="Laptop Clamshell"
@@ -36,6 +37,15 @@ log() {
 	esac
 }
 
+LAPTOP_LID_CFG_FILE="${LAPTOP_LID_CFG_FILE:-${XDG_CONFIG_HOME}/hypr/laptop-monitors.conf}"
+
+log "TRACE" "Got laptop lid config file as: '${LAPTOP_LID_CFG_FILE}'"
+
+if [[ ! -w "${LAPTOP_LID_CFG_FILE}" ]]; then
+	log "ERROR" "No laptop config file exists at: '${LAPTOP_LID_CFG_FILE}'!"
+	exit 1
+fi
+
 handle-laptop-lid() {
 	local laptop_lid_state
 	local laptop_mon="${1:-"eDP-1"}"
@@ -54,8 +64,7 @@ handle-laptop-lid() {
 	"OPEN")
 		if ! hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1")'; then
 			log "TRACE" "Laptop lid is open, attempting to enable it..."
-			if hyprctl keyword monitor "${laptop_mon},enable"; then
-				hyprctl keyword monitor "${laptop_mon},${laptop_mon_options}"
+			if echo "monitor=${laptop_mon},${laptop_mon_options}" > "${LAPTOP_LID_CFG_FILE}"; then
 				log "Laptop screen enabled"
 			else
 				log "ERROR" "Received an error when enabling the laptop screen!"
@@ -65,7 +74,7 @@ handle-laptop-lid() {
 	"CLOSED")
 		if hyprctl monitors -j | jq -er '.[] | select(.name=="eDP-1")' >/dev/null; then
 			log "TRACE" "Laptop lid is shut, attempting to disable it..."
-			if hyprctl keyword monitor "${laptop_mon},disable"; then
+			if echo "monitor=${laptop_mon},disable" > "${LAPTOP_LID_CFG_FILE}"; then
 				log "Laptop screen disabled"
 			else
 				log "ERROR" "Received an error when disabling the laptop screen in clamshell mode!"
