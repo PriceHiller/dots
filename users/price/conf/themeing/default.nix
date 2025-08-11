@@ -10,43 +10,35 @@
     };
     packages = with pkgs; [
       kdePackages.qt6ct
-      libsForQt5.qt5ct
     ];
+    sessionVariables = {
+      GTK_THEME = "${config.gtk.theme.name}";
+    };
   };
 
   qt = {
     enable = true;
-    platformTheme.name = "qt6ct";
-    style.name = "kvantum";
+    platformTheme.name = "gtk";
+    style.name = "gtk2";
   };
 
-  xdg.configFile =
-    let
-      themeName = "rose-pine-moon-rose";
-    in
-    {
-      "Kvantum/kvantum.kvconfig".text = ''
-        [General]
-        theme=${themeName}
-      '';
-
-      "Kvantum/${themeName}".source =
-        "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/${themeName}/${themeName}.kvconfig";
-    };
-
   dconf.settings."org/gnome/desktop/interface" = {
-    color-scheme = "default";
+    color-scheme = "prefer-dark";
   };
 
   gtk = {
     enable = true;
     theme = {
-      name = "rose-pine-moon";
-      package = pkgs.rose-pine-gtk-theme;
+      name = "Colloid-Dark-Catppuccin";
+      package = pkgs.colloid-gtk-theme.override {
+        tweaks = [ "catppuccin" ];
+      };
     };
     iconTheme = {
-      name = "rose-pine-moon";
-      package = pkgs.rose-pine-icon-theme;
+      name = "Colloid-Catppuccin-Dark";
+      package = pkgs.colloid-icon-theme.override {
+        schemeVariants = [ "catppuccin" ];
+      };
     };
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
   };
