@@ -2,11 +2,25 @@
 {
   programs.nixcord = {
     enable = true;
+    vesktop.enable = true;
+    discord.enable = false;
     config = {
       themeLinks = [
         "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/themes/flavors/midnight-catppuccin-macchiato.theme.css"
       ];
       plugins = {
+        favoriteGifSearch = {
+          enable = true;
+        };
+        fullSearchContext = {
+          enable = true;
+        };
+        copyFileContents = {
+          enable = true;
+        };
+        pinDMs = {
+          enable = true;
+        };
         alwaysAnimate = {
           enable = true;
         };
