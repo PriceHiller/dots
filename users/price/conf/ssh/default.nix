@@ -13,11 +13,11 @@
           user = "cc";
         };
         luna = {
-          hostname = "luna.hosts.price-hiller.com";
+          hostname = "luna.hosts.pricehiller.com";
           user = "root";
           port = 2200;
         };
-        "luna.hosts.price-hiller.com" = luna;
+        "luna.hosts.pricehiller.com" = luna;
         asgard = {
           hostname = "asgard-eternal.com";
           user = "asgard";

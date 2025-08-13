@@ -122,6 +122,9 @@ in
       };
     };
     nginx.virtualHosts."${gitea_host}" = {
+      serverAliases = [
+        "git.price-hiller.com"
+      ];
       enableACME = true;
       forceSSL = true;
       locations = {

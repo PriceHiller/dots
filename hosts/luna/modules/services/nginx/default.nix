@@ -10,7 +10,7 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "price@price-hiller.com";
+    defaults.email = "price@pricehiller.com";
   };
 
   networking.firewall.allowedTCPPorts = [
@@ -18,7 +18,10 @@
     443
   ];
   services.nginx.virtualHosts = {
-    "price-hiller.com" = {
+    "pricehiller.com" = {
+      serverAliases = [
+        "price-hiller.com"
+      ];
       forceSSL = true;
       enableACME = true;
       root = inputs.blog.packages.${pkgs.system}.default;

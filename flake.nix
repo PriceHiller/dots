@@ -42,7 +42,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     blog = {
-      url = "git+https://git.price-hiller.com/blog/blog";
+      url = "git+https://git.pricehiller.com/blog/blog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay = {
@@ -224,7 +224,7 @@
         in
         {
           luna = {
-            hostname = "luna.hosts.price-hiller.com";
+            hostname = "luna.hosts.pricehiller.com";
             fastConnection = true;
             profiles.system = {
               sshUser = "root";
