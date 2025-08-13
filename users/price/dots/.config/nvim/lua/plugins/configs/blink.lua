@@ -173,7 +173,6 @@ return {
                                 prefix_min_len = 3,
                                 backend = {
                                     additional_rg_options = {
-                                        "--max-depth=4",
                                         "--one-file-system",
                                         "--hidden",
                                         "--glob=!.git/*",
