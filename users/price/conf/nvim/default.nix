@@ -78,6 +78,7 @@
       vue-language-server
       typescript-language-server
       bashdb
+      vscode-extensions.vadimcn.vscode-lldb.adapter
       bash-language-server
       shfmt
       texlab
