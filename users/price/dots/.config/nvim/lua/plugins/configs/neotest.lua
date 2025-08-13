@@ -63,7 +63,7 @@ return {
                 desc = "Neotest: Output",
             },
             {
-                "<leader>tk",
+                "<leader>tt",
                 function()
                     wrap_neotest_flatten_nest(function()
                         vim.cmd("Neotest summary toggle")
