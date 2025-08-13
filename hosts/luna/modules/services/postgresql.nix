@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   pg_dataDir_base = "/var/lib/postgresql";
 in
@@ -17,12 +22,20 @@ in
       log_disconnections = true;
       logging_collector = true;
       log_statement = "all";
+      log_directory = "/var/log/postgresql/${config.services.postgresql.package.psqlSchema}/";
     };
     ensureUsers = [
       {
         name = "root";
         ensureClauses.superuser = true;
       }
+    ];
+  };
+
+  systemd.services.postgresql.serviceConfig = {
+    # Ensure postgres can write to its specified log directory
+    ReadWritePaths = lib.mkBefore [
+      config.services.postgresql.settings.log_directory
     ];
   };
 
