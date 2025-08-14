@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
     userName = "Price Hiller";
-    userEmail = "price@price-hiller.com";
+    userEmail = "price@pricehiller.com";
     aliases = {
       unstage = "reset HEAD --";
     };
