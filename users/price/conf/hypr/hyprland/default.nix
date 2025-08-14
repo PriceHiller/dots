@@ -1,10 +1,11 @@
 {
   inputs,
   pkgs,
+  clib,
   ...
 }:
 let
-  colors = import ../colors.nix;
+  colors = clib.kcolors;
 in
 {
   imports = [

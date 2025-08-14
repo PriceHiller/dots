@@ -1,8 +1,148 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    thunderbird
-  ];
+  pkgs,
+  config,
+  lib,
+  clib,
+  ...
+}:
+let
+  colors = clib.kcolors;
+  hx = colors.hex;
+in
+{
+  programs.thunderbird = {
+    enable = true;
+    package = pkgs.thunderbird.override {
+      extraPolicies.ExtensionSettings = {
+        "markdown-here-revival@xul.calypsoblue.org" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.thunderbird.net/user-media/addons/_attachments/988035/markdown_here_revival-4.0.7-tb.xpi";
+        };
+      };
+    };
+    settings = clib.attrsToMozillaPref {
+      mail = {
+        threadpane.listview = 1;
+        cloud_files.enabled = false;
+        openpgp.allow_external_gnupg = true;
+      };
+      mailnews = {
+        tags =
+          lib.mapAttrs' (name: value: (lib.nameValuePair (lib.toLower name) (value // { tag = "${name}"; })))
+          <| {
+            Github.color = "#${hx.sakuraPink}";
+            USAA.color = "#${hx.crystalBlue}";
+            Personal.color = "#${hx.peachRed}";
+            Finance.color = "#${hx.carpYellow}";
+            College.color = "#${hx.surimiOrange}";
+          };
+        headers = {
+          showSender = true;
+          showUserAgent = true;
+          sendUserAgent = false;
+        };
+        sanitize_date_header = true;
+        suppress_content_language = true;
+        display = {
+          date_senders_timezone = true;
+        };
+      };
+      # Isolate cookies
+      network.cookie.cookieBehavior = 5;
+      browser.aboutConfig.showWarning = false;
+
+      # === Disable Telemetry === #
+      datareporting = {
+        usage.uploadEnabled = false;
+        healthreport.uploadEnabled = false;
+        policy = {
+          dataSubmissionEnabled = false;
+          dataSubmissionPolicyBypassNotification = true;
+        };
+      };
+      dom.security.unexpected_system_load_telemetry_enabled = false;
+      privacy.trackingprotection.origin_telemetry.enabled = false;
+      telemetry.origin_telemetry_test_mode.enabled = false;
+      toolkit = {
+        coverage = {
+          opt-out = true;
+          endpoint.base = "";
+        };
+        telemetry = {
+          server = "http://no-telemetry.pricehiller.com";
+          enabled = false;
+          rejected = true;
+          prompted = 2;
+          archive.enabled = false;
+          bhrPing.enabled = false;
+          ecosystemtelemetry.enabled = false;
+          firstShutdownPing.enabled = false;
+          newProfilePing.enabled = false;
+          shutdownPingSender.enabled = false;
+          shutdownPingSender.enabledFirstSession = false;
+          updatePing.enabled = false;
+          unified = false;
+          coverage.opt-out = true;
+        };
+      };
+      app = {
+        shield.optoutstudies.enabled = false;
+        normandy = {
+          enabled = false;
+          api_url = "";
+        };
+        donation.eoy.version.viewed = 999;
+      };
+      breakpad.reportURL = "";
+      browser = {
+        crashReports.unsubmittedCheck.autoSubmit2 = false;
+        tabs.crashReporting.sendReport = false;
+        urlbar = {
+          quicksuggest.enabled = false;
+          suggest.quicksuggest = {
+            nonsponsored = false;
+            sponsored = false;
+          };
+        };
+      };
+      captivedetect.canonicalURL = "";
+      network = {
+        trr.confirmation_telemetry_enabled = false;
+        captive-portal-service.enabled = false;
+        connectivity-service.enabled = false;
+        prefetch-next = false;
+        predictor = {
+          enabled = false;
+          enable-prefetch = false;
+          http.speculative-parallel-limit = 0;
+        };
+      };
+      mail = {
+        rights.override = true;
+        instrumentation = {
+          postUrl = "";
+          askUser = false;
+          userOptedIn = false;
+        };
+      };
+      geo.provider.use_geoclue = false;
+      extensions.htmlaboutaddons.recommendations.enabled = false;
+      # === Disable Telemetry === #
+    };
+    profiles = {
+      "default" = {
+        isDefault = true;
+        withExternalGnupg = true;
+        accountsOrder = [
+          "price@pricehiller.com"
+          "price.hiller@my.utsa.edu"
+          "price@price-hiller.com"
+          "price@orion-technologies.io"
+          "philler3138@gmail.com"
+        ];
+      };
+    };
+  };
   xdg = {
     desktopEntries.thunderbird = {
       name = "thunderbird";
@@ -19,5 +159,172 @@
         "text/calendar" = [ "thunderbird.desktop" ];
       };
     };
+  };
+  accounts = {
+    calendar = {
+      accounts = {
+        "Calendar" =
+          let
+            emailCfg = config.accounts.email.accounts."price@pricehiller.com";
+          in
+          {
+            primary = true;
+            thunderbird.enable = true;
+            remote = {
+              url = "https://purelymail.com/webdav/178420/caldav/C17BA6E0-F877-461D-95A2-46109084C877/";
+              type = "caldav";
+              userName = emailCfg.userName;
+              passwordCommand = emailCfg.passwordCommand;
+            };
+          };
+      };
+    };
+    email =
+      let
+        gpg = {
+          key = "C3FADDE7A8534BEB";
+          signByDefault = true;
+        };
+        thunderbirdFilters = [
+          {
+            name = "Tag USAA Emails";
+            enabled = true;
+            type = "81";
+            action = "AddTag";
+            actionValue = "usaa";
+            condition = "AND (all addresses,contains,usaa)";
+          }
+          {
+            name = "Tag Github Emails";
+            enabled = true;
+            type = "81";
+            action = "AddTag";
+            actionValue = "github";
+            condition = "AND (all addresses,contains,github)";
+          }
+          {
+            name = "Tag Capital One Emails";
+            enabled = true;
+            type = "81";
+            action = "AddTag";
+            actionValue = "finance";
+            condition = "AND (all addresses,contains,capitalone.com)";
+          }
+          {
+            name = "Tag Personal Emails";
+            enabled = true;
+            type = "81";
+            action = "AddTag";
+            actionValue = "personal";
+            condition = "OR (all addresses,contains,jhiller@ccn-law.com) OR (all addresses,contains,samovepros.com) OR (all addresses,contains,avidgolfer@me.com) OR (all addresses,contains,sunnydays352@yahoo.com)";
+          }
+        ];
+      in
+      {
+        maildirBasePath = "${config.xdg.dataHome}/mail/";
+        accounts = {
+          "price@pricehiller.com" = rec {
+            inherit gpg;
+            realName = "Price Hiller";
+            address = "price@pricehiller.com";
+            userName = address;
+            primary = true;
+            thunderbird = {
+              enable = true;
+              messageFilters = thunderbirdFilters;
+            };
+            imap = {
+              host = "imap.purelymail.com";
+              port = 993;
+            };
+            smtp = {
+              host = "smtp.purelymail.com";
+              port = 465;
+            };
+            passwordCommand = "cat ${config.age.secrets."mail-price--pricehiller.com".path}";
+          };
+          "price@price-hiller.com" = rec {
+            inherit gpg;
+            realName = "Price Hiller";
+            address = "price@price-hiller.com";
+            userName = address;
+            thunderbird = {
+              enable = true;
+              messageFilters = thunderbirdFilters;
+            };
+            imap = {
+              host = "imap.purelymail.com";
+              port = 993;
+            };
+            smtp = {
+              host = "smtp.purelymail.com";
+              port = 465;
+            };
+            passwordCommand = "cat ${config.age.secrets."mail-price--price-hiller.com".path}";
+          };
+          "price@orion-technologies.io" = rec {
+            inherit gpg;
+            realName = "Price Hiller";
+            address = "price@orion-technologies.io";
+            userName = address;
+            passwordCommand = "cat ${config.age.secrets."mail-price--orion-technologies.com".path}";
+            thunderbird = {
+              enable = true;
+              messageFilters = thunderbirdFilters;
+            };
+            imap = {
+              host = "imap.purelymail.com";
+              port = 993;
+            };
+            smtp = {
+              host = "smtp.purelymail.com";
+              port = 465;
+            };
+          };
+          "philler3138@gmail.com" = rec {
+            realName = "Price Hiller";
+            address = "philler3138@gmail.com";
+            userName = address;
+            flavor = "gmail.com";
+            passwordCommand = "cat ${config.age.secrets."mail-philler3138--gmail.com".path}";
+            thunderbird = {
+              enable = true;
+              messageFilters = thunderbirdFilters;
+            };
+          };
+          "price.hiller@my.utsa.edu" = rec {
+            realName = "Price Hiller";
+            address = "price.hiller@my.utsa.edu";
+            userName = address;
+            flavor = "outlook.office365.com";
+            passwordCommand = "cat ${config.age.secrets."mail-price.hiller--my.utsa.edu".path}";
+            thunderbird = {
+              enable = true;
+              settings = id: {
+                # Set OAuth2 as the authentication method in Thunderbird
+                "mail.server.server_${id}.authMethod" = 10;
+                "mail.smtpserver.smtp_${id}.authMethod" = 10;
+              };
+              messageFilters = [
+                {
+                  name = "Tag College Emails";
+                  enabled = true;
+                  type = "81";
+                  action = "AddTag";
+                  actionValue = "college";
+                  condition = "ALL";
+                }
+              ];
+            };
+            imap = {
+              host = "outlook.office365.com";
+              port = 993;
+            };
+            smtp = {
+              host = "smtp.office365.com";
+            };
+          };
+        };
+      };
   };
 }

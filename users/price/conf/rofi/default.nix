@@ -11,6 +11,6 @@
       sorting-method = "fzf";
       drun-match-fields = "name";
     };
-    package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.rofi-wayland;
+    package = pkgs.rofi-wayland;
   };
 }

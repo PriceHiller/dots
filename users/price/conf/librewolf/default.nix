@@ -1,36 +1,5 @@
-{ config, lib, ... }:
+{ config, lib, clib, ... }:
 let
-  # Converts an attr path to the string representation of that path
-  #   {
-  #     hello = { world = true; };
-  #     goodbye = { moon = "bye"; }
-  #   }
-  #     Becomes
-  #   {
-  #     "hello.world" = true;
-  #     "goodbye.moon" = "bye";
-  #   }
-  #     Works for arbitrarily nested attrsets
-  attrsToStringPath =
-    attrs:
-    let
-      _attrsToStringPath =
-        _parent:
-        let
-          parent = if isNull _parent then "" else "${_parent}.";
-        in
-        attrs:
-        lib.attrsets.foldlAttrs (
-          acc: _name:
-          let
-            name = "${parent}${_name}";
-          in
-          value:
-          acc // (if builtins.isAttrs value then _attrsToStringPath name value else { "${name}" = value; })
-        ) { } attrs;
-    in
-    _attrsToStringPath null attrs;
-
   nixValToLibrewolfPref =
     val:
     if builtins.isList val then
@@ -59,8 +28,7 @@ in
   programs.librewolf = {
     enable = true;
     settings =
-      builtins.mapAttrs (_: val: nixValToLibrewolfPref val)
-      <| (attrsToStringPath {
+      clib.attrsToMozillaPref {
         identity.fxaccounts.enabled = true;
         webgl.disabled = false;
         browser.policies.runOncePerModification = {
@@ -109,6 +77,6 @@ in
             allow-rfc1918 = true;
           };
         };
-      });
+      };
   };
 }

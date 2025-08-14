@@ -71,4 +71,20 @@ rec {
         ) { } attrs;
     in
     _attrsToStringPath null attrs;
+
+  # Converts attrs for mozilla programs (Firefox/Librewolf/Thunderbird) to correct format
+  # for prefences (like in about:config)
+  attrsToMozillaPref =
+    let
+      nixValToMozillaPref =
+        val:
+        if builtins.isList val then
+          "[${val |> builtins.map (item: ''"${item}"'') |> lib.strings.concatStringsSep ","}]"
+        else
+          val;
+    in
+    attrs: builtins.mapAttrs (_: val: nixValToMozillaPref val) <| (attrsToStringPath attrs);
+
+  kcolors = (import ./kanagawa-colors.nix);
+
 }
