@@ -1,3 +1,4 @@
 [submodule "secrets"]
 	path = secrets
 	url = ssh://gitea@git.pricehiller.com:2220/Price/Secrets.git
+	branch = main
