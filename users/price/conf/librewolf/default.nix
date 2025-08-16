@@ -1,4 +1,9 @@
-{ config, lib, clib, ... }:
+{
+  config,
+  lib,
+  clib,
+  ...
+}:
 let
   nixValToLibrewolfPref =
     val:
@@ -27,56 +32,55 @@ in
   };
   programs.librewolf = {
     enable = true;
-    settings =
-      clib.attrsToMozillaPref {
-        identity.fxaccounts.enabled = true;
-        webgl.disabled = false;
-        browser.policies.runOncePerModification = {
-          extensionsInstall = [ ];
-          removeSearchEngines = [
-            "Bing"
-            "Amazon.com"
-            "eBay"
-            "Twitter"
-          ];
-          extensionsUninstall = [
-            "bing@search.mozilla.org"
-            "amazondotcom@search.mozilla.org"
-            "ebay@search.mozilla.org"
-            "twitter@search.mozilla.org"
-          ];
-        };
-        privacy = {
-          # Disabled for now, causes too many issues for me unfortunately :(
-          # In the future investigate compat with surfing keys and resistFingerprinting
-          resistFingerprinting = false;
-          clearOnShutdown = {
-            history = false;
-            downloads = false;
-            cookies = false;
-          };
-        };
-        sidebar = {
-          main.tools = "syncedtabs,history,bookmarks";
-          verticalTabs = true;
-          revamp = true;
-        };
-        font = {
-          default.x-western = "sans-serif";
-          minimum-size.x-western = 18;
-        };
-        network = {
-          cookie.lifetimePolicy = 0;
-          trr = {
-            mode = 3;
-            uri = "https://dns.mullvad.net/dns-query";
-            default_provider_uri = "https://dns10.quad9.net/dns-query";
-            strict_native_fallback = false;
-            retry_on_recoverable_errors = true;
-            disable-heuristics = true;
-            allow-rfc1918 = true;
-          };
+    settings = clib.attrsToMozillaPref {
+      identity.fxaccounts.enabled = true;
+      webgl.disabled = false;
+      browser.policies.runOncePerModification = {
+        extensionsInstall = [ ];
+        removeSearchEngines = [
+          "Bing"
+          "Amazon.com"
+          "eBay"
+          "Twitter"
+        ];
+        extensionsUninstall = [
+          "bing@search.mozilla.org"
+          "amazondotcom@search.mozilla.org"
+          "ebay@search.mozilla.org"
+          "twitter@search.mozilla.org"
+        ];
+      };
+      privacy = {
+        # Disabled for now, causes too many issues for me unfortunately :(
+        # In the future investigate compat with surfing keys and resistFingerprinting
+        resistFingerprinting = false;
+        clearOnShutdown = {
+          history = false;
+          downloads = false;
+          cookies = false;
         };
       };
+      sidebar = {
+        main.tools = "syncedtabs,history,bookmarks";
+        verticalTabs = true;
+        revamp = true;
+      };
+      font = {
+        default.x-western = "sans-serif";
+        minimum-size.x-western = 18;
+      };
+      network = {
+        cookie.lifetimePolicy = 0;
+        trr = {
+          mode = 3;
+          uri = "https://dns.mullvad.net/dns-query";
+          default_provider_uri = "https://dns10.quad9.net/dns-query";
+          strict_native_fallback = false;
+          retry_on_recoverable_errors = true;
+          disable-heuristics = true;
+          allow-rfc1918 = true;
+        };
+      };
+    };
   };
 }

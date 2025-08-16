@@ -150,7 +150,7 @@ return {
                             command = "d2",
                             args = {
                                 "$FILENAME",
-                                "-"
+                                "-",
                             },
                             format = "line",
                             ignore_stdout = true,

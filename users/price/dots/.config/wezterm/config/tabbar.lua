@@ -19,7 +19,6 @@ local edges = {
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local function tab_title(tab_info)
-
         local title = tab_info.tab_title
         -- if the tab title is explicitly set, take that
         if title and #title > 0 then
@@ -93,7 +92,6 @@ wezterm.on("update-right-status", function(window, pane)
     if hostname ~= nil or hostname ~= "" then
         hostname = "@" .. hostname
     end
-
 
     local leader_text = "󰀘 LEADER"
     local leader = ""

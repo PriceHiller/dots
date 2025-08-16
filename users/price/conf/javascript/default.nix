@@ -24,29 +24,28 @@ in
     {
       cacheFile."${npm_paths.cache}/.hm-dir" = placeholder;
       stateFile."${npm_paths.logs-dir}/.hm-dir" = placeholder;
-      dataFile =
-        {
-          "${npm_paths.prefix}/lib/.hm-dir" = placeholder;
-        }
-        # "${npm_paths.prefix}/lib/node_modules/@vue/typescript-plugin" =
-        #   {
-        #     source = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
-        #     recursive = true;
-        #   }
+      dataFile = {
+        "${npm_paths.prefix}/lib/.hm-dir" = placeholder;
+      }
+      # "${npm_paths.prefix}/lib/node_modules/@vue/typescript-plugin" =
+      #   {
+      #     source = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+      #     recursive = true;
+      #   }
 
-        # Install some global npm packages via Nix
-        //
-          lib.attrsets.mapAttrs'
-            (name: value: {
-              name = "${npm_paths.prefix}/lib/node_modules/${name}";
-              value = {
-                source = "${value}";
-              };
-            })
-            {
-              "@vue/typescript-plugin" =
-                "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin";
+      # Install some global npm packages via Nix
+      //
+        lib.attrsets.mapAttrs'
+          (name: value: {
+            name = "${npm_paths.prefix}/lib/node_modules/${name}";
+            value = {
+              source = "${value}";
             };
+          })
+          {
+            "@vue/typescript-plugin" =
+              "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin";
+          };
     };
 
   home = {

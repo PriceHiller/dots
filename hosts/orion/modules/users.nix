@@ -15,25 +15,24 @@
     root.hashedPasswordFile = config.age.secrets.users-root-pw.path;
     price = {
       isNormalUser = true;
-      extraGroups =
-        [
-          "wheel"
-          "keyd"
-          "lpadmin"
-          "systemd-journal"
-          (lib.mkIf config.virtualisation.docker.enable "docker")
-          (lib.mkIf config.programs.wireshark.enable "wireshark")
-        ]
-        ++ (
-          if config.virtualisation.libvirtd.enable then
-            [
-              "libvirtd"
-              "qemu-libvirtd"
-              "kvm"
-            ]
-          else
-            [ ]
-        );
+      extraGroups = [
+        "wheel"
+        "keyd"
+        "lpadmin"
+        "systemd-journal"
+        (lib.mkIf config.virtualisation.docker.enable "docker")
+        (lib.mkIf config.programs.wireshark.enable "wireshark")
+      ]
+      ++ (
+        if config.virtualisation.libvirtd.enable then
+          [
+            "libvirtd"
+            "qemu-libvirtd"
+            "kvm"
+          ]
+        else
+          [ ]
+      );
       group = "price";
       shell = pkgs.zsh;
       createHome = true;

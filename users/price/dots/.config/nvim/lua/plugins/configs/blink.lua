@@ -179,8 +179,8 @@ return {
                                             "--glob=!.git/*",
                                         },
                                         ignore_paths = {
-                                            vim.env.HOME
-                                        }
+                                            vim.env.HOME,
+                                        },
                                     },
                                 },
                             },
