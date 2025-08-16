@@ -172,10 +172,15 @@ return {
                             opts = {
                                 prefix_min_len = 3,
                                 backend = {
-                                    additional_rg_options = {
-                                        "--one-file-system",
-                                        "--hidden",
-                                        "--glob=!.git/*",
+                                    ripgrep = {
+                                        additional_rg_options = {
+                                            "--one-file-system",
+                                            "--hidden",
+                                            "--glob=!.git/*",
+                                        },
+                                        ignore_paths = {
+                                            vim.env.HOME
+                                        }
                                     },
                                 },
                             },
