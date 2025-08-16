@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  config,
   ...
 }:
 
@@ -13,9 +12,6 @@
       "nixpkgs=${inputs.nixpkgs}"
       "home-manager=${inputs.home-manager}"
     ];
-    extraOptions = ''
-      !include ${config.age.secrets.gh-access-token.path};
-    '';
     settings = {
       auto-optimise-store = true;
       experimental-features = [
