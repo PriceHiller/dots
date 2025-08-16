@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
@@ -77,8 +78,8 @@
       typescript
       vue-language-server
       typescript-language-server
-      bashdb
       vscode-extensions.vadimcn.vscode-lldb.adapter
+      inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.bashdb
       bash-language-server
       shfmt
       texlab
