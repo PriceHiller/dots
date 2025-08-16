@@ -1,33 +1,3 @@
---- Fancy wrapper for deleting the current buffer based on the window type, tab statuses, etc.
----
---- Kinda cursed... definitely better ways of doing this, but by god its my trash! Mfers ask "You
---- really live like this?" and the answer is YES! Yes I do.
----@param opts number|snacks.bufdelete.Opts?
-local bwdelete = function(opts)
-    opts = opts or {}
-    opts.buf = opts.buf or vim.api.nvim_get_current_buf()
-
-    local nuke = false
-
-    if vim.fn.win_gettype() ~= "" and not vim.bo[opts.buf].modified then
-        opts.force = true
-        nuke = true
-    end
-
-    if
-        nuke
-        or (
-            #vim.api.nvim_list_tabpages() > 1
-            and #vim.api.nvim_tabpage_list_wins(vim.api.nvim_get_current_tabpage()) == 1
-        )
-    then
-        local cmd = opts.wipe and vim.cmd.bwipeout or vim.cmd.bdelete
-        cmd({ args = { opts.buf }, bang = opts.force })
-    else
-        require("snacks").bufdelete.delete(opts)
-    end
-end
-
 --- Set a mapping to quickly close the current buffer
 ---@param bufnr integer A buffer id
 local map_quick_close = function(bufnr)
@@ -65,17 +35,11 @@ return {
         keys = {
             {
                 "<A-x>",
-                bwdelete,
-                desc = "Close Buffer",
-                mode = { "", "!", "v" },
-            },
-            {
-                "<A-x>",
                 function()
-                    bwdelete({ force = true })
+                    require("snacks").bufdelete.delete()
                 end,
                 desc = "Close Buffer",
-                mode = { "t" },
+                mode = { "", "!", "v", "t" },
             },
             {
                 "<leader>nd",
