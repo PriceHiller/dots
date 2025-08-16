@@ -156,7 +156,6 @@
                 in
                 [
                   ./modules/nixos/btrfs-rollback.nix
-                  ./modules/nixos/optimize-nix-store.nix
                   inputs.home-manager.nixosModules.home-manager
                   {
                     home-manager = {
