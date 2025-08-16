@@ -27,8 +27,6 @@
       substituters = [
         "https://nix-community.cachix.org"
       ];
-      keep-failed = true;
-      keep-going = true;
       log-lines = 100;
       max-jobs = "auto";
       trusted-public-keys = [
