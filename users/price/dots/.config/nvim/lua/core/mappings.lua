@@ -228,6 +228,16 @@ M.setup = function()
     -- Search within selection
     vim.keymap.set("x", "z/", "<C-\\><C-n>`</\\%V", { desc = "Search forward within visual selection" })
     vim.keymap.set("x", "z?", "<C-\\><C-n>`>?\\%V", { desc = "Search backward within visual selection" })
+
+    -- Toggle ("set") option binds
+    vim.keymap.set("n", "<leader>s", "", {
+        desc = "> Toggle Option",
+    })
+    vim.keymap.set("n", "<leader>sw", "<cmd>set wrap!<CR>", {
+        desc = "Toggle: Wrap",
+        noremap = true,
+        silent = true,
+    })
 end
 
 return M
