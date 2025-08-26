@@ -55,7 +55,6 @@ in
       typescript-language-server
       oxlint
       eslint
-      nodePackages_latest.prettier
     ];
 
     sessionVariables = {

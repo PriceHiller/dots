@@ -64,9 +64,14 @@
     ];
   };
   home = {
+    sessionVariables = {
+      NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = 1;
+    };
     packages = with pkgs; [
       neovide
       bun
+      flutter
+      jdk
       nil
       sqlfluff
       ast-grep
