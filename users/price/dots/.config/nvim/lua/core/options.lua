@@ -140,7 +140,6 @@ M.setup = function()
         "indent-heuristic",
         "linematch:60",
         "algorithm:histogram",
-        "inline:char",
     }) do
         opt.diffopt:append(diffopt)
     end
