@@ -32,10 +32,12 @@ M.setup = function()
     vim.api.nvim_create_autocmd("TermOpen", {
         group = augroup,
         callback = function(args)
-            vim.api.nvim_set_option_value("spell", false, { scope = "local" })
-            if vim.api.nvim_get_current_buf() == args.buf then
-                vim.cmd.startinsert()
-            end
+            vim.defer_fn(function()
+                vim.api.nvim_set_option_value("spell", false, { scope = "local" })
+                if vim.api.nvim_get_current_buf() == args.buf and vim.bo.buftype == "terminal" then
+                    vim.cmd.startinsert()
+                end
+            end, 10)
         end,
     })
 
