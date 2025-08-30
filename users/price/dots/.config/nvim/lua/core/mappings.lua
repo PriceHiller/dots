@@ -70,6 +70,19 @@ M.setup = function()
 
         vim.cmd.cd(git_dir)
     end, { silent = true, desc = "Change CWD to Root of Git Directory For Current File" })
+    vim.keymap.set("n", "<leader>cc", function()
+        local bufpath = vim.uv.fs_realpath(vim.api.nvim_buf_get_name(0))
+        if not bufpath then
+            vim.notify("Unable to copy current buffer's path!")
+            return
+        end
+
+        vim.fn.setreg("+", bufpath)
+        vim.notify(("Copied current buffer path to clipboard (%s)"):format(bufpath))
+    end, {
+        silent = true,
+        desc = "Copy current buffer's path to clipboard",
+    })
 
     -- Terminal mappings
     vim.keymap.set("t", [[<C-\>]], [[<C-\><C-n>]], { silent = true })
