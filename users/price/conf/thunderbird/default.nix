@@ -181,10 +181,6 @@ in
     };
     email =
       let
-        gpg = {
-          key = "C3FADDE7A8534BEB";
-          signByDefault = true;
-        };
         thunderbirdFilters = [
           {
             name = "Tag USAA Emails";
@@ -224,7 +220,6 @@ in
         maildirBasePath = "${config.xdg.dataHome}/mail/";
         accounts = {
           "price@pricehiller.com" = rec {
-            inherit gpg;
             realName = "Price Hiller";
             address = "price@pricehiller.com";
             userName = address;
@@ -244,7 +239,6 @@ in
             passwordCommand = "cat ${config.age.secrets."mail-price--pricehiller.com".path}";
           };
           "price@price-hiller.com" = rec {
-            inherit gpg;
             realName = "Price Hiller";
             address = "price@price-hiller.com";
             userName = address;
@@ -263,7 +257,6 @@ in
             passwordCommand = "cat ${config.age.secrets."mail-price--price-hiller.com".path}";
           };
           "price@orion-technologies.io" = rec {
-            inherit gpg;
             realName = "Price Hiller";
             address = "price@orion-technologies.io";
             userName = address;
