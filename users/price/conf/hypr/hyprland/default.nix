@@ -52,9 +52,6 @@ in
       dwindle = {
         pseudotile = 0;
       };
-      gestures = {
-        workspace_swipe = false;
-      };
     };
   };
 }
