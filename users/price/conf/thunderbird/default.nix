@@ -128,11 +128,22 @@ in
       geo.provider.use_geoclue = false;
       extensions.htmlaboutaddons.recommendations.enabled = false;
       # === Disable Telemetry === #
+
+      # Enable user Chrome
+      toolkit.legacyUserProfileCustomizations.stylesheets = true;
     };
     profiles = {
       "default" = {
         isDefault = true;
-        withExternalGnupg = true;
+        userChrome = lib.mkMerge [
+          # css
+          ''
+            .calendar-task-tree > treechildren::-moz-tree-row(inprogress, selected, focus) {
+              background-color: #00ff0050 !important;
+            }
+          ''
+        ];
+
         accountsOrder = [
           "price@pricehiller.com"
           "price.hiller@my.utsa.edu"
