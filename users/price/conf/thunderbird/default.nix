@@ -141,6 +141,27 @@ in
             .calendar-task-tree > treechildren::-moz-tree-row(inprogress, selected, focus) {
               background-color: #00ff0050 !important;
             }
+
+            /* Month calendar colors for days */
+            calendar-day-label {
+              &[relation="today"] {
+                color: #${hx.peachRed} !important;
+              }
+            }
+
+            .calendar-month-day-box-current-month[relation="today"],
+            .calendar-month-day-box-day-off[relation="today"],
+            .calendar-month-day-box-other-month[relation="today"] {
+              background-color: #${hx.sakuraPink}20 !important;
+              border: 1px solid #${hx.sakuraPink} !important;
+            }
+
+            .calendar-month-day-box-current-month[selected="true"],
+            .calendar-month-day-box-day-off[selected="true"],
+            .calendar-month-day-box-other-month[selected="true"] {
+              background-color: #${hx.crystalBlue}20 !important;
+              border: 1px solid #${hx.crystalBlue} !important;
+            }
           ''
         ];
 
