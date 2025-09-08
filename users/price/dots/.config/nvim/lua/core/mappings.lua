@@ -48,8 +48,26 @@ M.setup = function()
         vim.cmd.noh()
     end, { silent = true, desc = "Remove Highlighted Searches" })
 
-    -- Set current focused file as cwd
-    vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>", { silent = true, desc = "Change CWD to Current File" })
+    -- Set current focused file or terminal as cwd
+    vim.keymap.set("n", "<leader>cd", function()
+        local buf = vim.api.nvim_get_current_buf()
+        if vim.bo[buf].buftype == "terminal" then
+            local termcwd = vim.b[buf].termcwd
+            vim.cmd.cd(termcwd)
+        else
+            vim.cmd.cd("%:p:h")
+        end
+    end, { silent = true, desc = "Change CWD to Current Buffer's Directory" })
+
+    vim.keymap.set("n", "<leader>cf", function()
+        vim.g.term_follow_cwd = not vim.g.term_follow_cwd
+        local state = vim.g.term_follow_cwd and "Enabled" or "Disasbled"
+        vim.notify(("%s auto-following of Terminal CWD"):format(state))
+    end, {
+        silent = true,
+        desc = "Toggle following of Terminal CWDs",
+    })
+
     vim.keymap.set("n", "<leader>cg", function()
         local cur_buf = vim.api.nvim_get_current_buf()
         local cur_file = vim.api.nvim_buf_get_name(cur_buf)
@@ -70,10 +88,19 @@ M.setup = function()
 
         vim.cmd.cd(git_dir)
     end, { silent = true, desc = "Change CWD to Root of Git Directory For Current File" })
+
     vim.keymap.set("n", "<leader>cc", function()
-        local bufpath = vim.uv.fs_realpath(vim.api.nvim_buf_get_name(0))
+        local buf = vim.api.nvim_get_current_buf()
+        ---@type string | nil
+        local bufpath
+        if vim.bo[buf].buftype == "terminal" then
+            bufpath = vim.uv.fs_realpath(vim.b[buf].termcwd)
+        else
+            bufpath = vim.uv.fs_realpath(vim.api.nvim_buf_get_name(buf))
+        end
+
         if not bufpath then
-            vim.notify("Unable to copy current buffer's path!")
+            vim.notify("Unable to copy current buffer's path!", vim.log.levels.WARN)
             return
         end
 
