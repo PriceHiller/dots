@@ -201,9 +201,10 @@ in
           in
           {
             primary = true;
+            primaryCollection = "17807AC1-891A-4418-A189-DB3CA6BF4D0D";
             thunderbird.enable = true;
             remote = {
-              url = "https://purelymail.com/webdav/178420/caldav/C17BA6E0-F877-461D-95A2-46109084C877/";
+              url = "https://purelymail.com";
               type = "caldav";
               userName = emailCfg.userName;
               passwordCommand = emailCfg.passwordCommand;
