@@ -54,6 +54,7 @@
         bind = SUPERCTRL,SPACE,exec,rofi -show window
         bind = SUPER,F,fullscreen
         bind = SUPER,Q,killactive,
+        bind = CTRLSUPER,Q,forcekillactive,
         bind = SUPER,A,togglefloating,
         bind = SUPER,D,exec,makoctl dismiss -a
         bind = SUPERSHIFT,Q,exec,hyprlock
