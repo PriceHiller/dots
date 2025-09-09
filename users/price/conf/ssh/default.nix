@@ -3,25 +3,12 @@
   programs.ssh = {
     enable = true;
     matchBlocks = rec {
-      ch1 = {
-        hostname = "129.114.27.58";
-        user = "cc";
-      };
-      ch2 = {
-        hostname = "129.114.24.252";
-        user = "cc";
-      };
       luna = {
         hostname = "luna.hosts.pricehiller.com";
         user = "root";
         port = 2200;
       };
       "luna.hosts.pricehiller.com" = luna;
-      asgard = {
-        hostname = "asgard-eternal.com";
-        user = "asgard";
-      };
-      "asgard-eternal.com" = asgard;
       webtech = {
         hostname = "webtech.pricehiller.com";
         user = "ubuntu";
