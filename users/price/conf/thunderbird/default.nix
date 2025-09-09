@@ -35,6 +35,7 @@ in
             Personal.color = "#${hx.peachRed}";
             Finance.color = "#${hx.carpYellow}";
             College.color = "#${hx.surimiOrange}";
+            Monitoring.color = "#${hx.springGreen}";
           };
         headers = {
           showSender = true;
@@ -169,6 +170,7 @@ in
           "price@pricehiller.com"
           "price.hiller@my.utsa.edu"
           "price@price-hiller.com"
+          "monitor@pricehiller.com"
           "price@orion-technologies.io"
           "philler3138@gmail.com"
         ];
@@ -240,12 +242,20 @@ in
             condition = "AND (all addresses,contains,capitalone.com)";
           }
           {
+            name = "Tag Monitoring Emails";
+            enabled = true;
+            type = "81";
+            action = "AddTag";
+            actionValue = "monitoring";
+            condition = "AND (all addresses,contains,monitoring.pricehiller.com)";
+          }
+          {
             name = "Tag Personal Emails";
             enabled = true;
             type = "81";
             action = "AddTag";
             actionValue = "personal";
-            condition = "OR (all addresses,contains,jhiller@ccn-law.com) OR (all addresses,contains,samovepros.com) OR (all addresses,contains,avidgolfer@me.com) OR (all addresses,contains,sunnydays352@yahoo.com)";
+            condition = "OR (all addresses,contains,jhiller@ccn-law.com) OR (all addresses,contains,samovepros@live.com) OR (all addresses,contains,avidgolfer@me.com) OR (all addresses,contains,sunnydays352@yahoo.com)";
           }
         ];
       in
@@ -288,6 +298,24 @@ in
               port = 465;
             };
             passwordCommand = "cat ${config.age.secrets."mail-price--price-hiller.com".path}";
+          };
+          "monitor@monitoring.pricehiller.com" = rec {
+            realName = "Monitor";
+            address = "monitor@monitoring.pricehiller.com";
+            userName = address;
+            thunderbird = {
+              enable = true;
+              messageFilters = thunderbirdFilters;
+            };
+            imap = {
+              host = "imap.purelymail.com";
+              port = 993;
+            };
+            smtp = {
+              host = "smtp.purelymail.com";
+              port = 465;
+            };
+            passwordCommand = "cat ${config.age.secrets."mail-monitor--monitoring.pricehiller.com".path}";
           };
           "price@orion-technologies.io" = rec {
             realName = "Price Hiller";
