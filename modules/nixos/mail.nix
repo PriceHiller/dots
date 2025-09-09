@@ -27,24 +27,25 @@ in
   };
 
   config = lib.mkIf (cfg.enable) {
-    users.groups."${cfg.group}" = {};
+    users.groups."${cfg.group}" = { };
     age.secrets.${cfg.agenixPassAttr}.group = cfg.group;
     programs.msmtp = {
       enable = true;
       defaults = {
         port = 465;
         tls = true;
+        tls_starttls = false;
         syslog = "on";
         aliases = pkgs.writeText "msmtp-aliases" ''
-          root: ${config.networking.hostName}@monitoring.pricehiller.com
+          root: root.${config.networking.hostName}@${cfg.mailDomain}
         '';
       };
       accounts.default = {
         auth = true;
         host = "smtp.purelymail.com";
-        from = "${config.networking.hostName}@${cfg.mail-domain}";
+        from = "${config.networking.hostName}@${cfg.mailDomain}";
         from_full_name = "${config.networking.hostName}";
-        user = "monitor@${cfg.mail-domain}";
+        user = "monitor@${cfg.mailDomain}";
         passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.${cfg.agenixPassAttr}.path}";
       };
     };
