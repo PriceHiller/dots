@@ -22,6 +22,11 @@
         user = "asgard";
       };
       "asgard-eternal.com" = asgard;
+      webtech = {
+        hostname = "webtech.pricehiller.com";
+        user = "ubuntu";
+      };
+      "webtech.pricehiller.com" = webtech;
     }
     # NOTE: UTSA Hosts behind VPN server
     // builtins.listToAttrs (
