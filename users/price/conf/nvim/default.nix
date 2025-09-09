@@ -101,7 +101,6 @@
       yaml-language-server
       tinymist
       vim-language-server
-      taplo
       kotlin-language-server
       powershell-editor-services
       sql-formatter
@@ -117,6 +116,7 @@
       typstyle
       cmake-format
       cmake-language-server
+      tombi
     ];
   };
   xdg.mimeApps.defaultApplications = {
