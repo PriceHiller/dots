@@ -35,14 +35,16 @@
 # --peachRed:       #FF5D62
 # --surimiOrange:   #FFA066
 
-font=Fira Code 10
-background-color=#16161DF0
+font=Fira Code 12
+background-color=#16161D
 border-color=#FF9E3B
 border-radius=10
+max-history=500
 text-color=#DCA561
 progress-color=over #7E9CD8
-default-timeout=5000
-width=450
+default-timeout=8000
+width=500
+height=150
 on-touch=none
 on-button-left=dismiss-all
 format=<b><span size="larger" fgcolor="#7E9CD8">%s</span></b>\n%b\n<span size="small" fgcolor="#54546D">%a</span>
@@ -55,3 +57,10 @@ default-timeout=500000000
 [app-name=Spotify]
 text-color=#98BB6C
 border-color=#98BB6C
+
+[app-name=orgmode]
+background-color=#E6C384
+border-color=#E6C384
+text-color=#2A2A37
+format=<b><span size="larger" fgcolor="#16161D">%s</span></b>\n%b\n<span size="small" fgcolor="#54546D">%a</span>
+
