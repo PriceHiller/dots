@@ -782,21 +782,41 @@ return {
                             return message
                         end
                         local remaining_tasks_today = function()
+                            local last_task = ""
+                            local last_date_diff
+
                             local remaining_tasks_today = 0
                             local today = OrgDate:today()
+                            local now = OrgDate:now()
+
                             for _, orgfile in pairs(org.files.files) do
                                 ---@type OrgFile
                                 orgfile = orgfile
                                 for _, headline in ipairs(orgfile:get_opened_unfinished_headlines()) do
                                     for _, date in ipairs(headline:get_deadline_and_scheduled_dates()) do
                                         if date:is_same_or_before(today, "day") then
+                                            local diff = now:diff(date, "minute")
+                                            if not last_date_diff or diff <= last_date_diff then
+                                                last_task = headline:get_title()
+                                                last_date_diff = diff
+                                            end
                                             remaining_tasks_today = remaining_tasks_today + 1
                                             break
                                         end
                                     end
                                 end
                             end
-                            return ("Tasks Remaining: %d"):format(remaining_tasks_today)
+                            if remaining_tasks_today == 0 then
+                                return
+                            end
+
+                            local task_title = last_task:gsub("[~/*_=+]", "")
+                            local msg = ("[%d] | %s"):format(remaining_tasks_today, task_title)
+                            if not conditions.width_percent_below(#msg, 0.3, false) then
+                                msg = msg:sub(1, vim.o.columns / 3) .. "…"
+                            end
+
+                            return msg
                         end
                         return clocked_in_task() or remaining_tasks_today()
                     end,
