@@ -209,6 +209,7 @@
               };
               modules = [
                 ./modules/nixos/btrfs-rollback.nix
+                ./modules/nixos/mail.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
