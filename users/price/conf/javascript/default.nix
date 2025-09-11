@@ -57,6 +57,10 @@ in
       eslint
     ];
 
+    sessionPath = [
+      "${npm_paths.prefix}/bin"
+    ];
+
     sessionVariables = {
       NPM_CONFIG_USERCONFIG = pkgs.writeText "npm_user_config" ''
         prefix=${npm_paths.prefix}
