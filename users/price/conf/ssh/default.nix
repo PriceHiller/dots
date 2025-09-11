@@ -2,7 +2,19 @@
 {
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = rec {
+      "*" = {
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+      };
       luna = {
         hostname = "luna.hosts.pricehiller.com";
         user = "root";
@@ -11,7 +23,7 @@
       "luna.hosts.pricehiller.com" = luna;
       webtech = {
         hostname = "webtech.pricehiller.com";
-        user = "ubuntu";
+        user = "root";
       };
       "webtech.pricehiller.com" = webtech;
     }
