@@ -106,6 +106,7 @@
       sql-formatter
       tflint
       prettierd
+      superhtml
       nginx-language-server
       asmfmt
       asm-lsp
