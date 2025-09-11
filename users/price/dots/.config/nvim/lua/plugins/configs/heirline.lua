@@ -806,11 +806,7 @@ return {
                                 end
                             end
 
-                            if
-                                remaining_tasks_today == 0
-                                or not last_date_diff
-                                or not last_task
-                            then
+                            if remaining_tasks_today == 0 or not last_date_diff or not last_task then
                                 return
                             end
 
