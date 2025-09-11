@@ -219,6 +219,73 @@ return {
             { "<leader>os", desc = "> Orgmode Picker" },
             {
                 "<leader>oss",
+                desc = "Orgmode Picker: Search snippets",
+                function()
+                    local org = require("orgmode")
+                    local snacks = require("snacks")
+
+                    snacks.picker({
+                        title = "Org Headlnes",
+                        format = "file",
+                        formatters = {
+                            file = { filename_only = true },
+                            text = { ft = "org" },
+                        },
+                        finder = function()
+                            ---@type snacks.picker.Item[]
+                            local all_headlines = {}
+
+                            for _, file in ipairs(org.files:all()) do
+                                ---@type OrgHeadline[]
+                                local toplevel_snippets = {}
+                                for _, headline in ipairs(file:get_headlines()) do
+                                    if headline:get_level() == 1 and headline:has_tag("snippet") then
+                                        table.insert(toplevel_snippets, headline)
+                                    end
+                                end
+
+                                for _, headline in ipairs(toplevel_snippets) do
+                                    local text = vim.iter({
+                                        string.rep("*", headline:get_level()),
+                                        headline:get_todo(),
+                                        (function()
+                                            local priority = headline:get_priority()
+                                            if priority ~= "" then
+                                                return ("[#%s]"):format(priority)
+                                            end
+                                            return nil
+                                        end)(),
+                                        headline:get_title(),
+                                        (function()
+                                            local tags, _ = headline:tags_to_string()
+                                            return tags
+                                        end)(),
+                                    }):join(" ")
+
+                                    local score = 0
+                                    if headline:is_todo() and not headline:is_done() then
+                                        score = 100
+                                    end
+                                    ---@type snacks.picker.Item
+                                    local item = {
+                                        file = file.filename,
+                                        line = text,
+                                        text = text,
+                                        score = score,
+                                        idx = score,
+                                        pos = { headline:get_range().start_line, headline:get_range().end_line },
+                                    }
+
+                                    table.insert(all_headlines, item)
+                                end
+                            end
+                            return all_headlines
+                        end,
+                    })
+                end,
+            },
+            {
+                "<leader>osh",
                 desc = "Orgmode Picker: Search Headings",
                 function()
                     local org = require("orgmode")
