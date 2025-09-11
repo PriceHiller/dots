@@ -776,8 +776,8 @@ return {
                             local title = headline:get_title():gsub("[~/*_=+]", "")
 
                             local message = ("%s %s"):format(time_elapsed, title)
-                            if not conditions.width_percent_below(#message, 0.3, false) then
-                                message = message:sub(1, vim.o.columns / 3) .. "…"
+                            if not conditions.width_percent_below(#message, 0.5, false) then
+                                message = message:sub(1, vim.o.columns / 2) .. "…"
                             end
                             return message
                         end
@@ -787,7 +787,7 @@ return {
 
                             local remaining_tasks_today = 0
                             local today = OrgDate:today()
-                            local now = os.time()
+                            local now = OrgDate.from_timestamp(os.time())
 
                             for _, orgfile in pairs(org.files.files) do
                                 ---@type OrgFile
@@ -796,8 +796,8 @@ return {
                                     local date = headline:get_deadline_date() or headline:get_scheduled_date()
 
                                     if date and date:is_same_or_before(today, "day") then
-                                        local diff = math.abs(now - date.timestamp)
-                                        if not last_date_diff or diff <= last_date_diff then
+                                        local diff = date:diff(now, "minute")
+                                        if not last_date_diff or math.abs(diff) <= math.abs(last_date_diff) then
                                             last_task = headline:get_title()
                                             last_date_diff = diff
                                         end
@@ -806,14 +806,60 @@ return {
                                 end
                             end
 
-                            if remaining_tasks_today == 0 then
+                            if
+                                remaining_tasks_today == 0
+                                or not last_date_diff
+                                or not last_task
+                            then
                                 return
                             end
 
                             local task_title = last_task:gsub("[~/*_=+]", "")
-                            local msg = ("[%d] | %s"):format(remaining_tasks_today, task_title)
-                            if not conditions.width_percent_below(#msg, 0.3, false) then
-                                msg = msg:sub(1, vim.o.columns / 3) .. "…"
+                            local time_to_task = ""
+                            if last_date_diff and last_date_diff > 0 then
+                                (function()
+                                    local mins = math.abs(last_date_diff)
+                                    local hours = mins / 60
+
+                                    if mins < 60 then
+                                        mins = math.floor(mins)
+                                        if mins <= 1 then
+                                            time_to_task = "NOW"
+                                            return
+                                        end
+                                        time_to_task = ("In %d minutes"):format(mins)
+                                        return
+                                    end
+
+                                    if hours < 24 then
+                                        hours = math.floor(hours)
+                                        if hours == 1 then
+                                            time_to_task = "In 1 hour"
+                                            return
+                                        end
+
+                                        time_to_task = ("In %d hours"):format(hours)
+                                        return
+                                    end
+                                end)()
+                                if time_to_task ~= "" then
+                                    time_to_task = (" %s"):format(time_to_task)
+                                end
+                            end
+
+                            local msg = ("[%d]%s | %s"):format(remaining_tasks_today, time_to_task, task_title)
+                            local width_threshold = 0.5
+                            local msg_fits = function()
+                                return conditions.width_percent_below(#msg, width_threshold, false)
+                            end
+                            if not msg_fits() then
+                                msg = ("[%d] | %s"):format(remaining_tasks_today, task_title)
+                                if not msg_fits() then
+                                    msg = task_title
+                                    if not msg_fits() then
+                                        msg = msg:sub(1, vim.o.columns / 2) .. "…"
+                                    end
+                                end
                             end
 
                             return msg
