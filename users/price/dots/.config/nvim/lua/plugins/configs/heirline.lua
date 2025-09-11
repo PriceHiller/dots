@@ -703,12 +703,12 @@ return {
             local timer = vim.uv.new_timer()
             timer:start(
                 1000,
-                500,
+                5000,
                 vim.schedule_wrap(function()
                     vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
                 end)
             )
-            vim.api.nvim_create_autocmd("VimResized", {
+            vim.api.nvim_create_autocmd({ "VimResized", "BufWritePost" }, {
                 callback = function()
                     vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
                 end,
@@ -787,25 +787,25 @@ return {
 
                             local remaining_tasks_today = 0
                             local today = OrgDate:today()
-                            local now = OrgDate:now()
+                            local now = os.time()
 
                             for _, orgfile in pairs(org.files.files) do
                                 ---@type OrgFile
                                 orgfile = orgfile
                                 for _, headline in ipairs(orgfile:get_opened_unfinished_headlines()) do
-                                    for _, date in ipairs(headline:get_deadline_and_scheduled_dates()) do
-                                        if date:is_same_or_before(today, "day") then
-                                            local diff = now:diff(date, "minute")
-                                            if not last_date_diff or diff <= last_date_diff then
-                                                last_task = headline:get_title()
-                                                last_date_diff = diff
-                                            end
-                                            remaining_tasks_today = remaining_tasks_today + 1
-                                            break
+                                    local date = headline:get_deadline_date() or headline:get_scheduled_date()
+
+                                    if date and date:is_same_or_before(today, "day") then
+                                        local diff = math.abs(now - date.timestamp)
+                                        if not last_date_diff or diff <= last_date_diff then
+                                            last_task = headline:get_title()
+                                            last_date_diff = diff
                                         end
+                                        remaining_tasks_today = remaining_tasks_today + 1
                                     end
                                 end
                             end
+
                             if remaining_tasks_today == 0 then
                                 return
                             end
