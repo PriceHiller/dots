@@ -261,124 +261,139 @@ in
       in
       {
         maildirBasePath = "${config.xdg.dataHome}/mail/";
-        accounts = {
-          "price@pricehiller.com" = rec {
-            realName = "Price Hiller";
-            address = "price@pricehiller.com";
-            userName = address;
-            primary = true;
-            thunderbird = {
-              enable = true;
-              messageFilters = thunderbirdFilters;
+        accounts =
+          let
+            setReplyLocation = id: {
+              "mail.identity.id_${id}.reply_on_top" = 1;
+              "mail.identity.id_${id}.sig_bottom" = false;
             };
-            imap = {
-              host = "imap.purelymail.com";
-              port = 993;
-            };
-            smtp = {
-              host = "smtp.purelymail.com";
-              port = 465;
-            };
-            passwordCommand = "cat ${config.age.secrets."mail-price--pricehiller.com".path}";
-          };
-          "price@price-hiller.com" = rec {
-            realName = "Price Hiller";
-            address = "price@price-hiller.com";
-            userName = address;
-            thunderbird = {
-              enable = true;
-              messageFilters = thunderbirdFilters;
-            };
-            imap = {
-              host = "imap.purelymail.com";
-              port = 993;
-            };
-            smtp = {
-              host = "smtp.purelymail.com";
-              port = 465;
-            };
-            passwordCommand = "cat ${config.age.secrets."mail-price--price-hiller.com".path}";
-          };
-          "monitor@monitoring.pricehiller.com" = rec {
-            realName = "Monitor";
-            address = "monitor@monitoring.pricehiller.com";
-            userName = address;
-            thunderbird = {
-              enable = true;
-              messageFilters = thunderbirdFilters;
-            };
-            imap = {
-              host = "imap.purelymail.com";
-              port = 993;
-            };
-            smtp = {
-              host = "smtp.purelymail.com";
-              port = 465;
-            };
-            passwordCommand = "cat ${config.age.secrets."mail-monitor--monitoring.pricehiller.com".path}";
-          };
-          "price@orion-technologies.io" = rec {
-            realName = "Price Hiller";
-            address = "price@orion-technologies.io";
-            userName = address;
-            passwordCommand = "cat ${config.age.secrets."mail-price--orion-technologies.com".path}";
-            thunderbird = {
-              enable = true;
-              messageFilters = thunderbirdFilters;
-            };
-            imap = {
-              host = "imap.purelymail.com";
-              port = 993;
-            };
-            smtp = {
-              host = "smtp.purelymail.com";
-              port = 465;
-            };
-          };
-          "philler3138@gmail.com" = rec {
-            realName = "Price Hiller";
-            address = "philler3138@gmail.com";
-            userName = address;
-            flavor = "gmail.com";
-            passwordCommand = "cat ${config.age.secrets."mail-philler3138--gmail.com".path}";
-            thunderbird = {
-              enable = true;
-              messageFilters = thunderbirdFilters;
-            };
-          };
-          "price.hiller@my.utsa.edu" = rec {
-            realName = "Price Hiller";
-            address = "price.hiller@my.utsa.edu";
-            userName = address;
-            flavor = "outlook.office365.com";
-            passwordCommand = "cat ${config.age.secrets."mail-price.hiller--my.utsa.edu".path}";
-            thunderbird = {
-              enable = true;
-              settings = id: {
-                # Set OAuth2 as the authentication method in Thunderbird
-                "mail.server.server_${id}.authMethod" = 10;
-                "mail.smtpserver.smtp_${id}.authMethod" = 10;
+          in
+          {
+            "price@pricehiller.com" = rec {
+              realName = "Price Hiller";
+              address = "price@pricehiller.com";
+              userName = address;
+              primary = true;
+              thunderbird = {
+                enable = true;
+                messageFilters = thunderbirdFilters;
+                settings = id: (setReplyLocation id);
               };
-              messageFilters = [
-                {
-                  name = "Tag College Emails";
-                  enabled = true;
-                  type = "81";
-                  action = "AddTag";
-                  actionValue = "college";
-                  condition = "ALL";
-                }
-              ];
+              imap = {
+                host = "imap.purelymail.com";
+                port = 993;
+              };
+              smtp = {
+                host = "smtp.purelymail.com";
+                port = 465;
+              };
+              passwordCommand = "cat ${config.age.secrets."mail-price--pricehiller.com".path}";
             };
-            imap = {
-              host = "outlook.office365.com";
-              port = 993;
+            "price@price-hiller.com" = rec {
+              realName = "Price Hiller";
+              address = "price@price-hiller.com";
+              userName = address;
+              thunderbird = {
+                enable = true;
+                messageFilters = thunderbirdFilters;
+                settings = id: (setReplyLocation id);
+              };
+              imap = {
+                host = "imap.purelymail.com";
+                port = 993;
+              };
+              smtp = {
+                host = "smtp.purelymail.com";
+                port = 465;
+              };
+              passwordCommand = "cat ${config.age.secrets."mail-price--price-hiller.com".path}";
             };
-            smtp = {
-              host = "smtp.office365.com";
+            "monitor@monitoring.pricehiller.com" = rec {
+              realName = "Monitor";
+              address = "monitor@monitoring.pricehiller.com";
+              userName = address;
+              thunderbird = {
+                enable = true;
+                messageFilters = thunderbirdFilters;
+                settings = id: (setReplyLocation id);
+              };
+              imap = {
+                host = "imap.purelymail.com";
+                port = 993;
+              };
+              smtp = {
+                host = "smtp.purelymail.com";
+                port = 465;
+              };
+              passwordCommand = "cat ${config.age.secrets."mail-monitor--monitoring.pricehiller.com".path}";
+            };
+            "price@orion-technologies.io" = rec {
+              realName = "Price Hiller";
+              address = "price@orion-technologies.io";
+              userName = address;
+              passwordCommand = "cat ${config.age.secrets."mail-price--orion-technologies.com".path}";
+              thunderbird = {
+                enable = true;
+                messageFilters = thunderbirdFilters;
+                settings = id: (setReplyLocation id);
+              };
+              imap = {
+                host = "imap.purelymail.com";
+                port = 993;
+              };
+              smtp = {
+                host = "smtp.purelymail.com";
+                port = 465;
+              };
+            };
+            "philler3138@gmail.com" = rec {
+              realName = "Price Hiller";
+              address = "philler3138@gmail.com";
+              userName = address;
+              flavor = "gmail.com";
+              passwordCommand = "cat ${config.age.secrets."mail-philler3138--gmail.com".path}";
+              thunderbird = {
+                enable = true;
+                messageFilters = thunderbirdFilters;
+                settings = id: (setReplyLocation id);
+              };
+            };
+            "price.hiller@my.utsa.edu" = rec {
+              realName = "Price Hiller";
+              address = "price.hiller@my.utsa.edu";
+              userName = address;
+              flavor = "outlook.office365.com";
+              passwordCommand = "cat ${config.age.secrets."mail-price.hiller--my.utsa.edu".path}";
+              thunderbird = {
+                enable = true;
+                settings =
+                  id:
+                  {
+                    # Set OAuth2 as the authentication method in Thunderbird
+                    "mail.server.server_${id}.authMethod" = 10;
+                    "mail.smtpserver.smtp_${id}.authMethod" = 10;
+                  }
+                  // (setReplyLocation id);
+                messageFilters = [
+                  {
+                    name = "Tag College Emails";
+                    enabled = true;
+                    type = "81";
+                    action = "AddTag";
+                    actionValue = "college";
+                    condition = "ALL";
+                  }
+                ];
+              };
+              imap = {
+                host = "outlook.office365.com";
+                port = 993;
+              };
+              smtp = {
+                host = "smtp.office365.com";
+              };
             };
           };
-        };
       };
   };
 }
