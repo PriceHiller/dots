@@ -11,6 +11,5 @@
       sorting-method = "fzf";
       drun-match-fields = "name";
     };
-    package = pkgs.rofi-wayland;
   };
 }
