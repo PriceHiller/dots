@@ -212,22 +212,11 @@ M.setup = function()
 
     -- Toggle lsp diagnostic appearance
     vim.keymap.set("n", "<leader>lt", function()
-        ---@diagnostic disable-next-line: undefined-field
-        local diag_config = vim.diagnostic.config()
-        if not diag_config then
-            return
-        end
-        if diag_config.virtual_lines == diag_config.virtual_text then
-            diag_config.virtual_text = not diag_config.virtual_text
-        end
         vim.diagnostic.enable(true, { buf = vim.api.nvim_get_current_buf() })
-        vim.diagnostic.config({
-            virtual_lines = not diag_config.virtual_lines,
-            virtual_text = not diag_config.virtual_text,
-        })
+        require("plugin.wrapdiag"):toggle_current_line()
     end, {
         silent = true,
-        desc = "LSP: Toggle Virtual Lines",
+        desc = "LSP: Toggle Wrap Diagnostics",
     })
 
     -- Credit to https://www.reddit.com/r/neovim/comments/1k3lhac/tiny_quality_of_life_rebind_make_j_and_k/
