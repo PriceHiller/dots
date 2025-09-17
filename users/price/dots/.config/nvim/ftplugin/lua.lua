@@ -1,6 +1,8 @@
-vim.opt_local.tabstop = 4
-vim.opt_local.shiftwidth = 4
-vim.opt_local.expandtab = true
+local opt = vim.opt_local
+
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
 
 vim.keymap.set("n", "<localleader>fr", ":%lua<CR>", {
     buffer = true,
@@ -11,3 +13,15 @@ vim.keymap.set("v", "<localleader>fr", ":lua<CR>", {
     buffer = true,
     silent = true,
 })
+
+opt.formatlistpat = require("utils.formatpat")
+    .new({
+        pat = {
+            [[---@\S*]],
+            [[--]],
+            [[-]],
+            [[\d\.]],
+            [[+]],
+        },
+    })
+    :listpat()

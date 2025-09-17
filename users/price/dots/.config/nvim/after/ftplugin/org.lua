@@ -6,3 +6,11 @@ end, {
     buffer = true,
     desc = "Org: Toggle Indent Mode",
 })
+
+local FormatPat = require("utils.formatpat").new()
+local List = require("utils.list")
+
+FormatPat.pat = List.prepend(FormatPat.pat, {
+    [=[- \[.\{0,1\}\]]=],
+})
+vim.opt_local.formatlistpat = FormatPat:listpat()
