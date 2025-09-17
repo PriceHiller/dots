@@ -7,6 +7,12 @@
       (python313.withPackages (
         py-pkgs: with py-pkgs; [
           debugpy
+          jupyter
+          jupyterlab
+          jupytext
+          pandas
+          numpy
+          matplotlib
         ]
       ))
       uv
