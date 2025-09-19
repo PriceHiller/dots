@@ -71,15 +71,8 @@ in
       };
       network = {
         cookie.lifetimePolicy = 0;
-        trr = {
-          mode = 3;
-          uri = "https://dns.mullvad.net/dns-query";
-          default_provider_uri = "https://dns10.quad9.net/dns-query";
-          strict_native_fallback = false;
-          retry_on_recoverable_errors = true;
-          disable-heuristics = true;
-          allow-rfc1918 = true;
-        };
+        # We use the local DNS resolver, it should support encryption
+        trr.mode = 0;
       };
     };
   };
