@@ -10,10 +10,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hypr-dynamic-cursors = {
-      url = "github:VirtCode/hypr-dynamic-cursors";
-      inputs.hyprland.follows = "hyprland";
-    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -66,6 +62,10 @@
     };
     zsh-completions = {
       url = "github:zsh-users/zsh-completions";
+      flake = false;
+    };
+    oisd-blocklist = {
+      url = "https://big.oisd.nl/domainswild";
       flake = false;
     };
     self.submodules = true;
