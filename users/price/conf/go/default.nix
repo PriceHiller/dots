@@ -2,8 +2,10 @@
 {
   programs.go = {
     enable = true;
-    goBin = ".local/bin/go";
-    goPath = ".local/share/go";
+    env = {
+      GOBIN = ".local/bin/go";
+      GOPATH = ".local/share/go";
+    };
     telemetry.mode = "off";
   };
   home.packages = with pkgs; [ (lib.hiPrio gotools) ];
