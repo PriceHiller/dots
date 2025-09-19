@@ -181,7 +181,10 @@ return {
                             null_ls.builtins.formatting.typstyle,
                             null_ls.builtins.formatting.cmake_format,
                             null_ls.builtins.formatting.shfmt,
-                            null_ls.builtins.formatting.prettierd,
+                            null_ls.builtins.formatting.prettierd.with({
+                                disabled_filetypes = { "markdown" },
+                            }),
+                            null_ls.builtins.formatting.markdownlint,
                             null_ls.builtins.diagnostics.hadolint,
                             null_ls.builtins.diagnostics.sqlfluff.with(sqlfluff_config),
                             null_ls.builtins.formatting.sqlfluff.with(sqlfluff_config),

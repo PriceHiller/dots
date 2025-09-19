@@ -118,6 +118,7 @@
       cmake-format
       cmake-language-server
       tombi
+      markdownlint-cli
     ];
   };
   xdg.mimeApps.defaultApplications = {
