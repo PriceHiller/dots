@@ -5,6 +5,7 @@ return {
         ft = "lua",
         opts = {
             library = {
+                "lazy.nvim",
                 { path = "luassert-types/library", words = { "assert" } },
                 { path = "busted-types/library", words = { "describe" } },
                 { path = "${3rd}/luv/library", words = { "vim%.uv", "vim%.loop" } },

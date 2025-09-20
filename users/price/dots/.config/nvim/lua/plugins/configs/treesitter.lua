@@ -1,4 +1,5 @@
 ---@diagnostic disable: missing-fields
+---@type LazySpec
 return {
     {
         "danymat/neogen",
@@ -87,134 +88,159 @@ return {
         end,
     },
     {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        event = { "BufReadPre", "BufNewFile", "WinLeave" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            "RRethy/nvim-treesitter-endwise",
-        },
-        init = function()
-            vim.api.nvim_create_autocmd("FileReadPre", {
-                once = true,
-                callback = function()
-                    require("nvim-treesitter")
-                    return true
-                end,
-            })
-        end,
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                auto_install = true,
-                ignore_install = { "comment" },
-                ensure_installed = {
-                    "latex",
-                    "regex",
-                    "vim",
-                    "lua",
-                    "bash",
-                    "markdown",
-                    "markdown_inline",
-                    "typst",
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        keys = (function()
+            local move_config = {
+                goto_next_start = {
+                    ["]fs"] = "@function.outer",
+                    ["]cs"] = "@class.outer",
+                    ["]bs"] = "@block.outer",
                 },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<CR>",
-                        scope_incremental = "<S-CR>",
-                        node_incremental = "<CR>",
-                        node_decremental = "<BS>",
-                    },
+                goto_next_end = {
+                    ["]fe"] = "@function.outer",
+                    ["]ce"] = "@class.outer",
+                    ["]be"] = "@block.outer",
                 },
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = { "org" },
-                    disable = function(_, buf)
-                        local disabled_filetypes = {
-                            "tex",
-                            "log",
-                            "csv",
-                            "tsv",
-                            "csv_semicolon",
-                            "csv_whitespace",
-                            "csv_pipe",
-                            "rfc_csv",
-                            "rfc_semicolon",
-                        }
+                goto_previous_start = {
+                    ["[fs"] = "@function.outer",
+                    ["[cs"] = "@class.outer",
+                    ["[bs"] = "@block.outer",
+                },
+                goto_previous_end = {
+                    ["[fe"] = "@function.outer",
+                    ["[ce"] = "@class.outer",
+                    ["[bs"] = "@block.outer",
+                },
+            }
 
-                        for _, ft in ipairs(disabled_filetypes) do
-                            if vim.bo[buf] and vim.bo[buf].filetype == ft then
-                                return true
-                            end
+            ---@type LazyKeysSpec[]
+            local keys = {}
+
+            for move, binds in pairs(move_config) do
+                for bind, query_string in pairs(binds) do
+                    table.insert(keys, {
+                        bind,
+                        mode = { "n", "x", "o" },
+                        function()
+                            require("nvim-treesitter-textobjects.move")[move](query_string, "textobjects")
+                        end,
+                        desc = ("%s > %s"):format(move, query_string),
+                    })
+                end
+            end
+
+            local select_config = {
+
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["ib"] = "@block.inner",
+                ["ab"] = "@block.outer",
+            }
+
+            for bind, query in pairs(select_config) do
+                table.insert(keys, {
+                    bind,
+                    mode = { "n", "x", "o" },
+                    function()
+                        require("nvim-treesitter-textobjects.select").select_textobject(query, "textobjects")
+                    end,
+                    desc = ("Select > %s"):format(query),
+                })
+            end
+            table.insert(keys, {
+                "as",
+                mode = { "n", "x", "o" },
+                function()
+                    require("nvim-treesitter-textobjects.select").select_textobject("@scope", "locals")
+                end,
+                desc = ("Select > %s"):format("@scope"),
+            })
+
+            return keys
+        end)(),
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    include_surrounding_whitespace = true,
+                    disable = function(_, _)
+                        local mode = vim.fn.mode()
+                        if mode == "c" then
+                            return true
                         end
                     end,
-                },
-                indent = {
-                    enable = true,
-                    disable = { "lua", "org" },
-                },
-                playground = {
-                    enable = true,
-                },
-                query_linter = {
-                    enable = true,
-                },
-                endwise = {
-                    enable = true,
-                },
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        disable = function(lang, bufnr)
-                            local mode = vim.fn.mode()
-                            if mode == "c" then
-                                return true
-                            end
-                        end,
-                        keymaps = {
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            ["ic"] = "@class.inner",
-                            ["ib"] = "@block.inner",
-                            ["ab"] = "@block.outer",
-                            ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-                        },
+                    keymaps = {
+                        ["af"] = "@function.outer",
+                        ["if"] = "@function.inner",
+                        ["ac"] = "@class.outer",
+                        ["ic"] = "@class.inner",
+                        ["ib"] = "@block.inner",
+                        ["ab"] = "@block.outer",
+                        ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
                     },
-                    move = {
-                        enable = true,
-                        disable = function(lang, bufnr)
-                            local mode = vim.fn.mode()
-                            if mode == "c" then
-                                return true
-                            end
-                        end,
-                        set_jumps = true,
-                        goto_next_start = {
-                            ["]fs"] = "@function.outer",
-                            ["]cs"] = "@class.outer",
-                            ["]bs"] = "@block.outer",
-                        },
-                        goto_next_end = {
-                            ["]fe"] = "@function.outer",
-                            ["]ce"] = "@class.outer",
-                            ["]be"] = "@block.outer",
-                        },
-                        goto_previous_start = {
-                            ["[fs"] = "@function.outer",
-                            ["[cs"] = "@class.outer",
-                            ["[bs"] = "@block.outer",
-                        },
-                        goto_previous_end = {
-                            ["[fe"] = "@function.outer",
-                            ["[ce"] = "@class.outer",
-                            ["[bs"] = "@block.outer",
-                        },
-                    },
-                    include_surrounding_whitespace = true,
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true,
                 },
             })
+        end,
+    },
+
+    {
+        "shushtain/nvim-treesitter-incremental-selection",
+        keys = {
+            {
+                "<CR>",
+                function()
+                    require("nvim-treesitter-incremental-selection").init_selection()
+                end,
+            },
+            {
+                "<BS>",
+                mode = { "v" },
+                function()
+                    require("nvim-treesitter-incremental-selection").decrement_node()
+                end,
+            },
+            {
+                "<CR>",
+                mode = { "v" },
+                function()
+                    require("nvim-treesitter-incremental-selection").increment_node()
+                end,
+            },
+        },
+        config = function()
+            local tsis = require("nvim-treesitter-incremental-selection")
+
+            tsis.setup({
+                ignore_injections = false,
+                loop_siblings = false,
+                fallback = true,
+                quiet = false,
+            })
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        branch = "main",
+        event = { "BufReadPre", "BufNewFile", "WinLeave", "FileReadPre" },
+        dependencies = {
+            "RRethy/nvim-treesitter-endwise",
+        },
+        config = function()
+            local ts = require("nvim-treesitter")
+
+            -- Install _all_ available parsers
+            vim.defer_fn(function()
+                ts.install(ts.get_available())
+            end, 50)
         end,
     },
 }
