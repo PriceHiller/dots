@@ -24,6 +24,31 @@ in
       description = "The agenix attribute to use, e.g. 'mail-pass' from 'config.age.secrets.mail-pass'";
       type = lib.types.str;
     };
+    host = lib.mkOption {
+      description = "The mail smtp server host";
+      default = "smtp.purelymail.com";
+      type = lib.types.str;
+    };
+    port = lib.mkOption {
+      description = "The port to send SMTP traffic on";
+      default = 465;
+      type = lib.types.port;
+    };
+    connectionString = lib.mkOption {
+      description = "The full connection string of the host and port in the format `host:port`";
+      default = "${cfg.host}:${builtins.toString cfg.port}";
+      readOnly = true;
+    };
+    user = lib.mkOption {
+      description = "The user used for authentication to the mail server";
+      default = "monitor@${cfg.mailDomain}";
+      type = lib.types.str;
+    };
+    passwordPath = lib.mkOption {
+      description = "The path to the password file used for authentication to the mail server";
+      default = config.age.secrets.${cfg.agenixPassAttr}.path;
+      type = lib.types.str;
+    };
   };
 
   config = lib.mkIf (cfg.enable) {
@@ -35,7 +60,7 @@ in
     programs.msmtp = {
       enable = true;
       defaults = {
-        port = 465;
+        port = cfg.port;
         tls = true;
         tls_starttls = false;
         syslog = "on";
@@ -46,11 +71,11 @@ in
       };
       accounts.default = {
         auth = true;
-        host = "smtp.purelymail.com";
+        host = cfg.host;
         from = "%U.${config.networking.hostName}@${cfg.mailDomain}";
         from_full_name = "${config.networking.hostName}";
-        user = "monitor@${cfg.mailDomain}";
-        passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.${cfg.agenixPassAttr}.path}";
+        user = cfg.user;
+        passwordeval = "${pkgs.coreutils}/bin/cat ${cfg.passwordPath}";
       };
     };
   };
