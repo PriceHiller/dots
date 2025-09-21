@@ -19,10 +19,16 @@ in
     };
   };
 
-  environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
+  environment.etc.machine-id = {
+    text = "8883d3861851470cbcbc98ed1f91727d";
+    mode = "0644";
+  };
   environment.persistence.save = {
     hideMounts = true;
     persistentStoragePath = "${persist-dir}/save";
+    directories = [
+      "/var/log"
+    ];
   };
   environment.persistence.ephemeral = {
     persistentStoragePath = "${persist-dir}/ephemeral";
