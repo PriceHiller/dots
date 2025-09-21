@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   prometheus_host = "prometheus.${config.networking.domain}";
 in
@@ -7,11 +7,19 @@ in
     prometheus = {
       enable = true;
       port = 9000;
+      globalConfig = {
+        scrape_interval = "15s";
+      };
       scrapeConfigs = [
         {
           job_name = "node-exporter";
           static_configs = [
-            { targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }
+            {
+              targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+              labels = {
+                host = "${prometheus_host}";
+              };
+            }
           ];
         }
       ];
@@ -63,13 +71,12 @@ in
     };
 
     nginx = {
-      additionalModules = [ pkgs.nginxModules.pam ];
       virtualHosts."${prometheus_host}" = {
         enableACME = true;
         forceSSL = true;
         extraConfig = ''
-          auth_pam "Password Required";
-          auth_pam_service_name "nginx";
+          auth_basic "Password Required";
+          auth_basic_user_file ${config.age.prometheus-basic-auth.path};
         '';
         locations."/" = {
           proxyPass = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
@@ -77,11 +84,6 @@ in
       };
     };
   };
-  security.pam.services.nginx.setEnvironment = false;
-  systemd.services.nginx.serviceConfig = {
-    SupplementaryGroups = [ "shadow" ];
-  };
-
   environment.persistence.save.directories = [
     {
       directory = "/var/lib/${config.services.prometheus.stateDir}";

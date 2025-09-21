@@ -3,13 +3,29 @@ let
   grafana_host = "grafana.${config.networking.domain}";
 in
 {
+
+  users.users.grafana.extraGroups = [
+    config.meta.mail.group
+  ];
+
   services = {
     grafana = {
       enable = true;
-      settings.server = {
-        domain = "${grafana_host}";
-        http_addr = "127.0.0.1";
-        http_port = 2342;
+      settings = {
+        smtp = {
+          enabled = true;
+          user = config.meta.mail.user;
+          startTLS_policy = "NoStartTLS";
+          host = config.meta.mail.connectionString;
+          from_name = "Grafana";
+          from_address = "grafana.${config.networking.hostName}@${config.meta.mail.mailDomain}";
+          password = "$__file{${config.meta.mail.passwordPath}}";
+        };
+        server = {
+          domain = "${grafana_host}";
+          http_addr = "127.0.0.1";
+          http_port = 2342;
+        };
       };
     };
 
