@@ -142,7 +142,7 @@ return {
 
             for bind, query in pairs(select_config) do
                 table.insert(keys, {
-                    bind,
+                    "v" .. bind,
                     mode = { "n", "x", "o" },
                     function()
                         require("nvim-treesitter-textobjects.select").select_textobject(query, "textobjects")
@@ -151,7 +151,7 @@ return {
                 })
             end
             table.insert(keys, {
-                "as",
+                "vas",
                 mode = { "n", "x", "o" },
                 function()
                     require("nvim-treesitter-textobjects.select").select_textobject("@scope", "locals")
@@ -173,15 +173,6 @@ return {
                             return true
                         end
                     end,
-                    keymaps = {
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        ["ic"] = "@class.inner",
-                        ["ib"] = "@block.inner",
-                        ["ab"] = "@block.outer",
-                        ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-                    },
                 },
                 move = {
                     enable = true,
