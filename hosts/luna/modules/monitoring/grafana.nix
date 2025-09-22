@@ -7,6 +7,13 @@ in
   users.users.grafana.extraGroups = [
     config.meta.mail.group
   ];
+  environment.persistence.save.directories = [
+    {
+      directory = config.services.grafana.dataDir;
+      user = "grafana";
+      group = "grafana";
+    }
+  ];
 
   services = {
     grafana = {
