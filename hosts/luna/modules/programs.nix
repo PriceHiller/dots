@@ -21,6 +21,8 @@
       syntaxHighlighting.enable = true;
       shellInit = ''
         source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
+        alias ls='eza --icons=always --group-directories-first --long --header --octal-permissions --classify --group --extended'
+        alias l='l -alh'
       '';
     };
   };
@@ -36,5 +38,7 @@
     git
     jq
     rsync
+    eza
+    htop
   ];
 }
