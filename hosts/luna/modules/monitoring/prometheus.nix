@@ -12,22 +12,44 @@ in
       };
       scrapeConfigs = [
         {
-          job_name = "node-exporter";
-          static_configs = [
-            {
-              targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
-              labels = {
-                host = "${prometheus_host}";
-              };
-            }
-          ];
+          job_name = "Luna Metrics";
+          static_configs =
+            builtins.map
+              (
+                cfg:
+                cfg
+                // {
+                  labels.host = "${prometheus_host}";
+                }
+              )
+              [
+                {
+                  targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+                }
+                {
+                  targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.nginx.port}" ];
+                }
+                {
+                  targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}" ];
+                }
+                {
+                  targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.snmp.port}" ];
+                }
+              ];
         }
       ];
       exporters = {
+        nginx = {
+          enable = true;
+        };
+        systemd = {
+          enable = true;
+        };
         node = {
           enable = true;
           port = 9001;
           enabledCollectors = [
+            "logind"
             "arp"
             "bcache"
             "btrfs"
@@ -71,6 +93,7 @@ in
     };
 
     nginx = {
+      statusPage = true;
       virtualHosts."${prometheus_host}" = {
         enableACME = true;
         forceSSL = true;
