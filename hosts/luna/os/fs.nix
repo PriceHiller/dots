@@ -4,7 +4,10 @@ let
   persist-dir = "/persist";
 in
 {
-  environment.etc.machine-id.source = "${persist-dir}/ephemeral/etc/machine-id";
+  environment.etc.machine-id = {
+    text = "f9417c732bea4572a562dbeb2f420c23";
+    mode = "0644";
+  };
   environment.persistence.save = {
     hideMounts = true;
     persistentStoragePath = "${persist-dir}/save";
