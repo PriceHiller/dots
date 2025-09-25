@@ -2,12 +2,13 @@
   description = "Price Hiller's home manager configuration";
 
   inputs = {
-    nix.url = "github:nixos/nix";
+    nix.url = "git+https://github.com/nixos/nix?shallow=1";
     deploy-rs.url = "github:serokell/deploy-rs";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/25.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
+    nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.05";
     hyprland = {
-      url = "github:hyprwm/Hyprland";
+      url = "git+https://github.com/hyprwm/Hyprland?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
@@ -156,6 +157,7 @@
                 in
                 [
                   ./modules/nixos/btrfs-rollback.nix
+                  ./modules/nixos/grafana-alloy.nix
                   inputs.home-manager.nixosModules.home-manager
                   {
                     home-manager = {
@@ -210,6 +212,7 @@
               modules = [
                 ./modules/nixos/btrfs-rollback.nix
                 ./modules/nixos/mail.nix
+                ./modules/nixos/grafana-alloy.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko

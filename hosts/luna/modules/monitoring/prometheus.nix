@@ -99,17 +99,13 @@ in
         forceSSL = true;
         extraConfig = ''
           auth_basic "Password Required";
-          auth_basic_user_file ${config.age.secrets.prometheus-basic-auth.path};
+          auth_basic_user_file ${config.age.secrets.nginx-basic-auth.path};
         '';
         locations."/" = {
           proxyPass = "http://${config.services.prometheus.listenAddress}:${builtins.toString config.services.prometheus.port}";
         };
       };
     };
-  };
-  age.secrets.prometheus-basic-auth = {
-    owner = config.services.nginx.user;
-    group = config.services.nginx.user;
   };
   environment.persistence.save.directories = [
     {
