@@ -37,7 +37,6 @@ in
       systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     initrd = {
