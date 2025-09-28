@@ -1,3 +1,6 @@
+-- Set Neovide's font
+vim.cmd([[set guifont=Fira\ Code,Twitter\ Color\ Emoji,Symbols\ Nerd\ Font\ Mono:h14]])
+
 -- Floating and Popupmenu Transparency
 vim.opt.winblend = 30
 vim.opt.pumblend = 90
