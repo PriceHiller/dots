@@ -21,10 +21,12 @@
     springViolet1 = "938AA9"; # #938AA9
     springViolet2 = "9CABCA"; # #9CABCA
     sumiInk0 = "16161D"; # #16161D
-    sumiInk1 = "1F1F28"; # #1F1F28
-    sumiInk2 = "2A2A37"; # #2A2A37
-    sumiInk3 = "363646"; # #363646
-    sumiInk4 = "54546D"; # #54546D
+    sumiInk1 = "181820"; # #181820
+    sumiInk2 = "1a1a22"; # #1a1a22
+    sumiInk3 = "1F1F28"; # #1F1F28
+    sumiInk4 = "2A2A37"; # #2A2A37
+    sumiInk5 = "363646"; # #363646
+    sumiInk6 = "54546D"; # #54546D
     surimiOrange = "FFA066"; # #FFA066
     waveAqua1 = "6A9589"; # #6A9589
     waveAqua2 = "7AA89F"; # #7AA89F
