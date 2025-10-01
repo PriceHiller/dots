@@ -11,6 +11,7 @@
           jupyterlab
           jupytext
           pandas
+          pandas-stubs
           numpy
           matplotlib
         ]
