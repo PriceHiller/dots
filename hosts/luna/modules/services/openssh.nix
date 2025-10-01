@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   services.openssh = {
     enable = true;
@@ -16,6 +16,7 @@
       "-f AUTHPRIV"
       "-l INFO"
     ];
+    authorizedKeysInHomedir = false;
     settings = {
       PasswordAuthentication = false;
       AuthenticationMethods = "publickey";
@@ -24,6 +25,9 @@
       X11Forwarding = false;
       AllowAgentForwarding = false;
       AllowStreamLocalForwarding = false;
+      PerSourcePenaltyExemptList = lib.strings.concatStringsSep "," [
+        "192.168.0.0/22"
+      ];
       LogLevel = "VERBOSE";
       AllowUsers = [ "root" ];
     };
