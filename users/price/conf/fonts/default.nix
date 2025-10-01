@@ -20,20 +20,23 @@
       defaultFonts = {
         sansSerif = [
           "Noto Sans"
+          "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];
         serif = [
           "Noto Serif"
+          "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];
         monospace = [
           "FiraCode Nerd Font"
           "Noto Sans Mono"
+          "Twitter Color Emoji"
           "Symbols Nerd Font Mono"
         ];
         emoji = [
           "Twitter Color Emoji"
-          "Symbols Nerd Font Mono"
+          "Symbols Nerd Font"
         ];
       };
     };
