@@ -1,4 +1,13 @@
 vim.opt_local.textwidth = 100
+local fmtpat = require("utils.formatpat").new()
+
+local raw_commentstring = vim.trim(vim.o.commentstring:gsub("%%s", ""))
+for _, pat in ipairs(vim.deepcopy(fmtpat.pat)) do
+    local comment_pat = ([[%s\s*%s]]):format(raw_commentstring, pat)
+    table.insert(fmtpat.pat, comment_pat)
+end
+table.insert(fmtpat.pat, raw_commentstring)
+vim.opt_local.formatlistpat = fmtpat:listpat()
 
 -- Treesitter automatic Python format strings
 -- THANKS https://gist.github.com/linguini1/ee91b6d8c196cbd731d10a61447af6a3
