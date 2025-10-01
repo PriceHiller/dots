@@ -4,7 +4,6 @@
     packages = with pkgs; [
       ansible
       ansible-lint
-      ansible-language-server
     ];
     sessionVariables = {
       ANSIBLE_HOME = "${config.xdg.dataHome}/ansible";

@@ -88,7 +88,6 @@
       bash-language-server
       shfmt
       texlab
-      ansible-language-server
       ansible-lint
       csharp-ls
       gopls
