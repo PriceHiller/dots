@@ -1,7 +1,9 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.zathura
+    (pkgs.zathura.override {
+      useMupdf = true;
+    })
   ];
   xdg.mimeApps.defaultApplications = {
     "application/pdf" = [
