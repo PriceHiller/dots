@@ -26,6 +26,7 @@ return {
         },
         opts = {
             keys = "etovxqpdygfblzhckisuran",
+            hl_mode = "replace",
         },
     },
 }
