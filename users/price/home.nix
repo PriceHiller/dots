@@ -66,7 +66,6 @@ in
         kooha
         libreoffice-fresh
         nix-prefetch-scripts
-        mako
         wl-clipboard
         grim
         slurp
