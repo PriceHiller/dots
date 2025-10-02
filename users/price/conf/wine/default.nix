@@ -13,8 +13,8 @@
       sessionVariables = {
         WINEPREFIX = "${wineprefix-dir}/default";
       };
-      activation.init = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        mkdir -p "${wineprefix-dir}"
+      activation.createWinePrefixDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        run mkdir -p "${wineprefix-dir}"
       '';
       packages = with pkgs; [
         wineWowPackages.waylandFull
