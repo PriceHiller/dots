@@ -5,6 +5,12 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
-        config = true,
+        config = function()
+            require("flutter-tools").setup({
+                widget_guides = {
+                    enabled = true,
+                },
+            })
+        end,
     },
 }

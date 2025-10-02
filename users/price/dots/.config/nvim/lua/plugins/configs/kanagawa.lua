@@ -406,6 +406,9 @@ return {
                 -- Quickfix stuff
                 { "QuickFixHeaderSoft", { link = "NonText" } },
                 { "QuickFixFilenameInvalid", { link = "NonText" } },
+
+                -- Flutter tools
+                { "FlutterWidgetGuides", { fg = colors.sakuraPink } },
             }
 
             if vim.g.neovide then
