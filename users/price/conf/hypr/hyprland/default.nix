@@ -41,7 +41,7 @@ in
         gaps_out = 10;
         border_size = 3;
         "col.active_border" = "rgb(${colors.hex.surimiOrange}) 45deg";
-        "col.inactive_border" = "rgb(${colors.hex.sumiInk4})";
+        "col.inactive_border" = "rgb(${colors.hex.sumiInk6})";
       };
       misc = {
         enable_anr_dialog = false;
