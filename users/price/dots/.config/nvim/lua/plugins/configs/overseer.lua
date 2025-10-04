@@ -59,6 +59,45 @@ return {
             overseer.register_template(
                 ---@type overseer.TemplateDefinition
                 {
+                    name = "Run Live Server (CWD)",
+                    desc = "Run `live-server` for the CWD",
+                    builder = function(_)
+                        return {
+                            cmd = {
+                                "live-server",
+                                "-H",
+                                "localhost",
+                                "-o",
+                                "--index",
+                            },
+                        }
+                    end,
+                }
+            )
+            overseer.register_template(
+                ---@type overseer.TemplateDefinition
+                {
+                    name = "Run Live Server (Buf)",
+                    desc = "Run `live-server` for the directory of the current buffer",
+                    builder = function(_)
+                        local bufpath = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+                        local dir = vim.fs.dirname(bufpath)
+                        return {
+                            cmd = {
+                                "live-server",
+                                "-H",
+                                "localhost",
+                                "-o",
+                                "--index",
+                                dir,
+                            },
+                        }
+                    end,
+                }
+            )
+            overseer.register_template(
+                ---@type overseer.TemplateDefinition
+                {
                     name = "Watch D2",
                     desc = "Run `d2 --watch`",
                     ---@return overseer.TaskDefinition

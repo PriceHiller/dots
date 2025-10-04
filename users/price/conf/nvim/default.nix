@@ -114,6 +114,7 @@
       stylua
       lua-language-server
       typstyle
+      live-server
       cmake-format
       cmake-language-server
       tombi
