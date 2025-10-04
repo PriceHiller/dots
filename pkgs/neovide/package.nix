@@ -25,16 +25,16 @@
 
 rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
   pname = "neovide";
-  version = "0.15.0";
+  version = "0.15.2";
 
   src = fetchFromGitHub {
     owner = "neovide";
     repo = "neovide";
-    rev = "5aeaf719982ef29e4247433c28d5e54a38339e6e";
-    hash = "sha256-ZZ1HdsRs95sj5UZdi+jwHWdhQ7Np0vOdWeJlSsDEoDU=";
+    rev = "86c3639fcb6fe69a901ddfbc78853c8248908498";
+    hash = "sha256-/h3xO1cA+A776pjKZg2RHZQ3ytiVHJobPlx95Us5PPY=";
   };
 
-  cargoHash = "sha256-1ni8AZIwAz5R2Ejt9Fj5qmybvL4KZV/M3BMqQx4HFLU=";
+  cargoHash = "sha256-DD2c63JHMdzwD1OmC7c9dMB59qjvdAYZ9drQf3f8xCs=";
 
   SKIA_SOURCE_DIR =
     let
@@ -42,8 +42,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
         owner = "rust-skia";
         repo = "skia";
         # see rust-skia:skia-bindings/Cargo.toml#package.metadata skia
-        tag = "m135-0.83.1";
-        hash = "sha256-TSGPJl9DfWQtrkNIhv40s8VcuudCjbiSh+QjLc0hKN4=";
+        tag = "m140-0.87.4";
+        hash = "sha256-pHxqTrqguZcPmuZgv0ASbJ3dgn8JAyHI7+PdBX5gAZQ=";
       };
       # The externals for skia are taken from skia/DEPS
       externals = linkFarm "skia-externals" (
