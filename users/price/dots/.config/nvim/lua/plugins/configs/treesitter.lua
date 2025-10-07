@@ -131,7 +131,6 @@ return {
             end
 
             local select_config = {
-
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
@@ -142,21 +141,21 @@ return {
 
             for bind, query in pairs(select_config) do
                 table.insert(keys, {
-                    "v" .. bind,
-                    mode = { "n", "x", "o" },
+                    bind,
+                    mode = { "x", "o" },
                     function()
                         require("nvim-treesitter-textobjects.select").select_textobject(query, "textobjects")
                     end,
-                    desc = ("Select > %s"):format(query),
+                    desc = ("TS > %s"):format(query),
                 })
             end
             table.insert(keys, {
-                "vas",
-                mode = { "n", "x", "o" },
+                "as",
+                mode = { "x", "o" },
                 function()
                     require("nvim-treesitter-textobjects.select").select_textobject("@scope", "locals")
                 end,
-                desc = ("Select > %s"):format("@scope"),
+                desc = ("TS > %s"):format("@scope"),
             })
 
             return keys
