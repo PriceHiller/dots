@@ -74,7 +74,7 @@ in
     gitea = {
       appName = "Gitea";
       enable = true;
-      dump.enable = true;
+      dump.enable = false;
       database = {
         type = "postgres";
         passwordFile = config.age.secrets.gitea-db-pass.path;
