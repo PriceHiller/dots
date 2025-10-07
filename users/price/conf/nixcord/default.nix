@@ -61,14 +61,6 @@
         gifPaste = {
           enable = true;
         };
-        imageZoom = {
-          enable = true;
-          invertScroll = true;
-          nearestNeighbour = false;
-          saveZoomValues = true;
-          square = false;
-          zoom = 1.0;
-        };
         memberCount = {
           enable = true;
           memberList = true;
@@ -146,13 +138,6 @@
         };
         serverListAPI = {
           enable = true;
-        };
-        shikiCodeblocks = {
-          enable = false;
-          bgOpacity = 59.9132;
-          theme = "https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/refs/heads/main/packages/tm-themes/themes/catppuccin-mocha.json";
-          tryHljs = "ALWAYS";
-          useDevIcon = "COLOR";
         };
         showHiddenThings = {
           disableDisallowedDiscoveryFilters = true;
