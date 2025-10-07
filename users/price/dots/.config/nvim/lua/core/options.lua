@@ -135,13 +135,19 @@ M.setup = function()
     -- Hide the tabline
     vim.opt.showtabline = 0
 
-    -- Improved diff
-    for _, diffopt in ipairs({
+    -- Improved diffopt
+    opt.diffopt = ""
+    for _, new_diffopt in ipairs({
+        "internal",
+        "filler",
+        "closeoff",
         "indent-heuristic",
+        "inline:word",
         "linematch:60",
         "algorithm:histogram",
     }) do
-        opt.diffopt:append(diffopt)
+        ---@diagnostic disable-next-line: undefined-field
+        opt.diffopt:append(new_diffopt)
     end
     opt.fillchars:append("diff:╱")
 
