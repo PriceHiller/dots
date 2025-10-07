@@ -66,7 +66,7 @@ return {
                 -- see the "default configuration" section below for full documentation on how to define
                 -- your own keymap.
                 keymap = {
-                    preset = "default",
+                    preset = "none",
                     ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                     ["<C-e>"] = { "hide", "fallback" },
                     ["<CR>"] = { "accept", "fallback" },
@@ -80,6 +80,7 @@ return {
                     ["<C-n>"] = { "select_next", "fallback" },
                     ["<C-s>"] = { "scroll_documentation_up", "fallback" },
                     ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+                    ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
                 },
 
                 cmdline = {
@@ -124,9 +125,9 @@ return {
                         "lsp",
                         "path",
                         "snippets",
+                        "nix",
                         "buffer",
                         "ripgrep",
-                        "nix",
                         "emoji",
                         "latex",
                         "orgmode",
