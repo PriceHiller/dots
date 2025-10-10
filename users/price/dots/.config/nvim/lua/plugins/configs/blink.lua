@@ -85,11 +85,11 @@ return {
 
                 cmdline = {
                     keymap = {
-                        ["<CR>"] = { "accept_and_enter", "fallback" },
+                        ["<CR>"] = { "accept", "fallback" },
                     },
                     completion = {
                         list = {
-                            selection = { preselect = false, auto_insert = true },
+                            selection = { preselect = false, auto_insert = false },
                         },
                         ghost_text = {
                             enabled = true,
@@ -228,12 +228,13 @@ return {
                         range = "full",
                     },
                     list = {
-                        selection = { preselect = false, auto_insert = true },
+                        selection = { preselect = false, auto_insert = false },
                     },
                     ghost_text = {
                         enabled = true,
                     },
                     menu = {
+                        auto_show = true,
                         winblend = vim.g.neovide and 90,
                         max_height = vim.opt.pumheight:get(),
                         draw = {
