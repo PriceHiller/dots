@@ -27,10 +27,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixcord = {
-      url = "github:kaylorben/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     agenix = {
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -162,7 +158,6 @@
                   {
                     home-manager = {
                       sharedModules = [
-                        inputs.nixcord.homeModules.nixcord
                         inputs.agenix.homeManagerModules.default
                         age-secrets
                         ./modules/hm/link-file.nix
