@@ -793,7 +793,7 @@ return {
                                 ---@type OrgFile
                                 orgfile = orgfile
                                 for _, headline in ipairs(orgfile:get_opened_unfinished_headlines()) do
-                                    local date = headline:get_deadline_date() or headline:get_scheduled_date()
+                                    local date = headline:get_scheduled_date() or headline:get_deadline_date()
 
                                     if date and date:is_same_or_before(today, "day") then
                                         local diff = date:diff(now, "minute")
