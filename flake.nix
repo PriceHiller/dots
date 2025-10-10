@@ -208,6 +208,7 @@
                 ./modules/nixos/btrfs-rollback.nix
                 ./modules/nixos/mail.nix
                 ./modules/nixos/grafana-alloy.nix
+                ./modules/nixos/openssh.nix
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko

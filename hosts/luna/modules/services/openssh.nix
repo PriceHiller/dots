@@ -1,8 +1,7 @@
 { config, lib, ... }:
 {
+  ext.services.openssh.enable = true;
   services.openssh = {
-    enable = true;
-    startWhenNeeded = true;
     # We set the hostkeys manually so they persist through reboots
     hostKeys = [
       {
@@ -12,39 +11,9 @@
         type = "ed25519";
       }
     ];
-    sftpFlags = [
-      "-f AUTHPRIV"
-      "-l INFO"
+    settings.PerSourcePenaltyExemptList = lib.strings.concatStringsSep "," [
+      "192.168.0.0/22"
     ];
-    authorizedKeysInHomedir = false;
-    settings = {
-      PasswordAuthentication = false;
-      AuthenticationMethods = "publickey";
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "prohibit-password";
-      X11Forwarding = false;
-      AllowAgentForwarding = false;
-      AllowStreamLocalForwarding = false;
-      PerSourcePenaltyExemptList = lib.strings.concatStringsSep "," [
-        "192.168.0.0/22"
-      ];
-      LogLevel = "VERBOSE";
-      AllowUsers = [ "root" ];
-    };
     ports = [ 2200 ];
-    banner = ''
-      ┌────────────────────────────────────────────────────┐
-      │        Orion Technologies - Security Notice        │
-      │        ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄        │
-      │  UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED  │
-      │                                                    │
-      │     You must have written, explicit, authorized    │
-      │   permission to access or configure this device.   │
-      │ Unauthorized attempts and actions to access or use │
-      │   this system may result in civil and/or criminal  │
-      │ penalties. All activities performed on this device │
-      │              are logged and monitored.             │
-      └────────────────────────────────────────────────────┘
-    '';
   };
 }
