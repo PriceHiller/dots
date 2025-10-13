@@ -112,8 +112,7 @@ in
                   let
                     self = inputs.self;
                     rev =
-                      self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision
-                        or "unknown";
+                      self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown";
                   in
                   rev
                 }",

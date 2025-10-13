@@ -29,5 +29,5 @@ local FormatPat = require("utils.formatpat").new()
 local List = require("utils.list")
 
 FormatPat.pat = List.append(FormatPat.pat, { ">" })
-FormatPat.pat = List.prepend(FormatPat.pat, {[=[- \[.\]]=],})
+FormatPat.pat = List.prepend(FormatPat.pat, { [=[- \[.\]]=] })
 vim.opt_local.formatlistpat = FormatPat:listpat()
