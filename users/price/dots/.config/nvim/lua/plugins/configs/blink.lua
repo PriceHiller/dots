@@ -58,30 +58,43 @@ return {
                 Buffer = { icon = "", hlgroup = "Buffer" },
                 Nix = { icon = "", hlgroup = "Nix" },
             }
+
+            ---@type blink.cmp.KeymapConfig
+            local blink_keymap = {
+                ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+                ["<C-e>"] = { "hide", "fallback" },
+                ["<CR>"] = { "accept", "fallback" },
+                ["<C-Tab>"] = { "snippet_forward", "fallback" },
+                ["<C-S-Tab>"] = { "snippet_backward", "fallback" },
+                ["<Up>"] = { "select_prev", "fallback" },
+                ["<Down>"] = { "select_next", "fallback" },
+                ["<Tab>"] = { "select_next", "fallback" },
+                ["<S-Tab>"] = { "select_prev", "fallback" },
+                ["<C-p>"] = { "select_prev", "fallback" },
+                ["<C-n>"] = { "select_next", "fallback" },
+                ["<C-s>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+                ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+            }
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "visual_multi_exit",
+                callback = function()
+                    local bufnr = vim.api.nvim_get_current_buf()
+
+                    local keymaps = vim.api.nvim_buf_get_keymap(bufnr, "i")
+                    for _, map in ipairs(keymaps) do
+                        if map.desc == "blink.cmp" then
+                            vim.keymap.del("i", map.lhs, { buffer = bufnr })
+                        end
+                    end
+                    require("blink.cmp.keymap.apply").keymap_to_current_buffer(blink_keymap)
+                end,
+            })
+
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
-                -- 'default' for mappings similar to built-in completion
-                -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-                -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-                -- see the "default configuration" section below for full documentation on how to define
-                -- your own keymap.
-                keymap = {
-                    preset = "none",
-                    ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-                    ["<C-e>"] = { "hide", "fallback" },
-                    ["<CR>"] = { "accept", "fallback" },
-                    ["<C-Tab>"] = { "snippet_forward", "fallback" },
-                    ["<C-S-Tab>"] = { "snippet_backward", "fallback" },
-                    ["<Up>"] = { "select_prev", "fallback" },
-                    ["<Down>"] = { "select_next", "fallback" },
-                    ["<Tab>"] = { "select_next", "fallback" },
-                    ["<S-Tab>"] = { "select_prev", "fallback" },
-                    ["<C-p>"] = { "select_prev", "fallback" },
-                    ["<C-n>"] = { "select_next", "fallback" },
-                    ["<C-s>"] = { "scroll_documentation_up", "fallback" },
-                    ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-                    ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
-                },
+                keymap = vim.tbl_extend("error", { preset = "none" }, blink_keymap),
 
                 cmdline = {
                     keymap = {
