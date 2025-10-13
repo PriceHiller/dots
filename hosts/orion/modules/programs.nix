@@ -5,6 +5,7 @@
   ...
 }:
 {
+  ext.basePrograms.enable = true;
   environment.sessionVariables = {
     DO_NOT_TRACK = 1;
   };
@@ -16,12 +17,6 @@
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
     dconf.enable = true;
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableGlobalCompInit = false;
-      enableBashCompletion = true;
-    };
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
