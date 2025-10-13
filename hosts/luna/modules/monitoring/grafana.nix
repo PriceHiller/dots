@@ -1,4 +1,4 @@
-{ config, ... }:
+{ inputs, config, ... }:
 let
   grafana_host = "grafana.${config.networking.domain}";
   grafana_loki_host = "loki.${config.networking.domain}";
@@ -13,6 +13,17 @@ in
       user = "grafana";
       group = "grafana";
     }
+    {
+      directory = config.services.loki.dataDir;
+      user = "loki";
+      group = "loki";
+    }
+    {
+      directory = config.services.vector.settings.data_dir;
+      mode = "0700";
+      user = "nobody";
+      group = "nogroup";
+    }
   ];
 
   systemd.services.alloy = {
@@ -25,33 +36,139 @@ in
       ];
     };
   };
-  ext.services.alloy = {
-    enable = true;
-    enableDefaultConfig = true;
-    environmentFile = config.age.secrets.nginx-basic-auth.path;
-    loki =
-      let
-        scfg = config.services.loki.configuration.server;
-      in
-      {
-        host = scfg.http_listen_address;
-        port = scfg.http_listen_port;
-        protocol = "http";
-      };
-    extraConfig =
-      let
-        endpoint = config.ext.services.alloy.endpoint;
-      in
-      [
-        ''
-          loki.source.file "nginx" {
-            forward_to = [${endpoint}]
-            targets = [
-              { __path__ = "/var/log/nginx/access.log", "service_name" = "loki.source.file.nginx" },
-            ]
-          }
-        ''
+  systemd.services.vector = {
+    serviceConfig = {
+      EnvironmentFile = config.age.secrets.basic-auth-env.path;
+      SupplementaryGroups = [
+        "nginx"
+        "systemd-journal"
+        "adm"
       ];
+      BindReadOnlyPaths = [
+        "/var/log/nginx"
+      ];
+    };
+  };
+  services.vector = {
+    enable = true;
+    validateConfig = false;
+    settings = {
+      schema.log_namespace = true;
+      api.enabled = true;
+      data_dir = "/var/lib/private/vector/";
+
+      sources = {
+        source_journald = {
+          type = "journald";
+        };
+        source_nginx = {
+          type = "file";
+          include = [
+            "/var/log/nginx/access.log"
+          ];
+          ignore_older_secs = 86400;
+        };
+      };
+      transforms = {
+        transform_nginx = {
+          inputs = [
+            "source_nginx"
+          ];
+          type = "remap";
+          source = # vrl
+            ''
+              . = string!(.)
+              . = parse_json!(.)
+              if .level == null && .status != null {
+                .status, err = to_int(.status)
+                if err == null && .status >= 500 {
+                    .level = "error"
+                } else {
+                  .level = "info"
+                }
+              }
+
+              %service_name = "nginx"
+            '';
+        };
+        transform_journald = {
+          inputs = [
+            "source_journald"
+          ];
+          type = "remap";
+          source = # vrl
+            ''
+
+              .message = string!(.)
+              structured = parse_syslog(.message) ?? parse_key_value(.message) ?? {}
+
+              if structured.level != null {
+                .level = structured.level
+              } else if structured.LEVEL != null {
+                .level = structured.LEVEL
+              } else if structured.priority != null {
+                .level = to_syslog_level(to_int(structured.priority) ?? -1) ?? null
+              } else if structured.PRIORITY != null {
+                .level = to_syslog_level(to_int(structured.PRIORITY) ?? -1) ?? null
+              }
+
+
+
+              jmeta = %journald.metadata
+              if jmeta == null {
+                jmeta = {}
+              }
+
+              .boot_id = jmeta._BOOT_ID
+              .cmdline = jmeta._BOOT_ID
+              .unit = jmeta._SYSTEMD_UNIT
+              .slice = jmeta._SYSTEMD_SLICE
+              .machine_id = jmeta._MACHINE_ID
+              .cmdline = jmeta._CMDLINE
+              .hostname = jmeta._HOSTNAME
+              .cgroup = jmeta._SYSTEMD_CGROUP
+              .comm = jmeta._COMM
+              .exe = jmeta._EXE
+              .syslog_identifer = jmeta.SYSLOG_IDENTIFIER
+              .syslog_facility = to_syslog_facility(to_int(jmeta.SYSLOG_FACILITY) ?? -1) ?? null
+
+              %service_name = "journal"
+            '';
+        };
+      };
+      sinks = {
+        sink_loki = {
+          inputs = [
+            "transform_*"
+          ];
+          type = "loki";
+          labels = {
+            service_name = "{{ %service_name }}";
+            system_host = "${config.system.name}";
+            nixos_system_rev = "${
+              let
+                self = inputs.self;
+                rev =
+                  self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown";
+              in
+              rev
+            }";
+            nixos_state_verison = "${config.system.stateVersion}";
+          };
+          encoding.codec = "json";
+          endpoint =
+            let
+              lcfg = config.services.loki.configuration.server;
+            in
+            "http://${lcfg.http_listen_address}:${builtins.toString lcfg.http_listen_port}";
+          auth = {
+            strategy = "basic";
+            user = ''''${BASIC_AUTH_USERNAME}'';
+            password = ''''${BASIC_AUTH_PASSWORD}'';
+          };
+        };
+      };
+    };
   };
 
   services = {

@@ -10,7 +10,7 @@ in
 {
   services.postgresqlBackup = {
     enable = true;
-    location = "/var/backup/postgresql";
+    location = "/var/backup/postgresql/${config.services.postgresql.package.psqlSchema}/";
     backupAll = true;
   };
 
@@ -34,23 +34,34 @@ in
 
   systemd.services.postgresql.serviceConfig = {
     # Ensure postgres can write to its specified log directory
-    ReadWritePaths = lib.mkBefore [
+    ReadWritePaths = lib.mkAfter [
       config.services.postgresql.settings.log_directory
     ];
   };
 
   environment.systemPackages = [ pkgs.pgloader ];
 
+  environment.persistence.ephemeral.directories = [
+    {
+      directory = "${config.services.postgresql.settings.log_directory}";
+      user = "postgres";
+      group = "postgres";
+      mode = "0770";
+    }
+  ];
+
   environment.persistence.save.directories = [
     {
       directory = "${pg_dataDir_base}";
       user = "postgres";
       group = "postgres";
+      mode = "0770";
     }
     {
       directory = config.services.postgresqlBackup.location;
       user = "postgres";
       group = "postgres";
+      mode = "0770";
     }
   ];
 }

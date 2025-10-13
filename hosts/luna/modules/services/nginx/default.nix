@@ -9,45 +9,76 @@
     owner = config.services.nginx.user;
     group = config.services.nginx.user;
   };
+
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     recommendedTlsSettings = true;
-    appendHttpConfig = ''
-      log_format logger-json escape=json '${
-        # We remove the whitespace in the json log to ensure the json log comes out on a single line
-        # in the system log
-        builtins.replaceStrings [ "\n" " " ] [ "" "" ] ''
-          {
-              "time": "$time_iso8601",
-              "time_msec": $msec,
-              "status": $status,
-              "http_user_agent": "$http_user_agent",
-              "http_host": "$http_host",
-              "http_referer": "$http_referer",
-              "bytes_sent": $bytes_sent,
-              "content_type": "$content_type",
-              "content_length": "$content_length",
-              "remote_addr": "$remote_addr",
-              "request_length": $request_length,
-              "request_method": "$request_method",
-              "reqest_uri": "$request_uri",
-              "request_time": $request_time,
-              "server_protocol": "$server_protocol",
-              "upstream_addr": "$upstream_addr"
-          }
-        ''
-      }';
-      access_log /var/log/nginx/access.log logger-json;
-    '';
+    appendHttpConfig = # nginx
+      ''
+        log_format logger-json escape=json '${
+          # We remove the whitespace in the json log to ensure the json log comes out on a single line
+          # in the system log
+          builtins.replaceStrings [ "\n" " " ] [ "" "" ] ''
+            {
+                "time": "$time_iso8601",
+                "time_msec": $msec,
+                "status": $status,
+                "http_user_agent": "$http_user_agent",
+                "http_host": "$http_host",
+                "http_referer": "$http_referer",
+                "bytes_sent": $bytes_sent,
+                "content_type": "$content_type",
+                "content_length": "$content_length",
+                "remote_addr": "$remote_addr",
+                "request_length": $request_length,
+                "request_method": "$request_method",
+                "request_uri": "$request_uri",
+                "request_time": $request_time,
+                "request_id": "$request_id",
+                "server_protocol": "$server_protocol",
+                "upstream_addr": "$upstream_addr"
+            }
+          ''
+        }';
+        access_log /var/log/nginx/access.log logger-json;
+      '';
   };
 
   security.acme = {
     acceptTerms = true;
     defaults.email = "acme@monitoring.pricehiller.com";
   };
+
+  environment.persistence.ephemeral.directories =
+    let
+      acmeCfg = config.security.acme;
+      acmeUser = if acmeCfg.useRoot then "root" else "acme";
+      acmeGroup = acmeCfg.defaults.group;
+    in
+    builtins.concatLists [
+      [
+        {
+          directory = "/var/lib/acme";
+          user = acmeUser;
+          group = acmeGroup;
+        }
+      ]
+      (
+        acmeCfg.certs
+        |> builtins.mapAttrs (
+          _: val: {
+            directory = val.directory;
+            user = acmeUser;
+            group = val.group;
+            mode = "u=rwx,g=rx,o=";
+          }
+        )
+        |> builtins.attrValues
+      )
+    ];
 
   networking.firewall.allowedTCPPorts = [
     80

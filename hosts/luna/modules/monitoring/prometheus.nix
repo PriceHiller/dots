@@ -107,6 +107,7 @@ in
       };
     };
   };
+
   environment.persistence.save.directories = [
     {
       directory = "/var/lib/${config.services.prometheus.stateDir}";

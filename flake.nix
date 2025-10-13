@@ -4,7 +4,7 @@
   inputs = {
     nix.url = "git+https://github.com/nixos/nix?shallow=1";
     deploy-rs.url = "github:serokell/deploy-rs";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
     nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.05";
     hyprland = {
@@ -107,7 +107,16 @@
     in
     {
       formatter = forAllSystems (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-      packages = forAllSystems (pkgs: import ./pkgs pkgs);
+      packages = forAllSystems (
+        pkgs:
+        let
+          bootstrapISO = self.nixosConfigurations.bootstrapper.config.system.build.isoImage;
+        in
+        {
+          inherit bootstrapISO;
+          default = bootstrapISO;
+        }
+      );
       overlays = import ./overlays { inherit inputs; };
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
@@ -152,6 +161,7 @@
                   };
                 in
                 [
+                  ./modules/nixos/base-programs.nix
                   ./modules/nixos/btrfs-rollback.nix
                   ./modules/nixos/grafana-alloy.nix
                   inputs.home-manager.nixosModules.home-manager
@@ -209,11 +219,39 @@
                 ./modules/nixos/mail.nix
                 ./modules/nixos/grafana-alloy.nix
                 ./modules/nixos/openssh.nix
+                ./modules/nixos/base-programs.nix
+                inputs.nixos-facter-modules.nixosModules.facter
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
                 {
                   config = inputs.secrets.secrets.${hostname};
+                }
+                ./hosts/${hostname}
+              ];
+            };
+          bootstrapper =
+            let
+              hostname = "bootstrapper";
+            in
+            nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              specialArgs = {
+                inherit self;
+                inherit inputs;
+                inherit hostname;
+                inherit nixpkgs;
+                inherit clib;
+              };
+              modules = [
+                ./modules/nixos/openssh.nix
+                ./modules/nixos/base-programs.nix
+                {
+                  config = {
+                    nixpkgs.overlays = [
+                      inputs.neovim-nightly-overlay.overlays.default
+                    ];
+                  };
                 }
                 ./hosts/${hostname}
               ];

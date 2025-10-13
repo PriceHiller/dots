@@ -28,4 +28,13 @@
         |> builtins.listToAttrs;
     in
     baseRunners 8;
+
+  environment.persistence.save.directories = [
+    {
+      directory = "/var/lib/private/github-runner";
+      user = "nobody";
+      group = "nogroup";
+      mode = "0700";
+    }
+  ];
 }

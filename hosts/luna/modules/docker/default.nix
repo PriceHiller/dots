@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  environment.persistence.ephemeral.directories = [
+    "/var/lib/containers"
+    "/var/lib/docker"
+  ];
+
   environment.systemPackages = with pkgs; [
     docker
     docker-compose

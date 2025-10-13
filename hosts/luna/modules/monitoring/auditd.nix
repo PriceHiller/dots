@@ -1,15 +1,30 @@
-{ ... }:
+{ lib, ... }:
+let
+  logrotateStatusDir = "/var/lib/logrotate";
+
+in
 {
+  environment.persistence.ephemeral.directories = [
+    logrotateStatusDir
+  ];
+
   services = {
     journald.audit = true;
-    logrotate.settings."/var/log/audit/audit.log" = {
-      frequency = "daily";
-      compress = true;
-      rotate = 10;
-      size = "1G";
-      dateext = true;
+    logrotate = {
+      extraArgs = lib.mkAfter [
+        "--state"
+        "${logrotateStatusDir}/logrotate.status"
+      ];
+      settings."/var/log/audit/audit.log" = {
+        frequency = "daily";
+        compress = true;
+        rotate = 10;
+        size = "1G";
+        dateext = true;
+      };
     };
   };
+
   security = {
     auditd.enable = true;
 

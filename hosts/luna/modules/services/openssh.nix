@@ -14,6 +14,9 @@
     settings.PerSourcePenaltyExemptList = lib.strings.concatStringsSep "," [
       "192.168.0.0/22"
     ];
-    ports = [ 2200 ];
+    ports = [
+      22
+      2200
+    ];
   };
 }

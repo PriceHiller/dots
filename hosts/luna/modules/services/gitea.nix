@@ -154,5 +154,11 @@ in
       user = config.services.gitea.user;
       group = config.services.gitea.group;
     }
+    {
+      directory = "/var/lib/private/gitea-runner";
+      user = "nobody";
+      group = "nogroup";
+      mode = "0700";
+    }
   ];
 }
