@@ -28,7 +28,7 @@ return {
                 },
                 highlighter = {
                     auto_enable = true,
-                    lsp = true,
+                    lsp = false,
                 },
             })
         end,
