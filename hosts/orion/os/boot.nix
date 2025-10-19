@@ -37,7 +37,21 @@ in
       systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
     };
-    kernelModules = [ "kvm-intel" ];
+    kernelParams = [
+      "intel_iommu=on"
+    ];
+    kernelModules = [
+      # More virtualization features
+      "kvm"
+      "kvm_intel"
+
+    ];
+    extraModprobeConfig = builtins.concatStringsSep "\n" [
+      # Allow nested virtualization
+      "options kvm_intel nested=1"
+      # Ignore messages due to guest operating systems having a fit
+      "options kvm ignore_msrs=1"
+    ];
     extraModulePackages = [ ];
     initrd = {
       availableKernelModules = [

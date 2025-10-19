@@ -87,4 +87,20 @@ rec {
 
   kcolors = (import ./kanagawa-colors.nix);
 
+  pow =
+    base: exponent:
+    if exponent > 0 then
+      let
+        and1 = x: (x / 2) * 2 != x;
+        x = pow base (exponent / 2);
+      in
+      assert and1 0 == false;
+      assert and1 1 == true;
+      assert and1 2 == false;
+      assert and1 3 == true;
+      x * x * (if and1 exponent then base else 1)
+    else if exponent == 0 then
+      1
+    else
+      throw "undefined";
 }

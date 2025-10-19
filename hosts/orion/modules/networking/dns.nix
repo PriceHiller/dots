@@ -1,25 +1,50 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  config,
+  ...
+}:
 let
   hasIPv6Internet = true;
   StateDirectory = "dnscrypt-proxy";
   getCacheFile = fname: "/var/lib/${StateDirectory}/${fname}";
   getLogFile = fname: "/var/log/dnscrypt-proxy/${fname}";
+  dnscrypt_port = "5300";
 in
 {
   networking = {
     useNetworkd = true;
     nameservers = lib.mkForce [
       "127.0.0.1"
-      "[::1]"
+      "::1"
     ];
   };
   services.resolved.enable = false;
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      # Explicitly specify the nameservers here so dnsmasq listens locally
+      listen-address = config.networking.nameservers;
+      bind-interfaces = true;
+      stop-dns-rebind = true;
+      address = [
+        "/.localhost/127.0.0.1"
+      ];
+      server = [
+        "127.0.0.1#${dnscrypt_port}"
+        "::1#${dnscrypt_port}"
+      ];
+    };
+  };
   # Pulled from https://wiki.nixos.org/wiki/Encrypted_DNS
   services.dnscrypt-proxy = {
     enable = true;
     # See https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
     settings = {
-      # listen_addresses = config.networking.nameservers;
+      listen_addresses = [
+        "127.0.0.1:${dnscrypt_port}"
+        "[::1]:${dnscrypt_port}"
+      ];
       sources = {
         # See https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
         public-resolvers = {
@@ -66,8 +91,9 @@ in
         privacy_level = 0;
         username = "";
         password = "";
-        max_query_log_entries = 1000;
-        max_memory_mb = 64;
+        listen_address = "127.0.0.1:8080";
+        max_query_log_entries = 100000;
+        max_memory_mb = 128;
       };
       query_log = {
         file = getLogFile "query.log";
@@ -87,5 +113,16 @@ in
     };
   };
 
+  services.nginx.virtualHosts = {
+    "dnscrypt.localhost" = {
+      forceSSL = false;
+      enableACME = false;
+      locations."/".proxyPass =
+        "http://${config.services.dnscrypt-proxy.settings.monitoring_ui.listen_address}/";
+    };
+  };
+
   systemd.services.dnscrypt-proxy2.serviceConfig.StateDirectory = StateDirectory;
+
+  # environment.persistence.ephemeral =
 }

@@ -5,6 +5,7 @@
     nix.url = "git+https://github.com/nixos/nix?shallow=1";
     deploy-rs.url = "github:serokell/deploy-rs";
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
     nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.05";
     hyprland = {
@@ -164,6 +165,8 @@
                   ./modules/nixos/base-programs.nix
                   ./modules/nixos/btrfs-rollback.nix
                   ./modules/nixos/grafana-alloy.nix
+                  ./modules/nixos/vector.nix
+                  ./modules/nixos/persistence.nix
                   inputs.home-manager.nixosModules.home-manager
                   {
                     home-manager = {
@@ -182,6 +185,8 @@
                       users.price = import ./users/price/home.nix;
                     };
                   }
+                  inputs.nixos-facter-modules.nixosModules.facter
+                  inputs.nixos-hardware.nixosModules.dell-xps-15-9530
                   inputs.lanzaboote.nixosModules.lanzaboote
                   inputs.impermanence.nixosModules.impermanence
                   inputs.agenix.nixosModules.default
@@ -220,6 +225,8 @@
                 ./modules/nixos/grafana-alloy.nix
                 ./modules/nixos/openssh.nix
                 ./modules/nixos/base-programs.nix
+                ./modules/nixos/vector.nix
+                ./modules/nixos/persistence.nix
                 inputs.nixos-facter-modules.nixosModules.facter
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default

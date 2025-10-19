@@ -1,15 +1,16 @@
 {
   inputs,
   pkgs,
-  config,
+  lib,
   ...
 }:
 {
-  ext.basePrograms.enable = true;
-  environment.sessionVariables = {
-    DO_NOT_TRACK = 1;
+  ext.basePrograms = {
+    enable = true;
+    zsh.enableFzfTab = false;
   };
   programs = {
+    zsh.enableGlobalCompInit = lib.mkForce false;
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -28,6 +29,6 @@
     };
   };
   environment.systemPackages = [
-    config.boot.kernelPackages.perf
+    pkgs.perf
   ];
 }

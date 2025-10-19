@@ -1,10 +1,11 @@
 {
   lib ? (import <nixpkgs> { }).lib,
+  config,
   ...
 }:
 let
   root-disk = "/dev/nvme0n1";
-  persist-dir = "/persist";
+  persistDir = config.ext.persistence.persistDir;
 in
 {
   services = {
@@ -14,34 +15,12 @@ in
       fileSystems = [
         "/"
         "/nix"
-        "/persist"
+        "${persistDir}"
       ];
     };
   };
 
-  environment.etc.machine-id = {
-    text = "8883d3861851470cbcbc98ed1f91727d";
-    mode = "0644";
-  };
-  environment.persistence.save = {
-    hideMounts = true;
-    persistentStoragePath = "${persist-dir}/save";
-    directories = [
-      "/var/log"
-    ];
-  };
-  environment.persistence.ephemeral = {
-    persistentStoragePath = "${persist-dir}/ephemeral";
-    hideMounts = true;
-    directories = [
-      "/var/lib"
-      # Systemd needs the `/usr` directory to exist on boot -- see
-      # https://github.com/nix-community/impermanence/issues/253#issuecomment-2614528056
-      "/usr/systemd-placeholder"
-    ];
-  };
-
-  fileSystems."${persist-dir}".neededForBoot = true;
+  ext.persistence.enable = true;
 
   disko.devices = {
     disk.${lib.removePrefix "/dev/" root-disk} = {
@@ -96,8 +75,8 @@ in
                       "noatime"
                     ];
                   };
-                  "/persist" = {
-                    mountpoint = "/persist";
+                  "${persistDir}" = {
+                    mountpoint = "${persistDir}";
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
@@ -112,3 +91,4 @@ in
     };
   };
 }
+
