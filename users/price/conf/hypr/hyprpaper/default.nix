@@ -1,14 +1,9 @@
 { config, ... }:
 let
-  wpapers-dir = "${config.xdg.dataHome}/wallpapers/";
-  eDP-1-wallpaper = "${wpapers-dir}/edp1.jpg";
-  default-wallpaper = "${wpapers-dir}/default.jpg";
+  eDP-1-wallpaper = builtins.toString ../wallpapers/Autumn-Leaves.jpg;
+  default-wallpaper = builtins.toString ../wallpapers/Nebula.jpg;
 in
 {
-  link = {
-    "${eDP-1-wallpaper}".source = builtins.toString ../wallpapers/Autumn-Leaves.jpg;
-    "${default-wallpaper}".source = builtins.toString ../wallpapers/Nebula.jpg;
-  };
   systemd.user.services.hyperpaper.Unit.After = [
     config.wayland.systemd.target
     "hm-link-files.target"
