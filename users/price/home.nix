@@ -123,6 +123,7 @@ in
         strawberry
         ghidra
         d2
+        rustdesk-flutter
       ]
       ++ [
         age
