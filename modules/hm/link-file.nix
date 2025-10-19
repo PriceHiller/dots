@@ -38,7 +38,7 @@ in
               };
               svc-name = lib.mkOption {
                 type = lib.types.str;
-                default =
+                apply = val:
                   let
                     replaceNonAlnum =
                       rep: str:
@@ -47,7 +47,9 @@ in
                       ));
                     mkLinkName = targetPath: "hm-link-${(replaceNonAlnum "-" targetPath)}";
                   in
-                  mkLinkName name;
+                  mkLinkName val;
+
+                default = name;
                 description = "The full systemd service name.";
                 readOnly = true;
               };
