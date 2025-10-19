@@ -6,14 +6,32 @@
 }:
 let
   cfg = config.ext.basePrograms;
+  mkEnabledOption = description: lib.options.mkOption {
+    description = description;
+    type = lib.types.bool;
+    default = true;
+  };
 in
 {
   options.ext.basePrograms = {
     enable = lib.options.mkEnableOption "Install & Configure default programs";
+    zsh = lib.options.mkOption {
+      description = "Zsh specific options";
+      default = { };
+      type = lib.types.submodule {
+        options = {
+          enable = mkEnabledOption "Whether to enable Zsh";
+          enableFzfTab = mkEnabledOption "Whether to enable fzf-tab for completions";
+        };
+      };
+    };
   };
 
   config = lib.mkIf (cfg.enable) {
     environment = {
+      sessionVariables = {
+        DO_NOT_TRACK = 1;
+      };
       systemPackages = with pkgs; [
         eza
         dust
@@ -78,7 +96,7 @@ in
         };
         syntaxHighlighting.enable = true;
         interactiveShellInit = # zsh
-          builtins.concatStringsSep "\n# ===== #\n" [
+          lib.mkMerge [
             # Options
             # zsh
             ''
@@ -128,9 +146,11 @@ in
 
             ''
 
-            # Ensure we load fzf-tab AFTER compinit
-            # zsh
-            ''source "${pkgs.zsh-fzf-tab.src}/fzf-tab.plugin.zsh"''
+            (lib.mkIf cfg.zsh.enableFzfTab
+              # Ensure we load fzf-tab AFTER compinit
+              # zsh
+              ''source "${pkgs.zsh-fzf-tab.src}/fzf-tab.plugin.zsh"''
+            )
           ];
       };
     };

@@ -15,8 +15,19 @@
       "192.168.0.0/22"
     ];
     ports = [
-      22
       2200
     ];
+  };
+  services.endlessh-go = {
+    enable = true;
+    port = 22;
+    openFirewall = true;
+    extraOptions = [
+    "-geoip_supplier=ip-api"
+    ];
+    prometheus = {
+      enable = true;
+      listenAddress = "127.0.0.1";
+    };
   };
 }

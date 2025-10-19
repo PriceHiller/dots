@@ -1,70 +1,9 @@
-{ lib, ... }:
+{ config, ... }:
 let
-  persist-dir = "/persist";
+  persist-dir = config.ext.persistence.persistDir;
 in
 {
-  environment.persistence.save = {
-    hideMounts = true;
-    persistentStoragePath = "${persist-dir}/save";
-    directories = [
-      # Persist log files
-      "/var/log"
-      "/var/lib/lastlog"
-    ];
-  };
-
-  environment.persistence.critical = {
-    persistentStoragePath = "${persist-dir}/critical";
-    hideMounts = true;
-    files = [
-      # Persist machine id
-      # See https://nixos.org/manual/nixos/stable/#sec-machine-id
-      "/etc/machine-id"
-    ];
-    directories = builtins.concatLists [
-      [
-        # Persist systemd state
-        # see https://nixos.org/manual/nixos/stable/#sec-var-systemd
-        "/var/lib/systemd"
-      ]
-
-      # Persist important state for users
-      # see https://nixos.org/manual/nixos/stable/#sec-state-users
-      [
-        "/var/lib/nixos"
-      ]
-    ];
-  };
-
-  environment.persistence.ephemeral = {
-    persistentStoragePath = "${persist-dir}/ephemeral";
-    hideMounts = true;
-
-    directories = [
-      # Systemd needs the `/usr` directory to exist on boot -- see
-      # https://github.com/nix-community/impermanence/issues/253#issuecomment-2614528056
-      "/usr/systemd-placeholder"
-
-      # TODO: Remove this and correctly identify all specific directories to persist
-      # Generically hang onto state from most services
-      "/var/lib"
-    ];
-  };
-
-  system.activationScripts."var-lib-private-perms" = {
-    # Ensure the systemd private directory has the correct permissions set
-    #
-    # Impermanence will create the outer parent directory and set wrong permissions for it if any
-    # path within is persisted, thus we need to set it back to what systemd expects
-    deps = [
-      "persist-files"
-      "createPersistentStorageDirs"
-    ];
-    text = ''
-      mkdir -p /var/lib/private
-      chmod 0700 /var/lib/private
-    '';
-  };
+  ext.persistence.enable = true;
 
   services = {
     fstrim.enable = true;
@@ -77,8 +16,6 @@ in
       ];
     };
   };
-
-  fileSystems."${persist-dir}".neededForBoot = true;
 
   disko.devices = {
     disk = {

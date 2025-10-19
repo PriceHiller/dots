@@ -20,6 +20,7 @@ in
                 cfg
                 // {
                   labels.host = "${prometheus_host}";
+                  labels.instance = "luna.hosts.${config.networking.domain}";
                 }
               )
               [
@@ -34,6 +35,9 @@ in
                 }
                 {
                   targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.snmp.port}" ];
+                }
+                {
+                  targets = [ "127.0.0.1:${toString config.services.endlessh-go.prometheus.port}" ];
                 }
               ];
         }

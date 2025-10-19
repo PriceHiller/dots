@@ -9,7 +9,6 @@ in
   ];
 
   services = {
-    journald.audit = true;
     logrotate = {
       extraArgs = lib.mkAfter [
         "--state"
@@ -26,17 +25,24 @@ in
   };
 
   security = {
-    auditd.enable = true;
+    auditd = {
+      enable = true;
+      settings = {
+        log_format = "ENRICHED";
+      };
+    };
 
     audit = {
       enable = true;
       backlogLimit = 8192;
       rules = [
+        # Remove noisy messages
+        "-a exclude,always -F msgtype=SERVICE_START"
+        "-a exclude,always -F msgtype=SERVICE_STOP"
+        "-a exclude,always -F msgtype=BPF"
+
         # Kexec usage
         "-a always,exit -F arch=b64 -S kexec_load -F key=KEXEC"
-
-        # Root directory access/modification
-        "-a always,exit -F arch=b64 -F dir=/root -F key=roothomeaccess -F perm=war"
 
         # Failed Modifications of critical paths
         "-a always,exit -F arch=b64 -S open -F dir=/etc -F success=0 -F key=unauthedfileaccess"
@@ -80,7 +86,7 @@ in
         "-a always,exit -F arch=b64 -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=-1 -F key=delete"
 
         # Root command executions
-        "-a always,exit -F arch=b64 -F euid=0 -F auid>=1000 -F auid!=-1 -S execve -F key=rootcmd"
+        "-a always,exit -F arch=b64 -F euid=0 -F auid!=unset -S execve -F key=root-command"
 
         # Unsuccessful permission change
         "-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr,fchmodat2,setxattrat,removexattrat,file_setattr -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change"

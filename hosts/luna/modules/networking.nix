@@ -16,6 +16,12 @@
       "91.239.100.100#anycast.uncensoreddns.org"
       "2001:67c:28a4::#anycast.uncensoreddns.org"
     ];
+    timeServers = [
+      "0.pool.ntp.org"
+      "1.pool.ntp.org"
+      "2.pool.ntp.org"
+      "3.pool.ntp.org"
+    ];
     useNetworkd = true;
   };
 }

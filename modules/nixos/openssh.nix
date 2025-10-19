@@ -36,7 +36,6 @@ in
         X11Forwarding = false;
         AllowAgentForwarding = false;
         AllowStreamLocalForwarding = false;
-        LogLevel = "VERBOSE";
         AllowUsers = [ "root" ];
       };
       banner = ''
