@@ -40,6 +40,14 @@ M.setup = function()
             end, 10)
         end,
     })
+    vim.api.nvim_create_autocmd("TermLeave", {
+        group = augroup,
+        desc = "Reload buffers when leaving terminal",
+        pattern = "*",
+        callback = function()
+            pcall(vim.cmd.checktime)
+        end,
+    })
 
     -- NOTE: Removes No Name buffers, thanks
     -- https://www.reddit.com/r/neovim/comments/16b0n3a/comment/jzcbhxo/?utm_source=share&utm_medium=web2x&context=3

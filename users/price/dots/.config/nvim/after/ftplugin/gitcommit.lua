@@ -25,3 +25,5 @@ vim.api.nvim_create_autocmd("BufUnload", {
         return true
     end,
 })
+
+vim.bo[bufnr].commentstring = "; %s"
