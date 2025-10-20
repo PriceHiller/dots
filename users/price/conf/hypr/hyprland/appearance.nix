@@ -18,7 +18,7 @@
       enabled = 1;
       bezier = [
         "overshot,0.08,0.8,0,1.1"
-        "quick_curve,0,.5,0,.5"
+        "quick_curve,0,0.5,0,0.5"
       ];
       animation = [
         "windows,1,3,overshot,slide"
