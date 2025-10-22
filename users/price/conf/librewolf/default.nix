@@ -4,15 +4,6 @@
   clib,
   ...
 }:
-let
-  nixValToLibrewolfPref =
-    val:
-    if builtins.isList val then
-      "[${val |> builtins.map (item: ''"${item}"'') |> lib.strings.concatStringsSep ","}]"
-    else
-      val;
-
-in
 {
 
   xdg.mimeApps.defaultApplications = lib.mkIf (config.programs.librewolf.enable) {
@@ -51,9 +42,11 @@ in
         ];
       };
       privacy = {
-        # Disabled for now, causes too many issues for me unfortunately :(
-        # In the future investigate compat with surfing keys and resistFingerprinting
-        resistFingerprinting = false;
+        resistFingerprinting = true;
+        fingerprintingProtection.overrides = [
+          "+AllTargets"
+          "-CSSPrefersColorScheme"
+        ];
         clearOnShutdown = {
           history = false;
           downloads = false;
