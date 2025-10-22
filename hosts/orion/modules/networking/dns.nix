@@ -2,6 +2,8 @@
   inputs,
   lib,
   config,
+  pkgs,
+  clib,
   ...
 }:
 let
@@ -10,6 +12,9 @@ let
   getCacheFile = fname: "/var/lib/${StateDirectory}/${fname}";
   getLogFile = fname: "/var/log/dnscrypt-proxy/${fname}";
   dnscrypt_port = "5300";
+  cert-key-name = "local-certificate";
+  cert-key-path = "/var/lib/dnscrypt-proxy/${cert-key-name}";
+  cert-pub-path = ../../files/localhost.pem;
 in
 {
   networking = {
@@ -27,6 +32,9 @@ in
       listen-address = config.networking.nameservers;
       bind-interfaces = true;
       stop-dns-rebind = true;
+      rebind-localhost-ok = true;
+      cache-size = 0;
+      log-queries = "proto";
       address = [
         "/.localhost/127.0.0.1"
       ];
@@ -36,7 +44,16 @@ in
       ];
     };
   };
-  # Pulled from https://wiki.nixos.org/wiki/Encrypted_DNS
+
+  systemd.services.dnscrypt-proxy.serviceConfig = {
+    LoadCredential = "${cert-key-name}:${config.age.secrets.local-certificate.path}";
+    ExecStartPre = [
+      "${pkgs.writeShellScriptBin "set-cred-path" ''
+        ${pkgs.coreutils}/bin/ln -sf "$CREDENTIALS_DIRECTORY/${cert-key-name}" "${cert-key-path}"
+      ''}/bin/set-cred-path"
+    ];
+  };
+
   services.dnscrypt-proxy = {
     enable = true;
     # See https://github.com/DNSCrypt/dnscrypt-proxy/blob/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
@@ -84,23 +101,39 @@ in
         log_file = getLogFile "blocked.log";
       };
 
-      log_level = 2;
-
       monitoring_ui = {
         enabled = true;
         privacy_level = 0;
+        enable_query_log = true;
         username = "";
         password = "";
         listen_address = "127.0.0.1:8080";
         max_query_log_entries = 100000;
         max_memory_mb = 128;
       };
+      local_doh = {
+        listen_addresses = [ "127.0.0.1:3000" ];
+        path = "/dns-query";
+        cert_file = cert-pub-path;
+        cert_key_file = cert-key-path;
+      };
       query_log = {
         file = getLogFile "query.log";
       };
 
-      cache_size = 16384;
-      lb_strategy = "p10"; # Randomly choose from the fastest 10 servers
+      dnscrypt_ephemeral_keys = true;
+      bootstrap_resolvers = [
+        "194.242.2.2:53"
+        "1.1.1.1:53"
+        "192.71.166.92:53"
+        "[2a03:f80:30:192:71:166:92:1]:53"
+      ];
+
+      cache = true;
+      cache_size = (clib.pow 2 18);
+
+      lb_strategy = "p5"; # Randomly choose from the fastest N servers
+      lb_estimator = true;
       ipv6_servers = hasIPv6Internet;
       block_ipv6 = !hasIPv6Internet;
 
@@ -113,6 +146,11 @@ in
     };
   };
 
+  age.secrets.local-certificate = {
+    group = "nginx";
+    mode = "0440";
+  };
+
   services.nginx.virtualHosts = {
     "dnscrypt.localhost" = {
       forceSSL = false;
@@ -123,6 +161,4 @@ in
   };
 
   systemd.services.dnscrypt-proxy2.serviceConfig.StateDirectory = StateDirectory;
-
-  # environment.persistence.ephemeral =
 }

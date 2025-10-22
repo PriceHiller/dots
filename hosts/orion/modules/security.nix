@@ -3,14 +3,11 @@ let
   cert-file = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 in
 {
-  environment.sessionVariables = {
-    NIX_SSL_CERT_FILE = "${cert-file}";
-    SSL_CERT_FILE = "${cert-file}";
-  };
   security = {
     pki = {
       certificateFiles = [
         "${cert-file}"
+        ../files/localhost.pem
       ];
     };
     polkit = {

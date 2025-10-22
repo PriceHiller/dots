@@ -2,10 +2,10 @@
   config,
   lib,
   clib,
+  osConfig,
   ...
 }:
 {
-
   xdg.mimeApps.defaultApplications = lib.mkIf (config.programs.librewolf.enable) {
     "default-web-browser" = [ "librewolf.desktop" ];
     "text/html" = [ "librewolf.desktop" ];
@@ -65,7 +65,21 @@
       network = {
         cookie.lifetimePolicy = 0;
         # We use the local DNS resolver, it should support encryption
-        trr.mode = 0;
+        trr =
+          let
+            dnscryptCfg = osConfig.services.dnscrypt-proxy;
+            dohCfg = dnscryptCfg.settings.local_doh;
+            dohUri = "https://${(builtins.elemAt dohCfg.listen_addresses 0)}${dohCfg.path}";
+          in
+          (lib.mkIf dnscryptCfg.enable {
+            mode = 3;
+            uri = dohUri;
+            custom_uri = dohUri;
+          });
+        dns = {
+          echconfig.enabled = true;
+          use_https_rr_as_altsvc = true;
+        };
       };
     };
   };
