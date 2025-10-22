@@ -49,7 +49,6 @@
       core = {
         ignorecase = false;
         quotePath = false;
-        commentChar = ";";
       };
       diff = {
         colorMoved = "default";
