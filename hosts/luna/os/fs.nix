@@ -11,8 +11,8 @@ in
       enable = true;
       fileSystems = [
         "/"
-        "/nix"
-        "${persist-dir}"
+        "/mnt/Store-1"
+        "/mnt/Store-2"
       ];
     };
   };
@@ -73,6 +73,10 @@ in
                   subvolumes = {
                     "/${base-subvol}" = {
                       mountpoint = "/";
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                     };
                     "/nix" = {
                       mountpoint = "/nix";
@@ -126,6 +130,10 @@ in
                     {
                       "/root" = {
                         mountpoint = "${baseMount}";
+                        mountOptions = [
+                          "compress=zstd"
+                          "noatime"
+                        ];
                       };
                       "${persist-dir}" = {
                         mountpoint = "${baseMount}/${persist-dir}";
@@ -172,6 +180,10 @@ in
                     {
                       "/root" = {
                         mountpoint = "${baseMount}";
+                        mountOptions = [
+                          "compress=zstd"
+                          "noatime"
+                        ];
                       };
                       "${persist-dir}" = {
                         mountpoint = "${baseMount}/${persist-dir}";

@@ -14,8 +14,6 @@ in
       enable = true;
       fileSystems = [
         "/"
-        "/nix"
-        "${persistDir}"
       ];
     };
   };
@@ -67,6 +65,10 @@ in
                 subvolumes = {
                   "/root" = {
                     mountpoint = "/";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/nix" = {
                     mountpoint = "/nix";
@@ -91,4 +93,3 @@ in
     };
   };
 }
-
