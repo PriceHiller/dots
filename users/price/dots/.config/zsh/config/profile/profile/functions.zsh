@@ -167,6 +167,17 @@ Unzip () {
 	done
 }
 
+ffmp4() {
+	# Thanks to https://news.ycombinator.com/item?id=45675856
+	input_file="$1"
+	output_file="${input_file%.*}_sd.mp4"
+
+	ffmpeg -i "$input_file" -c:v libx264 -crf 33 -profile:v baseline -level 3.0 -pix_fmt yuv420p -movflags faststart "$output_file"
+
+	echo "Compressed video saved as: $output_file"
+}
+
+
 File-Strip-Blank() {
 	for file in "${*[@]}"; do
 		mv "${file}" "${file//[[:blank:]]/-}"
