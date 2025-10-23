@@ -202,7 +202,7 @@ in
               .rt_timestamp = jmeta.__REALTIME_TIMESTAMP
               .invocation_id = jmeta._SYSTEMD_INVOCATION_ID
               .exe = jmeta._EXE
-              .syslog_identifer = jmeta.SYSLOG_IDENTIFIER
+              .syslog_identifier = jmeta.SYSLOG_IDENTIFIER
               .syslog_facility = to_syslog_facility(to_int(jmeta.SYSLOG_FACILITY) ?? -1) ?? null
 
               %service_name = "journal"
