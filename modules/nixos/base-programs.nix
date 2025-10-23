@@ -55,6 +55,7 @@ in
         man-pages-posix
         jq
         coreutils-full
+        unblob
       ];
     };
 
@@ -88,6 +89,7 @@ in
           };
         };
         shellAliases = {
+          ex = "unblob";
           ls = "eza --icons=always --group-directories-first --long --header --octal-permissions --classify --group --extended";
           l = "ls -alh";
           ll = "l";
