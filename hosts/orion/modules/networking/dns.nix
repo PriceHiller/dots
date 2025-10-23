@@ -155,8 +155,11 @@ in
     "dnscrypt.localhost" = {
       forceSSL = false;
       enableACME = false;
-      locations."/".proxyPass =
+      locations."/" = {
+        proxyPass =
         "http://${config.services.dnscrypt-proxy.settings.monitoring_ui.listen_address}/";
+        proxyWebsockets = true;
+      };
     };
   };
 
