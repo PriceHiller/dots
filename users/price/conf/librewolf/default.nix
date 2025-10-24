@@ -48,26 +48,52 @@ in
         privacy = {
           resistFingerprinting = false;
           fingerprintingProtection = {
-            overrides = concatComma [ "+AllTargets,+JSLocale,+FontVisibilityRestrictGenerics,-CSSPrefersColorScheme" ];
-            pbmode = true;
-            granularOverrides = builtins.toJSON [
-              {
-                firstPartyDomain = "localhost";
-                overrides = [ "-AllTargets" ];
-              }
-              {
-                firstPartyDomain = "dnscrypt.localhost";
-                overrides = [ "-AllTargets" ];
-              }
-              {
-                firstPartyDomain = "print.localhost";
-                overrides = [ "-AllTargets" ];
-              }
-              {
-                firstPartyDomain = "pricehiller.com";
-                overrides = [ "-AllTargets" ];
-              }
+            overrides = concatComma [
+              "+AllTargets,+JSLocale,+FontVisibilityRestrictGenerics,-CSSPrefersColorScheme"
             ];
+            pbmode = true;
+            granularOverrides =
+              # See
+              # https://searchfox.org/firefox-release/source/toolkit/components/resistfingerprinting/FingerprintingWebCompatService.sys.mjs#22
+              # for the schema
+              #
+              # See
+              # https://searchfox.org/firefox-main/source/toolkit/components/resistfingerprinting/RFPTargets.inc
+              # for the targets (overrides)
+              [
+                {
+                  firstPartyDomain = "utsa.edu";
+                  overrides = [
+                    "-JSLocale"
+                    "-JSDateTimeUTC"
+                  ];
+                }
+                {
+                  firstPartyDomain = "instructure.com";
+                  overrides = [
+                    "-JSLocale"
+                    "-JSDateTimeUTC"
+                  ];
+                }
+                {
+                  firstPartyDomain = "localhost";
+                  overrides = [ "-AllTargets" ];
+                }
+                {
+                  firstPartyDomain = "dnscrypt.localhost";
+                  overrides = [ "-AllTargets" ];
+                }
+                {
+                  firstPartyDomain = "print.localhost";
+                  overrides = [ "-AllTargets" ];
+                }
+                {
+                  firstPartyDomain = "pricehiller.com";
+                  overrides = [ "-AllTargets" ];
+                }
+              ]
+              |> builtins.map (override: override // { overrides = (concatComma override.overrides); })
+              |> builtins.toJSON;
             remoteOverrides.enabled = true;
           };
           clearOnShutdown = {
