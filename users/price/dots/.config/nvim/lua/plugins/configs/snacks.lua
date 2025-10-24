@@ -466,6 +466,15 @@ return {
                             ignored = false,
                             follow = true,
                         },
+                        recent = {
+                            ---@type snacks.picker.Filter
+                            filter = {
+                                filter = function(item)
+                                    -- Ensure we only get back exactly what's in oldfiles
+                                    return vim.list_contains(vim.v.oldfiles, item.file)
+                                end,
+                            },
+                        },
                         grep = {
                             hidden = true,
                             ignored = false,
