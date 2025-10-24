@@ -165,6 +165,9 @@ M.setup = function()
 
     -- Make terminal cursor in insert mode a vertical line
     opt.guicursor:append("t:ver25")
+
+    -- Disable swapfile
+    opt.swapfile = false
 end
 
 return M
