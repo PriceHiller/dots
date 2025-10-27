@@ -132,7 +132,7 @@ in
       cache = true;
       cache_size = (clib.pow 2 18);
 
-      lb_strategy = "p5"; # Randomly choose from the fastest N servers
+      lb_strategy = "p3"; # Randomly choose from the fastest N servers
       lb_estimator = true;
       ipv6_servers = hasIPv6Internet;
       block_ipv6 = !hasIPv6Internet;
