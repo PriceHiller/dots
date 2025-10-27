@@ -96,9 +96,9 @@ in
           DOMAIN = "${gitea_host}";
           HTTP_ADDR = "127.0.0.1";
           ROOT_URL = "https://${gitea_host}/";
-          SSH_PORT = 2220;
-          START_SSH_SERVER = true;
-          DISABLE_QUERY_AUTH_TOKEN = true;
+          SSH_PORT = (builtins.elemAt config.services.openssh.ports 0);
+          START_SSH_SERVER = false;
+          SSH_USER = config.services.gitea.user;
         };
         session.COOKIE_SECURE = true;
         "repository.upload".FILE_MAX_SIZE = 1024;
@@ -139,7 +139,14 @@ in
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ config.services.gitea.settings.server.SSH_PORT ];
+  services.openssh.extraConfig = ''
+    Match User ${config.services.gitea.settings.server.SSH_USER}
+      AuthorizedKeysFile ${config.services.gitea.stateDir}/.ssh/authorized_keys
+  '';
+
+  services.openssh.settings.AllowUsers = [
+    config.services.gitea.settings.server.SSH_USER
+  ];
 
   systemd.services.gitea-runner-default.serviceConfig.ExecStartPre = lib.mkBefore [
     # HACK: Delay startup by 10 seconds. This should ensure that the gitea service is good to
