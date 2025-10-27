@@ -14,6 +14,7 @@
           pandas-stubs
           numpy
           matplotlib
+          scikit-learn
         ]
       ))
       uv
