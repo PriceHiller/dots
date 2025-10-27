@@ -102,6 +102,15 @@ in
         };
         session.COOKIE_SECURE = true;
         "repository.upload".FILE_MAX_SIZE = 1024;
+        "markup.jupyter" = {
+          ENABLED = true;
+          FILE_EXTENSIONS = ".ipynb";
+          RENDER_COMMAND = "${pkgs.jupyter}/bin/jupyter nbconvert --stdin --stdout --to html  --embed-images --template basic";
+          IS_INPUT_FILE = false;
+        };
+        "markup.sanitizer.jupyter.img" = {
+          ALLOW_DATA_URI_IMAGES = true;
+        };
       };
     };
     gitea-actions-runner.instances = {
