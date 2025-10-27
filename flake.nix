@@ -171,6 +171,7 @@
                   ./modules/nixos/grafana-alloy.nix
                   ./modules/nixos/vector.nix
                   ./modules/nixos/persistence.nix
+                  ./modules/nixos/dns.nix
                   inputs.home-manager.nixosModules.home-manager
                   {
                     home-manager = {
@@ -231,6 +232,7 @@
                 ./modules/nixos/base-programs.nix
                 ./modules/nixos/vector.nix
                 ./modules/nixos/persistence.nix
+                ./modules/nixos/dns.nix
                 inputs.nixos-facter-modules.nixosModules.facter
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default

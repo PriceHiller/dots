@@ -7,7 +7,6 @@ in
     pki = {
       certificateFiles = [
         "${cert-file}"
-        ../files/localhost.pem
       ];
     };
     polkit = {
