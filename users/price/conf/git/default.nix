@@ -3,15 +3,17 @@
 
   programs.git = {
     enable = true;
-    userName = "Price Hiller";
-    userEmail = "price@pricehiller.com";
-    aliases = {
-      unstage = "reset HEAD --";
-    };
     ignores = [
       ".~lock.*#" # Ignore libreoffice lock files
     ];
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Price Hiller";
+        email = "price@pricehiller.com";
+      };
+      alias = {
+        unstage = "reset HEAD --";
+      };
       init.defaultBranch = "main";
       merge.conflictstyle = "zdiff3";
       branch.autosetupmerge = "always";
@@ -64,29 +66,30 @@
       signByDefault = true;
       key = null;
     };
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        features = "interactive decorations";
-        interactive = {
-          keep-plus-minus-markers = false;
-        };
-        decorations = {
-          commit-decoration-style = "bold box ul";
-          dark = true;
-          file-style = "omit";
-          hunk-header-decoration-style = ''"#022b45" box ul'';
-          hunk-header-file-style = ''"#999999"'';
-          hunk-header-style = "file line-number syntax";
-          line-numbers = true;
-          line-numbers-left-style = ''"#022b45"'';
-          minus-emph-style = ''normal "#80002a"'';
-          minus-style = ''normal "#330011"'';
-          plus-emph-style = ''syntax "#003300"'';
-          plus-style = ''syntax "#001a00"'';
-          syntax-theme = "Solarized (dark)";
-        };
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      features = "interactive decorations";
+      interactive = {
+        keep-plus-minus-markers = false;
+      };
+      decorations = {
+        commit-decoration-style = "bold box ul";
+        dark = true;
+        file-style = "omit";
+        hunk-header-decoration-style = ''"#022b45" box ul'';
+        hunk-header-file-style = ''"#999999"'';
+        hunk-header-style = "file line-number syntax";
+        line-numbers = true;
+        line-numbers-left-style = ''"#022b45"'';
+        minus-emph-style = ''normal "#80002a"'';
+        minus-style = ''normal "#330011"'';
+        plus-emph-style = ''syntax "#003300"'';
+        plus-style = ''syntax "#001a00"'';
+        syntax-theme = "Solarized (dark)";
       };
     };
   };
