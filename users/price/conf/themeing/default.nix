@@ -18,8 +18,6 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style.name = "gtk2";
   };
 
   dconf.settings."org/gnome/desktop/interface" = {
