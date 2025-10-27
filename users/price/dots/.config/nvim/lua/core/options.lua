@@ -168,6 +168,9 @@ M.setup = function()
 
     -- Disable swapfile
     opt.swapfile = false
+
+    -- More lines in scrollback for terminal buffers
+    opt.scrollback = 100000
 end
 
 return M
