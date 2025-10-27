@@ -3,7 +3,11 @@
 
   inputs = {
     nix.url = "git+https://github.com/nixos/nix?shallow=1";
-    deploy-rs.url = "github:serokell/deploy-rs";
+    # deploy-rs.url = "github:serokell/deploy-rs";
+    # Temporarily use fork of deploy-rs until they merge the patch for Nix >= 2.32 support
+    # Thank you XYenon
+    # See https://github.com/serokell/deploy-rs/pull/346
+    deploy-rs.url = "github:XYenon/deploy-rs?branch=nix-2-32&ref=b1b25be706f1441a9463ffbaf5a2d181591f7a68";
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
@@ -127,7 +131,7 @@
             age-plugin-yubikey
             nixos-rebuild
             nixos-install-tools
-            pkgs.deploy-rs
+            inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
           ];
           shellHook = ''
             export RULES="$PWD/secrets/secrets.nix"
