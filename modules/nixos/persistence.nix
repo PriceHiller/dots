@@ -17,7 +17,7 @@ in
   };
 
   config = lib.mkIf (cfg.enable) {
-    system.activationScripts."var-lib-private-perms" = {
+    system.activationScripts."systemd-private-perms" = {
       # Ensure the systemd private directory has the correct permissions set
       #
       # Impermanence will create the outer parent directory and set wrong permissions for it if any
@@ -29,6 +29,9 @@ in
       text = ''
         mkdir -p /var/lib/private
         chmod 0700 /var/lib/private
+
+        mkdir -p /var/log/private
+        chmod 0700 /var/log/private
       '';
     };
 
