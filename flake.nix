@@ -170,6 +170,7 @@
                   ./modules/nixos/btrfs-rollback.nix
                   ./modules/nixos/grafana-alloy.nix
                   ./modules/nixos/vector.nix
+                  ./modules/nixos/logviewer.nix
                   ./modules/nixos/persistence.nix
                   ./modules/nixos/dns.nix
                   inputs.home-manager.nixosModules.home-manager
