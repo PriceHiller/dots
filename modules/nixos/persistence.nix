@@ -17,24 +17,6 @@ in
   };
 
   config = lib.mkIf (cfg.enable) {
-    system.activationScripts."systemd-private-perms" = {
-      # Ensure the systemd private directory has the correct permissions set
-      #
-      # Impermanence will create the outer parent directory and set wrong permissions for it if any
-      # path within is persisted, thus we need to set it back to what systemd expects
-      deps = [
-        "persist-files"
-        "createPersistentStorageDirs"
-      ];
-      text = ''
-        mkdir -p /var/lib/private
-        chmod 0700 /var/lib/private
-
-        mkdir -p /var/log/private
-        chmod 0700 /var/log/private
-      '';
-    };
-
     fileSystems."${cfg.persistDir}".neededForBoot = true;
 
     environment.persistence.save = {
@@ -46,6 +28,14 @@ in
         "/var/lib/lastlog"
       ];
     };
+
+    # Ensure's the private directories for systemd have correct perms after boot
+    systemd.tmpfiles.rules = [
+      "z /var/lib/private 0700 root root -"
+      "z /var/cache/private 0700 root root -"
+      "z /var/log/private 0700 root root -"
+      "z /run/private 0700 root root -"
+    ];
 
     environment.persistence.critical = {
       persistentStoragePath = "${cfg.persistDir}/critical";
