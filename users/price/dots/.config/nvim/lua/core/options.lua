@@ -166,9 +166,6 @@ M.setup = function()
     -- Make terminal cursor in insert mode a vertical line
     opt.guicursor:append("t:ver25")
 
-    -- Disable swapfile
-    opt.swapfile = false
-
     -- More lines in scrollback for terminal buffers
     opt.scrollback = 100000
 end
