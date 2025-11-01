@@ -95,7 +95,7 @@ return {
                     vim.fn.stdpath("config") .. "/**/*",
                 },
                 notifications = {
-                    enabled = false,
+                    enabled = true,
                     cron_enabled = true,
                     repeater_reminder_time = reminder_times,
                     deadline_warning_reminder_time = reminder_times,
