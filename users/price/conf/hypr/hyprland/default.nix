@@ -1,6 +1,4 @@
 {
-  inputs,
-  pkgs,
   clib,
   ...
 }:
@@ -19,23 +17,7 @@ in
     package = null;
     portalPackage = null;
     extraConfig = (builtins.readFile ./application/gromit-mpx.conf);
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-    ];
     settings = {
-      plugin = {
-        hyprexpo = {
-          columns = 3;
-          gap_size = 5;
-          bg_col = "rgb(${colors.hex.sumiInk1})";
-          workspace_method = "center current"; # [center/first] [workspace] e.g. first 1 or center m+1
-          skip_empty = true;
-
-          enable_gesture = true; # laptop touchpad
-          gesture_fingers = 3; # 3 or 4
-          gesture_distance = 300; # how far is the "max"
-        };
-      };
       general = {
         gaps_in = 5;
         gaps_out = 10;

@@ -123,11 +123,6 @@
         bind = SUPERCTRL,7,exec,${./scripts/move-workspace-mon.bash} 7
         bind = SUPERCTRL,8,exec,${./scripts/move-workspace-mon.bash} 8
         bind = SUPERCTRL,9,exec,${./scripts/move-workspace-mon.bash} 9
-
-        # --- EXPO ---
-        bind = CTRLSUPER,up,hyprexpo:expo,toggle
-        bind = CTRLSUPER,down,hyprexpo:expo,off
-        bindn = ,escape,hyprexpo:expo,off
       '';
   };
 }
