@@ -12,3 +12,9 @@ vim.keymap.set("n", "<localleader>ff", "<cmd>FlutterOutlineOpen<CR>", {
     silent = true,
     desc = "Flutter: Open Outline",
 })
+
+vim.keymap.set("n", "<localleader>ft", "<cmd>FlutterLogToggle<CR>", {
+    buffer = true,
+    silent = true,
+    desc = "Flutter: Log Toggle",
+})
