@@ -46,7 +46,10 @@ M.setup = function()
     -- Get rid of highlight after search
     vim.keymap.set("n", "<esc>", function()
         vim.cmd.noh()
-    end, { silent = true, desc = "Remove Highlighted Searches" })
+        if vim.snippet then
+            vim.snippet.stop()
+        end
+    end, { silent = true, desc = "Remove Highlights" })
 
     -- Set current focused file or terminal as cwd
     vim.keymap.set("n", "<leader>cd", function()
