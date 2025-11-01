@@ -11,7 +11,7 @@
     open-sans
     noto-fonts
     twitter-color-emoji
-    vistafonts
+    vista-fonts
     roboto
   ];
   fonts = {
