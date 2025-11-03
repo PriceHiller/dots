@@ -15,6 +15,7 @@
           numpy
           matplotlib
           scikit-learn
+          seaborn
         ]
       ))
       uv
