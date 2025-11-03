@@ -9,7 +9,7 @@ local FormatPat = {
     ---@type fmtpat.Pattern
     pat = {
         [[-]],
-        [[\d\.]],
+        [[\(\d\+\.\)\+]],
         [[+]],
     },
 }
