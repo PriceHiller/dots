@@ -124,6 +124,7 @@ M.setup = function()
     -- Buffer bindings
     vim.keymap.set("n", "<A-a>", ":bprevious<CR>", { silent = true, desc = "Go to Previous Buffer" })
     vim.keymap.set("n", "<A-s>", ":bnext<CR>", { silent = true, desc = "Go to Next Buffer" })
+    vim.keymap.set("n", "<A-d>", ":buffer#<CR>", { silent = true, desc = "Go to last buffer" })
 
     -- Binding to insert literal tab
     vim.keymap.set("i", "<C-Tab>", function()
