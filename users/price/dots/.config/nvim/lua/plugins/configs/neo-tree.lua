@@ -10,6 +10,7 @@ return {
             "miversen33/netman.nvim",
             "folke/snacks.nvim",
         },
+        lazy = false,
         cmd = "Neotree",
         keys = {
             { "<leader>nt", "<cmd>Neotree show toggle focus<cr>", desc = "Neotree: Toggle" },
@@ -38,7 +39,93 @@ return {
             })
         end,
         config = function()
+            ---@class Ext.Neotree.ExtractedSortKey
+            ---@field type "text" | "date" | "number"
+            ---@field value integer | string
+
+            ---@param name string
+            ---@return Ext.Neotree.ExtractedSortKey
+            local function extract_sort_key(name)
+                -- Extract first token (before space, underscore, or dash)
+                local prefix = name:match("^([^%s_%-]+)")
+                if not prefix then
+                    return { type = "text", value = name }
+                end
+
+                -- Try to parse as date/datetime (YYYY-MM-DD, YYYYMMDD, YYYY/MM/DD, etc.)
+                local y, m, d = prefix:match("^(%d%d%d%d)[/-]?(%d%d)[/-]?(%d%d)")
+                if y then
+                    -- Check for time component
+                    local h, min, s = name:match("^[^%s_%-]+[%s_%-]+(%d%d):?(%d%d):?(%d?%d?)")
+                    h, min, s = tonumber(h) or 0, tonumber(min) or 0, tonumber(s) or 0
+
+                    local timestamp = os.time({
+                        ---@diagnostic disable-next-line: assign-type-mismatch
+                        year = tonumber(y),
+                        ---@diagnostic disable-next-line: assign-type-mismatch
+                        month = tonumber(m),
+                        ---@diagnostic disable-next-line: assign-type-mismatch
+                        day = tonumber(d),
+                        hour = h,
+                        min = min,
+                        sec = s,
+                    })
+                    return { type = "date", value = timestamp }
+                end
+
+                -- Try to parse as number (including decimals)
+                local num = tonumber(prefix)
+                if num then
+                    return { type = "number", value = num }
+                end
+
+                -- Default to alphabetic
+                return { type = "text", value = prefix }
+            end
+
+            ---@class ExtNeotree.SortItem
+            ---@field name? string
+            ---@field path string
+            ---@field type "directory" | "file"
+
             require("neo-tree").setup({
+                --- Sorts in descending priority if the type of entires are different:
+                ---
+                --- - Date
+                --- - Number
+                --- - Name
+                ---
+                ---@param a ExtNeotree.SortItem
+                ---@param b ExtNeotree.SortItem
+                ---@return boolean?
+                sort_function = function(a, b)
+                    if a.type ~= b.type then
+                        return a.type < b.type
+                    end
+
+                    local a_name = a.name and a.name or a.path
+                    local b_name = b.name and b.name or b.path
+
+                    local key_a = extract_sort_key(a_name)
+                    local key_b = extract_sort_key(b_name)
+
+                    -- Type priority: date > number > text
+                    local type_priority = { date = 3, number = 2, text = 1 }
+                    local priority_a = type_priority[key_a.type]
+                    local priority_b = type_priority[key_b.type]
+
+                    if priority_a ~= priority_b then
+                        return priority_a > priority_b
+                    end
+
+                    -- Same type, compare values
+                    if key_a.value ~= key_b.value then
+                        return key_a.value < key_b.value
+                    end
+
+                    -- If prefixes are equal, compare full names
+                    return a_name:lower() < b_name:lower()
+                end,
                 sources = {
                     "filesystem",
                     "git_status",
