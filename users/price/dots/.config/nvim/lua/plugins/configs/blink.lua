@@ -54,6 +54,7 @@ return {
                 Ripgrep = { icon = "󰱼", hlgroup = "Ripgrep" },
                 Latex = { icon = "󰿈", hlgroup = "LatexSymbol" },
                 cmdline = { icon = "", hlgroup = "CommandLine" },
+                Orgmode = { icon = "", hlgroup = "Orgmode" },
                 Buffer = { icon = "", hlgroup = "Buffer" },
                 Nix = { icon = "", hlgroup = "Nix" },
             }
@@ -142,6 +143,7 @@ return {
                         "ripgrep",
                         "emoji",
                         "latex",
+                        "orgmode",
                         "dadbod",
                     },
                     providers = {
@@ -216,6 +218,11 @@ return {
                             score_offset = -1,
                         },
                         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+                        orgmode = {
+                            name = "Orgmode",
+                            module = "orgmode.org.autocompletion.blink",
+                            score_offset = 5,
+                        },
                     },
                 },
 
