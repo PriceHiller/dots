@@ -1,7 +1,6 @@
 return {
     {
         "nvim-orgmode/orgmode",
-        event = "VeryLazy",
         cmd = { "Org" },
         ft = { "org" },
         keys = {
@@ -95,8 +94,8 @@ return {
                     vim.fn.stdpath("config") .. "/**/*",
                 },
                 notifications = {
-                    enabled = true,
-                    cron_enabled = true,
+                    enabled = false,
+                    cron_enabled = false,
                     repeater_reminder_time = reminder_times,
                     deadline_warning_reminder_time = reminder_times,
                     reminder_time = reminder_times,
@@ -189,14 +188,6 @@ return {
                     },
                 },
             })
-            -- NOTE: We want to ensure orgmode loads its files on entry, a lot of things depend on
-            -- them being loaded.
-            -- PERF: We defer this because it has a huge impact on start up time, better to wait a
-            -- bit before trying to load the files to keep Neovim from doing too much on startup.
-            vim.defer_fn(function()
-                org.files:ensure_loaded()
-            end, 500)
-
             vim.api.nvim_set_hl(0, "org_code_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_verbatim_delimiter", { link = "@punctuation.delimiter" })
             vim.api.nvim_set_hl(0, "org_italic_delimiter", { link = "@punctuation.delimiter" })
