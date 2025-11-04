@@ -91,6 +91,8 @@
       cmake-language-server
       tombi
       markdownlint-cli
+      php
+      phpactor
     ];
   };
   xdg.mimeApps.defaultApplications = {
