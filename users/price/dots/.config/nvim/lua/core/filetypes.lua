@@ -20,7 +20,6 @@ M.setup = function()
     local fts_to_lang_registration = {
         ["azure-pipelines"] = "yaml",
         ["dockerignore"] = "gitignore",
-        ["zsh"] = "bash",
     }
 
     vim.iter(fts_to_lang_registration):each(function(filetype, language)
