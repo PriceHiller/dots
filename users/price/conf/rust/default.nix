@@ -47,6 +47,8 @@ in
         "rustfmt"
       ])
       rust-analyzer-nightly
+      cargo-audit
+      cargo-deny
       cargo-watch
       cargo-nextest
       sccacheWrapped
