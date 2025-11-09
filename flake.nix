@@ -114,6 +114,23 @@
         }
       );
       overlays = import ./overlays { inherit inputs; };
+      apps = forAllSystems (pkgs: {
+        default = {
+          type = "app";
+          meta.description = "Launch interactive repl to inspect config";
+          program =
+            pkgs.writeShellApplication {
+              name = "inspect-flake";
+              runtimeInputs = with pkgs; [
+                git
+              ];
+              text = ''
+                nix repl --file "$(git rev-parse --show-toplevel)"/repl.nix
+              '';
+            }
+            |> pkgs.lib.getExe;
+        };
+      });
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
