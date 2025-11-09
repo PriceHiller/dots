@@ -294,4 +294,15 @@
           };
         };
     };
+
+  nixConfig = {
+    experimental-features = [
+      "pipe-operators"
+      "nix-command"
+      "flakes"
+      "ca-derivations"
+      "recursive-nix"
+      "dynamic-derivations"
+    ];
+  };
 }
