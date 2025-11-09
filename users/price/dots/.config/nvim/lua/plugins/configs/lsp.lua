@@ -109,6 +109,7 @@ return {
                     settings = {
                         tsserver_plugins = {
                             "@vue/typescript-plugin",
+                            "@styled/typescript-styled-plugin",
                         },
                     },
                 })
