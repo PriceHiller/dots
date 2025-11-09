@@ -9,7 +9,7 @@ vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
     ---@type vim.Diagnostic.Set[]
     local diags = {}
     for _, diag in ipairs(diagnostics) do
-        if diag.message ~= "html_elements_cant_self_close" then
+        if diag.code ~= "html_elements_cant_self_close" then
             table.insert(diags, diag)
         end
     end
