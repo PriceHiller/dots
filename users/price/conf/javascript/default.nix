@@ -55,6 +55,7 @@ in
       typescript-language-server
       oxlint
       eslint
+      firebase-tools
     ];
 
     sessionPath = [
