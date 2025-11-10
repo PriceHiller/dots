@@ -117,6 +117,30 @@
       apps = forAllSystems (pkgs: {
         default = {
           type = "app";
+          meta.description = "Run nixos-rebuild switch";
+          program =
+            pkgs.writeShellApplication {
+              name = "nixos-rebuild-wrapper";
+              runtimeInputs = with pkgs; [
+                nix-output-monitor
+                nixos-rebuild
+                hostname
+              ];
+              text = ''
+                MSG="Switching to NixOS configuration: '$(hostname)'"
+                HEADER=$(printf "%''${#MSG}s\n" | tr ' ' "=")
+                echo
+                echo "$HEADER"
+                echo "$MSG"
+                echo "$HEADER"
+                echo
+                sudo nixos-rebuild switch --flake ".#$(hostname)" --accept-flake-config |& nom
+              '';
+            }
+            |> pkgs.lib.getExe;
+        };
+        repl = {
+          type = "app";
           meta.description = "Launch interactive repl to inspect config";
           program =
             pkgs.writeShellApplication {
