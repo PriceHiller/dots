@@ -1,6 +1,8 @@
 return {
     settings = {
-        schemas = require("schemastore").json.schemas(),
-        validate = { enable = true },
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+        },
     },
 }
