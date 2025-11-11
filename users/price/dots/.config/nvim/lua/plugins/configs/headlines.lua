@@ -25,6 +25,7 @@ return {
             headlines.setup({
                 markdown = {
                     bullets = bullets,
+                    quote_string = false,
                     bullet_highlights = bullet_highlights,
                     fat_headline_lower_string = "▀",
                 },
