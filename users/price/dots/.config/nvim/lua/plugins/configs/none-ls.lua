@@ -76,7 +76,7 @@ return {
                     null_ls.builtins.formatting.cmake_format,
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.formatting.prettierd.with({
-                        disabled_filetypes = { "markdown", "html" },
+                        disabled_filetypes = { "markdown" },
                     }),
                     null_ls.builtins.formatting.markdownlint,
                     null_ls.builtins.diagnostics.hadolint,
