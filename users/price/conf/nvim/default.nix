@@ -93,6 +93,8 @@
       markdownlint-cli
       php
       phpactor
+      phpPackages.php-cs-fixer
+      actionlint
     ];
   };
   xdg.mimeApps.defaultApplications = {
