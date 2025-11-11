@@ -81,7 +81,6 @@ in
         luarocks
         imagemagick
         shellcheck
-        nodejs
         ruby
         yamllint
         curl

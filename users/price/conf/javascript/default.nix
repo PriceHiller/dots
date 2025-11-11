@@ -50,7 +50,7 @@ in
 
   home = {
     packages = with pkgs; [
-      nodejs
+      nodePackages_latest.nodejs
       typescript
       typescript-language-server
       oxlint
