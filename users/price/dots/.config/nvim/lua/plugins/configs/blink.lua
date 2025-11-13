@@ -119,8 +119,8 @@ return {
                 fuzzy = {
                     implementation = "prefer_rust_with_warning",
                     sorts = {
-                        "exact",
                         "score",
+                        "exact",
                         "sort_text",
                         "kind",
                         "label",
