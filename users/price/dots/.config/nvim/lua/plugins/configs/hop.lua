@@ -8,6 +8,8 @@ return {
                     if vim.bo.filetype == "neo-tree" then
                         ---@diagnostic disable-next-line: missing-fields
                         require("hop").hint_lines({})
+                    elseif vim.bo.filetype == "NeogitStatus" then
+                        require("hop").hint_lines({})
                     else
                         ---@diagnostic disable-next-line: missing-fields
                         require("hop").hint_char1({ current_line_only = false })

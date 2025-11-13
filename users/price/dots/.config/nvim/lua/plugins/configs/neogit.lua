@@ -29,6 +29,8 @@ return {
                     popup = {
                         ["l"] = false,
                         ["L"] = "LogPopup",
+                        ["f"] = false,
+                        ["F"] = "FetchPopup"
                     },
                 },
             })
