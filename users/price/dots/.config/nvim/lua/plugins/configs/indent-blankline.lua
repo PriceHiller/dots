@@ -2,9 +2,6 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = { "BufReadPre", "BufNewFile" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
         config = function()
             require("ibl").setup({
                 exclude = {
