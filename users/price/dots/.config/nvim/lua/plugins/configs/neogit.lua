@@ -25,6 +25,9 @@ return {
                     diffview = true,
                     telescope = true,
                 },
+                status = {
+                    recent_commit_count = 30
+                },
                 mappings = {
                     popup = {
                         ["l"] = false,
