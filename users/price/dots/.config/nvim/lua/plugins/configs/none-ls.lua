@@ -66,9 +66,6 @@ return {
                     null_ls.builtins.formatting.d2_fmt,
                     d2_validate,
                     ts_query_fmt,
-                    null_ls.builtins.formatting.fnlfmt.with({
-                        filetypes = { "query" },
-                    }),
                     null_ls.builtins.formatting.google_java_format,
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.asmfmt,
@@ -78,7 +75,6 @@ return {
                     null_ls.builtins.formatting.prettierd.with({
                         disabled_filetypes = { "markdown" },
                     }),
-                    null_ls.builtins.formatting.phpcsfixer,
                     null_ls.builtins.diagnostics.actionlint,
                     null_ls.builtins.formatting.markdownlint,
                     null_ls.builtins.diagnostics.hadolint,

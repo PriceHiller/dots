@@ -94,6 +94,8 @@
       php
       phpactor
       phpPackages.php-cs-fixer
+      phpPackages.psalm
+      phpPackages.phpstan
       actionlint
     ];
   };
