@@ -33,10 +33,6 @@ return {
         dependencies = {
             { "PriceHiller/blink-nix.nvim" },
             "rafamadriz/friendly-snippets",
-            {
-                "L3MON4D3/LuaSnip",
-                build = "make install_jsregexp",
-            },
             "erooke/blink-cmp-latex",
             "mikavilpas/blink-ripgrep.nvim",
             "moyiz/blink-emoji.nvim",
