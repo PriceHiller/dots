@@ -10,7 +10,6 @@ return {
             "miversen33/netman.nvim",
             "folke/snacks.nvim",
         },
-        lazy = false,
         cmd = "Neotree",
         keys = {
             { "<leader>nt", "<cmd>Neotree show toggle focus<cr>", desc = "Neotree: Toggle" },
