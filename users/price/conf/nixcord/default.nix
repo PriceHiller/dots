@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    legcord
+    (discord.override {
+      withEquicord = true;
+    })
   ];
 }
