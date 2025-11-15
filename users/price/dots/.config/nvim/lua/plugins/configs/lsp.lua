@@ -52,12 +52,7 @@ return {
             {
                 "<leader>lc",
                 function()
-                    -- HACK: Make code actions work with `nvim-java`, tracking https://github.com/aznhe21/actions-preview.nvim/issues/50
-                    if vim.bo.filetype == "java" then
-                        vim.lsp.buf.code_action()
-                    else
-                        require("actions-preview").code_actions()
-                    end
+                    require("actions-preview").code_actions()
                 end,
                 desc = "LSP: Code Action",
                 mode = { "n", "v" },
@@ -86,10 +81,6 @@ return {
             "MasonUninstall",
             "MasonUninstallAll",
         },
-    },
-    {
-        "nvim-java/nvim-java",
-        ft = { "java" },
     },
     (function()
         local filetypes = {
