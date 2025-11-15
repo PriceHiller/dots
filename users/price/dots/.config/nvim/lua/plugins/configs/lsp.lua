@@ -64,24 +64,6 @@ return {
         lazy = false,
         config = false,
     },
-    {
-        "williamboman/mason.nvim",
-        opts = {
-            max_concurrent_installers = 12,
-            registries = {
-                "github:nvim-java/mason-registry",
-                "github:mason-org/mason-registry",
-            },
-        },
-        cmd = {
-            "Mason",
-            "MasonLog",
-            "MasonUpdate",
-            "MasonInstall",
-            "MasonUninstall",
-            "MasonUninstallAll",
-        },
-    },
     (function()
         local filetypes = {
             "javascript",

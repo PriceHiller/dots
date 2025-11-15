@@ -145,4 +145,16 @@ U.write_file = function(path, mode, ...)
     return path
 end
 
+---Get a program's path if found or `nil` if not
+---@param program string
+---@return string?
+U.get_program_path = function(program)
+    local path = vim.fn.exepath(program)
+    if #path == 0 then
+        vim.notify(("`%s` not found in `$PATH`"):format(program), vim.log.levels.ERROR)
+        return nil
+    end
+    return path
+end
+
 return U

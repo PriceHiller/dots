@@ -1,3 +1,5 @@
+local utils = require("utils.funcs")
+
 return {
     {
         "rcarriga/nvim-dap-ui",
@@ -134,15 +136,7 @@ return {
         config = function()
             local dap = require("dap")
 
-            --- Gets a path for a given program in the environment
-            ---@param program string String of a program in the Mason packages
-            ---@return string Full path to the program if found, or nil if not
-            local function get_program_path(program)
-                local program_path = vim.fn.stdpath("data") .. "/mason/packages/" .. program .. "/" .. program
-                return program_path
-            end
-
-            local lldb_path = get_program_path("codelldb")
+            local lldb_path = utils.get_program_path("codelldb") or ""
             -- Adapaters
             dap.adapters.lldb = {
                 type = "server",
@@ -156,13 +150,13 @@ return {
 
             dap.adapters.coreclr = {
                 type = "executable",
-                command = get_program_path("netcoredbg"),
+                command = utils.get_program_path("netcoredbg") or "",
                 args = { "--interpreter=vscode" },
             }
 
             dap.adapters.bashdb = {
                 type = "executable",
-                command = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/bash-debug-adapter",
+                command = utils.get_program_path("bashdb") or "",
                 name = "bashdb",
             }
 
