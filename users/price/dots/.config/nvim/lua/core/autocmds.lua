@@ -28,6 +28,40 @@ M.setup = function()
         end,
     })
 
+    local format_on_save = true
+    vim.api.nvim_create_user_command("ToggleFmtOnSave", function()
+        format_on_save = not format_on_save
+        local intercept_state = "`Enabled`"
+        if not format_on_save then
+            intercept_state = "`Disabled`"
+        end
+        vim.notify("Format on save " .. intercept_state, vim.log.levels.INFO, {
+            title = "Format On Save",
+            ---@param win integer The window handle
+            on_open = function(win)
+                vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(win) })
+            end,
+        })
+    end, { desc = "Toggles intercepting BufWritePre to format on save" })
+
+    -- NOTE: Format with lsp on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        callback = function(args)
+            if not format_on_save then
+                return
+            end
+
+            local clients = vim.lsp.get_clients({
+                bufnr = args.buf,
+                method = "textDocument/formatting",
+            })
+            if #clients > 0 then
+                vim.lsp.buf.format()
+            end
+        end,
+    })
+
     -- NOTE: Some TermOpen improvements
     vim.api.nvim_create_autocmd("TermOpen", {
         group = augroup,
