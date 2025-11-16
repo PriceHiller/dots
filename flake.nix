@@ -102,7 +102,9 @@
       treefmtEval = forAllSystems (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
     in
     {
-      formatter = forAllSystems (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      formatter = forAllSystems (
+        pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper
+      );
       packages = forAllSystems (
         pkgs:
         let
@@ -163,7 +165,7 @@
             age-plugin-yubikey
             nixos-rebuild
             nixos-install-tools
-            inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
+            inputs.deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.deploy-rs
           ];
           shellHook = ''
             export RULES="$PWD/secrets/secrets.nix"
@@ -171,7 +173,7 @@
         };
       });
       checks = forAllSystems (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+        formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
       nixosConfigurations =
         let

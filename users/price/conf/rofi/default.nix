@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   home.packages = [
-    inputs.rofi-tools.packages.${pkgs.system}.rofi-cliphist
+    inputs.rofi-tools.packages.${pkgs.stdenv.hostPlatform.system}.rofi-cliphist
   ];
   programs.rofi = {
     enable = true;

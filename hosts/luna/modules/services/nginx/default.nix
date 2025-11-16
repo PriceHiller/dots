@@ -62,7 +62,7 @@
       ];
       forceSSL = true;
       enableACME = true;
-      root = inputs.blog.packages.${pkgs.system}.default;
+      root = inputs.blog.packages.${pkgs.stdenv.hostPlatform.system}.default;
       locations =
         let
           wkd-default-cfg = ''
