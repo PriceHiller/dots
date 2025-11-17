@@ -76,6 +76,13 @@ in
                   ];
                 }
                 {
+                  firstPartyDomain = "github.com";
+                  overrides = [
+                    "-JSLocale"
+                    "-JSDateTimeUTC"
+                  ];
+                }
+                {
                   firstPartyDomain = "localhost";
                   overrides = [ "-AllTargets" ];
                 }
