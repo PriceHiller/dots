@@ -21,17 +21,19 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+        lazy = false,
         keys = {
             { "]g", "<cmd>Gitsigns next_hunk<CR><CR>", desc = "Gitsigns: Next Hunk" },
             { "[g", "<cmd>Gitsigns prev_hunk<CR><CR>", desc = "Gitsigns: Prev Hunk" },
         },
-        opts = {
-            current_line_blame = true,
-            current_line_blame_opts = {
-                delay = 0,
-            },
-        },
+        config = function()
+            require("gitsigns").setup({
+                current_line_blame = true,
+                current_line_blame_opts = {
+                    delay = 0,
+                },
+            })
+        end,
     },
     {
         "linrongbin16/gitlinker.nvim",

@@ -2,6 +2,10 @@ return {
     {
         "rebelot/heirline.nvim",
         lazy = false,
+        dependencies = {
+            "lewis6991/gitsigns.nvim",
+            "rebelot/kanagawa.nvim",
+        },
         opts = function()
             local colors = require("kanagawa.colors").setup().palette
 
@@ -699,21 +703,6 @@ return {
                 },
             }
 
-            vim.opt.showcmdloc = "statusline"
-            local timer = vim.uv.new_timer()
-            timer:start(
-                1000,
-                5000,
-                vim.schedule_wrap(function()
-                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
-                end)
-            )
-            vim.api.nvim_create_autocmd({ "VimResized", "BufWritePost" }, {
-                callback = function()
-                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
-                end,
-            })
-
             return {
                 statusline = {
                     {
@@ -891,94 +880,111 @@ return {
                             },
                         },
                     },
-                    {
-                        condition = conditions.is_git_repo,
+                    (function()
+                        --- @class (exact) Ext.Gitsigns.StatusObj
+                        --- @field added? integer
+                        --- @field removed? integer
+                        --- @field changed? integer
+                        --- @field head? string
+                        --- @field root? string
+                        --- @field gitdir? string
 
-                        init = function(self)
-                            self.status_dict = vim.b.gitsigns_status_dict
-                            self.has_changes = self.status_dict.added ~= 0
-                                or self.status_dict.removed ~= 0
-                                or self.status_dict.changed ~= 0
-                        end,
-                        margin(1),
-                        {
-                            provider = seps.full.left,
-                            hl = {
-                                fg = colors.springGreen,
-                                bg = utils.get_highlight("StatusLine").bg,
+                        ---@return Ext.Gitsigns.StatusObj
+                        local get_status_dict = function()
+                            return vim.b.gitsigns_status_dict
+                        end
+
+                        local has_changes = function()
+                            local status_dict = get_status_dict()
+                            return status_dict.added ~= 0 or status_dict.removed ~= 0 or status_dict.changed ~= 0
+                        end
+
+                        return {
+                            condition = conditions.is_git_repo,
+                            update = {
+                                "User",
+                                pattern = "GitSignsUpdate",
                             },
-                        },
-                        {
-                            provider = "  ",
-                            hl = {
-                                fg = colors.sumiInk0,
-                                bg = colors.springGreen,
+                            margin(1),
+                            {
+                                provider = seps.full.left,
+                                hl = {
+                                    fg = colors.springGreen,
+                                    bg = utils.get_highlight("StatusLine").bg,
+                                },
                             },
-                        },
-                        {
-                            provider = seps.full.right,
-                            hl = {
-                                fg = colors.springGreen,
-                                bg = colors.autumnGreen,
+                            {
+                                provider = "  ",
+                                hl = {
+                                    fg = colors.sumiInk0,
+                                    bg = colors.springGreen,
+                                },
                             },
-                        },
-                        {
-                            provider = function(self)
-                                return " " .. self.status_dict.head
-                            end,
-                            hl = { fg = colors.sumiInk0, bg = colors.autumnGreen },
-                        },
-                        {
-                            provider = function(self)
-                                local suffix = ""
-                                if self.has_changes then
-                                    suffix = " "
-                                end
-                                return seps.full.right .. suffix
-                            end,
-                            hl = function(self)
-                                local bg = utils.get_highlight("StatusLine").bg
-                                if self.has_changes then
-                                    bg = colors.sumiInk4
-                                end
-                                return {
-                                    fg = colors.autumnGreen,
-                                    bg = bg,
-                                }
-                            end,
-                        },
-                        {
-                            provider = function(self)
-                                local count = self.status_dict.added or 0
-                                return count > 0 and (" " .. count)
-                            end,
-                            hl = { fg = utils.get_highlight("@diff.plus").fg, bg = colors.sumiInk4 },
-                        },
-                        {
-                            provider = function(self)
-                                local count = self.status_dict.changed or 0
-                                return count > 0 and ("  " .. count)
-                            end,
-                            hl = { fg = utils.get_highlight("@diff.delta").fg, bg = colors.sumiInk4 },
-                        },
-                        {
-                            provider = function(self)
-                                local count = self.status_dict.removed or 0
-                                return count > 0 and ("  " .. count)
-                            end,
-                            hl = { fg = utils.get_highlight("@diff.minus").fg, bg = colors.sumiInk4 },
-                        },
-                        {
-                            condition = function(self)
-                                return self.has_changes
-                            end,
-                            provider = seps.full.right,
-                            hl = {
-                                fg = colors.sumiInk4,
-                                bg = utils.get_highlight("StatusLine").bg,
+                            {
+                                provider = seps.full.right,
+                                hl = {
+                                    fg = colors.springGreen,
+                                    bg = colors.autumnGreen,
+                                },
                             },
-                        },
-                    },
+                            {
+                                provider = function()
+                                    return " " .. get_status_dict().head
+                                end,
+                                hl = { fg = colors.sumiInk0, bg = colors.autumnGreen },
+                            },
+                            {
+                                provider = function()
+                                    local suffix = ""
+                                    if has_changes() then
+                                        suffix = " "
+                                    end
+                                    return seps.full.right .. suffix
+                                end,
+                                hl = function(self)
+                                    local bg = utils.get_highlight("StatusLine").bg
+                                    if has_changes() then
+                                        bg = colors.sumiInk4
+                                    end
+                                    return {
+                                        fg = colors.autumnGreen,
+                                        bg = bg,
+                                    }
+                                end,
+                            },
+                            {
+                                provider = function()
+                                    local count = get_status_dict().added or 0
+                                    return count > 0 and (" " .. count)
+                                end,
+                                hl = { fg = utils.get_highlight("@diff.plus").fg, bg = colors.sumiInk4 },
+                            },
+                            {
+                                provider = function()
+                                    local count = get_status_dict().changed or 0
+                                    return count > 0 and ("  " .. count)
+                                end,
+                                hl = { fg = utils.get_highlight("@diff.delta").fg, bg = colors.sumiInk4 },
+                            },
+                            {
+                                provider = function()
+                                    local count = get_status_dict().removed or 0
+                                    return count > 0 and ("  " .. count)
+                                end,
+                                hl = { fg = utils.get_highlight("@diff.minus").fg, bg = colors.sumiInk4 },
+                            },
+                            {
+                                condition = function()
+                                    return has_changes()
+                                end,
+                                provider = seps.full.right,
+                                hl = {
+                                    fg = colors.sumiInk4,
+                                    bg = utils.get_highlight("StatusLine").bg,
+                                },
+                            },
+                        }
+                    end)(),
                     -- Align Right
                     {
                         provider = "%=",
