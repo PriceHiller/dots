@@ -97,6 +97,7 @@
       phpPackages.psalm
       phpPackages.phpstan
       actionlint
+      netcoredbg
     ];
   };
   xdg.mimeApps.defaultApplications = {
