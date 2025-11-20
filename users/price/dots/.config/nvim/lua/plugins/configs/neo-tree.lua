@@ -38,48 +38,72 @@ return {
             })
         end,
         config = function()
-            ---@class Ext.Neotree.ExtractedSortKey
-            ---@field type "text" | "date" | "number"
-            ---@field value integer | string
+            local snacks = require("snacks")
+            local function on_move(data)
+                snacks.rename.on_rename_file(data.source, data.destination)
+            end
+            local events = require("neo-tree.events")
 
-            ---@param name string
-            ---@return Ext.Neotree.ExtractedSortKey
-            local function extract_sort_key(name)
-                -- Extract first token (before space, underscore, or dash)
-                local prefix = name:match("^([^%s_%-]+)")
-                if not prefix then
-                    return { type = "text", value = name }
+            --- Compares two strings using natural ordering.
+            --- @param a string The first string.
+            --- @param b string The second string.
+            --- @return boolean True if 'a' is strictly less than 'b'.
+            local function natural_lt(a, b)
+                local i, j = 1, 1
+                local len_a, len_b = #a, #b
+
+                local a_leading_nums = a:match("^%d+")
+                local b_leading_nums = b:match("^%d+")
+
+                if a_leading_nums and not b_leading_nums then
+                    -- If `a` has any leading numbers while `b` lacks leading numbers, then we will
+                    -- consider `a` > `b`
+                    return true
                 end
 
-                -- Try to parse as date/datetime (YYYY-MM-DD, YYYYMMDD, YYYY/MM/DD, etc.)
-                local y, m, d = prefix:match("^(%d%d%d%d)[/-]?(%d%d)[/-]?(%d%d)")
-                if y then
-                    -- Check for time component
-                    local h, min, s = name:match("^[^%s_%-]+[%s_%-]+(%d%d):?(%d%d):?(%d?%d?)")
-                    h, min, s = tonumber(h) or 0, tonumber(min) or 0, tonumber(s) or 0
+                while i <= len_a and j <= len_b do
+                    local char_a = a:sub(i, i)
+                    local char_b = b:sub(j, j)
 
-                    local timestamp = os.time({
-                        ---@diagnostic disable-next-line: assign-type-mismatch
-                        year = tonumber(y),
-                        ---@diagnostic disable-next-line: assign-type-mismatch
-                        month = tonumber(m),
-                        ---@diagnostic disable-next-line: assign-type-mismatch
-                        day = tonumber(d),
-                        hour = h,
-                        min = min,
-                        sec = s,
-                    })
-                    return { type = "date", value = timestamp }
+                    -- Check if both characters are digits
+                    local a_is_digit = char_a:match("%d")
+                    local b_is_digit = char_b:match("%d")
+
+                    if a_is_digit and b_is_digit then
+                        -- Extract the complete number from both strings
+                        local _, end_a, num_str_a = a:find("^(%d+)", i)
+                        local _, end_b, num_str_b = b:find("^(%d+)", j)
+
+                        local num_a = tonumber(num_str_a)
+                        local num_b = tonumber(num_str_b)
+
+                        -- Compare numeric values
+                        if num_a ~= num_b then
+                            return num_a < num_b
+                        end
+
+                        -- If values are equal, skip past the numbers and continue
+                        i = end_a + 1
+                        j = end_b + 1
+                    else
+                        if a_is_digit or b_is_digit then
+                            -- If a doesn't have a digit then in this case,
+                            -- a is considered > b
+                            return a_is_digit
+                        end
+
+                        -- Standard character comparison
+                        if char_a ~= char_b then
+                            return char_a < char_b
+                        end
+
+                        i = i + 1
+                        j = j + 1
+                    end
                 end
 
-                -- Try to parse as number (including decimals)
-                local num = tonumber(prefix)
-                if num then
-                    return { type = "number", value = num }
-                end
-
-                -- Default to alphabetic
-                return { type = "text", value = prefix }
+                -- If we reached the end, handle length differences (e.g., "a" < "abc")
+                return len_a < len_b
             end
 
             ---@class ExtNeotree.SortItem
@@ -105,25 +129,7 @@ return {
                     local a_name = a.name and a.name or a.path
                     local b_name = b.name and b.name or b.path
 
-                    local key_a = extract_sort_key(a_name)
-                    local key_b = extract_sort_key(b_name)
-
-                    -- Type priority: date > number > text
-                    local type_priority = { date = 3, number = 2, text = 1 }
-                    local priority_a = type_priority[key_a.type]
-                    local priority_b = type_priority[key_b.type]
-
-                    if priority_a ~= priority_b then
-                        return priority_a > priority_b
-                    end
-
-                    -- Same type, compare values
-                    if key_a.value ~= key_b.value then
-                        return key_a.value < key_b.value
-                    end
-
-                    -- If prefixes are equal, compare full names
-                    return a_name:lower() < b_name:lower()
+                    return natural_lt(a_name, b_name)
                 end,
                 sources = {
                     "filesystem",
@@ -151,7 +157,7 @@ return {
                 },
                 filesystem = {
                     follow_current_file = {
-                        enabled = true,
+                        enabled = false,
                         leave_dirs_open = false,
                     },
                     use_libuv_file_watcher = true,
@@ -191,19 +197,9 @@ return {
                             vim.wo[args.winid].winfixheight = false
                         end,
                     },
+                    { event = events.FILE_MOVED, handler = on_move },
+                    { event = events.FILE_RENAMED, handler = on_move },
                 },
-            })
-        end,
-        opts = function(_, opts)
-            local snacks = require("snacks")
-            local function on_move(data)
-                snacks.rename.on_rename_file(data.source, data.destination)
-            end
-            local events = require("neo-tree.events")
-            opts.event_handlers = opts.event_handlers or {}
-            vim.list_extend(opts.event_handlers, {
-                { event = events.FILE_MOVED, handler = on_move },
-                { event = events.FILE_RENAMED, handler = on_move },
             })
         end,
     },
