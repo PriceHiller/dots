@@ -168,6 +168,17 @@ M.setup = function()
 
     -- More lines in scrollback for terminal buffers
     opt.scrollback = 100000
+
+    -- Improved shada options
+    opt.shada = {
+        "!",
+        -- Remember more files for marks & oldfiles
+        "'1000",
+        -- Remember up to 100 lines per register
+        "<100",
+        "s10",
+        "h",
+    }
 end
 
 return M
