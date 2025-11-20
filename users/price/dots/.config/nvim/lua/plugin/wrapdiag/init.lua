@@ -185,7 +185,7 @@ function WrapDiag:setup()
     })
 
     -- Re-render diagnostics when the window is resized
-    vim.api.nvim_create_autocmd("VimResized", {
+    vim.api.nvim_create_autocmd({ "VimResized", "WinResized" }, {
         group = self.augroup,
         callback = function()
             self:refresh()
