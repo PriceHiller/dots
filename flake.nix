@@ -61,6 +61,12 @@
       url = "https://big.oisd.nl/domainswild";
       flake = false;
     };
+    swe-project = {
+      url = "github:phobost/SWE-Shopping-App?dir=src/backend/api";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     self.submodules = true;
     secrets = {
       url = ./secrets;
@@ -272,6 +278,7 @@
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
+                inputs.swe-project.nixosModules.phobost
                 {
                   config = inputs.secrets.secrets.${hostname};
                 }
