@@ -82,10 +82,6 @@ M.setup = function()
                 server_capabilities.documentFormattingProvider = false
                 server_capabilities.documentRangeFormattingProvider = false
             end
-
-            if server_capabilities.inlayHintProvider and not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) then
-                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            end
         end,
     })
 
