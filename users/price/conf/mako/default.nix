@@ -1,8 +1,26 @@
 { pkgs, clib, ... }:
 let
-
   colors = clib.kcolors;
   hx = colors.hex;
+  mkCard =
+    {
+      bg,
+      title-fg ? "#${hx.sumiInk0}",
+      app-fg ? "#${hx.sumiInk6}",
+    }:
+    {
+      background-color = bg;
+      border-color = bg;
+      text-color = "#${hx.sumiInk2}";
+      format = ''<b><span size="larger" fgcolor="${title-fg}">%s</span></b>\n%b\n<span size="small" fgcolor="${app-fg}">%a</span>'';
+    };
+  mkImportantCard =
+    attrs:
+    (mkCard attrs)
+    // {
+      default-timeout = 0;
+      ignore-timeout = 1;
+    };
 in
 {
   home.packages = with pkgs; [
@@ -25,13 +43,8 @@ in
       on-touch = "none";
       format = ''<b><span size="larger" fgcolor="#${hx.crystalBlue}">%s</span></b>\n%b\n<span size="small" fgcolor="#${hx.sumiInk6}">%a</span>'';
 
-      "urgency=critical" = {
-        background-color = "#${hx.peachRed}";
-        default-timeout = 0;
-        ignore-timeout = 1;
-        border-color = "#${hx.peachRed}";
-        text-color = "#${hx.sumiInk2}";
-        format = ''<b><span size="larger" fgcolor="#${hx.sumiInk0}">%s</span></b>\n%b\n<span size="small" fgcolor="#${hx.sumiInk6}">%a</span>'';
+      "urgency=critical" = mkImportantCard {
+        bg = "#${hx.peachRed}";
       };
 
       "app-name=tidal-hifi" = {
@@ -40,22 +53,11 @@ in
         format = ''<b><span size="larger" fgcolor="#${hx.surimiOrange}">%s</span></b>\n%b\n<span size="small" fgcolor="#${hx.sumiInk6}">%a</span>'';
       };
 
-      "app-name=orgmode" = {
-        background-color = "#${hx.carpYellow}";
-        default-timeout = 0;
-        ignore-timeout = 1;
-        border-color = "#${hx.carpYellow}";
-        text-color = "#${hx.sumiInk2}";
-        format = ''<b><span size="larger" fgcolor="#${hx.sumiInk0}">%s</span></b>\n%b\n<span size="small" fgcolor="#${hx.sumiInk6}">%a</span>'';
+      "app-name=Thunderbird" = mkImportantCard {
+        bg = "#${hx.crystalBlue}";
       };
-
-      "app-name=Thunderbird" = {
-        background-color = "#${hx.crystalBlue}";
-        default-timeout = 0;
-        ignore-timeout = 1;
-        border-color = "#${hx.crystalBlue}";
-        text-color = "#${hx.sumiInk2}";
-        format = ''<b><span size="larger" fgcolor="#${hx.sumiInk0}">%s</span></b>\n%b\n<span size="small" fgcolor="#${hx.sumiInk6}">%a</span>'';
+      "app-name=equibop" = mkImportantCard {
+        bg = "#${hx.oniViolet}";
       };
     };
   };
