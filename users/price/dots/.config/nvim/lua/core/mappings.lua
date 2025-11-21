@@ -263,10 +263,25 @@ M.setup = function()
     vim.keymap.set("x", "z?", "<C-\\><C-n>`>?\\%V", { desc = "Search backward within visual selection" })
 
     -- Toggle ("set") option binds
+
+    --- Display a message showing the new value of an option
+    ---@param opt_name string The option name, e.g. `wrap`
+    ---@param new_value any The new value of the option
+    local function msg_show_opt(opt_name, new_value)
+        local msg = ("`%s` set to `%s`"):format(opt_name, vim.inspect(new_value))
+        vim.notify(msg, vim.log.levels.INFO, {
+            title = "Option Set",
+        })
+    end
+
     vim.keymap.set("n", "<leader>s", "", {
         desc = "> Toggle Option",
     })
-    vim.keymap.set("n", "<leader>sw", "<cmd>set wrap!<CR>", {
+    vim.keymap.set("n", "<leader>sw", function()
+        local new_wrap_value = not vim.wo.wrap
+        vim.wo.wrap = not vim.wo.wrap
+        msg_show_opt("wrap", new_wrap_value)
+    end, {
         desc = "Toggle: Wrap",
         noremap = true,
         silent = true,
