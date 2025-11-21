@@ -1,10 +1,16 @@
-{ pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 let
   fs = lib.fileset;
 in
 {
   home.packages = with pkgs; [
     fontconfig
+    inputs.apple-emoji-linux.packages.${pkgs.stdenv.hostPlatform.system}.default
     overpass
     nerd-fonts.overpass
     nerd-fonts.fira-code
@@ -35,22 +41,25 @@ in
       defaultFonts = {
         sansSerif = [
           "Noto Sans"
+          "Apple Color Emoji"
           "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];
         serif = [
           "Noto Serif"
+          "Apple Color Emoji"
           "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];
         monospace = [
-          "FiraCode Nerd Font"
           "Fira Code"
           "Noto Sans Mono"
+          "Apple Color Emoji"
           "Twitter Color Emoji"
           "Symbols Nerd Font Mono"
         ];
         emoji = [
+          "Apple Color Emoji"
           "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];

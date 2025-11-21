@@ -1,15 +1,6 @@
 [font]
-normal = "FiraCode Nerd Font"
+normal = ["Fira Code", "Apple Color Emoji", "Symbols Nerd Font"]
 size = 14
 
 [font.features]
-"FiraCode Nerd Font" = [
-  "+cv02",
-  "+cv30",
-  "+ss05",
-  "+ss03",
-  "+ss04",
-  "+cv26",
-  "+ss10",
-]
-
+"Fira Code" = ["+cv02", "+cv30", "+ss05", "+ss03", "+ss04", "+cv26", "+ss10"]

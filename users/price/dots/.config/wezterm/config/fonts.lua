@@ -1,9 +1,6 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
 
 return {
-    font_dirs = {
-        (os.getenv("XDG_DATA_HOME") or os.getenv("HOME") .. "/.local/share") .. "/fonts",
-    },
     use_cap_height_to_scale_fallback_fonts = true,
     line_height = 1.0,
     font = wezterm.font_with_fallback({
@@ -27,7 +24,7 @@ return {
         },
         ---@diagnostic disable-next-line: missing-fields
         {
-            family = "MesloLGS Nerd Font",
+            family = "Apple Color Emoji",
         },
         ---@diagnostic disable-next-line: missing-fields
         {
@@ -40,5 +37,5 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         { family = "Nerd Font Symbols" },
     }),
-    font_size = 13,
+    font_size = 14,
 }
