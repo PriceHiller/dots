@@ -1,5 +1,16 @@
-{ lib, ... }:
+{ lib, config, ... }:
+let
+  ssh-state-dir = "${config.home.homeDirectory}/.ssh/state";
+in
 {
+  home.activation.ensureSSHControlDirExists =
+    lib.hm.dag.entryAfter [ "writeBoundary" ]
+      # bash
+      ''
+        run echo "Ensuring ssh state directory exists at '${ssh-state-dir}'"
+        run mkdir -p '${ssh-state-dir}/controllers'
+        run chmod 0700 '${ssh-state-dir}'
+      '';
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -7,13 +18,13 @@
       "*" = {
         forwardAgent = false;
         addKeysToAgent = "no";
-        serverAliveInterval = 0;
+        serverAliveInterval = 10;
         serverAliveCountMax = 3;
         hashKnownHosts = false;
-        userKnownHostsFile = "~/.ssh/known_hosts";
-        controlMaster = "no";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "no";
+        userKnownHostsFile = "~/.ssh/state/known_hosts";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/state/controllers/controller-%r@%n:%p";
+        controlPersist = "1h";
       };
       luna = {
         hostname = "luna.hosts.pricehiller.com";
