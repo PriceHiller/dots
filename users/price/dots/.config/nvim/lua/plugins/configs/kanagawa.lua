@@ -113,7 +113,8 @@ return {
                 { "NeogitNotificationError", { fg = colors.samuraiRed, bold = true } },
 
                 -- Cmp
-                { "BlinkCmpMenu", { fg = colors.roninYellow, bg = "NONE" } },
+                { "BlinkCmpMenu", { fg = colors.fujiWhite, bg = "NONE" } },
+                { "BlinkCmpLabelMatch", { bg = "NONE", bold = true } },
                 { "BlinkCmpKindField", { fg = colors.fujiWhite, bg = colors.sakuraPink, blend = 0 } },
                 { "BlinkCmpKindProperty", { fg = colors.fujiWhite, bg = colors.sakuraPink, blend = 0 } },
                 { "BlinkCmpKindEvent", { fg = colors.fujiWhite, bg = colors.sakuraPink, blend = 0 } },
