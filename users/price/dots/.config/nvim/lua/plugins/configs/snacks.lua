@@ -10,7 +10,7 @@ local map_quick_close = function(bufnr)
     end)
     vim.keymap.set("n", "q", function()
         vim.cmd.bdelete({ args = { bufnr }, bang = true })
-    end, { silent = true, buffer = bufnr, desc = "Quick Close Buffer" })
+    end, { silent = true, buffer = bufnr, noremap = true, desc = "Quick Close Buffer" })
 end
 
 vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
@@ -27,32 +27,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
     end,
 })
 
----@param bufnr integer? Buffer id
-local bufdelete = function(bufnr)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
-
-    local tabnr = vim.api.nvim_get_current_tabpage()
-
-    local tab_winrs = vim.api.nvim_tabpage_list_wins(tabnr)
-    ---@type integer[]
-    local buf_winrs = {}
-    for _, winnr in ipairs(tab_winrs) do
-        local winbufnr = vim.api.nvim_win_get_buf(winnr)
-        if winbufnr == bufnr then
-            table.insert(buf_winrs, winbufnr)
-        end
-    end
-
-    if #tab_winrs == #buf_winrs then
-        vim.cmd.bdelete({
-            args = { bufnr },
-            bang = vim.bo[bufnr].buftype ~= "",
-        })
-    else
-        require("snacks").bufdelete.delete(bufnr)
-    end
-end
-
 return {
     {
         "folke/snacks.nvim",
@@ -61,7 +35,9 @@ return {
         keys = {
             {
                 "<A-x>",
-                bufdelete,
+                function()
+                    require("snacks").bufdelete.delete()
+                end,
                 desc = "Close Buffer",
                 mode = { "", "!", "v", "t" },
             },
@@ -572,9 +548,12 @@ return {
                     },
                 },
             })
+
+            if snacks.config.notifier.enabled then
+                vim.print = snacks.debug.inspect
+            end
             _G.bt = snacks.debug.backtrace
             _G.dd = snacks.debug.inspect
-            vim.print = snacks.debug.inspect
         end,
     },
 }
