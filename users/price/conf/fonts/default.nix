@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+let
+  fs = lib.fileset;
+in
 {
   home.packages = with pkgs; [
     fontconfig
@@ -17,6 +20,18 @@
   fonts = {
     fontconfig = {
       enable = true;
+      configFile =
+        ./configs
+        |> fs.fileFilter (file: file.hasExt "conf")
+        |> fs.toList
+        |> lib.map (file: {
+          name = file |> builtins.baseNameOf |> lib.strings.removeSuffix ".conf";
+          value = {
+            enable = true;
+            source = file;
+          };
+        })
+        |> builtins.listToAttrs;
       defaultFonts = {
         sansSerif = [
           "Noto Sans"
@@ -30,6 +45,7 @@
         ];
         monospace = [
           "FiraCode Nerd Font"
+          "Fira Code"
           "Noto Sans Mono"
           "Twitter Color Emoji"
           "Symbols Nerd Font Mono"
