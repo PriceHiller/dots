@@ -39,8 +39,8 @@ in
         # Init completions LAST
         # zsh
         ''
-          autoload -Uz compinit && compinit
-          autoload -Uz bashcompinit && bashcompinit
+          autoload -U compinit && compinit
+          autoload -U bashcompinit && bashcompinit
         ''
         # Ensure we load fzf-tab AFTER compinit
         # zsh
