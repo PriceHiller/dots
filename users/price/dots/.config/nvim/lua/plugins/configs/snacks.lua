@@ -1,32 +1,3 @@
---- Set a mapping to quickly close the current buffer
----@param bufnr integer A buffer id
-local map_quick_close = function(bufnr)
-    vim.iter({
-        "q/",
-        "q?",
-        "q:",
-    }):each(function(lhs)
-        pcall(vim.keymap.del, "n", lhs)
-    end)
-    vim.keymap.set("n", "q", function()
-        vim.cmd.bdelete({ args = { bufnr }, bang = true })
-    end, { silent = true, buffer = bufnr, noremap = true, desc = "Quick Close Buffer" })
-end
-
-vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
-    callback = function(args)
-        if args.event == "TermOpen" then
-            map_quick_close(args.buf)
-            return
-        end
-        local bo = vim.bo[args.buf]
-        if vim.list_contains({ "nofile", "terminal", "nowrite", "help" }, bo.buftype) then
-            map_quick_close(args.buf)
-            return
-        end
-    end,
-})
-
 return {
     {
         "folke/snacks.nvim",
