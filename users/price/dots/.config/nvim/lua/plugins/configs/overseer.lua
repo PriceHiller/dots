@@ -16,7 +16,20 @@ return {
         },
         config = function()
             local overseer = require("overseer")
-            overseer.setup()
+            overseer.setup({
+                actions = {
+                    ["Send SIGINT"] = {
+                        desc = "Ctrl-C",
+                        condition = function(task)
+                            return task:is_running() and task.strategy and task.strategy.job_id
+                        end,
+                        run = function(task)
+                            local pid = vim.fn.jobpid(task.strategy.job_id)
+                            vim.uv.kill(pid, vim.uv.constants.SIGINT)
+                        end,
+                    },
+                },
+            })
             local tempname_caches = {}
 
             --- Get a temp file bound to the bufnr
