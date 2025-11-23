@@ -13,7 +13,6 @@ in
     let
       baseRunnerCfg = {
         enable = true;
-        replace = true;
         tokenFile = config.age.secrets.gh-token.path;
         url = "https://github.com/phobost";
         extraLabels = [
