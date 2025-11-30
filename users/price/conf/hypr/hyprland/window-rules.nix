@@ -1,12 +1,12 @@
 { ... }:
 {
   wayland.windowManager.hyprland.settings = {
-    windowrulev2 = [
-      "opacity 0.0 override, class:^(xwaylandvideobridge)$"
-      "noanim, class:^(xwaylandvideobridge)$"
-      "noinitialfocus, class:^(xwaylandvideobridge)$"
-      "maxsize 1 1, class:^(xwaylandvideobridge)$"
-      "noblur, class:^(xwaylandvideobridge)$"
+    windowrule = [
+      "match:class ^(xwaylandvideobridge)$, opacity 0.0 override"
+      "match:class ^(xwaylandvideobridge)$, no_anim on"
+      "match:class ^(xwaylandvideobridge)$, no_initial_focus on"
+      "match:class ^(xwaylandvideobridge)$, max_size 1 1"
+      "match:class ^(xwaylandvideobridge)$, no_blur on"
     ];
   };
 }
