@@ -28,7 +28,7 @@ M.setup = function()
         end,
     })
 
-    local format_on_save = true
+    local format_on_save = false
     vim.api.nvim_create_user_command("ToggleFmtOnSave", function()
         format_on_save = not format_on_save
         local intercept_state = "`Enabled`"
