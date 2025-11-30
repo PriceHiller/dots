@@ -8,7 +8,14 @@
   services.nginx.virtualHosts."phobost-api.pricehiller.com" = {
     forceSSL = true;
     enableACME = true;
-    locations."/".proxyPass =
-      "http://${config.services.phobost-api.host}:${builtins.toString config.services.phobost-api.port}";
+    locations."/" = {
+      proxyPass = "http://${config.services.phobost-api.host}:${builtins.toString config.services.phobost-api.port}";
+      extraConfig =
+        # nginx
+        ''
+          add_header 'Access-Control-Allow-Origin' '*';
+          add_header 'Access-Control-Allow-Methods' 'POST';
+        '';
+    };
   };
 }
