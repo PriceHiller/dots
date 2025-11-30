@@ -161,9 +161,6 @@ M.setup = function()
     -- Binding to allow ctrl - > indent
     vim.keymap.set("i", "<C->>", "<C-t>", { silent = true, desc = "Insert: Indent" })
 
-    -- Create newline from anywhere in current line without modifying current line
-    vim.keymap.set("i", "<S-CR>", "<C-o>o", { silent = true, desc = "Insert: New Line" })
-
     -- Copy first leading word of line onto newline and insert (autolist functionality basically)
     vim.keymap.set({ "i", "n" }, "<C-CR>", function()
         local line = vim.api.nvim_get_current_line()
