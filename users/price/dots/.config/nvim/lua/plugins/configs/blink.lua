@@ -110,11 +110,11 @@ return {
 
                 cmdline = {
                     keymap = {
-                        ["<CR>"] = { "accept", "fallback" },
+                        ["<CR>"] = { "accept_and_enter", "fallback" },
                     },
                     completion = {
                         list = {
-                            selection = { preselect = false, auto_insert = false },
+                            selection = { preselect = false, auto_insert = true },
                         },
                         ghost_text = {
                             enabled = true,
@@ -253,7 +253,7 @@ return {
                         range = "full",
                     },
                     list = {
-                        selection = { preselect = false, auto_insert = false },
+                        selection = { preselect = false, auto_insert = true },
                     },
                     ghost_text = {
                         enabled = true,
