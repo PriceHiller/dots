@@ -1,11 +1,9 @@
 return {
     {
         "nvim-orgmode/orgmode",
-        cmd = { "Org" },
-        ft = { "org" },
-        keys = {
-            { "<leader>o", desc = "> Org" },
-        },
+        -- PERF: We only incur a significant startup penalty with orgmode if we _immediately_ try to
+        -- read agenda files
+        lazy = false,
         config = function()
             local org = require("orgmode")
 
