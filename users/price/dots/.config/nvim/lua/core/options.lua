@@ -63,7 +63,7 @@ M.setup = function()
     opt.timeout = true
     opt.ttimeoutlen = 20
     opt.timeoutlen = 1000
-    opt.updatetime = 250
+    opt.updatetime = 1000
 
     -- Enable persistent undo
     opt.undofile = true
@@ -138,6 +138,7 @@ M.setup = function()
     -- Improved diffopt
     opt.diffopt = ""
     for _, new_diffopt in ipairs({
+        "followwrap",
         "internal",
         "filler",
         "closeoff",
