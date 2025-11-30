@@ -51,6 +51,8 @@ in
   home = {
     packages = with pkgs; [
       nodePackages_latest.nodejs
+      pnpm
+      biome
       typescript
       typescript-language-server
       oxlint
