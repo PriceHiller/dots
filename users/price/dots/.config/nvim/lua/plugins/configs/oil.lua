@@ -8,12 +8,6 @@ return {
         config = function()
             require("oil").setup({
                 default_file_explorer = false,
-                columns = {
-                    "icon",
-                    "permissions",
-                    "size",
-                    "mtime",
-                },
                 keymaps = {
                     ["<BS>"] = { "actions.parent", mode = "n" },
                 },
