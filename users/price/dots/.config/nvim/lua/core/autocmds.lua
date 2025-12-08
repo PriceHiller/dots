@@ -119,6 +119,11 @@ M.setup = function()
             ---@type integer
             local bufnr = args.buf
 
+            if not vim.bo[bufnr].buflisted then
+                -- Ignore unlisted buffers
+                return
+            end
+
             ---@type string? The file extension if detected
             local extension = vim.fn.fnamemodify(path, ":e")
             ---@type string The filename if detected
