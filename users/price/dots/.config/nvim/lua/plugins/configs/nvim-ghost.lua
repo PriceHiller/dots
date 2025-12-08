@@ -22,10 +22,10 @@ return {
                     vim.bo[args.buf].filetype = "markdown"
                 end,
             })
+            vim.cmd("silent! GhostTextStart")
             -- HACK: Reset the nvim listen address so we don't run into issues
             -- where other programs/plugins will reuse an existing socket
             vim.env.NVIM_LISTEN_ADDRESS = initial_nvim_listen_addr
-            vim.cmd("silent! GhostTextStart")
         end,
     },
 }
