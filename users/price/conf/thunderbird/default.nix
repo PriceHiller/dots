@@ -21,6 +21,7 @@ in
       };
     };
     settings = clib.attrsToMozillaPref {
+      intl.date_time.pattern_override.time_short = "h:mm aaaa";
       mail = {
         threadpane.listview = 1;
         cloud_files.enabled = false;
