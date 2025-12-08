@@ -253,7 +253,7 @@ return {
                         range = "full",
                     },
                     list = {
-                        selection = { preselect = false, auto_insert = true },
+                        selection = { preselect = false, auto_insert = false },
                     },
                     ghost_text = {
                         enabled = true,
