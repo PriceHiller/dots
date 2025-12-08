@@ -1,7 +1,9 @@
 return {
     {
         "kylechui/nvim-surround",
-        event = { "BufReadPre", "BufNewFile" },
-        opts = {},
+        lazy = false,
+        config = function()
+            require("nvim-surround").setup({})
+        end,
     },
 }
