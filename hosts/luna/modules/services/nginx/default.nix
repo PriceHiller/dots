@@ -20,7 +20,11 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "acme@monitoring.pricehiller.com";
+    defaults = {
+      email = "acme@monitoring.pricehiller.com";
+      dnsProvider = "route53";
+      environmentFile = config.age.secrets.acme-env-file.path;
+    };
   };
 
   environment.persistence.ephemeral.directories =
