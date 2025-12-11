@@ -200,7 +200,7 @@ in
             username = "";
             password = "";
             listen_address = "127.0.0.1:8080";
-            max_query_log_entries = 100000;
+            max_query_log_entries = 1000;
             max_memory_mb = 128;
           };
         };
