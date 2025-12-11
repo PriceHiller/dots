@@ -37,9 +37,10 @@ in
   home = {
     packages = [
       # Use until equibop is updated on Nixpkgs
+      # WAITING: https://github.com/NixOS/nixpkgs/pull/456790
       (import (pkgs.fetchzip {
         url = "https://github.com/Rexcrazy804/nixpkgs/archive/update-equibop.tar.gz";
-        hash = "sha256-LIoEQm2pLyC/Mw3us9edOBLjyFrdZULtqfYM5dX0PDc=";
+        hash = "sha256-QBcO3s4g5OzEWabTrWj/vqFzpAyYYKIrb7slViGbxp0=";
       }) { inherit (pkgs.stdenv.hostPlatform) system; }).equibop
     ];
   };
