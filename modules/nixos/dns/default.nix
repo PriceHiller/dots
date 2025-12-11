@@ -76,7 +76,7 @@ in
       };
 
       security.pki.certificateFiles = [
-        cfg.doh.publicKey
+        ./ca.crt
       ];
 
       networking = {

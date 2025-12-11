@@ -131,11 +131,11 @@ in
               dohCfg = dnscryptCfg.settings.local_doh;
               dohUri = "https://${(builtins.elemAt dohCfg.listen_addresses 0)}${dohCfg.path}";
             in
-            (lib.mkIf dnscryptCfg.enable {
+            {
               mode = 3;
               uri = dohUri;
               custom_uri = dohUri;
-            });
+            };
           dns = {
             echconfig.enabled = true;
             use_https_rr_as_altsvc = true;

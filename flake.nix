@@ -213,7 +213,7 @@
                   ./modules/nixos/vector.nix
                   ./modules/nixos/logviewer.nix
                   ./modules/nixos/persistence.nix
-                  ./modules/nixos/dns.nix
+                  ./modules/nixos/dns
                   inputs.home-manager.nixosModules.home-manager
                   {
                     home-manager = {
@@ -274,7 +274,7 @@
                 ./modules/nixos/base-programs.nix
                 ./modules/nixos/vector.nix
                 ./modules/nixos/persistence.nix
-                ./modules/nixos/dns.nix
+                ./modules/nixos/dns
                 inputs.nixos-facter-modules.nixosModules.facter
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
