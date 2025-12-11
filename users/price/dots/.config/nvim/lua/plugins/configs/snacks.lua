@@ -1,3 +1,27 @@
+--- Wrapper around `snacks.bufdelete.delete`
+---@param opts number|snacks.bufdelete.Opts?
+local bwdelete = function(opts)
+    local buf = (opts or {}).buf or vim.api.nvim_get_current_buf()
+
+    local tab_wins = vim.api.nvim_tabpage_list_wins(vim.api.nvim_get_current_tabpage())
+    ---@type integer[]
+    local tab_bufs = {}
+    for _, tab_win in ipairs(tab_wins) do
+        local tab_buf = vim.api.nvim_win_get_buf(tab_win)
+        -- Only include valid buffers (i.e. ignore file trees, notifications, etc.)
+        if vim.bo[tab_buf].buflisted and not vim.list_contains(tab_bufs, tab_buf) then
+            table.insert(tab_bufs, tab_buf)
+        end
+    end
+
+    -- If there is only a single unmodified buffer visible in the current tab, then use bdelete
+    if #tab_bufs == 1 and not vim.bo[buf].modified then
+        vim.cmd.bdelete({ buf, bang = true })
+    else
+        require("snacks").bufdelete.delete(opts)
+    end
+end
+
 return {
     {
         "folke/snacks.nvim",
@@ -7,7 +31,7 @@ return {
             {
                 "<A-x>",
                 function()
-                    require("snacks").bufdelete.delete()
+                    bwdelete()
                 end,
                 desc = "Close Buffer",
                 mode = { "", "!", "v", "t" },
