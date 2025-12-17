@@ -30,20 +30,23 @@ in
       clib.attrsToMozillaPref {
         identity.fxaccounts.enabled = true;
         webgl.disabled = false;
-        browser.policies.runOncePerModification = {
-          extensionsInstall = [ ];
-          removeSearchEngines = [
-            "Bing"
-            "Amazon.com"
-            "eBay"
-            "Twitter"
-          ];
-          extensionsUninstall = [
-            "bing@search.mozilla.org"
-            "amazondotcom@search.mozilla.org"
-            "ebay@search.mozilla.org"
-            "twitter@search.mozilla.org"
-          ];
+        browser = {
+          urlbar.openintab = true;
+          policies.runOncePerModification = {
+            extensionsInstall = [ ];
+            removeSearchEngines = [
+              "Bing"
+              "Amazon.com"
+              "eBay"
+              "Twitter"
+            ];
+            extensionsUninstall = [
+              "bing@search.mozilla.org"
+              "amazondotcom@search.mozilla.org"
+              "ebay@search.mozilla.org"
+              "twitter@search.mozilla.org"
+            ];
+          };
         };
         privacy = {
           resistFingerprinting = false;
