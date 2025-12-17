@@ -58,7 +58,7 @@ in
       "${config.home.sessionVariables.CARGO_HOME}/config.toml".text = ''
         [build]
         rustc-wrapper = "${sccacheWrapped}/bin/sccache"
-        rustflags = [ "-C", "linker=${pkgs.clang}/bin/clang", "-C", "link-arg=--ld-path=${pkgs.mold-wrapped}/bin/mold" ]
+        rustflags = [ "-C", "linker=${pkgs.clang}/bin/clang", "-C", "link-arg=--ld-path=${pkgs.mold}/bin/mold" ]
 
         [profile.dev]
         split-debuginfo = "unpacked"
