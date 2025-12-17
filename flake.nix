@@ -12,6 +12,10 @@
       url = "git+https://github.com/hyprwm/Hyprland?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hypr-dynamic-cursors = {
+      url = "github:VirtCode/hypr-dynamic-cursors";
+      inputs.hyprland.follows = "hyprland";
+    };
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
