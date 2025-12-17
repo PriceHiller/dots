@@ -1,31 +1,8 @@
 {
   config,
   pkgs,
-  osConfig,
   ...
 }:
-let
-  sccacheWrapped =
-    if osConfig.services.memcached.enable then
-      pkgs.symlinkJoin {
-        name = "sccache";
-        paths = [ pkgs.sccache ];
-        buildInputs = [ pkgs.makeWrapper ];
-        postBuild = ''
-          wrapProgram $out/bin/sccache \
-            --set SCCACHE_MEMCACHED_KEY_PREFIX "SCCACHE" \
-            --set SCCACHE_MEMCACHED_ENDPOINT "tcp://${builtins.toString osConfig.services.memcached.listen}:${builtins.toString osConfig.services.memcached.port}"
-        '';
-      }
-    else
-      # Symlinking this ensures that sccache can properly create temporary directories.
-      # This is because Nix wants to cause every sccache invocation to sandbox the build, by
-      # symlinking sccache instead, we can avoid the sandbox to some degree.
-      pkgs.symlinkJoin {
-        name = "sccache";
-        paths = [ pkgs.sccache ];
-      };
-in
 {
   home = {
     sessionVariables = {
@@ -37,6 +14,8 @@ in
       #  laziness.
       OPENSSL_DIR = "${pkgs.openssl.dev}";
       OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+      SCCACHE_SERVER_UDS = "${config.xdg.stateHome}/sccache.sock";
+      SCCACHE_CACHE_SIZE = "40G";
     };
     packages = with pkgs; [
       (pkgs.fenix.complete.withComponents [
@@ -51,13 +30,13 @@ in
       cargo-deny
       cargo-watch
       cargo-nextest
-      sccacheWrapped
+      pkgs.sccache
     ];
     file = {
       # NOTE: This improves the rust edit-build-run cycle. See https://davidlattimore.github.io/posts/2024/02/04/speeding-up-the-rust-edit-build-run-cycle.html
       "${config.home.sessionVariables.CARGO_HOME}/config.toml".text = ''
         [build]
-        rustc-wrapper = "${sccacheWrapped}/bin/sccache"
+        rustc-wrapper = "${pkgs.sccache}/bin/sccache"
         rustflags = [ "-C", "linker=${pkgs.clang}/bin/clang", "-C", "link-arg=--ld-path=${pkgs.mold}/bin/mold" ]
 
         [profile.dev]
