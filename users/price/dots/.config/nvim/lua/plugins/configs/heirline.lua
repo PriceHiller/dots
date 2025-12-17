@@ -871,8 +871,8 @@ return {
                                 msg = ("[%d] | %s"):format(remaining_tasks_today, task_title)
                                 if not msg_fits() then
                                     msg = task_title
-                                    if not msg_fits() then
-                                        msg = msg:sub(1, vim.o.columns / 2) .. "…"
+                                    while not msg_fits() and #msg > 1 do
+                                        msg = msg:sub(1, #msg / 2) .. "…"
                                     end
                                 end
                             end
@@ -1175,7 +1175,7 @@ return {
                     end)(),
                     Orgmode,
                     {
-                        provider = "%=",
+                        provider = "%<%=",
                     },
                     Buffers,
                     TabPages,
