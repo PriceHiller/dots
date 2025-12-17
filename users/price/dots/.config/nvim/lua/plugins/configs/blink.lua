@@ -109,9 +109,6 @@ return {
                 keymap = vim.tbl_extend("error", { preset = "none" }, blink_keymap),
 
                 cmdline = {
-                    keymap = {
-                        ["<CR>"] = { "accept_and_enter", "fallback" },
-                    },
                     completion = {
                         list = {
                             selection = { preselect = false, auto_insert = true },
