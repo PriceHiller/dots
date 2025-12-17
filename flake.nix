@@ -62,6 +62,12 @@
       url = "https://big.oisd.nl/domainswild";
       flake = false;
     };
+    copyparty = {
+      url = "github:9001/copyparty";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     self.submodules = true;
     secrets = {
       url = ./secrets;
@@ -273,6 +279,7 @@
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default
                 inputs.disko.nixosModules.disko
+                inputs.copyparty.nixosModules.default
                 {
                   config = inputs.secrets.secrets.${hostname};
                 }

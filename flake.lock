@@ -121,6 +121,27 @@
         "url": "https://git.pricehiller.com/blog/blog"
       }
     },
+    "copyparty": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765489116,
+        "narHash": "sha256-PbmarsQW7+nVKyvUL/aMXCwAAah9oxygveyOCfu/Dhg=",
+        "owner": "9001",
+        "repo": "copyparty",
+        "rev": "ce2eeba22694f2a6a3d31ea382b8d206d979266c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "9001",
+        "repo": "copyparty",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1760924934,
@@ -415,6 +436,21 @@
       }
     },
     "flake-utils_3": {
+      "locked": {
+        "lastModified": 1678901627,
+        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_4": {
       "inputs": {
         "systems": "systems_6"
       },
@@ -1264,7 +1300,7 @@
     },
     "rofi-tools": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -1290,6 +1326,7 @@
         "agenix": "agenix",
         "apple-emoji-linux": "apple-emoji-linux",
         "blog": "blog",
+        "copyparty": "copyparty",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
         "emacs-overlay": "emacs-overlay",
