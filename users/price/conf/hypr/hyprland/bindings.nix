@@ -56,7 +56,7 @@
         bind = SUPER,Q,killactive,
         bind = CTRLSUPER,Q,forcekillactive,
         bind = SUPER,A,togglefloating,
-        bind = SUPER,D,exec,makoctl dismiss -a
+        bind = SUPER,D,exec,swaync-client --close-latest
         bind = SUPERSHIFT,Q,exec,hyprlock
         bind = SUPERSHIFT,M,exit
 

@@ -75,6 +75,7 @@ tooltip label,
 #privacy,
 #custom-systemd-failed-units,
 #tray menu,
+#custom-notification,
 #custom-lock {
   background-color: #16161d;
   color: #dcd7ba;
@@ -326,6 +327,23 @@ tooltip {
 /* Clock */
 #clock {
   color: #ff9e3b;
+}
+
+/* Sway Notification Center */
+#custom-notification {
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
+  margin-right: 0rem;
+  color: #9CABCA;
+}
+
+
+#custom-notification.dnd-none,
+#custom-notification.dnd-notification,
+#custom-notification.dnd-inhibited-notification,
+#custom-notification.dnd-inhibited-none
+{
+  color: #FF5D62;
 }
 
 /* Lock */

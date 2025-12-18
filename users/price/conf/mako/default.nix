@@ -28,7 +28,7 @@ in
   ];
 
   services.mako = {
-    enable = true;
+    enable = false;
     settings = {
       font = "Fira Code 12";
       background-color = "#${hx.sumiInk0}";
