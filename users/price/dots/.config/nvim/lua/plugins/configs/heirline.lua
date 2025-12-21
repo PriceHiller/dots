@@ -791,8 +791,7 @@ return {
                                 time_elapsed = ("[%s]"):format(clocked_time)
                             end
 
-                            -- Get the title and remove some org syntax from it
-                            local title = headline:get_title():gsub("[~/*_=+]", "")
+                            local title = headline:get_title()
 
                             local message = ("%s %s"):format(time_elapsed, title)
                             if not conditions.width_percent_below(#message, 0.5, false) then
@@ -829,7 +828,7 @@ return {
                                 return
                             end
 
-                            local task_title = last_task:gsub("[~/*_=+]", "")
+                            local task_title = last_task
                             local time_to_task = ""
                             if last_date_diff and last_date_diff > 0 then
                                 (function()
