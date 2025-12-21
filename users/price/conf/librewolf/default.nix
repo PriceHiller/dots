@@ -31,7 +31,6 @@ in
         identity.fxaccounts.enabled = true;
         webgl.disabled = false;
         browser = {
-          urlbar.openintab = true;
           policies.runOncePerModification = {
             extensionsInstall = [ ];
             removeSearchEngines = [
