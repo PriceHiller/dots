@@ -117,8 +117,6 @@ in
 
     nginx.virtualHosts = {
       "${grafana_host}" = {
-        enableACME = true;
-        acmeRoot = null;
         forceSSL = true;
         locations."/" = {
           proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${builtins.toString config.services.grafana.settings.server.http_port}";
@@ -127,7 +125,6 @@ in
         };
       };
       "${grafana_loki_host}" = {
-        enableACME = true;
         forceSSL = true;
         extraConfig = ''
           auth_basic "Password Required";

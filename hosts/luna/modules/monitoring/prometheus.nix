@@ -99,7 +99,6 @@ in
     nginx = {
       statusPage = true;
       virtualHosts."${prometheus_host}" = {
-        enableACME = true;
         forceSSL = true;
         extraConfig = ''
           auth_basic "Password Required";

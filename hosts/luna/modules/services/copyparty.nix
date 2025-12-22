@@ -104,7 +104,6 @@ in
 
   services.nginx.virtualHosts = {
     "fs.pricehiller.com" = {
-      enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://${host}:${builtins.toString port}";

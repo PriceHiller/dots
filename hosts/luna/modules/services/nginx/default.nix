@@ -18,14 +18,6 @@
     recommendedTlsSettings = true;
   };
 
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "acme@monitoring.pricehiller.com";
-      dnsProvider = "route53";
-      environmentFile = config.age.secrets.acme-env-file.path;
-    };
-  };
 
   environment.persistence.ephemeral.directories =
     let
@@ -59,13 +51,13 @@
     80
     443
   ];
+
   services.nginx.virtualHosts = {
     "pricehiller.com" = {
       serverAliases = [
         "price-hiller.com"
       ];
       forceSSL = true;
-      enableACME = true;
       root = inputs.blog.packages.${pkgs.stdenv.hostPlatform.system}.default;
       locations =
         let

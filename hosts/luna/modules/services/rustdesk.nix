@@ -16,7 +16,6 @@ in
       };
     };
     nginx.virtualHosts.${rustDeskDomain} = {
-      enableACME = true;
       forceSSL = true;
       locations = {
         "/ws/id" = {
