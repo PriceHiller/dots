@@ -72,6 +72,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    nixcord.url = "github:kaylorben/nixcord";
     self.submodules = true;
     secrets = {
       url = ./secrets;
@@ -223,6 +224,7 @@
                     home-manager = {
                       sharedModules = [
                         inputs.agenix.homeManagerModules.default
+                        inputs.nixcord.homeModules.nixcord
                         age-secrets
                         ./modules/hm/link-file.nix
                       ];
