@@ -79,6 +79,14 @@ in
         "https://raw.githubusercontent.com/catppuccin/discord/refs/heads/main/themes/macchiato.theme.css"
         "https://raw.githubusercontent.com/catppuccin/discord/refs/heads/main/themes/mocha.theme.css"
       ];
+      themes = {
+        catpuccin-latte = ./themes/catpuccin-latte.css;
+        apple-emoji-replace = ./themes/apple-emoji-replace.css;
+      };
+      enabledThemes = [
+        "catpuccin-latte.css"
+        "apple-emoji-replace.css"
+      ];
     };
     equibop = {
       enable = true;
