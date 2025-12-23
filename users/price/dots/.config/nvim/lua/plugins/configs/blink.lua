@@ -19,15 +19,6 @@ return {
         },
     },
     {
-        "saghen/blink.compat",
-        -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
-        lazy = true,
-        -- make sure to set opts so that lazy.nvim calls blink.compat's setup
-        config = function()
-            require("blink.compat").setup({})
-        end,
-    },
-    {
         "saghen/blink.cmp",
         lazy = false, -- lazy loading handled internally
         dependencies = {
