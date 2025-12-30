@@ -56,7 +56,7 @@
         bind = SUPER,Q,killactive,
         bind = CTRLSUPER,Q,forcekillactive,
         bind = SUPER,A,togglefloating,
-        bind = SUPER,D,exec,swaync-client --close-latest
+        bind = SUPER,D,exec,swaync-client --hide-all
         bind = SUPERSHIFT,Q,exec,hyprlock
         bind = SUPERSHIFT,M,exit
 
