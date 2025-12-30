@@ -1,11 +1,16 @@
 {
+  config,
   inputs,
   pkgs,
   clib,
   ...
 }:
-
 {
+  age.secrets.nix-access-tokens = {
+    mode = "440";
+    group = "wheel";
+  };
+
   nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixVersions.git;
@@ -13,6 +18,9 @@
       "nixpkgs=${inputs.nixpkgs}"
       "home-manager=${inputs.home-manager}"
     ];
+    extraOptions = ''
+      !include ${config.age.secrets.nix-access-tokens.path}
+    '';
     settings = {
       # Make the download buffer 256 mb
       download-buffer-size = 256 * (clib.pow 2 20);
