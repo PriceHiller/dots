@@ -126,6 +126,7 @@
       phpPackages.phpstan
       actionlint
       netcoredbg
+      mdx-language-server
     ];
   };
   xdg.mimeApps.defaultApplications = {

@@ -71,6 +71,7 @@ return {
             "typescript",
             "typescriptreact",
             "vue",
+            "mdx"
         }
         return {
             "pmizio/typescript-tools.nvim",
@@ -83,6 +84,7 @@ return {
                         tsserver_plugins = {
                             "@vue/typescript-plugin",
                             "@styled/typescript-styled-plugin",
+                            "@mdx-js/typescript-plugin"
                         },
                     },
                 })
