@@ -115,6 +115,7 @@
       lua-language-server
       typstyle
       live-server
+      astro-language-server
       cmake-format
       cmake-language-server
       tombi

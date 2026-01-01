@@ -65,6 +65,7 @@ in
     ];
 
     sessionVariables = {
+      ASTRO_TELEMETRY_DISABLED = 1;
       NPM_CONFIG_USERCONFIG = pkgs.writeText "npm_user_config" ''
         prefix=${npm_paths.prefix}
         cache=${npm_paths.cache}
