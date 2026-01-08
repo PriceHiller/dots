@@ -38,7 +38,6 @@
     };
     blog = {
       url = "git+https://git.pricehiller.com/blog/blog";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
