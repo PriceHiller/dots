@@ -18,9 +18,16 @@ in
         eDP-1-wallpaper
         default-wallpaper
       ];
+      splash = false;
       wallpaper = [
-        "eDP-1,${eDP-1-wallpaper}"
-        ",${default-wallpaper}"
+        {
+          monitor = "eDP-1";
+          path = eDP-1-wallpaper;
+        }
+        {
+          monitor = "";
+          path = default-wallpaper;
+        }
       ];
     };
   };
