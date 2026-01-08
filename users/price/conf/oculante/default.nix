@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    oculante
+    # Waiting on https://github.com/NixOS/nixpkgs/pull/476565
+    # oculante
   ];
   xdg.mimeApps = {
     defaultApplications = {
