@@ -7,7 +7,7 @@
     runtimeInputs = with pkgs; [
       stylua
       gnugrep
-      nixfmt-rfc-style
+      nixfmt
       nodePackages.prettier
       shfmt
     ];

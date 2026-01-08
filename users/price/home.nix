@@ -104,7 +104,7 @@ in
         dust
         fd
         playerctl
-        nixfmt-rfc-style
+        nixfmt
         lxappearance
         direnv
         stylua
