@@ -49,8 +49,10 @@
   ];
   environment.persistence.ephemeral.users = {
     root = {
-      home = (config.users.users.root.home);
-      files = [ ".bash_history" ];
+      files = [
+        ".bash_history"
+        ".zsh_history"
+      ];
     };
   };
 }
