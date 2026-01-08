@@ -254,6 +254,8 @@ M.setup = function()
     vim.keymap.set({ "", "!", "v", "t" }, '<C-">', "<cmd>tabprevious<CR>", { noremap = true, silent = true })
     -- Close tab
     vim.keymap.set({ "", "!", "v", "t" }, "<C-|>", "<cmd>tabclose<CR>", { noremap = true, silent = true })
+    -- Create a new tab, I don't use tagstacks much if ever
+    vim.keymap.set("n", "<C-T>", "<cmd>tabnew<CR>", { noremap = true, silent = true })
 
     -- Search within selection
     vim.keymap.set("x", "z/", "<C-\\><C-n>`</\\%V", { desc = "Search forward within visual selection" })
