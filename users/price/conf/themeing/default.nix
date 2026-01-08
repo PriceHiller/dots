@@ -18,6 +18,7 @@
 
   qt = {
     enable = true;
+    platformTheme.name = "gtk3";
   };
 
   dconf.settings."org/gnome/desktop/interface" = {
