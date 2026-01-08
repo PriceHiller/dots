@@ -10,7 +10,8 @@
         hplip
         brlaser
         brgenml1lpr
-        cnijfilter2
+        # Currently broken, waiting on https://github.com/NixOS/nixpkgs/pull/477193
+        # cnijfilter2
         splix
       ];
     };
