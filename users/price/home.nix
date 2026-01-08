@@ -180,6 +180,7 @@ in
   services = {
     blueman-applet.enable = true;
     easyeffects.enable = true;
+    opensnitch-ui.enable = true;
   };
 
   systemd.user = {

@@ -1,5 +1,9 @@
-{ hostname, ... }:
 {
+  hostname,
+  ...
+}:
+{
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -7,6 +11,9 @@
   };
   networking = {
     hostName = hostname;
+    nftables = {
+      enable = true;
+    };
     wireless.iwd = {
       enable = true;
       settings = {

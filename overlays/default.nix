@@ -18,7 +18,7 @@
       '';
     });
     opensnitch-ui = prev.opensnitch-ui.overrideAttrs (oldAttrs: {
-      propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python311Packages.qt-material ];
+      propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [ prev.python3Packages.qt-material ];
     });
     age-plugin-yubikey = prev.age-plugin-yubikey.overrideAttrs (oldAttrs: {
       nativeBuildInputs = oldAttrs.nativeBuildInputs or [ ] ++ [ final.makeWrapper ];
