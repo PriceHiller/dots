@@ -48,6 +48,18 @@ in
           };
     };
 
+  programs.bun = {
+    enable = true;
+    settings = {
+      telemetry = false;
+      install = {
+        globalBinDir = "${config.xdg.dataHome}/bun/bin";
+        globalDir = "${config.xdg.dataHome}/bun/packages";
+        cache.dir = "${config.xdg.cacheHome}/bun/install";
+      };
+    };
+  };
+
   home = {
     packages = with pkgs; [
       nodePackages_latest.nodejs
@@ -61,6 +73,7 @@ in
 
     sessionPath = [
       "${npm_paths.prefix}/bin"
+      config.programs.bun.settings.install.globalBinDir
     ];
 
     sessionVariables = {
