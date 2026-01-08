@@ -39,8 +39,6 @@ M.setup = function()
     opt.wrap = true
     opt.breakat = " \t;,[]()"
     opt.linebreak = true
-    opt.formatlistpat = require("utils.formatpat").new():listpat()
-    opt.formatoptions = "jcroqnp"
     opt.breakindent = true
     opt.breakindentopt = "list:-1"
 
@@ -180,6 +178,13 @@ M.setup = function()
         "s10",
         "h",
     }
+
+    -- Default textwidth, particuarly relevant for automatically hard wrapping comments when
+    -- `formatoptions` contains `c`
+    opt.textwidth = 80
+    -- Relevant for `n` in 'formatoptions'
+    opt.formatlistpat = require("utils.formatpat").new():listpat()
+    opt.formatoptions = "jcroqnp"
 end
 
 return M
