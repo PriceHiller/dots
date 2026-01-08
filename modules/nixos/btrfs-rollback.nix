@@ -59,6 +59,7 @@ in
               if findfs LABEL="$DISK_LABEL"; then
                 FOUND_DISK=1
                 printf "Found disk!\n"
+                sleep .2
                 break;
               fi
               ((SEARCH_ATTEMPTS--))
