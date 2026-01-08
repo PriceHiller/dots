@@ -13,7 +13,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nix = {
-    package = pkgs.nixVersions.git;
+    package = pkgs.nixVersions.latest;
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"
       "home-manager=${inputs.home-manager}"
