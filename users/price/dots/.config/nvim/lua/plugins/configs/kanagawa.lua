@@ -400,6 +400,9 @@ return {
                 -- Use underlines for urls
                 { "@string.special.url", get_hl("@string.special.url", { underline = true, undercurl = false }) },
 
+                -- Make @character stand out, useful for `printf` injections
+                { "@character", get_hl("@character", { fg = colors.waveAqua1 }) },
+
                 -- Yank/Paste hls for plugins etc.
                 { "Yank", { bg = colors.surimiOrange } },
                 { "Paste", { bg = colors.springViolet1 } },
