@@ -4,8 +4,8 @@
   config,
   ...
 }:
-
 {
+  networking.firewall.enable = false;
   services.opensnitch = {
     enable = true;
     settings = {
@@ -41,6 +41,9 @@
         (allowProg "nix" "${lib.getExe pkgs.nix}")
         (allowProg "mullvad" "${lib.getExe config.services.mullvad-vpn.package}")
         (allowProg "dig" "${lib.getExe pkgs.dig}")
+        (allowProg "spotify" "${lib.getExe pkgs.spotify}")
+        (allowProg "strawberry" "${lib.getExe pkgs.strawberry}")
+        (allowProg "spotify" "${lib.getExe pkgs.equibop}")
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
         (allowProg "avahi-daemon" "${lib.getExe' config.services.avahi.package "avahi-daemon"} ")
         (allowProg "avahi-resolve" "${lib.getExe' config.services.avahi.package "avahi-resolve"} ")
