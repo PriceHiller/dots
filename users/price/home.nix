@@ -115,7 +115,7 @@ in
         egl-wayland
         helvum
         brightnessctl
-        tidal-hifi
+        spotify
         nix-output-monitor
         sops
         tree-sitter
