@@ -81,6 +81,16 @@
               etag on;
             '';
           };
+          # Always cache assets that have a hashed filename output via astro.
+          # Etag is good and all, but it kicks off a round trip request to the server which can
+          # cause a flash of white if the external CSS sheets aren't loaded
+          "~* \.(?:css|js|woff2?|png|jpe?g|gif|svg)$".extraConfig =
+            # nginx
+            ''
+              expires 1y;
+              add_header Cache-Control "public, max-age=31536000, immutable";
+              etag off;
+            '';
           "^~ /.well-known/openpgpkey/hu/" = {
             alias = "${./gpg-wkd}/$1";
             extraConfig = wkd-default-cfg;
