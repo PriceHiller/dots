@@ -107,11 +107,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1768029059,
-        "narHash": "sha256-yI1havApmwYpR9Fm4rD9Uv90LOXcMhVKEymfNeMr/Jc=",
+        "lastModified": 1768032816,
+        "narHash": "sha256-Eg4cQQpwfhuCVHfZBQiFAdITD2CjLz3atGRxsm+/LhA=",
         "ref": "refs/heads/main",
-        "rev": "35eed8b19f24020afd79ed90670c1d8afc214011",
-        "revCount": 16,
+        "rev": "920bb39dcfcd530a4fabab9758a519612c1ce29b",
+        "revCount": 17,
         "submodules": true,
         "type": "git",
         "url": "https://git.pricehiller.com/price/Blog"
