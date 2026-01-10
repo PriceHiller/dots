@@ -12,12 +12,12 @@
 
   services.nginx = {
     enable = true;
+    enableReload = true;
     recommendedProxySettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     recommendedTlsSettings = true;
   };
-
 
   environment.persistence.ephemeral.directories =
     let
