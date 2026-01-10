@@ -74,6 +74,11 @@
                   return 302 /$1;
               }
               try_files $uri $uri.html $uri/ =404;
+              add_header Cache-Control "no-cache";
+              add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+              add_header Cross-Origin-Opener-Policy "same-origin";
+              add_header X-Frame-Options "SAMEORIGIN";
+              etag on;
             '';
           };
           "^~ /.well-known/openpgpkey/hu/" = {
