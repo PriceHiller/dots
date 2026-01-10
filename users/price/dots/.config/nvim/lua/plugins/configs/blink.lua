@@ -149,6 +149,14 @@ return {
                     providers = {
                         buffer = {
                             score_offset = -5,
+                            opts = {
+                                -- Get completion from all open buffers
+                                get_bufnrs = function()
+                                    return vim.tbl_filter(function(bufnr)
+                                        return vim.bo[bufnr].buftype == ""
+                                    end, vim.api.nvim_list_bufs())
+                                end,
+                            },
                         },
                         path = {
                             ---@type blink.cmp.PathOpts
