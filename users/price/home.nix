@@ -120,7 +120,6 @@ in
         sops
         tree-sitter
         strawberry
-        ghidra
         d2
         rustdesk-flutter
       ]
