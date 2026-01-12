@@ -11,7 +11,6 @@ in
     ./monitors.nix
     ./window-rules.nix
     ./bindings.nix
-    ./dynamic-cursors.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
