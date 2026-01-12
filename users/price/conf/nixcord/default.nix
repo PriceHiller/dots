@@ -58,6 +58,7 @@ in
 
   programs.nixcord = {
     enable = true;
+    discord.enable = false;
     discord = {
       vencord.enable = false;
     };
