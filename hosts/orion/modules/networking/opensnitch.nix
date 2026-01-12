@@ -41,6 +41,7 @@
         (allowProg "nix" "${lib.getExe pkgs.nix}")
         (allowProg "mullvad" "${lib.getExe config.services.mullvad-vpn.package}")
         (allowProg "dig" "${lib.getExe pkgs.dig}")
+        (allowProg "fwupd" "${lib.getExe pkgs.fwupd}")
         (allowProg "spotify" "${lib.getExe pkgs.spotify}")
         (allowProg "strawberry" "${lib.getExe pkgs.strawberry}")
         (allowProg "spotify" "${lib.getExe pkgs.equibop}")
