@@ -1,6 +1,8 @@
 return {
     settings = {
-        exportPdf = "onType",
-        formatterMode = "typstyle",
+        exportPdf = "never",
+        lint = {
+            enabled = true
+        }
     },
 }
