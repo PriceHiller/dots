@@ -71,7 +71,7 @@ return {
             "typescript",
             "typescriptreact",
             "vue",
-            "mdx"
+            "mdx",
         }
         return {
             "pmizio/typescript-tools.nvim",
@@ -80,11 +80,18 @@ return {
             config = function()
                 require("typescript-tools").setup({
                     filetypes = filetypes,
+                    config = {
+                        on_attach = function(client, _)
+                            client.server_capabilities.documentFormattingProvider = false
+                            client.server_capabilities.documentRangeFormattingProvider = false
+                            client.server_capabilities.documentOnTypeFormattingProvider = nil
+                        end,
+                    },
                     settings = {
                         tsserver_plugins = {
                             "@vue/typescript-plugin",
                             "@styled/typescript-styled-plugin",
-                            "@mdx-js/typescript-plugin"
+                            "@mdx-js/typescript-plugin",
                         },
                     },
                 })
