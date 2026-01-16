@@ -71,6 +71,7 @@
           image = "nix-runner:latest";
           imageFile = runner;
           autoStart = false;
+          pull = "never";
         };
         "debian" = {
           image = "debian:latest";
