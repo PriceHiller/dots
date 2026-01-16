@@ -1,6 +1,29 @@
 -- TODO: Make this more general, this will support my own NixOS config and dot file
 -- stuff, but not generally usable for other projects. Would be good to use something
 -- like `.nvim.lua` for this or whatever else works 🤷.
+
+
+local original_diag_set = vim.diagnostic.set
+
+---@param namespace integer The diagnostic namespace
+---@param bufnr integer Buffer number
+---@param diagnostics vim.Diagnostic.Set[]
+---@param opts? vim.diagnostic.Opts Display options to pass to |vim.diagnostic.show()|
+---@diagnostic disable-next-line: duplicate-set-field
+vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
+    ---@type vim.Diagnostic.Set[]
+    local diags = {}
+    for _, diag in ipairs(diagnostics) do
+        -- I prefer using builtins via `builtins.`, not just using em' straight up as nixpkgs
+        -- redefines them and I want to know exactly what I'm using
+        if not diag.message:match("^this is a prelude builtin") then
+            table.insert(diags, diag)
+        end
+    end
+
+    original_diag_set(namespace, bufnr, diags, opts)
+end
+
 return {
     cmd = { "nixd" },
     settings = {
