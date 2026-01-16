@@ -71,6 +71,7 @@ return {
                     null_ls.builtins.formatting.asmfmt,
                     null_ls.builtins.formatting.typstyle,
                     null_ls.builtins.formatting.cmake_format,
+                    null_ls.builtins.formatting.prettierd,
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.diagnostics.actionlint,
                     null_ls.builtins.formatting.markdownlint,
