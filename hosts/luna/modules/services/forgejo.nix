@@ -164,6 +164,7 @@
         nginx.virtualHosts."${git_host}" = {
           serverAliases = [
             "forgejo.pricehiller.com"
+            "gitea.pricehiller.com"
           ];
           forceSSL = true;
           locations = {
