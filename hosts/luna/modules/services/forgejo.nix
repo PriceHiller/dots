@@ -1,4 +1,5 @@
 {
+  self,
   config,
   inputs,
   pkgs,
@@ -28,38 +29,25 @@
   config =
     let
       git_host = "git.${config.networking.domain}";
-      # TODO: Move this docker image out to a separate package and NixOS Module Huge thank you to
-      # https://icewind.nl/entry/gitea-actions-nix/ -- wouldn't have figured this out without that
-      # post 🙂
-      base = import (inputs.nix + "/docker.nix") {
-        inherit pkgs;
-        name = "nix-ci-base";
-        extraPkgs = with pkgs; [
-          nodejs_20
-          bash
-        ];
-        nixConf = {
-          sandbox = "true";
-          experimental-features = [
-            "pipe-operators"
-            "nix-command"
-            "flakes"
-          ];
-        };
-      };
-      runner = pkgs.dockerTools.buildImage {
+      runner = pkgs.dockerTools.streamLayeredImage {
         name = "nix-runner";
-        tag = "latest";
-
-        fromImage = base;
-        fromImageName = null;
-        fromImageTag = "latest";
-
-        copyToRoot = pkgs.buildEnv {
-          name = "image-root";
-          paths = [ pkgs.coreutils-full ];
-          # add coreutils (which includes sleep) to /bin
-          pathsToLink = [ "/bin" ];
+        created = "@" + builtins.toString self.lastModified;
+        fromImage = import (inputs.nix + "/docker.nix") {
+          inherit pkgs;
+          name = "nix-ci-base";
+          extraPkgs = with pkgs; [
+            coreutils-full
+            nodejs
+            bash
+          ];
+          nixConf = {
+            sandbox = "true";
+            experimental-features = [
+              "pipe-operators"
+              "nix-command"
+              "flakes"
+            ];
+          };
         };
       };
 
@@ -67,29 +55,11 @@
     in
     {
       virtualisation.oci-containers.containers = {
-        "nix-runner" = {
-          image = "nix-runner:latest";
-          imageFile = runner;
-          autoStart = false;
-          pull = "never";
-        };
-        "debian" = {
-          image = "debian:latest";
-          pull = "newer";
-          autoStart = false;
-        };
-        "alpine" = {
-          image = "alpine:latest";
-          pull = "newer";
-          autoStart = false;
-        };
-        "ubuntu" = {
-          image = "ubuntu:latest";
-          pull = "newer";
-          autoStart = false;
+        ${runner.imageName} = {
+          imageStream = runner;
+          image = "${runner.imageName}:${runner.imageTag}";
         };
       };
-
       services = {
         forgejo = {
           enable = true;
@@ -98,6 +68,7 @@
             type = "postgres";
             passwordFile = config.age.secrets.forgejo-db-pass.path;
           };
+          # See https://forgejo.org/docs/next/admin/config-cheat-sheet/ for details
           settings = {
             DEFAULT = {
               APP_NAME = "Forgejo";
@@ -121,6 +92,7 @@
               SSH_PORT = (builtins.elemAt config.services.openssh.ports 0);
               START_SSH_SERVER = false;
               SSH_USER = config.services.forgejo.user;
+              LANDING_PAGE = "/explore/repos";
             };
             session.COOKIE_SECURE = true;
             "repository.upload".FILE_MAX_SIZE = 1024;
@@ -154,10 +126,8 @@
                 runner.capacity = 16;
               };
               labels = [
-                "default:docker://nix-runner:latest"
-                "nix:docker://nix-runner:latest"
-                "alpine:docker://alpine:latest"
-                "debian:docker://debian:latest"
+                "default:docker://${runner.imageName}:${runner.imageTag}"
+                "nix:docker://${runner.imageName}:${runner.imageTag}"
               ];
             };
           };
@@ -182,6 +152,10 @@
 
       systemd = {
         services = {
+          gitea-runner-default = {
+            wants = [ "forgejo.service" ];
+            after = [ "forgejo.service" ];
+          };
           forgejo.preStart =
             let
               adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
