@@ -1415,7 +1415,7 @@
     "oisd-blocklist": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-QvHf7ii7RyiEeBCWjrDq4qJC7XhoWg1YHV0m12ig0zg=",
+        "narHash": "sha256-7PwmN4ADfMfmugSZzlnpjJpv7gMO7LOsLa0EeLxkwL0=",
         "type": "file",
         "url": "https://big.oisd.nl/domainswild"
       },
