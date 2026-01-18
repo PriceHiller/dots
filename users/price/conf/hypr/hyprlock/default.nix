@@ -45,7 +45,7 @@ in
       label = [
         # Battery capacity
         {
-          text = ''cmd[update:1000] ${./scripts/battery-level.bash}'';
+          text = "cmd[update:1000] ${./scripts/battery-level.bash}";
           font_size = 10;
           font_color = "rgb(${colors.rgb.fujiWhite})";
           position = "10, 10";

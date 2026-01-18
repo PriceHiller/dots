@@ -38,7 +38,8 @@ in
               };
               svc-name = lib.mkOption {
                 type = lib.types.str;
-                apply = val:
+                apply =
+                  val:
                   let
                     replaceNonAlnum =
                       rep: str:

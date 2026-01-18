@@ -1,4 +1,4 @@
-{ hostname, ... }:
+{ hostname, lib, ... }:
 {
   services.resolved = {
     enable = true;
@@ -8,6 +8,7 @@
   };
   networking = {
     hostName = hostname;
+    wireless.enable = lib.mkForce false;
     wireless.iwd = {
       enable = true;
       settings = {

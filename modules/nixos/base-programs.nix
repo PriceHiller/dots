@@ -6,11 +6,13 @@
 }:
 let
   cfg = config.ext.basePrograms;
-  mkEnabledOption = description: lib.options.mkOption {
-    description = description;
-    type = lib.types.bool;
-    default = true;
-  };
+  mkEnabledOption =
+    description:
+    lib.options.mkOption {
+      description = description;
+      type = lib.types.bool;
+      default = true;
+    };
 in
 {
   options.ext.basePrograms = {

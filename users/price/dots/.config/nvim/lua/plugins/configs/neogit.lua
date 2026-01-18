@@ -26,14 +26,14 @@ return {
                     telescope = true,
                 },
                 status = {
-                    recent_commit_count = 30
+                    recent_commit_count = 30,
                 },
                 mappings = {
                     popup = {
                         ["l"] = false,
                         ["L"] = "LogPopup",
                         ["f"] = false,
-                        ["F"] = "FetchPopup"
+                        ["F"] = "FetchPopup",
                     },
                 },
             })

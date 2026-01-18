@@ -34,7 +34,7 @@ in
       dotDir = "${config.xdg.configHome}/zsh-dotdir";
       enableCompletion = false;
       initContent = lib.mkMerge [
-        ''export _ZO_DOCTOR=0''
+        "export _ZO_DOCTOR=0"
         (builtins.readFile ./init-extra.zsh)
         # Init completions LAST
         # zsh

@@ -2,7 +2,6 @@
 -- stuff, but not generally usable for other projects. Would be good to use something
 -- like `.nvim.lua` for this or whatever else works 🤷.
 
-
 local original_diag_set = vim.diagnostic.set
 
 ---@param namespace integer The diagnostic namespace

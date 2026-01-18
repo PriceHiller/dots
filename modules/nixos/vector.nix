@@ -159,8 +159,8 @@ in
             endpoint = cfg.settings.sinks.loki.endpoint;
             auth = {
               strategy = "basic";
-              user = ''''${BASIC_AUTH_USERNAME}'';
-              password = ''''${BASIC_AUTH_PASSWORD}'';
+              user = "\${BASIC_AUTH_USERNAME}";
+              password = "\${BASIC_AUTH_PASSWORD}";
             };
           };
         };

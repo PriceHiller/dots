@@ -9,16 +9,13 @@ jobs:
       - name: Rewrite SSH Git Refs to HTTPS
         run: |
           git config --global url.'https://forgejo:${{ secrets.REPOS_READ_TOKEN }}@git.pricehiller.com'.insteadOf 'ssh://forgejo@git.pricehiller.com:2200'
-
       - name: Check out code
         uses: actions/checkout@v4
         with:
           token: "${{ secrets.REPOS_READ_TOKEN }}"
           submodules: true
-
       - name: Nix Version
         run: nix --version
-
       - name: Nix Flake Check
         run: |
           nix flake check

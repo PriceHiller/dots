@@ -1,6 +1,6 @@
 let
   flake = builtins.getFlake (toString ./.);
-  pkgs = import flake.inputs.nixpkgs {};
+  pkgs = import flake.inputs.nixpkgs { };
   lib = pkgs.lib;
 in
 flake
