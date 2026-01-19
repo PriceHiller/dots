@@ -8,10 +8,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
     nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.05";
-    hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?shallow=1";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?shallow=1";
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
