@@ -54,7 +54,7 @@
       flake = false;
     };
     oisd-blocklist = {
-      url = "https://big.oisd.nl/domainswild";
+      url = "github:sjhgvr/oisd";
       flake = false;
     };
     copyparty = {

@@ -162,7 +162,7 @@ in
           };
 
           blocked_names = {
-            blocked_names_file = inputs.oisd-blocklist;
+            blocked_names_file = "${inputs.oisd-blocklist}/domainswild_big.txt";
             log_file = getLogFile "blocked.log";
           };
 
