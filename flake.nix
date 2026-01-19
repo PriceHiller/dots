@@ -35,10 +35,6 @@
     blog = {
       url = "git+https://git.pricehiller.com/price/Blog";
     };
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     treefmt-nix.url = "github:numtide/treefmt-nix";
     apple-emoji-linux.url = "github:samuelngs/apple-emoji-linux";
     neovim-nightly-overlay = {
@@ -242,7 +238,6 @@
                   {
                     config = {
                       nixpkgs.overlays = [
-                        inputs.emacs-overlay.overlays.default
                         inputs.neovim-nightly-overlay.overlays.default
                         inputs.fenix.overlays.default
                         self.overlays.modifications
