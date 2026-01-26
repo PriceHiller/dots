@@ -23,6 +23,6 @@
     # WAITING: https://github.com/NixOS/nixpkgs/pull/456790
     (import (pkgs.fetchzip {
       url = "https://github.com/Rexcrazy804/nixpkgs/archive/update-equibop.tar.gz";
-      hash = "sha256-QBcO3s4g5OzEWabTrWj/vqFzpAyYYKIrb7slViGbxp0=";
+      hash = "sha256-Ctx31dXlh5Ze1zSFrsNBEYtf2xVlj0UUAfThnlIG6tE=";
     }) { inherit (pkgs.stdenv.hostPlatform) system; }).equibop;
 }
