@@ -58,6 +58,11 @@ in
         jq
         coreutils-full
         unblob
+        inetutils
+        iperf
+        nmap
+        traceroute
+        mtr
       ];
     };
 
