@@ -18,6 +18,7 @@
       + builtins.readFile ./fmt.bash
     );
   };
+  ciscoPacketTracer9 = pkgs.callPackage ./packettracer/pkg.nix { };
   equibop =
     # Use until equibop is updated on Nixpkgs
     # WAITING: https://github.com/NixOS/nixpkgs/pull/456790
