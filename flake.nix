@@ -236,7 +236,6 @@
                     config = {
                       nixpkgs.overlays = [
                         inputs.neovim-nightly-overlay.overlays.default
-                        inputs.fenix.overlays.default
                         self.overlays.modifications
                         self.overlays.additions
                       ];
