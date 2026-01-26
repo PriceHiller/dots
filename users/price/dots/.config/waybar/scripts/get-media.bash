@@ -18,7 +18,12 @@ get-album-info() {
 		text="󰓄 No Media"
 	fi
 
-	printf '{"class": "%s", "text": "%s"}\n' "${class}" "${text}"
+	jq \
+		--null-input \
+		--compact-output \
+		--arg class "$class" \
+		--arg text "$text" \
+		'{"class": $class, "text": $text}'
 }
 
 album-info-poller() {
