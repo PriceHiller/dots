@@ -414,6 +414,9 @@ return {
 
                 -- Flutter tools
                 { "FlutterWidgetGuides", { fg = colors.sakuraPink } },
+
+                -- Make variable definitions (where they are defined/created) standout
+                { "LspReferenceWrite", get_hl("LspReferenceText", { bold = true, underdotted = true }) },
             }
 
             if vim.g.neovide then
