@@ -36,7 +36,6 @@ in
       [
         terraform
         imhex
-        kdePackages.kdenlive
         obs-studio
         xdg-utils
         dig
