@@ -13,8 +13,8 @@
     };
     rules =
       let
-        allowProg = name: progPath: {
-          inherit name;
+        allowProg = _name: progPath: {
+          name = "000-allow-${_name}";
           enabled = true;
           created = "2026-01-08T13:25:44-06:00";
           updated = "2026-01-08T13:25:44-06:00";
@@ -26,35 +26,77 @@
             type = "simple";
             sensitive = false;
             operand = "process.path";
-            data = progPath;
-            list = [ ];
+            data = (lib.strings.trim progPath);
           };
         };
+        allowPathRecursive =
+          _name:
+          let
+            name = "000-allow-path-recursive-${_name}";
+          in
+          _path: {
+            inherit name;
+            enabled = true;
+            created = "2026-01-08T13:25:44-06:00";
+            updated = "2026-01-08T13:25:44-06:00";
+            action = "allow";
+            duration = "always";
+            precendence = false;
+            nolog = false;
+            operator = {
+              type = "regexp";
+              sensitive = false;
+              operand = "process.path";
+              data = "^(${
+                (
+                  _path
+                  |> builtins.toString
+                  |> lib.strings.trim
+                  |> lib.strings.removeSuffix "/"
+                  |> lib.strings.escapeRegex
+                )
+              })/.*";
+            };
+          };
+        allowPackage =
+          package:
+          let
+            name = lib.getName package;
+          in
+          allowPathRecursive name (lib.getBin package);
+
+        allowExe =
+          package:
+          let
+            name = lib.getName package;
+          in
+          allowProg name (lib.getExe package);
+
+        allowExe' =
+          package: exeName:
+          let
+            name = "${(lib.getName package)}-${exeName}";
+          in
+          allowProg name (lib.getExe' package exeName);
       in
       [
-        (allowProg "git" "${lib.getExe pkgs.git}")
-        (allowProg "nsncd" "${lib.getExe pkgs.nsncd}")
-        (allowProg "dnscrypt-proxy" "${lib.getExe config.services.dnscrypt-proxy.package}")
-        (allowProg "dnsmasq" "${lib.getExe config.services.dnsmasq.package}")
-        (allowProg "ssh" "${lib.getExe pkgs.openssh}")
-        (allowProg "system-nix" "${lib.getExe config.nix.package}")
-        (allowProg "nix" "${lib.getExe pkgs.nix}")
-        (allowProg "mullvad" "${lib.getExe config.services.mullvad-vpn.package}")
-        (allowProg "dig" "${lib.getExe pkgs.dig}")
-        (allowProg "fwupdmgr" "${lib.getBin pkgs.fwupd}/fwupdmgr-wrapped")
-        (allowProg "fwupdtool" "${lib.getBin pkgs.fwupd}/.fwupdtool-wrapped")
-        (allowProg "dbxtool" "${lib.getBin pkgs.fwupd}/.dbxtool-wrapped")
-        (allowProg "spotify" "${lib.getBin pkgs.spotify}/.spotify-wrapped")
-        (allowProg "strawberry" "${lib.getExe pkgs.strawberry}")
-        (allowProg "equibop" "${lib.getExe pkgs.equibop}")
+        (allowPackage pkgs.git)
+        (allowPackage pkgs.spotify)
+        (allowPackage pkgs.thunderbird)
+        (allowPackage pkgs.git)
+        (allowExe pkgs.nsncd)
+        (allowExe config.services.dnscrypt-proxy.package)
+        (allowExe config.services.dnsmasq.package)
+        (allowExe pkgs.openssh)
+        (allowPackage pkgs.nix)
+        (allowPackage config.nix.package)
+        (allowPackage config.services.mullvad-vpn.package)
+        (allowExe pkgs.dig)
+        (allowPackage pkgs.fwupd)
+        (allowExe pkgs.strawberry)
+        (allowPackage pkgs.equibop)
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
-        (allowProg "avahi-daemon" "${lib.getExe' config.services.avahi.package "avahi-daemon"} ")
-        (allowProg "avahi-resolve" "${lib.getExe' config.services.avahi.package "avahi-resolve"} ")
-        (allowProg "avahi-browse" "${lib.getExe' config.services.avahi.package "avahi-browse"} ")
-        (allowProg "avahi-dnsconfd" "${lib.getExe' config.services.avahi.package "avahi-dnsconfd"} ")
-        (allowProg "avahi-publish" "${lib.getExe' config.services.avahi.package "avahi-publish"} ")
-        (allowProg "avahi-autoipd" "${lib.getExe' config.services.avahi.package "avahi-autoipd"} ")
-        (allowProg "avahi-set-host-name" "${lib.getExe' config.services.avahi.package "avahi-set-host-name"} ")
+        (allowPackage config.services.avahi.package)
         {
           created = "2023-07-05T10:46:47.904024069+01:00";
           updated = "2023-07-05T10:46:47.921828104+01:00";
@@ -89,6 +131,34 @@
           };
         }
       ]
+      # Allow all connections for nix builds `nixbld*` users
+      ++ (
+        config.nix.nrBuildUsers
+        |> builtins.genList (
+          num:
+          let
+            # Users start from `nixbld1`
+            user = "nixbld${builtins.toString (num + 1)}";
+          in
+          {
+            created = "2024-05-31T23:39:28+02:00";
+            updated = "2024-05-31T23:39:28+02:00";
+            name = "000-allow-${user}-user";
+            description = "";
+            action = "reject";
+            duration = "always";
+            enabled = true;
+            precedence = true;
+            nolog = false;
+            operator = {
+              type = "simple";
+              operand = "user.uid";
+              data = config.users.users.${user}.uid;
+              sensitive = false;
+            };
+          }
+        )
+      )
       |> builtins.foldl' (acc: prog: acc // { ${prog.name} = prog; }) { };
   };
 
