@@ -186,7 +186,6 @@
               hostname = "orion";
             in
             nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
               specialArgs = {
                 inherit self;
                 inherit inputs;
@@ -250,7 +249,6 @@
               hostname = "luna";
             in
             nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
               specialArgs = {
                 inherit self;
                 inherit inputs;
@@ -283,7 +281,6 @@
               hostname = "bootstrapper";
             in
             nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
               specialArgs = {
                 inherit self;
                 inherit inputs;
