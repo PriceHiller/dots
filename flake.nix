@@ -7,7 +7,8 @@
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
-    nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.05";
+    nixpkgs-unstable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixpkgs-unstable";
+    nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.11";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?shallow=1";
     fenix = {
       url = "github:nix-community/fenix";
@@ -222,7 +223,6 @@
                         inherit inputs;
                       };
                       useGlobalPkgs = true;
-                      useUserPackages = true;
                       users.price = import ./users/price/home.nix;
                     };
                   }
