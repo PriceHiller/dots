@@ -124,7 +124,7 @@
       phpactor
       phpPackages.php-cs-fixer
       phpPackages.psalm
-      phpPackages.phpstan
+      phpstan
       actionlint
       netcoredbg
       mdx-language-server
