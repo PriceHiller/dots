@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -38,8 +37,6 @@ in
       config.services.postgresql.settings.log_directory
     ];
   };
-
-  environment.systemPackages = [ pkgs.pgloader ];
 
   environment.persistence.ephemeral.directories = [
     {
