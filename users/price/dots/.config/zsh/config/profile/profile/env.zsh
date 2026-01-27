@@ -170,7 +170,5 @@ fi
 
 ### Miscellaneous ###
 export DOCKER_BUILDKIT=1
-export NOTES_DIR="${HOME}/.notes"
-export GITLAB_HOST="https://gitlab.orion-technologies.io"
 export SSLKEYLOGFILE="${XDG_DATA_HOME}/ssl-key-log.log"
 export POWERSHELL_TELEMETRY_OPTOUT=true
