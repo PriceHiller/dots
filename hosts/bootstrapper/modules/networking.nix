@@ -2,9 +2,11 @@
 {
   services.resolved = {
     enable = true;
-    domains = [ "~." ];
-    dnsovertls = "true";
-    dnssec = "false";
+    settings.Resolve = {
+      Domains = [ "~." ];
+      DNSOverTLS = "true";
+      DNSSEC = "false";
+    };
   };
   networking = {
     hostName = hostname;

@@ -4,7 +4,12 @@
   ...
 }:
 {
-  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs = {
+    hostPlatform.system = "x86_64-linux";
+    config.allowUnfree = true;
+  };
+
   nix = {
     package = pkgs.nixVersions.latest;
     nixPath = [
