@@ -73,7 +73,11 @@
             DEFAULT = {
               APP_NAME = "Forgejo";
             };
-            service.DISABLE_REGISTRATION = true;
+            service = {
+              DISABLE_REGISTRATION = true;
+              ENABLE_NOTIFY_MAIL = true;
+            };
+
             # Extend timeouts to 1 hour
             "git.timeout" = {
               DEFAULT = 3600;
