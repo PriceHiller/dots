@@ -172,7 +172,6 @@ in
           "price.hiller@my.utsa.edu"
           "price@price-hiller.com"
           "monitor@pricehiller.com"
-          "price@orion-technologies.io"
           "philler3138@gmail.com"
         ];
       };
@@ -327,25 +326,6 @@ in
                 port = 465;
               };
               passwordCommand = "cat ${config.age.secrets."mail-monitor--monitoring.pricehiller.com".path}";
-            };
-            "price@orion-technologies.io" = rec {
-              realName = "Price Hiller";
-              address = "price@orion-technologies.io";
-              userName = address;
-              passwordCommand = "cat ${config.age.secrets."mail-price--orion-technologies.com".path}";
-              thunderbird = {
-                enable = true;
-                messageFilters = thunderbirdFilters;
-                settings = id: (setReplyLocation id);
-              };
-              imap = {
-                host = "imap.purelymail.com";
-                port = 993;
-              };
-              smtp = {
-                host = "smtp.purelymail.com";
-                port = 465;
-              };
             };
             "philler3138@gmail.com" = rec {
               realName = "Price Hiller";
