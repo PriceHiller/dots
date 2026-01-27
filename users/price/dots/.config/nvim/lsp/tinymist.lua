@@ -1,6 +1,6 @@
 return {
     settings = {
-        exportPdf = "never",
+        exportPdf = "onType",
         lint = {
             enabled = true,
         },
