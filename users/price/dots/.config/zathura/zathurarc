@@ -40,8 +40,6 @@ set recolor-darkcolor           "#FFF9D8"
 set recolor                     "true"
 set recolor-keephue             "true"
 
-set database                    "plain"
-
 set synctex true
 set synctex-editor-command      "code -g %{input}:%{line}"
 
