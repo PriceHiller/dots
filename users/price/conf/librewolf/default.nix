@@ -26,6 +26,7 @@ in
   };
   programs.librewolf = {
     enable = true;
+    profiles.default = {};
     settings =
       clib.attrsToMozillaPref {
         identity.fxaccounts.enabled = true;
