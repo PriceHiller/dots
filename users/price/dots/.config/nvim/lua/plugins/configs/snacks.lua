@@ -381,8 +381,82 @@ return {
                         set_picker_cwd = function(picker, item)
                             if item then
                                 picker:set_cwd(snacks.picker.util.dir(item))
-                                picker:find({ refresh = true })
+                                picker:refresh()
                             end
+                        end,
+                        change_cwd = function(picker, item)
+                            if item then
+                                local dir = snacks.picker.util.dir(item)
+                                vim.cmd.cd(dir)
+                                picker:set_cwd(dir)
+                            end
+                        end,
+                        delete_path = function(picker)
+                            local items = picker:selected({ fallback = true })
+
+                            if #items == 0 then
+                                return
+                            end
+
+                            local confirmation_msg = ("Delete %d files/paths?"):format(#items)
+
+                            if #items == 1 then
+                                confirmation_msg = ("Delete `%s`?"):format(snacks.picker.util.path(items[1]))
+                            end
+
+                            local do_delete = vim.fn.confirm(confirmation_msg, "&Yes\n&No", 2, "Question")
+                            if do_delete ~= 1 then
+                                return
+                            end
+
+                            local failed_to_delete_paths = {}
+                            for _, item in ipairs(items) do
+                                local path = snacks.picker.util.path(item)
+                                if not path then
+                                    return
+                                end
+
+                                local res = vim.fn.delete(path, "rf")
+                                if res ~= 0 then
+                                    -- Failed to delete a path, track the failure for later emission
+                                    -- in a error message
+                                    table.insert(failed_to_delete_paths, path)
+                                end
+                            end
+
+                            ---@type string?
+                            local err_title = "Failed to delete paths"
+                            local err_msg = nil
+
+                            if #failed_to_delete_paths == 1 then
+                                err_title = "Failed to delete 1 path"
+                                err_msg = ("Failed to delete '%s'"):format(failed_to_delete_paths[1])
+                            elseif #failed_to_delete_paths > 1 then
+                                local paths_shown = { unpack(failed_to_delete_paths, 1, 8) }
+
+                                err_title = ("Failed to delete %d paths:"):format(#failed_to_delete_paths)
+                                err_msg = table.concat({
+                                    err_title,
+                                    "",
+                                    vim.iter(paths_shown)
+                                        :map(function(path)
+                                            return ("- `%s`"):format(path)
+                                        end)
+                                        :join("\n"),
+                                    #failed_to_delete_paths ~= #paths_shown
+                                            and ("... %d paths omitted"):format(#failed_to_delete_paths - #paths_shown)
+                                        or nil,
+                                }, "\n")
+                            end
+
+                            if err_msg then
+                                vim.notify(err_msg, vim.log.levels.ERROR, {
+                                    title = err_title,
+                                    ft = "markdown",
+                                })
+                            end
+
+                            picker:refresh()
                         end,
                     },
                     win = {
@@ -390,16 +464,19 @@ return {
                             keys = {
                                 ["<C-l>"] = { "loclist", mode = { "i", "n" } },
                                 ["<C-S-d>"] = { "set_picker_cwd", mode = { "n", "i" } },
-                                ["<C-S-x>"] = { "cd", mode = { "n", "i" } },
+                                ["<C-A-d>"] = { "delete_path", mode = { "n", "i" } },
+                                ["<C-S-x>"] = { "change_cwd", mode = { "n", "i" } },
                                 ["<C-S-k>"] = { "history_forward", mode = { "i", "n" } },
                                 ["<C-S-j>"] = { "history_back", mode = { "i", "n" } },
+                                ["<S-Tab>"] = false,
+                                ["<Tab>"] = { "select", mode = { "i", "n", "x" } },
                             },
                         },
                         list = {
                             keys = {
                                 ["<S-Tab>"] = false,
                                 ["<Tab>"] = { "select", mode = { "i", "n", "x" } },
-                                ["<C-x>"] = { "deselect_all", mode = { "i", "n", "x" } },
+                                ["<C-A-d>"] = { "delete_path", mode = { "n", "i" } },
                                 ["q"] = { "close", mode = { "n", "x" } },
                             },
                         },
