@@ -118,7 +118,12 @@ in
             "history"
             "bookmarks"
           ];
-          verticalTabs = true;
+          "verticalTabs" = true;
+          "verticalTabs.dragToPinPromo.dismissed" = true;
+          animation = {
+            duration-ms = 40;
+            enabled = true;
+          };
           revamp = true;
         };
         font = {
