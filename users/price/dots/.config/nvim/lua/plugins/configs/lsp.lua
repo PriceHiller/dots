@@ -114,7 +114,6 @@ return {
             "williamboman/mason.nvim",
             "Decodetalkers/csharpls-extended-lsp.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
-            "b0o/schemastore.nvim",
         },
         keys = {
             { "<leader>l", desc = "> LSP" },
