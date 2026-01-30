@@ -2,38 +2,48 @@ local M = {}
 
 ---Stolen with ❤️ from https://github.com/tj-moody/.dotfiles/blob/c2afec06b68cd0413c20d332672907c11f0a9c47/nvim/lua/mappings.lua#L171C1-L171C1
 ---Adapted from https://vi.stackexchange.com/a/12870
----Traverse to indent >= or > current indent
----@param direction integer 1 - forwards | -1 - backwards
----@param equal boolean include lines equal to current indent in search?
-local function indent_traverse(direction, equal) -- {{{
+---Traverse to next block with matching indent, crossing whitespace or different indent
+---@param direction integer 1 for forwards, -1 for backwards
+---@param equal boolean true for same indent, false for strictly less indent
+---@return function handler Callback for keymap
+local function indent_traverse(direction, equal)
     return function()
-        -- Get the current cursor position
         local current_line, column = unpack(vim.api.nvim_win_get_cursor(0))
+        local current_indent = vim.fn.indent(current_line)
         local match_line = current_line
-        local match_indent = false
-        local match = false
-
         local buf_length = vim.api.nvim_buf_line_count(0)
 
-        -- Look for a line of appropriate indent
-        -- level without going out of the buffer
-        while (not match) and (match_line ~= buf_length) and (match_line ~= 1) do
-            match_line = match_line + direction
-            local match_line_str = vim.api.nvim_buf_get_lines(0, match_line - 1, match_line, false)[1]
-            -- local match_line_is_whitespace = match_line_str and match_line_str:match('^%s*$')
-            local match_line_is_whitespace = match_line_str:match("^%s*$")
-
-            if equal then
-                match_indent = vim.fn.indent(match_line) <= vim.fn.indent(current_line)
-            else
-                match_indent = vim.fn.indent(match_line) < vim.fn.indent(current_line)
-            end
-            match = match_indent and not match_line_is_whitespace
+        local function is_whitespace(lnum)
+            local line_str = vim.api.nvim_buf_get_lines(0, lnum - 1, lnum, false)[1]
+            return line_str:match("^%s*$") ~= nil
         end
 
-        -- If a line is found go to line
-        if match or match_line == buf_length then
-            vim.fn.cursor({ match_line, column + 1 })
+        local function indent_matches(lnum)
+            if equal then
+                return vim.fn.indent(lnum) == current_indent
+            else
+                return vim.fn.indent(lnum) < current_indent
+            end
+        end
+
+        -- We're trying to find the next valid location that matches the indentation to traverse to
+        -- that is not in the current paragraph -- thus we're checking if we've crossed a gap of
+        -- whitespace to a line with a matching indentation level
+        local crossed_whitespace_gap = false
+
+        while true do
+            match_line = match_line + direction
+
+            if match_line < 1 or match_line > buf_length then
+                return
+            end
+
+            if is_whitespace(match_line) or not indent_matches(match_line) then
+                crossed_whitespace_gap = true
+            elseif crossed_whitespace_gap then
+                vim.fn.cursor({ match_line, column + 1 })
+                return
+            end
         end
     end
 end
