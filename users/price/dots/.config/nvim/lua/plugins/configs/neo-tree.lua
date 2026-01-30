@@ -13,6 +13,10 @@ return {
         cmd = "Neotree",
         keys = {
             { "<leader>nt", "<cmd>Neotree show toggle focus<cr>", desc = "Neotree: Toggle" },
+            -- Key bind to allow rapidly toggling neo-tree. If the window is open and I need to to
+            -- focus on it, I can just hit this twice which will toggle it closed then reopen
+            -- neo-tree with it focused
+            { "<D-A-x>", "<cmd>Neotree show toggle focus<cr>", desc = "Neotree: Toggle" },
         },
         init = function()
             -- Correctly hijack netrw, thanks to
