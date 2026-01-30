@@ -24,7 +24,7 @@ return {
 
                         ---@cast filematch string[]
 
-                        table.insert(filematch,  "**/nvim/snippets/*.json")
+                        table.insert(filematch, "**/nvim/snippets/*.json")
                         vscode_snippets_ext.fileMatch = filematch
                         return vscode_snippets_ext
                     end)(),

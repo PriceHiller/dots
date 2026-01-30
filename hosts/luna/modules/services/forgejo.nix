@@ -149,9 +149,11 @@
                   in
                   {
                     valid_volumes = ro_vols;
-                    options = let
-                      volOpts = builtins.concatStringsSep "-v";
-                    in "-v /nix/var/log:/nix/var/log:ro -v /nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro -v /nix/var/nix/db:/nix/var/nix/db:ro -v /nix/store:/nix/store:ro";
+                    options =
+                      let
+                        volOpts = builtins.concatStringsSep "-v";
+                      in
+                      "-v /nix/var/log:/nix/var/log:ro -v /nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro -v /nix/var/nix/db:/nix/var/nix/db:ro -v /nix/store:/nix/store:ro";
                   };
               };
               labels = [
