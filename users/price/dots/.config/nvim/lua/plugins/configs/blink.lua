@@ -27,7 +27,6 @@ return {
             "erooke/blink-cmp-latex",
             "mikavilpas/blink-ripgrep.nvim",
             "moyiz/blink-emoji.nvim",
-            "joelazar/blink-calc",
             {
                 "xzbdmw/colorful-menu.nvim",
                 config = function()
@@ -60,7 +59,6 @@ return {
                 cmdline = { icon = "", hlgroup = "CommandLine" },
                 Buffer = { icon = "", hlgroup = "Buffer" },
                 Nix = { icon = "", hlgroup = "Nix" },
-                Calc = { icon = "󰪚", hlgroup = "Calc" },
             }
 
             ---@type blink.cmp.KeymapConfig
@@ -142,7 +140,6 @@ return {
                         "nix",
                         "buffer",
                         "ripgrep",
-                        "calc",
                         "emoji",
                         "latex",
                         "dadbod",
