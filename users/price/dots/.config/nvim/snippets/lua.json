@@ -1,0 +1,12 @@
+{
+  "loc": {
+    "prefix": "loc",
+    "body": "debug.getinfo(1, 'S').source:gsub('^@', '')",
+    "description": "Get the absolute path of the current lua script"
+  },
+  "loc (dir)": {
+    "prefix": "loc (dir)",
+    "body": "vim.fn.fnamemodify(debug.getinfo(1, \"S\").source:sub(2), \":p:h\")",
+    "description": "Get the absolute path to the parent directory of the current lua script"
+  }
+}
