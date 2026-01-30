@@ -295,6 +295,15 @@ M.setup = function()
         noremap = true,
         silent = true,
     })
+
+    -- Clear terminal scrollback
+    vim.keymap.set("t", "<C-l>", function()
+        vim.fn.chansend(vim.b.terminal_job_id, vim.api.nvim_replace_termcodes("<C-l>", true, true, true))
+        local sb = vim.bo.scrollback
+        vim.bo.scrollback = 1
+        vim.bo.scrollback = sb
+    end, { desc = "Clear terminal scrollback" })
+
 end
 
 return M
