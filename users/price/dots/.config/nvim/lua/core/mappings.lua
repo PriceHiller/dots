@@ -304,6 +304,27 @@ M.setup = function()
         vim.bo.scrollback = sb
     end, { desc = "Clear terminal scrollback" })
 
+    --- Navigating across folds
+
+    ---Jump to the next or previous fold without visible cursor flicker.
+    ---@param motion string Vim motion command
+    local function jump_to_fold(motion)
+        local view = vim.fn.winsaveview()
+        vim.cmd("silent! normal! " .. motion)
+        local target = vim.fn.line(".")
+        vim.fn.winrestview(view)
+
+        if target ~= view.lnum then
+            vim.api.nvim_win_set_cursor(0, { target, 0 })
+        end
+    end
+
+    vim.keymap.set("n", "<C-S-j>", function()
+        jump_to_fold("zj")
+    end, { desc = "Go to the start of the next fold" })
+    vim.keymap.set("n", "<C-S-k>", function()
+        jump_to_fold("zk[z")
+    end, { desc = "Go to the start of the previous fold" })
 end
 
 return M
