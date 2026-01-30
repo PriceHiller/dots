@@ -31,7 +31,11 @@
       git_host = "git.${config.networking.domain}";
       runner = pkgs.dockerTools.streamLayeredImage {
         name = "nix-runner";
+        tag = "latest";
         created = "@" + builtins.toString self.lastModified;
+        config = {
+          Entrypoint = [ (lib.getExe pkgs.bashInteractive) ];
+        };
         fromImage = import (inputs.nix + "/docker.nix") {
           inherit pkgs;
           name = "nix-ci-base";
@@ -58,6 +62,7 @@
         ${runner.imageName} = {
           imageStream = runner;
           image = "${runner.imageName}:${runner.imageTag}";
+          autoStart = false;
         };
       };
       services = {
@@ -127,7 +132,27 @@
               tokenFile = config.age.secrets.forgejo-runner-token.path;
               name = "Default";
               settings = {
-                runner.capacity = 16;
+                runner = {
+                  capacity = 16;
+                  envs = {
+                    NIX_REMOTE = "daemon";
+                  };
+                };
+                container =
+                  let
+                    ro_vols = [
+                      "/nix/var/log"
+                      "/nix/var/nix/db"
+                      "/nix/var/nix/daemon-socket"
+                      "/nix/store"
+                    ];
+                  in
+                  {
+                    valid_volumes = ro_vols;
+                    options = let
+                      volOpts = builtins.concatStringsSep "-v";
+                    in "-v /nix/var/log:/nix/var/log:ro -v /nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro -v /nix/var/nix/db:/nix/var/nix/db:ro -v /nix/store:/nix/store:ro";
+                  };
               };
               labels = [
                 "default:docker://${runner.imageName}:${runner.imageTag}"

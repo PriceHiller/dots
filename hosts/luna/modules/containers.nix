@@ -7,20 +7,17 @@
 
   environment.systemPackages = with pkgs; [
     docker
-    docker-compose
+    podman-compose
   ];
 
   virtualisation = {
-    oci-containers.backend = "docker";
+    oci-containers.backend = "podman";
     containers.enable = true;
-    docker = {
+    podman = {
       enable = true;
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true;
-      package = pkgs.docker;
     };
   };
 }

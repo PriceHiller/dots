@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   nix-build-dir = "/nix/build/";
 in
@@ -39,12 +39,31 @@ in
         "flakes"
       ];
       auto-optimise-store = true;
-      trusted-users = [ "@wheel" ];
+      trusted-users = [
+        "@wheel"
+        "nix-ssh"
+      ];
+      trusted-public-keys = [
+        "nix.cache.pricehiller.com-1:itknnAnhCcMXhaRfY9AxCBlaa8CaNWfvEeVx007yfYA="
+      ];
+      secret-key-files = [ config.age.secrets.nix-cache-signing-key.path ];
     };
     gc = {
       automatic = true;
       options = "--delete-older-than 7d";
-      dates = "daily";
+      dates = "weekly";
+    };
+
+    sshServe = {
+      enable = true;
+      trusted = true;
+      write = true;
+      keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICImNLedUg3+uLcOIADXGTTB47OFs0RKTdPrgZ0/n/l8 price@orion"
+      ]
+      ++ config.ext.services.openssh.rootAuthorizedKeys;
     };
   };
+
+  services.openssh.settings.AllowUsers = [ "nix-ssh" ];
 }

@@ -14,7 +14,10 @@ in
       certs = {
         ${baseDomain} = {
           domain = "${baseDomain}";
-          extraDomainNames = [ "*.${baseDomain}" ];
+          extraDomainNames = [
+            "*.${baseDomain}"
+            "*.cache.${baseDomain}"
+          ];
           group = "nginx";
           reloadServices = [
             "nginx"

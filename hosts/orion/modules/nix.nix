@@ -5,6 +5,9 @@
   clib,
   ...
 }:
+let
+  nix-netrc-path = "/run/nix-cache-config";
+in
 {
   age.secrets.nix-access-tokens = {
     mode = "440";
@@ -12,6 +15,28 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  systemd.services.generate-nix-cache-config = {
+    description = "Generate nix cache config with credentials";
+    wantedBy = [ "nix-daemon.service" ];
+    before = [ "nix-daemon.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      EnvironmentFile = config.age.secrets.basic-auth-env.path;
+      ExecStart =
+        let
+        in
+        pkgs.writeShellScript "gen-nix-config" ''
+          echo "machine nix.cache.pricehiller.com" >> ${nix-netrc-path}
+          echo "login $BASIC_AUTH_USERNAME" >> ${nix-netrc-path}
+          echo "password $BASIC_AUTH_PASSWORD" >> ${nix-netrc-path}
+          chmod 440 ${nix-netrc-path}
+          chown root:wheel ${nix-netrc-path}
+        '';
+      RemainAfterExit = true;
+    };
+  };
+
   nix = {
     package = pkgs.nixVersions.latest;
     nixPath = [
@@ -20,6 +45,7 @@
     ];
     extraOptions = ''
       !include ${config.age.secrets.nix-access-tokens.path}
+      netrc-file = ${nix-netrc-path}
     '';
     settings = {
       # Make the download buffer 256 mb
@@ -40,19 +66,48 @@
       use-xdg-base-directories = true;
       trusted-users = [ "@wheel" ];
       substituters = [
+        "https://nix.cache.pricehiller.com"
         "https://nix-community.cachix.org"
         "https://hyprland.cachix.org"
       ];
       log-lines = 100;
       max-jobs = "auto";
       trusted-public-keys = [
+        "nix.cache.pricehiller.com-1:itknnAnhCcMXhaRfY9AxCBlaa8CaNWfvEeVx007yfYA="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
+      secret-key-files = [ config.age.secrets.nix-cache-signing-key.path ];
     };
     gc = {
       automatic = true;
       options = "--delete-older-than 7d";
     };
   };
+
+  age.secrets = {
+    nix-cache-signing-key = {
+      owner = config.services.nix-post-build-hook-queue.user;
+      mode = "0400";
+    };
+    ssh-automation-key = {
+      owner = config.services.nix-post-build-hook-queue.user;
+      mode = "0400";
+    };
+  };
+
+  services.nix-post-build-hook-queue = {
+    enable = true;
+    signingPrivateKeyPath = config.age.secrets.nix-cache-signing-key.path;
+    sshPrivateKeyPath = config.age.secrets.ssh-automation-key.path;
+    uploadTo = "ssh://nix-ssh@nix.cache.pricehiller.com:2200";
+  };
+
+  programs.ssh.knownHostsFiles = [
+    (pkgs.writeText "luna" ''
+      [luna.hosts.pricehiller.com]:2200 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
+      [git.price-hiller.com]:2200 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
+      [nix.cache.pricehiller.com]:2200 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
+    '')
+  ];
 }

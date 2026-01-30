@@ -4,7 +4,7 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    docker-compose
+    podman-compose
     virt-manager
     spice
     virtio-win
@@ -28,7 +28,10 @@
         swtpm.enable = true;
       };
     };
-    containers.enable = true;
+    containers = {
+      enable = true;
+    };
+    oci-containers.backend = "podman";
     podman = {
       enable = true;
       dockerCompat = true;
