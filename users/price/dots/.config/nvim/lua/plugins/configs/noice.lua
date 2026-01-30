@@ -2,6 +2,9 @@ return {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
+        keys = {
+            { "<D-A-m>", "<cmd>Noice all<CR>", desc = "Noice: Show All Messages" },
+        },
         config = function()
             require("noice").setup({
                 lsp = {
@@ -50,6 +53,50 @@ return {
                         filter = { event = "msg_show", min_height = 20 },
                     },
                 },
+            })
+
+            ---Fold expression for Noice buffers based on NoiceFormatEvent extmarks.
+            ---@return string foldlevel Vim fold level (">1", "=", or "0")
+            function _G.NoiceFoldExpr()
+                local bufnr = vim.api.nvim_get_current_buf()
+                local lnum = vim.v.lnum
+                local ns_id = vim.api.nvim_get_namespaces()["noice"]
+                if not ns_id then
+                    return "0"
+                end
+
+                local extmarks = vim.api.nvim_buf_get_extmarks(
+                    bufnr,
+                    ns_id,
+                    { lnum - 1, 0 },
+                    { lnum - 1, -1 },
+                    { details = true }
+                )
+
+                for _, mark in ipairs(extmarks) do
+                    local details = mark[4]
+                    if details and details.hl_group == "NoiceFormatEvent" then
+                        return ">1"
+                    end
+                end
+                return "="
+            end
+
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "noice",
+                callback = function(args)
+                    local buf = args.buf
+                    vim.schedule(function()
+                        for _, winnr in ipairs(vim.fn.win_findbuf(buf)) do
+                            local wo = vim.wo[winnr]
+                            wo.foldmethod = "expr"
+                            wo.foldexpr = "v:lua.NoiceFoldExpr()"
+                            wo.foldenable = true
+                            wo.foldlevel = 0
+                        end
+                    end)
+                end,
+                desc = "Apply custom NoiceFoldExpr to noice message buffers",
             })
 
             vim.opt.cmdheight = 0
