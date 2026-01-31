@@ -68,7 +68,6 @@ in
 
     documentation = {
       dev.enable = true;
-      nixos.includeAllModules = true;
     };
 
     programs = {
