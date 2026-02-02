@@ -4,6 +4,16 @@ return {
     use_cap_height_to_scale_fallback_fonts = true,
     line_height = 1.0,
     font = wezterm.font_with_fallback({
+        {
+            family = "Maple Mono",
+            harfbuzz_features = {
+                "calt",
+                "cv01",
+                "cv02",
+                "cv31",
+                "ss07",
+            },
+        },
         ---@diagnostic disable-next-line: missing-fields
         {
             family = "Fira Code",

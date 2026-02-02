@@ -1,3 +1,6 @@
+-- Slightly decreased linespacing for Maple Mono
+vim.opt.linespace = -1
+
 -- Floating and Popupmenu Transparency
 vim.opt.winblend = 30
 vim.opt.pumblend = 90
@@ -32,7 +35,7 @@ vim.keymap.set("i", "<D-v>", function()
     -- Set the register to be pasted `charwise`, see `:h charwise`
     vim.fn.setreg(register, register_content, "c")
     -- Handle pasting at the end of lines. Because we're invoking `normal!` commands whilst in
-    -- `insert` mode, we have to handle EOL stuff. For some reason (and I'm too lazy to investiage),
+    -- `insert` mode, we have to handle EOL stuff. For some reason (and I'm too lazy to investigate),
     -- `nvim_feedkeys` doesn't block correctly here and the last `setreg` call is triggered too
     -- early.
     local cmd = '"' .. register .. "g"

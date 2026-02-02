@@ -1,6 +1,9 @@
 [font]
-normal = ["Fira Code", "Apple Color Emoji", "Symbols Nerd Font"]
+normal = ["Maple Mono", "Apple Color Emoji", "Symbols Nerd Font"]
 size = 14
 
 [font.features]
 "Fira Code" = ["+cv02", "+cv30", "+ss05", "+ss03", "+ss04", "+cv26", "+ss10"]
+
+# See https://font.subf.dev/en/playground/ for configuration
+"Maple Mono" = ["+calt", "+cv01", "+cv02", "+cv31", "+ss07", "+ss08", "+ss05"]

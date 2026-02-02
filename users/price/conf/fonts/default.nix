@@ -12,7 +12,10 @@ in
     fontconfig
     inputs.apple-emoji-linux.packages.${pkgs.stdenv.hostPlatform.system}.default
     overpass
+    maple-mono.variable
     nerd-fonts.overpass
+    lexend
+    poly
     nerd-fonts.fira-code
     nerd-fonts.symbols-only
     fira-code
@@ -40,18 +43,21 @@ in
         |> builtins.listToAttrs;
       defaultFonts = {
         sansSerif = [
+          "Lexend"
           "Noto Sans"
           "Apple Color Emoji"
           "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];
         serif = [
+          "Poly"
           "Noto Serif"
           "Apple Color Emoji"
           "Twitter Color Emoji"
           "Symbols Nerd Font"
         ];
         monospace = [
+          "Maple Mono"
           "Fira Code"
           "Noto Sans Mono"
           "Apple Color Emoji"

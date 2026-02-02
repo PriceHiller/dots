@@ -38,7 +38,7 @@
 /* Global Styling */
 * {
   border: none;
-  font-family: "FiraCode Nerd Font", monospace;
+  font-family:  "Symbols Nerd Font Mono", "Lexend", monospace;
   font-weight: 500;
   font-size: 13px;
   border-radius: 0px;
@@ -86,6 +86,7 @@ tooltip label,
 tooltip {
   background-color: #16161d;
   color: #dcd7ba;
+  font-family:  "Symbols Nerd Font Mono", "Maple Mono";
   border-radius: 20px;
 }
 
