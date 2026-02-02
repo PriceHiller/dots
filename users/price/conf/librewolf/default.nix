@@ -7,6 +7,7 @@
 }:
 let
   concatComma = list: (lib.concatStringsSep "," list);
+  sslKeyLogFilePath = "${config.xdg.cacheHome}/SSLKEYLOGFILE.log";
 in
 {
   xdg.mimeApps.defaultApplications = lib.mkIf (config.programs.librewolf.enable) {
@@ -153,5 +154,23 @@ in
       // {
         "privacy.fingerprintingProtection" = true;
       };
+  };
+
+  home = {
+    # SECURITY: Extract this to a general NixOS module and add a audit rule to watch reads of this
+    # file. Should also notify the user when an attempt to read this file occurs. Unlikely to be a
+    # true security issue, as if an attacker can already read this then it's already game over and
+    # they could trivially access important data on the system anyhow.
+    sessionVariables = {
+      SSLKEYLOGFILE = "${sslKeyLogFilePath}";
+    };
+    activation.ensureSSLKeyLogFileExists =
+      lib.hm.dag.entryAfter [ "writeBoundary" ]
+        # bash
+        ''
+          touch  "${sslKeyLogFilePath}" || true
+          # Ensure only the curret user has perms to mess with the file
+          chmod 0600 "${sslKeyLogFilePath}"
+        '';
   };
 }

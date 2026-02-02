@@ -170,5 +170,4 @@ fi
 
 ### Miscellaneous ###
 export DOCKER_BUILDKIT=1
-export SSLKEYLOGFILE="${XDG_DATA_HOME}/ssl-key-log.log"
 export POWERSHELL_TELEMETRY_OPTOUT=true
