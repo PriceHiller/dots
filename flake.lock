@@ -108,11 +108,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1770004372,
-        "narHash": "sha256-uZMPlhWo1fmJFYXYRjS8WlfC3L2nF8a3/2SZh2LubCk=",
+        "lastModified": 1770065380,
+        "narHash": "sha256-ZpXgBLY14FJWWYC/Nrvv3to5KMMuRhx2Leur5wwxOG0=",
         "ref": "refs/heads/main",
-        "rev": "4f6bd8ea56777c2bcd6aebd768c9cc9fc648c42d",
-        "revCount": 38,
+        "rev": "36b186e564b89aea53e6224157d93c7de35c909d",
+        "revCount": 39,
         "submodules": true,
         "type": "git",
         "url": "https://git.pricehiller.com/price/Blog"
@@ -1378,13 +1378,12 @@
     },
     "nixpkgs_11": {
       "locked": {
-        "lastModified": 1769461804,
-        "narHash": "sha256-msG8SU5WsBUfVVa/9RPLaymvi5bI8edTavbIq3vRlhI=",
-        "ref": "nixos-unstable",
-        "rev": "bfc1b8a4574108ceef22f02bafcf6611380c100d",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/NixOS/nixpkgs"
+        "lastModified": 1769636319,
+        "narHash": "sha256-aYmsrvbEmpbFQEN9LhoDJVjbYd3PGw0vKxTPuEuJUaA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bc6c9823d4c1f2ea0c2fe009aa7d7265b5045fa8",
+        "type": "github"
       },
       "original": {
         "ref": "nixos-unstable",
