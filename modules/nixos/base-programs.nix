@@ -59,6 +59,7 @@ in
         coreutils-full
         unblob
         inetutils
+        iproute2
         iperf
         nmap
         traceroute
