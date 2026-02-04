@@ -98,20 +98,40 @@
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
         (allowPackage config.services.avahi.package)
         {
-          created = "2023-07-05T10:46:47.904024069+01:00";
-          updated = "2023-07-05T10:46:47.921828104+01:00";
-          name = "000-allow-localhost";
-          enabled = true;
-          precedence = true;
+          created = "2025-04-09T23:21:35-06:00";
+          updated = "2025-04-09T23:21:35-06:00";
+          name = "000-allow-localhost-ipv4";
+          description = "Allow connections to localhost via IPv4";
           action = "allow";
           duration = "always";
-          operator = "dest.network";
-          type = "network";
+          operator = {
+            operand = "dest.ip";
+            data = "127.0.0.1";
+            type = "simple";
+            list = [ ];
+            sensitive = false;
+          };
+          enabled = true;
+          precedence = true;
           nolog = false;
-          operand = "dest.network";
-          sensitive = false;
-          data = "127.0.0.0/8";
-          list = [ ];
+        }
+        {
+          created = "2025-04-09T23:17:39-06:00";
+          updated = "2025-04-09T23:17:39-06:00";
+          name = "000-allow-localhost6";
+          description = "Allow connections to localhost via IPv6";
+          action = "allow";
+          duration = "always";
+          operator = {
+            operand = "dest.network";
+            data = "::1/128";
+            type = "network";
+            list = [ ];
+            sensitive = false;
+          };
+          enabled = true;
+          precedence = true;
+          nolog = false;
         }
         {
           created = "2024-05-31T23:39:28+02:00";
