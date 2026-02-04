@@ -21,6 +21,7 @@ return {
     {
         "saghen/blink.cmp",
         lazy = false, -- lazy loading handled internally
+        build = "nix run '.#build-plugin'",
         dependencies = {
             { "PriceHiller/blink-nix.nvim" },
             "rafamadriz/friendly-snippets",
@@ -44,7 +45,6 @@ return {
                 end,
             },
         },
-        build = "cargo build --release",
         config = function()
             ---@class CustomKindMapItem
             ---@field icon string
