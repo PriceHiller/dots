@@ -1,0 +1,13 @@
+{
+  "postheader": {
+    "body": [
+      "---",
+      "title: ${1:title}",
+      "summary: ${2:summary}",
+      "tags:",
+      "  - ${3:tag}",
+      "---"
+    ],
+    "prefix": "postheader"
+  }
+}
