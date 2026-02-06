@@ -130,8 +130,21 @@
       mdx-language-server
     ];
   };
-  xdg.mimeApps.defaultApplications = {
-    "text/plain" = [ "neovide.desktop" ];
-    "inode/directory" = [ "neovide.desktop" ];
+  xdg = {
+    mimeApps.defaultApplications = {
+      "text/plain" = [ "neovide.desktop" ];
+      "x-scheme-handler/terminal" = [ "neovide.desktop" ];
+      "application/xml" = [ "neovide.desktop" ];
+    };
+    desktopEntries.neovide-terminal = {
+      name = "Neovide Terminal";
+      exec = "${pkgs.neovide}/bin/neovide -- +terminal";
+      icon = "neovide";
+      terminal = false;
+      categories = [
+        "System"
+        "TerminalEmulator"
+      ];
+    };
   };
 }
