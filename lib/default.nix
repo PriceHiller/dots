@@ -103,4 +103,26 @@ rec {
       1
     else
       throw "undefined";
+
+  # Extract mimetypes from a package's desktop file if they exist
+  getMimeDefaults =
+    package: desktopFileName:
+    let
+      desktopPath = "${package}/share/applications/${desktopFileName}";
+
+      mimeTypes =
+        (lib.strings.optionalString (builtins.pathExists desktopPath) (builtins.readFile desktopPath))
+        |> (lib.strings.splitString "\n")
+        |> (lib.lists.findFirst (line: lib.strings.hasPrefix "MimeType=" line) "")
+        |> (lib.strings.removePrefix "MimeType=")
+        |> (lib.strings.splitString ";")
+        # Filter out empty strings caused by trailing semicolons
+        |> (builtins.filter (s: s != ""));
+    in
+    mimeTypes
+    |> builtins.map (type: {
+      name = type;
+      value = [ desktopFileName ];
+    })
+    |> builtins.listToAttrs;
 }
