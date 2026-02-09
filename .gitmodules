@@ -1,3 +1,3 @@
 [submodule "secrets"]
 	path = secrets
-	url = ssh://forgejo@git.pricehiller.com:2200/price/Secrets.git
+	url = ssh://forgejo@git.pricehiller.com:10322/price/Secrets.git

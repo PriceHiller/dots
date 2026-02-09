@@ -29,7 +29,7 @@ in
       luna = {
         hostname = "luna.hosts.pricehiller.com";
         user = "root";
-        port = 2200;
+        port = 10322;
       };
       "luna.hosts.pricehiller.com" = luna;
       webtech = {
