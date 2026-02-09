@@ -35,6 +35,7 @@ M.setup = function()
             if not client then
                 return
             end
+
             if not client_notif_timer then
                 vim.notify(
                     "Failed to create LSP client notification timer!\nWill *not* emit bulk notifications for newly attached clients!",
@@ -58,6 +59,12 @@ M.setup = function()
                             if client_name ~= "" then
                                 table.insert(messages, "- `" .. cur_client.name .. "`")
                             end
+                        end
+
+                        -- If for whatever reason the messages turn out to be empty, then don't emit
+                        -- a message at all
+                        if #messages == 0 then
+                            return
                         end
 
                         vim.notify(table.concat(messages, "\n"), vim.log.levels.INFO, {
