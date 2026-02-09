@@ -704,36 +704,31 @@ return {
             }
 
             vim.opt.showcmdloc = "statusline"
-            local timer = vim.uv.new_timer()
-            timer:start(
-                1000,
-                5000,
-                vim.schedule_wrap(function()
-                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
-                end)
-            )
-            vim.api.nvim_create_autocmd({ "VimResized", "BufWritePost" }, {
-                callback = function()
-                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
-                end,
-            })
-
-            vim.opt.showcmdloc = "statusline"
-            local timer = vim.uv.new_timer()
-            timer:start(
-                1000,
-                5000,
-                vim.schedule_wrap(function()
-                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
-                end)
-            )
-            vim.api.nvim_create_autocmd({ "VimResized", "BufWritePost" }, {
-                callback = function()
-                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
-                end,
-            })
 
             local org = require("orgmode")
+            local org_is_updating = false
+
+            local do_org_update = function()
+                if org_is_updating then
+                    return
+                end
+                org_is_updating = true
+
+                vim.defer_fn(function()
+                    -- This ensures that the current orgmode instance has reloaded all of its files to ensure
+                    -- it is in-sync with instances running under different Neovim processes
+                    for _, file in ipairs(org.files:all()) do
+                        file:reload()
+                    end
+                    vim.api.nvim_exec_autocmds("User", { pattern = "HeirlineOrgUpdate" })
+                    org_is_updating = false
+                end, 100)
+            end
+
+            vim.api.nvim_create_autocmd({ "FocusGained", "BufWritePost" }, {
+                callback = do_org_update,
+            })
+
             local OrgDate = require("orgmode.objects.date")
             local Orgmode = {
                 condition = function()
