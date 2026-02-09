@@ -50,7 +50,6 @@ in
         "-a always,exit -F arch=b64 -S open -F dir=/var -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/home -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/srv -F success=0 -F key=unauthedfileaccess"
-        "-a always,exit -F arch=b64 -S open -F dir=/opt -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/boot -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/nix -F success=0 -F key=unauthedfileaccess"
         "-a always,exit -F arch=b64 -S open -F dir=/persist -F success=0 -F key=unauthedfileaccess"
