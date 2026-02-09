@@ -158,6 +158,8 @@ M.setup = function()
                 "webm",
                 "pptx",
                 "gif",
+                "pcapng",
+                "pcap",
             }
 
             if extension and not extension:match("^%s*$") and intercept_file_open then
