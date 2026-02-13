@@ -16,6 +16,11 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  system.extraDependencies = [
+    # Ensure `basic-auth-env` doesn't get eaten by a rogue GC
+    config.age.secrets.basic-auth-env.file
+  ];
+
   systemd.services.generate-nix-cache-config = {
     description = "Generate nix cache config with credentials";
     wantedBy = [ "nix-daemon.service" ];
