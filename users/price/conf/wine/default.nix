@@ -17,7 +17,7 @@
         run mkdir -p "${wineprefix-dir}"
       '';
       packages = with pkgs; [
-        wineWowPackages.waylandFull
+        wineWow64Packages.waylandFull
         winetricks
       ];
     };
