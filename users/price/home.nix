@@ -22,8 +22,8 @@ in
 {
   age = {
     identityPaths = [
-      "${config.home.homeDirectory}/.ssh/id_ed25519"
       "${config.home.homeDirectory}/.ssh/age-key"
+      "${config.home.homeDirectory}/.ssh/id_ed25519"
     ];
   };
   imports = [ ./conf ];
