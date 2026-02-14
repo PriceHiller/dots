@@ -129,7 +129,7 @@
         default = {
           type = "app";
           meta.description = "Run nixos-rebuild switch";
-          program =
+          program = pkgs.lib.getExe (
             pkgs.writeShellApplication {
               name = "nixos-rebuild-wrapper";
               runtimeInputs = with pkgs; [
@@ -148,12 +148,12 @@
                 sudo nixos-rebuild switch --flake ".#$(hostname)" --accept-flake-config |& nom
               '';
             }
-            |> pkgs.lib.getExe;
+          );
         };
         repl = {
           type = "app";
           meta.description = "Launch interactive repl to inspect config";
-          program =
+          program = pkgs.lib.getExe (
             pkgs.writeShellApplication {
               name = "inspect-flake";
               runtimeInputs = with pkgs; [
@@ -163,7 +163,7 @@
                 nix repl --file "$(git rev-parse --show-toplevel)"/repl.nix
               '';
             }
-            |> pkgs.lib.getExe;
+          );
         };
       });
       devShells = forAllSystems (pkgs: {
