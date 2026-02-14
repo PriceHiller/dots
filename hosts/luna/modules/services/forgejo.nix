@@ -90,6 +90,7 @@
 
         forgejo = {
           enable = true;
+          package = pkgs.forgejo;
           dump.enable = false;
           database = {
             type = "postgres";
