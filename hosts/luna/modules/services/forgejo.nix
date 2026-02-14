@@ -50,6 +50,7 @@
           dockerTools.binSh
           dockerTools.caCertificates
           dockerTools.usrBinEnv
+          dockerTools.fakeNss
         ];
         config = {
           Entrypoint = [ "/bin/bash" ];
