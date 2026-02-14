@@ -1,7 +1,6 @@
 {
   self,
   config,
-  inputs,
   pkgs,
   lib,
   ...
@@ -71,6 +70,23 @@
       };
 
       services = {
+        anubis.instances.forgejo = {
+          settings = {
+            TARGET = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}";
+            BIND = ":8992";
+            BIND_NETWORK = "tcp";
+            COOKIE_DOMAIN = git_host;
+            COOKIE_PREFIX = "bteye";
+          };
+          policy = {
+            extraBots = [
+              {
+                import = "(data)/clients/git.yaml";
+              }
+            ];
+          };
+        };
+
         forgejo = {
           enable = true;
           dump.enable = false;
@@ -126,6 +142,11 @@
               SENDMAIL_PATH = "${config.security.wrapperDir}/sendmail";
               SENDMAIL_ARGS = "--";
             };
+            # Allow Nginx & Anubis to act as reverse proxies
+            security = {
+              REVERSE_PROXY_LIMIT = 2;
+              REVERSE_PROXY_TRUSTED_PROXIES = "127.0.0.0/8,::1/128";
+            };
           };
         };
         gitea-actions-runner = {
@@ -168,12 +189,9 @@
           ];
           forceSSL = true;
           locations = {
-            "/".proxyPass =
-              "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}";
-            "/robots.txt" = {
-              extraConfig = ''
-                return 200 "User-agent: *\nDisallow: /";
-              '';
+            "/" = {
+              proxyPass = "http://127.0.0.1${builtins.toString config.services.anubis.instances.forgejo.settings.BIND}";
+              proxyWebsockets = true;
             };
           };
         };
