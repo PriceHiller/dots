@@ -16,11 +16,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  system.extraDependencies = [
-    # Ensure `basic-auth-env` doesn't get eaten by a rogue GC
-    config.age.secrets.basic-auth-env.file
-  ];
-
   systemd.services.generate-nix-cache-config = {
     description = "Generate nix cache config with credentials";
     wantedBy = [ "nix-daemon.service" ];
@@ -105,14 +100,14 @@ in
     enable = true;
     signingPrivateKeyPath = config.age.secrets.nix-cache-signing-key.path;
     sshPrivateKeyPath = config.age.secrets.ssh-automation-key.path;
-    uploadTo = "ssh://nix-ssh@nix.cache.pricehiller.com:2200";
+    uploadTo = "ssh://nix-ssh@nix.cache.pricehiller.com:10322";
   };
 
   programs.ssh.knownHostsFiles = [
     (pkgs.writeText "luna" ''
-      [luna.hosts.pricehiller.com]:2200 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
-      [git.price-hiller.com]:2200 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
-      [nix.cache.pricehiller.com]:2200 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
+      [luna.hosts.pricehiller.com]:10322 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
+      [git.pricehiller.com]:10322 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
+      [nix.cache.pricehiller.com]:10322 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm8jeE4idKQiUGqFv17SEcfR2zzVIL5c/miuvOfy3A3
     '')
   ];
 }
