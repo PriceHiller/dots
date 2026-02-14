@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Rewrite SSH Git Refs to HTTPS
         run: |
-          git config --global url.'https://forgejo:${{ secrets.REPOS_READ_TOKEN }}@git.pricehiller.com'.insteadOf 'ssh://forgejo@git.pricehiller.com:2200'
+          git config --global url.'https://forgejo:${{ secrets.REPOS_READ_TOKEN }}@git.pricehiller.com'.insteadOf 'ssh://forgejo@git.pricehiller.com:10322'
       - name: Check out code
         uses: actions/checkout@v4
         with:
