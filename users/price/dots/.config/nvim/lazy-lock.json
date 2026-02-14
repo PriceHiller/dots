@@ -37,7 +37,7 @@
   "macrobank.nvim": { "branch": "master", "commit": "b71c248660cdb67849bc6a9da1770c4bcfefb5be" },
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
   "mdx.nvim": { "branch": "main", "commit": "30222997ed4c0c7cc7447c4fce360fce87101bbf" },
-  "mini.nvim": { "branch": "main", "commit": "8ccd03b844a990cd740638715eb3a474001e51d7" },
+  "mini.nvim": { "branch": "main", "commit": "4ca988557786c9a4e41d5e5b6e31b4c9d7379f53" },
   "neo-tree.nvim": { "branch": "main", "commit": "1d682ea4b77890e4cdb7e6da17368a46ebdd6fb2" },
   "neoformat": { "branch": "master", "commit": "57332dff19c1544a212bc5520f6f7d485b154bc3" },
   "neogen": { "branch": "main", "commit": "23e7e9f883d01289ebd90e98025acc860ea26366" },
