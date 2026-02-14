@@ -76,13 +76,76 @@
             TARGET = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}";
             BIND = ":8992";
             BIND_NETWORK = "tcp";
+            DIFFICULTY = 12;
             COOKIE_DOMAIN = git_host;
-            COOKIE_PREFIX = "bteye";
           };
           policy = {
             extraBots = [
               {
+                import = "(data)/common/allow-private-addresses.yaml";
+              }
+              {
                 import = "(data)/clients/git.yaml";
+              }
+              {
+                action = "WEIGH";
+                expression = {
+                  all = [
+                    "\"User-Agent\" in headers"
+                    "( userAgent.contains(\"Firefox\") ) || ( userAgent.contains(\"Chrome\") ) || ( userAgent.contains(\"Safari\") )"
+                    "\"Accept\" in headers"
+                    "\"Sec-Fetch-Dest\" in headers"
+                    "\"Sec-Fetch-Mode\" in headers"
+                    "\"Sec-Fetch-Site\" in headers"
+                    "\"Accept-Encoding\" in headers"
+                    "( headers[\"Accept-Encoding\"].contains(\"zstd\") || headers[\"Accept-Encoding\"].contains(\"br\") )"
+                    "\"Accept-Language\" in headers"
+                  ];
+                };
+                name = "realistic-browser-catchall";
+                weight = {
+                  adjust = -10;
+                };
+              }
+              {
+                action = "WEIGH";
+                expression = "\"Upgrade-Insecure-Requests\" in headers";
+                name = "upgrade-insecure-requests";
+                weight = {
+                  adjust = -2;
+                };
+              }
+              {
+                action = "WEIGH";
+                expression = {
+                  all = [
+                    "userAgent.contains(\"Chrome\")"
+                    "\"Sec-Ch-Ua\" in headers"
+                    "headers[\"Sec-Ch-Ua\"].contains(\"Chromium\")"
+                    "\"Sec-Ch-Ua-Mobile\" in headers"
+                    "\"Sec-Ch-Ua-Platform\" in headers"
+                  ];
+                };
+                name = "chrome-is-proper";
+                weight = {
+                  adjust = -5;
+                };
+              }
+              {
+                action = "WEIGH";
+                expression = "!(\"Accept\" in headers)";
+                name = "should-have-accept";
+                weight = {
+                  adjust = 5;
+                };
+              }
+              {
+                action = "WEIGH";
+                name = "generic-browser";
+                user_agent_regex = "Mozilla|Opera";
+                weight = {
+                  adjust = 10;
+                };
               }
             ];
           };
@@ -156,7 +219,7 @@
           instances = {
             default = {
               enable = true;
-              url = config.services.forgejo.settings.server.ROOT_URL;
+              url = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}";
               tokenFile = config.age.secrets.forgejo-runner-token.path;
               name = "Default";
               settings = {

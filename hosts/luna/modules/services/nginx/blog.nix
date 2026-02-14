@@ -20,7 +20,6 @@ in
       };
       policy = {
         settings = {
-          COOKIE_PREFIX = "bteye";
           status_codes = {
             CHALLENGE = 200;
             DENY = 403;
@@ -60,7 +59,7 @@ in
           in
           {
             # This allows Anubis to check the connection
-            "^~ /.chk" = {
+            "^~ /.within.website" = {
               extraConfig =
                 # nginx
                 ''
@@ -74,8 +73,8 @@ in
               extraConfig =
                 # nginx
                 ''
-                  auth_request /.chk/x/cmd/anubis/api/check;
-                  error_page 401 403 =200 /.chk/?redir=$request_uri;
+                  auth_request /.within.website/x/cmd/anubis/api/check;
+                  error_page 401 403 =200 /.within.website/?redir=$request_uri;
 
                   try_files $uri $uri.html $uri/ =404;
                   add_header Cache-Control "no-cache";

@@ -7,6 +7,7 @@
       WEBMASTER_EMAIL = "anubis.webmaster@pricehiller.com";
       SERVE_ROBOTS_TXT = true;
       DIFFICULTY = 6;
+      COOKIE_PREFIX = "achk";
     };
     policy = {
       useDefaultBotRules = true;
