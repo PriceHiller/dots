@@ -29,29 +29,34 @@
   config =
     let
       git_host = "git.${config.networking.domain}";
-      runner = pkgs.dockerTools.streamLayeredImage {
+      runner = pkgs.dockerTools.buildLayeredImage {
         name = "nix-runner";
         tag = "latest";
         created = "@" + builtins.toString self.lastModified;
+        contents = with pkgs; [
+          coreutils-full
+          nodejs
+          bashInteractive
+          openssh
+          nix
+          findutils
+          curl
+          wget
+          gitMinimal
+          less
+          which
+          gzip
+          gnutar
+          gnugrep
+          dockerTools.binSh
+          dockerTools.caCertificates
+          dockerTools.usrBinEnv
+        ];
         config = {
-          Entrypoint = [ (lib.getExe pkgs.bashInteractive) ];
-        };
-        fromImage = import (inputs.nix + "/docker.nix") {
-          inherit pkgs;
-          name = "nix-ci-base";
-          extraPkgs = with pkgs; [
-            coreutils-full
-            nodejs
-            bash
+          Entrypoint = [ "/bin/bash" ];
+          Env = [
+            "NIX_REMOTE=daemon"
           ];
-          nixConf = {
-            sandbox = "true";
-            experimental-features = [
-              "pipe-operators"
-              "nix-command"
-              "flakes"
-            ];
-          };
         };
       };
 
@@ -60,11 +65,11 @@
     {
       virtualisation.oci-containers.containers = {
         ${runner.imageName} = {
-          imageStream = runner;
+          imageFile = runner;
           image = "${runner.imageName}:${runner.imageTag}";
-          autoStart = false;
         };
       };
+
       services = {
         forgejo = {
           enable = true;
@@ -141,19 +146,12 @@
                 container =
                   let
                     ro_vols = [
-                      "/nix/var/log"
-                      "/nix/var/nix/db"
-                      "/nix/var/nix/daemon-socket"
-                      "/nix/store"
+                      "/nix"
                     ];
                   in
                   {
                     valid_volumes = ro_vols;
-                    options =
-                      let
-                        volOpts = builtins.concatStringsSep "-v";
-                      in
-                      "-v /nix/var/log:/nix/var/log:ro -v /nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro -v /nix/var/nix/db:/nix/var/nix/db:ro -v /nix/store:/nix/store:ro";
+                    options = ro_vols |> builtins.map (vol: "-v ${vol}:${vol}:ro") |> builtins.concatStringsSep " ";
                   };
               };
               labels = [
