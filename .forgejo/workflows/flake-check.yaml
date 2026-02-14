@@ -1,4 +1,4 @@
-name: Check Formatting of Files
+name: Check Flake
 enable-email-notifications: true
 on:
   - push
