@@ -147,6 +147,13 @@
                   adjust = 10;
                 };
               }
+              {
+                name = "priority-header-empty-or-unset";
+                action = "DENY";
+                expression = ''
+                  !("Priority" in headers) || headers["Priority"].trim() == ""
+                '';
+              }
             ];
           };
         };
