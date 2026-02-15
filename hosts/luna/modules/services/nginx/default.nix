@@ -102,8 +102,8 @@
         filter = "nginx-direct-ip-access";
         logpath = "/var/log/nginx/access.log";
         backend = "auto";
-        maxretry = 2;
-        findtime = "5m";
+        maxretry = 1;
+        findtime = "30m";
         bantime = "5m";
       };
       nginx-unauthorized.settings = {
