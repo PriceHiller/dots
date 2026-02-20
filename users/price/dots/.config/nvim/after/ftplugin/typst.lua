@@ -1,5 +1,6 @@
 vim.opt_local.textwidth = 0
 vim.opt_local.shiftwidth = 2
+vim.opt_local.spell = true
 
 vim.keymap.set("n", "<localleader>fr", function()
     local buf = vim.api.nvim_get_current_buf()
