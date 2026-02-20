@@ -2,6 +2,7 @@
   config,
   lib,
   clib,
+  pkgs,
   osConfig,
   ...
 }:
@@ -27,9 +28,23 @@ in
   };
   programs.librewolf = {
     enable = true;
-    profiles.default = { };
+    profiles.default = {
+      userChrome = (
+        pkgs.runCommand "build-scss"
+          {
+            nativeBuildInputs = [ pkgs.dart-sass ];
+
+          }
+          ''
+            sass --style expanded ${./userchrome}/style.scss $out
+          ''
+      );
+
+    };
     settings =
       clib.attrsToMozillaPref {
+        devtools.debugger.remote-enabled = true;
+        toolkit.legacyUserProfileCustomizations.stylesheets = true;
         identity.fxaccounts.enabled = true;
         webgl.disabled = false;
         browser = {

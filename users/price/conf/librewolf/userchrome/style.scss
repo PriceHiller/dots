@@ -1,0 +1,6 @@
+// Add small light ring around favicons to make them more visible in tabs, some sites have
+// completely _black_ favicons and they're pretty much impossible to see when using a dark
+// background
+.tab-icon-image {
+  filter: drop-shadow(0 0 1px oklch(1 0 0 / 0.6));
+}
