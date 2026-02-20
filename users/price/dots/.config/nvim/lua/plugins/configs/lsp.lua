@@ -76,7 +76,7 @@ return {
         return {
             "pmizio/typescript-tools.nvim",
             dependencies = { "nvim-lua/plenary.nvim" },
-            lazy = false,
+            event = "VeryLazy",
             config = function()
                 require("typescript-tools").setup({
                     filetypes = filetypes,
