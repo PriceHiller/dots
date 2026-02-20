@@ -4,3 +4,9 @@
 .tab-icon-image {
   filter: drop-shadow(0 0 1px oklch(1 0 0 / 0.6));
 }
+
+// When using vertical-tabs, there is a vertical spacer that is added and cannot be removed, just
+// hide the thing
+#vertical-spacer {
+  display: none !important;
+}
