@@ -1,11 +1,14 @@
 {
   config,
+  pkgs,
   lib,
   inputs,
   ...
 }:
 let
   cfg = config.ext.services.vector;
+  nginxCfg = cfg.settings.collectors.nginx;
+  journaldCfg = cfg.settings.collectors.journald;
 in
 {
   imports = [
@@ -19,6 +22,7 @@ in
       type = lib.types.str;
       default = "/var/lib/private/vector";
     };
+
     persist = lib.options.mkOption {
       description = "Vector impermanence persistence options";
       default = { };
@@ -88,11 +92,12 @@ in
                   default = { };
                   type = lib.types.submodule {
                     options = {
-                      enable = lib.mkEnableOption "Enable Nginx log collection, this will also update the Nginx log format to emit json";
-                      logPath = lib.options.mkOption {
-                        description = "The log path to collect logs from";
-                        type = lib.types.either (lib.types.str) (lib.types.path);
-                        default = "/var/log/nginx/access.log";
+                      enable = lib.mkEnableOption "Enable Nginx log collection";
+                      logSocketPath = lib.options.mkOption {
+                        description = "Path to the Nginx-to-Vector Unix socket";
+                        type = lib.types.path;
+                        default = "/run/vector-nginx/nginx.sock";
+                        readOnly = true;
                       };
                     };
                   };
@@ -105,79 +110,72 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable) {
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
 
-    ext.logviewer.enable = true;
-
-    environment.persistence.${cfg.persist.attr}.directories = lib.mkIf (cfg.persist.enable) [
+      # ── Base Vector config  ──
       {
-        directory = cfg.dataDir;
-        mode = "0700";
-        user = "nobody";
-        group = "nogroup";
-      }
-    ];
+        ext.logviewer.enable = true;
 
-    systemd.services.vector = {
-      after = [ config.ext.logviewer.serviceName ];
-      serviceConfig = {
-        EnvironmentFile = lib.mkIf (!(builtins.isNull cfg.environmentFile)) cfg.environmentFile;
-        SupplementaryGroups = lib.mkMerge [
-          (lib.mkIf cfg.settings.collectors.journald.enable [ "systemd-journal" ])
-          [ config.ext.logviewer.group ]
+        environment.persistence.${cfg.persist.attr}.directories = lib.mkIf cfg.persist.enable [
+          {
+            directory = cfg.dataDir;
+            mode = "0700";
+            user = "nobody";
+            group = "nogroup";
+          }
         ];
-      };
-    };
 
-    services.vector = {
-      enable = true;
-      validateConfig = false;
-      settings = {
-        schema.log_namespace = true;
-        api.enabled = true;
-        data_dir = cfg.dataDir;
-        sinks = {
-          sink_loki = lib.mkIf (cfg.settings.sinks.loki.enable) {
-            inputs = [
-              "*_sink"
-            ];
-            type = "loki";
-            labels = {
-              service_name = "{{ %service_name }}";
-              system_host = "${config.system.name}";
-              nixos_system_rev = "${
-                let
-                  self = inputs.self;
-                  rev =
-                    self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown";
-                in
-                rev
-              }";
-              nixos_state_verison = "${config.system.stateVersion}";
-            };
-            encoding.codec = "json";
-            endpoint = cfg.settings.sinks.loki.endpoint;
-            auth = {
-              strategy = "basic";
-              user = "\${BASIC_AUTH_USERNAME}";
-              password = "\${BASIC_AUTH_PASSWORD}";
+        systemd.services.vector = {
+          after = [ config.ext.logviewer.serviceName ];
+          serviceConfig = {
+            EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
+            SupplementaryGroups = [ config.ext.logviewer.group ];
+          };
+        };
+
+        services.vector = {
+          enable = true;
+          validateConfig = false;
+          settings = {
+            schema.log_namespace = true;
+            api.enabled = true;
+            data_dir = cfg.dataDir;
+            sinks.sink_loki = lib.mkIf cfg.settings.sinks.loki.enable {
+              inputs = [ "*_sink" ];
+              type = "loki";
+              labels = {
+                service_name = "{{ %service_name }}";
+                system_host = config.system.name;
+                nixos_system_rev =
+                  let
+                    self = inputs.self;
+                  in
+                  self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown";
+                nixos_state_verison = config.system.stateVersion;
+              };
+              encoding.codec = "json";
+              endpoint = cfg.settings.sinks.loki.endpoint;
+              auth = {
+                strategy = "basic";
+                user = "\${BASIC_AUTH_USERNAME}";
+                password = "\${BASIC_AUTH_PASSWORD}";
+              };
             };
           };
         };
-      };
-    };
+      }
 
-    services.vector.settings.sources.source_journald =
-      lib.mkIf (cfg.settings.collectors.journald.enable)
-        {
+      # ── Journald collector ──
+      (lib.mkIf journaldCfg.enable {
+        systemd.services.vector.serviceConfig.SupplementaryGroups = [ "systemd-journal" ];
+
+        services.vector.settings.sources.source_journald = {
           type = "journald";
         };
-    services.vector.settings.transforms.transform_journald_sink =
-      lib.mkIf (cfg.settings.collectors.journald.enable)
-        {
-          inputs = [
-            "source_journald"
-          ];
+
+        services.vector.settings.transforms.transform_journald_sink = {
+          inputs = [ "source_journald" ];
           type = "remap";
           source = # vrl
             ''
@@ -212,27 +210,50 @@ in
               %service_name = "journal"
             '';
         };
+      })
 
-    # services.vector.settings.sources.source_logs = lib.mkIf ();
-    services.vector.settings.sources.source_nginx = lib.mkIf (cfg.settings.collectors.nginx.enable) {
-      type = "file";
-      include = [
-        cfg.settings.collectors.nginx.logPath
-      ];
-      ignore_older_secs = 86400;
-    };
-    services.vector.settings.transforms.transform_nginx_sink =
-      lib.mkIf (cfg.settings.collectors.nginx.enable)
-        {
+      # ── Nginx collector ──
+      (lib.mkIf nginxCfg.enable {
+        systemd.services.vector =
+          let
+            runtimeDir = (builtins.dirOf nginxCfg.logSocketPath);
+          in
+          {
+            serviceConfig = {
+              RuntimeDirectory = [ (builtins.baseNameOf runtimeDir) ];
+              # Ensure Nginx can write its logs to the socket vector will read from
+              ExecStartPre =
+                let
+                  setfacl = lib.getExe' pkgs.acl "setfacl";
+                in
+                [
+                  "+${setfacl} --default --modify u:${config.services.nginx.user}:rw /run/vector-nginx"
+                  "+${setfacl} --modify u:${config.services.nginx.user}:x /run/vector-nginx"
+                ];
+            };
+          };
 
-          inputs = [
-            "source_nginx"
-          ];
+        # Nginx needs to start _after_ vector so the socket file exists and is writeable
+        systemd.services.nginx = {
+          after = [ "vector.service" ];
+          wants = [ "vector.service" ];
+        };
+
+        services.vector.settings.sources.source_nginx = {
+          type = "socket";
+          mode = "unix_datagram";
+          path = nginxCfg.logSocketPath;
+          socket_file_mode = 504; # 0o0770
+        };
+
+        services.vector.settings.transforms.transform_nginx_sink = {
+          inputs = [ "source_nginx" ];
           type = "remap";
           source = # vrl
             ''
-              msg = string!(.)
-              msg = parse_json!(.)
+              syslog = parse_syslog!(string!(.))
+              msg = parse_json!(syslog.message)
+
               if msg.level == null && msg.status != null {
                 status, err = to_int(msg.status)
                 if err == null && status >= 500 {
@@ -247,38 +268,40 @@ in
               %service_name = "nginx"
             '';
         };
-    services.nginx.appendHttpConfig =
-      lib.mkIf (cfg.settings.collectors.nginx.enable)
-        # nginx
-        ''
-          log_format logger-json escape=json '${
-            # We remove the whitespace in the json log to ensure the json log comes out on a single line
-            # in the system log
-            builtins.replaceStrings [ "\n" " " ] [ "" "" ] ''
-              {
-                  "time": "$time_iso8601",
-                  "time_msec": $msec,
-                  "status": $status,
-                  "http_user_agent": "$http_user_agent",
-                  "http_host": "$http_host",
-                  "http_referer": "$http_referer",
-                  "bytes_sent": $bytes_sent,
-                  "content_type": "$content_type",
-                  "content_length": "$content_length",
-                  "remote_addr": "$remote_addr",
-                  "request_length": $request_length,
-                  "request_method": "$request_method",
-                  "request_uri": "$request_uri",
-                  "request_time": $request_time,
-                  "request_id": "$request_id",
-                  "request": "$request",
-                  "server_protocol": "$server_protocol",
-                  "upstream_addr": "$upstream_addr"
-              }
-            ''
-          }';
-          access_log ${cfg.settings.collectors.nginx.logPath} logger-json;
-        '';
 
-  };
+        services.nginx.appendHttpConfig =
+
+          # nginx
+          ''
+            log_format vector-logger-json escape=json '${
+              builtins.replaceStrings [ "\n" " " ] [ "" "" ] ''
+                {
+                    "time": "$time_iso8601",
+                    "time_msec": $msec,
+                    "status": $status,
+                    "http_user_agent": "$http_user_agent",
+                    "http_host": "$http_host",
+                    "http_referer": "$http_referer",
+                    "bytes_sent": $bytes_sent,
+                    "content_type": "$content_type",
+                    "content_length": "$content_length",
+                    "remote_addr": "$remote_addr",
+                    "request_length": $request_length,
+                    "request_method": "$request_method",
+                    "request_uri": "$request_uri",
+                    "request_time": $request_time,
+                    "request_id": "$request_id",
+                    "request": "$request",
+                    "server_protocol": "$server_protocol",
+                    "upstream_addr": "$upstream_addr"
+                }
+              ''
+            }';
+
+            access_log syslog:server=unix:${nginxCfg.logSocketPath} vector-logger-json;
+          '';
+      })
+
+    ]
+  );
 }
