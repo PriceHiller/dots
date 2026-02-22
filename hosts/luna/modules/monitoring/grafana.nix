@@ -7,6 +7,12 @@ in
   users.users.grafana.extraGroups = [
     config.meta.mail.group
   ];
+
+  age.secrets.grafana-secret-key = {
+    owner = "grafana";
+    mode = "0400";
+  };
+
   environment.persistence.save.directories = [
     {
       directory = config.services.grafana.dataDir;
@@ -98,6 +104,9 @@ in
       enable = true;
       settings = {
         analytics.reporting_enabled = false;
+        security = {
+          secret_key = "$__file{${config.age.secrets.grafana-secret-key.path}}";
+        };
         smtp = {
           enabled = true;
           user = config.meta.mail.user;
