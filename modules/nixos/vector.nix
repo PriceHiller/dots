@@ -16,7 +16,7 @@ in
   ];
 
   options.ext.services.vector = {
-    enable = lib.options.mkEnableOption "Enable OpenSSH server with some defaults enabled";
+    enable = lib.options.mkEnableOption "Enable Vector log collection";
     dataDir = lib.options.mkOption {
       description = "The data directory to use for vector";
       type = lib.types.str;
@@ -147,12 +147,14 @@ in
               labels = {
                 service_name = "{{ %service_name }}";
                 system_host = config.system.name;
+                nixos_state_version = config.system.stateVersion;
+              };
+              structured_metadata = {
                 nixos_system_rev =
                   let
                     self = inputs.self;
                   in
                   self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown";
-                nixos_state_verison = config.system.stateVersion;
               };
               encoding.codec = "json";
               endpoint = cfg.settings.sinks.loki.endpoint;
@@ -189,7 +191,6 @@ in
               .level = to_syslog_level(to_int(jmeta.PRIORITY) ?? -1) ?? null
               .stream_id = jmeta._STREAM_ID
               .boot_id = jmeta._BOOT_ID
-              .cmdline = jmeta._BOOT_ID
               .unit = jmeta._SYSTEMD_UNIT
               .slice = jmeta._SYSTEMD_SLICE
               .machine_id = jmeta._MACHINE_ID
@@ -197,7 +198,6 @@ in
               .pid = jmeta._PID
               .uid = jmeta._UID
               .gid = jmeta._GID
-              .stream_id = jmeta._STEAM_ID
               .hostname = jmeta._HOSTNAME
               .cgroup = jmeta._SYSTEMD_CGROUP
               .comm = jmeta._COMM
@@ -227,8 +227,8 @@ in
                   setfacl = lib.getExe' pkgs.acl "setfacl";
                 in
                 [
-                  "+${setfacl} --default --modify u:${config.services.nginx.user}:rw /run/vector-nginx"
-                  "+${setfacl} --modify u:${config.services.nginx.user}:x /run/vector-nginx"
+                  "+${setfacl} --default --modify u:${config.services.nginx.user}:rw ${runtimeDir}"
+                  "+${setfacl} --modify u:${config.services.nginx.user}:x ${runtimeDir}"
                 ];
             };
           };
@@ -265,38 +265,130 @@ in
               }
 
               . = msg
+
+              ts, err = from_unix_timestamp(to_int!(.time_msec), unit: "milliseconds")
+              if err == null {
+                %timestamp = ts
+              }
               %service_name = "nginx"
             '';
         };
 
         services.nginx.appendHttpConfig =
-
+          let
+            headersToNginxVars =
+              prefix: headers:
+              let
+                toNginxVar = name: builtins.replaceStrings [ "-" ] [ "_" ] name;
+                headerEntries = builtins.map (name: ''"${name}":"${prefix}${toNginxVar name}"'') headers;
+              in
+              "'" + builtins.concatStringsSep "," headerEntries + "'";
+          in
           # nginx
           ''
-            log_format vector-logger-json escape=json '${
-              builtins.replaceStrings [ "\n" " " ] [ "" "" ] ''
-                {
-                    "time": "$time_iso8601",
-                    "time_msec": $msec,
-                    "status": $status,
-                    "http_user_agent": "$http_user_agent",
-                    "http_host": "$http_host",
-                    "http_referer": "$http_referer",
-                    "bytes_sent": $bytes_sent,
-                    "content_type": "$content_type",
-                    "content_length": "$content_length",
-                    "remote_addr": "$remote_addr",
-                    "request_length": $request_length,
-                    "request_method": "$request_method",
-                    "request_uri": "$request_uri",
-                    "request_time": $request_time,
-                    "request_id": "$request_id",
-                    "request": "$request",
-                    "server_protocol": "$server_protocol",
-                    "upstream_addr": "$upstream_addr"
-                }
-              ''
-            }';
+            log_format vector-logger-json escape=json
+              '{'
+                '"time": "$time_iso8601",'
+                '"time_msec": $msec,'
+                '"status": $status,'
+                '"host": "$host",'
+                '"headers": {'
+                  '"request": {'
+                    ${headersToNginxVars "$http_" [
+                      # Content negotiation & metadata
+                      "host"
+                      "content-type"
+                      "content-length"
+                      "accept"
+                      "accept-language"
+                      "accept-encoding"
+                      "accept-charset"
+                      "from"
+                      "upgrade-insecure-requests"
+                      "priority"
+
+                      # Client identity & context
+                      "user-agent"
+                      "sec-ch-ua"
+                      "sec-ch-ua-mobile"
+                      "sec-ch-ua-platform"
+                      "referer"
+                      "origin"
+                      "dnt"
+
+                      # Caching
+                      "cache-control"
+                      "if-modified-since"
+                      "if-none-match"
+
+                      # Connection & transport
+                      "connection"
+                      "upgrade"
+                      "te"
+                      "via"
+                      "range"
+
+                      # Proxy & tracing
+                      "x-forwarded-for"
+                      "x-forwarded-proto"
+                      "x-forwarded-host"
+                      "x-request-id"
+                      "forwarded"
+
+                      # Sec-Fetch (browser-enforced)
+                      "sec-fetch-dest"
+                      "sec-fetch-mode"
+                      "sec-fetch-site"
+                      "sec-fetch-user"
+
+                      # Extended Client Hints
+                      "sec-ch-ua-full-version-list"
+                      "sec-ch-ua-platform-version"
+                      "sec-ch-ua-model"
+                      "sec-ch-ua-arch"
+                      "sec-ch-ua-bitness"
+
+                      # Behavioural signals
+                      "sec-gpc"
+                      "sec-purpose"
+                      "save-data"
+                      "x-requested-with"
+
+                      # Network hints
+                      "device-memory"
+                      "downlink"
+                      "ect"
+                      "rtt"
+                    ]}
+                  '},'
+                  '"response": {'
+                    ${headersToNginxVars "$sent_http_" [
+                      "content-type"
+                      "content-encoding"
+                      "etag"
+                      "cache-control"
+                      "vary"
+                      "location"
+                    ]}
+                  '}'
+                '},'
+                '"bytes_sent": $bytes_sent,'
+                '"remote_addr": "$remote_addr",'
+                '"uri": "$uri",'
+                '"request_length": $request_length,'
+                '"request_method": "$request_method",'
+                '"request_uri": "$request_uri",'
+                '"request_time": $request_time,'
+                '"request_id": "$request_id",'
+                '"server_protocol": "$server_protocol",'
+                '"upstream_addr": "$upstream_addr",'
+                '"ssl_protocol": "$ssl_protocol",'
+                '"ssl_cipher": "$ssl_cipher",'
+                '"connection_serial": $connection,'
+                '"connection_requests": $connection_requests,'
+                '"request_completion": "$request_completion",'
+                '"pipe": "$pipe"'
+              '}';
 
             access_log syslog:server=unix:${nginxCfg.logSocketPath} vector-logger-json;
           '';
