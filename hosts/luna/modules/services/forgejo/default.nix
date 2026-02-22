@@ -275,6 +275,15 @@
       };
 
       systemd = {
+        tmpfiles.rules = [
+          "d '${config.services.forgejo.customDir}/templates' - forgejo forgejo - -"
+          "d '${config.services.forgejo.customDir}/public' - forgejo forgejo - -"
+          "d '${config.services.forgejo.customDir}/public/assets' - forgejo forgejo - -"
+          "d '${config.services.forgejo.customDir}/public/assets/img' - forgejo forgejo - -"
+          "L+ '${config.services.forgejo.customDir}/public/assets/img/favicon.svg' - forgejo forgejo - ${./forgejo-favicon.svg}"
+          "L+ '${config.services.forgejo.customDir}/public/assets/img/logo.svg' - forgejo forgejo - ${./forgejo-favicon.svg}"
+          "d '${config.services.forgejo.customDir}/public/assets/css' - forgejo forgejo - -"
+        ];
         services = {
           gitea-runner-default = {
             wants = [ "forgejo.service" ];
