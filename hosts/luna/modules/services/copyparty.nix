@@ -16,6 +16,7 @@ in
     enable = true;
     openFilesLimit = 8192;
     settings = {
+      theme = 2; # pm-monokai
       i = host;
       p = [ port ];
       no-reload = true;
