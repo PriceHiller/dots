@@ -9,6 +9,41 @@
   };
 
   services.nginx = {
+    appendHttpConfig =
+      # nginx
+      ''
+        log_format logger-json escape=json '${
+          # We remove the whitespace in the json log to ensure the json log comes out on a single line
+          # in the system log
+          builtins.replaceStrings [ "\n" " " ] [ "" "" ] ''
+            {
+                "time": "$time_iso8601",
+                "time_msec": $msec,
+                "status": $status,
+                "http_user_agent": "$http_user_agent",
+                "http_host": "$http_host",
+                "http_referer": "$http_referer",
+                "bytes_sent": $bytes_sent,
+                "content_type": "$content_type",
+                "content_length": "$content_length",
+                "remote_addr": "$remote_addr",
+                "request_length": $request_length,
+                "request_method": "$request_method",
+                "request_uri": "$request_uri",
+                "request_time": $request_time,
+                "request_id": "$request_id",
+                "request": "$request",
+                "server_protocol": "$server_protocol",
+                "upstream_addr": "$upstream_addr"
+            }
+          ''
+        }';
+        access_log "/var/log/nginx/access.log" logger-json;
+
+        # Log out to syslog by default
+        access_log syslog:server=unix:/dev/log;
+      '';
+
     enable = true;
     enableReload = true;
     recommendedProxySettings = true;
