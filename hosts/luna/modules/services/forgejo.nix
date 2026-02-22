@@ -88,6 +88,15 @@
                 import = "(data)/clients/git.yaml";
               }
               {
+                name = "Block clients lacking modern Sec-Fetch-* headers";
+                action = "DENY";
+                expression.any = [
+                  ''!("Sec-Fetch-Dest" in headers)''
+                  ''!("Sec-Fetch-Mode" in headers)''
+                  ''!("Sec-Fetch-Site" in headers)''
+                ];
+              }
+              {
                 action = "WEIGH";
                 expression = {
                   all = [
@@ -255,10 +264,6 @@
           };
         };
         nginx.virtualHosts."${git_host}" = {
-          serverAliases = [
-            "forgejo.pricehiller.com"
-            "gitea.pricehiller.com"
-          ];
           forceSSL = true;
           locations = {
             "/" = {

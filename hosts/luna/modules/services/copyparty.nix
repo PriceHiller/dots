@@ -107,6 +107,15 @@ in
         {
           import = "(data)/common/allow-private-addresses.yaml";
         }
+        {
+          name = "Block clients lacking modern Sec-Fetch-* headers";
+          action = "DENY";
+          expression.any = [
+            ''!("Sec-Fetch-Dest" in headers)''
+            ''!("Sec-Fetch-Mode" in headers)''
+            ''!("Sec-Fetch-Site" in headers)''
+          ];
+        }
       ];
     };
   };
