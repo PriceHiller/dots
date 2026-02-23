@@ -32,29 +32,6 @@ in
         port = 10322;
       };
       "luna.hosts.pricehiller.com" = luna;
-      webtech = {
-        hostname = "webtech.pricehiller.com";
-        user = "root";
-      };
-      "webtech.pricehiller.com" = webtech;
-    }
-    # NOTE: UTSA Hosts behind VPN server
-    // builtins.listToAttrs (
-      builtins.map (
-        num:
-        let
-          hostname = "fox${
-            if (num > 0 && num < 10) then "0${builtins.toString num}" else builtins.toString num
-          }.cs.utsarr.net";
-        in
-        {
-          name = hostname;
-          value = {
-            user = "zfp106";
-            inherit hostname;
-          };
-        }
-      ) (lib.range 1 4)
-    );
+    };
   };
 }
