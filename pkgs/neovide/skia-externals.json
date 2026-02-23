@@ -4,10 +4,15 @@
     "rev": "8e49998f003d693213b538ef765814c7d21abada",
     "hash": "sha256-zP2kiB4nyLi0/I8OsRhxKG0qRGPe2ALLQ+HHfqlBJ6Y="
   },
+  "freetype": {
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/freetype2.git",
+    "rev": "b91f75bd02db43b06d634591eb286d3eb0ce3b65",
+    "hash": "sha256-MQwGy7k1BhbQeCouQb35eDh9TeABz4M5wpJ37keDlVE="
+  },
   "harfbuzz": {
     "url": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
-    "rev": "08b52ae2e44931eef163dbad71697f911fadc323",
-    "hash": "sha256-sP9FQLUEgTZFlvfYqSZnzZqBMxVotzD0FKKsu3/OdUw="
+    "rev": "31695252eb6ed25096893aec7f848889dad874bc",
+    "hash": "sha256-Csyz08JTNXfY2fo27x1Eg1CqO/tt8Rt9udr3KflojSg="
   },
   "icu": {
     "url": "https://chromium.googlesource.com/chromium/deps/icu.git",
@@ -21,8 +26,13 @@
   },
   "libpng": {
     "url": "https://skia.googlesource.com/third_party/libpng.git",
-    "rev": "ed217e3e601d8e462f7fd1e04bed43ac42212429",
-    "hash": "sha256-Mo1M8TuVaoSIb7Hy2u6zgjZ1DKgpmgNmGRP6dGg/aTs="
+    "rev": "4e3f57d50f552841550a36eabbb3fbcecacb7750",
+    "hash": "sha256-tNRrA9RUp6Mi7dbIB/70a/4tn/JxAsTUb9EI9nlXLjM="
+  },
+  "libwebp": {
+    "url": "https://chromium.googlesource.com/webm/libwebp.git",
+    "rev": "845d5476a866141ba35ac133f856fa62f0b7445f",
+    "hash": "sha256-lH5wpzaCCPCfW2rHevJ7MQ6WpTYkh2LljLvD1nq36To="
   },
   "wuffs": {
     "url": "https://skia.googlesource.com/external/github.com/google/wuffs-mirror-release-c.git",
