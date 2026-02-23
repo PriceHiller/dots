@@ -51,19 +51,20 @@
     "apple-emoji-linux": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "ttc": "ttc"
+        "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1771532394,
-        "narHash": "sha256-xw2IuYLOukUEFj0kQtVCm82wAAv4FLrtoJS1kb+UK6I=",
+        "lastModified": 1771347507,
+        "narHash": "sha256-zbAQafwYYt62oVput8pQvTSV55h4xBO3v2kDElSa4mo=",
         "owner": "samuelngs",
         "repo": "apple-emoji-linux",
-        "rev": "2aa12422962f1e915e08aa587cdad6f812a25eef",
+        "rev": "e56448ab6b556c9a3be63ce0fb1903b70fd87b61",
         "type": "github"
       },
       "original": {
         "owner": "samuelngs",
         "repo": "apple-emoji-linux",
+        "rev": "e56448ab6b556c9a3be63ce0fb1903b70fd87b61",
         "type": "github"
       }
     },
@@ -105,7 +106,7 @@
         "bun2nix": "bun2nix",
         "nixpkgs": "nixpkgs_2",
         "systems": "systems_4",
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
         "lastModified": 1771792243,
@@ -131,7 +132,7 @@
           "nixpkgs"
         ],
         "systems": "systems_3",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
         "lastModified": 1765198123,
@@ -644,7 +645,7 @@
         "flake-parts": "flake-parts_2",
         "nix": "nix",
         "nixpkgs": "nixpkgs_5",
-        "treefmt-nix": "treefmt-nix_3"
+        "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
         "lastModified": 1771657037,
@@ -1250,15 +1251,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771369470,
-        "narHash": "sha256-0NBlEBKkN3lufyvFegY4TYv5mCNHbi5OmBDrzihbBMQ=",
-        "owner": "NixOS",
+        "lastModified": 1748370509,
+        "narHash": "sha256-QlL8slIgc16W5UaI3w7xHQEP+Qmv/6vSNTpoZrrSlbk=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0182a361324364ae3f436a63005877674cf45efb",
+        "rev": "4faa5f5321320e49a78ae7848582f684d64783e9",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -1627,7 +1628,7 @@
           "nixpkgs"
         ],
         "pre-commit-hooks": "pre-commit-hooks_2",
-        "treefmt-nix": "treefmt-nix_4"
+        "treefmt-nix": "treefmt-nix_5"
       },
       "locked": {
         "lastModified": 1765197636,
@@ -1669,7 +1670,7 @@
         "oisd-blocklist": "oisd-blocklist",
         "rofi-tools": "rofi-tools",
         "secrets": "secrets",
-        "treefmt-nix": "treefmt-nix_5",
+        "treefmt-nix": "treefmt-nix_6",
         "zsh-completions": "zsh-completions"
       }
     },
@@ -1877,6 +1878,27 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "apple-emoji-linux",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1748243702,
+        "narHash": "sha256-9YzfeN8CB6SzNPyPm2XjRRqSixDopTapaRsnTpXUEY8=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "1f3f7b784643d488ba4bf315638b2b0a4c5fb007",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
           "blog",
           "bun2nix",
           "nixpkgs"
@@ -1896,7 +1918,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_2": {
+    "treefmt-nix_3": {
       "inputs": {
         "nixpkgs": "nixpkgs_3"
       },
@@ -1914,7 +1936,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_3": {
+    "treefmt-nix_4": {
       "inputs": {
         "nixpkgs": [
           "harmonia",
@@ -1935,7 +1957,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_4": {
+    "treefmt-nix_5": {
       "inputs": {
         "nixpkgs": [
           "rofi-tools",
@@ -1956,7 +1978,7 @@
         "type": "github"
       }
     },
-    "treefmt-nix_5": {
+    "treefmt-nix_6": {
       "inputs": {
         "nixpkgs": "nixpkgs_12"
       },
@@ -1973,20 +1995,6 @@
         "repo": "treefmt-nix",
         "type": "github"
       }
-    },
-    "ttc": {
-      "flake": false,
-      "locked": {
-        "path": "path:./Apple Color Emoji.ttc",
-        "type": "path"
-      },
-      "original": {
-        "path": "path:./Apple Color Emoji.ttc",
-        "type": "path"
-      },
-      "parent": [
-        "apple-emoji-linux"
-      ]
     },
     "utils": {
       "inputs": {
