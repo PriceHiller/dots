@@ -6,11 +6,12 @@
 {
   services = {
     nginx.virtualHosts = {
+      "price-hiller.com" = {
+        enableACME = true;
+        globalRedirect = "pricehiller.com";
+      };
       "pricehiller.com" = {
         default = true;
-        serverAliases = [
-          "price-hiller.com"
-        ];
         forceSSL = true;
         root = inputs.blog.packages.${pkgs.stdenv.hostPlatform.system}.default;
         locations =
