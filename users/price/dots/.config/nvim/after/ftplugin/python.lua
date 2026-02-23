@@ -1,11 +1,9 @@
 vim.opt_local.textwidth = 100
-local fmtpat = require("utils.formatpat").new()
 
+-- Support comments in format patterns
 local raw_commentstring = vim.trim(vim.o.commentstring:gsub("%%s", ""))
-for _, pat in ipairs(vim.deepcopy(fmtpat.pat)) do
-    local comment_pat = ([[%s\s*%s]]):format(raw_commentstring, pat)
-    table.insert(fmtpat.pat, comment_pat)
-end
+local fmtpat = require("utils.formatpat").new()
+table.insert(fmtpat.start_pat, [[\%(#\s*\)\?]])
 table.insert(fmtpat.pat, raw_commentstring)
 vim.opt_local.formatlistpat = fmtpat:listpat()
 
