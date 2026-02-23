@@ -38,7 +38,7 @@
             # Always cache assets that have a hashed filename output via astro.
             # Etag is good and all, but it kicks off a round trip request to the server which can
             # cause a flash of white if the external CSS sheets aren't loaded
-            "~* \.(?:css|js|woff2?|png|jpe?g|gif|svg|webp|avif)$".extraConfig =
+            "~* \/(assets|js)\/.*\.(?:css|js|woff2?|png|jpe?g|gif|svg|webp|avif)$".extraConfig =
               # nginx
               ''
                 expires 1y;
