@@ -183,6 +183,11 @@ in
             ''
               .message = string!(.)
 
+              parsed, err = parse_json(.message)
+              if err == null {
+                .message = parsed
+              }
+
               jmeta = %journald.metadata
               if jmeta == null {
                 jmeta = {}
