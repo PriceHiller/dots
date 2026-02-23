@@ -164,6 +164,9 @@ in
             echconfig.enabled = true;
             use_https_rr_as_altsvc = true;
           };
+          # See https://searchfox.org/firefox-release/source/modules/libpref/init/StaticPrefList.yaml#13784
+          # We only send the referer iff hosts match
+          http.referer.XOriginPolicy = 3;
         };
       }
       // {
