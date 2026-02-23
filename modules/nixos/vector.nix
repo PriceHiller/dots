@@ -187,7 +187,7 @@ in
 
               parsed, err = parse_json(.message)
               if err == null {
-                .message = parsed
+                .structured_message = parsed
               }
 
               jmeta = %journald.metadata
