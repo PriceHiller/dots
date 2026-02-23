@@ -154,7 +154,9 @@ in
                   let
                     self = inputs.self;
                   in
-                  self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown";
+                  builtins.toString (
+                    self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown"
+                  );
               };
               encoding.codec = "json";
               endpoint = cfg.settings.sinks.loki.endpoint;
