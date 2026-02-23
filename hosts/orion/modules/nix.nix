@@ -85,17 +85,6 @@ in
     };
   };
 
-  age.secrets = {
-    nix-cache-signing-key = {
-      owner = config.services.nix-post-build-hook-queue.user;
-      mode = "0400";
-    };
-    ssh-automation-key = {
-      owner = config.services.nix-post-build-hook-queue.user;
-      mode = "0400";
-    };
-  };
-
   services.nix-post-build-hook-queue = {
     enable = true;
     signingPrivateKeyPath = config.age.secrets.nix-cache-signing-key.path;
