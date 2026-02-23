@@ -70,7 +70,6 @@
       kdePackages.kio
       kdePackages.kio-fuse
       kdePackages.kio-extras
-      kdePackages.audiocd-kio
       # Support for compressing/decompressing archives
       kdePackages.ark
       # Support for Git and more
