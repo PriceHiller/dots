@@ -1,3 +1,8 @@
+if vim.b.didftplugin then
+    return
+end
+vim.b.didftplugin = true
+
 vim.opt_local.textwidth = 100
 
 -- Support comments in format patterns
