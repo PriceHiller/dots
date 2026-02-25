@@ -325,6 +325,19 @@ M.setup = function()
     vim.keymap.set("n", "<C-S-k>", function()
         jump_to_fold("zk[z")
     end, { desc = "Go to the start of the previous fold" })
+
+    -- Ignore indentexpr for `gw`
+    _G._gw_operatorfunc = function()
+        vim.cmd("normal! '[V']gw")
+        vim.bo.indentexpr = vim.b._saved_indentexpr
+    end
+
+    vim.keymap.set({ "n", "x" }, "gw", function()
+        vim.b._saved_indentexpr = vim.bo.indentexpr
+        vim.bo.indentexpr = ""
+        vim.o.operatorfunc = "v:lua._gw_operatorfunc"
+        return "g@"
+    end, { expr = true, desc = "Ignore `indentexpr` for `gw`" })
 end
 
 return M
