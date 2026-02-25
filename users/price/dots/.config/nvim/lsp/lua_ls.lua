@@ -1,6 +1,3 @@
--- HACK: Ensure lazydev is loaded before `lua_ls` is setup
-pcall(require, "lazydev")
-
 return {
     settings = {
         Lua = {
