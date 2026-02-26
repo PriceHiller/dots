@@ -42,6 +42,7 @@
           curl
           wget
           gitMinimal
+          gnused
           less
           which
           gzip
