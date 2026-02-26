@@ -164,8 +164,8 @@
             created = "2024-05-31T23:39:28+02:00";
             updated = "2024-05-31T23:39:28+02:00";
             name = "000-allow-${user}-user";
-            description = "";
-            action = "reject";
+            description = "Allow All Connections for Nix Build Users `nixbld*`";
+            action = "allow";
             duration = "always";
             enabled = true;
             precedence = true;
