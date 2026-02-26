@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  nix-runner-cache = "xdg-cache";
+in
 {
   options = {
     # All secrets starting with "forgejo-" are necessarily forgejo secrets and so we want to make
@@ -52,12 +55,20 @@
           dockerTools.caCertificates
           dockerTools.usrBinEnv
           dockerTools.fakeNss
+          jq
+          (runCommand "cache-dir" { } ''
+            mkdir -p $out/${nix-runner-cache}/nix
+          '')
         ];
         config = {
           Entrypoint = [ "/bin/bash" ];
           Env = [
             "NIX_REMOTE=daemon"
+            "XDG_CACHE_HOME=/${nix-runner-cache}"
           ];
+          Volumes = {
+            "/${nix-runner-cache}/nix" = { };
+          };
         };
       };
 
@@ -235,19 +246,17 @@
               settings = {
                 runner = {
                   capacity = 16;
-                  envs = {
-                    NIX_REMOTE = "daemon";
-                  };
                 };
                 container =
                   let
-                    ro_vols = [
-                      "/nix"
+                    vols = [
+                      "/nix:/nix:ro"
+                      "nix-cache:/${nix-runner-cache}/nix"
                     ];
                   in
                   {
-                    valid_volumes = ro_vols;
-                    options = ro_vols |> builtins.map (vol: "-v ${vol}:${vol}:ro") |> builtins.concatStringsSep " ";
+                    valid_volumes = vols |> builtins.map (vol: vol |> builtins.split ":" |> builtins.head);
+                    options = vols |> builtins.map (vol: "-v ${vol}") |> builtins.concatStringsSep " ";
                   };
               };
               labels = [
