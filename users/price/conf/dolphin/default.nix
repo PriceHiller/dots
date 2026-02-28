@@ -37,9 +37,12 @@
   };
   home = {
     activation = {
-      kdeBuildMimeCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        ${pkgs.kdePackages.kservice}/bin/kbuildsycoca6 --noincremental
-      '';
+      kdeBuildMimeCache =
+        lib.hm.dag.entryAfter [ "writeBoundary" ]
+          # bash
+          ''
+            run ${pkgs.kdePackages.kservice}/bin/kbuildsycoca6 --noincremental
+          '';
       kdeTerminalConfig =
         # TODO: Make this take in an attrset that maps to a kconfig write
         let
@@ -49,17 +52,17 @@
         lib.hm.dag.entryAfter [ "writeBoundary" ]
           # bash
           ''
-            ${kconfig} \
-              --file "${kdeGlobalsFilePath}" \
-              --group "General" \
-              --key "TerminalApplication" \
-              "neovide-terminal"
+            run ${kconfig} \
+               --file "${kdeGlobalsFilePath}" \
+               --group "General" \
+               --key "TerminalApplication" \
+               "neovide-terminal"
 
-            ${kconfig} \
-              --file "${kdeGlobalsFilePath}" \
-              --group "General" \
-              --key "TerminalService" \
-              "neovide-terminal.desktop"
+             run ${kconfig} \
+               --file "${kdeGlobalsFilePath}" \
+               --group "General" \
+               --key "TerminalService" \
+               "neovide-terminal.desktop"
           '';
     };
     packages = with pkgs; [
