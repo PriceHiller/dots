@@ -105,7 +105,6 @@ in
         playerctl
         nixfmt
         lxappearance
-        direnv
         stylua
         typstyle
         typst
