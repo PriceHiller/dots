@@ -1,4 +1,5 @@
 {
+  self,
   config,
   lib,
   pkgs,
@@ -110,13 +111,21 @@ in
             # zsh
             ''
               export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
-              mkdir -p "$XDG_CONFIG_HOME"
+              if [[ ! -d $XDG_CONFIG_HOME ]]; then
+                mkdir -p "$XDG_CONFIG_HOME"
+              fi
               export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.local/cache}"
-              mkdir -p "$XDG_CACHE_HOME"
+              if [[ ! -d $XDG_CACHE_HOME ]]; then
+                mkdir -p "$XDG_CACHE_HOME"
+              fi
               export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
-              mkdir -p "$XDG_DATA_HOME"
+              if [[ ! -d $XDG_DATA_HOME ]]; then
+                mkdir -p "$XDG_DATA_HOME"
+              fi
               export XDG_STATE_HOME="''${XDG_STATE_HOME:-$HOME/.local/state}"
-              mkdir -p "$XDG_STATE_HOME"
+              if [[ ! -d $XDG_STATE_HOME ]]; then
+                mkdir -p "$XDG_STATE_HOME"
+              fi
               export XDG_CONFIG_DIRS="''${XDG_CONFIG_DIRS:-/etc/xdg}"
             ''
             # Options
@@ -178,8 +187,31 @@ in
 
             # zsh
             ''
-              autoload -U compinit && compinit
-              autoload -U bashcompinit && bashcompinit
+              () {
+                autoload -Uz compinit bashcompinit
+                local cache_dir="''${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+
+                if [[ ! -d "$cache_dir" ]]; then
+                  mkdir -p "$cache_dir"
+                fi
+
+                zstyle ':completion:*' cache-path "$cache_dir"
+                zstyle ':completion:*' use-cache on
+                zstyle ":completion:*:commands" rehash 1
+
+                # Generate a new zcompdump every 24 hours and on every new revision of the system
+                local zcompdump="$cache_dir/zcompdump-${self.shortRev or self.dirtyShortRev or "unknown-rev"}"
+                local stale_dump=($zcompdump(N.mh+24))
+                if [[ -f "$zcompdump" && -z "$stale_dump" ]]; then
+                    # zcompdump is not considered stale, re-use it
+                    compinit -C -d "$zcompdump"
+                else
+                    # Rebuild zcompdump
+                    compinit -d "$zcompdump"
+                fi
+
+                bashcompinit
+              }
             ''
 
             (lib.mkIf cfg.zsh.enableFzfTab
