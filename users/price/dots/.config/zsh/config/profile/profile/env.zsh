@@ -152,9 +152,6 @@ export PATH="${PATH}:${DOTNET_CLI_HOME}/tools"
 export GOPATH="${XDG_DATA_HOME}/go"
 export PATH="${PATH}:/usr/local/go/bin:${GOPATH}/bin"
 
-### Direnv ###
-eval "$(direnv hook zsh)"
-
 ### Terminal Specific ###
 # If using the kitty terminal we want to set our TERM var to be xterm as kitty will send
 # kitty-xterm which causes a fucking headache and a half due to ncurses not containing
