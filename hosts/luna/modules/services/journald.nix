@@ -1,8 +1,4 @@
 { ... }:
 {
-  services.journald = {
-    extraConfig = ''
-      SystemMaxUse=100G
-    '';
-  };
+  ext.journald.enable = true;
 }

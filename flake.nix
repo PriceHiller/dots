@@ -212,6 +212,7 @@
                   ./modules/nixos/btrfs-rollback.nix
                   ./modules/nixos/grafana-alloy.nix
                   ./modules/nixos/vector.nix
+                  ./modules/nixos/journald.nix
                   ./modules/nixos/logviewer.nix
                   ./modules/nixos/persistence.nix
                   ./modules/nixos/dns
@@ -275,6 +276,7 @@
                 ./modules/nixos/base-programs.nix
                 ./modules/nixos/vector.nix
                 ./modules/nixos/persistence.nix
+                ./modules/nixos/journald.nix
                 ./modules/nixos/dns
                 inputs.nixos-facter-modules.nixosModules.facter
                 inputs.impermanence.nixosModules.impermanence
