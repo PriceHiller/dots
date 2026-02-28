@@ -165,6 +165,17 @@ in
     mimeApps.enable = true;
   };
 
+  # This ensures that all activation scripts pick up desired `XDG` environment variables
+  home.activation.setXdgEnv =
+    lib.hm.dag.entryBefore [ "writeBoundary" ]
+      # bash
+      ''
+        export XDG_CACHE_HOME="${config.xdg.cacheHome}"
+        export XDG_CONFIG_HOME="${config.xdg.configHome}"
+        export XDG_DATA_HOME="${config.xdg.dataHome}"
+        export XDG_STATE_HOME="${config.xdg.stateHome}"
+      '';
+
   programs = {
     nix-index.enable = true;
     wofi.enable = true;
