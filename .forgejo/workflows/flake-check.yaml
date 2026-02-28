@@ -3,6 +3,10 @@ enable-email-notifications: true
 on:
   - push
   - workflow_dispatch
+env:
+  NIX_CONFIG: |
+    experimental-features = flakes nix-command
+    accept-flake-config = true
 jobs:
   Check-Formatting:
     runs-on: default
@@ -11,12 +15,14 @@ jobs:
         run: |
           git config --global url.'https://forgejo:${{ secrets.REPOS_READ_TOKEN }}@git.pricehiller.com'.insteadOf 'ssh://forgejo@git.pricehiller.com:10322'
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: https://git.pricehiller.com/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           token: "${{ secrets.REPOS_READ_TOKEN }}"
           submodules: true
       - name: Nix Version
         run: nix --version
+      - name: Check Formatting
+        run: nix build ".#checks.$(nix eval --impure --raw --expr 'builtins.currentSystem').formatting"
       - name: Nix Flake Check
         run: |
-          nix --accept-flake-config --experimental-features "flakes nix-command" flake check
+          nix flake check
