@@ -1,16 +1,11 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
 }:
 {
-  ext.basePrograms = {
-    enable = true;
-    zsh.enableFzfTab = false;
-  };
+  ext.basePrograms.enable = true;
   programs = {
-    zsh.enableGlobalCompInit = lib.mkForce false;
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
