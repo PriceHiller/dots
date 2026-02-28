@@ -1,12 +1,11 @@
 configure() {
-	# Enable Caching
-	zstyle ':completion:*' use-cache on
-    zstyle ':completion:*' menu no
-
 	### Fzf Tab Configuration ###
 	zstyle ':fzf-tab:*' fzf-pad 100
     zstyle ':fzf-tab:*' use-fzf-default-opts yes
     zstyle ':fzf-tab:*' switch-group '<' '>'
+
+	# Disable preview for options
+    zstyle ':fzf-tab:complete:*:options' fzf-preview
 
 	# Tab completion for CD/directory navigation
 	zstyle ':completion:*:git-checkout:*' sort false
