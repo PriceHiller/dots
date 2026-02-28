@@ -83,7 +83,7 @@ in
       zsh = {
         enable = true;
         enableCompletion = true;
-        enableGlobalCompInit = true;
+        enableGlobalCompInit = false;
         enableBashCompletion = true;
         autosuggestions = {
           enable = true;
@@ -106,9 +106,23 @@ in
         syntaxHighlighting.enable = true;
         interactiveShellInit = # zsh
           lib.mkMerge [
+            # Default env vars
+            # zsh
+            ''
+              export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"
+              mkdir -p "$XDG_CONFIG_HOME"
+              export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.local/cache}"
+              mkdir -p "$XDG_CACHE_HOME"
+              export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"
+              mkdir -p "$XDG_DATA_HOME"
+              export XDG_STATE_HOME="''${XDG_STATE_HOME:-$HOME/.local/state}"
+              mkdir -p "$XDG_STATE_HOME"
+              export XDG_CONFIG_DIRS="''${XDG_CONFIG_DIRS:-/etc/xdg}"
+            ''
             # Options
             # zsh
             ''
+              export HISTFILE="''${XDG_DATA_HOME}/zsh_history"
               export SAVEHIST=10000
               export HISTSIZE=10000
               setopt INC_APPEND_HISTORY_TIME
@@ -116,7 +130,6 @@ in
               setopt HIST_FIND_NO_DUPS
               setopt AUTO_PARAM_SLASH
 
-              setopt EXTENDED_GLOB
               setopt NULL_GLOB
 
               setopt AUTO_CD
@@ -129,8 +142,9 @@ in
 
               setopt CHASEDOTS
 
-              unsetopt BEEP
+              setopt INTERACTIVE_COMMENTS
 
+              unsetopt BEEP
             ''
 
             # zsh
@@ -152,7 +166,20 @@ in
                   eval "$cmd"
                 fi
               }
+            ''
 
+            # Additional useful plugins
+            # zsh
+            ''
+              source "${pkgs.zsh-nix-shell.src}/nix-shell.plugin.zsh"
+              source "${pkgs.zsh-completions.src}/zsh-completions.plugin.zsh"
+              source "${pkgs.nix-zsh-completions.src}/nix-zsh-completions.plugin.zsh"
+            ''
+
+            # zsh
+            ''
+              autoload -U compinit && compinit
+              autoload -U bashcompinit && bashcompinit
             ''
 
             (lib.mkIf cfg.zsh.enableFzfTab
