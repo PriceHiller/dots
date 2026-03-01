@@ -55,6 +55,7 @@ in
       # If a nix build fails, we want to hang onto its build directory for debugging
       keep-failed = true;
       auto-optimise-store = true;
+      commit-lock-file-summary = "build(nix): update flake.lock";
       experimental-features = [
         "pipe-operators"
         "nix-command"
