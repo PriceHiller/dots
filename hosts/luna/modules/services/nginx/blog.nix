@@ -7,7 +7,8 @@
   services = {
     nginx.virtualHosts = {
       "price-hiller.com" = {
-        enableACME = true;
+        forceSSL = true;
+        useACMEHost = "pricehiller.com";
         globalRedirect = "pricehiller.com";
       };
       "pricehiller.com" = {

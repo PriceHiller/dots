@@ -15,6 +15,7 @@ in
         ${baseDomain} = {
           domain = "${baseDomain}";
           extraDomainNames = [
+            "price-hiller.com"
             "*.${baseDomain}"
             "*.cache.${baseDomain}"
           ];
