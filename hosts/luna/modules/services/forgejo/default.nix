@@ -240,7 +240,7 @@ in
           instances = {
             default = {
               enable = true;
-              url = "http://${config.services.forgejo.settings.server.HTTP_ADDR}:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}";
+              url = config.services.forgejo.settings.server.ROOT_URL;
               tokenFile = config.age.secrets.forgejo-runner-token.path;
               name = "Default";
               settings = {
