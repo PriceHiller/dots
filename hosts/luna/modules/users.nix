@@ -1,6 +1,9 @@
 { pkgs, config, ... }:
 {
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo = {
+    wheelNeedsPassword = false;
+    execWheelOnly = true;
+  };
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
