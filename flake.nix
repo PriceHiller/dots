@@ -72,7 +72,7 @@
     nixcord.url = "github:kaylorben/nixcord";
     self.submodules = true;
     secrets = {
-      url = ./secrets;
+      url = ./secrets/.;
       inputs = {
         nixpkgs.follows = "nixpkgs";
         agenix.follows = "agenix";
