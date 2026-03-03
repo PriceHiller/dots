@@ -101,6 +101,7 @@ in
           ls = "eza --icons=always --group-directories-first --long --header --octal-permissions --classify --group --extended";
           l = "ls -alh";
           ll = "l";
+          nflu = "nix flake update --commit-lock-file";
           Get-Public-IPV4 = "dig @resolver4.opendns.com myip.opendns.com +short -4";
           Get-Public-IPV6 = "dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6";
         };
