@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
@@ -26,5 +26,6 @@
         wrapProgram $out/bin/age-plugin-yubikey --prefix LD_LIBRARY_PATH : ${final.pcsclite.lib}/lib
       '';
     });
+    unblob = inputs.nixpkgs-stable.legacyPackages.${final.stdenv.hostPlatform.system}.unblob;
   };
 }

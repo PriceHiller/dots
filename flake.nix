@@ -285,6 +285,14 @@
                 inputs.harmonia.nixosModules.harmonia
                 inputs.copyparty.nixosModules.default
                 {
+                  config = {
+                    nixpkgs.overlays = [
+                      self.overlays.modifications
+                      self.overlays.additions
+                    ];
+                  };
+                }
+                {
                   config = inputs.secrets.secrets.${hostname};
                 }
                 ./hosts/${hostname}
