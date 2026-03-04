@@ -15,7 +15,12 @@ vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
     for _, diag in ipairs(diagnostics) do
         -- I prefer using builtins via `builtins.`, not just using em' straight up as nixpkgs
         -- redefines them and I want to know exactly what I'm using
-        if not diag.message:match("^this is a prelude builtin") then
+        if
+            not vim.list_contains({
+                "sema-primop-overridden",
+                "sema-primop-removed-prefix",
+            }, diag.user_data.lsp.code)
+        then
             table.insert(diags, diag)
         end
     end
