@@ -52,17 +52,24 @@ in
     enable = true;
     settings = {
       telemetry = false;
-      install = {
-        globalBinDir = "${config.xdg.dataHome}/bun/bin";
-        globalDir = "${config.xdg.dataHome}/bun/packages";
-        cache.dir = "${config.xdg.cacheHome}/bun/install";
-      };
+      install =
+        let
+          hours = 60 * 60;
+          days = 24 * hours;
+        in
+        {
+          minimumReleaseAge = 14 * days;
+          minimumReleaseAgeExcludes = [ "@types/bun" ];
+          globalBinDir = "${config.xdg.dataHome}/bun/bin";
+          globalDir = "${config.xdg.dataHome}/bun/packages";
+          cache.dir = "${config.xdg.cacheHome}/bun/install";
+        };
     };
   };
 
   home = {
     packages = with pkgs; [
-      nodePackages_latest.nodejs
+      nodejs_latest
       pnpm
       biome
       typescript
