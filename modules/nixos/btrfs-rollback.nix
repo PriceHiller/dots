@@ -46,6 +46,7 @@ in
         wantedBy = [ "initrd.target" ];
         before = [ "sysroot.mount" ];
         after = [ "initrd-root-device.target" ];
+        requires = [ "initrd-root-device.target" ];
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
         script = # bash
