@@ -44,7 +44,6 @@ in
       # More virtualization features
       "kvm"
       "kvm_intel"
-
     ];
     extraModprobeConfig = builtins.concatStringsSep "\n" [
       # Allow nested virtualization
@@ -65,6 +64,46 @@ in
       systemd = {
         tpm2.enable = true;
         enable = true;
+        dbus.enable = true;
+        emergencyAccess = true;
+        storePaths = [
+          "${pkgs.ncurses}/share/terminfo"
+        ];
+        managerEnvironment = {
+          TERM = "linux";
+          TERMINFO = "${pkgs.ncurses}/share/terminfo";
+        };
+        network.enable = true;
+        initrdBin = with pkgs; [
+          # Filesystem & Disk
+          coreutils
+          findutils
+          dosfstools # fsck.vfa
+          e2fsprogs # fsck.ext4, tune2fs
+          btrfs-progs
+          parted
+
+          # Search & Navigation
+          less
+          ripgrep
+          fzf
+
+          # Networking
+          iproute2
+          iputils # ping
+          curl
+          wpa_supplicant
+
+          # Editing
+          neovim
+
+          # Hardware Debugging
+          pciutils # lspci
+          usbutils # lsusb
+
+          # Process Debugging
+          strace
+        ];
       };
     };
   };
