@@ -136,7 +136,7 @@
             "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
             "format-disconnected": "{icon} Disconnected",
             "format-linked": " {ifname} | ↕ {bandwidthTotalBytes}",
-            "format-wifi": "{icon} {essid} | ↕ {bandwidthTotalBytes}",
+            "format-wifi": "{icon} {essid} ({signalStrength}%) | ↕ {bandwidthTotalBytes}",
             "format-ethernet": "{icon} {ipaddr}/{cidr} | ↕ {bandwidthTotalBytes}",
             "format-disabled": "󰀝 Wireless Networking Disabled",
             "tooltip-format": "{ifname}: {ipaddr}/{cidr} 󰌹 {gwaddr}",
