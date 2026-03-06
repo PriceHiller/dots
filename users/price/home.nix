@@ -31,6 +31,7 @@ in
   home = {
     stateVersion = "${osConfig.system.stateVersion}";
     language.base = "en_US.UTF-8";
+    preferXdgDirectories = true;
     packages =
       with pkgs;
       [
@@ -88,7 +89,6 @@ in
         maven
         pwvucontrol
         openssl
-        wget
         rsync
         readline
         gh
