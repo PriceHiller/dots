@@ -85,6 +85,7 @@ in
 
     sessionVariables = {
       ASTRO_TELEMETRY_DISABLED = 1;
+      NODE_REPL_HISTORY = "${config.xdg.stateHome}/node_repl_history";
       NPM_CONFIG_USERCONFIG = pkgs.writeText "npm_user_config" ''
         prefix=${npm_paths.prefix}
         cache=${npm_paths.cache}
