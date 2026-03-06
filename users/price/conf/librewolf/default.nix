@@ -26,8 +26,12 @@ in
     "application/x-extension-xhtml" = [ "librewolf.desktop" ];
     "application/x-extension-xht" = [ "librewolf.desktop" ];
   };
+  home.file.".librewolf/native-messaging-hosts".enable = false;
+  home.file.".mozilla/native-messaging-hosts".enable = false;
+  programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   programs.librewolf = {
     enable = true;
+    configPath = "${config.xdg.configHome}/librewolf/librewolf";
     profiles.default = {
       userChrome = (
         pkgs.runCommand "build-scss"
