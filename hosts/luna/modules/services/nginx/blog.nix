@@ -28,8 +28,38 @@
               extraConfig =
                 # nginx
                 ''
-                  try_files $uri $uri.html $uri/ =404;
-                  add_header Cache-Control "no-cache";
+                  # Redirect any `index.html` matches to the directory
+                  # > /some/path/index.html -> /some/path
+                  # > /index.html -> /
+                  rewrite ^(.*)/index.html$ $1 permanent;
+
+                  # Strip '.html' from the end of urls
+                  # > /some/file.html -> /some/file
+                  rewrite ^(/.*)\.html(\?.*)?$ $1$2 permanent;
+
+                  # Remove trailing slashes from URLs
+                  # > /some/path/ -> /some/path
+                  rewrite ^/(.*)/(\?.*)?$ /$1$2 permanent;
+
+                  # Redirect any raw `/index` to `/` if `/index` doesnt exist
+                  # > /some/path/index -> /some/path
+                  # > /index -> /
+                  # > (/path/index is a file & exists) /path/index -> /path/index
+                  if (!-e $request_filename) {
+                    rewrite ^(.*)/index$ /$1 permanent;
+                  }
+
+                  # Redirect any hits from `/articles/` to `/posts/` -- `/articles/` is no longer a valid URL
+                  # > /articles/ -> /posts/
+                  # > /articles/example-post -> /posts/example-post
+                  rewrite  ^/articles/(.*)$ /posts/$1 permanent;
+                  rewrite  ^/articles/?$ /posts/ permanent;
+
+                  index index.html;
+                  try_files $uri/index.html $uri.html $uri/ $uri =404;
+                  # Revalidate the cache in the background and use the stale cache for a short while
+                  # when the cache is being revalidated
+                  add_header Cache-Control "public, max-age=${builtins.toString (60 * 1)}, stale-while-revalidate=${builtins.toString (60 * 14)}";
                   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
                   add_header Cross-Origin-Opener-Policy "same-origin";
                   add_header X-Frame-Options "SAMEORIGIN";
