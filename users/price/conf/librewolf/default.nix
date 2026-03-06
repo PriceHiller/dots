@@ -28,6 +28,18 @@ in
   };
   home.file.".librewolf/native-messaging-hosts".enable = false;
   home.file.".mozilla/native-messaging-hosts".enable = false;
+  home.file.".librewolf/librewolf.overrides.cfg".enable = false;
+  xdg.configFile."librewolf/librewolf/librewolf.overrides.cfg".text =
+    let
+      mkOverridesFile = prefs: ''
+        ${lib.concatStrings (
+          lib.mapAttrsToList (name: value: ''
+            defaultPref("${name}", ${builtins.toJSON value});
+          '') prefs
+        )}
+      '';
+    in
+    mkOverridesFile config.programs.librewolf.settings;
   programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   programs.librewolf = {
     enable = true;
