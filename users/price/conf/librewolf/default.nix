@@ -45,6 +45,7 @@ in
       );
 
     };
+    # Most preferences are defined in https://searchfox.org/firefox-release/source/modules/libpref/init/StaticPrefList.yaml
     settings =
       clib.attrsToMozillaPref {
         devtools.debugger.remote-enabled = true;
@@ -52,6 +53,9 @@ in
         identity.fxaccounts.enabled = true;
         webgl.disabled = false;
         browser = {
+          cache = {
+            disk.enable = true;
+          };
           policies.runOncePerModification = {
             extensionsInstall = [ ];
             removeSearchEngines = [
