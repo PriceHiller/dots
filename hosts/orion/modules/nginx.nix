@@ -8,6 +8,8 @@
       "[::1]"
     ];
     recommendedProxySettings = true;
+    recommendedBrotliSettings = true;
+    recommendedUwsgiSettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     recommendedTlsSettings = true;
