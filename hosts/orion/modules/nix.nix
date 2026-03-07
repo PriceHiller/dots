@@ -65,6 +65,7 @@ in
         "dynamic-derivations"
       ];
       use-xdg-base-directories = true;
+      allowed-users = [ "@wheel" ];
       trusted-users = [ "@wheel" ];
       substituters = [
         "https://nix.cache.pricehiller.com"
