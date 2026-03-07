@@ -268,6 +268,11 @@ in
         };
         nginx.virtualHosts."${git_host}" = {
           forceSSL = true;
+          extraConfig =
+            # nginx
+            ''
+              client_max_body_size 10g;
+            '';
           locations = {
             "/" = {
               proxyPass = "http://127.0.0.1${builtins.toString config.services.anubis.instances.forgejo.settings.BIND}";
