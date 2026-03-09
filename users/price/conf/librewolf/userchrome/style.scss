@@ -10,3 +10,8 @@
 #vertical-spacer {
   display: none !important;
 }
+
+// Make the download button more visible in dark mode
+#downloads-button {
+  filter: brightness(0) invert(1);
+}
