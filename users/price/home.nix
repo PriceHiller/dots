@@ -160,7 +160,11 @@ in
   xdg = {
     enable = true;
     mime.enable = true;
-    systemDirs.data = [ "${config.home.profileDirectory}/share/" ];
+    systemDirs.data = [
+      "${config.home.profileDirectory}/share/"
+      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+    ];
     cacheHome = "${config.home.homeDirectory}/.local/cache";
     mimeApps.enable = true;
   };
