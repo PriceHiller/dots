@@ -24,6 +24,7 @@
           "keyd"
           "lpadmin"
           "systemd-journal"
+          "fuse"
           (lib.mkIf config.virtualisation.docker.enable "docker")
           (lib.mkIf config.programs.wireshark.enable "wireshark")
         ]
@@ -31,6 +32,9 @@
           "libvirtd"
           "qemu-libvirtd"
           "kvm"
+        ])
+        (lib.mkIf config.services.davfs2.enable [
+          config.services.davfs2.davGroup
         ])
       ];
       group = "price";
