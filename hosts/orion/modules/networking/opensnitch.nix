@@ -9,6 +9,14 @@
   services.opensnitch = {
     enable = true;
     settings = {
+      Rules = {
+        EnableChecksums = true;
+      };
+      Stats = {
+        MaxEvents = 10000;
+        MaxStats = 1000;
+      };
+      ProcMonitorMethod = "ebpf";
       Firewall = config.networking.firewall.backend;
     };
     rules =
