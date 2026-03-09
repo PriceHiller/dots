@@ -3,15 +3,6 @@
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
   modifications = final: prev: {
-    equicord = prev.equicord.overrideAttrs (oldAttrs: {
-      name = "equicord-with-user-plugins";
-      patchPhase = (oldAttrs.patchPhase or "") + ''
-        ls -alh
-        ls -alh src
-        mkdir -p ./src/userplugins
-        cp -r ${./equicord/userplugins}/* ./src/userplugins/
-      '';
-    });
     lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
       postInstall = ''
         wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
