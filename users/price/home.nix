@@ -111,7 +111,6 @@ in
         mullvad-vpn
         easyeffects
         egl-wayland
-        helvum
         brightnessctl
         spotify
         nix-output-monitor
