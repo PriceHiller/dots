@@ -109,8 +109,9 @@ in
           import = "(data)/common/allow-private-addresses.yaml";
         }
         {
-          name = "Block clients lacking modern Sec-Fetch-* headers";
+          name = "Block clients lacking modern Sec-Fetch-* headers accessing `/.cpr`";
           action = "DENY";
+          path_regex = "^/.cpr/.*$";
           expression.any = [
             ''!("Sec-Fetch-Dest" in headers)''
             ''!("Sec-Fetch-Mode" in headers)''
