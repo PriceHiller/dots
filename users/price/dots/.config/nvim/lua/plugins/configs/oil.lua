@@ -11,6 +11,7 @@ return {
                 keymaps = {
                     ["<BS>"] = { "actions.parent", mode = "n" },
                 },
+                columns = {},
             })
         end,
         keys = {
