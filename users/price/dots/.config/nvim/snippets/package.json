@@ -9,9 +9,10 @@
       },
       {
         "language": [
-          "markdown"
+          "markdown",
+          "mdx"
         ],
-        "path": "./markdown.json.json"
+        "path": "./markdown.json"
       }
     ]
   },

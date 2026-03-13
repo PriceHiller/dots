@@ -1,14 +1,17 @@
 {
   "details": {
+    "scope": "markdown,mdx",
+    "prefix": "details",
     "body": [
       "<details>",
       "<summary>$1</summary>",
       "$0",
       "</details>"
-    ],
-    "prefix": "details"
+    ]
   },
   "postheader": {
+    "scope": "markdown,mdx",
+    "prefix": "postheader",
     "body": [
       "---",
       "title: ${1:title}",
@@ -16,7 +19,6 @@
       "tags:",
       "  - ${3:tag}",
       "---"
-    ],
-    "prefix": "postheader"
+    ]
   }
 }
