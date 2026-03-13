@@ -51,6 +51,7 @@ in
       description = "Webdav Mount for '${webdav-host}'";
       where = mount-path;
       automountConfig.TimeoutIdleSec = "30min";
+      wantedBy = [ "multi-user.target" ];
     }
   ];
 }
