@@ -109,11 +109,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1773422284,
-        "narHash": "sha256-eDJRcCr+ZlIOsWvkHfXAmJ99WYT5GC1IPDdsgKMCdM0=",
+        "lastModified": 1773423346,
+        "narHash": "sha256-a1tQ7N7rl4PHxl7IvgTlVHpQRGZyZhwEJYt+hNa09Cs=",
         "ref": "refs/heads/main",
-        "rev": "26e14b8fca093405c4e3de7c17dcfad6f06665cf",
-        "revCount": 92,
+        "rev": "d85f2ed67890581130fc6ef00a5ff4900913bc8d",
+        "revCount": 93,
         "submodules": true,
         "type": "git",
         "url": "https://git.pricehiller.com/price/Blog"
