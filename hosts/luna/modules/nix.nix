@@ -33,6 +33,7 @@ in
       # If we have large-ish build artifacts in `tmpfs` that can quickly exceed the storage size of
       # the volume and cause the nix daemon to fail due a lack of memory
       build-dir = nix-build-dir;
+      max-jobs = "auto";
       experimental-features = [
         "pipe-operators"
         "nix-command"
