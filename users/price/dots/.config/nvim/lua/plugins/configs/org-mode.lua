@@ -206,11 +206,7 @@ return {
         "nvim-orgmode/telescope-orgmode.nvim",
         dependencies = {
             "nvim-orgmode/orgmode",
-            "nvim-telescope/telescope.nvim",
-        },
-        cmd = {
-            "Telescope orgmode search_headings",
-            "Telescope orgmode refile_heading",
+            "folke/snacks.nvim",
         },
         keys = {
             { "<leader>os", desc = "> Orgmode Picker" },
@@ -222,7 +218,7 @@ return {
                     local snacks = require("snacks")
 
                     snacks.picker({
-                        title = "Org Headlnes",
+                        title = "Search Snippets",
                         format = "file",
                         formatters = {
                             file = { filename_only = true },
@@ -285,76 +281,37 @@ return {
                 "<leader>osh",
                 desc = "Orgmode Picker: Search Headings",
                 function()
-                    local org = require("orgmode")
-                    local snacks = require("snacks")
-
-                    snacks.picker({
-                        title = "Org Headlnes",
-                        format = "file",
-                        formatters = {
-                            file = { filename_only = true },
-                            text = { ft = "org" },
-                        },
-                        finder = function()
-                            ---@type snacks.picker.Item[]
-                            local all_headlines = {}
-
-                            for _, file in ipairs(org.files:all()) do
-                                for _, headline in ipairs(file:get_headlines()) do
-                                    local text = vim.iter({
-                                        string.rep("*", headline:get_level()),
-                                        headline:get_todo(),
-                                        (function()
-                                            local priority = headline:get_priority()
-                                            if priority ~= "" then
-                                                return ("[#%s]"):format(priority)
-                                            end
-                                            return nil
-                                        end)(),
-                                        headline:get_title(),
-                                        (function()
-                                            local tags, _ = headline:tags_to_string()
-                                            return tags
-                                        end)(),
-                                    }):join(" ")
-
-                                    local score = 0
-                                    if headline:is_todo() and not headline:is_done() then
-                                        score = 100
-                                    end
-                                    ---@type snacks.picker.Item
-                                    local item = {
-                                        file = file.filename,
-                                        line = text,
-                                        text = text,
-                                        score = score,
-                                        idx = score,
-                                        pos = { headline:get_range().start_line, headline:get_range().end_line },
-                                    }
-
-                                    table.insert(all_headlines, item)
-                                end
-                            end
-                            return all_headlines
-                        end,
-                    })
+                    require("telescope-orgmode").search_headings()
                 end,
             },
             {
                 "<leader>osr",
-                ":Telescope orgmode refile_heading<CR>",
                 desc = "Orgmode Picker: Refile Heading",
                 silent = true,
+                function()
+                    require("telescope-orgmode").refile_heading()
+                end,
             },
             {
                 "<leader>osi",
-                ":Telescope orgmode insert_link<CR>",
                 desc = "Orgmode Picker: Insert Link",
                 silent = true,
+                function()
+                    require("telescope-orgmode").insert_link()
+                end,
+            },
+            {
+                "<leader>ost",
+                desc = "Orgmode Picker: Search Tags",
+                silent = true,
+                function()
+                    require("telescope-orgmode").search_tags()
+                end,
             },
         },
         config = function()
-            require("telescope").load_extension("orgmode")
+            local tom = require("telescope-orgmode")
+            tom.setup({ adapter = "snacks" })
         end,
     },
 }
