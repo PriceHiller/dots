@@ -31,7 +31,7 @@ in
   config =
     let
       git_host = "git.${config.networking.domain}";
-      runner = pkgs.dockerTools.buildLayeredImage {
+      runner = pkgs.dockerTools.streamLayeredImage {
         name = "nix-runner";
         tag = "latest";
         created = "@" + builtins.toString self.lastModified;
@@ -77,7 +77,7 @@ in
     {
       virtualisation.oci-containers.containers = {
         ${runner.imageName} = {
-          imageFile = runner;
+          imageStream = runner;
           image = "${runner.imageName}:${runner.imageTag}";
         };
       };
