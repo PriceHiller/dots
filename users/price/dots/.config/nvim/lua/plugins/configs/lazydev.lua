@@ -25,6 +25,7 @@ return {
                 { path = "busted-types/library", words = { "describe" } },
                 { path = "${3rd}/luv/library", words = { "vim%.uv", "vim%.loop" } },
                 { path = "wezterm-types", mods = { "wezterm" } },
+                { path = "nvim-lspconfig", words = { "lspconfig" } },
             },
         },
         dependencies = {

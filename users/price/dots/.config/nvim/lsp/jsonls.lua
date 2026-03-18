@@ -12,6 +12,7 @@ local get_snippet_or_err = function(name)
 end
 
 return {
+    ---@type lspconfig.settings.jsonls
     settings = {
         json = {
             schemas = schemastore.json.schemas({

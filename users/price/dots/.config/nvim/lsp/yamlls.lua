@@ -1,4 +1,5 @@
 return {
+    ---@type lspconfig.settings.yamlls
     settings = {
         redhat = {
             telemetry = {
