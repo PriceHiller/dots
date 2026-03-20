@@ -1,0 +1,10 @@
+{
+  "nix-bash-shebang + nix-shebang + nixsh": {
+    "body": "#!/usr/bin/env -S nix shell nixpkgs#bash --command bash",
+    "prefix": [
+      "nix-bash-shebang",
+      "nix-shebang",
+      "nixsh"
+    ]
+  }
+}
