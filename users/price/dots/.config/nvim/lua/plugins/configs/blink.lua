@@ -2,7 +2,7 @@ return {
     {
         "saghen/blink.cmp",
         lazy = false, -- lazy loading handled internally
-        build = "nix run '.#build-plugin'",
+        build = "nix --accept-flake-config run '.#build-plugin'",
         dependencies = {
             { "PriceHiller/blink-nix.nvim" },
             "rafamadriz/friendly-snippets",
