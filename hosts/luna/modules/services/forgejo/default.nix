@@ -100,6 +100,19 @@ in
                 import = "(data)/clients/git.yaml";
               }
               {
+                name = "Allow access to actions API";
+                action = "ALLOW";
+                expression.all = [
+                  ''!("priority" in headers)''
+                  ''!("accept_language" in headers)''
+                  ''"User-Agent" in headers''
+                  ''userAgent.contains("connect-go/")''
+                  ''"Content-Type" in headers''
+                  ''(headers["Content-Type"] == "application/proto" || headers["Content-Type"] == "application/json")''
+                  ''path.startsWith("/api/")''
+                ];
+              }
+              {
                 name = "Block clients lacking modern Sec-Fetch-* headers";
                 action = "DENY";
                 expression.any = [
