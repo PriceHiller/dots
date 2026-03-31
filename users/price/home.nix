@@ -35,6 +35,7 @@ in
     packages =
       with pkgs;
       [
+        prismlauncher
         ciscoPacketTracer9
         anki
         terraform
