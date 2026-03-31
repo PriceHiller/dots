@@ -171,7 +171,7 @@
           {
             created = "2024-05-31T23:39:28+02:00";
             updated = "2024-05-31T23:39:28+02:00";
-            name = "000-allow-${user}-user";
+            name = "0000-allow-${user}-nix-build-user";
             description = "Allow All Connections for Nix Build Users `nixbld*`";
             action = "allow";
             duration = "always";
