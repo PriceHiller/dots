@@ -126,4 +126,13 @@
 	if command -v rsync >/dev/null 2>&1; then
 		alias rs=rsync --info=PROGRESS2 --human-readable
 	fi
+
+    if command -v python >/dev/null 2>&1; then
+        alias py=python
+    fi
+
+    if command -v python3 > /dev/null 2>&1; then
+        alias py=python3
+        alias py3=python3
+    fi
 }
