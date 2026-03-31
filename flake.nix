@@ -237,7 +237,7 @@
                   }
                   inputs.nix-post-build-hook-queue.nixosModules.default
                   inputs.nixos-facter-modules.nixosModules.facter
-                  inputs.nixos-hardware.nixosModules.dell-xps-15-9530
+                  inputs.nixos-hardware.nixosModules.dell-xps-15-9530-nvidia
                   inputs.lanzaboote.nixosModules.lanzaboote
                   inputs.impermanence.nixosModules.impermanence
                   inputs.agenix.nixosModules.default
