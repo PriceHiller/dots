@@ -9,7 +9,6 @@ return {
                     height = 0.85,
                     width = 0.90,
                 },
-                jsonFormatter = "jq",
             })
         end,
     },
