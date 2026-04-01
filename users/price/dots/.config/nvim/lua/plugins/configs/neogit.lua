@@ -9,6 +9,7 @@ return {
         config = function()
             local neogit = require("neogit")
             neogit.setup({
+                treesitter_diff_highlight = true,
                 disable_insert_on_commit = true,
                 disable_commit_confirmation = true,
                 disable_builtin_notifications = true,
