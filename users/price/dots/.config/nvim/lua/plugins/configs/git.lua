@@ -1,3 +1,5 @@
+local utils = require("utils.funcs")
+
 return {
     {
         "sindrets/diffview.nvim",
@@ -22,10 +24,15 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         lazy = false,
+        cmd = { "Gitsigns" },
         keys = {
             { "]g", "<cmd>Gitsigns next_hunk<CR><CR>", desc = "Gitsigns: Next Hunk" },
             { "[g", "<cmd>Gitsigns prev_hunk<CR><CR>", desc = "Gitsigns: Prev Hunk" },
         },
+
+        init = function()
+            utils.alias_cmd("Gs", "Gitsigns")
+        end,
         config = function()
             require("gitsigns").setup({
                 current_line_blame = true,

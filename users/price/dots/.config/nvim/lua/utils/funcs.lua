@@ -157,4 +157,27 @@ U.get_program_path = function(program)
     return path
 end
 
+---Create a command alias via abbreviations
+---@param alias string|string[] The alias name(s), if a list aliases all items in the list to the cmd
+---@param cmd string The command to alias to
+U.alias_cmd = function(alias, cmd)
+    ---@class CmdAlias
+    ---@field cmd string The original command this alias expands to
+    ---@field expand fun(): string The expansion function used by cnoreabbrev
+
+    ---@type table<string, CmdAlias>
+    _G._cmd_aliases = _G._cmd_aliases or {}
+
+    _G._cmd_aliases[alias] = {
+        cmd = cmd,
+        expand = function()
+            if vim.fn.getcmdtype() == ":" and vim.fn.getcmdline():match("^%A*" .. alias .. "$") then
+                return cmd
+            end
+            return alias
+        end,
+    }
+    vim.cmd(("cnoreabbrev <expr> %s v:lua._cmd_aliases.%s.expand()"):format(alias, alias))
+end
+
 return U
