@@ -17,7 +17,7 @@
   "freetype": {
     "url": "https://chromium.googlesource.com/chromium/src/third_party/freetype2.git",
     "rev": "b91f75bd02db43b06d634591eb286d3eb0ce3b65",
-    "hash": "sha256-MQwGy7k1BhbQeCouQb35eDh9TeABz4M5wpJ37keDlVE="
+    "hash": "sha256-Y8CesBhk3q6YluLkcSv0EbQQNTSrmo5e96P33reO56A="
   },
   "harfbuzz": {
     "url": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
