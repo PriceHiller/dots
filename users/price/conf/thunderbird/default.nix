@@ -223,7 +223,7 @@ in
             type = "81";
             action = "AddTag";
             actionValue = "usaa";
-            condition = "AND (all addresses,contains,usaa)";
+            condition = "OR (all addresses,contains,usaa) OR (subject,contains,usaa) OR (subject,contains,USAA)";
           }
           {
             name = "Tag Github Emails";
