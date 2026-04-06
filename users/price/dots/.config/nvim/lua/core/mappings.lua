@@ -338,6 +338,11 @@ M.setup = function()
         vim.o.operatorfunc = "v:lua._gw_operatorfunc"
         return "g@"
     end, { expr = true, desc = "Ignore `indentexpr` for `gw`" })
+
+    vim.keymap.set("n", "<CR>", "van", { remap = true, desc = "Expand Incremental Selection" })
+    vim.keymap.set("v", "<CR>", "an", { remap = true, desc = "Expand Incremental Selection" })
+    vim.keymap.set("n", "<BS>", "vin", { remap = true, desc = "Decrease Incremental Selection" })
+    vim.keymap.set("v", "<BS>", "in", { remap = true, desc = "Decrease Incremental Selection" })
 end
 
 return M

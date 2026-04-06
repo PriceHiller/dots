@@ -169,42 +169,6 @@ return {
             })
         end,
     },
-
-    {
-        "shushtain/nvim-treesitter-incremental-selection",
-        keys = {
-            {
-                "<CR>",
-                function()
-                    require("nvim-treesitter-incremental-selection").init_selection()
-                end,
-            },
-            {
-                "<BS>",
-                mode = { "v" },
-                function()
-                    require("nvim-treesitter-incremental-selection").decrement_node()
-                end,
-            },
-            {
-                "<CR>",
-                mode = { "v" },
-                function()
-                    require("nvim-treesitter-incremental-selection").increment_node()
-                end,
-            },
-        },
-        config = function()
-            local tsis = require("nvim-treesitter-incremental-selection")
-
-            tsis.setup({
-                ignore_injections = false,
-                loop_siblings = false,
-                fallback = true,
-                quiet = false,
-            })
-        end,
-    },
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
