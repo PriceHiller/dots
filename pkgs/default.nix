@@ -8,7 +8,6 @@
       stylua
       gnugrep
       nixfmt
-      nodePackages.prettier
       shfmt
     ];
     text = (
