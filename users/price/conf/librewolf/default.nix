@@ -11,21 +11,25 @@ let
   sslKeyLogFilePath = "${config.xdg.cacheHome}/SSLKEYLOGFILE.log";
 in
 {
-  xdg.mimeApps.defaultApplications = lib.mkIf (config.programs.librewolf.enable) {
-    "default-web-browser" = [ "librewolf.desktop" ];
-    "text/html" = [ "librewolf.desktop" ];
-    "x-scheme-handler/http" = [ "librewolf.desktop" ];
-    "x-scheme-handler/https" = [ "librewolf.desktop" ];
-    "x-scheme-handler/about" = [ "librewolf.desktop" ];
-    "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
-    "x-scheme-handler/chrome" = [ "librewolf.desktop" ];
-    "application/x-extension-htm" = [ "librewolf.desktop" ];
-    "application/x-extension-html" = [ "librewolf.desktop" ];
-    "application/x-extension-shtml" = [ "librewolf.desktop" ];
-    "application/xhtml+xml" = [ "librewolf.desktop" ];
-    "application/x-extension-xhtml" = [ "librewolf.desktop" ];
-    "application/x-extension-xht" = [ "librewolf.desktop" ];
-  };
+  xdg.mimeApps.defaultApplications =
+    let
+      librewolfDesktop = "io.gitlab.librewolf-community.desktop";
+    in
+    lib.mkIf (config.programs.librewolf.enable) {
+      "default-web-browser" = [ librewolfDesktop ];
+      "text/html" = [ librewolfDesktop ];
+      "x-scheme-handler/http" = [ librewolfDesktop ];
+      "x-scheme-handler/https" = [ librewolfDesktop ];
+      "x-scheme-handler/about" = [ librewolfDesktop ];
+      "x-scheme-handler/unknown" = [ librewolfDesktop ];
+      "x-scheme-handler/chrome" = [ librewolfDesktop ];
+      "application/x-extension-htm" = [ librewolfDesktop ];
+      "application/x-extension-html" = [ librewolfDesktop ];
+      "application/x-extension-shtml" = [ librewolfDesktop ];
+      "application/xhtml+xml" = [ librewolfDesktop ];
+      "application/x-extension-xhtml" = [ librewolfDesktop ];
+      "application/x-extension-xht" = [ librewolfDesktop ];
+    };
   home.file.".librewolf/native-messaging-hosts".enable = false;
   home.file.".mozilla/native-messaging-hosts".enable = false;
   home.file.".librewolf/librewolf.overrides.cfg".enable = false;
