@@ -28,7 +28,7 @@
           updated = "2026-01-08T13:25:44-06:00";
           action = "allow";
           duration = "always";
-          precendence = false;
+          precendence = true;
           nolog = false;
           operator = {
             type = "simple";
@@ -49,7 +49,7 @@
             updated = "2026-01-08T13:25:44-06:00";
             action = "allow";
             duration = "always";
-            precendence = false;
+            precendence = true;
             nolog = false;
             operator = {
               type = "regexp";
@@ -92,6 +92,8 @@
         (allowPackage pkgs.spotify)
         (allowPackage pkgs.thunderbird)
         (allowPackage pkgs.git)
+        (allowPackage pkgs.librewolf)
+        (allowPackage pkgs.ungoogled-chromium)
         (allowExe pkgs.nsncd)
         (allowExe config.services.dnscrypt-proxy.package)
         (allowExe config.services.dnsmasq.package)
@@ -102,9 +104,40 @@
         (allowExe pkgs.dig)
         (allowPackage pkgs.fwupd)
         (allowExe pkgs.strawberry)
-        (allowPackage pkgs.equibop)
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
         (allowPackage config.services.avahi.package)
+        {
+          created = "2025-04-09T23:21:35-06:00";
+          updated = "2025-04-09T23:21:35-06:00";
+          name = "000-allow-gh";
+          description = "Allow gh cli to access Github API";
+          action = "allow";
+          duration = "always";
+          operator = {
+            operand = "list";
+            type = "list";
+            list = [
+              {
+                operand = "dest.host";
+                data = "api.github.com";
+                type = "simple";
+                list = null;
+                sensitive = false;
+              }
+              {
+                operand = "process.path";
+                data = (lib.getExe' pkgs.gh "gh");
+                type = "simple";
+                list = null;
+                sensitive = false;
+              }
+            ];
+            sensitive = false;
+          };
+          enabled = true;
+          precedence = true;
+          nolog = false;
+        }
         {
           created = "2025-04-09T23:21:35-06:00";
           updated = "2025-04-09T23:21:35-06:00";
