@@ -11,6 +11,7 @@
     nixpkgs-unstable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixpkgs-unstable";
     nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.11";
 
+    nix-bwrapper.url = "github:Naxdy/nix-bwrapper";
     harmonia.url = "github:nix-community/harmonia";
     nix-post-build-hook-queue = {
       url = "github:newam/nix-post-build-hook-queue";
@@ -247,6 +248,7 @@
                       nixpkgs.overlays = [
                         inputs.neovim-nightly-overlay.overlays.default
                         inputs.nix-post-build-hook-queue.overlays.default
+                        inputs.nix-bwrapper.overlays.default
                         self.overlays.modifications
                         self.overlays.additions
                       ];
