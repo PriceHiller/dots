@@ -115,7 +115,6 @@ in
         easyeffects
         egl-wayland
         brightnessctl
-        spotify
         nix-output-monitor
         sops
         tree-sitter
