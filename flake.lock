@@ -668,11 +668,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776695811,
-        "narHash": "sha256-UPO3SFTbmxTOiioO7j1d1Unus63+jO/6mNNS+lsgjBQ=",
+        "lastModified": 1776701552,
+        "narHash": "sha256-CCRzOEFg6JwCdZIR5dLD0ypah5/e2JQVuWQ/l3rYrPY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0a8d50edf28d537ce7538fbbf207fa7939d41abc",
+        "rev": "c81775b640d4507339d127f5adb4105f6015edf2",
         "type": "github"
       },
       "original": {
@@ -777,10 +777,10 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1776620869,
-        "narHash": "sha256-lv4B7xOx8Wb028n6hzdhkHxzMjSefrVMoptGENsikqQ=",
+        "lastModified": 1776700590,
+        "narHash": "sha256-E2pfXLXfGiIm/vT7oylnIieXWY5E+zkuQ3wxXldyx9M=",
         "ref": "refs/heads/main",
-        "rev": "a360c31d0434898888e710f4a5f560200f50cecf",
+        "rev": "e12d2b7cc846485a172444c2e5288c55fa3a3c59",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1162,10 +1162,10 @@
         "nixpkgs-regression": "nixpkgs-regression"
       },
       "locked": {
-        "lastModified": 1776625560,
-        "narHash": "sha256-Najlrl7f7FlDSz+0/NnVdkAp7KY+2MRcR7dMaXpD2+E=",
+        "lastModified": 1776697569,
+        "narHash": "sha256-gR7c7mjFCI7JhdiwjIZpyoyq9un7LbK88oxsGGTokZ0=",
         "ref": "refs/heads/master",
-        "rev": "0baf843542649eb0c0786acaaebd98c134ca660a",
+        "rev": "f77a33ba444243419e895977ca68d8a86e62156c",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/nixos/nix"
