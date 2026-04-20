@@ -36,6 +36,7 @@
   programs.neovim = {
     enable = true;
     package = pkgs.neovim;
+    sideloadInitLua = true;
     extraWrapperArgs = [
       "--suffix"
       "LD_LIBRARY_PATH"
