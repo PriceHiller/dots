@@ -1,9 +1,12 @@
 return {
     {
         "saghen/blink.cmp",
-        lazy = false, -- lazy loading handled internally
-        build = "nix --accept-flake-config run '.#build-plugin'",
+        lazy = false,
+        build = function()
+            require("blink.cmp").build():wait(60000)
+        end,
         dependencies = {
+            "saghen/blink.lib",
             { "PriceHiller/blink-nix.nvim" },
             "rafamadriz/friendly-snippets",
             "erooke/blink-cmp-latex",
@@ -27,6 +30,18 @@ return {
             },
         },
         config = function()
+            -- HACK: Some blink community sources depend on the old v1 lib that blink shipped
+            -- with. Shim in the new `blink.lib` and functions that those community sources need
+            -- from the v1 stuff until they're updated.
+            package.loaded["blink.cmp.lib.async"] = (function()
+                local task = require("blink.lib.task")
+                task.empty = task.resolve
+                task.on_completion = task.on_resolve
+                task.on_failure = task.on_reject
+                task.task = task
+                return task
+            end)()
+
             ---@class CustomKindMapItem
             ---@field icon string
             ---@field hlgroup string
@@ -237,7 +252,7 @@ return {
                         winblend = vim.g.neovide and 90,
                         max_height = vim.opt.pumheight:get(),
                         draw = {
-                            padding = { 0, 1 },
+                            padding = 1,
                             columns = { { "kind_icon" }, { "label", gap = 1 } },
                             components = {
                                 label = {
