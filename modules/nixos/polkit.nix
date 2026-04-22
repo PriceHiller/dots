@@ -4,29 +4,27 @@
 let
   cfg = config.ext.polkit;
 
-  ruleSubmodule = lib.types.submodule (
-    { ... }:
-    {
-      options = {
-        enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = "Whether to install this polkit rule.";
-        };
-
-        text = lib.mkOption {
-          type = lib.types.lines;
-          description = ''
-            Text of the polkit rule
-
-            See https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html#polkit-rules
-          '';
-        };
+  ruleSubmodule = lib.types.submodule {
+    options = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether to install this polkit rule.";
       };
-    }
-  );
+
+      text = lib.mkOption {
+        type = lib.types.lines;
+        description = "JavaScript source of the polkit rule.";
+      };
+    };
+  };
 
   ruleType = lib.types.coercedTo lib.types.lines (text: { inherit text; }) ruleSubmodule;
+
+  enabledRules = lib.filterAttrs (_: r: r.enable) cfg.rules;
+
+  # attr name -> /etc path used as the environment.etc key
+  etcPathFor = name: "polkit-1/rules.d/${name}.rules";
 in
 {
   options.ext.polkit = {
@@ -48,17 +46,16 @@ in
       '';
       description = ''
         Polkit rules to install under /etc/polkit-1/rules.d/.
-        The attribute name is used as the file name (with `.rules` appended).
-        A value may be a plain string (the rule text) or an attrset
-        `{ enable, text }`.
+        Only takes effect when `security.polkit.enable` is true.
       '';
     };
   };
 
   config = (lib.mkIf config.security.polkit.enable) {
     environment.etc =
-      cfg.rules
-      |> lib.filterAttrs (_: r: r.enable)
-      |> lib.mapAttrs' (name: r: lib.nameValuePair "polkit-1/rules.d/${name}.rules" { text = r.text; });
+      enabledRules |> lib.mapAttrs' (name: r: lib.nameValuePair (etcPathFor name) { text = r.text; });
+
+    systemd.services.polkit.reloadTriggers =
+      enabledRules |> lib.attrNames |> map (name: config.environment.etc.${etcPathFor name}.source);
   };
 }
