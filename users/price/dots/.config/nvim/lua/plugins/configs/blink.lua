@@ -229,6 +229,9 @@ return {
 
                 ---@diagnostic disable-next-line: missing-fields
                 completion = {
+                    trigger = {
+                        show_on_backspace_in_keyword = true,
+                    },
                     documentation = {
                         auto_show = true,
                         auto_show_delay_ms = 50,
