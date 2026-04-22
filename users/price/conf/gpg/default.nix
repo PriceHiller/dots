@@ -7,6 +7,7 @@
     mutableTrust = false;
     scdaemonSettings = {
       disable-ccid = true;
+      pcsc-shared = true;
     };
     publicKeys = [
       {
