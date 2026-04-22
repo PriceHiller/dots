@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   cert-file = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
 in
@@ -9,19 +9,19 @@ in
         "${cert-file}"
       ];
     };
-    polkit = {
+    sudo-rs = {
       enable = true;
-    };
-    sudo = {
       execWheelOnly = true;
-      extraConfig =
+      wheelNeedsPassword = false;
+      extraConfig = lib.mkMerge [
         # This is done to ensure `SSH_AUTH_SOCK` is picked up from the user session -- useful for nix
         # invocations that look up submodules.
         #
         # See https://pricehiller.com/posts/private-git-submodule-authentication-and-nixos-rebuilds
         ''
           Defaults env_keep+=SSH_AUTH_SOCK
-        '';
+        ''
+      ];
     };
   };
   boot.kernel.sysctl = {

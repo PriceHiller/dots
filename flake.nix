@@ -216,6 +216,7 @@
                   ./modules/nixos/journald.nix
                   ./modules/nixos/logviewer.nix
                   ./modules/nixos/persistence.nix
+                  ./modules/nixos/polkit.nix
                   ./modules/nixos/dns
                   inputs.home-manager.nixosModules.home-manager
                   {

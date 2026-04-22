@@ -5,10 +5,6 @@
   ...
 }:
 {
-  security.sudo = {
-    wheelNeedsPassword = false;
-    execWheelOnly = true;
-  };
   users.groups = {
     price = { };
     lpadmin = { };
