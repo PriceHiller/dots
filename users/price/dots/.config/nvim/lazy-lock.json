@@ -3,7 +3,7 @@
   "alpha-nvim": { "branch": "main", "commit": "6c6a89d5b068b5251c8bdf0dd57bb921bcfeeb09" },
   "blink-cmp-latex": { "branch": "main", "commit": "4f2910b98dabed17a1667ab806354faa8763098e" },
   "blink-emoji.nvim": { "branch": "master", "commit": "dff709139ad5389fb55ebab026e75278a12b325a" },
-  "blink-nix.nvim": { "branch": "main", "commit": "beea8e16535206e390d569bfd85274225b8ce0a0" },
+  "blink-nix.nvim": { "branch": "main", "commit": "189414c61fef9955f16d26528961ba046a64f4cc" },
   "blink-ripgrep.nvim": { "branch": "main", "commit": "d84a20e765fdc9cc8c0775708e083e7185654527" },
   "blink.cmp": { "branch": "main", "commit": "61a1391399076ca37f06f63cca0a8fe22b267463" },
   "blink.lib": { "branch": "main", "commit": "4b9a304a1d715c180c8a0d1db7b76a8c6868ed8f" },
