@@ -11,7 +11,7 @@ in
     settings = {
       general = {
         disable_loading_bar = true;
-        grace = 0;
+        grace = 30;
         ignore_empty_input = true;
         hide_cursor = true;
         no_fade_in = false;
