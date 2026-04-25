@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }:
 {
@@ -38,6 +39,10 @@
     package = pkgs.neovim;
     sideloadInitLua = true;
     extraWrapperArgs = [
+      # Use `--run`, to expand Agenix's `${XDG_RUNTIME_DIR}` to a full path
+      "--run"
+      ''export OPENROUTER_API_KEY_FILE="$(echo "${config.age.secrets.openrouter-api-key.path}")"''
+
       "--suffix"
       "LD_LIBRARY_PATH"
       ":"
@@ -67,9 +72,11 @@
   home = {
     sessionVariables = {
       NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = 1;
+      OPENROUTER_API_KEY_FILE = config.age.secrets.openrouter-api-key.path;
     };
     packages = with pkgs; [
       neovide
+      opencode
       bun
       flutter
       jdk

@@ -17,6 +17,3 @@ vim.api.nvim_create_autocmd("BufReadPre", {
         end)
     end,
 })
-
--- Keymap to easily invoke `Z` user command
-vim.keymap.set("n", "<leader>z", ":Z ", { silent = true, desc = "Invoke `Z`" })
