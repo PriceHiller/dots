@@ -28,7 +28,7 @@
           updated = "2026-01-08T13:25:44-06:00";
           action = "allow";
           duration = "always";
-          precendence = true;
+          precedence = true;
           nolog = false;
           operator = {
             type = "simple";
@@ -49,7 +49,7 @@
             updated = "2026-01-08T13:25:44-06:00";
             action = "allow";
             duration = "always";
-            precendence = true;
+            precedence = true;
             nolog = false;
             operator = {
               type = "regexp";
@@ -88,7 +88,6 @@
           allowProg name (lib.getExe' package exeName);
       in
       [
-        (allowPackage pkgs.git)
         (allowPackage pkgs.spotify)
         (allowPackage pkgs.thunderbird)
         (allowPackage pkgs.git)
