@@ -65,6 +65,7 @@ in
         nmap
         traceroute
         mtr
+        bubblewrap
       ];
     };
 
@@ -97,6 +98,7 @@ in
           };
         };
         shellAliases = {
+          bwrap-cwd = ''bwrap --ro-bind /nix/store /nix/store --ro-bind-try /etc /etc --ro-bind-try /run/current-system /run/current-system --ro-bind-try /usr/bin/env /usr/bin/env --proc /proc --dev /dev --tmpfs /tmp --bind "$PWD" "$PWD" --chdir "$PWD" --unshare-all --die-with-parent --setenv PATH "$PATH"'';
           ex = "unblob";
           ls = "eza --icons=always --group-directories-first --long --header --octal-permissions --classify --group --extended";
           l = "ls -alh";
