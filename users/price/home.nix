@@ -73,7 +73,6 @@ in
         grim
         slurp
         unzip
-        Fmt
         screen-cap
         shfmt
         wezterm

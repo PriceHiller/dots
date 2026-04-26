@@ -1,6 +1,11 @@
 { inputs, ... }:
 {
-  additions = final: _prev: import ../pkgs { pkgs = final; };
+  additions =
+    final: _prev:
+    import ../pkgs {
+      pkgs = final;
+      lib = _prev.lib;
+    };
 
   modifications = final: prev: {
     lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {

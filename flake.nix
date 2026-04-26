@@ -103,6 +103,7 @@
                 inherit system;
                 overlays = [
                   inputs.agenix.overlays.default
+                  inputs.nix-bwrapper.overlays.default
                   self.overlays.modifications
                   self.overlays.additions
                 ];
@@ -125,7 +126,9 @@
           default = bootstrapISO;
         }
       );
-      overlays = import ./overlays { inherit inputs; };
+      overlays = import ./overlays {
+        inherit inputs;
+      };
       apps = forAllSystems (pkgs: {
         default = {
           type = "app";

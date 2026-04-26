@@ -1,27 +1,12 @@
-{ pkgs, ... }:
 {
-  screen-cap = pkgs.callPackage ./screen-cap/default.nix { };
-  neovide = pkgs.callPackage ./neovide/package.nix { };
-  Fmt = pkgs.writeShellApplication {
-    name = "Fmt";
-    runtimeInputs = with pkgs; [
-      stylua
-      gnugrep
-      nixfmt
-      shfmt
-    ];
-    text = (
-      ''
-        #!${pkgs.bash}/bin/bash
-      ''
-      + builtins.readFile ./fmt.bash
-    );
-  };
-  equibop =
-    # Use until equibop is updated on Nixpkgs
-    # WAITING: https://github.com/NixOS/nixpkgs/pull/456790
-    (import (pkgs.fetchzip {
-      url = "https://github.com/Rexcrazy804/nixpkgs/archive/update-equibop.tar.gz";
-      hash = "sha256-Ctx31dXlh5Ze1zSFrsNBEYtf2xVlj0UUAfThnlIG6tE=";
-    }) { inherit (pkgs.stdenv.hostPlatform) system; }).equibop;
+  pkgs ? (import <nixpkgs> { }),
+  # NOTE: If this is called from an overlay then you cannot provide the `final` for
+  # `lib`. This has to come from `prev` otherwise the overlay will recursively try to determine the
+  # keys of `pkgs.lib` from `final.lib` over and over leading to a infinite recursion
+  lib ? pkgs.lib,
+  ...
+}:
+lib.packagesFromDirectoryRecursive {
+  inherit (pkgs) callPackage;
+  directory = ./pkgs;
 }
