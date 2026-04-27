@@ -9,6 +9,7 @@
   services.opensnitch = {
     enable = true;
     settings = {
+      LogLevel = 1;
       Rules = {
         EnableChecksums = true;
       };
@@ -16,11 +17,32 @@
         MaxEvents = 10000;
         MaxStats = 1000;
       };
+      Ebpf = {
+        QueueEventsSize = 200;
+      };
       ProcMonitorMethod = "ebpf";
       Firewall = config.networking.firewall.backend;
+      FwOptions.MonitorInterval = "5s";
     };
     rules =
       let
+        resolveSymlink =
+          _path:
+          let
+            pathStr = builtins.toString _path;
+            fileType = builtins.readFileType pathStr;
+          in
+          if fileType == "symlink" then
+            lib.strings.trim (
+              builtins.readFile (
+                pkgs.runCommand "resolved-path" { } ''
+                  readlink -f ${_path} > $out
+                ''
+              )
+            )
+          else
+            pathStr;
+
         allowProg = _name: progPath: {
           name = "000-allow-${_name}";
           enabled = true;
@@ -73,19 +95,26 @@
           in
           allowPathRecursive name (lib.getBin package);
 
+        allowPackage' =
+          name-suffix: package:
+          let
+            name = "${(lib.getName package)}--${name-suffix}";
+          in
+          allowPathRecursive name (lib.getBin package);
+
         allowExe =
           package:
           let
             name = lib.getName package;
           in
-          allowProg name (lib.getExe package);
+          allowProg name ((lib.getExe package) |> resolveSymlink);
 
         allowExe' =
           package: exeName:
           let
             name = "${(lib.getName package)}-${exeName}";
           in
-          allowProg name (lib.getExe' package exeName);
+          allowProg name ((lib.getExe' package exeName) |> resolveSymlink);
       in
       [
         (allowPackage pkgs.spotify)
@@ -97,8 +126,9 @@
         (allowExe config.services.dnscrypt-proxy.package)
         (allowExe config.services.dnsmasq.package)
         (allowExe pkgs.openssh)
-        (allowPackage pkgs.nix)
-        (allowPackage config.nix.package)
+        # Have to use `nix-cli` as the top level package is symlinked to it,
+        # opensnitch wants the resolved path, not the symlink
+        (allowPackage config.nix.package.nix-cli)
         (allowPackage config.services.mullvad-vpn.package)
         (allowExe pkgs.dig)
         (allowPackage pkgs.fwupd)
@@ -145,9 +175,9 @@
           action = "allow";
           duration = "always";
           operator = {
-            operand = "dest.ip";
-            data = "127.0.0.1";
-            type = "simple";
+            type = "network";
+            operand = "dest.network";
+            data = "127.0.0.1/8";
             list = [ ];
             sensitive = false;
           };
@@ -212,7 +242,7 @@
             nolog = false;
             operator = {
               type = "simple";
-              operand = "user.uid";
+              operand = "user.id";
               data = config.users.users.${user}.uid;
               sensitive = false;
             };
