@@ -50,6 +50,7 @@ in
 
   programs.bun = {
     enable = true;
+    package = pkgs.bwrapped.bun;
     settings = {
       telemetry = false;
       install =

@@ -77,7 +77,7 @@
     packages = with pkgs; [
       neovide
       bwrapped.opencode
-      bun
+      bwrapped.bun
       flutter
       jdk
       nil
