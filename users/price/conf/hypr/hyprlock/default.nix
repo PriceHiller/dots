@@ -13,7 +13,7 @@ in
         disable_loading_bar = true;
         grace = 30;
         ignore_empty_input = true;
-        hide_cursor = true;
+        hide_cursor = false;
         no_fade_in = false;
       };
 
@@ -47,7 +47,7 @@ in
         {
           text = "cmd[update:1000] ${./scripts/battery-level.bash}";
           font_size = 10;
-          font_color = "rgb(${colors.rgb.fujiWhite})";
+          color = "rgb(${colors.rgb.fujiWhite})";
           position = "10, 10";
           halign = "left";
           valign = "bottom";
@@ -80,6 +80,19 @@ in
           halign = "center";
           valign = "center";
           shadow_color = "rgba(0, 0, 0, 0.30)";
+          shadow_passes = 3;
+          shadow_size = 2;
+        }
+        # Shutdown Button
+        {
+          text = "⏻";
+          font_size = 10;
+          onclick = "shutdown -h now";
+          color = "rgb(${colors.rgb.peachRed})";
+          position = "-10, 10";
+          halign = "right";
+          valign = "bottom";
+          shadow_color = "rgba(0, 0, 0, 0.20)";
           shadow_passes = 3;
           shadow_size = 2;
         }
