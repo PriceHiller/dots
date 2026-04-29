@@ -174,6 +174,7 @@ in
           };
           query_log = {
             file = getLogFile "query.log";
+            format = "ltsv";
           };
 
           dnscrypt_ephemeral_keys = true;
