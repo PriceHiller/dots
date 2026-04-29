@@ -9,20 +9,6 @@ in
         "${cert-file}"
       ];
     };
-    sudo-rs = {
-      enable = true;
-      execWheelOnly = true;
-      wheelNeedsPassword = false;
-      extraConfig = lib.mkMerge [
-        # This is done to ensure `SSH_AUTH_SOCK` is picked up from the user session -- useful for nix
-        # invocations that look up submodules.
-        #
-        # See https://pricehiller.com/posts/private-git-submodule-authentication-and-nixos-rebuilds
-        ''
-          Defaults env_keep+=SSH_AUTH_SOCK
-        ''
-      ];
-    };
   };
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.log_martions" = true;
