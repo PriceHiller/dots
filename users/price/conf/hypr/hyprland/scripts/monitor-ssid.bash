@@ -25,7 +25,7 @@ log() {
 		return 1
 		;;
 	esac
-	printf "Laptop Clamshell: %s\n""$msg"
+	printf "SSID: %s\n" "$msg"
 }
 
 monitor-ssid() {
