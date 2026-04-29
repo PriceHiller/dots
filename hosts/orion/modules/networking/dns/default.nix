@@ -17,7 +17,7 @@
     enable_query_log = true;
     username = "";
     password = "";
-    listen_address = "127.0.0.1:8080";
+    listen_address = "127.0.0.2:5353";
     max_query_log_entries = 100000;
     max_memory_mb = 128;
   };
