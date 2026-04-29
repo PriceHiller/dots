@@ -14,8 +14,8 @@
         EnableChecksums = true;
       };
       Stats = {
-        MaxEvents = 10000;
-        MaxStats = 1000;
+        MaxEvents = 1000000;
+        MaxStats = 1000000;
       };
       Ebpf = {
         QueueEventsSize = 200;
