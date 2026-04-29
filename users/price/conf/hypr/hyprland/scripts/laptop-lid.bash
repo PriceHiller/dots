@@ -5,7 +5,6 @@ set -eEuo pipefail
 
 log() {
 	local syslog_id="laptop-lid"
-	local title="Laptop Clamshell"
 	local level="INFO"
 	local args="${*}"
 	if (($# > 1)); then
@@ -20,11 +19,9 @@ log() {
 		;;
 	"INFO")
 		systemd-cat -t "$syslog_id" -p "notice" <<<"$msg"
-		notify-send "$title" "$msg" -a "$title"
 		;;
 	"ERROR")
 		systemd-cat -t "$syslog_id" -p "error" <<<"$msg"
-		notify-send "$title" "$msg" -a "$title" -u "critical"
 		;;
 	*)
 		systemd-cat -t "$syslog_id" -p "error" <<-__EOS__
