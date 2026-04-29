@@ -29,6 +29,7 @@ in
       ];
       authorizedKeysInHomedir = false;
       settings = {
+        LogLevel = "VERBOSE";
         PasswordAuthentication = false;
         AuthenticationMethods = "publickey";
         KbdInteractiveAuthentication = false;
