@@ -247,7 +247,7 @@ in
             type = "81";
             action = "AddTag";
             actionValue = "monitoring";
-            condition = "AND (all addresses,contains,monitoring.pricehiller.com)";
+            condition = "OR (all addresses,contains,monitoring.pricehiller.com) OR (from,contains,pricehiller.com)";
           }
           {
             name = "Tag Personal Emails";
