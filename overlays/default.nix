@@ -23,5 +23,6 @@
       '';
     });
     unblob = inputs.nixpkgs-stable.legacyPackages.${final.stdenv.hostPlatform.system}.unblob;
+    davfs2 = inputs.nixpkgs-stable.legacyPackages.${final.stdenv.hostPlatform.system}.davfs2;
   };
 }
