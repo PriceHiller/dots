@@ -243,7 +243,8 @@
             operator = {
               type = "simple";
               operand = "user.id";
-              data = config.users.users.${user}.uid;
+              # Needs to be a string, not a number for the match
+              data = config.users.users.${user}.uid |> builtins.toString;
               sensitive = false;
             };
           }
