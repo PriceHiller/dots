@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -38,21 +39,24 @@ in
         AllowAgentForwarding = false;
         AllowStreamLocalForwarding = false;
         AllowUsers = [ "root" ];
+        Banner = (
+          pkgs.writeText "ssh-banner" ''
+            ┌────────────────────────────────────────────────────┐
+            │        Orion Technologies - Security Notice        │
+            │        ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄        │
+            │  UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED  │
+            │                                                    │
+            │     You must have written, explicit, authorized    │
+            │   permission to access or configure this device.   │
+            │ Unauthorized attempts and actions to access or use │
+            │   this system may result in civil and/or criminal  │
+            │ penalties. All activities performed on this device │
+            │              are logged and monitored.             │
+            └────────────────────────────────────────────────────┘
+          ''
+          |> builtins.toString
+        );
       };
-      banner = ''
-        ┌────────────────────────────────────────────────────┐
-        │        Orion Technologies - Security Notice        │
-        │        ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄        │
-        │  UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED  │
-        │                                                    │
-        │     You must have written, explicit, authorized    │
-        │   permission to access or configure this device.   │
-        │ Unauthorized attempts and actions to access or use │
-        │   this system may result in civil and/or criminal  │
-        │ penalties. All activities performed on this device │
-        │              are logged and monitored.             │
-        └────────────────────────────────────────────────────┘
-      '';
     };
   };
 }
