@@ -46,7 +46,7 @@ in
         # Battery capacity
         {
           text = "cmd[update:1000] ${./scripts/battery-level.bash}";
-          font_size = 10;
+          font_size = 12;
           color = "rgb(${colors.rgb.fujiWhite})";
           position = "10, 10";
           halign = "left";
@@ -86,7 +86,7 @@ in
         # Shutdown Button
         {
           text = "⏻";
-          font_size = 10;
+          font_size = 12;
           onclick = "shutdown -h now";
           color = "rgb(${colors.rgb.peachRed})";
           position = "-10, 10";
