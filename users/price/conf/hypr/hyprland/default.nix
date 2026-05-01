@@ -31,9 +31,6 @@ in
         focus_on_activate = true;
         animate_manual_resizes = true;
       };
-      dwindle = {
-        pseudotile = 0;
-      };
     };
   };
 }
