@@ -25,7 +25,6 @@ in
       mail = {
         threadpane.listview = 1;
         cloud_files.enabled = false;
-        openpgp.allow_external_gnupg = true;
       };
       mailnews = {
         tags =
@@ -137,6 +136,7 @@ in
     profiles = {
       "default" = {
         isDefault = true;
+        withExternalGnupg = true;
         userChrome = lib.mkMerge [
           # css
           ''
@@ -274,6 +274,10 @@ in
               address = "price@pricehiller.com";
               userName = address;
               primary = true;
+              gpg = {
+                key = "C3FADDE7A8534BEB";
+                signByDefault = true;
+              };
               thunderbird = {
                 enable = true;
                 messageFilters = thunderbirdFilters;
@@ -293,6 +297,10 @@ in
               realName = "Price Hiller";
               address = "price@price-hiller.com";
               userName = address;
+              gpg = {
+                key = "C3FADDE7A8534BEB";
+                signByDefault = true;
+              };
               thunderbird = {
                 enable = true;
                 messageFilters = thunderbirdFilters;
