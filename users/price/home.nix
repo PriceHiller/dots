@@ -36,7 +36,6 @@ in
       with pkgs;
       [
         prismlauncher
-        ciscoPacketTracer9
         anki
         terraform
         imhex
