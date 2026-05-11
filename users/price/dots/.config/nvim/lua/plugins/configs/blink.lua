@@ -92,6 +92,7 @@ return {
 
             ---@diagnostic disable-next-line: missing-fields
             require("blink.cmp").setup({
+                signature = { enabled = true },
                 keymap = vim.tbl_extend("error", { preset = "none" }, blink_keymap),
 
                 cmdline = {
