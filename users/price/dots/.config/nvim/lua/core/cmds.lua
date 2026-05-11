@@ -17,7 +17,8 @@ M.setup = function()
 
             if start_idx and end_idx then
                 -- Highlight the match
-                vim.api.nvim_buf_add_highlight(buf, preview_ns, "Substitute", line1 + i - 2, start_idx - 1, end_idx)
+                local line_nr = line1 + i - 2
+                vim.hl.range(buf, preview_ns, "Substitute", { line_nr, start_idx - 1 }, { line_nr, end_idx })
 
                 -- Add lines and set highlights in the preview buffer
                 -- if inccommand=split
@@ -31,13 +32,12 @@ M.setup = function()
                         false,
                         { prefix .. line }
                     )
-                    vim.api.nvim_buf_add_highlight(
+                    vim.hl.range(
                         preview_buf,
                         preview_ns,
                         "Substitute",
-                        preview_buf_line,
-                        #prefix + start_idx - 1,
-                        #prefix + end_idx
+                        { preview_buf_line, #prefix + start_idx - 1 },
+                        { preview_buf_line, #prefix + end_idx }
                     )
                     preview_buf_line = preview_buf_line + 1
                 end
