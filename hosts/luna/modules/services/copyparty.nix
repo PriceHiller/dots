@@ -98,6 +98,7 @@ in
       DIFFICULTY = 12;
     };
     policy = {
+      useDefaultBotRules = false;
       settings = {
         status_codes = {
           CHALLENGE = 200;
@@ -107,6 +108,18 @@ in
       extraBots = [
         {
           import = "(data)/common/allow-private-addresses.yaml";
+        }
+        {
+          import = "(data)/bots/_deny-pathological.yaml";
+        }
+        {
+          import = "(data)/meta/ai-block-aggressive.yaml";
+        }
+        {
+          import = "(data)/bots/aggressive-brazilian-scrapers.yaml";
+        }
+        {
+          import = "(data)/common/keep-internet-working.yaml";
         }
         {
           name = "Block clients lacking modern Sec-Fetch-* headers accessing `/.cpr`";
