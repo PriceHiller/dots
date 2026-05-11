@@ -35,7 +35,7 @@ in
     packages =
       with pkgs;
       [
-        prismlauncher
+        bwrapped.prismlauncher
         anki
         terraform
         imhex
