@@ -75,7 +75,7 @@ M.setup = function()
         vim.cmd(("tab split | aboveleft vnew | r # | set filetype=%s | normal! 0d_ "):format(buf_ft))
         local opts = {
             buftype = "nofile",
-            winbar = vim.opt.winbar:get(),
+            winbar = vim.o.winbar,
         }
         for option, value in pairs(opts) do
             vim.api.nvim_set_option_value(option, value, { scope = "local" })
