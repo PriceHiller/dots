@@ -154,12 +154,6 @@ return {
                 args = { "--interpreter=vscode" },
             }
 
-            dap.adapters.bashdb = {
-                type = "executable",
-                command = utils.get_program_path("bashdb") or "",
-                name = "bashdb",
-            }
-
             -- configurations
             dap.configurations.cpp = {
                 {
@@ -247,29 +241,6 @@ return {
 
             dap.configurations.cs = config
             dap.configurations.fsharp = config
-
-            dap.configurations.sh = {
-                {
-                    type = "bashdb",
-                    request = "launch",
-                    name = "Launch file",
-                    showDebugOutput = true,
-                    pathBashdb = vim.fn.stdpath("data")
-                        .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
-                    pathBashdbLib = vim.fn.stdpath("data") .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir",
-                    trace = true,
-                    file = "${file}",
-                    program = "${file}",
-                    cwd = "${workspaceFolder}",
-                    pathCat = "cat",
-                    pathBash = "/bin/bash",
-                    pathMkfifo = "mkfifo",
-                    pathPkill = "pkill",
-                    args = {},
-                    env = {},
-                    terminalKind = "integrated",
-                },
-            }
         end,
     },
 }

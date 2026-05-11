@@ -92,7 +92,6 @@
       vue-language-server
       typescript-language-server
       vscode-extensions.vadimcn.vscode-lldb.adapter
-      inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.bashdb
       bash-language-server
       shfmt
       texlab

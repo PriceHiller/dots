@@ -16,8 +16,6 @@ return {
                         "packer",
                         "lsp-installer",
                         "lspinfo",
-                        "mason.nvim",
-                        "mason",
                         "man",
                         "OverseerForm",
                         "noice",
