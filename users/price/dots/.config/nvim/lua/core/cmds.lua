@@ -1,3 +1,5 @@
+local utils = require("utils.funcs")
+
 local M = {}
 M.setup = function()
     -- If invoked as a preview callback, performs 'inccommand' preview by
@@ -111,6 +113,9 @@ M.setup = function()
         nargs = "*",
         desc = "Create tempfile and cd to its directory",
     })
+
+    utils.alias_cmd("T", "Tmp")
+    utils.alias_cmd("S", "Tmp scratch.md")
 end
 
 return M
