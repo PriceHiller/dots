@@ -1,4 +1,5 @@
 local M = {}
+local utils = require("utils.funcs")
 
 ---Stolen with ❤️ from https://github.com/tj-moody/.dotfiles/blob/c2afec06b68cd0413c20d332672907c11f0a9c47/nvim/lua/mappings.lua#L171C1-L171C1
 ---Adapted from https://vi.stackexchange.com/a/12870
@@ -343,6 +344,58 @@ M.setup = function()
     vim.keymap.set("v", "<CR>", "an", { remap = true, desc = "Expand Incremental Selection" })
     vim.keymap.set("n", "<BS>", "vin", { remap = true, desc = "Decrease Incremental Selection" })
     vim.keymap.set("v", "<BS>", "in", { remap = true, desc = "Decrease Incremental Selection" })
+
+    local function trim_lines_common_indent(lines)
+        local out = {}
+
+        -- 1. Trim trailing whitespace from all lines
+        for i, line in ipairs(lines) do
+            out[i] = (line:gsub("%s+$", ""))
+        end
+
+        -- 2. Find the minimum leading indent across non-empty lines.
+        local min_indent = math.huge
+        for _, line in ipairs(out) do
+            if line ~= "" then
+                local indent = #line:match("^%s*")
+                if indent < min_indent then
+                    min_indent = indent
+                end
+            end
+        end
+        -- A minimum indent can't be found, the minimum indent is necessarily 0
+        if min_indent == math.huge then
+            min_indent = 0
+        end
+
+        -- 3. Strip exactly that many leading characters from every line.
+        for i, line in ipairs(out) do
+            out[i] = line:sub(min_indent + 1)
+        end
+
+        return out
+    end
+
+    vim.keymap.set("x", "<C-c>", function()
+        if vim.fn.mode() ~= "V" then
+            -- Pass through when the mode isn't visual by lines
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "nx", false)
+            return
+        end
+
+        -- Do a real yank so the `TextYankPost` event fires
+        -- and so we get some text like `n lines yanked`
+        vim.cmd("normal! y")
+
+        -- Now, grab the lines out of the unnammed register for processing
+        local lines = vim.fn.getreg('"', 1, true)
+        local text = table.concat(trim_lines_common_indent(lines), "\n")
+
+        -- unnamed register
+        vim.fn.setreg('"', text, "V")
+        -- system clipboard
+        vim.fn.setreg("+", text, "V")
+    end, { desc = "Yank selection with common indent trimmed" })
 end
 
 return M
