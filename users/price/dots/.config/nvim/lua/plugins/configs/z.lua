@@ -1,7 +1,11 @@
+local utils = require("utils.funcs")
 return {
     {
         "PriceHiller/z.nvim",
         cmd = { "Z" },
+        init = function()
+            utils.alias_cmd("z", "Z")
+        end,
         config = function()
             require("z").setup({
                 z_cmd = function()
