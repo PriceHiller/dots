@@ -114,8 +114,10 @@ M.setup = function()
         desc = "Create tempfile and cd to its directory",
     })
 
+    utils.alias_cmd("t", "Tmp")
     utils.alias_cmd("T", "Tmp")
     utils.alias_cmd("S", "Tmp scratch.md")
+    utils.alias_cmd("s", "Tmp scratch.md")
 end
 
 return M
