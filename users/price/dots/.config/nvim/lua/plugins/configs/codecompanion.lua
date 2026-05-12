@@ -1,6 +1,11 @@
 return {
     {
         "olimorris/codecompanion.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "ravitemer/codecompanion-history.nvim",
+        },
         cmd = {
             "CodeCompanion",
             "CodeCompanionActions",
@@ -612,6 +617,11 @@ return {
             }
 
             require("codecompanion").setup({
+                extensions = {
+                    history = {
+                        enabled = true,
+                    },
+                },
                 interactions = {
                     acp = {
                         adapter = "opencode",
@@ -676,9 +686,5 @@ All input is written in Typst's math format.
                 },
             })
         end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
     },
 }
