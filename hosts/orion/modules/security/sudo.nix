@@ -3,7 +3,7 @@
   security.sudo-rs = {
     enable = true;
     execWheelOnly = true;
-    wheelNeedsPassword = true;
+    wheelNeedsPassword = false;
     extraConfig = lib.mkMerge [
       # This is done to ensure `SSH_AUTH_SOCK` is picked up from the user session -- useful for nix
       # invocations that look up submodules.
