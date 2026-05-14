@@ -19,14 +19,6 @@ pkgs.mkBwrapper {
       "\${XDG_DATA_HOME:-$HOME/.local/share}/bun"
       "\${XDG_DATA_HOME:-$HOME/.local/share}/.bun"
     ];
-
-    # Read-only binds.
-    read = [
-      # Global git config / ignore / attributes, so `opencode`-driven git
-      # operations use the user's identity. (XDG path per git's own rules.)
-      "\${XDG_CONFIG_HOME:-$HOME/.config}/git"
-      "\${HOME}/.gitconfig"
-    ];
   };
 
   sockets = {
@@ -37,4 +29,15 @@ pkgs.mkBwrapper {
   };
   dbus.enable = lib.mkForce false;
   flatpak.enable = lib.mkForce false;
+
+  fhsenv.extraInstallCmds = ''
+    for dir in share/bash-completion/completions share/fish/vendor_completions.d share/zsh/site-functions; do
+      if [ -d "${pkgs.bun}/$dir" ] && [ "$(ls -A "${pkgs.bun}/$dir")" ]; then
+        mkdir -p "$out/$dir"
+        for f in "${pkgs.bun}/$dir"/*; do
+          ln -sf "$f" "$out/$dir/$(basename "$f")"
+        done
+      fi
+    done
+  '';
 }
