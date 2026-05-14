@@ -22,7 +22,6 @@
         wrapProgram $out/bin/age-plugin-yubikey --prefix LD_LIBRARY_PATH : ${final.pcsclite.lib}/lib
       '';
     });
-    unblob = inputs.nixpkgs-stable.legacyPackages.${final.stdenv.hostPlatform.system}.unblob;
     davfs2 = inputs.nixpkgs-stable.legacyPackages.${final.stdenv.hostPlatform.system}.davfs2;
   };
 }

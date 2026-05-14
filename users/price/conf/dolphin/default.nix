@@ -9,7 +9,7 @@
   # - https://github.com/rumboon/dolphin-overlay/issues/2#issuecomment-3844942348
   # - https://github.com/NixOS/nixpkgs/issues/409986#issuecomment-3826168101
   xdg = {
-    systemDirs.data = [ "${pkgs.libsForQt5.kservice}/etc/xdg" ];
+    systemDirs.data = [ "${pkgs.kdePackages.kservice}/etc/xdg" ];
     configFile = {
       "menus/applications.menu" = {
         source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
