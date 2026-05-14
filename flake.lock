@@ -1184,11 +1184,11 @@
         "treefmt-nix": "treefmt-nix_5"
       },
       "locked": {
-        "lastModified": 1776504286,
-        "narHash": "sha256-VqiLhvlhDbLd2gqw6NgPlvcNK7q/idIcX7/Dt+Juat0=",
+        "lastModified": 1778754079,
+        "narHash": "sha256-ER8/eMMoOVtX008KTTLJg5MwUixgIPymzL1JeVAYvA8=",
         "owner": "Naxdy",
         "repo": "nix-bwrapper",
-        "rev": "f80ba353fcc9012d1c601353bf549be92f29861c",
+        "rev": "0977d3a41ce06b5aa65f5c54566f9e8fd898e017",
         "type": "github"
       },
       "original": {
