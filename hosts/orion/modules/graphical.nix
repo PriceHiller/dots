@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # Allow Chromium & Electron apps run natively in wayland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     NIXOS_WAYLAND = "1";
+    HYPRLAND_LUA_STUBS_PATH = "${pkgs.lib.traceVal config.programs.hyprland.package.outPath}/share/hypr/stubs";
   };
   services.displayManager = {
     autoLogin = {

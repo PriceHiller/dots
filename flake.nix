@@ -240,6 +240,7 @@
                       users.price = import ./users/price/home.nix;
                     };
                   }
+                  inputs.hyprland.nixosModules.default
                   inputs.nix-post-build-hook-queue.nixosModules.default
                   inputs.nixos-facter-modules.nixosModules.facter
                   inputs.nixos-hardware.nixosModules.dell-xps-15-9530-nvidia
