@@ -70,7 +70,7 @@ in
 
   home = {
     packages = with pkgs; [
-      nodejs_latest
+      bwrapped.nodejs
       pnpm
       biome
       typescript
