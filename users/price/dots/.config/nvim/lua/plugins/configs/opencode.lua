@@ -13,8 +13,8 @@ return {
                 ui = {
                     output = {
                         tools = {
-                            use_folds = false
-                        }
+                            use_folds = false,
+                        },
                     },
                 },
             })

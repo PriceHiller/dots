@@ -7,11 +7,16 @@ let
   mkNodeBwrap =
     name:
     pkgs.mkBwrapper {
-      imports = [ pkgs.bwrapperPresets.devshell ./../../presets/fixExitTrap.nix ];
+      imports = [
+        pkgs.bwrapperPresets.devshell
+        ./../../presets/fixExitTrap.nix
+      ];
       app = {
         # mkBwrapper names the output binary after app.package.pname, not runScript.
         # Override pname so the wrapper lands at $out/bin/${name} as expected.
-        package = pkgs.nodejs_latest.overrideAttrs (_: { pname = name; });
+        package = pkgs.nodejs_latest.overrideAttrs (_: {
+          pname = name;
+        });
         runScript = name;
       };
 

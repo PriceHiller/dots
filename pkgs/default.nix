@@ -9,6 +9,7 @@
 (lib.packagesFromDirectoryRecursive {
   inherit (pkgs) callPackage;
   directory = ./pkgs;
-}) // {
+})
+// {
   bwrapped = import ./bwrapped { inherit pkgs lib; };
 }
