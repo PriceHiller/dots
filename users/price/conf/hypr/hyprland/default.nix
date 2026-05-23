@@ -1,39 +1,21 @@
-{
-  clib,
-  ...
-}:
+{ config, ... }:
 let
-  colors = clib.kcolors;
+  luaDir = "${config.home.homeDirectory}/.config/home-manager/users/price/conf/hypr/hyprland/lua";
 in
 {
-  # TODO: Migrate to a lua based configuration.
-  # Holy shit, Hyprland finally did it!
-  imports = [
-    ./appearance.nix
-    ./monitors.nix
-    ./window-rules.nix
-    ./bindings.nix
-  ];
+  # All Hyprland configuration lives in `./lua/`. The legacy nix-defined
+  # configs (`./appearance.nix`, `./bindings.nix`, `./monitors.nix`,
+  # `./window-rules.nix`) are retained for reference but no longer imported.
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
     portalPackage = null;
-    extraConfig = (builtins.readFile ./application/gromit-mpx.conf);
-    configType = "hyprlang";
-    settings = {
-      general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 3;
-        "col.active_border" = "rgb(${colors.hex.surimiOrange}) 45deg";
-        "col.inactive_border" = "rgb(${colors.hex.sumiInk6})";
-      };
-      misc = {
-        enable_anr_dialog = false;
-        disable_hyprland_logo = true;
-        focus_on_activate = true;
-        animate_manual_resizes = true;
-      };
-    };
+    configType = "lua";
+    extraConfig = ''require("./lua")'';
+  };
+
+  xdg.configFile."hypr/lua" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${luaDir}";
+    force = true;
   };
 }
