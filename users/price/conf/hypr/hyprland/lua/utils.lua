@@ -19,4 +19,18 @@ function M.dump(o, indent)
     end
 end
 
+---Check if a list contains a given item.
+---@generic T
+---@param list T[]
+---@param item T
+---@return boolean
+function M.list_contains(list, item)
+    for _, v in ipairs(list) do
+        if v == item then
+            return true
+        end
+    end
+    return false
+end
+
 return M
