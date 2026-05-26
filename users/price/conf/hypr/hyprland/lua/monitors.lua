@@ -21,11 +21,11 @@ hl.monitor({
 local LAPTOP_MON = "desc:Samsung Display Corp. 0x414D"
 local LID_PATH = "/proc/acpi/button/lid/LID0/state"
 
---- Configure the laptop monitor as enabled (lid open).
+---Configure the laptop monitor as enabled (lid open).
 ---
---- Note: `disabled = false` is required to re-enable a monitor that was
---- previously disabled -- without it, `hl.monitor()` leaves the disabled
---- flag alone and the call appears to be a no-op.
+---Note: `disabled = false` is required to re-enable a monitor that was
+---previously disabled -- without it, `hl.monitor()` leaves the disabled
+---flag alone and the call appears to be a no-op.
 local function enable_laptop_mon()
     hl.monitor({
         output = LAPTOP_MON,
@@ -41,10 +41,10 @@ local function disable_laptop_mon()
     hl.monitor({ output = LAPTOP_MON, disabled = true })
 end
 
---- Read the ACPI lid switch state once at startup. Returns "open",
---- "closed", or nil if the file can't be read (in which case the monitor
---- defaults to enabled).
-local function read_lid_state_at_startup()
+---Read the ACPI lid switch state once at startup. Returns "open",
+---"closed", or nil if the file can't be read
+---@return "open" | "closed" | nil
+local function get_acpi_lid_state()
     local f = io.open(LID_PATH, "r")
     if not f then
         return nil
@@ -60,7 +60,7 @@ local function read_lid_state_at_startup()
 end
 
 -- Apply initial state once at startup.
-if read_lid_state_at_startup() == "closed" then
+if get_acpi_lid_state() == "closed" then
     disable_laptop_mon()
 else
     enable_laptop_mon()
