@@ -25,6 +25,7 @@
             "backlight",
             "network",
             "clock",
+            "idle_inhibitor",
             "custom/notification",
             "custom/lock"
         ],
@@ -169,7 +170,6 @@
             ]
         },
         "idle_inhibitor": {
-            "tooltip": false,
             "format": "{icon}",
             "format-icons": {
                 "activated": "",
