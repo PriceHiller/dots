@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
   config,
   ...
 }:
@@ -76,6 +75,7 @@
     };
     packages = with pkgs; [
       neovide
+      fortune
       opencode
       bwrapped.bun
       flutter

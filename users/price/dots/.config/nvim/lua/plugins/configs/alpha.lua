@@ -214,9 +214,18 @@ return {
             }
 
             -- Footer 2, fortune
+            local get_fortune = (function()
+                if vim.fn.executable("fortune") then
+                    return function()
+                        return vim.split(vim.system({ "fortune", "-n", "500", "-s" }):wait(3000).stdout, "\n") or { "" }
+                    end
+                end
+
+                return require("alpha.fortune")
+            end)()
             local fortune = {
                 type = "text",
-                val = require("alpha.fortune")(),
+                val = get_fortune(),
                 opts = { position = "center", hl = "Comment" },
             }
 
