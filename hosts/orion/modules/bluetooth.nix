@@ -10,8 +10,6 @@
   };
   services.blueman = {
     enable = true;
-    # Waiting on https://github.com/NixOS/nixpkgs/issues/514705 to be resolved
-    withApplet = false;
   };
   environment.systemPackages = with pkgs; [ bluez ];
 
