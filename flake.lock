@@ -1684,11 +1684,11 @@
         "nixpkgs": "nixpkgs_13"
       },
       "locked": {
-        "lastModified": 1780002339,
-        "narHash": "sha256-y+MYPIAbJoV7mhyb/RjmhQXxRXLsI64aCY4j+U9Z7HQ=",
+        "lastModified": 1780002629,
+        "narHash": "sha256-jZUsbfW1jkq6Fl+tHvkPIzQ3T1OMTa0Nb+Y/u+Bpkmw=",
         "ref": "refs/heads/Development",
-        "rev": "1d23d3e60018033ee7ba35e8b245c06866f58576",
-        "revCount": 48,
+        "rev": "02adcf5efe3cb09a1ef7e030e6ba991bd62fe227",
+        "revCount": 49,
         "type": "git",
         "url": "https://git.pricehiller.com/price/resume"
       },
