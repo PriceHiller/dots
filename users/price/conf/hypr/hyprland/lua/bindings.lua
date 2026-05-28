@@ -99,11 +99,9 @@ hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd("hyprlock"))
 -- ---------------------------------------------------------------------------
 
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
-hl.bind("SUPER + Q", hl.dsp.window.kill())
+hl.bind("SUPER + Q", hl.dsp.window.close())
 -- Force kill (SIGKILL) the active window.
-hl.bind("SUPER + CTRL + Q", function()
-    hl.dispatch(hl.dsp.window.signal({ signal = 9 }))
-end)
+hl.bind("SUPER + CTRL + Q", hl.dsp.window.kill())
 hl.bind("SUPER + A", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
 
