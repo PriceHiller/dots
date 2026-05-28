@@ -34,22 +34,22 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = rec {
+    settings = rec {
       "*" = {
-        forwardAgent = false;
-        addKeysToAgent = "no";
-        serverAliveInterval = 10;
-        serverAliveCountMax = 3;
-        hashKnownHosts = false;
-        userKnownHostsFile = "~/.ssh/state/known_hosts";
-        controlMaster = "auto";
-        controlPath = "~/.ssh/state/controllers/controller-%r@%n:%p";
-        controlPersist = "1h";
+        ForwardAgent = false;
+        AddKeysToAgent = false;
+        ServerAliveInterval = 10;
+        ServerAliveCountMax = 3;
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/state/known_hosts";
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/state/controllers/controller-%r@%n:%p";
+        ControlPersist = "1h";
       };
       luna = {
-        hostname = "luna.hosts.pricehiller.com";
-        user = "root";
-        port = 10322;
+        HostName = "luna.hosts.pricehiller.com";
+        User = "root";
+        Port = 10322;
       };
       "luna.hosts.pricehiller.com" = luna;
     };
