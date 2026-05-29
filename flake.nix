@@ -3,12 +3,15 @@
 
   inputs = {
     nix.url = "git+https://github.com/nixos/nix?shallow=1";
-    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs-master";
+    };
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
 
-    nixpkgs-unstable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixpkgs-unstable";
+    nixpkgs-master.url = "git+https://github.com/NixOS/nixpkgs?shallow=1";
     nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.11";
 
     nix-bwrapper.url = "github:Naxdy/nix-bwrapper";
