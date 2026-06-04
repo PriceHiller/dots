@@ -368,11 +368,17 @@ return {
 
                 -- Titles/Headlines
                 { "@markup.heading.1", { fg = colors.crystalBlue, bold = true } },
+                { "@markup.heading.1.bg", { bg = colors.sumiInk2 } },
                 { "@markup.heading.2", { fg = colors.carpYellow, bold = true } },
+                { "@markup.heading.2.bg", { bg = colors.sumiInk2 } },
                 { "@markup.heading.3", { fg = colors.peachRed, bold = true } },
+                { "@markup.heading.3.bg", { bg = colors.sumiInk2 } },
                 { "@markup.heading.4", { fg = colors.surimiOrange, bold = true } },
+                { "@markup.heading.4.bg", { bg = colors.sumiInk2 } },
                 { "@markup.heading.5", { fg = colors.oniViolet2, bold = true } },
+                { "@markup.heading.5.bg", { bg = colors.sumiInk2 } },
                 { "@markup.heading.6", { fg = colors.sakuraPink, bold = true } },
+                { "@markup.heading.6.bg", { bg = colors.sumiInk2 } },
                 { "@markup.heading.7", { fg = colors.lightBlue, bold = true } },
                 { "@markup.heading.8", { fg = colors.springGreen, bold = true } },
                 { "@org.headline.level1", { link = "@markup.heading.1" } },

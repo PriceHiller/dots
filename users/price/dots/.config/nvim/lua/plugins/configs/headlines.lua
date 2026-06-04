@@ -24,9 +24,8 @@ return {
             local headlines = require("headlines")
             headlines.setup({
                 markdown = {
-                    bullets = bullets,
-                    bullet_highlights = bullet_highlights,
-                    fat_headline_lower_string = "▀",
+                    bullets = false,
+                    query = false,
                 },
                 rmd = {
                     bullets = bullets,
@@ -49,6 +48,6 @@ return {
                 callback = headlines.refresh,
             })
         end,
-        ft = { "norg", "rmd", "org", "markdown" },
+        ft = { "norg", "rmd", "org" },
     },
 }
