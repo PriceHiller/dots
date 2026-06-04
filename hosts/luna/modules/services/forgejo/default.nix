@@ -106,7 +106,7 @@ in
                   ''!("priority" in headers)''
                   ''!("accept_language" in headers)''
                   ''"User-Agent" in headers''
-                  ''userAgent.contains("connect-go/")''
+                  ''userAgent.contains("forgejo-runner/")''
                   ''"Content-Type" in headers''
                   ''(headers["Content-Type"] == "application/proto" || headers["Content-Type"] == "application/json")''
                   ''path.startsWith("/api/")''
