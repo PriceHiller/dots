@@ -208,6 +208,7 @@ return {
                     end),
                     button("s", "  Settings", "<cmd>e ~/.config/nvim/<CR>"),
                     button("u", "  Update Plugins", ":Lazy sync<CR>"),
+                    button("l", "  Lazy", ":Lazy<CR>"),
                     button("q", "  Quit", ":qa<CR>"),
                 },
                 opts = { spacing = 0 },
