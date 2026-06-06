@@ -73,6 +73,10 @@ return {
         config = function()
             require("treesitter-context").setup({
                 max_lines = 5,
+                multiwindow = true,
+                on_attach = function(buf)
+                    return not vim.list_contains({ "opencode" }, vim.bo[buf].filetype)
+                end,
             })
         end,
     },
