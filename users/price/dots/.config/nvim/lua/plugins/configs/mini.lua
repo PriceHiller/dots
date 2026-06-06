@@ -4,6 +4,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("mini.align").setup({})
+            require("mini.ai").setup({})
         end,
     },
 }
