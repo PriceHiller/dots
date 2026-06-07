@@ -97,6 +97,25 @@ in
                 import = "(data)/common/allow-private-addresses.yaml";
               }
               {
+                name = "Allow Git Clients";
+                action = "ALLOW";
+                expression.all = [
+                  ''
+                    (
+                     userAgent.startsWith("git/")   ||
+                     userAgent.contains("libgit")   ||
+                     userAgent.startsWith("go-git") ||
+                     userAgent.startsWith("JGit/")  ||
+                     userAgent.startsWith("JGit-")
+                    )
+                  ''
+                  ''"Accept" in headers''
+                  ''headers["Accept"] == "*/*" || headers["Accept"].startsWith("application/x-git")''
+                  ''"Accept-Encoding" in headers''
+                  ''"Accept-Language" in headers''
+                ];
+              }
+              {
                 import = "(data)/clients/git.yaml";
               }
               {
