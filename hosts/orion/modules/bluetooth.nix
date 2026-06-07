@@ -8,10 +8,11 @@
     enable = true;
     powerOnBoot = true;
   };
-  services.blueman = {
-    enable = true;
-  };
-  environment.systemPackages = with pkgs; [ bluez ];
+  environment.systemPackages = with pkgs; [
+    bluez
+    blueman
+  ];
+  services.dbus.packages = [ pkgs.blueman ];
 
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
