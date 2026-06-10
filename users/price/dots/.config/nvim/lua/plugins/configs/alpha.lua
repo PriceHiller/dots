@@ -215,18 +215,30 @@ return {
             }
 
             -- Footer 2, fortune
-            local get_fortune = (function()
-                if vim.fn.executable("fortune") then
-                    return function()
-                        return vim.split(vim.system({ "fortune", "-n", "500", "-s" }):wait(3000).stdout, "\n") or { "" }
-                    end
+            local get_fortune = function()
+                -- Since we try to asynchronously get the fortune value, we need to stuff it into a
+                -- global and then refresh Alpha with the resulting string
+                if vim.g.__alpha_fortune and #vim.g.__alpha_fortune > 0 then
+                    return vim.g.__alpha_fortune
                 end
 
-                return require("alpha.fortune")
-            end)()
+                if vim.fn.executable("fortune") then
+                    vim.system({ "fortune", "-n", "500", "-s" }, function(ex)
+                        if ex.code == 0 then
+                            vim.g.__alpha_fortune = vim.split(ex.stdout, "\n") or { "" }
+                            pcall(vim.cmd.AlphaRedraw)
+                        end
+                    end)
+                    return { "" }
+                else
+                    vim.g.__alpha_fortune = require("alpha.fortune")()
+                    return vim.g.__alpha_fortune
+                end
+            end
+
             local fortune = {
                 type = "text",
-                val = get_fortune(),
+                val = get_fortune,
                 opts = { position = "center", hl = "Comment" },
             }
 
