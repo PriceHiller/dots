@@ -12,14 +12,6 @@ in
 {
   programs.thunderbird = {
     enable = true;
-    package = pkgs.thunderbird.override {
-      extraPolicies.ExtensionSettings = {
-        "markdown-here-revival@xul.calypsoblue.org" = {
-          installation_mode = "force_installed";
-          install_url = "https://addons.thunderbird.net/user-media/addons/_attachments/988035/markdown_here_revival-4.0.7-tb.xpi";
-        };
-      };
-    };
     settings = clib.attrsToMozillaPref {
       intl.date_time.pattern_override.time_short = "h:mm aaaa";
       mail = {
