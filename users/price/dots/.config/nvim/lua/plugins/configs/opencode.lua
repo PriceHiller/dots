@@ -1,6 +1,10 @@
 return {
     {
         "sudo-tee/opencode.nvim",
+        keys = {
+            { "z", desc = "> Opencode" },
+        },
+        cmd = { "Opencode" },
         config = function()
             -- Default configuration with all available options
             require("opencode").setup({
