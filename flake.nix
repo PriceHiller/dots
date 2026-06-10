@@ -23,10 +23,6 @@
     };
     resume.url = "git+https://git.pricehiller.com/price/resume";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?shallow=1";
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
     };
