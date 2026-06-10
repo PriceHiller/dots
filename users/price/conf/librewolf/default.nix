@@ -13,7 +13,7 @@ in
 {
   xdg.mimeApps.defaultApplications =
     let
-      librewolfDesktop = "io.gitlab.librewolf-community.desktop";
+      librewolfDesktop = "librewolf.desktop";
     in
     lib.mkIf (config.programs.librewolf.enable) {
       "default-web-browser" = [ librewolfDesktop ];
@@ -47,7 +47,6 @@ in
   programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   programs.librewolf = {
     enable = true;
-    package = pkgs.bwrapped.librewolf;
     configPath = "${config.xdg.configHome}/librewolf/librewolf";
     profiles.default = {
       userChrome = (
