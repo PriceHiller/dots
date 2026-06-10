@@ -115,10 +115,189 @@
             name = "${(lib.getName package)}-${exeName}";
           in
           allowProg name ((lib.getExe' package exeName) |> resolveSymlink);
+
+        mkDestHostsOperator =
+          hosts:
+          let
+            hostsList = if builtins.isList hosts then hosts else [ hosts ];
+          in
+          if builtins.length hostsList == 1 then
+            {
+              operand = "dest.host";
+              data = builtins.elemAt hostsList 0;
+              type = "simple";
+              sensitive = false;
+            }
+          else
+            {
+              operand = "dest.host";
+              data = "^(${lib.concatStringsSep "|" (map lib.strings.escapeRegex hostsList)})$";
+              type = "regexp";
+              sensitive = false;
+            };
+
+        allowPathRecursiveToHost =
+          _name:
+          let
+            name = "000-allow-path-recursive-${_name}";
+          in
+          _path: hosts: {
+            inherit name;
+            enabled = true;
+            created = "2026-01-08T13:25:44-06:00";
+            updated = "2026-01-08T13:25:44-06:00";
+            action = "allow";
+            duration = "always";
+            precedence = true;
+            nolog = false;
+            operator = {
+              type = "list";
+              operand = "list";
+              sensitive = false;
+              list = [
+                (mkDestHostsOperator hosts)
+                {
+                  operand = "process.path";
+                  data = "^(${
+                    (
+                      _path
+                      |> builtins.toString
+                      |> lib.strings.trim
+                      |> lib.strings.removeSuffix "/"
+                      |> lib.strings.escapeRegex
+                    )
+                  })/.*";
+                  type = "regexp";
+                  sensitive = false;
+                }
+              ];
+            };
+          };
+
+        allowPackageToHost =
+          package: hosts:
+          let
+            name = lib.getName package;
+          in
+          allowPathRecursiveToHost name (lib.getBin package) hosts;
+
+        allowPathRecursiveToHostRegex =
+          _name:
+          let
+            name = "000-allow-path-recursive-${_name}";
+          in
+          _path: hostRegex: {
+            inherit name;
+            enabled = true;
+            created = "2026-01-08T13:25:44-06:00";
+            updated = "2026-01-08T13:25:44-06:00";
+            action = "allow";
+            duration = "always";
+            precedence = true;
+            nolog = false;
+            operator = {
+              type = "list";
+              operand = "list";
+              sensitive = false;
+              list = [
+                {
+                  operand = "dest.host";
+                  data = hostRegex;
+                  type = "regexp";
+                  sensitive = false;
+                }
+                {
+                  operand = "process.path";
+                  data = "^(${
+                    (
+                      _path
+                      |> builtins.toString
+                      |> lib.strings.trim
+                      |> lib.strings.removeSuffix "/"
+                      |> lib.strings.escapeRegex
+                    )
+                  })/.*";
+                  type = "regexp";
+                  sensitive = false;
+                }
+              ];
+            };
+          };
+
+        allowPackageToHostRegex =
+          package: hostRegex:
+          let
+            name = "${(lib.getName package)}-regex";
+          in
+          allowPathRecursiveToHostRegex name (lib.getBin package) hostRegex;
+
+        allowProgToHostRegex =
+          progPath: hostRegex:
+          let
+            progName = builtins.baseNameOf (builtins.toString progPath);
+          in
+          {
+            name = "000-allow-${progName}-to-host-regex";
+            enabled = true;
+            created = "2026-01-08T13:25:44-06:00";
+            updated = "2026-01-08T13:25:44-06:00";
+            action = "allow";
+            duration = "always";
+            precedence = true;
+            nolog = false;
+            operator = {
+              type = "list";
+              sensitive = false;
+              list = [
+                {
+                  operand = "dest.host";
+                  data = hostRegex;
+                  type = "regexp";
+                  sensitive = false;
+                }
+                {
+                  operand = "process.path";
+                  data = (lib.strings.trim progPath);
+                  type = "simple";
+                  sensitive = false;
+                }
+              ];
+            };
+          };
+
+        allowProgToHost =
+          progPath: hosts:
+          let
+            progName = builtins.baseNameOf (builtins.toString progPath);
+          in
+          {
+            name = "000-allow-${progName}-to-${lib.concatStringsSep "-" hosts}";
+            enabled = true;
+            created = "2026-01-08T13:25:44-06:00";
+            updated = "2026-01-08T13:25:44-06:00";
+            action = "allow";
+            duration = "always";
+            precedence = true;
+            nolog = false;
+            operator = {
+              type = "list";
+              sensitive = false;
+              list = [
+                (mkDestHostsOperator hosts)
+                {
+                  operand = "process.path";
+                  data = (lib.strings.trim progPath);
+                  type = "simple";
+                  sensitive = false;
+                }
+              ];
+            };
+          };
       in
       [
         (allowPackage pkgs.spotify)
         (allowPackage pkgs.thunderbird)
+        (allowPackageToHostRegex pkgs.nodejs_latest ".*.npmjs.org$")
         (allowPackage pkgs.git)
         (allowPackage pkgs.librewolf)
         (allowPackage pkgs.ungoogled-chromium)
@@ -135,38 +314,8 @@
         (allowExe pkgs.strawberry)
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
         (allowPackage config.services.avahi.package)
-        {
-          created = "2025-04-09T23:21:35-06:00";
-          updated = "2025-04-09T23:21:35-06:00";
-          name = "000-allow-gh";
-          description = "Allow gh cli to access Github API";
-          action = "allow";
-          duration = "always";
-          operator = {
-            operand = "list";
-            type = "list";
-            list = [
-              {
-                operand = "dest.host";
-                data = "api.github.com";
-                type = "simple";
-                list = null;
-                sensitive = false;
-              }
-              {
-                operand = "process.path";
-                data = (lib.getExe' pkgs.gh "gh");
-                type = "simple";
-                list = null;
-                sensitive = false;
-              }
-            ];
-            sensitive = false;
-          };
-          enabled = true;
-          precedence = true;
-          nolog = false;
-        }
+        (allowPackageToHost pkgs.gh "api.github.com")
+        (allowPackageToHost pkgs.davfs2 [ "fs.pricehiller.com" ])
         {
           created = "2025-04-09T23:21:35-06:00";
           updated = "2025-04-09T23:21:35-06:00";
