@@ -253,6 +253,27 @@
         "type": "github"
       }
     },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1780824777,
+        "narHash": "sha256-/D3gjEDezsoa//Kbd+rNQRERl4AS+HYOMChsdD1eus4=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "3a556b6fbd42412b6f3f0ea8d35959b1826f86ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -1707,6 +1728,7 @@
         "copyparty": "copyparty",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
+        "fenix": "fenix",
         "harmonia": "harmonia",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
@@ -1728,6 +1750,23 @@
         "secrets": "secrets",
         "treefmt-nix": "treefmt-nix_6",
         "zsh-completions": "zsh-completions"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780758424,
+        "narHash": "sha256-OcXGwiq5ibERT8S9rx5V1bgleguAfwzSQzMePpf8yIE=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "a9a66c4077fedd375c0f1e61dc39a8f3243ce0ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
       }
     },
     "rust-overlay": {
