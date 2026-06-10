@@ -11,9 +11,6 @@
     packages = with pkgs; [
       kdePackages.qt6ct
     ];
-    sessionVariables = {
-      GTK_THEME = "${config.gtk.theme.name}";
-    };
   };
 
   qt = {
