@@ -119,6 +119,7 @@ in
         strawberry
         d2
         rustdesk-flutter
+        sone
       ]
       ++ [
         age
