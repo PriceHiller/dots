@@ -25,6 +25,7 @@ in
       (fenix.complete.withComponents [
         "cargo"
         "clippy"
+        "miri"
         "rust-src"
         "rustc"
         "rustfmt"
