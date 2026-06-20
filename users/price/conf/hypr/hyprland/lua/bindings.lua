@@ -109,8 +109,7 @@ hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
 -- Screen captures
 -- ---------------------------------------------------------------------------
 
-hl.bind("SUPER + S", hl.dsp.exec_cmd([[grim -g "$(slurp)" - | swappy -f -]]))
-hl.bind("SUPER + CTRL + S", hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy --type image/png]]))
+hl.bind("SUPER + S", hl.dsp.exec_cmd([[flameshot gui --clipboard]]))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("screen-cap"))
 hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd("screen-cap gif"))
 
