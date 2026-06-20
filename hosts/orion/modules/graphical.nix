@@ -25,8 +25,16 @@
   xdg = {
     portal = {
       enable = true;
+      config.common = {
+        "org.freedesktop.impl.portal.FileChooser" = "kde";
+        "org.freedesktop.impl.portal.OpenURI" = "kde";
+        "org.freedesktop.impl.portal.OpenFile" = "kde";
+        "org.freedesktop.impl.portal.OpenDirectory" = "kde";
+      };
+      xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
+        kdePackages.xdg-desktop-portal-kde
       ];
     };
   };
