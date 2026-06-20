@@ -396,6 +396,8 @@ M.setup = function()
         -- system clipboard
         vim.fn.setreg("+", text, "V")
     end, { desc = "Yank selection with common indent trimmed" })
+
+    vim.keymap.set({ "n", "v" }, "<D-f>", "/")
 end
 
 return M
