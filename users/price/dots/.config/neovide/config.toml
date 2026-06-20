@@ -1,3 +1,6 @@
+# Breaks `Noice.nvim`, so we need to disable it
+startup-message-capture = false
+
 [font]
 normal = ["Maple Mono", "Apple Color Emoji", "Symbols Nerd Font"]
 size = 14
