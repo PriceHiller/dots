@@ -47,6 +47,7 @@ in
   programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
   programs.librewolf = {
     enable = true;
+    package = pkgs.bwrapped.librewolf;
     configPath = "${config.xdg.configHome}/librewolf/librewolf";
     profiles.default = {
       userChrome = (
