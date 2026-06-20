@@ -8,6 +8,9 @@ return {
             formatting = {
                 command = { "nixfmt" },
             },
+            diagnostic = {
+                suppress = { "sema-primop-removed-prefix" },
+            },
             options = {
                 nixos = {
                     expr = "(let pkgs = import <nixpkgs> { }; in (pkgs.lib.evalModules { modules = (import <nixpkgs/nixos/modules/module-list.nix>) ++ [ ({...}: { nixpkgs.hostPlatform = builtins.currentSystem;} ) ] ; })).options",
