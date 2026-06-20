@@ -314,6 +314,7 @@
         (allowExe pkgs.strawberry)
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
         (allowPackage config.services.avahi.package)
+        (allowPackageToHostRegex pkgs.fwupd ".*\.fwupd\.org$")
         (allowPackageToHost pkgs.gh (lib.strings.escapeRegex "api.github.com"))
         (allowPackageToHost pkgs.davfs2 (map lib.strings.escapeRegex [ "fs.pricehiller.com" ]))
         (allowPackageToHost pkgs.sone ".*\.tidal\.com")
