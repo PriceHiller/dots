@@ -1,3 +1,4 @@
+local utils = require("utils")
 -- ---------------------------------------------------------------------------
 -- Helpers
 -- ---------------------------------------------------------------------------
@@ -98,12 +99,60 @@ hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd("hyprlock"))
 -- Window management
 -- ---------------------------------------------------------------------------
 
-hl.bind("SUPER + F", hl.dsp.window.fullscreen())
+hl.bind("SUPER + CTRL + F", hl.dsp.window.fullscreen())
 hl.bind("SUPER + Q", hl.dsp.window.close())
 -- Force kill (SIGKILL) the active window.
 hl.bind("SUPER + CTRL + Q", hl.dsp.window.kill())
-hl.bind("SUPER + A", hl.dsp.window.float({ action = "toggle" }))
+hl.bind("SUPER + CTRL + A", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
+
+-- ---------------------------------------------------------------------------
+-- macOS-style SUPER shortcuts
+-- ---------------------------------------------------------------------------
+-- Super+C/V/X/Z/F behave like macOS Cmd+C/V/X/Z/F in GUI apps. In terminals (kitty/wezterm/...)
+-- only Super+C/V are remapped (to Ctrl+Shift+C/V); Super+X/Z/F are no-ops so native Ctrl+X/Z/F keep
+-- working. In excluded apps, the raw Super+<key> is passed through unchanged
+
+---@param window HL.Window?
+---@return string
+local function active_class(window)
+    window = window or hl.get_active_window()
+    return window and window.class and window.class:lower() or ""
+end
+
+---@param key string
+---@return function
+local function mac_shortcut(key)
+    return function()
+        local active_window = hl.get_active_window()
+        local active_class_name = active_class(active_window)
+        if
+            utils.list_contains({
+                -- Pass through the actual keys to these apps -- they handle SUPER keys themselves
+                "neovide",
+                "kitty",
+                "org.wezfurlong.wezterm",
+            }, active_class_name)
+        then
+            hl.dispatch(hl.dsp.pass({
+                window = active_window,
+            }))
+            return
+        end
+
+        hl.dispatch(hl.dsp.send_shortcut({ mods = "CTRL", key = key }))
+    end
+end
+
+hl.bind("SUPER + C", mac_shortcut("C"))
+hl.bind("SUPER + V", mac_shortcut("V"))
+hl.bind("SUPER + X", mac_shortcut("X"))
+hl.bind("SUPER + Z", mac_shortcut("Z"))
+hl.bind("SUPER + T", mac_shortcut("T"))
+hl.bind("SUPER + W", mac_shortcut("W"))
+hl.bind("SUPER + A", mac_shortcut("A"))
+hl.bind("SUPER + B", mac_shortcut("B"))
+hl.bind("SUPER + F", mac_shortcut("F"))
 
 -- ---------------------------------------------------------------------------
 -- Screen captures
