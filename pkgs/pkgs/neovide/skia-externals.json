@@ -5,24 +5,25 @@
     "hash": "sha256-wnHEQY/NYS48sMPElUWSeLsETyQbWw2sMScc4geaPFA="
   },
   "d3d12allocator": {
-    "url": "https://skia.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator.git",
+    "url": "https://skia.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator.git"
+,
     "rev": "169895d529dfce00390a20e69c2f516066fe7a3b",
     "hash": "sha256-5DbR/3Lb0eMBpHNf7MtZOb1C0QrNlx/ZvPVbCxxF9eQ="
   },
   "expat": {
     "url": "https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git",
-    "rev": "8e49998f003d693213b538ef765814c7d21abada",
-    "hash": "sha256-zP2kiB4nyLi0/I8OsRhxKG0qRGPe2ALLQ+HHfqlBJ6Y="
+    "rev": "6154446fccefbf3ca644894f598969113b0c7bcd",
+    "hash": "sha256-ifMDdEWu9H8iJ/VSKuXlisJKx1s1F8ecT74bwXnBWcA="
   },
   "freetype": {
     "url": "https://chromium.googlesource.com/chromium/src/third_party/freetype2.git",
-    "rev": "b91f75bd02db43b06d634591eb286d3eb0ce3b65",
-    "hash": "sha256-Y8CesBhk3q6YluLkcSv0EbQQNTSrmo5e96P33reO56A="
+    "rev": "264b5fbf5b912b39f98d038bf75d39be0a73f21b",
+    "hash": "sha256-UeV2TAEDylx72nRVrzIVquzfduHgHWvO2Lw+OTWZrqE="
   },
   "harfbuzz": {
     "url": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
-    "rev": "31695252eb6ed25096893aec7f848889dad874bc",
-    "hash": "sha256-Csyz08JTNXfY2fo27x1Eg1CqO/tt8Rt9udr3KflojSg="
+    "rev": "9cb1fee51069b206effb4736e443b038d230789d",
+    "hash": "sha256-EYItQuWvB4q2Q2iJfMyEtX9MTm3rEFlcwZ+NQEAVy0M="
   },
   "icu": {
     "url": "https://chromium.googlesource.com/chromium/deps/icu.git",
@@ -36,8 +37,8 @@
   },
   "libpng": {
     "url": "https://skia.googlesource.com/third_party/libpng.git",
-    "rev": "4e3f57d50f552841550a36eabbb3fbcecacb7750",
-    "hash": "sha256-tNRrA9RUp6Mi7dbIB/70a/4tn/JxAsTUb9EI9nlXLjM="
+    "rev": "d5515b5b8be3901aac04e5bd8bd5c89f287bcd33",
+    "hash": "sha256-N507gFyjXXsJ3dyQN0SlVy80WXlbNlZs/cnqLaCmFTk="
   },
   "libwebp": {
     "url": "https://chromium.googlesource.com/webm/libwebp.git",
