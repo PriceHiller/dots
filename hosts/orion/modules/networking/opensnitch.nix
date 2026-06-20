@@ -125,13 +125,13 @@
             {
               operand = "dest.host";
               data = builtins.elemAt hostsList 0;
-              type = "simple";
+              type = "regexp";
               sensitive = false;
             }
           else
             {
               operand = "dest.host";
-              data = "^(${lib.concatStringsSep "|" (map lib.strings.escapeRegex hostsList)})$";
+              data = "^(${lib.concatStringsSep "|" hostsList})$";
               type = "regexp";
               sensitive = false;
             };
@@ -314,8 +314,9 @@
         (allowExe pkgs.strawberry)
         (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
         (allowPackage config.services.avahi.package)
-        (allowPackageToHost pkgs.gh "api.github.com")
-        (allowPackageToHost pkgs.davfs2 [ "fs.pricehiller.com" ])
+        (allowPackageToHost pkgs.gh (lib.strings.escapeRegex "api.github.com"))
+        (allowPackageToHost pkgs.davfs2 (map lib.strings.escapeRegex [ "fs.pricehiller.com" ]))
+        (allowPackageToHost pkgs.sone ".*\.tidal\.com")
         {
           created = "2025-04-09T23:21:35-06:00";
           updated = "2025-04-09T23:21:35-06:00";
