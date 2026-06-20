@@ -10,9 +10,10 @@
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
+    nixpkgs-unstable-small.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable-small";
 
     nixpkgs-master.url = "git+https://github.com/NixOS/nixpkgs?shallow=1";
-    nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-25.11";
+    nixpkgs-stable.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-26.05";
 
     nix-bwrapper.url = "github:Naxdy/nix-bwrapper";
     harmonia.url = "github:nix-community/harmonia";

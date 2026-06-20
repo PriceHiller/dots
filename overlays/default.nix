@@ -8,6 +8,9 @@
     };
 
   modifications = final: prev: {
+    # TODO: Remove this once https://github.com/NixOS/nixpkgs/pull/533093 hits unstable
+    librewolf =
+      inputs.nixpkgs-unstable-small.legacyPackages.${final.stdenv.hostPlatform.system}.librewolf;
     lxappearance = prev.lxappearance.overrideAttrs (oldAttrs: {
       postInstall = ''
         wrapProgram $out/bin/lxappearance --prefix GDK_BACKEND : x11
