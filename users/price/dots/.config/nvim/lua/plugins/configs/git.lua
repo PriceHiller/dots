@@ -2,26 +2,6 @@ local utils = require("utils.funcs")
 
 return {
     {
-        "sindrets/diffview.nvim",
-        keys = {
-            { "<localleader>d", desc = "> Diff View" },
-            { "<localleader>dd", "<cmd>DiffviewOpen<CR>", desc = "Diff View: Open" },
-            { "<localleader>dh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff View: File History" },
-        },
-        cmd = {
-            "DiffviewToggleFiles",
-            "DiffviewFileHistory",
-            "DiffviewFocusFiles",
-            "DiffviewRefresh",
-            "DiffviewClose",
-            "DiffviewOpen",
-            "DiffviewLog",
-        },
-        opts = {
-            enhanced_diff_hl = true,
-        },
-    },
-    {
         "lewis6991/gitsigns.nvim",
         lazy = false,
         cmd = { "Gitsigns" },

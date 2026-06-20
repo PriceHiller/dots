@@ -23,7 +23,7 @@ return {
                 },
                 graph_style = "unicode",
                 integrations = {
-                    diffview = true,
+                    codediff = true,
                     telescope = true,
                 },
                 status = {
@@ -58,7 +58,7 @@ return {
             })
         end,
         dependencies = {
-            "sindrets/diffview.nvim",
+            "esmuellert/codediff.nvim",
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
         },
