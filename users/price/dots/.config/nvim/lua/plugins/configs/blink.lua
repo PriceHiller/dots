@@ -3,7 +3,7 @@ return {
         "saghen/blink.cmp",
         lazy = false,
         build = function()
-            require("blink.cmp").build():wait(60000)
+            require("blink.cmp").build():pwait()
         end,
         dependencies = {
             "saghen/blink.lib",
@@ -70,7 +70,7 @@ return {
                 ["<S-Tab>"] = { "select_prev", "fallback" },
                 ["<C-p>"] = { "select_prev", "fallback" },
                 ["<C-n>"] = { "select_next", "fallback" },
-                ["<C-s>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-u>"] = { "scroll_documentation_up", "fallback" },
                 ["<C-d>"] = { "scroll_documentation_down", "fallback" },
                 ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
             }
