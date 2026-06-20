@@ -10,7 +10,7 @@ return {
                             "neo-tree",
                             "NeogitStatus",
                             "lazy",
-                            "neotest-summary"
+                            "neotest-summary",
                         }, vim.bo.filetype)
                     then
                         require("hop").hint_lines({})
