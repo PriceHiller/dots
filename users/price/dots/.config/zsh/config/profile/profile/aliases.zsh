@@ -25,7 +25,7 @@
 				editor_to_use="${EDITOR} --"
 			fi
 			alias gg="${editor_to_use} -c 'Neogit'"
-			alias gd="${editor_to_use} -c 'DiffviewOpen'"
+			alias gd="${editor_to_use} -c 'CodeDiff'"
 			alias gl="${editor_to_use} -c 'call feedkeys(\":Neogit log\<CR>l\")'"
 		fi
 
