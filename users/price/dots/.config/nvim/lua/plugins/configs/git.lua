@@ -3,13 +3,12 @@ local utils = require("utils.funcs")
 return {
     {
         "lewis6991/gitsigns.nvim",
-        lazy = false,
         cmd = { "Gitsigns" },
+        event = { "BufReadPre", "BufNewFile" },
         keys = {
             { "]g", "<cmd>Gitsigns next_hunk<CR><CR>", desc = "Gitsigns: Next Hunk" },
             { "[g", "<cmd>Gitsigns prev_hunk<CR><CR>", desc = "Gitsigns: Prev Hunk" },
         },
-
         init = function()
             utils.alias_cmd("Gs", "Gitsigns")
         end,

@@ -3,7 +3,6 @@ return {
         "rebelot/heirline.nvim",
         lazy = false,
         dependencies = {
-            "lewis6991/gitsigns.nvim",
             "rebelot/kanagawa.nvim",
         },
         opts = function()

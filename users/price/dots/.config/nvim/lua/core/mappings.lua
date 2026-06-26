@@ -1,5 +1,4 @@
 local M = {}
-local utils = require("utils.funcs")
 
 ---Stolen with ❤️ from https://github.com/tj-moody/.dotfiles/blob/c2afec06b68cd0413c20d332672907c11f0a9c47/nvim/lua/mappings.lua#L171C1-L171C1
 ---Adapted from https://vi.stackexchange.com/a/12870

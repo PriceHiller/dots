@@ -1,8 +1,7 @@
 return {
-
     {
         "kevinhwang91/nvim-fundo",
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufRead", "BufNewFile" },
         dependencies = { "kevinhwang91/promise-async" },
         config = true,
         build = function()

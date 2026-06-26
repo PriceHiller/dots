@@ -50,6 +50,14 @@ return {
         },
         keys = {
             {
+                "gra",
+                function()
+                    require("actions-preview").code_actions()
+                end,
+                desc = "LSP: Code Action",
+                mode = { "n", "v" },
+            },
+            {
                 "<leader>lc",
                 function()
                     require("actions-preview").code_actions()

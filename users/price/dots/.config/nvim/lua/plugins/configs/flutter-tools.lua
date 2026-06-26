@@ -2,6 +2,7 @@ return {
     {
         "nvim-flutter/flutter-tools.nvim",
         lazy = false,
+        enabled = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
