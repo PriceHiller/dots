@@ -11,7 +11,7 @@ return {
                         return vim.env.NVIM_FLATTEN_BLOCK ~= nil
                     end,
                     should_nest = function()
-                        return vim.env.NVIM_FLATTEN_NEST ~= nil
+                        return vim.env.NVIM_FLATTEN_NEST ~= nil or vim.tbl_contains(vim.v.argv, "--headless")
                     end,
                 },
                 one_per = {

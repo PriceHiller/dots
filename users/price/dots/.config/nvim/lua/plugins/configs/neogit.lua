@@ -1,7 +1,7 @@
 return {
     {
         "neogitorg/neogit",
-        cmd = { "Neogit" },
+        cmd = { "Neogit", "NeogitLogCurrent" },
         keys = {
             { "<leader>g", desc = "> Git" },
             { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit: Open" },
@@ -38,6 +38,17 @@ return {
                     },
                 },
             })
+            vim.api.nvim_create_user_command("NeogitLogCurrent", function()
+                require("neogit.popups.log.actions").log_current({
+                    get_arguments = function()
+                        return { "--max-count=256" }
+                    end,
+                    get_internal_arguments = function()
+                        return { graph = true, decorate = true }
+                    end,
+                    state = { env = { files = {} } },
+                })
+            end, { desc = "Neogit: Log current branch" })
             vim.api.nvim_create_autocmd("User", {
                 pattern = "Neogit*",
                 desc = "Handle Neogit Refreshes",

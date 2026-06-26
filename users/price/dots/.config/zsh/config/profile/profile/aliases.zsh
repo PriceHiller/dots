@@ -24,9 +24,9 @@
 			if [[ -n "${XDG_CURRENT_DESKTOP}" ]] && [[ "${EDITOR}" =~ "^neovide*" ]] && command -v neovide >/dev/null 2>&1; then
 				editor_to_use="${EDITOR} --"
 			fi
-			alias gg="${editor_to_use} -c 'Neogit'"
-			alias gd="${editor_to_use} -c 'CodeDiff'"
-			alias gl="${editor_to_use} -c 'call feedkeys(\":Neogit log\<CR>l\")'"
+			alias gg="${editor_to_use} +'lcd $PWD | Neogit'"
+			alias gd="${editor_to_use} +'lcd $PWD | CodeDiff'"
+			alias gl="${editor_to_use} +'lcd $PWD | NeogitLogCurrent'"
 		fi
 
 		alias g="git"
@@ -43,7 +43,9 @@
 		alias gst="git stash"
 		alias gstc="git stash clear"
 		alias gsw="git switch"
-		alias gr="git remote"
+		alias gr="git reset"
+		alias grc="git rebase --continue"
+		alias gR="git remote"
 		alias glo="git log --oneline"
 		alias gw="git worktree"
 		alias gwa="git worktree add"
