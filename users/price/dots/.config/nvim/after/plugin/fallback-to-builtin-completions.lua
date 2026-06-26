@@ -19,16 +19,11 @@ if vim.fn.has("nvim-0.12") == 1 then
     complete_lsp = "o,.^5,w^5,b^5,u^5"
 else
     complete_default = ".,w,b,u"
-    complete_lsp = "o,.,w,b,u"
+    complete_lsp = ".,w,b,u"
 end
 
 -- Default (no LSP) is buffer-based.
 vim.o.complete = complete_default
--- 'popup' renders the selected item's documentation in a *floating* window
--- next to the menu (blink-like). vim.lsp.completion populates the info (docs +
--- detail), resolves it lazily via completionItem/resolve, and Treesitter/markdown
--- highlights it. Do NOT also set 'preview' -- that shows docs in a split preview
--- window instead, which conflicts with the floating popup.
 vim.o.completeopt = "noinsert,menuone,fuzzy,noselect,popup"
 vim.o.pumheight = 8
 -- 'autocomplete' (Nvim 0.12+) drives native as-you-type completion. On older
@@ -42,13 +37,36 @@ local has_native_autocomplete = pcall(vim.api.nvim_get_option_info2, "autocomple
 if has_native_autocomplete then
     vim.o.autocomplete = false
 end
-vim.api.nvim_create_autocmd("CmdlineChanged", {
-    pattern = [=[[:\/\?]]=],
-    callback = function()
-        if vim.fn.exists("*wildtrigger") == 1 then
-            -- Nvim 0.12+: native as-you-type cmdline completion.
+if vim.fn.exists("*wildtrigger") == 1 then
+    vim.api.nvim_create_autocmd("CmdlineChanged", {
+        pattern = [=[[:\/\?]]=],
+        callback = function()
             vim.fn.wildtrigger()
-        else
+        end,
+    })
+else
+    vim.o.wildcharm = vim.fn.char2nr(vim.keycode("<C-z>"))
+    local grp = vim.api.nvim_create_augroup("cmdline_autocomplete", { clear = true })
+
+    vim.api.nvim_create_autocmd("CmdlineChanged", {
+        group = grp,
+        callback = function()
+            -- only for ':' command-line, not '/' or '?' searches
+            if vim.fn.getcmdtype() ~= ":" then
+                return
+            end
+
+            local line = vim.fn.getcmdline()
+            for _, match_to_skip in ipairs({
+                "^s*$",
+                ".*!$",
+                '.*"$',
+            }) do
+                if line:match(match_to_skip) then
+                    return
+                end
+            end
+
             -- Nvim 0.11 fallback: feed 'wildcharm' to open the wildmenu live.
             -- Guard against recursion (feeding wildcharm itself fires
             -- CmdlineChanged) and against an already-open wildmenu.
@@ -67,14 +85,8 @@ vim.api.nvim_create_autocmd("CmdlineChanged", {
             vim.schedule(function()
                 vim.g._fallback_wildtrigger_busy = false
             end)
-        end
-    end,
-})
-
--- Nvim 0.11 fallback needs a 'wildcharm' to feed for live cmdline completion;
--- <C-z> is the conventional choice and is otherwise unused on the cmdline.
-if vim.fn.exists("*wildtrigger") ~= 1 and vim.o.wildcharm == 0 then
-    vim.o.wildcharm = vim.fn.char2nr(vim.keycode("<C-z>"))
+        end,
+    })
 end
 
 --- Whether the fallback completion machinery (autocomplete + <CR> accept)
@@ -189,31 +201,39 @@ vim.keymap.set("c", "<C-Space>", "<Tab>", {
     desc = "Completion: Trigger (cmdline)",
 })
 
--- Navigate: <Tab> = { "select_next", "fallback" }
-vim.keymap.set({ "i", "c" }, "<Tab>", function()
-    return vim.fn.pumvisible() ~= 0 and "<C-n>" or "<Tab>"
-end, { silent = true, expr = true, noremap = true, desc = "Completion: Next or Tab" })
+--- Commandline bindings
+for _, next_bind in ipairs({
+    "<Tab>",
+}) do
+    vim.keymap.set("c", next_bind, function()
+        return vim.fn.wildmenumode() == 1 and "<C-n>" or next_bind
+    end, { expr = true, desc = "Completion: Next" })
+end
 
--- Navigate: <S-Tab> = { "select_prev", "fallback" }
-vim.keymap.set({ "i", "c" }, "<S-Tab>", function()
-    return vim.fn.pumvisible() ~= 0 and "<C-p>" or "<S-Tab>"
-end, { silent = true, expr = true, noremap = true, desc = "Completion: Prev or S-Tab" })
+for _, prev_bind in ipairs({
+    "<S-Tab>",
+}) do
+    vim.keymap.set("c", prev_bind, function()
+        return vim.fn.wildmenumode() == 1 and "<C-p>" or prev_bind
+    end, { expr = true, desc = "Completion: Previous" })
+end
 
--- Navigate: <Down> = { "select_next", "fallback" }
-vim.keymap.set("i", "<Down>", function()
-    return vim.fn.pumvisible() ~= 0 and "<C-n>" or "<Down>"
-end, { silent = true, expr = true, noremap = true, desc = "Completion: Next or Down" })
-vim.keymap.set("c", "<Down>", function()
-    return vim.fn.wildmenumode() ~= 0 and "<C-E><Down>" or "<Down>"
-end, { silent = true, expr = true, noremap = true, desc = "Cmdline: Down (wildmenu-aware)" })
+-- Insert mode bindings
+for _, next_bind in ipairs({
+    "<Tab>",
+}) do
+    vim.keymap.set("i", next_bind, function()
+        return vim.fn.pumvisible() ~= 0 and "<C-n>" or next_bind
+    end, { silent = true, expr = true, noremap = true, desc = "Completion: Next" })
+end
 
--- Navigate: <Up> = { "select_prev", "fallback" }
-vim.keymap.set("i", "<Up>", function()
-    return vim.fn.pumvisible() ~= 0 and "<C-p>" or "<Up>"
-end, { silent = true, expr = true, noremap = true, desc = "Completion: Prev or Up" })
-vim.keymap.set("c", "<Up>", function()
-    return vim.fn.wildmenumode() ~= 0 and "<C-E><Up>" or "<Up>"
-end, { silent = true, expr = true, noremap = true, desc = "Cmdline: Up (wildmenu-aware)" })
+for _, prev_bind in ipairs({
+    "<S-Tab>",
+}) do
+    vim.keymap.set("i", prev_bind, function()
+        return vim.fn.pumvisible() ~= 0 and "<C-p>" or prev_bind
+    end, { silent = true, expr = true, noremap = true, desc = "Completion: Previous" })
+end
 
 -- Accept: <CR> = { "accept", "fallback" }
 -- Note: <C-e> = { "hide", "fallback" } is already native pum behaviour
