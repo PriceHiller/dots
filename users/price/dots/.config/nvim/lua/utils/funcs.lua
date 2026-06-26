@@ -180,4 +180,25 @@ U.alias_cmd = function(alias, cmd)
     vim.cmd(("cnoreabbrev <expr> %s v:lua._cmd_aliases.%s.expand()"):format(alias, alias))
 end
 
+---Fallible require. If the module is not found all calls or usages of the
+---return will always return `nil`.
+---@param module_name string The module to require
+---@return unknown
+U.require_proxy = function (module_name)
+    local success, module = pcall(require, module_name)
+    if success then
+        return module
+    end
+    local proxy
+    proxy = setmetatable({}, {
+        __index = function(_, _)
+            return proxy
+        end,
+        __call = function(_, ...)
+            return proxy
+        end,
+    })
+    return proxy
+end
+
 return U

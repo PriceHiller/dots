@@ -1,3 +1,5 @@
+local require_proxy = require("utils.funcs").require_proxy
+
 return {
     ---@type lspconfig.settings.yamlls
     settings = {
@@ -7,7 +9,7 @@ return {
             },
         },
         yaml = {
-            schemas = require("schemastore").yaml.schemas({
+            schemas = require_proxy("schemastore").yaml.schemas({
                 validate = { enable = true },
                 extra = {
                     {

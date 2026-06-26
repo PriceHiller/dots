@@ -1,4 +1,5 @@
-local schemastore = require("schemastore")
+local require_proxy = require("utils.funcs").require_proxy
+local schemastore = require_proxy("schemastore")
 
 local vscode_snippets_name = "VSCode Code Snippets"
 

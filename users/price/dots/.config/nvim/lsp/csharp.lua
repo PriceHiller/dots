@@ -1,5 +1,7 @@
+local require_proxy = require("utils.funcs").require_proxy
+
 return {
     handlers = {
-        ["textDocument/definition"] = require("csharpls_extended").handler,
+        ["textDocument/definition"] = require_proxy("csharpls_extended").handler,
     },
 }
