@@ -61,6 +61,7 @@ return {
             local blink_keymap = {
                 ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
                 ["<C-e>"] = { "hide", "fallback" },
+                ["<C-Escape>"] = { "hide", "fallback" },
                 ["<CR>"] = { "accept", "fallback" },
                 ["<C-Tab>"] = { "snippet_forward", "fallback" },
                 ["<C-S-Tab>"] = { "snippet_backward", "fallback" },
@@ -148,7 +149,7 @@ return {
                                 -- Get completion from all open buffers
                                 get_bufnrs = function()
                                     return vim.tbl_filter(function(bufnr)
-                                        return vim.bo[bufnr].buftype == ""
+                                        return vim.bo[bufnr].buftype == "" or vim.bo[bufnr].filetype == "gitcommit"
                                     end, vim.api.nvim_list_bufs())
                                 end,
                             },
@@ -214,10 +215,6 @@ return {
                             name = "Nix",
                             module = "blink-nix",
                         },
-                        calc = {
-                            name = "Calc",
-                            module = "blink-calc",
-                        },
                         emoji = {
                             opts = { insert = true },
                             module = "blink-emoji",
@@ -230,9 +227,6 @@ return {
 
                 ---@diagnostic disable-next-line: missing-fields
                 completion = {
-                    trigger = {
-                        show_on_backspace_in_keyword = true,
-                    },
                     documentation = {
                         auto_show = true,
                         auto_show_delay_ms = 50,
@@ -246,7 +240,7 @@ return {
                         range = "full",
                     },
                     list = {
-                        selection = { preselect = false, auto_insert = false },
+                        selection = { preselect = true, auto_insert = false },
                     },
                     ghost_text = {
                         enabled = true,
@@ -256,7 +250,7 @@ return {
                         winblend = vim.g.neovide and 90,
                         max_height = vim.opt.pumheight:get(),
                         draw = {
-                            padding = 1,
+                            padding = 0,
                             columns = { { "kind_icon" }, { "label", gap = 1 } },
                             components = {
                                 label = {
