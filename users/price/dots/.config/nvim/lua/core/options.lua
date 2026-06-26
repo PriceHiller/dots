@@ -145,8 +145,10 @@ M.setup = function()
         "linematch:60",
         "algorithm:histogram",
     }) do
-        ---@diagnostic disable-next-line: undefined-field
-        opt.diffopt:append(new_diffopt)
+        pcall(function()
+            ---@diagnostic disable-next-line: undefined-field
+            opt.diffopt:append(new_diffopt)
+        end)
     end
     opt.fillchars:append("diff:╱")
 
