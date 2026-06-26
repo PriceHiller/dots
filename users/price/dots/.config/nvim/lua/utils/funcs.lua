@@ -147,11 +147,12 @@ end
 
 ---Get a program's path if found or `nil` if not
 ---@param program string
+---@param log_level integer?
 ---@return string?
-U.get_program_path = function(program)
+U.get_program_path = function(program, log_level)
     local path = vim.fn.exepath(program)
     if #path == 0 then
-        vim.notify(("`%s` not found in `$PATH`"):format(program), vim.log.levels.ERROR)
+        vim.notify(("`%s` not found in `$PATH`"):format(program), log_level or vim.log.levels.WARN)
         return nil
     end
     return path
