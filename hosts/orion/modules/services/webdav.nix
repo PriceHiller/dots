@@ -21,7 +21,6 @@ in
     serviceConfig = {
       Type = "oneshot";
       LoadCredential = "pw:${config.age.secrets.copyparty-users-price-pw.path}";
-      WantedBy = [ "multi-user.target" ];
       ExecStart = pkgs.writeShellScript "gen-webdav-creds" ''
         PW="$(cat "$CREDENTIALS_DIRECTORY/pw")"
         echo "/mnt/${webdav-host} price \"$PW\"" > /etc/davfs2/secrets
