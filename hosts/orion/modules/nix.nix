@@ -3,6 +3,7 @@
   inputs,
   pkgs,
   clib,
+  lib,
   ...
 }:
 let
@@ -65,8 +66,15 @@ in
         "dynamic-derivations"
       ];
       use-xdg-base-directories = true;
-      allowed-users = [ "@wheel" ];
-      trusted-users = [ "@wheel" ];
+      allowed-users = [
+        "@wheel"
+        # DynamicUser services have no /etc/group entry, so group-based checks
+        # fail. Allow the dynamic username directly.
+        "nix-post-build-hook-queue"
+      ];
+      trusted-users = [
+        "@wheel"
+      ];
       substituters = [
         "https://nix.cache.pricehiller.com"
         "https://nix-community.cachix.org"
