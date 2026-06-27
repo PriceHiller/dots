@@ -185,7 +185,7 @@ end
 ---return will always return `nil`.
 ---@param module_name string The module to require
 ---@return unknown
-U.require_proxy = function (module_name)
+U.require_proxy = function(module_name)
     local success, module = pcall(require, module_name)
     if success then
         return module
