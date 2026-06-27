@@ -5,6 +5,14 @@ in
 {
   ext.persistence.enable = true;
 
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 64 * 1024;
+      priority = 10;
+    }
+  ];
+
   services = {
     fstrim.enable = true;
     btrfs.autoScrub = {
@@ -90,6 +98,13 @@ in
                       mountOptions = [
                         "compress=zstd"
                         "noatime"
+                      ];
+                    };
+                    "/swap" = {
+                      mountpoint = "/swap";
+                      mountOptions = [
+                        "noatime"
+                        "nodatacow"
                       ];
                     };
                   };

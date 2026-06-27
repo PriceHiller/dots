@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  zramSwap.enable = true;
+  boot.zswap.enable = true;
 }

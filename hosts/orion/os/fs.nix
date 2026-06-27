@@ -20,6 +20,14 @@ in
 
   ext.persistence.enable = true;
 
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 128 * 1024;
+      priority = 10;
+    }
+  ];
+
   disko.devices = {
     disk.${lib.removePrefix "/dev/" root-disk} = {
       type = "disk";
@@ -82,6 +90,13 @@ in
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
+                    ];
+                  };
+                  "/swap" = {
+                    mountpoint = "/swap";
+                    mountOptions = [
+                      "noatime"
+                      "nodatacow"
                     ];
                   };
                 };
