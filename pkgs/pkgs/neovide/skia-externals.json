@@ -5,8 +5,7 @@
     "hash": "sha256-wnHEQY/NYS48sMPElUWSeLsETyQbWw2sMScc4geaPFA="
   },
   "d3d12allocator": {
-    "url": "https://skia.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator.git"
-,
+    "url": "https://skia.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator.git",
     "rev": "169895d529dfce00390a20e69c2f516066fe7a3b",
     "hash": "sha256-5DbR/3Lb0eMBpHNf7MtZOb1C0QrNlx/ZvPVbCxxF9eQ="
   },
@@ -66,3 +65,4 @@
     "hash": "sha256-jNj6SuTZ5/a7crtYhxW3Q/TlfRMNMfYIVxDlr7bYdzQ="
   }
 }
+
