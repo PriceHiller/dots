@@ -32,13 +32,13 @@ end
 --- @param follow boolean     when true, also focus the destination workspace
 local function move_active_window_to_ws_on_current_mon(ws, follow)
     local mon = focused_monitor_name()
-    hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = false }))
-    if mon then
-        hl.dispatch(hl.dsp.workspace.move({ monitor = mon }))
-    end
-    if follow then
-        hl.dispatch(hl.dsp.focus({ workspace = ws }))
-    end
+    hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = true }))
+    -- if mon then
+    --     hl.dispatch(hl.dsp.workspace.move({ monitor = mon }))
+    -- end
+    -- if follow then
+    --     hl.dispatch(hl.dsp.focus({ workspace = ws }))
+    -- end
 end
 
 -- ---------------------------------------------------------------------------
@@ -93,7 +93,7 @@ hl.bind("SUPER + CTRL + RETURN", hl.dsp.exec_cmd("xdg-open 'http://'"))
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind("SUPER + CTRL + SPACE", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind("SUPER + D", hl.dsp.exec_cmd("swaync-client --hide-all"))
-hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd("hyprlock"))
+hl.bind("SUPER + CTRL + Q", hl.dsp.exec_cmd("hyprlock"))
 
 -- ---------------------------------------------------------------------------
 -- Window management
@@ -102,7 +102,7 @@ hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + CTRL + F", hl.dsp.window.fullscreen())
 hl.bind("SUPER + Q", hl.dsp.window.close())
 -- Force kill (SIGKILL) the active window.
-hl.bind("SUPER + CTRL + Q", hl.dsp.window.kill())
+hl.bind("SUPER + SHIFT + Q", hl.dsp.window.kill())
 hl.bind("SUPER + CTRL + A", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
 
@@ -204,18 +204,19 @@ hl.bind("SUPER + j", hl.dsp.focus({ direction = "d" }))
 -- Workspaces
 -- ---------------------------------------------------------------------------
 
--- SUPER + CTRL + arrow/hjkl: switch to prev/next absolute workspace, drag it
--- onto the current monitor.
-for _, k in ipairs({ "left", "h" }) do
-    hl.bind("SUPER + CTRL + " .. k, function()
-        focus_ws_on_current_mon("-1")
-    end)
-end
-for _, k in ipairs({ "right", "l" }) do
-    hl.bind("SUPER + CTRL + " .. k, function()
-        focus_ws_on_current_mon("+1")
-    end)
-end
+-- CTRL + arrow/hjkl: switch to prev/next absolute workspace, drag it onto the current monitor.
+hl.bind("SUPER + CTRL + h ", function()
+    focus_ws_on_current_mon("-1")
+end)
+hl.bind("CTRL + left", function()
+    focus_ws_on_current_mon("-1")
+end)
+hl.bind("SUPER + CTRL + l ", function()
+    focus_ws_on_current_mon("+1")
+end)
+hl.bind("CTRL + right", function()
+    focus_ws_on_current_mon("+1")
+end)
 
 -- SUPER + ALT + arrow/hjkl: send the active window to prev/next absolute
 -- workspace, drag that workspace onto the current monitor, AND follow it
