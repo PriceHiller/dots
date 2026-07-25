@@ -63,7 +63,7 @@ return {
         event = "FileType",
         keys = {
             {
-                "[cc",
+                "[Cc",
                 function()
                     require("treesitter-context").go_to_context(vim.v.count1)
                 end,
@@ -76,6 +76,7 @@ return {
                 multiwindow = true,
                 on_attach = function(buf)
                     return not vim.list_contains({ "opencode" }, vim.bo[buf].filetype)
+                        and not vim.b[buf].ts_context_disable
                 end,
             })
         end,
@@ -87,22 +88,22 @@ return {
             local move_config = {
                 goto_next_start = {
                     ["]fs"] = "@function.outer",
-                    ["]cs"] = "@class.outer",
+                    ["]Cs"] = "@class.outer",
                     ["]bs"] = "@block.outer",
                 },
                 goto_next_end = {
                     ["]fe"] = "@function.outer",
-                    ["]ce"] = "@class.outer",
+                    ["]Ce"] = "@class.outer",
                     ["]be"] = "@block.outer",
                 },
                 goto_previous_start = {
                     ["[fs"] = "@function.outer",
-                    ["[cs"] = "@class.outer",
+                    ["[Cs"] = "@class.outer",
                     ["[bs"] = "@block.outer",
                 },
                 goto_previous_end = {
                     ["[fe"] = "@function.outer",
-                    ["[ce"] = "@class.outer",
+                    ["[Ce"] = "@class.outer",
                     ["[bs"] = "@block.outer",
                 },
             }
