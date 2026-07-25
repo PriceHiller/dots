@@ -1,4 +1,5 @@
 local utils = require("utils.funcs")
+local Color = require("utils.colors")
 local get_hl = utils.get_hl
 local select_hl = utils.select_hl
 
@@ -31,7 +32,7 @@ return {
             -- very important. Lua does not guarantee hashmaps will be in the order they are
             -- defined, thus the array.
             --
-            ---@type { [1]: string, [2]: vim.api.keyset.highlight | fun(): vim.api.keyset.highlight | table<Highlight.Keys, fun(): string | integer> }[]
+            ---@type { [1]: string, [2]: vim.api.keyset.highlight | fun(): vim.api.keyset.highlight? | table<Highlight.Keys, fun(): (string | integer)?> }[]
             local extra_hls = {
                 -- For diagnostics
                 { "CustomErrorBg", { bg = "#3d1b22" } },
@@ -196,15 +197,6 @@ return {
                 { "TSRainbowViolet", { fg = colors.oniViolet } },
                 { "TSRainbowCyan", { fg = colors.lightBlue } },
                 { "TreesitterContext", { bg = colors.sumiInk0 } },
-                { "DiffviewFilePanelTitle", { fg = colors.crystalBlue } },
-                {
-                    "DiffviewDiffDeleteDim",
-                    {
-                        fg = function()
-                            return get_hl("Comment")().fg
-                        end,
-                    },
-                },
                 { "LspInlayHint", { fg = colors.springViolet2, bg = colors.winterBlue } },
                 { "@text", { fg = colors.fujiWhite } },
                 { "RainbowDelimiterRed", { fg = colors.peachRed } },
@@ -260,6 +252,20 @@ return {
                 --- Misc
                 { "SnacksPickerDir", { fg = colors.fujiGray } },
                 --- Git stuff
+                {
+                    "DiffChange",
+                    {
+                        bg = Color.from(colors.springViolet1):darken(0.75):toHex(),
+                    },
+                },
+                {
+                    "DiffText",
+                    {
+                        bg = Color.from(colors.springViolet1):darken(0.5):toHex(),
+                    },
+                },
+                { "DiffTextAdd", get_hl("DiffTextAdd", { bg = colors.autumnGreen }) },
+                { "DiffTextDelete", { bg = colors.autumnRed } },
                 { "SnacksPickerGitStatusModified", { link = "DiffChanged" } },
                 { "SnacksPickerGitStatusUntracked", { fg = colors.springViolet1 } },
                 { "SnacksPickerGitStatusDeleted", { link = "DiffDeleted" } },
@@ -422,6 +428,9 @@ return {
 
                 -- Make variable definitions (where they are defined/created) standout
                 { "LspReferenceWrite", get_hl("LspReferenceText", { bold = true, underdotted = true }) },
+
+                -- Make `NonText` blend with background
+                { "NonText", get_hl("NonText", { nocombine = false }) },
             }
 
             if vim.g.neovide then
