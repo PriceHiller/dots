@@ -13,6 +13,7 @@
       };
       alias = {
         unstage = "reset HEAD --";
+        diffview = "!nvim -c DiffviewOpen";
       };
       init.defaultBranch = "main";
       merge.conflictstyle = "zdiff3";

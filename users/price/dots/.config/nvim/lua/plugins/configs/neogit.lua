@@ -25,6 +25,7 @@ return {
                 integrations = {
                     codediff = true,
                     telescope = true,
+                    diffivew = true,
                 },
                 status = {
                     recent_commit_count = 30,
