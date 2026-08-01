@@ -189,6 +189,17 @@ in
               source "${pkgs.nix-zsh-completions.src}/nix-zsh-completions.plugin.zsh"
             ''
 
+            # Zsh Vi Mode
+            # zsh
+            ''
+              function zvm_config() {
+                export ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+                export ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+                export ZVM_INIT_MODE=sourcing
+              }
+              source "${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+            ''
+
             # zsh
             ''
               () {
