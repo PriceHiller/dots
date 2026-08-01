@@ -32,7 +32,7 @@ end
 --- @param follow boolean     when true, also focus the destination workspace
 local function move_active_window_to_ws_on_current_mon(ws, follow)
     local mon = focused_monitor_name()
-    hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = true }))
+    hl.dispatch(hl.dsp.window.move({ workspace = ws, follow = follow }))
     -- if mon then
     --     hl.dispatch(hl.dsp.workspace.move({ monitor = mon }))
     -- end
@@ -52,7 +52,7 @@ hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Submaps: resize / move_window
 -- ---------------------------------------------------------------------------
 
-hl.bind("SUPER + R", hl.dsp.submap("resize"))
+hl.bind("SUPER + CTRL + R", hl.dsp.submap("resize"))
 hl.define_submap("resize", function()
     hl.bind("right", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
     hl.bind("left", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
@@ -102,9 +102,9 @@ hl.bind("SUPER + CTRL + Q", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + CTRL + F", hl.dsp.window.fullscreen())
 hl.bind("SUPER + Q", hl.dsp.window.close())
 -- Force kill (SIGKILL) the active window.
-hl.bind("SUPER + SHIFT + Q", hl.dsp.window.kill())
+hl.bind("SUPER + ALT + X", hl.dsp.window.kill())
 hl.bind("SUPER + CTRL + A", hl.dsp.window.float({ action = "toggle" }))
-hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
+hl.bind("SUPER + SHIFT + Q", hl.dsp.exit())
 
 -- ---------------------------------------------------------------------------
 -- macOS-style SUPER shortcuts
@@ -120,33 +120,47 @@ local function active_class(window)
     return window and window.class and window.class:lower() or ""
 end
 
----@param key string
+---@param shortcut table[]
+---@param classes_to_pass string[]?
 ---@return function
-local function mac_shortcut(key)
+local function rebind(shortcut, classes_to_pass)
+    classes_to_pass = classes_to_pass or {}
     return function()
         local active_window = hl.get_active_window()
         local active_class_name = active_class(active_window)
-        if
-            utils.list_contains({
-                -- Pass through the actual keys to these apps -- they handle SUPER keys themselves
-                "neovide",
-                "kitty",
-                "org.wezfurlong.wezterm",
-            }, active_class_name)
-        then
+        if utils.list_contains(classes_to_pass, active_class_name) then
             hl.dispatch(hl.dsp.pass({
                 window = active_window,
             }))
             return
         end
 
-        hl.dispatch(hl.dsp.send_shortcut({ mods = "CTRL", key = key }))
+        hl.dispatch(hl.dsp.send_shortcut(shortcut))
     end
 end
 
-hl.bind("SUPER + C", mac_shortcut("C"))
-hl.bind("SUPER + V", mac_shortcut("V"))
-hl.bind("SUPER + X", mac_shortcut("X"))
+local term_apps = {
+    "neovide",
+    "kitty",
+    "org.wezfurlong.wezterm",
+}
+
+hl.bind("SUPER + C", rebind({ mods = "CTRL", key = "C" }, term_apps))
+hl.bind("SUPER + V", rebind({ mods = "CTRL", key = "V" }, term_apps))
+hl.bind("SUPER + X", rebind({ mods = "CTRL", key = "X" }, term_apps))
+hl.bind("SUPER + A", rebind({ mods = "CTRL", key = "A" }, term_apps))
+hl.bind("SUPER + W", rebind({ mods = "CTRL", key = "W" }, term_apps))
+hl.bind("SUPER + Z", rebind({ mods = "CTRL", key = "Z" }, term_apps))
+hl.bind("SUPER + F", rebind({ mods = "CTRL", key = "F" }, term_apps))
+hl.bind("SUPER + SHIFT + Z", rebind({ mods = "CTRL + SHIFT", key = "Z" }, term_apps))
+hl.bind("SUPER + L", rebind({ mods = "CTRL", key = "L" }, term_apps))
+hl.bind("SUPER + T", rebind({ mods = "CTRL", key = "T" }, term_apps))
+hl.bind("SUPER + R", rebind({ mods = "CTRL", key = "R" }, term_apps))
+hl.bind("SUPER + H", rebind({ mods = "CTRL", key = "H" }, term_apps))
+hl.bind("SUPER + left", rebind({ mods = "", key = "HOME" }))
+hl.bind("SUPER + right", rebind({ mods = "", key = "END" }))
+hl.bind("ALT + right", rebind({ mods = "CTRL", key = "right" }))
+hl.bind("ALT + left", rebind({ mods = "CTRL", key = "left" }))
 
 -- ---------------------------------------------------------------------------
 -- Screen captures
@@ -184,44 +198,38 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%-"), { repea
 -- Focus movement
 -- ---------------------------------------------------------------------------
 
-hl.bind("SUPER + left", hl.dsp.focus({ direction = "l" }))
-hl.bind("SUPER + right", hl.dsp.focus({ direction = "r" }))
-hl.bind("SUPER + up", hl.dsp.focus({ direction = "u" }))
-hl.bind("SUPER + down", hl.dsp.focus({ direction = "d" }))
+hl.bind("SUPER + ALT + left", hl.dsp.focus({ direction = "l" }))
+hl.bind("SUPER + ALT + right", hl.dsp.focus({ direction = "r" }))
+hl.bind("SUPER + ALT + up", hl.dsp.focus({ direction = "u" }))
+hl.bind("SUPER + ALT + down", hl.dsp.focus({ direction = "d" }))
 
-hl.bind("SUPER + h", hl.dsp.focus({ direction = "l" }))
-hl.bind("SUPER + l", hl.dsp.focus({ direction = "r" }))
-hl.bind("SUPER + k", hl.dsp.focus({ direction = "u" }))
-hl.bind("SUPER + j", hl.dsp.focus({ direction = "d" }))
+hl.bind("SUPER + ALT + h", hl.dsp.focus({ direction = "l" }))
+hl.bind("SUPER + ALT + l", hl.dsp.focus({ direction = "r" }))
+hl.bind("SUPER + ALT + k", hl.dsp.focus({ direction = "u" }))
+hl.bind("SUPER + ALT + j", hl.dsp.focus({ direction = "d" }))
 
 -- ---------------------------------------------------------------------------
 -- Workspaces
 -- ---------------------------------------------------------------------------
 
 -- CTRL + arrow/hjkl: switch to prev/next absolute workspace, drag it onto the current monitor.
-hl.bind("SUPER + CTRL + h ", function()
-    focus_ws_on_current_mon("-1")
-end)
 hl.bind("CTRL + left", function()
     focus_ws_on_current_mon("-1")
-end)
-hl.bind("SUPER + CTRL + l ", function()
-    focus_ws_on_current_mon("+1")
 end)
 hl.bind("CTRL + right", function()
     focus_ws_on_current_mon("+1")
 end)
 
--- SUPER + ALT + arrow/hjkl: send the active window to prev/next absolute
+-- Send the active window to prev/next absolute
 -- workspace, drag that workspace onto the current monitor, AND follow it
 -- (matches the trailing `1` arg to `move-workspace-mon.bash`).
 for _, k in ipairs({ "left", "h" }) do
-    hl.bind("SUPER + ALT + " .. k, function()
+    hl.bind("SUPER + CTRL + " .. k, function()
         move_active_window_to_ws_on_current_mon("-1", true)
     end)
 end
 for _, k in ipairs({ "right", "l" }) do
-    hl.bind("SUPER + ALT + " .. k, function()
+    hl.bind("SUPER + CTRL + " .. k, function()
         move_active_window_to_ws_on_current_mon("+1", true)
     end)
 end
