@@ -61,6 +61,7 @@
       push = {
         autoSetupRemote = true;
         default = "current";
+        recurseSubmodules = "on-demand";
       };
     };
     signing = {
