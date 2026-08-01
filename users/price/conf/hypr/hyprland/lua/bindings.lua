@@ -147,20 +147,14 @@ end
 hl.bind("SUPER + C", mac_shortcut("C"))
 hl.bind("SUPER + V", mac_shortcut("V"))
 hl.bind("SUPER + X", mac_shortcut("X"))
-hl.bind("SUPER + Z", mac_shortcut("Z"))
-hl.bind("SUPER + T", mac_shortcut("T"))
-hl.bind("SUPER + W", mac_shortcut("W"))
-hl.bind("SUPER + A", mac_shortcut("A"))
-hl.bind("SUPER + B", mac_shortcut("B"))
-hl.bind("SUPER + F", mac_shortcut("F"))
 
 -- ---------------------------------------------------------------------------
 -- Screen captures
 -- ---------------------------------------------------------------------------
 
-hl.bind("SUPER + S", hl.dsp.exec_cmd([[flameshot gui --clipboard]]))
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("screen-cap"))
-hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd("screen-cap gif"))
+hl.bind("SUPER + SHIFT + 4", hl.dsp.exec_cmd([[flameshot gui --clipboard]]))
+hl.bind("SUPER + SHIFT + 3", hl.dsp.exec_cmd("screen-cap"))
+hl.bind("SUPER + SHIFT + 2", hl.dsp.exec_cmd("screen-cap gif"))
 
 -- ---------------------------------------------------------------------------
 -- Media keys
