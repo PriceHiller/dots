@@ -160,6 +160,8 @@ hl.bind("SUPER + H", rebind({ mods = "CTRL", key = "H" }, term_apps))
 hl.bind("SUPER + left", rebind({ mods = "", key = "HOME" }))
 hl.bind("SUPER + right", rebind({ mods = "", key = "END" }))
 hl.bind("ALT + right", rebind({ mods = "CTRL", key = "right" }))
+hl.bind("ALT + BACKSPACE", rebind({ mods = "CTRL", key = "BACKSPACE" }))
+hl.bind("SUPER + BACKSPACE", rebind({ mods = "CTRL", key = "U" }))
 hl.bind("ALT + left", rebind({ mods = "CTRL", key = "left" }))
 
 -- ---------------------------------------------------------------------------
