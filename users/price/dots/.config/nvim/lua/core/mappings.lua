@@ -396,6 +396,7 @@ M.setup = function()
     end, { desc = "Yank selection with common indent trimmed" })
 
     vim.keymap.set({ "n", "v" }, "<D-f>", "/")
+    vim.keymap.set({ "", "!", "v", "t" }, "<D-w>", "<Cmd>tabclose<CR>")
 end
 
 return M
