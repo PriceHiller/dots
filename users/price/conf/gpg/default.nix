@@ -20,8 +20,8 @@
     enableSshSupport = true;
     enableZshIntegration = true;
     pinentry.package = pkgs.pinentry-rofi;
-    maxCacheTtl = 4 * 60 * 60;
-    maxCacheTtlSsh = 4 * 60 * 60;
+    maxCacheTtl = 16 * 60 * 60;
+    maxCacheTtlSsh = 16 * 60 * 60;
     sshKeys = [ "530D3EC95C32AB9EC33714AAF865738D6E77680A" ];
     extraConfig = ''
       allow-loopback-pinentry
