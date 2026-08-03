@@ -3,6 +3,7 @@
   home = {
     pointerCursor = {
       name = "BreezeX-RosePine-Linux";
+      enable = true;
       package = pkgs.rose-pine-cursor;
       gtk.enable = true;
       dotIcons.enable = false;
