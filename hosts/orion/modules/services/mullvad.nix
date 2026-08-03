@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 {
   services.mullvad-vpn = {
     enable = true;
-    package = pkgs.mullvad-vpn;
+    gui.enable = true;
   };
   environment.persistence.ephemeral.directories = [ "/etc/mullvad-vpn" ];
 }
