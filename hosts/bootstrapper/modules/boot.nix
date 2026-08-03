@@ -4,6 +4,8 @@
   services.hardware.bolt.enable = true;
 
   boot = {
+    # Silence warning from NixOS mod
+    zfs.forceImportRoot = false;
     tmp = {
       useTmpfs = true;
       cleanOnBoot = true;
