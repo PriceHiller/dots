@@ -43,12 +43,12 @@
           else
             pathStr;
 
-        allowProg = _name: progPath: {
-          name = "000-allow-${_name}";
+        ruleProg = action: _name: progPath: {
+          name = "000-${action}-${_name}";
+          inherit action;
           enabled = true;
           created = "2026-01-08T13:25:44-06:00";
           updated = "2026-01-08T13:25:44-06:00";
-          action = "allow";
           duration = "always";
           precedence = true;
           nolog = false;
@@ -59,17 +59,17 @@
             data = (lib.strings.trim progPath);
           };
         };
-        allowPathRecursive =
-          _name:
+        rulePathRecursive =
+          action: _name:
           let
-            name = "000-allow-path-recursive-${_name}";
+            name = "000-${action}-path-recursive-${_name}";
           in
           _path: {
             inherit name;
+            inherit action;
             enabled = true;
             created = "2026-01-08T13:25:44-06:00";
             updated = "2026-01-08T13:25:44-06:00";
-            action = "allow";
             duration = "always";
             precedence = true;
             nolog = false;
@@ -93,28 +93,28 @@
           let
             name = lib.getName package;
           in
-          allowPathRecursive name (lib.getBin package);
+          rulePathRecursive "allow" name (lib.getBin package);
 
         allowPackage' =
           name-suffix: package:
           let
             name = "${(lib.getName package)}--${name-suffix}";
           in
-          allowPathRecursive name (lib.getBin package);
+          rulePathRecursive "allow" name (lib.getBin package);
 
         allowExe =
           package:
           let
             name = lib.getName package;
           in
-          allowProg name ((lib.getExe package) |> resolveSymlink);
+          ruleProg "allow" name ((lib.getExe package) |> resolveSymlink);
 
         allowExe' =
           package: exeName:
           let
             name = "${(lib.getName package)}-${exeName}";
           in
-          allowProg name ((lib.getExe' package exeName) |> resolveSymlink);
+          ruleProg "allow" name ((lib.getExe' package exeName) |> resolveSymlink);
 
         mkDestHostsOperator =
           hosts:
@@ -136,17 +136,17 @@
               sensitive = false;
             };
 
-        allowPathRecursiveToHost =
-          _name:
+        rulePathRecursiveToHost =
+          action: _name:
           let
-            name = "000-allow-path-recursive-${_name}";
+            name = "000-${action}-path-recursive-${_name}";
           in
           _path: hosts: {
             inherit name;
+            inherit action;
             enabled = true;
             created = "2026-01-08T13:25:44-06:00";
             updated = "2026-01-08T13:25:44-06:00";
-            action = "allow";
             duration = "always";
             precedence = true;
             nolog = false;
@@ -174,14 +174,18 @@
             };
           };
 
-        allowPackageToHost =
-          package: hosts:
+        rulePackageToHost =
+          action: package: hosts:
           let
             name = lib.getName package;
           in
-          allowPathRecursiveToHost name (lib.getBin package) hosts;
+          rulePathRecursiveToHost action name (lib.getBin package) hosts;
 
-        allowPathRecursiveToHostRegex =
+        allowPackageToHost = rulePackageToHost "allow";
+
+        denyPackageToHost = rulePackageToHost "deny";
+
+        rulePathRecursiveToHostRegex =
           _name:
           let
             name = "000-allow-path-recursive-${_name}";
@@ -229,19 +233,19 @@
           let
             name = "${(lib.getName package)}-regex";
           in
-          allowPathRecursiveToHostRegex name (lib.getBin package) hostRegex;
+          rulePathRecursiveToHostRegex name (lib.getBin package) hostRegex;
 
-        allowProgToHostRegex =
-          progPath: hostRegex:
+        ruleProgToHostRegex =
+          action: progPath: hostRegex:
           let
             progName = builtins.baseNameOf (builtins.toString progPath);
           in
           {
             name = "000-allow-${progName}-to-host-regex";
+            inherit action;
             enabled = true;
             created = "2026-01-08T13:25:44-06:00";
             updated = "2026-01-08T13:25:44-06:00";
-            action = "allow";
             duration = "always";
             precedence = true;
             nolog = false;
@@ -265,17 +269,17 @@
             };
           };
 
-        allowProgToHost =
-          progPath: hosts:
+        ruleProgToHost =
+          action: progPath: hosts:
           let
             progName = builtins.baseNameOf (builtins.toString progPath);
           in
           {
             name = "000-allow-${progName}-to-${lib.concatStringsSep "-" hosts}";
+            inherit action;
             enabled = true;
             created = "2026-01-08T13:25:44-06:00";
             updated = "2026-01-08T13:25:44-06:00";
-            action = "allow";
             duration = "always";
             precedence = true;
             nolog = false;
@@ -294,84 +298,117 @@
             };
           };
       in
-      [
-        (allowPackage pkgs.spotify)
-        (allowPackage pkgs.thunderbird)
-        (allowPackageToHostRegex pkgs.nodejs_latest ".*.npmjs.org$")
-        (allowPackage pkgs.git)
-        (allowPackage pkgs.librewolf)
-        (allowPackage pkgs.ungoogled-chromium)
-        (allowExe pkgs.nsncd)
-        (allowExe config.services.dnscrypt-proxy.package)
-        (allowExe config.services.dnsmasq.package)
-        (allowExe pkgs.openssh)
-        # Have to use `nix-cli` as the top level package is symlinked to it,
-        # opensnitch wants the resolved path, not the symlink
-        (allowPackage config.nix.package.nix-cli)
-        (allowPackage config.services.mullvad-vpn.package)
-        (allowExe pkgs.dig)
-        (allowPackage pkgs.fwupd)
-        (allowExe pkgs.strawberry)
-        (allowProg "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
-        (allowPackage config.services.avahi.package)
-        (allowPackageToHostRegex pkgs.fwupd ".*\.fwupd\.org$")
-        (allowPackageToHost pkgs.gh (lib.strings.escapeRegex "api.github.com"))
-        (allowPackageToHost pkgs.davfs2 (map lib.strings.escapeRegex [ "fs.pricehiller.com" ]))
-        (allowPackageToHost pkgs.sone ".*\.tidal\.com")
-        {
-          created = "2025-04-09T23:21:35-06:00";
-          updated = "2025-04-09T23:21:35-06:00";
-          name = "000-allow-localhost-ipv4";
-          description = "Allow connections to localhost via IPv4";
-          action = "allow";
-          duration = "always";
-          operator = {
-            type = "network";
-            operand = "dest.network";
-            data = "127.0.0.1/8";
-            list = [ ];
-            sensitive = false;
-          };
-          enabled = true;
-          precedence = true;
-          nolog = false;
-        }
-        {
-          created = "2025-04-09T23:17:39-06:00";
-          updated = "2025-04-09T23:17:39-06:00";
-          name = "000-allow-localhost6";
-          description = "Allow connections to localhost via IPv6";
-          action = "allow";
-          duration = "always";
-          operator = {
-            operand = "dest.network";
-            data = "::1/128";
-            type = "network";
-            list = [ ];
-            sensitive = false;
-          };
-          enabled = true;
-          precedence = true;
-          nolog = false;
-        }
-        {
-          created = "2024-05-31T23:39:28+02:00";
-          updated = "2024-05-31T23:39:28+02:00";
-          name = "000-block-ld-preload";
-          description = "";
-          action = "reject";
-          duration = "always";
-          enabled = true;
-          precedence = true;
-          nolog = false;
-          operator = {
-            operand = "process.env.LD_PRELOAD";
-            data = "^(\\.|/).*";
-            type = "regexp";
-            sensitive = false;
-          };
-        }
-      ]
+      # Mapped with an index so ordering below can be used to decide priority -- since the rules
+      # above generally enable precedence ORDERING matters
+      #
+      # This enables explictly allowing access to only the specified domains and then explicitly
+      # disallowing all other domains via a pattern like `allow .*some.host` and then afterwards
+      # `dissalow .*`
+      lib.imap1
+        (
+          idx: rule:
+          let
+            ruleNum = builtins.toString idx;
+          in
+          rule
+          // {
+            name =
+              if rule.name != null then
+                "${ruleNum}-${rule.name}"
+              else
+                let
+                  fallbackName = "${ruleNum}-UNKNOWN-RULE-NAME";
+                in
+                builtins.warn "No name defined for rule, using a default of ${fallbackName}" fallbackName;
+
+          }
+        )
+        [
+          (allowPackageToHost pkgs.spotify [
+            ".*\.spotify\.com"
+            ".*\.spotifycdn\.com"
+            ".*\.scdn\.co"
+          ])
+          (denyPackageToHost pkgs.spotify [
+            ".*"
+          ])
+
+          (allowPackage pkgs.thunderbird)
+          (allowPackageToHostRegex pkgs.nodejs_latest ".*.npmjs.org$")
+          (allowPackage pkgs.git)
+          (allowPackage pkgs.librewolf)
+          (allowPackage pkgs.ungoogled-chromium)
+          (allowExe pkgs.nsncd)
+          (allowExe config.services.dnscrypt-proxy.package)
+          (allowExe config.services.dnsmasq.package)
+          (allowExe pkgs.openssh)
+          # Have to use `nix-cli` as the top level package is symlinked to it,
+          # opensnitch wants the resolved path, not the symlink
+          (allowPackage config.nix.package.nix-cli)
+          (allowPackage config.services.mullvad-vpn.package)
+          (allowExe pkgs.dig)
+          (allowPackage pkgs.fwupd)
+          (allowExe pkgs.strawberry)
+          (ruleProg "allow" "systemd-timesyncd" "${lib.getBin pkgs.systemd}/lib/systemd/systemd-timesyncd")
+          (allowPackage config.services.avahi.package)
+          (allowPackageToHostRegex pkgs.fwupd ".*\.fwupd\.org$")
+          (allowPackageToHost pkgs.gh (lib.strings.escapeRegex "api.github.com"))
+          (allowPackageToHost pkgs.davfs2 (map lib.strings.escapeRegex [ "fs.pricehiller.com" ]))
+          (allowPackageToHost pkgs.sone ".*\.tidal\.com")
+          {
+            created = "2025-04-09T23:21:35-06:00";
+            updated = "2025-04-09T23:21:35-06:00";
+            name = "000-allow-localhost-ipv4";
+            description = "Allow connections to localhost via IPv4";
+            action = "allow";
+            duration = "always";
+            operator = {
+              type = "network";
+              operand = "dest.network";
+              data = "127.0.0.1/8";
+              list = [ ];
+              sensitive = false;
+            };
+            enabled = true;
+            precedence = true;
+            nolog = false;
+          }
+          {
+            created = "2025-04-09T23:17:39-06:00";
+            updated = "2025-04-09T23:17:39-06:00";
+            name = "000-allow-localhost6";
+            description = "Allow connections to localhost via IPv6";
+            action = "allow";
+            duration = "always";
+            operator = {
+              operand = "dest.network";
+              data = "::1/128";
+              type = "network";
+              list = [ ];
+              sensitive = false;
+            };
+            enabled = true;
+            precedence = true;
+            nolog = false;
+          }
+          {
+            created = "2024-05-31T23:39:28+02:00";
+            updated = "2024-05-31T23:39:28+02:00";
+            name = "000-block-ld-preload";
+            description = "";
+            action = "reject";
+            duration = "always";
+            enabled = true;
+            precedence = true;
+            nolog = false;
+            operator = {
+              operand = "process.env.LD_PRELOAD";
+              data = "^(\\.|/).*";
+              type = "regexp";
+              sensitive = false;
+            };
+          }
+        ]
       # Allow all connections for nix builds `nixbld*` users
       ++ (
         config.nix.nrBuildUsers
