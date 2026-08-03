@@ -5,7 +5,7 @@
     userAllowOther = true;
   };
   environment.systemPackages = with pkgs; [
-    jmtpfs
+    go-mtpfs
   ];
   services.udev.packages = with pkgs; [
     libmtp
