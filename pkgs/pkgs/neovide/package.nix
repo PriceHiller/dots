@@ -33,8 +33,8 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
   src = fetchFromGitHub {
     owner = "neovide";
     repo = "neovide";
-    rev = "7af518d72c33907b57d3a6c54c67969857a13871";
-    hash = "sha256-C1qNdHSYi2z33PZqmZaUYiCkGuhIVGvphSXT09O0eYU=";
+    rev = "b56abb653ae7e4836a125a11c0a02afb0e59b7af";
+    hash = "sha256-6jvwz4mcUo+hmGH88OPB2EGjA5QL+x4Tbiyft3f1LIE=";
   };
 
   cargoLock = {
