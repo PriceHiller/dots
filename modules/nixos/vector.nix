@@ -145,7 +145,7 @@ in
               inputs = [ "*_sink" ];
               type = "loki";
               labels = {
-                service_name = "{{ %service_name }}";
+                service_name = "svc-{{ %service_name }}";
                 system_host = config.system.name;
                 nixos_state_version = config.system.stateVersion;
               };
