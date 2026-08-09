@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -10,7 +9,7 @@ in
 {
   home.packages = with pkgs; [
     fontconfig
-    inputs.apple-emoji-linux.packages.${pkgs.stdenv.hostPlatform.system}.default
+    apple-color-emoji-font
     overpass
     maple-mono.variable
     nerd-fonts.overpass

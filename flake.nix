@@ -48,7 +48,6 @@
       url = "git+https://git.pricehiller.com/price/Blog";
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    apple-emoji-linux.url = "github:samuelngs/apple-emoji-linux/e56448ab6b556c9a3be63ce0fb1903b70fd87b61";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
