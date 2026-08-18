@@ -23,7 +23,16 @@
       binfmt = true;
     };
   };
-  environment.systemPackages = [
-    pkgs.perf
+  environment.systemPackages = with pkgs; [
+    perf
+    via
+    qmk
+  ];
+  hardware.keyboard.qmk.enable = true;
+  services.udev.packages = with pkgs; [
+    qmk
+    qmk-udev-rules
+    qmk_hid
+    via
   ];
 }
