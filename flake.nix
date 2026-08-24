@@ -153,7 +153,7 @@
                 echo "$MSG"
                 echo "$HEADER"
                 echo
-                sudo --preserve-env=SSH_AUTH_SOCK nixos-rebuild switch --flake ".#$(hostname)" --accept-flake-config |& nom
+                sudo --preserve-env=SSH_AUTH_SOCK nixos-rebuild switch --flake ".#$(hostname)" --accept-flake-config --log-format internal-json -v |& nom --json
               '';
             }
           );
