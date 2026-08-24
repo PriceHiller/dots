@@ -12,7 +12,6 @@ in
     enable = true;
     settings = {
       General = {
-        useGrimAdapter = true;
         showAbortNotification = false;
         showStartupLaunchMessage = false;
         # showDesktopNotification = false;
@@ -20,7 +19,6 @@ in
         uiColor = "#${colors.sakuraPink}";
         contrastUiColor = "#${colors.winterRed}";
         drawColor = "#${colors.crystalBlue}";
-        disabledGrimWarning = true;
       };
     };
   };
