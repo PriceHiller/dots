@@ -195,14 +195,14 @@ in
           require_nofilter = true;
 
           monitoring_ui = {
-            enabled = true;
-            privacy_level = 0;
-            enable_query_log = true;
-            username = "";
-            password = "";
-            listen_address = "127.0.0.1:8080";
-            max_query_log_entries = 1000;
-            max_memory_mb = 128;
+            enabled = lib.mkDefault true;
+            privacy_level = lib.mkDefault 0;
+            enable_query_log = lib.mkDefault true;
+            username = lib.mkDefault "";
+            password = lib.mkDefault "";
+            listen_address = lib.mkDefault "127.0.0.1:8080";
+            max_query_log_entries = lib.mkDefault 1000;
+            max_memory_mb = lib.mkDefault 128;
           };
         };
       };
