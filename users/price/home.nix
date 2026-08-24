@@ -66,7 +66,7 @@ in
         deno
         powershell
         kooha
-        libreoffice-fresh
+        libreoffice-stable
         nix-prefetch-scripts
         wl-clipboard
         grim
