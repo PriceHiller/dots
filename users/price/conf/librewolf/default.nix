@@ -106,13 +106,6 @@ in
               # for the targets (overrides)
               [
                 {
-                  firstPartyDomain = "utsa.edu";
-                  overrides = [
-                    "-JSLocale"
-                    "-JSDateTimeUTC"
-                  ];
-                }
-                {
                   firstPartyDomain = "instructure.com";
                   overrides = [
                     "-JSLocale"

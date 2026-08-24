@@ -161,7 +161,6 @@ in
 
         accountsOrder = [
           "price@pricehiller.com"
-          "price.hiller@my.utsa.edu"
           "price@price-hiller.com"
           "monitor@pricehiller.com"
           "philler3138@gmail.com"
@@ -337,41 +336,6 @@ in
                 enable = true;
                 messageFilters = thunderbirdFilters;
                 settings = id: (setReplyLocation id);
-              };
-            };
-            "price.hiller@my.utsa.edu" = rec {
-              realName = "Price Hiller";
-              address = "price.hiller@my.utsa.edu";
-              userName = address;
-              flavor = "outlook.office365.com";
-              passwordCommand = "cat ${config.age.secrets."mail-price.hiller--my.utsa.edu".path}";
-              thunderbird = {
-                enable = true;
-                settings =
-                  id:
-                  {
-                    # Set OAuth2 as the authentication method in Thunderbird
-                    "mail.server.server_${id}.authMethod" = 10;
-                    "mail.smtpserver.smtp_${id}.authMethod" = 10;
-                  }
-                  // (setReplyLocation id);
-                messageFilters = [
-                  {
-                    name = "Tag College Emails";
-                    enabled = true;
-                    type = "81";
-                    action = "AddTag";
-                    actionValue = "college";
-                    condition = "ALL";
-                  }
-                ];
-              };
-              imap = {
-                host = "outlook.office365.com";
-                port = 993;
-              };
-              smtp = {
-                host = "smtp.office365.com";
               };
             };
           };
