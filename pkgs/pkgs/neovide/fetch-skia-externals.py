@@ -1,9 +1,9 @@
 #!/usr/bin/env -S nix shell nixpkgs#python3 nixpkgs#nix-prefetch-git --command python3
 
 import argparse
+import json
 import subprocess
 import sys
-import json
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock

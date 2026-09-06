@@ -8,10 +8,6 @@ let
     lib.types.int
     lib.types.bool
   ];
-
-  activeSettings = lib.attrsets.filterAttrs (_: v: v != null) cfg.settings;
-
-  mkValueString = v: if builtins.isBool v then (if v then "yes" else "no") else builtins.toString v;
 in
 {
   options.ext.journald = {
@@ -43,11 +39,7 @@ in
     };
   };
 
-  config = lib.modules.mkIf (cfg.enable && activeSettings != { }) {
-    services.journald.extraConfig = lib.generators.toKeyValue {
-      mkKeyValue = lib.generators.mkKeyValueDefault {
-        inherit mkValueString;
-      } "=";
-    } activeSettings;
+  config = lib.modules.mkIf (cfg.enable) {
+    services.journald.settings.Journal = cfg.settings;
   };
 }
