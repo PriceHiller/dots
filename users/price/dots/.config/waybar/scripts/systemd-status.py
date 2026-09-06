@@ -56,13 +56,17 @@ if total_units_failed > 0:
     status = SystemUnitStatus.Degraded
     failed_units_tooltip.extend(
         map(
-            lambda unit: f"<b><span color='#FFA066'>System</span> <span color='#FF5D62'>></span> {unit["unit"]}</b>",
+            lambda unit: (
+                f"<b><span color='#FFA066'>System</span> <span color='#FF5D62'>></span> {unit['unit']}</b>"
+            ),
             system_failed_units,
         )
     )
     failed_units_tooltip.extend(
         map(
-            lambda unit: f"<b><span color='#FFA066'>User</span>   <span color='#FF5D62'>></span> {unit["unit"]}</b>",
+            lambda unit: (
+                f"<b><span color='#FFA066'>User</span>   <span color='#FF5D62'>></span> {unit['unit']}</b>"
+            ),
             user_failed_units,
         )
     )
