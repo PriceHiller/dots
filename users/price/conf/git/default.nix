@@ -17,7 +17,10 @@
       };
       init.defaultBranch = "main";
       merge.conflictstyle = "zdiff3";
-      branch.autosetupmerge = "always";
+      branch = {
+        autosetupmerge = "always";
+        sort = "comitterdate";
+      };
       remote.pushDefault = "origin";
       am.threeWay = true;
       apply.ignoreWhitespace = "change";
