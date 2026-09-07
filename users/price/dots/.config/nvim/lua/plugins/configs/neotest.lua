@@ -124,7 +124,24 @@ return {
                 adapters = {
                     require("neotest-plenary"),
                     require("neotest-go"),
-                    require("rustaceanvim.neotest"),
+                    (function()
+                        -- For neotest to play nice with nextest we need to disable the progress
+                        -- bar, do this by overriding the returned env vars built from
+                        -- rustaceanvim's adapter
+                        local spec = require("rustaceanvim.neotest")
+                        local build_spec = spec.build_spec
+                        spec.build_spec = function(args)
+                            local ret = build_spec(args)
+                            if not ret then
+                                return
+                            end
+                            ret.env = vim.tbl_deep_extend("force", ret.env or {}, {
+                                NEXTEST_SHOW_PROGRESS = "none",
+                            })
+                            return ret
+                        end
+                        return spec
+                    end)(),
                 },
             })
         end,
