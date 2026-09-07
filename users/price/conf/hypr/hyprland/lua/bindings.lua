@@ -67,7 +67,7 @@ hl.define_submap("resize", function()
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
-hl.bind("SUPER + M", hl.dsp.submap("move_window"))
+hl.bind("SUPER + ALT + M", hl.dsp.submap("move_window"))
 hl.define_submap("move_window", function()
     hl.bind("right", hl.dsp.window.move({ direction = "r" }))
     hl.bind("left", hl.dsp.window.move({ direction = "l" }))
