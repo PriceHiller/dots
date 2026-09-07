@@ -145,16 +145,21 @@
                 nixos-rebuild
                 hostname
               ];
-              text = ''
-                MSG="Switching to NixOS configuration: '$(hostname)'"
-                HEADER=$(printf "%''${#MSG}s\n" | tr ' ' "=")
-                echo
-                echo "$HEADER"
-                echo "$MSG"
-                echo "$HEADER"
-                echo
-                sudo --preserve-env=SSH_AUTH_SOCK nixos-rebuild switch --flake ".#$(hostname)" --accept-flake-config --log-format internal-json -v |& nom --json
-              '';
+              text =
+                let
+                  cmd = ''sudo --preserve-env=SSH_AUTH_SOCK nixos-rebuild switch --flake ".#$(hostname)" --accept-flake-config --log-format internal-json -v |& nom --json'';
+                in
+                ''
+                  MSG="Switching to NixOS configuration: '$(hostname)'"
+                  HEADER=$(printf "%''${#MSG}s\n" | tr ' ' "=")
+                  echo
+                  echo "$HEADER"
+                  echo "$MSG"
+                  echo "$HEADER"
+                  # shellcheck disable=SC2016
+                  echo '> ${cmd}'
+                  ${cmd}
+                '';
             }
           );
         };
