@@ -37,6 +37,7 @@ pkgs.mkBwrapper {
       readWrite = [
         "\${XDG_CONFIG_HOME:-$HOME/.config}/librewolf"
         "\${XDG_CACHE_HOME:-$HOME/.cache}/librewolf"
+        "\${HOME}/Downloads/"
       ];
       read = [
         # Needed for GPU acceleration
@@ -53,6 +54,8 @@ pkgs.mkBwrapper {
         (realPath "/run/pcscd/pcscd.comm")
         # Speech Support
         (realPath "$XDG_RUNTIME_DIR/speech-dispatcher/speechd.sock")
+        # For reading mime handlers
+        ''$(readlink -f "$XDG_CONFIG_HOME/mimeapps.list")''
       ];
     };
 
@@ -73,6 +76,11 @@ pkgs.mkBwrapper {
         "org.freedesktop.portal.Notifications"
         "org.freedesktop.portal.FileChooser"
         "org.freedesktop.FileManager1"
+        "org.freedesktop.UDisks2"
+        "org.freedesktop.UPower"
+        "org.a11y.Bus"
+        "com.canonical.AppMenu.Registrar"
+        "org.gnome.SessionManager"
         "org.a11y.Bus"
         "org.gtk.vfs.*"
       ];
