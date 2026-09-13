@@ -1,9 +1,25 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  cfg ? null,
+  extraPolicies ? null,
+  pkcs11Modules ? null,
+  appDataDir ? null,
+  ...
+}:
 pkgs.mkBwrapper {
   app = {
     renameDesktopFile = false;
-    overwriteExec = false;
-    package = pkgs.librewolf;
+    package = pkgs.librewolf.override (
+      lib.filterAttrs (_: value: value != null) {
+        inherit
+          cfg
+          extraPolicies
+          pkcs11Modules
+          appDataDir
+          ;
+      }
+    );
     env = {
       DICPATH = "${pkgs.hunspell |> pkgs.lib.getLib}/share";
     };

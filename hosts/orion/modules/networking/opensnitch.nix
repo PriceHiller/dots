@@ -336,7 +336,14 @@
           (allowPackage pkgs.thunderbird)
           (allowPackageToHostRegex pkgs.nodejs_latest ".*.npmjs.org$")
           (allowPackage pkgs.git)
-          (allowPackage pkgs.librewolf)
+          # Use the *inner* librewolf (the app nix-bwrapper sandboxes), not a plain
+          # `pkgs.librewolf`: HM reconfigures `programs.librewolf.finalPackage`, so the bwrapped
+          # wrapper's inner app gets a new store path that the plain package no longer
+          # matches. `passthru.args.targetPkgs` (nix-bwrapper's fhsenv args) leads with the app
+          # package, so this tracks the reconfigured inner automatically.
+          (allowPackage (
+            builtins.elemAt (config.home-manager.users.price.programs.librewolf.finalPackage.passthru.args.targetPkgs pkgs) 0
+          ))
           (allowPackage pkgs.ungoogled-chromium)
           (allowExe pkgs.nsncd)
           (allowExe config.services.dnscrypt-proxy.package)
