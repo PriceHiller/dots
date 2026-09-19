@@ -12,6 +12,7 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "nvim-neotest/neotest-go",
+            "nvim-neotest/neotest-python",
             "mrcjkb/rustaceanvim",
             "nvim-neotest/neotest-plenary",
         },
@@ -124,6 +125,7 @@ return {
                 adapters = {
                     require("neotest-plenary"),
                     require("neotest-go"),
+                    require("neotest-python"),
                     (function()
                         -- For neotest to play nice with nextest we need to disable the progress
                         -- bar, do this by overriding the returned env vars built from
