@@ -259,3 +259,13 @@ for i = 1, 9 do
         move_active_window_to_ws_on_current_mon(i, false)
     end)
 end
+
+-- Set additional input settings
+hl.config({
+    input = {
+        kb_options = "caps:escape",
+        sensitivity = -0.25
+    },
+})
+
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })

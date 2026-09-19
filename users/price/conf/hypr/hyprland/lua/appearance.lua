@@ -38,10 +38,6 @@ hl.config({
         focus_on_activate = true,
         animate_manual_resizes = true,
     },
-
-    input = {
-        kb_options = "caps:escape",
-    },
 })
 
 -- ---------------------------------------------------------------------------
