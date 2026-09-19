@@ -1,10 +1,11 @@
 { ... }:
 {
-
   programs.git = {
     enable = true;
     ignores = [
       ".~lock.*#" # Ignore libreoffice lock files
+      "*.ignore"
+      "*.ignore.*"
     ];
     settings = {
       user = {
