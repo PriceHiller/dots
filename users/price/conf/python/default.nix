@@ -27,6 +27,7 @@
     ];
     sessionVariables = {
       PYTHON_HISTORY = "${config.xdg.dataHome}/python_history";
+      PYTHONPYCACHEPREFIX = "${config.xdg.cacheHome}/python/";
     };
   };
 }
