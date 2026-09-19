@@ -18,10 +18,7 @@ return {
         },
         basedpyright = {
             analysis = {
-                diagnosticSeverityOverrides = {
-                    reportAny = false,
-                    reportExplicitAny = false,
-                },
+                diagnosticMode = "workspace",
             },
         },
     },
