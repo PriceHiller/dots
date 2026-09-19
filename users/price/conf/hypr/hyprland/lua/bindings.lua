@@ -264,7 +264,7 @@ end
 hl.config({
     input = {
         kb_options = "caps:escape",
-        sensitivity = -0.25
+        sensitivity = -0.25,
     },
 })
 
