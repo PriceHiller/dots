@@ -6,7 +6,7 @@
   programs.rofi = {
     enable = true;
     theme = ./themes/kanagawa.rasi;
-    extraConfig = {
+    settings = {
       matching = "fuzzy";
       sorting-method = "fzf";
       drun-match-fields = "name";
