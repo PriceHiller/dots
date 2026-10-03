@@ -28,7 +28,7 @@ M.setup = function()
         end,
     })
 
-    local format_on_save = false
+    local format_on_save = true
     vim.api.nvim_create_user_command("ToggleFmtOnSave", function()
         format_on_save = not format_on_save
         local intercept_state = "`Enabled`"
@@ -57,7 +57,10 @@ M.setup = function()
                 method = "textDocument/formatting",
             })
             if #clients > 0 then
-                vim.lsp.buf.format()
+                vim.lsp.buf.format({
+                    bufnr = args.buf,
+                    async = true,
+                })
             end
         end,
     })
