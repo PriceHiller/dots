@@ -84,6 +84,12 @@
         treefmt-nix.follows = "treefmt-nix";
       };
     };
+    MailWatch = {
+      url = ./ext/MailWatch/.;
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
@@ -294,6 +300,7 @@
                 ./modules/nixos/persistence.nix
                 ./modules/nixos/journald.nix
                 ./modules/nixos/dns
+                inputs.MailWatch.nixosModules.default
                 inputs.nixos-facter-modules.nixosModules.facter
                 inputs.impermanence.nixosModules.impermanence
                 inputs.agenix.nixosModules.default

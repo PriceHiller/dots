@@ -1,3 +1,6 @@
 [submodule "secrets"]
 	path = secrets
 	url = ssh://forgejo@git.pricehiller.com:10322/price/Secrets.git
+[submodule "ext/MailWatch"]
+	path = ext/MailWatch
+	url = https://git.pricehiller.com/price/MailWatch.git
