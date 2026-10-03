@@ -229,6 +229,30 @@ M.setup = function()
         silent = true,
         desc = "LSP: Toggle Wrap Diagnostics",
     })
+    vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, {
+        silent = true,
+        desc = "LSP: Definitions",
+    })
+    vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, {
+        silent = true,
+        desc = "LSP: Implementation",
+    })
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, {
+        silent = true,
+        desc = "LSP: References",
+    })
+    vim.keymap.set("n", "<leader>lz", vim.lsp.buf.incoming_calls, {
+        silent = true,
+        desc = "LSP: Incoming calls",
+    })
+    vim.keymap.set("n", "<leader>lx", vim.lsp.buf.outgoing_calls, {
+        silent = true,
+        desc = "LSP: Incoming calls",
+    })
+    vim.keymap.set("n", "<leader>lD", vim.lsp.buf.type_definition, {
+        silent = true,
+        desc = "LSP: Type Definitions",
+    })
 
     -- Credit to https://www.reddit.com/r/neovim/comments/1k3lhac/tiny_quality_of_life_rebind_make_j_and_k/
     -- Adds a mark to the jumplist on counted j and k motions and makes j and k by default use

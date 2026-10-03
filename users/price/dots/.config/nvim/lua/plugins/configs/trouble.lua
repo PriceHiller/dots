@@ -11,18 +11,6 @@ return {
         },
         keys = {
             { "<leader>x", desc = "> Trouble" },
-            { "<leader>lr", "<cmd>Trouble lsp_references toggle win.position=right<cr>", desc = "LSP: References" },
-            {
-                "<leader>li",
-                "<cmd>Trouble lsp_implementations toggle win.position=right<cr>",
-                desc = "LSP: Implementation",
-            },
-            { "<leader>ld", "<cmd>Trouble lsp_definitions toggle win.position=right<CR>", desc = "LSP: Definitions" },
-            {
-                "<leader>lD",
-                "<cmd>Trouble lsp_type_definitions toggle win.position=right<CR>",
-                desc = "LSP: Type Definitions",
-            },
             {
                 "<leader>xx",
                 function()
