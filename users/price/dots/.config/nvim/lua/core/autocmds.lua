@@ -57,10 +57,7 @@ M.setup = function()
                 method = "textDocument/formatting",
             })
             if #clients > 0 then
-                vim.lsp.buf.format({
-                    bufnr = args.buf,
-                    async = true,
-                })
+                vim.lsp.buf.format()
             end
         end,
     })
