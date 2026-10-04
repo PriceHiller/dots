@@ -142,6 +142,11 @@ return {
                         "latex",
                         "dadbod",
                     },
+                    per_filetype = {
+                        opencode = {
+                            "lsp",
+                        },
+                    },
                     providers = {
                         buffer = {
                             score_offset = -5,

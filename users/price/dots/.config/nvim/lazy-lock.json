@@ -76,7 +76,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "58447c1fca354bbf184425e4a8d01deecbd6f3c4" },
   "oil.nvim": { "branch": "master", "commit": "b73018b75affd13fa38e2fc94ef753b465f770d7" },
   "omnisharp-extended-lsp.nvim": { "branch": "main", "commit": "51e407a46ddb15e49727139b5b1ae3650cd6a069" },
-  "opencode.nvim": { "branch": "main", "commit": "38b198ac0d103303c5e46e7202de94d8b77b7da6" },
+  "opencode.nvim": { "branch": "v2", "commit": "ec97b9e5ca0f5e44f57f9e7eabdc80b86b75f776" },
   "orgmode": { "branch": "master", "commit": "878d34a8cb68293a55a9cd0725a6c3649e42e92d" },
   "overseer.nvim": { "branch": "master", "commit": "a93d9f6d6defdac4bcd6d2c8ba988650e42e0a0e" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },

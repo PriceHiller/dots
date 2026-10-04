@@ -1,8 +1,9 @@
 return {
     {
         "sudo-tee/opencode.nvim",
+        branch = "v2",
         keys = {
-            { "z", desc = "> Opencode" },
+            { "<leader>z", desc = "> Opencode" },
         },
         cmd = { "Opencode" },
         config = function()
