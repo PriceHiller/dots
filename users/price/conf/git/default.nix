@@ -1,7 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.git = {
     enable = true;
+    package = pkgs.gitFull;
     ignores = [
       ".~lock.*#" # Ignore libreoffice lock files
       "*.ignore"
@@ -11,6 +12,11 @@
       user = {
         name = "Price Hiller";
         email = "price@pricehiller.com";
+      };
+      url = {
+        "ssh://forgejo@git.pricehiller.com:10322" = {
+          pushInsteadOf = "https://git.pricehiller.com";
+        };
       };
       alias = {
         unstage = "reset HEAD --";
