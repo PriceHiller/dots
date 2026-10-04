@@ -1370,6 +1370,22 @@
     },
     "nixpkgs_14": {
       "locked": {
+        "lastModified": 1790510107,
+        "narHash": "sha256-EVMNYv7hYDDD9TGVT/hIyTYgpiXA8y3m5xIEIxuGNU0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3181085bfd08663b6b9e60bc7a8395c2aaa741bd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_15": {
+      "locked": {
         "lastModified": 1779560665,
         "narHash": "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=",
         "owner": "nixos",
@@ -1384,7 +1400,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_15": {
+    "nixpkgs_16": {
       "locked": {
         "lastModified": 1770107345,
         "narHash": "sha256-tbS0Ebx2PiA1FRW8mt8oejR0qMXmziJmPaU1d4kYY9g=",
@@ -1564,6 +1580,26 @@
         "type": "github"
       }
     },
+    "opencode": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_14"
+      },
+      "locked": {
+        "lastModified": 1791076847,
+        "narHash": "sha256-HpXR64QUKyjAnpg+XhNsG1v45bufQzjiVcmrkRjLvf8=",
+        "ref": "v2",
+        "rev": "f72a103a4b94fb9a467294877bf6243dd99c6bdc",
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/anomalyco/opencode"
+      },
+      "original": {
+        "ref": "v2",
+        "shallow": true,
+        "type": "git",
+        "url": "https://github.com/anomalyco/opencode"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -1683,7 +1719,7 @@
     "resume": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_14"
+        "nixpkgs": "nixpkgs_15"
       },
       "locked": {
         "lastModified": 1780002629,
@@ -1748,6 +1784,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable-small": "nixpkgs-unstable-small",
         "oisd-blocklist": "oisd-blocklist",
+        "opencode": "opencode",
         "resume": "resume",
         "rofi-tools": "rofi-tools",
         "secrets": "secrets",
@@ -2076,7 +2113,7 @@
     },
     "treefmt-nix_6": {
       "inputs": {
-        "nixpkgs": "nixpkgs_15"
+        "nixpkgs": "nixpkgs_16"
       },
       "locked": {
         "lastModified": 1786901030,

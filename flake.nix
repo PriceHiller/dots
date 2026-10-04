@@ -74,6 +74,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    opencode.url = "git+https://github.com/anomalyco/opencode?shallow=1&ref=v2";
     nixcord.url = "github:kaylorben/nixcord";
     self.submodules = true;
     secrets = {

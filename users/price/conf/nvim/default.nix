@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   config,
@@ -76,7 +77,7 @@
     packages = with pkgs; [
       neovide
       fortune
-      opencode
+      inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
       bwrapped.bun
       flutter
       jdk

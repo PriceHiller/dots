@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   ...
@@ -7,7 +8,7 @@ pkgs.mkBwrapper {
   imports = [ pkgs.bwrapperPresets.devshell ];
 
   app = {
-    package = pkgs.opencode;
+    package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
   };
 
   mounts = {
