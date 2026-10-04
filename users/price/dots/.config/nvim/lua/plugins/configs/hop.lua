@@ -7,7 +7,7 @@ return {
                 function()
                     if
                         vim.list_contains({
-                            "neo-tree",
+                            "fyler_finder",
                             "NeogitStatus",
                             "lazy",
                             "neotest-summary",

@@ -1188,6 +1188,7 @@ return {
                                 ".*neogit.*",
                                 "Overseer.*",
                                 "rest_nvim_result",
+                                ".*[Ff]yler.*",
                             },
                         }, args.buf)
                     end,

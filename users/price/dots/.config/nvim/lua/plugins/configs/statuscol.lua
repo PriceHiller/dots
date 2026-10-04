@@ -92,7 +92,9 @@ return {
                             end,
                         },
                         condition = {
-                            builtin.not_empty,
+                            function(args)
+                                return builtin.not_empty(args) and vim.bo[args.buf].filetype ~= "fyler_finder"
+                            end,
                         },
                     },
                 },

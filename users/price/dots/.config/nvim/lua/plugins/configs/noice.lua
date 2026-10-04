@@ -1,6 +1,7 @@
 return {
     {
         "folke/noice.nvim",
+        dependencies = { "MunifTanjim/nui.nvim" },
         event = "VeryLazy",
         keys = {
             { "<D-A-m>", "<cmd>Noice all<CR>", desc = "Noice: Show All Messages" },
