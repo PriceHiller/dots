@@ -352,6 +352,7 @@
           # Have to use `nix-cli` as the top level package is symlinked to it,
           # opensnitch wants the resolved path, not the symlink
           (allowPackage config.nix.package.nix-cli)
+          (allowPackage config.nix.package)
           (allowPackage config.services.mullvad-vpn.package)
           (allowExe pkgs.dig)
           (allowPackage pkgs.fwupd)
