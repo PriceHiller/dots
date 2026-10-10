@@ -120,7 +120,29 @@ local function active_class(window)
     return window and window.class and window.class:lower() or ""
 end
 
----@param shortcut table[]
+---@param shortcut table
+---@param window HL.Window?
+local function send_shortcut(shortcut, window)
+    -- send_shortcut can intermittently lose injected shortcuts or leave their keys held -- so we
+    -- instead send key states with a brief gap so the target receives the press before release.
+
+    ---@param state "down" | "up"
+    local function send_state(state)
+        hl.dispatch(hl.dsp.send_key_state({
+            mods = shortcut.mods,
+            key = shortcut.key,
+            state = state,
+            window = window,
+        }))
+    end
+
+    send_state("down")
+    hl.timer(function()
+        send_state("up")
+    end, { timeout = 2, type = "oneshot" })
+end
+
+---@param shortcut table
 ---@param classes_to_pass string[]?
 ---@return function
 local function rebind(shortcut, classes_to_pass)
@@ -135,7 +157,7 @@ local function rebind(shortcut, classes_to_pass)
             return
         end
 
-        hl.dispatch(hl.dsp.send_shortcut(shortcut))
+        send_shortcut(shortcut, active_window)
     end
 end
 
