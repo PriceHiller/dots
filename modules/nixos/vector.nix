@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  clib,
   ...
 }:
 let
@@ -112,8 +113,6 @@ in
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
-
-      # ── Base Vector config  ──
       {
         ext.logviewer.enable = true;
 
@@ -141,13 +140,25 @@ in
             schema.log_namespace = true;
             api.enabled = true;
             data_dir = cfg.dataDir;
+
             sinks.sink_loki = lib.mkIf cfg.settings.sinks.loki.enable {
               inputs = [ "*_sink" ];
               type = "loki";
+              endpoint = cfg.settings.sinks.loki.endpoint;
+              encoding.codec = "json";
+              acknowledgements.enabled = true;
+              buffer = {
+                type = "disk";
+                max_size = 512 * (clib.pow 2 20);
+                when_full = "block";
+              };
+              # Every event reaching this sink MUST have `.level` and `%service_name`,
+              # otherwise the template fails and the event is dropped.
               labels = {
-                service_name = "svc-{{ %service_name }}";
+                service_name = "{{ %service_name }}";
                 system_host = config.system.name;
                 nixos_state_version = config.system.stateVersion;
+                level = "{{ .level }}";
               };
               structured_metadata = {
                 nixos_system_rev =
@@ -158,8 +169,6 @@ in
                     self.rev or self.dirtyRev or self.lastModified or config.system.configurationRevision or "unknown"
                   );
               };
-              encoding.codec = "json";
-              endpoint = cfg.settings.sinks.loki.endpoint;
               auth = {
                 strategy = "basic";
                 user = "\${BASIC_AUTH_USERNAME}";
@@ -170,7 +179,25 @@ in
         };
       }
 
-      # ── Journald collector ──
+      # -- Catch-all for events that failed processing --
+      (lib.mkIf (journaldCfg.enable || nginxCfg.enable) {
+        services.vector.settings.transforms.transform_dropped_sink = {
+          inputs =
+            lib.optional journaldCfg.enable "transform_journald_sink.dropped"
+            ++ lib.optional nginxCfg.enable "transform_nginx.dropped";
+          type = "remap";
+          source = # vrl
+            ''
+              . = {
+                "level": "error",
+                "reason": %vector.dropped,
+                "original": .
+              }
+              %service_name = "vector-dropped"
+            '';
+        };
+      })
+
       (lib.mkIf journaldCfg.enable {
         systemd.services.vector.serviceConfig.SupplementaryGroups = [ "systemd-journal" ];
 
@@ -181,6 +208,8 @@ in
         services.vector.settings.transforms.transform_journald_sink = {
           inputs = [ "source_journald" ];
           type = "remap";
+          drop_on_error = true;
+          reroute_dropped = true;
           source = # vrl
             ''
               .message = string!(.)
@@ -195,7 +224,7 @@ in
                 jmeta = {}
               }
 
-              .level = to_syslog_level(to_int(jmeta.PRIORITY) ?? -1) ?? null
+              .level = to_syslog_level(to_int(jmeta.PRIORITY) ?? -1) ?? "unknown"
               .stream_id = jmeta._STREAM_ID
               .boot_id = jmeta._BOOT_ID
               .unit = jmeta._SYSTEMD_UNIT
@@ -219,7 +248,6 @@ in
         };
       })
 
-      # ── Nginx collector ──
       (lib.mkIf nginxCfg.enable {
         systemd.services.vector =
           let
@@ -253,149 +281,325 @@ in
           socket_file_mode = 504; # 0o0770
         };
 
-        services.vector.settings.transforms.transform_nginx_sink = {
-          inputs = [ "source_nginx" ];
-          type = "remap";
-          source = # vrl
-            ''
-              syslog = parse_syslog!(string!(.))
-              msg = parse_json!(syslog.message)
+        services.vector.settings.transforms = {
+          # NOT suffixed `_sink`: output only reaches Loki via the filter below
+          transform_nginx = {
+            inputs = [ "source_nginx" ];
+            type = "remap";
+            drop_on_error = true;
+            reroute_dropped = true;
+            source = # vrl
+              ''
+                # Compile-time only; must be unconditional
+                set_semantic_meaning(%timestamp, "timestamp")
 
-              if msg.level == null && msg.status != null {
-                status, err = to_int(msg.status)
-                if err == null && status >= 500 {
-                    msg.level = "error"
-                } else {
-                  msg.level = "info"
-                }
+                syslog = parse_syslog!(string!(.))
+                msg = object!(parse_json!(syslog.message))
+
+                # -- Status & level --
+                status = to_int(msg.status) ?? 0
                 msg.status = status
-              }
+                msg.level = if status >= 500 { "error" } else if status >= 400 { "warn" } else { "info" }
 
-              . = msg
+                # -- Timestamp: $msec is seconds with ms resolution --
+                secs, err = to_float(msg.time_unix)
+                if err == null {
+                  ts, err = from_unix_timestamp(to_int(secs * 1000), unit: "milliseconds")
+                  if err == null {
+                    %timestamp = ts
+                    del(msg.time_unix)
+                  }
+                }
 
-              ts, err = from_unix_timestamp(to_int!(.time_msec), unit: "milliseconds")
-              if err == null {
-                %timestamp = ts
-              }
-              %service_name = "nginx"
-            '';
+                # -- Simple conversions --
+                msg.pipelined = msg.pipe == "p"
+                del(msg.pipe)
+                msg.gzip_ratio = to_float(msg.gzip_ratio) ?? null
+                msg.tcp = map_values(object(msg.tcp) ?? {}) -> |v| { to_int(v) ?? null }
+
+                # -- Request: nginx fields + parsed URL --
+                req = object(msg.request) ?? {}
+                url, err = parse_url(
+                  (string(req.scheme) ?? "http") + "://" + (string(req.host) ?? "localhost") + (string(req.uri) ?? "")
+                )
+                if err == null {
+                  req = merge(req, url)
+                }
+                req.completed = req.completion == "OK"
+                del(req.completion)
+                msg.request = req
+
+                # -- TLS (only for TLS requests, otherwise the booleans would survive compact) --
+                if (string(msg.tls.protocol) ?? "") != "" {
+                  msg.tls.session_reused = msg.tls.session_reused == "r"
+                  msg.tls.early_data = msg.tls.early_data == "1"
+                } else {
+                  del(msg.tls)
+                }
+
+                # -- Upstream --
+                ${
+                  let
+                    # nginx joins values from multiple upstream attempts with ", " (servers in one group)
+                    # and " : " (across groups, e.g. internal redirects).
+                    upstreamLast = field: conv: ''
+                      parts = split(string(${field}) ?? "", r'\s*[,:]\s*')
+                      ${field} = ${conv}(parts[-1]) ?? null
+                    '';
+
+                    upstreamVrl = lib.concatStrings (
+                      lib.mapAttrsToList (field: conv: upstreamLast "up.${field}" conv) {
+                        status = "to_int";
+                        connect_time = "to_float";
+                        header_time = "to_float";
+                        queue_time = "to_float";
+                        "response.time" = "to_float";
+                        "response.length" = "to_int";
+                        "bytes.sent" = "to_int";
+                        "bytes.received" = "to_int";
+                      }
+                    );
+                  in
+                  # vrl
+                  ''
+                    up = object(msg.upstream) ?? {}
+                    ${upstreamVrl}
+                    msg.upstream = up
+                  ''
+                }
+
+                # -- Referer (must come after request, uses request.host) --
+                ref = string(msg.headers.request.referer) ?? ""
+                if ref != "" {
+                  r, err = parse_url(ref)
+                  if err == null {
+                    r.external = r.host != msg.request.host
+                    msg.referer = r
+                  }
+                }
+
+                # -- User agent --
+                ua = string(msg.headers.request."user-agent") ?? ""
+                if ua != "" {
+                  msg.user_agent = parse_user_agent(ua, mode: "enriched")
+                  msg.user_agent.raw = ua
+                }
+
+                # Must stay last: strips "", null, {} and []
+                . = compact(msg)
+                %service_name = "nginx"
+              '';
+          };
+
+          filter_nginx_sink = {
+            inputs = [ "transform_nginx" ];
+            type = "filter";
+            # Drop successful Vector to Loki pushes (feedback loop), keep failures
+            condition = ''!(.request.path == "/loki/api/v1/push" && .status == 204)'';
+          };
         };
 
-        services.nginx.appendHttpConfig =
+        # Error log via syslog so journald can get the actual severities
+        services.nginx.logError = lib.mkDefault "syslog:server=unix:/dev/log warn";
+
+        services.nginx.commonHttpConfig =
           let
-            headersToNginxVars =
-              prefix: headers:
-              let
-                toNginxVar = name: builtins.replaceStrings [ "-" ] [ "_" ] name;
-                headerEntries = builtins.map (name: ''"${name}":"${prefix}${toNginxVar name}"'') headers;
-              in
-              "'" + builtins.concatStringsSep "," headerEntries + "'";
+            nginxJson = rec {
+              # Emit the variable unquoted. Only use for variables that are ALWAYS numeric.
+              raw = value: {
+                _type = "nginx-raw";
+                inherit value;
+              };
+
+              # [ "user-agent" ] -> { "user-agent" = "$http_user_agent"; }
+              headers =
+                prefix: names:
+                lib.genAttrs names (name: prefix + builtins.replaceStrings [ "-" ] [ "_" ] (lib.toLower name));
+
+              toJSON =
+                v:
+                if lib.isAttrs v && (v._type or null) == "nginx-raw" then
+                  v.value
+                else if lib.isAttrs v then
+                  "{"
+                  + lib.concatStringsSep "," (lib.mapAttrsToList (k: x: "${builtins.toJSON k}:${toJSON x}") v)
+                  + "}"
+                else if lib.isString v then
+                  builtins.toJSON v
+                else
+                  throw "nginxJson: unsupported value type ${builtins.typeOf v}";
+
+              # nginx unescapes \\ and \' inside quoted strings
+              logFormat =
+                name: attrs: "log_format ${name} escape=json '${lib.escape [ "\\" "'" ] (toJSON attrs)}';";
+            };
           in
           # nginx
           ''
-            log_format vector-logger-json escape=json
-              '{'
-                '"time": "$time_iso8601",'
-                '"time_msec": $msec,'
-                '"status": $status,'
-                '"host": "$host",'
-                '"headers": {'
-                  '"request": {'
-                    ${headersToNginxVars "$http_" [
-                      # Content negotiation & metadata
-                      "host"
-                      "content-type"
-                      "content-length"
-                      "accept"
-                      "accept-language"
-                      "accept-encoding"
-                      "accept-charset"
-                      "from"
-                      "upgrade-insecure-requests"
-                      "priority"
+            ${nginxJson.logFormat "vector-logger-json" (
+              let
+                inherit (nginxJson) raw headers;
+              in
+              {
+                time_unix = raw "$msec";
+                status = raw "$status";
+                pid = raw "$pid";
+                nginx_version = "$nginx_version";
+                pipe = "$pipe";
+                gzip_ratio = "$gzip_ratio";
+                bytes_sent = raw "$bytes_sent";
+                body_bytes_sent = raw "$body_bytes_sent";
 
-                      # Client identity & context
-                      "user-agent"
-                      "sec-ch-ua"
-                      "sec-ch-ua-mobile"
-                      "sec-ch-ua-platform"
-                      "referer"
-                      "origin"
-                      "dnt"
+                request = {
+                  id = "$request_id";
+                  method = "$request_method";
+                  uri = "$request_uri";
+                  line = "$request";
+                  length = raw "$request_length";
+                  time = raw "$request_time";
+                  completion = "$request_completion";
+                  scheme = "$scheme";
+                  host = "$host";
+                };
 
-                      # Caching
-                      "cache-control"
-                      "if-modified-since"
-                      "if-none-match"
+                remote = {
+                  addr = "$remote_addr";
+                  port = raw "$remote_port";
+                  user = "$remote_user";
+                };
 
-                      # Connection & transport
-                      "connection"
-                      "upgrade"
-                      "te"
-                      "via"
-                      "range"
+                server = {
+                  name = "$server_name";
+                  addr = "$server_addr";
+                  port = raw "$server_port";
+                  protocol = "$server_protocol";
+                };
 
-                      # Proxy & tracing
-                      "x-forwarded-for"
-                      "x-forwarded-proto"
-                      "x-forwarded-host"
-                      "x-request-id"
-                      "forwarded"
+                connection = {
+                  serial = raw "$connection";
+                  requests = raw "$connection_requests";
+                  time = raw "$connection_time";
+                };
 
-                      # Sec-Fetch (browser-enforced)
-                      "sec-fetch-dest"
-                      "sec-fetch-mode"
-                      "sec-fetch-site"
-                      "sec-fetch-user"
+                limit = {
+                  req_status = "$limit_req_status";
+                  conn_status = "$limit_conn_status";
+                };
 
-                      # Extended Client Hints
-                      "sec-ch-ua-full-version-list"
-                      "sec-ch-ua-platform-version"
-                      "sec-ch-ua-model"
-                      "sec-ch-ua-arch"
-                      "sec-ch-ua-bitness"
+                tcp = {
+                  rtt = raw "$tcpinfo_rtt";
+                  rttvar = raw "$tcpinfo_rttvar";
+                  snd_cwnd = raw "$tcpinfo_snd_cwnd";
+                  rcv_space = raw "$tcpinfo_rcv_space";
+                };
 
-                      # Behavioural signals
-                      "sec-gpc"
-                      "sec-purpose"
-                      "save-data"
-                      "x-requested-with"
+                tls = {
+                  protocol = "$ssl_protocol";
+                  cipher = "$ssl_cipher";
+                  server_name = "$ssl_server_name";
+                  alpn = "$ssl_alpn_protocol";
+                  curve = "$ssl_curve";
+                  session_reused = "$ssl_session_reused";
+                  early_data = "$ssl_early_data";
+                  client = {
+                    ciphers = "$ssl_ciphers";
+                    curves = "$ssl_curves";
+                  };
+                };
 
-                      # Network hints
-                      "device-memory"
-                      "downlink"
-                      "ect"
-                      "rtt"
-                    ]}
-                  '},'
-                  '"response": {'
-                    ${headersToNginxVars "$sent_http_" [
-                      "content-type"
-                      "content-encoding"
-                      "etag"
-                      "cache-control"
-                      "vary"
-                      "location"
-                    ]}
-                  '}'
-                '},'
-                '"bytes_sent": $bytes_sent,'
-                '"remote_addr": "$remote_addr",'
-                '"uri": "$uri",'
-                '"request_length": $request_length,'
-                '"request_method": "$request_method",'
-                '"request_uri": "$request_uri",'
-                '"request_time": $request_time,'
-                '"request_id": "$request_id",'
-                '"server_protocol": "$server_protocol",'
-                '"upstream_addr": "$upstream_addr",'
-                '"ssl_protocol": "$ssl_protocol",'
-                '"ssl_cipher": "$ssl_cipher",'
-                '"connection_serial": $connection,'
-                '"connection_requests": $connection_requests,'
-                '"request_completion": "$request_completion",'
-                '"pipe": "$pipe"'
-              '}';
+                upstream = {
+                  addr = "$upstream_addr";
+                  status = "$upstream_status";
+                  cache_status = "$upstream_cache_status";
+                  connect_time = "$upstream_connect_time";
+                  header_time = "$upstream_header_time";
+                  response = {
+                    time = "$upstream_response_time";
+                    length = "$upstream_response_length";
+                  };
+                  bytes = {
+                    sent = "$upstream_bytes_sent";
+                    received = "$upstream_bytes_received";
+                  };
+                };
+
+                headers = {
+                  request = headers "$http_" [
+                    # Content negotiation & metadata
+                    "host"
+                    "content-type"
+                    "content-length"
+                    "accept"
+                    "accept-language"
+                    "accept-encoding"
+                    "accept-charset"
+                    "from"
+                    "upgrade-insecure-requests"
+                    "priority"
+
+                    # Client identity & context
+                    "user-agent"
+                    "sec-ch-ua"
+                    "sec-ch-ua-mobile"
+                    "sec-ch-ua-platform"
+                    "origin"
+                    "dnt"
+
+                    # Caching
+                    "cache-control"
+                    "if-modified-since"
+                    "if-none-match"
+
+                    # Connection & transport
+                    "connection"
+                    "upgrade"
+                    "te"
+                    "via"
+                    "range"
+
+                    # Proxy & tracing
+                    "x-forwarded-for"
+                    "x-forwarded-proto"
+                    "x-forwarded-host"
+                    "x-request-id"
+                    "forwarded"
+
+                    # Sec-Fetch (browser-enforced)
+                    "sec-fetch-dest"
+                    "sec-fetch-mode"
+                    "sec-fetch-site"
+                    "sec-fetch-user"
+
+                    # Extended Client Hints
+                    "sec-ch-ua-full-version-list"
+                    "sec-ch-ua-platform-version"
+                    "sec-ch-ua-model"
+                    "sec-ch-ua-arch"
+                    "sec-ch-ua-bitness"
+
+                    # Behavioural signals
+                    "sec-gpc"
+                    "sec-purpose"
+                    "save-data"
+                    "x-requested-with"
+
+                    # Network hints
+                    "device-memory"
+                    "downlink"
+                    "ect"
+                    "rtt"
+                  ];
+                  response = headers "$sent_http_" [
+                    "content-type"
+                    "content-encoding"
+                    "etag"
+                    "cache-control"
+                    "vary"
+                    "location"
+                  ];
+                };
+              }
+            )}
 
             access_log syslog:server=unix:${nginxCfg.logSocketPath} vector-logger-json;
           '';
