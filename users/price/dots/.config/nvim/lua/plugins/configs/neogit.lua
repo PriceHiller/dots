@@ -23,7 +23,6 @@ return {
                 },
                 graph_style = "unicode",
                 integrations = {
-                    codediff = true,
                     telescope = true,
                     diffivew = true,
                 },
@@ -70,7 +69,6 @@ return {
             })
         end,
         dependencies = {
-            "esmuellert/codediff.nvim",
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim",
         },

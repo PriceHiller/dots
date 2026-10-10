@@ -3,7 +3,7 @@ return {
         "dlyongemallo/diffview-plus.nvim",
         event = "VeryLazy",
         keys = {
-            { "<localleader>dv", "<cmd>DiffviewOpen<CR>", desc = "Diff View: Open" },
+            { "<localleader>dd", "<cmd>DiffviewOpen<CR>", desc = "Diff View: Open" },
             { "<localleader>dh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff View: File History" },
         },
         config = function()
@@ -38,11 +38,6 @@ return {
                             -- only touch the 2-way diff layouts
                             if ctx.layout_name == "diff2_horizontal" or ctx.layout_name == "diff2_vertical" then
                                 if ctx.symbol == "a" then -- old / left
-                                    -- vim.opt_local.winhl = table.concat({
-                                    --     "DiffText:DiffTextDelete",
-                                    --     "DiffAdd:DiffDelete",
-                                    --     "DiffChange:DiffDelete",
-                                    -- })
                                     vim.wo[winid].winhl = table.concat({
                                         vim.wo[winid].winhl,
                                         "DiffText:DiffTextDelete",
