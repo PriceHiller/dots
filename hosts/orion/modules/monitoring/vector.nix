@@ -1,5 +1,11 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  environment.systemPackages = with pkgs; [ vector ];
   ext.services.vector = {
     enable = lib.mkForce false;
     environmentFile = config.age.secrets.basic-auth-env.path;
