@@ -28,32 +28,5 @@
         '';
       });
       davfs2 = inputs.nixpkgs-stable.legacyPackages.${final.stdenv.hostPlatform.system}.davfs2;
-    }
-    // (
-      # See https://github.com/NixOS/nixpkgs/issues/548402
-      let
-        override =
-          pkg:
-          prev.${pkg}.overrideAttrs (prev: {
-            checkFlags = lib.map (
-              flag:
-              if lib.hasPrefix "CI_SKIP_TESTS=" flag then
-                "${flag},"
-                + lib.concatStringsSep "," [
-                  "test-tls-over-http-tunnel"
-                  "test-http-agent-keepalive"
-                  "test-https-proxy-request-invalid-char-in-url"
-                ]
-              else
-                flag
-            ) (prev.checkFlags or [ ]);
-          });
-      in
-      {
-        nodejs-slim = override "nodejs-slim";
-        nodejs_latest = prev.nodejs_latest.override {
-          nodejs-slim = override "nodejs-slim";
-        };
-      }
-    );
+    };
 }

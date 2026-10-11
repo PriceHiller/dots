@@ -4,71 +4,73 @@
   ...
 }:
 let
-  mkNodeBwrap =
-    name:
-    pkgs.mkBwrapper {
-      imports = [
-        pkgs.bwrapperPresets.devshell
-        ./../../presets/fixExitTrap.nix
-      ];
-      app = {
-        # mkBwrapper names the output binary after app.package.pname, not runScript.
-        # Override pname so the wrapper lands at $out/bin/${name} as expected.
-        package = pkgs.nodejs_latest.overrideAttrs (_: {
-          pname = name;
-        });
-        runScript = name;
-      };
+  # Compose the latest Node package directly to avoid nodejs_latest's
+  # deprecation warnings for forwarded attributes.
+  nodejsSlimLatest = pkgs.nodejs-slim_latest;
+  nodejsPackage = pkgs.symlinkJoin {
+    pname = "nodejs";
+    inherit (nodejsSlimLatest) version;
+    paths = [
+      nodejsSlimLatest
+      nodejsSlimLatest.npm
+    ]
+    ++ lib.lists.optional (builtins.hasAttr "corepack" nodejsSlimLatest) nodejsSlimLatest.corepack;
+  };
 
-      sockets = {
-        wayland = false;
-        x11 = false;
-        pipewire = false;
-        pulseaudio = false;
-      };
-      dbus.enable = lib.mkForce false;
-      flatpak.enable = lib.mkForce false;
+  nodeDispatcher = pkgs.writeShellScript "nodejs-dispatch" ''
+    exec "$@"
+  '';
 
-      mounts = {
-        readWrite = [
-          "\${XDG_STATE_HOME:-$HOME/.config}/npm"
-          "\${XDG_CACHE_HOME:-$HOME/.cache}/npm"
-          "\${XDG_DATA_HOME:-$HOME/.local/share}/npm"
-          "\${XDG_CONFIG_HOME:-$HOME/.local/share}/npm"
-        ];
-      };
+  # A single sandbox wrapper dispatches to the requested command inside the
+  # sandbox. Per-command launchers below pass their own basename to it.
+  nodeBwrapper = pkgs.mkBwrapper {
+    imports = [
+      pkgs.bwrapperPresets.devshell
+      ./../../presets/fixExitTrap.nix
+    ];
+    app = {
+      package = nodejsPackage.overrideAttrs (_: {
+        pname = "nodejs-bwrap";
+      });
+      runScript = "${nodeDispatcher}";
     };
 
-  # Discover every file/symlink in nodejs_latest's bin directory.
-  binaryNames = builtins.attrNames (builtins.readDir "${pkgs.nodejs_latest}/bin");
+    sockets = {
+      wayland = false;
+      x11 = false;
+      pipewire = false;
+      pulseaudio = false;
+    };
+    dbus.enable = lib.modules.mkForce false;
+    flatpak.enable = lib.modules.mkForce false;
 
-  # Build a wrapped derivation for each binary.
-  wrappedBins = lib.genAttrs binaryNames (name: mkNodeBwrap name);
+    mounts.readWrite = [
+      "\${XDG_STATE_HOME:-$HOME/.config}/npm"
+      "\${XDG_CACHE_HOME:-$HOME/.cache}/npm"
+      "\${XDG_DATA_HOME:-$HOME/.local/share}/npm"
+      "\${XDG_CONFIG_HOME:-$HOME/.local/share}/npm"
+    ];
+  };
 in
 pkgs.symlinkJoin {
   name = "node";
   # Keep the entire original package as the base so we get lib/, include/,
   # share/bash-completion, share/fish, man pages, etc. automatically.
-  paths = [ pkgs.nodejs_latest ];
+  paths = [ nodejsPackage ];
   postBuild = ''
-    # Override every binary with its bwrapped version.
-    ${lib.concatMapStrings (
-      name:
-      let
-        wrapped = wrappedBins.${name};
-      in
-      ''
-        rm -f $out/bin/${name}
-        ln -s ${wrapped}/bin/${name} $out/bin/${name}
-      ''
-    ) binaryNames}
+    # Discover every entry at build time so new upstream binaries are wrapped
+    # automatically without requiring evaluation-time access to the store path.
+    for binary in "$out"/bin/*; do
+      [ -e "$binary" ] || [ -L "$binary" ] || continue
+      [ -d "$binary" ] && continue
 
-    # npm (and npx) resolve their own code via lib/node_modules/npm,
-    # so make sure that points at the wrapped npm's copy too.
-    ${lib.optionalString (wrappedBins ? "npm") ''
-      rm -rf $out/lib/node_modules/npm
-      mkdir -p $out/lib/node_modules
-      ln -s ${wrappedBins.npm}/lib/node_modules/npm $out/lib/node_modules/npm
-    ''}
+      rm -f "$binary"
+      cat > "$binary" <<'EOF'
+    #!${pkgs.runtimeShell}
+    binary_name="''${0##*/}"
+    exec ${nodeBwrapper}/bin/nodejs-bwrap "$binary_name" "$@"
+    EOF
+      chmod +x "$binary"
+    done
   '';
 }
