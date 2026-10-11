@@ -45,15 +45,16 @@ let
     flatpak.enable = lib.modules.mkForce false;
 
     mounts.readWrite = [
-      "\${XDG_STATE_HOME:-$HOME/.config}/npm"
+      "\${XDG_STATE_HOME:-$HOME/.local/state}/npm"
       "\${XDG_CACHE_HOME:-$HOME/.cache}/npm"
       "\${XDG_DATA_HOME:-$HOME/.local/share}/npm"
-      "\${XDG_CONFIG_HOME:-$HOME/.local/share}/npm"
+      "\${XDG_CONFIG_HOME:-$HOME/.config}/npm"
     ];
   };
 in
 pkgs.symlinkJoin {
-  name = "node";
+  pname = "node";
+  inherit (nodejsSlimLatest) version meta;
   # Keep the entire original package as the base so we get lib/, include/,
   # share/bash-completion, share/fish, man pages, etc. automatically.
   paths = [ nodejsPackage ];
@@ -63,6 +64,7 @@ pkgs.symlinkJoin {
     for binary in "$out"/bin/*; do
       [ -e "$binary" ] || [ -L "$binary" ] || continue
       [ -d "$binary" ] && continue
+      [ -x "$binary" ] || continue
 
       rm -f "$binary"
       cat > "$binary" <<'EOF'
