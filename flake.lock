@@ -1581,16 +1581,16 @@
         "nixpkgs": "nixpkgs_15"
       },
       "locked": {
-        "lastModified": 1791634782,
-        "narHash": "sha256-CIZdrUVk/W5cUYU86Q71XMYIV3Y9+XEZn5eWw3UlNIo=",
-        "ref": "v2",
-        "rev": "4617210822bdbb31e5749751afbfb4584ccedac8",
+        "lastModified": 1791674355,
+        "narHash": "sha256-InLWmMMHorUhw+uee7D2FlsBlcY1QkxmSW3jK3Yvew0=",
+        "ref": "dev",
+        "rev": "823ac87f583336c39449444920144d346a1e3d6c",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/anomalyco/opencode"
       },
       "original": {
-        "ref": "v2",
+        "ref": "dev",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/anomalyco/opencode"
