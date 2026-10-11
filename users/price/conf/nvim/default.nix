@@ -5,6 +5,20 @@
   config,
   ...
 }:
+let
+  opencode = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+  opencodeWithLibstdcxx = pkgs.symlinkJoin {
+    name = "opencode-with-libstdcxx";
+    paths = [ opencode ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      rm "$out/bin/opencode" "$out/bin/opencode2"
+      makeWrapper ${opencode}/bin/opencode "$out/bin/opencode" \
+        --prefix LD_LIBRARY_PATH : ${pkgs.stdenv.cc.cc.lib}/lib
+      ln -s opencode "$out/bin/opencode2"
+    '';
+  };
+in
 {
   systemd.user =
     let
@@ -77,7 +91,7 @@
     packages = with pkgs; [
       neovide
       fortune
-      inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode
+      opencodeWithLibstdcxx
       bwrapped.bun
       flutter
       jdk
