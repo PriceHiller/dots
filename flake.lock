@@ -1549,10 +1549,10 @@
         "nixpkgs": "nixpkgs_15"
       },
       "locked": {
-        "lastModified": 1791674355,
-        "narHash": "sha256-InLWmMMHorUhw+uee7D2FlsBlcY1QkxmSW3jK3Yvew0=",
+        "lastModified": 1792534596,
+        "narHash": "sha256-vVTMmr76QEAVcAmmtJpo75jRQzD+Ox4F1bLed26SoYA=",
         "ref": "dev",
-        "rev": "823ac87f583336c39449444920144d346a1e3d6c",
+        "rev": "552f86716fecf64e463d08a40651f3e1a67d4db1",
         "shallow": true,
         "type": "git",
         "url": "https://github.com/anomalyco/opencode"
