@@ -267,17 +267,24 @@ in
             };
           };
         };
-        gitea-actions-runner = {
-          package = pkgs.forgejo-runner;
+        forgejo-runner = {
           instances = {
             default = {
               enable = true;
-              url = config.services.forgejo.settings.server.ROOT_URL;
-              tokenFile = config.age.secrets.forgejo-runner-token.path;
-              name = "Default";
+              secrets.server.connections.default = {
+                token_url = config.age.secrets.forgejo-runner-token.path;
+              };
+              settings.server.connections.default = {
+                url = config.services.forgejo.settings.server.ROOT_URL;
+                uuid = "8d2b4733-b1a1-4006-a95a-b2bed8b58052";
+              };
               settings = {
                 runner = {
                   capacity = 16;
+                  labels = [
+                    "default:docker://${runner.imageName}:${runner.imageTag}"
+                    "nix:docker://${runner.imageName}:${runner.imageTag}"
+                  ];
                 };
                 container =
                   let
@@ -291,10 +298,6 @@ in
                     options = vols |> builtins.map (vol: "-v ${vol}") |> builtins.concatStringsSep " ";
                   };
               };
-              labels = [
-                "default:docker://${runner.imageName}:${runner.imageTag}"
-                "nix:docker://${runner.imageName}:${runner.imageTag}"
-              ];
             };
           };
         };
