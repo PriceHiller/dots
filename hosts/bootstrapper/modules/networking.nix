@@ -5,7 +5,7 @@
     settings.Resolve = {
       Domains = [ "~." ];
       DNSOverTLS = "true";
-      DNSSEC = "false";
+      DNSSEC = true;
     };
   };
   networking = {
@@ -21,8 +21,10 @@
       };
     };
     nameservers = [
-      "194.242.2.2#dns.mullvad.net"
-      "2a07:e340::2#dns.mullvad.net"
+      "9.9.9.10#dns10.quad9.net"
+      "149.112.112.10#dns10.quad9.net"
+      "2620:fe::10#dns10.quad9.net"
+      "2620:fe::fe:10#dns10.quad9.net"
       "91.239.100.100#anycast.uncensoreddns.org"
       "2001:67c:28a4::#anycast.uncensoreddns.org"
     ];
