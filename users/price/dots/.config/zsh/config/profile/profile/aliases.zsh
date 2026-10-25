@@ -24,9 +24,9 @@
 			if [[ -n "${XDG_CURRENT_DESKTOP}" ]] && [[ "${EDITOR}" =~ "^neovide*" ]] && command -v neovide >/dev/null 2>&1; then
 				editor_to_use="${EDITOR} --"
 			fi
-			alias gg="${editor_to_use} +'lcd $PWD | Neogit'"
-			alias gd="${editor_to_use} +'lcd $PWD | DiffviewOpen'"
-			alias gl="${editor_to_use} +'lcd $PWD | NeogitLogCurrent'"
+			alias gg="${editor_to_use} +'Neogit'"
+			alias gd="${editor_to_use} +'DiffviewOpen'"
+			alias gl="${editor_to_use} +'NeogitLogCurrent'"
 		fi
 
 		alias g="git"
