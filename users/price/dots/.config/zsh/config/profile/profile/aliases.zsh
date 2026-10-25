@@ -25,7 +25,7 @@
 				editor_to_use="${EDITOR} --"
 			fi
 			alias gg="${editor_to_use} +'lcd $PWD | Neogit'"
-			alias gd="${editor_to_use} +'lcd $PWD | CodeDiff'"
+			alias gd="${editor_to_use} +'lcd $PWD | DiffviewOpen'"
 			alias gl="${editor_to_use} +'lcd $PWD | NeogitLogCurrent'"
 		fi
 
