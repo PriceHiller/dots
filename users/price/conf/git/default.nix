@@ -38,12 +38,19 @@
       commit.gpgsign = true;
       transfer.fsckObjects = true;
       receive.fsckObjects = true;
-      status.submoduleSummary = true;
-      submodule.recurse = true;
+      status = {
+        submoduleSummary = true;
+        showStash = true;
+      };
+      submodule = {
+        recurse = true;
+        fetchJobs = 0;
+      };
       fetch = {
         fsckObjects = true;
         prune = true;
         prunetags = true;
+        recurseSubmodules = "on-demand";
       };
       rebase = {
         autosquash = true;
