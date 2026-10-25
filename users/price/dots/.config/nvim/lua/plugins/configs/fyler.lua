@@ -187,7 +187,7 @@ return {
                 use_as_default_explorer = true,
                 follow_current_file = true,
                 -- Let Neovim's cwd drive Fyler, not the other way around.
-                follow_root_dir = false,
+                follow_root_dir = true,
                 extensions = {
                     git = { enabled = true },
                     watcher = { enabled = true },
