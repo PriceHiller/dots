@@ -199,7 +199,7 @@
             inputs.deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.deploy-rs
           ];
           shellHook = ''
-            export RULES="$PWD/secrets/secrets.nix"
+            export AGENIX_RULES="$PWD/secrets/secrets.nix"
           '';
         };
       });
