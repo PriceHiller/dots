@@ -1,10 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.go = {
     enable = true;
+    package = pkgs.go_latest;
     env = {
-      GOBIN = ".local/bin/go";
-      GOPATH = ".local/share/go";
+      GOBIN = "${config.home.homeDirectory}/.local/bin/go";
+      GOPATH = "${config.home.homeDirectory}/.local/share/go";
+      CC = "clang";
     };
     telemetry.mode = "off";
   };
