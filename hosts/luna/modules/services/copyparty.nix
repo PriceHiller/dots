@@ -29,6 +29,7 @@ in
       ah-alg = "argon2";
       shr = "/share";
       hash-mt = 12;
+      xff-hdr = "x-real-ip";
       shr-adm = "price";
       chpw-no = "price";
       chpw = true;
