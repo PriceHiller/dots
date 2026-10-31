@@ -58,8 +58,7 @@ in
         man-pages-posix
         jq
         coreutils-full
-        # Waiting on https://github.com/NixOS/nixpkgs/pull/519827
-        # unblob
+        unblob
         inetutils
         iproute2
         iperf
