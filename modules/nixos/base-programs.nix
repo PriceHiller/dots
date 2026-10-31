@@ -59,6 +59,7 @@ in
         jq
         coreutils-full
         unblob
+        nh
         inetutils
         iproute2
         iperf
