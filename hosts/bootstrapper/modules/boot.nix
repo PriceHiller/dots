@@ -12,7 +12,6 @@
     };
     loader.systemd-boot.enable = true;
     initrd = {
-      systemd.enable = true;
       allowMissingModules = true;
       availableKernelModules = [
         "xhci_pci"

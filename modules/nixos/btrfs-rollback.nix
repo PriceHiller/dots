@@ -35,7 +35,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable && config.boot.initrd.systemd.enable) {
+  config = lib.mkIf (cfg.enable && config.boot.loader.systemd-boot.enable) {
     boot.initrd.systemd = {
       initrdBin = with pkgs; [
         libuuid

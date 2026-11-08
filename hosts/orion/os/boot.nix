@@ -63,7 +63,6 @@ in
       ];
       systemd = {
         tpm2.enable = true;
-        enable = true;
         dbus.enable = true;
         emergencyAccess = true;
         storePaths = [

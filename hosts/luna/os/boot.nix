@@ -17,8 +17,5 @@
       efi.canTouchEfiVariables = true;
     };
     kernelParams = [ "audit=1" ];
-    initrd = {
-      systemd.enable = true;
-    };
   };
 }
