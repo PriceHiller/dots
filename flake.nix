@@ -93,6 +93,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    ncro = {
+      url = "github:manic-systems/ncro";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -258,6 +262,7 @@
                       users.price = import ./users/price/home.nix;
                     };
                   }
+                  inputs.ncro.nixosModules.default
                   inputs.hyprland.nixosModules.default
                   inputs.nix-post-build-hook-queue.nixosModules.default
                   inputs.nixos-facter-modules.nixosModules.facter

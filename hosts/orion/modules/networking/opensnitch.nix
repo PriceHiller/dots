@@ -235,6 +235,17 @@
           in
           rulePathRecursiveToHostRegex name (lib.getBin package) hostRegex;
 
+        ncroUpstreamHosts =
+          config.services.ncro.settings.upstreams
+          |> map (
+            upstream:
+            let
+              host = builtins.elemAt (builtins.match "https?://([^/:?#]+)(:[0-9]+)?([/?#].*)?" upstream.url) 0;
+            in
+            lib.strings.escapeRegex host
+          )
+          |> lib.lists.unique;
+
         ruleProgToHostRegex =
           action: progPath: hostRegex:
           let
@@ -353,6 +364,7 @@
           # opensnitch wants the resolved path, not the symlink
           (allowPackage config.nix.package.nix-cli)
           (allowPackage config.nix.package)
+          (allowPackageToHostRegex config.services.ncro.package "^(${lib.strings.concatStringsSep "|" ncroUpstreamHosts})$")
           (allowPackage config.services.mullvad-vpn.package)
           (allowExe pkgs.dig)
           (allowPackage pkgs.fwupd)
