@@ -195,6 +195,9 @@ return {
                             --- @type blink-ripgrep.Options
                             opts = {
                                 prefix_min_len = 3,
+                                future_features = {
+                                    use_blink_nightly = true,
+                                },
                                 backend = {
                                     ripgrep = {
                                         additional_rg_options = {
