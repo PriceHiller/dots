@@ -38,7 +38,7 @@
 /* Global Styling */
 * {
   border: none;
-  font-family:  "Symbols Nerd Font Mono", "Lexend", monospace;
+  font-family: "Symbols Nerd Font Mono", "Lexend", monospace;
   font-weight: 500;
   font-size: 13px;
   border-radius: 0px;
@@ -62,7 +62,6 @@
 #workspaces,
 #custom-media,
 #custom-weather,
-#custom-launcher,
 #network,
 #clock,
 #wireplumber,
@@ -87,12 +86,12 @@ tooltip label,
 tooltip {
   background-color: #16161d;
   color: #dcd7ba;
-  font-family:  "Symbols Nerd Font Mono", "Maple Mono";
+  font-family: "Symbols Nerd Font Mono", "Maple Mono";
   border-radius: 20px;
 }
 
 #submap {
-  background-color: #FF5D62
+  background-color: #ff5d62;
 }
 
 #custom-media {
@@ -117,14 +116,6 @@ tooltip {
   );
 }
 
-/* Launcher */
-#custom-launcher {
-  padding-right: 0.3rem;
-  padding-left: 0rem;
-  margin-right: 0rem;
-  color: #957fb8;
-}
-
 /* System Status */
 #cpu,
 #temperature,
@@ -132,32 +123,37 @@ tooltip {
 #disk,
 #battery {
   color: #7e9cd8;
-  margin-left: 0rem;
-  margin-right: 0rem;
 }
 
 #cpu {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   padding-right: 0em;
+  margin-right: 0rem;
 }
 
 #memory {
   border-radius: 0px;
   padding-left: 0.1rem;
   padding-right: 0.35rem;
+  margin-right: 0rem;
+  margin-left: 0rem;
 }
 
 #temperature {
   border-radius: 0px;
   padding-left: 0.35rem;
   padding-right: 0.35rem;
+  margin-right: 0rem;
+  margin-left: 0rem;
 }
 
 #disk {
   color: #dca561;
   border-radius: 0px;
   padding-left: 0.35rem;
+  margin-right: 0rem;
+  margin-left: 0rem;
   padding-right: 0.35rem;
 }
 
@@ -185,24 +181,16 @@ tooltip {
   color: #a3d4d5;
 }
 
-/* Audio Device & Wireplumber Audio Return */
-#custom-audio-device,
-#wireplumber {
-  margin-right: 0rem;
-}
-
 #custom-audio-device {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  padding-right: 0.35rem;
+  margin: 0;
   color: #ff9e3b;
 }
 
 #wireplumber {
-  border-top-left-radius: 0;
-  padding-left: 0.35rem;
-  border-bottom-left-radius: 0;
-  margin-left: 0rem;
+  /* border-top-left-radius: 0; */
+  /* padding-left: 0.35rem; */
+  /* border-bottom-left-radius: 0; */
+  /* margin-left: 0rem; */
   color: #d27e99;
 }
 
@@ -210,7 +198,7 @@ tooltip {
 #taskbar button {
   border-radius: 4px;
   margin-top: 0.1em;
-  min-height: 0.25em;
+  min-height: 0em;
   padding-left: 0em;
   padding-right: 0em;
   background-color: transparent;
@@ -228,26 +216,18 @@ tooltip {
 
 /* Worksapces */
 #workspaces {
-  margin-top: 0rem;
-  margin-bottom: 0rem;
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
-#workspaces * {
-  font-size: 0px;
-}
-
 #workspaces button {
-  border-radius: 50%;
-  min-height: 1rem;
-  min-width: 1rem;
-  padding-left: 0rem;
-  padding-right: 0rem;
-  padding-top: 0rem;
-  padding-bottom: 0rem;
-  background-color: #54546d;
+  min-height: 0rem;
+  min-width: 0rem;
+  padding: 0;
+  background-color: #727169;
   color: transparent;
+  font-weight: bolder;
+  border-radius: 50%;
 }
 
 #workspaces button.active {
@@ -267,34 +247,34 @@ tooltip {
 
 #workspaces button:hover {
   background: #98bb6c;
+  background-size: 400% 400%;
 }
 
-
 #privacy-item.audio-in {
-  color: #FF5D62;
-  -gtk-icon-shadow: 0 0 2px #FF5D62;
+  color: #ff5d62;
+  -gtk-icon-shadow: 0 0 2px #ff5d62;
 }
 
 #privacy-item.audio-out {
-  color: #98BB6C;
-  -gtk-icon-shadow: 0 0 2px #98BB6C;
+  color: #98bb6c;
+  -gtk-icon-shadow: 0 0 2px #98bb6c;
 }
 
 #privacy-item.screenshare {
-  color: #A3D4D5;
-  -gtk-icon-shadow: 0 0 2px #A3D4D5;
+  color: #a3d4d5;
+  -gtk-icon-shadow: 0 0 2px #a3d4d5;
 }
 
 #privacy-item.screenshare {
-  color: #A3D4D5;
+  color: #a3d4d5;
 }
 
 #custom-systemd-failed-units.ok {
-  color: #98BB6C;
+  color: #98bb6c;
 }
 
 #custom-systemd-failed-units.degraded {
-  color: #FF5D62;
+  color: #ff5d62;
   font-weight: bolder;
 }
 
@@ -310,7 +290,7 @@ tooltip {
 
 /* Backlight */
 #backlight {
-  color: #DCA561;
+  color: #dca561;
 }
 
 /* Network */
@@ -336,16 +316,14 @@ tooltip {
   padding-right: 1.2rem;
   padding-left: 1.2rem;
   margin-right: 0rem;
-  color: #9CABCA;
+  color: #9cabca;
 }
-
 
 #custom-notification.dnd-none,
 #custom-notification.dnd-notification,
 #custom-notification.dnd-inhibited-notification,
-#custom-notification.dnd-inhibited-none
-{
-  color: #FF5D62;
+#custom-notification.dnd-inhibited-none {
+  color: #ff5d62;
 }
 
 /* Lock */
