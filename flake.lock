@@ -1706,10 +1706,10 @@
         "nixpkgs": "nixpkgs_16"
       },
       "locked": {
-        "lastModified": 1794178649,
-        "narHash": "sha256-id900HoeauOWfvHAIAsKFDH/RStgACg0+Jd7pYEGaMw=",
+        "lastModified": 1794710506,
+        "narHash": "sha256-NV8PB7/iUqiVmk0+51S8KTteITAJkN216/ARuh8QGPs=",
         "ref": "refs/heads/Development",
-        "rev": "c367fd2c3de2b2d55193956c762b9575e3bdd0b6",
+        "rev": "b244e53149e6e7af752d49b351abcd67b0fcd360",
         "revCount": 50,
         "type": "git",
         "url": "https://git.pricehiller.com/price/resume"
