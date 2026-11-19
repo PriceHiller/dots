@@ -10,7 +10,7 @@ let
     inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode.overrideAttrs
       (old: {
         node_modules = old.node_modules.override {
-          hash = "sha256-xeEiIROe5jc0G5pFVayQbVG8G084v2wUnVAfU4n2HCM=";
+          hash = "sha256-drOGoGXuWUDDNQMylwI8R0Ih1sknP0XgEumUND1LKss=";
         };
       });
   opencodeWithLibstdcxx = pkgs.symlinkJoin {
