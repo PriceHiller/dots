@@ -17,13 +17,27 @@
       enable = true;
       package = pkgs.wireshark;
     };
-    steam.enable = true;
+    gamescope.enable = true;
+    steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+      protontricks.enable = true;
+      extraPackages = with pkgs; [
+        steamcmd
+        protonup-qt
+      ];
+    };
     appimage = {
       enable = true;
       binfmt = true;
     };
   };
   environment.systemPackages = with pkgs; [
+    wineWow64Packages.stagingFull
+    winetricks
+    protonup-qt
     perf
     via
     qmk
