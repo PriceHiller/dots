@@ -58,15 +58,6 @@ return {
                     end)
                 end,
             })
-            vim.api.nvim_create_autocmd("BufWinEnter", {
-                pattern = "NeogitStatus",
-                desc = "Set some unset options from Neogit",
-                callback = function()
-                    vim.schedule(function()
-                        vim.wo.foldcolumn = "auto"
-                    end)
-                end,
-            })
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
