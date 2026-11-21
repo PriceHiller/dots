@@ -431,6 +431,9 @@ return {
 
                 -- Make `NonText` blend with background
                 { "NonText", get_hl("NonText", { nocombine = false }) },
+
+                -- Make Multi Cursors visible
+                { "MCursor", { fg = colors.sumiInk0, bg = colors.crystalBlue, nocombine = false } },
             }
 
             if vim.g.neovide then
