@@ -7,7 +7,6 @@ return {
                 function()
                     if
                         vim.list_contains({
-                            "fyler_finder",
                             "NeogitStatus",
                             "lazy",
                             "neotest-summary",
