@@ -376,6 +376,23 @@
           (allowPackageToHost pkgs.davfs2 (map lib.strings.escapeRegex [ "fs.pricehiller.com" ]))
           (allowPackageToHost pkgs.sone ".*\.tidal\.com")
           {
+            created = "2024-05-31T23:39:28+02:00";
+            updated = "2024-05-31T23:39:28+02:00";
+            name = "0000-allow-davfs2-service-user";
+            description = "Allow Connections for davfs2 user";
+            action = "allow";
+            duration = "always";
+            enabled = config.services.davfs2.enable;
+            precedence = true;
+            nolog = false;
+            operator = {
+              type = "simple";
+              operand = "user.name";
+              data = config.services.davfs2.davUser;
+              sensitive = false;
+            };
+          }
+          {
             created = "2025-04-09T23:21:35-06:00";
             updated = "2025-04-09T23:21:35-06:00";
             name = "000-allow-localhost-ipv4";
