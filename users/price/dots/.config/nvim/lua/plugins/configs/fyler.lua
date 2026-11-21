@@ -212,6 +212,16 @@ return {
                 },
                 mappings = {
                     n = {
+                        ["<BS>"] = {
+                            action = "visit",
+                            args = { parent = true },
+                            desc = "Go to parent directory",
+                        },
+                        ["-"] = {
+                            action = "shrink",
+                            args = { parent = true },
+                            desc = "Collapse parent directory",
+                        },
                         ["<C-CR>"] = {
                             action = open_directory_in_oil,
                             desc = "Open directory in Oil float",
