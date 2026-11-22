@@ -119,6 +119,7 @@ in
         d2
         rustdesk-flutter
         sone
+        video-trimmer
       ]
       ++ [
         age
