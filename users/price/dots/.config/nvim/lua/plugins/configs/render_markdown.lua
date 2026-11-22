@@ -42,6 +42,7 @@ return {
                 pipe_table = {
                     head = "@markup.heading.1",
                     row = "@markup.heading.1",
+                    grid = true,
                 },
                 completions = { lsp = { enabled = true } },
                 file_types = { "markdown", "opencode_output" },
