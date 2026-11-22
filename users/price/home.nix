@@ -166,6 +166,10 @@ in
     ];
     cacheHome = "${config.home.homeDirectory}/.local/cache";
     mimeApps.enable = true;
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
   };
 
   # This ensures that all activation scripts pick up desired `XDG` environment variables
