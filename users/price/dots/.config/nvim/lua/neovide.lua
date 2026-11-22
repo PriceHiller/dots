@@ -23,6 +23,8 @@ vim.g.neovide_fullscreen = false
 vim.g.neovide_cursor_animation_length = 0.1
 
 -- ===== Allow clipboard copy paste in neovim
+-- Copy the visual selection
+vim.keymap.set("x", "<D-c>", '"+y', { desc = "Neovide: Copy selection" })
 -- Paste normal and visual mode
 vim.keymap.set({ "n", "v" }, "<D-v>", '"+P')
 -- Paste in command mode
