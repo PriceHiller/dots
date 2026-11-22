@@ -141,6 +141,9 @@ in
       google-java-format
       stylua
       lua-language-server
+      emmylua-ls
+      emmylua-check
+      emmylua-doc-cli
       typstyle
       live-server
       astro-language-server
