@@ -81,11 +81,6 @@ return {
                     },
                 },
                 org_agenda_files = {
-                    "~/Git/College/*",
-                    "~/Git/College/*/*",
-                    "~/Git/College/*/*/*",
-                    "~/Git/Projects/Blog/*",
-                    "~/Git/Projects/Blog/docs/**/*",
                     "~/Notes/**/*",
                     "~/.config/home-manager/*",
                     "~/.config/home-manager/docs/**/*",
