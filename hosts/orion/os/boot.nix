@@ -34,7 +34,10 @@ in
       pkiBundle = pkiBundlePath;
     };
     loader = {
-      systemd-boot.enable = lib.mkForce false;
+      systemd-boot = {
+        enable = lib.mkForce false;
+        configurationLimit = 5;
+      };
       efi.canTouchEfiVariables = true;
     };
     kernelParams = [
