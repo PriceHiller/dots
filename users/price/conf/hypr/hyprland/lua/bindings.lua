@@ -157,6 +157,16 @@ local function rebind(shortcut, classes_to_pass)
             return
         end
 
+        -- A layer might be taking ownership of keyboard focus without actually containing an active
+        -- window. We need to send the shortcut if the layer is taking exclusive control so the
+        -- _layer_ gets the shortcut, not the app beneath the layer.
+        for _, layer in ipairs(hl.get_layers()) do
+            if layer.mapped and layer.keyboard_interactivity == 1 then
+                send_shortcut(shortcut)
+                return
+            end
+        end
+
         send_shortcut(shortcut, active_window)
     end
 end
@@ -185,14 +195,6 @@ hl.bind("ALT + right", rebind({ mods = "CTRL", key = "right" }))
 hl.bind("ALT + BACKSPACE", rebind({ mods = "CTRL", key = "BACKSPACE" }))
 hl.bind("SUPER + BACKSPACE", rebind({ mods = "CTRL", key = "U" }))
 hl.bind("ALT + left", rebind({ mods = "CTRL", key = "left" }))
-
--- ---------------------------------------------------------------------------
--- Screen captures
--- ---------------------------------------------------------------------------
-
-hl.bind("SUPER + SHIFT + 4", hl.dsp.exec_cmd([[flameshot gui --clipboard]]))
-hl.bind("SUPER + SHIFT + 3", hl.dsp.exec_cmd("screen-cap"))
-hl.bind("SUPER + SHIFT + 2", hl.dsp.exec_cmd("screen-cap gif"))
 
 -- ---------------------------------------------------------------------------
 -- Media keys

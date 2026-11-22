@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 let
   luaDir = "${config.home.homeDirectory}/.config/home-manager/users/price/conf/hypr/hyprland/lua";
 in
@@ -12,7 +17,14 @@ in
     portalPackage = null;
     configType = "lua";
     extraConfig = ''require("./lua")'';
+    plugins = [
+      inputs.hyprcapture.packages.${pkgs.stdenv.hostPlatform.system}.hyprcapture
+    ];
   };
+
+  home.packages = with pkgs; [
+    tesseract
+  ];
 
   xdg.configFile."hypr/lua" = {
     source = config.lib.file.mkOutOfStoreSymlink "${luaDir}";

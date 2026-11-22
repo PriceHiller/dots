@@ -38,6 +38,7 @@
       ];
     };
   };
+  programs.gpu-screen-recorder.enable = true;
   hardware.nvidia.primeBatterySaverSpecialisation = true;
   hardware.graphics = {
     enable = true;
