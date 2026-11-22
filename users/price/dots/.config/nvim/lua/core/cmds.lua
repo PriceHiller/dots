@@ -72,7 +72,7 @@ M.setup = function()
         -- Minor alterations by me
         local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
         local buf_name = vim.api.nvim_buf_get_name(0)
-        vim.cmd(("tab split | aboveleft vnew | r # | set filetype=%s | normal! 0d_ "):format(buf_ft))
+        vim.cmd(("tab split | aboveleft vnew | r # | set filetype=%s | normal! 1Gdd"):format(buf_ft))
         local opts = {
             buftype = "nofile",
             winbar = vim.o.winbar,
