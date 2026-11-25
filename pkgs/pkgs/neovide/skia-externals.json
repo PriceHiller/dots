@@ -1,8 +1,8 @@
 {
   "brotli": {
     "url": "https://skia.googlesource.com/external/github.com/google/brotli.git",
-    "rev": "6d03dfbedda1615c4cba1211f8d81735575209c8",
-    "hash": "sha256-wnHEQY/NYS48sMPElUWSeLsETyQbWw2sMScc4geaPFA="
+    "rev": "cfa184a997ac19454d5a3ae97f6d600aac2445a6",
+    "hash": "sha256-ALailAPdnWTEenaA/L8An5gCoyGuWJ7H45BQb6IxtxA="
   },
   "d3d12allocator": {
     "url": "https://skia.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator.git",
@@ -11,38 +11,38 @@
   },
   "expat": {
     "url": "https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git",
-    "rev": "6154446fccefbf3ca644894f598969113b0c7bcd",
-    "hash": "sha256-ifMDdEWu9H8iJ/VSKuXlisJKx1s1F8ecT74bwXnBWcA="
+    "rev": "a76b1174c1ea52abb639a4c69d52b630a8a106a2",
+    "hash": "sha256-URR1HVFaTjWDWRlveH1mg40PC51dZ5JzaIV3DFeO6cw="
   },
   "freetype": {
     "url": "https://chromium.googlesource.com/chromium/src/third_party/freetype2.git",
-    "rev": "264b5fbf5b912b39f98d038bf75d39be0a73f21b",
-    "hash": "sha256-RRoTXV063rJBTL/JkVXuRZiNbPZLjtUP/kvt6XybG/k"
+    "rev": "891f904e2e7b4289f615598cd4b69832f87d2f3a",
+    "hash": "sha256-DOFkN/P0RARCU0kxB8J2X7UOnogrlBl5asuATzWBc4w="
   },
   "harfbuzz": {
     "url": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
-    "rev": "9cb1fee51069b206effb4736e443b038d230789d",
-    "hash": "sha256-EYItQuWvB4q2Q2iJfMyEtX9MTm3rEFlcwZ+NQEAVy0M="
+    "rev": "f5efbbef3841bdcdc6427bde7c2971f62ac8c8f1",
+    "hash": "sha256-wUQCb2VoZ/bD/as7SBg39XCgbMzhpBFcuNy/gZmq5V0="
   },
   "icu": {
     "url": "https://chromium.googlesource.com/chromium/deps/icu.git",
-    "rev": "d578f2e8b7bd5938e21cfb6bf15c079e0aa5b738",
-    "hash": "sha256-DsktUjKFFbeSqlFZTBqbZgvuJLOKvssCym2M3tcOJtw="
+    "rev": "2a51536dfb3b448bdf3dae70c782ea2879c90904",
+    "hash": "sha256-jMH5pspG5VdIjZDBtE4cVgsta4vWKIdzS3O0iTnPTyU="
   },
   "libjpeg-turbo": {
     "url": "https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git",
-    "rev": "e14cbfaa85529d47f9f55b0f104a579c1061f9ad",
-    "hash": "sha256-Ig+tmprZDvlf/M72/DTar2pbxat9ZElgSqdXdoM0lPs="
+    "rev": "640f254ad0fa03f6b1f29f89b7dd9366f2f6e533",
+    "hash": "sha256-wor4RTF3/5BFL9EWcGEofY+M4HN2+/KJUaOY+u86K5Q="
   },
   "libpng": {
     "url": "https://skia.googlesource.com/third_party/libpng.git",
-    "rev": "d5515b5b8be3901aac04e5bd8bd5c89f287bcd33",
-    "hash": "sha256-N507gFyjXXsJ3dyQN0SlVy80WXlbNlZs/cnqLaCmFTk="
+    "rev": "3061454d980de7d53608f594194cfac722721d2a",
+    "hash": "sha256-JSdzPsfRBjnk8DB/fkOCkaiUJ9/neQ2myIK5xnQuSsM="
   },
   "libwebp": {
     "url": "https://chromium.googlesource.com/webm/libwebp.git",
-    "rev": "845d5476a866141ba35ac133f856fa62f0b7445f",
-    "hash": "sha256-lH5wpzaCCPCfW2rHevJ7MQ6WpTYkh2LljLvD1nq36To="
+    "rev": "b43b2caa710c0c997c066cb32c7fea1391fad70a",
+    "hash": "sha256-KaoBz4lrx8FJD2oC3c2ZuTWLNvl+o9PyM9W5yf4YYzQ="
   },
   "vulkanmemoryallocator": {
     "url": "https://chromium.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator",
@@ -56,12 +56,12 @@
   },
   "wuffs": {
     "url": "https://skia.googlesource.com/external/github.com/google/wuffs-mirror-release-c.git",
-    "rev": "e3f919ccfe3ef542cfc983a82146070258fb57f8",
-    "hash": "sha256-373d2F/STcgCHEq+PO+SCHrKVOo6uO1rqqwRN5eeBCw="
+    "rev": "7411f488fe2e2c205c3d3b3d28638b7356522930",
+    "hash": "sha256-AMuAaCbNJYnSeac1B1IRSUh4rlE2KphT04/Ak4Pig5M="
   },
   "zlib": {
     "url": "https://chromium.googlesource.com/chromium/src/third_party/zlib",
-    "rev": "646b7f569718921d7d4b5b8e22572ff6c76f2596",
-    "hash": "sha256-jNj6SuTZ5/a7crtYhxW3Q/TlfRMNMfYIVxDlr7bYdzQ="
+    "rev": "456ae730017b9b4bd3371927abc82627fd51feef",
+    "hash": "sha256-K07NY9DN6lsTNmKl7OK3xAZ1vdesSnQVVsN3ZdJG/WU="
   }
 }
