@@ -1,9 +1,4 @@
 if not hl.plugin.hyprcapture then
-    hl.notification.create({
-        text = "Hyprcapture not available!",
-        timeout = 10 * 10000,
-        color = "#FF0000",
-    })
     return
 end
 
